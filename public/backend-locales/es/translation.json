@@ -1,0 +1,14 @@
+{
+  "telegram": {
+    "new_analysis": "Nuevo Análisis de Piel",
+    "name": "Nombre",
+    "email": "Correo",
+    "phone": "Teléfono",
+    "age": "Edad",
+    "skin_type": "Tipo de Piel",
+    "overall_score": "Puntuación General",
+    "concerns": "Preocupaciones Principales",
+    "recommendations": "Productos Recomendados",
+    "view_report": "Ver Informe Completo"
+  }
+}

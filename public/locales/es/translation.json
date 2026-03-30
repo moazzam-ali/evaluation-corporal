@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "brand": "HL/Skin",
+    "home": "Inicio",
+    "scan": "Analizar Piel"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "disclaimer": "Esta herramienta está destinada únicamente para fines de concienciación cosmética. Las puntuaciones de la piel pueden variar según el maquillaje aplicado. Los resultados no sustituyen el consejo dermatológico profesional."
+  },
+  "landing": {
+    "hero_title": "Análisis de Piel con IA",
+    "hero_subtitle": "Obtén una puntuación de salud de tu piel y recomendaciones de productos en segundos",
+    "cta": "Analizar Mi Piel",
+    "how_it_works": "Cómo Funciona",
+    "step1_title": "Toma una Foto",
+    "step1_desc": "Captura un selfie o sube una foto existente de tu rostro",
+    "step2_title": "Análisis con IA",
+    "step2_desc": "Nuestra IA analiza 12 métricas clave de la piel en segundos",
+    "step3_title": "Obtén Resultados",
+    "step3_desc": "Recibe tu puntuación de piel y recomendaciones personalizadas de productos",
+    "metrics_title": "12 Métricas de Piel Analizadas",
+    "trusted_by": "La confianza de miles de usuarios en todo el mundo"
+  },
+  "scan": {
+    "title": "Análisis de Piel",
+    "subtitle": "Toma una foto clara de tu rostro para obtener los resultados más precisos",
+    "camera_tab": "Cámara",
+    "upload_tab": "Subir",
+    "capture": "Capturar Foto",
+    "retake": "Volver a Tomar",
+    "upload_prompt": "Arrastra y suelta tu foto aquí, o haz clic para buscar",
+    "upload_formats": "JPG, PNG hasta 10MB",
+    "analyzing": "Analizando tu piel...",
+    "analyze_btn": "Analizar Mi Piel",
+    "tips_title": "Consejos para mejores resultados",
+    "tip1": "Usa luz natural",
+    "tip2": "Quítate las gafas y sombreros",
+    "tip3": "Mira directamente a la cámara",
+    "tip4": "Asegúrate de que todo tu rostro sea visible",
+    "no_face": "No se detectó un rostro. Intenta de nuevo con una foto más clara.",
+    "enter_details": "Ingresa Tus Datos",
+    "name": "Nombre",
+    "surname": "Apellido",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "age": "Edad",
+    "skin_type": "Tipo de Piel",
+    "skin_types": {
+      "oily": "Grasa",
+      "dry": "Seca",
+      "combination": "Mixta",
+      "normal": "Normal",
+      "sensitive": "Sensible"
+    }
+  },
+  "results": {
+    "title": "Tu Análisis de Piel",
+    "overall_score": "Puntuación General",
+    "skin_type": "Tipo de Piel",
+    "metrics_title": "Métricas Detalladas",
+    "recommendations_title": "Productos Recomendados",
+    "summary_title": "Resumen",
+    "email_cta": "Obtén Tu Informe Completo",
+    "email_placeholder": "Ingresa tu correo electrónico",
+    "email_submit": "Enviar Informe",
+    "email_success": "¡Informe enviado! Revisa tu bandeja de entrada.",
+    "share": "Compartir Resultados",
+    "new_scan": "Nuevo Escaneo",
+    "status": {
+      "good": "Bueno",
+      "normal": "Normal",
+      "needs_attention": "Necesita Atención"
+    }
+  },
+  "metrics": {
+    "oily_skin": "Piel Grasa",
+    "moisture": "Hidratación",
+    "texture": "Textura",
+    "wrinkles": "Arrugas",
+    "dark_circles": "Ojeras",
+    "redness": "Enrojecimiento",
+    "pores": "Poros",
+    "firmness": "Firmeza",
+    "radiance": "Luminosidad",
+    "acne": "Acné",
+    "dark_spots": "Manchas Oscuras",
+    "eye_area": "Área de Ojos"
+  },
+  "products": {
+    "view": "Ver Producto",
+    "priority": "Prioridad",
+    "reason": "Por qué lo recomendamos"
+  },
+  "privacy": {
+    "title": "Política de Privacidad",
+    "intro": "Tu privacidad es importante para nosotros. Esta política explica cómo manejamos tus datos.",
+    "data_handling_title": "Manejo de Datos",
+    "data_handling": "Las imágenes faciales se transmiten por HTTPS y se procesan pero NO se almacenan permanentemente. Solo los resultados del análisis en JSON y tu correo electrónico se almacenan en nuestra base de datos. Las imágenes se eliminan automáticamente después de 24 horas.",
+    "consent_title": "Consentimiento",
+    "consent": "Al usar nuestro servicio, aceptas la recopilación y el uso de información de acuerdo con esta política.",
+    "contact_title": "Contacto",
+    "contact": "Si tienes alguna pregunta sobre esta política, por favor contáctanos."
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "retry": "Intentar de Nuevo",
+    "back": "Volver"
+  }
+}

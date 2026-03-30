@@ -1,0 +1,14 @@
+{
+  "telegram": {
+    "new_analysis": "New Skin Analysis",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "age": "Age",
+    "skin_type": "Skin Type",
+    "overall_score": "Overall Score",
+    "concerns": "Key Concerns",
+    "recommendations": "Recommended Products",
+    "view_report": "View Full Report"
+  }
+}
