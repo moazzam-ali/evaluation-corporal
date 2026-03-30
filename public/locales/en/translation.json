@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "brand": "HL/Skin",
+    "home": "Home",
+    "scan": "Analyze Skin"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "disclaimer": "This tool is intended only for cosmetic awareness purposes. Skin scores may vary based on applied makeup. Results are not a substitute for professional dermatological advice."
+  },
+  "landing": {
+    "hero_title": "AI-Powered Skin Analysis",
+    "hero_subtitle": "Get a personalized skin health score and product recommendations in seconds",
+    "cta": "Analyze My Skin",
+    "how_it_works": "How It Works",
+    "step1_title": "Take a Photo",
+    "step1_desc": "Capture a selfie or upload an existing photo of your face",
+    "step2_title": "AI Analysis",
+    "step2_desc": "Our AI analyzes 12 key skin metrics in seconds",
+    "step3_title": "Get Results",
+    "step3_desc": "Receive your skin score and personalized product recommendations",
+    "metrics_title": "12 Skin Metrics Analyzed",
+    "trusted_by": "Trusted by thousands of users worldwide"
+  },
+  "scan": {
+    "title": "Skin Analysis",
+    "subtitle": "Take a clear photo of your face for the most accurate results",
+    "camera_tab": "Camera",
+    "upload_tab": "Upload",
+    "capture": "Capture Photo",
+    "retake": "Retake",
+    "upload_prompt": "Drag & drop your photo here, or click to browse",
+    "upload_formats": "JPG, PNG up to 10MB",
+    "analyzing": "Analyzing your skin...",
+    "analyze_btn": "Analyze My Skin",
+    "tips_title": "Tips for best results",
+    "tip1": "Use natural lighting",
+    "tip2": "Remove glasses and hats",
+    "tip3": "Face the camera directly",
+    "tip4": "Ensure your full face is visible",
+    "no_face": "No face detected. Please try again with a clearer photo.",
+    "enter_details": "Enter Your Details",
+    "name": "First Name",
+    "surname": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "age": "Age",
+    "skin_type": "Skin Type",
+    "skin_types": {
+      "oily": "Oily",
+      "dry": "Dry",
+      "combination": "Combination",
+      "normal": "Normal",
+      "sensitive": "Sensitive"
+    }
+  },
+  "results": {
+    "title": "Your Skin Analysis",
+    "overall_score": "Overall Score",
+    "skin_type": "Skin Type",
+    "metrics_title": "Detailed Metrics",
+    "recommendations_title": "Recommended Products",
+    "summary_title": "Summary",
+    "email_cta": "Get Your Full Report",
+    "email_placeholder": "Enter your email",
+    "email_submit": "Send Report",
+    "email_success": "Report sent! Check your inbox.",
+    "share": "Share Results",
+    "new_scan": "New Scan",
+    "status": {
+      "good": "Good",
+      "normal": "Normal",
+      "needs_attention": "Needs Attention"
+    }
+  },
+  "metrics": {
+    "oily_skin": "Oily Skin",
+    "moisture": "Moisture",
+    "texture": "Texture",
+    "wrinkles": "Wrinkles",
+    "dark_circles": "Dark Circles",
+    "redness": "Redness",
+    "pores": "Pores",
+    "firmness": "Firmness",
+    "radiance": "Radiance",
+    "acne": "Acne",
+    "dark_spots": "Dark Spots",
+    "eye_area": "Eye Area"
+  },
+  "products": {
+    "view": "View Product",
+    "priority": "Priority",
+    "reason": "Why we recommend this"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "Your privacy is important to us. This policy explains how we handle your data.",
+    "data_handling_title": "Data Handling",
+    "data_handling": "Facial images are transmitted over HTTPS and processed but NOT permanently stored. Only the JSON analysis results and your email are stored in our database. Images are automatically deleted after 24 hours.",
+    "consent_title": "Consent",
+    "consent": "By using our service, you consent to the collection and use of information in accordance with this policy.",
+    "contact_title": "Contact",
+    "contact": "If you have any questions about this policy, please contact us."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try Again",
+    "back": "Go Back"
+  }
+}
