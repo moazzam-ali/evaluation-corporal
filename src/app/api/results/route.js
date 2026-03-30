@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
+import { DEMO_ANALYSIS } from "@/lib/demo-data";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -7,6 +8,11 @@ export async function GET(request) {
 
   if (!id) {
     return NextResponse.json({ error: "Missing analysis ID" }, { status: 400 });
+  }
+
+  // Return demo data without hitting the database
+  if (id === "demo") {
+    return NextResponse.json({ data: DEMO_ANALYSIS });
   }
 
   try {
