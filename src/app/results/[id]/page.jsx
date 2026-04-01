@@ -31,7 +31,11 @@ export default function ResultsPage() {
   } = useAnalysisStore();
 
   useEffect(() => {
-    if (id) fetchAnalysis(id);
+    // If the store already has data (navigated from scan page), skip the API call
+    const hasData = useAnalysisStore.getState().metrics.length > 0;
+    if (!hasData && id) {
+      fetchAnalysis(id);
+    }
   }, [id, fetchAnalysis]);
 
   if (isLoading) return <Loader />;

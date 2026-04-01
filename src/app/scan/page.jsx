@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SkinCamera from "@/components/SkinCamera/SkinCamera";
+import useAnalysisStore from "@/store/analysisStore";
 
 const formSchema = z.object({
   name: z.string().min(1, "Required"),
@@ -88,6 +89,13 @@ export default function ScanPage() {
       if (!res.ok) {
         throw new Error(result.error || "Analysis failed");
       }
+
+      // Store results in Zustand so results page can use them
+      // even if DB storage failed
+      useAnalysisStore.getState().setAnalysisFromResponse({
+        results: result.results,
+        formData,
+      });
 
       toast.success(t("results.title", "Analysis complete!"));
       router.push(`/results/${result.id}`);
