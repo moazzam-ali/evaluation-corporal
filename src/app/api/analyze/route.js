@@ -136,13 +136,67 @@ async function callOpenAIWithRetry(imageUrl, formData, lng, { maxRetries = 2 } =
             ],
           },
         ],
-        max_tokens: 2500,
+        max_tokens: 3000,
         temperature: 0.2,
-        response_format: { type: "json_object" },
+        response_format: {
+          type: "json_schema",
+          json_schema: {
+            name: "skin_analysis",
+            strict: true,
+            schema: {
+              type: "object",
+              properties: {
+                overall_score: { type: "integer" },
+                skin_type: { type: "string", enum: ["oily", "dry", "combination", "normal", "sensitive"] },
+                metrics: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      id: { type: "string" },
+                      score: { type: "integer" },
+                      status: { type: "string", enum: ["good", "normal", "needs_attention"] },
+                      insight: { type: "string" },
+                    },
+                    required: ["id", "score", "status", "insight"],
+                    additionalProperties: false,
+                  },
+                },
+                recommendations: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      product_id: { type: "string" },
+                      priority: { type: "integer" },
+                      reason: { type: "string" },
+                    },
+                    required: ["product_id", "priority", "reason"],
+                    additionalProperties: false,
+                  },
+                },
+                summary: { type: "string" },
+              },
+              required: ["overall_score", "skin_type", "metrics", "recommendations", "summary"],
+              additionalProperties: false,
+            },
+          },
+        },
       });
 
       const choice = completion.choices?.[0];
       const finishReason = choice?.finish_reason;
+
+      // Check for refusal (Structured Outputs provides this field)
+      if (choice?.message?.refusal) {
+        console.warn(`[analyze] Model refused: ${choice.message.refusal}`);
+        return {
+          success: false,
+          error: "The image could not be analyzed. Please try a different, clearer photo.",
+          retryable: false,
+        };
+      }
+
       const content = choice?.message?.content;
 
       console.log(`[analyze] Attempt ${attempt} — finish_reason: ${finishReason}, content length: ${content?.length || 0}`);
