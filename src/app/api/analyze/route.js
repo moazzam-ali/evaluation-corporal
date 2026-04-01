@@ -8,7 +8,12 @@ import { sendAnalysisToTelegram } from "@/lib/telegram";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
+// Increase Vercel serverless function timeout (Pro plan: up to 300s, Hobby: 60s)
+export const maxDuration = 60;
+
 function extractJSON(content) {
+  if (!content) return null;
+
   // 1. Try direct parse
   try {
     return JSON.parse(content);
@@ -22,7 +27,7 @@ function extractJSON(content) {
     } catch {}
   }
 
-  // 3. Try finding the first { ... } or [ ... ] block
+  // 3. Try finding the first { ... } block
   const braceMatch = content.match(/\{[\s\S]*\}/);
   if (braceMatch) {
     try {
@@ -59,11 +64,15 @@ export async function POST(request) {
       imageUrl = cloudResult.url;
     } catch (err) {
       console.error("Cloudinary upload skipped:", err.message);
+      // Fallback: base64 data URL — OpenAI accepts these directly
       imageUrl = `data:image/jpeg;base64,${imageBuffer.toString("base64")}`;
     }
 
     // 3. Call OpenAI Vision API
     const prompt = getPromptForLanguage(lng);
+
+    console.log(`[analyze] Calling OpenAI for analysis ${id}, image size: ${imageBuffer.length} bytes, using ${imageUrl.startsWith("data:") ? "base64" : "URL"}`);
+
     const completion = await getOpenAI().chat.completions.create({
       model: "gpt-4o",
       messages: [
@@ -82,7 +91,7 @@ export async function POST(request) {
               type: "image_url",
               image_url: {
                 url: imageUrl,
-                detail: "high",
+                detail: "low",
               },
             },
           ],
@@ -93,16 +102,37 @@ export async function POST(request) {
       response_format: { type: "json_object" },
     });
 
-    const content = completion.choices[0].message.content;
+    const content = completion.choices[0]?.message?.content;
+    console.log(`[analyze] OpenAI response length: ${content?.length || 0} chars`);
+
+    if (!content) {
+      console.error("[analyze] Empty response from OpenAI. Finish reason:", completion.choices[0]?.finish_reason);
+      return NextResponse.json(
+        { error: "AI returned an empty response. Please try again with a clearer photo." },
+        { status: 502 }
+      );
+    }
+
     const results = extractJSON(content);
 
     if (!results) {
-      console.error("Raw AI response:", content);
+      console.error("[analyze] Failed to parse JSON. Raw response:", content.substring(0, 500));
       return NextResponse.json(
         { error: "AI returned an invalid response. Please try again." },
         { status: 502 }
       );
     }
+
+    // Validate the results have the expected shape
+    if (!results.overall_score || !Array.isArray(results.metrics)) {
+      console.error("[analyze] Results missing expected fields:", JSON.stringify(results).substring(0, 500));
+      return NextResponse.json(
+        { error: "AI analysis was incomplete. Please try again." },
+        { status: 502 }
+      );
+    }
+
+    console.log(`[analyze] Success! Overall score: ${results.overall_score}, metrics: ${results.metrics.length}`);
 
     // 4. Store in PostgreSQL (optional — skip if no DATABASE_URL)
     if (process.env.DATABASE_URL) {
@@ -112,7 +142,7 @@ export async function POST(request) {
           [id, JSON.stringify(formData), JSON.stringify(results), imageUrl.startsWith("data:") ? null : imageUrl, lng]
         );
       } catch (dbErr) {
-        console.error("DB insert failed (continuing without storage):", dbErr.message);
+        console.error("[analyze] DB insert failed (continuing):", dbErr.message);
       }
     }
 
@@ -148,7 +178,7 @@ export async function POST(request) {
           translations,
         });
       } catch (err) {
-        console.error("Telegram send failed:", err.message);
+        console.error("[analyze] Telegram send failed:", err.message);
         telegramStatus = { telegramStatus: "failed", error: err.message };
       }
     }
@@ -160,7 +190,7 @@ export async function POST(request) {
       ...telegramStatus,
     });
   } catch (error) {
-    console.error("Analysis error:", error);
+    console.error("[analyze] Fatal error:", error.message, error.stack);
     return NextResponse.json(
       { error: error.message || "Analysis failed" },
       { status: 500 }
