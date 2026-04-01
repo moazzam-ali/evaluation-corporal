@@ -8,6 +8,31 @@ import { sendAnalysisToTelegram } from "@/lib/telegram";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
+function extractJSON(content) {
+  // 1. Try direct parse
+  try {
+    return JSON.parse(content);
+  } catch {}
+
+  // 2. Try extracting from markdown code blocks
+  const codeBlockMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (codeBlockMatch) {
+    try {
+      return JSON.parse(codeBlockMatch[1].trim());
+    } catch {}
+  }
+
+  // 3. Try finding the first { ... } or [ ... ] block
+  const braceMatch = content.match(/\{[\s\S]*\}/);
+  if (braceMatch) {
+    try {
+      return JSON.parse(braceMatch[0]);
+    } catch {}
+  }
+
+  return null;
+}
+
 export async function POST(request) {
   try {
     const formDataReq = await request.formData();
@@ -26,15 +51,14 @@ export async function POST(request) {
     // 1. Generate unique ID
     const id = nanoid(22);
 
-    // 2. Upload image to Cloudinary
+    // 2. Upload image to Cloudinary (optional — falls back to base64)
     const imageBuffer = Buffer.from(await image.arrayBuffer());
     let imageUrl;
     try {
       const cloudResult = await uploadToCloudinary(imageBuffer, `skin-${id}.jpg`);
       imageUrl = cloudResult.url;
     } catch (err) {
-      console.error("Cloudinary upload failed, using base64 fallback:", err.message);
-      // Fallback: use base64 data URL for AI analysis
+      console.error("Cloudinary upload skipped:", err.message);
       imageUrl = `data:image/jpeg;base64,${imageBuffer.toString("base64")}`;
     }
 
@@ -66,34 +90,36 @@ export async function POST(request) {
       ],
       max_tokens: 2000,
       temperature: 0.3,
+      response_format: { type: "json_object" },
     });
 
-    let results;
     const content = completion.choices[0].message.content;
-    try {
-      // Try parsing directly
-      results = JSON.parse(content);
-    } catch {
-      // Try extracting JSON from markdown code blocks
-      const jsonMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/);
-      if (jsonMatch) {
-        results = JSON.parse(jsonMatch[1].trim());
-      } else {
-        throw new Error("Failed to parse AI response as JSON");
-      }
+    const results = extractJSON(content);
+
+    if (!results) {
+      console.error("Raw AI response:", content);
+      return NextResponse.json(
+        { error: "AI returned an invalid response. Please try again." },
+        { status: 502 }
+      );
     }
 
-    // 4. Store in PostgreSQL
-    await query(
-      "INSERT INTO analyses (id, form_data, results, image_url, language, created_at) VALUES ($1, $2, $3, $4, $5, NOW())",
-      [id, JSON.stringify(formData), JSON.stringify(results), imageUrl.startsWith("data:") ? null : imageUrl, lng]
-    );
+    // 4. Store in PostgreSQL (optional — skip if no DATABASE_URL)
+    if (process.env.DATABASE_URL) {
+      try {
+        await query(
+          "INSERT INTO analyses (id, form_data, results, image_url, language, created_at) VALUES ($1, $2, $3, $4, $5, NOW())",
+          [id, JSON.stringify(formData), JSON.stringify(results), imageUrl.startsWith("data:") ? null : imageUrl, lng]
+        );
+      } catch (dbErr) {
+        console.error("DB insert failed (continuing without storage):", dbErr.message);
+      }
+    }
 
     // 5. Send to Telegram (if chat IDs provided)
     let telegramStatus = { telegramStatus: "skipped" };
     if (chatIDs.length > 0) {
       try {
-        // Load backend translations
         const translationsPath = join(process.cwd(), "public", "backend-locales", lng, "translation.json");
         let translations;
         try {
@@ -130,6 +156,7 @@ export async function POST(request) {
     return NextResponse.json({
       id,
       status: "success",
+      results,
       ...telegramStatus,
     });
   } catch (error) {
