@@ -1,126 +1,104 @@
-export const SKIN_ANALYSIS_PROMPT = `You are a professional AI skin analysis system. Analyze the provided facial photograph and evaluate the skin condition across 12 specific metrics.
+/**
+ * Skin analysis prompt — engineered for reliable structured JSON output from GPT-4o Vision.
+ *
+ * Key design decisions:
+ * - JSON schema is in the system prompt (more reliable than user prompt)
+ * - Explicit instruction to ALWAYS return JSON even if image is unclear
+ * - Fallback scores (50) for metrics that can't be assessed from the photo
+ * - No disclaimers or caveats in the JSON — those go in the "summary" field
+ * - Products are referenced by ID only, matched client-side
+ */
 
-For each metric, provide:
-- A score from 0 to 100 (where 100 = best/healthiest condition)
-- A status: "good" (score >= 70), "normal" (score 40-69), or "needs_attention" (score < 40)
-- A brief 1-sentence insight describing what you observe
+const METRIC_IDS = [
+  "oily_skin",
+  "moisture",
+  "texture",
+  "wrinkles",
+  "dark_circles",
+  "redness",
+  "pores",
+  "firmness",
+  "radiance",
+  "acne",
+  "dark_spots",
+  "eye_area",
+];
 
-The 12 metrics to evaluate:
-1. oily_skin - Level of oiliness/sebum production (100 = well-balanced, 0 = extremely oily)
-2. moisture - Skin hydration level (100 = well-hydrated, 0 = very dry)
-3. texture - Skin smoothness and texture quality (100 = smooth, 0 = very rough/uneven)
-4. wrinkles - Presence of fine lines and wrinkles (100 = none visible, 0 = deep wrinkles)
-5. dark_circles - Under-eye dark circles (100 = none visible, 0 = very prominent)
-6. redness - Skin redness and irritation (100 = none, 0 = severe redness)
-7. pores - Pore visibility and size (100 = barely visible, 0 = very enlarged)
-8. firmness - Skin elasticity and firmness (100 = very firm, 0 = very saggy)
-9. radiance - Skin glow and luminosity (100 = radiant, 0 = very dull)
-10. acne - Acne and blemishes (100 = clear skin, 0 = severe acne)
-11. dark_spots - Hyperpigmentation and dark spots (100 = even tone, 0 = many dark spots)
-12. eye_area - Overall eye area health (100 = healthy, 0 = significant concerns)
+const PRODUCT_IDS = [
+  "daily_glow_cream",
+  "gentle_cleanser",
+  "firming_serum",
+  "spot_corrector",
+  "eye_renewal",
+  "hydra_boost",
+  "pore_refiner",
+  "soothing_toner",
+  "acne_control",
+  "night_repair",
+  "spf_shield",
+  "exfoliant",
+];
 
-Also calculate an overall_score (0-100) as a weighted average of all metrics.
+export function getPromptForLanguage(lang = "en") {
+  const isSpanish = lang === "es";
 
-Based on the scores, recommend 1-4 products from this catalog:
-- "daily_glow_cream" - Daily moisturizer for radiance and hydration
-- "gentle_cleanser" - Gentle foaming cleanser for daily use
-- "firming_serum" - Anti-aging firming serum with peptides
-- "spot_corrector" - Dark spot corrector with vitamin C
-- "eye_renewal" - Eye contour renewal cream
-- "hydra_boost" - Intensive hydration booster serum
-- "pore_refiner" - Pore minimizing treatment
-- "soothing_toner" - Calming toner for sensitive/red skin
-- "acne_control" - Blemish control treatment gel
-- "night_repair" - Overnight skin repair cream
-- "spf_shield" - Daily SPF 50 protection cream
-- "exfoliant" - Gentle chemical exfoliant
+  const insightLang = isSpanish
+    ? "Write ALL insight text and the summary in Spanish."
+    : "Write ALL insight text and the summary in English.";
 
-IMPORTANT: Return ONLY a valid JSON object with no additional text, preamble, or markdown formatting. The response must be parseable by JSON.parse().
+  return `You are a professional AI cosmetic skin assessment system. You will receive a facial photograph and must analyze the visible skin condition.
 
-JSON Schema:
+TASK: Analyze the face photo and return a JSON object scoring 12 skin metrics.
+
+IMPORTANT RULES:
+1. You MUST return ONLY a valid JSON object. No text before or after.
+2. You MUST score ALL 12 metrics listed below. Never omit any.
+3. Each score is an integer from 0 to 100, where 100 = healthiest/best.
+4. If a metric cannot be clearly assessed from the photo, give it a score of 50 (neutral) and note the limitation in the insight.
+5. ${insightLang}
+6. The "status" field MUST be exactly one of: "good" (score >= 70), "normal" (score 40-69), "needs_attention" (score < 40).
+7. Recommend 1-4 products from the catalog based on the lowest-scoring metrics.
+
+THE 12 METRICS (you must include ALL of these, in this exact order):
+1. oily_skin — Sebum/oil balance (100=balanced, 0=extremely oily)
+2. moisture — Hydration level (100=well-hydrated, 0=very dry)
+3. texture — Smoothness (100=smooth, 0=rough/uneven)
+4. wrinkles — Fine lines and wrinkles (100=none, 0=deep wrinkles)
+5. dark_circles — Under-eye circles (100=none, 0=very dark)
+6. redness — Irritation/redness (100=none, 0=severe)
+7. pores — Pore visibility (100=invisible, 0=very enlarged)
+8. firmness — Elasticity (100=very firm, 0=saggy)
+9. radiance — Glow/luminosity (100=radiant, 0=dull)
+10. acne — Breakouts/blemishes (100=clear, 0=severe acne)
+11. dark_spots — Hyperpigmentation (100=even tone, 0=many spots)
+12. eye_area — Overall eye area health (100=healthy, 0=significant issues)
+
+PRODUCT CATALOG (recommend by ID only):
+${PRODUCT_IDS.map((id) => `- "${id}"`).join("\n")}
+
+REQUIRED JSON SCHEMA (follow this EXACTLY):
 {
-  "overall_score": <number 0-100>,
+  "overall_score": <integer 0-100>,
   "skin_type": "<oily|dry|combination|normal|sensitive>",
   "metrics": [
     {
-      "id": "<metric_id>",
-      "score": <number 0-100>,
+      "id": "<one of the 12 metric IDs above>",
+      "score": <integer 0-100>,
       "status": "<good|normal|needs_attention>",
-      "insight": "<1-sentence observation>"
+      "insight": "<1 sentence describing observation>"
     }
   ],
   "recommendations": [
     {
-      "product_id": "<product_id from catalog>",
-      "priority": <1-4>,
-      "reason": "<1-sentence reason>"
+      "product_id": "<product ID from catalog>",
+      "priority": <integer 1-4>,
+      "reason": "<1 sentence why>"
     }
   ],
-  "summary": "<2-3 sentence overall skin health summary>"
-}`;
-
-export const SKIN_ANALYSIS_PROMPT_ES = `Eres un sistema profesional de análisis de piel con IA. Analiza la fotografía facial proporcionada y evalúa la condición de la piel en 12 métricas específicas.
-
-Para cada métrica, proporciona:
-- Una puntuación de 0 a 100 (donde 100 = mejor/más saludable)
-- Un estado: "good" (puntuación >= 70), "normal" (puntuación 40-69), o "needs_attention" (puntuación < 40)
-- Una breve observación de 1 oración describiendo lo que observas (en español)
-
-Las 12 métricas a evaluar:
-1. oily_skin - Nivel de grasa/producción de sebo (100 = equilibrado, 0 = extremadamente graso)
-2. moisture - Nivel de hidratación (100 = bien hidratado, 0 = muy seco)
-3. texture - Calidad de la textura (100 = suave, 0 = muy rugoso/irregular)
-4. wrinkles - Presencia de líneas finas y arrugas (100 = ninguna visible, 0 = arrugas profundas)
-5. dark_circles - Ojeras (100 = ninguna visible, 0 = muy prominentes)
-6. redness - Enrojecimiento e irritación (100 = ninguno, 0 = enrojecimiento severo)
-7. pores - Visibilidad y tamaño de poros (100 = apenas visibles, 0 = muy dilatados)
-8. firmness - Elasticidad y firmeza (100 = muy firme, 0 = muy flácido)
-9. radiance - Brillo y luminosidad (100 = radiante, 0 = muy opaco)
-10. acne - Acné e imperfecciones (100 = piel limpia, 0 = acné severo)
-11. dark_spots - Hiperpigmentación y manchas oscuras (100 = tono uniforme, 0 = muchas manchas)
-12. eye_area - Salud general del área de los ojos (100 = saludable, 0 = preocupaciones significativas)
-
-También calcula un overall_score (0-100) como promedio ponderado de todas las métricas.
-
-Basándote en las puntuaciones, recomienda 1-4 productos de este catálogo:
-- "daily_glow_cream" - Crema hidratante diaria para luminosidad
-- "gentle_cleanser" - Limpiador espumoso suave de uso diario
-- "firming_serum" - Sérum reafirmante anti-edad con péptidos
-- "spot_corrector" - Corrector de manchas oscuras con vitamina C
-- "eye_renewal" - Crema renovadora del contorno de ojos
-- "hydra_boost" - Sérum potenciador de hidratación intensiva
-- "pore_refiner" - Tratamiento minimizador de poros
-- "soothing_toner" - Tónico calmante para piel sensible/enrojecida
-- "acne_control" - Gel de tratamiento para control de imperfecciones
-- "night_repair" - Crema de reparación nocturna
-- "spf_shield" - Crema de protección solar diaria SPF 50
-- "exfoliant" - Exfoliante químico suave
-
-IMPORTANTE: Devuelve SOLO un objeto JSON válido sin texto adicional, preámbulo ni formato markdown. La respuesta debe ser parseable por JSON.parse().
-
-JSON Schema:
-{
-  "overall_score": <número 0-100>,
-  "skin_type": "<oily|dry|combination|normal|sensitive>",
-  "metrics": [
-    {
-      "id": "<metric_id>",
-      "score": <número 0-100>,
-      "status": "<good|normal|needs_attention>",
-      "insight": "<observación de 1 oración en español>"
-    }
-  ],
-  "recommendations": [
-    {
-      "product_id": "<product_id del catálogo>",
-      "priority": <1-4>,
-      "reason": "<razón de 1 oración en español>"
-    }
-  ],
-  "summary": "<resumen de 2-3 oraciones sobre la salud general de la piel en español>"
-}`;
-
-export function getPromptForLanguage(lang) {
-  if (lang === "es") return SKIN_ANALYSIS_PROMPT_ES;
-  return SKIN_ANALYSIS_PROMPT;
+  "summary": "<2-3 sentence overall assessment>"
 }
+
+The metrics array MUST contain exactly 12 objects, one for each metric ID listed above.`;
+}
+
+export { METRIC_IDS, PRODUCT_IDS };
