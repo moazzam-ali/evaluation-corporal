@@ -1,140 +1,364 @@
 import { NextResponse } from "next/server";
 import { nanoid } from "nanoid";
+import { z } from "zod";
 import getOpenAI from "@/lib/openai";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { query } from "@/lib/db";
-import { getPromptForLanguage } from "@/lib/prompts";
+import { getPromptForLanguage, METRIC_IDS } from "@/lib/prompts";
 import { sendAnalysisToTelegram } from "@/lib/telegram";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
-// Increase Vercel serverless function timeout (Pro plan: up to 300s, Hobby: 60s)
+// Vercel function config — 60s for Hobby, up to 300s for Pro
 export const maxDuration = 60;
 
-function extractJSON(content) {
-  if (!content) return null;
+// ------------------------------------------------------------------
+// 1. Response validation schema
+// ------------------------------------------------------------------
+const MetricSchema = z.object({
+  id: z.string(),
+  score: z.number().min(0).max(100),
+  status: z.enum(["good", "normal", "needs_attention"]),
+  insight: z.string().min(1),
+});
 
-  // 1. Try direct parse
+const RecommendationSchema = z.object({
+  product_id: z.string(),
+  priority: z.number().min(1).max(10),
+  reason: z.string().min(1),
+});
+
+const AnalysisResultSchema = z.object({
+  overall_score: z.number().min(0).max(100),
+  skin_type: z.enum(["oily", "dry", "combination", "normal", "sensitive"]),
+  metrics: z.array(MetricSchema).min(1),
+  recommendations: z.array(RecommendationSchema).min(1),
+  summary: z.string().min(1),
+});
+
+// ------------------------------------------------------------------
+// 2. JSON extraction — handles multiple response formats
+// ------------------------------------------------------------------
+function extractJSON(content) {
+  if (!content || typeof content !== "string") return null;
+
+  const cleaned = content.trim();
+
+  // Strategy 1: Direct parse (ideal — response_format: json_object should give us this)
   try {
-    return JSON.parse(content);
+    return JSON.parse(cleaned);
   } catch {}
 
-  // 2. Try extracting from markdown code blocks
-  const codeBlockMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/);
-  if (codeBlockMatch) {
+  // Strategy 2: Extract from markdown code block
+  const codeBlock = cleaned.match(/```(?:json)?\s*\n?([\s\S]*?)\n?\s*```/);
+  if (codeBlock) {
     try {
-      return JSON.parse(codeBlockMatch[1].trim());
+      return JSON.parse(codeBlock[1].trim());
     } catch {}
   }
 
-  // 3. Try finding the first { ... } block
-  const braceMatch = content.match(/\{[\s\S]*\}/);
-  if (braceMatch) {
+  // Strategy 3: Find the outermost balanced { } pair
+  const firstBrace = cleaned.indexOf("{");
+  const lastBrace = cleaned.lastIndexOf("}");
+  if (firstBrace !== -1 && lastBrace > firstBrace) {
     try {
-      return JSON.parse(braceMatch[0]);
+      return JSON.parse(cleaned.substring(firstBrace, lastBrace + 1));
     } catch {}
   }
 
   return null;
 }
 
-export async function POST(request) {
-  try {
-    const formDataReq = await request.formData();
-    const image = formDataReq.get("image");
-    const formData = JSON.parse(formDataReq.get("formData"));
-    const chatIDs = JSON.parse(formDataReq.get("chatIDs") || "[]");
-    const botIndex = formDataReq.get("botIndex") || "1";
-    const accountIDs = JSON.parse(formDataReq.get("accountIDs") || "[]");
-    const contactIDs = JSON.parse(formDataReq.get("contactIDs") || "[]");
-    const lng = formDataReq.get("lng") || "en";
+// ------------------------------------------------------------------
+// 3. Image validation — check magic bytes
+// ------------------------------------------------------------------
+function validateImageBuffer(buffer) {
+  if (!buffer || buffer.length === 0) {
+    return { valid: false, error: "Empty image data" };
+  }
 
+  // Max 10MB raw
+  if (buffer.length > 10 * 1024 * 1024) {
+    return { valid: false, error: "Image exceeds 10MB limit" };
+  }
+
+  // Check JPEG magic bytes: FF D8 FF
+  const isJPEG = buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+  // Check PNG magic bytes: 89 50 4E 47
+  const isPNG = buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47;
+  // Check WebP: RIFF....WEBP
+  const isWebP =
+    buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46 &&
+    buffer[8] === 0x57 && buffer[9] === 0x45 && buffer[10] === 0x42 && buffer[11] === 0x50;
+
+  if (!isJPEG && !isPNG && !isWebP) {
+    return { valid: false, error: "Invalid image format. Please upload a JPEG, PNG, or WebP image." };
+  }
+
+  const mime = isJPEG ? "image/jpeg" : isPNG ? "image/png" : "image/webp";
+  return { valid: true, mime };
+}
+
+// ------------------------------------------------------------------
+// 4. Call OpenAI with retry
+// ------------------------------------------------------------------
+async function callOpenAIWithRetry(imageUrl, formData, lng, { maxRetries = 2 } = {}) {
+  const prompt = getPromptForLanguage(lng);
+  const openai = getOpenAI();
+
+  let lastError;
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(`[analyze] OpenAI attempt ${attempt}/${maxRetries}`);
+
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: prompt,
+          },
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: `Analyze this person's facial skin. Age: ${formData.age}. Self-reported skin type: ${formData.skin_type}. Return the JSON analysis now.`,
+              },
+              {
+                type: "image_url",
+                image_url: {
+                  url: imageUrl,
+                  detail: "auto",
+                },
+              },
+            ],
+          },
+        ],
+        max_tokens: 2500,
+        temperature: 0.2,
+        response_format: { type: "json_object" },
+      });
+
+      const choice = completion.choices?.[0];
+      const finishReason = choice?.finish_reason;
+      const content = choice?.message?.content;
+
+      console.log(`[analyze] Attempt ${attempt} — finish_reason: ${finishReason}, content length: ${content?.length || 0}`);
+
+      // Check for content policy refusal
+      if (finishReason === "content_filter") {
+        return {
+          success: false,
+          error: "The image could not be analyzed due to content policy. Please try a different photo.",
+          retryable: false,
+        };
+      }
+
+      // Check for length cutoff
+      if (finishReason === "length") {
+        console.warn(`[analyze] Response was truncated (max_tokens hit)`);
+        // Still try to parse what we got — might be a complete JSON
+      }
+
+      // Empty response
+      if (!content) {
+        lastError = "AI returned an empty response";
+        if (attempt < maxRetries) {
+          console.warn(`[analyze] Empty response, retrying...`);
+          await new Promise((r) => setTimeout(r, 2000));
+          continue;
+        }
+        return { success: false, error: lastError, retryable: true };
+      }
+
+      // Parse JSON
+      const parsed = extractJSON(content);
+      if (!parsed) {
+        lastError = "Failed to parse AI response as JSON";
+        console.error(`[analyze] Parse failed. Raw (first 300 chars): ${content.substring(0, 300)}`);
+        if (attempt < maxRetries) {
+          await new Promise((r) => setTimeout(r, 2000));
+          continue;
+        }
+        return { success: false, error: lastError, retryable: true };
+      }
+
+      // Validate shape with Zod
+      const validation = AnalysisResultSchema.safeParse(parsed);
+      if (!validation.success) {
+        const issues = validation.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ");
+        console.error(`[analyze] Validation failed: ${issues}`);
+
+        // Try to fix common issues before rejecting
+        const fixed = attemptFix(parsed);
+        const revalidation = AnalysisResultSchema.safeParse(fixed);
+        if (revalidation.success) {
+          console.log(`[analyze] Auto-fixed validation issues`);
+          return { success: true, results: revalidation.data };
+        }
+
+        lastError = "AI response did not match expected format";
+        if (attempt < maxRetries) {
+          await new Promise((r) => setTimeout(r, 2000));
+          continue;
+        }
+        return { success: false, error: lastError, retryable: true };
+      }
+
+      return { success: true, results: validation.data };
+    } catch (err) {
+      lastError = err.message;
+      console.error(`[analyze] Attempt ${attempt} error: ${err.message}`);
+
+      // Don't retry on auth errors or invalid requests
+      if (err.status === 401 || err.status === 403) {
+        return { success: false, error: "API authentication error. Please check configuration.", retryable: false };
+      }
+      if (err.status === 400) {
+        return { success: false, error: "Invalid request to AI service. The image may be corrupted.", retryable: false };
+      }
+
+      // Retry on 429 (rate limit), 500, 502, 503
+      if (attempt < maxRetries) {
+        const delay = attempt * 3000;
+        console.warn(`[analyze] Retrying in ${delay}ms...`);
+        await new Promise((r) => setTimeout(r, delay));
+        continue;
+      }
+    }
+  }
+
+  return { success: false, error: lastError || "Analysis failed after retries", retryable: false };
+}
+
+// ------------------------------------------------------------------
+// 5. Attempt to fix common AI response issues
+// ------------------------------------------------------------------
+function attemptFix(parsed) {
+  const fixed = { ...parsed };
+
+  // Fix: overall_score might be a string
+  if (typeof fixed.overall_score === "string") {
+    fixed.overall_score = parseInt(fixed.overall_score, 10);
+  }
+
+  // Fix: metrics might have string scores
+  if (Array.isArray(fixed.metrics)) {
+    fixed.metrics = fixed.metrics.map((m) => ({
+      ...m,
+      score: typeof m.score === "string" ? parseInt(m.score, 10) : m.score,
+      // Fix: status might be missing — derive from score
+      status: m.status || (m.score >= 70 ? "good" : m.score >= 40 ? "normal" : "needs_attention"),
+    }));
+
+    // Fix: metrics might be missing some — pad with defaults
+    const existingIds = new Set(fixed.metrics.map((m) => m.id));
+    for (const id of METRIC_IDS) {
+      if (!existingIds.has(id)) {
+        fixed.metrics.push({
+          id,
+          score: 50,
+          status: "normal",
+          insight: "Could not be assessed from the provided photo.",
+        });
+      }
+    }
+  }
+
+  // Fix: recommendations might have string priorities
+  if (Array.isArray(fixed.recommendations)) {
+    fixed.recommendations = fixed.recommendations.map((r) => ({
+      ...r,
+      priority: typeof r.priority === "string" ? parseInt(r.priority, 10) : r.priority,
+    }));
+  }
+
+  // Fix: skin_type might have different casing
+  if (typeof fixed.skin_type === "string") {
+    fixed.skin_type = fixed.skin_type.toLowerCase();
+  }
+
+  return fixed;
+}
+
+// ------------------------------------------------------------------
+// 6. Main handler
+// ------------------------------------------------------------------
+export async function POST(request) {
+  const startTime = Date.now();
+
+  try {
+    // Parse form data
+    let formDataReq;
+    try {
+      formDataReq = await request.formData();
+    } catch (err) {
+      return NextResponse.json({ error: "Invalid request format" }, { status: 400 });
+    }
+
+    const image = formDataReq.get("image");
     if (!image) {
       return NextResponse.json({ error: "No image provided" }, { status: 400 });
     }
 
-    // 1. Generate unique ID
+    let formData;
+    try {
+      formData = JSON.parse(formDataReq.get("formData") || "{}");
+    } catch {
+      return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
+    }
+
+    let chatIDs, accountIDs, contactIDs;
+    try {
+      chatIDs = JSON.parse(formDataReq.get("chatIDs") || "[]");
+      accountIDs = JSON.parse(formDataReq.get("accountIDs") || "[]");
+      contactIDs = JSON.parse(formDataReq.get("contactIDs") || "[]");
+    } catch {
+      chatIDs = [];
+      accountIDs = [];
+      contactIDs = [];
+    }
+
+    const botIndex = formDataReq.get("botIndex") || "1";
+    const lng = ["en", "es"].includes(formDataReq.get("lng")) ? formDataReq.get("lng") : "en";
+
+    // Generate unique ID
     const id = nanoid(22);
 
-    // 2. Upload image to Cloudinary (optional — falls back to base64)
+    // Validate image
     const imageBuffer = Buffer.from(await image.arrayBuffer());
+    const imageValidation = validateImageBuffer(imageBuffer);
+    if (!imageValidation.valid) {
+      return NextResponse.json({ error: imageValidation.error }, { status: 400 });
+    }
+
+    console.log(`[analyze] ID: ${id}, image: ${imageBuffer.length} bytes (${imageValidation.mime}), lang: ${lng}`);
+
+    // Upload to Cloudinary or fallback to base64
     let imageUrl;
     try {
       const cloudResult = await uploadToCloudinary(imageBuffer, `skin-${id}.jpg`);
       imageUrl = cloudResult.url;
+      console.log(`[analyze] Cloudinary upload OK: ${imageUrl}`);
     } catch (err) {
-      console.error("Cloudinary upload skipped:", err.message);
-      // Fallback: base64 data URL — OpenAI accepts these directly
-      imageUrl = `data:image/jpeg;base64,${imageBuffer.toString("base64")}`;
+      console.warn(`[analyze] Cloudinary skipped: ${err.message}`);
+      imageUrl = `data:${imageValidation.mime};base64,${imageBuffer.toString("base64")}`;
     }
 
-    // 3. Call OpenAI Vision API
-    const prompt = getPromptForLanguage(lng);
+    // Call OpenAI with retry
+    const aiResult = await callOpenAIWithRetry(imageUrl, formData, lng);
 
-    console.log(`[analyze] Calling OpenAI for analysis ${id}, image size: ${imageBuffer.length} bytes, using ${imageUrl.startsWith("data:") ? "base64" : "URL"}`);
-
-    const completion = await getOpenAI().chat.completions.create({
-      model: "gpt-4o",
-      messages: [
-        {
-          role: "system",
-          content: prompt,
-        },
-        {
-          role: "user",
-          content: [
-            {
-              type: "text",
-              text: `Analyze this facial skin photo. The user is ${formData.age} years old and reports their skin type as "${formData.skin_type}". Provide the analysis in ${lng === "es" ? "Spanish" : "English"}.`,
-            },
-            {
-              type: "image_url",
-              image_url: {
-                url: imageUrl,
-                detail: "low",
-              },
-            },
-          ],
-        },
-      ],
-      max_tokens: 2000,
-      temperature: 0.3,
-      response_format: { type: "json_object" },
-    });
-
-    const content = completion.choices[0]?.message?.content;
-    console.log(`[analyze] OpenAI response length: ${content?.length || 0} chars`);
-
-    if (!content) {
-      console.error("[analyze] Empty response from OpenAI. Finish reason:", completion.choices[0]?.finish_reason);
-      return NextResponse.json(
-        { error: "AI returned an empty response. Please try again with a clearer photo." },
-        { status: 502 }
-      );
+    if (!aiResult.success) {
+      const status = aiResult.retryable ? 502 : 400;
+      return NextResponse.json({ error: aiResult.error }, { status });
     }
 
-    const results = extractJSON(content);
+    const { results } = aiResult;
+    console.log(`[analyze] Success in ${Date.now() - startTime}ms. Score: ${results.overall_score}, metrics: ${results.metrics.length}`);
 
-    if (!results) {
-      console.error("[analyze] Failed to parse JSON. Raw response:", content.substring(0, 500));
-      return NextResponse.json(
-        { error: "AI returned an invalid response. Please try again." },
-        { status: 502 }
-      );
-    }
-
-    // Validate the results have the expected shape
-    if (!results.overall_score || !Array.isArray(results.metrics)) {
-      console.error("[analyze] Results missing expected fields:", JSON.stringify(results).substring(0, 500));
-      return NextResponse.json(
-        { error: "AI analysis was incomplete. Please try again." },
-        { status: 502 }
-      );
-    }
-
-    console.log(`[analyze] Success! Overall score: ${results.overall_score}, metrics: ${results.metrics.length}`);
-
-    // 4. Store in PostgreSQL (optional — skip if no DATABASE_URL)
+    // Store in PostgreSQL (non-blocking — don't fail the request)
     if (process.env.DATABASE_URL) {
       try {
         await query(
@@ -142,11 +366,11 @@ export async function POST(request) {
           [id, JSON.stringify(formData), JSON.stringify(results), imageUrl.startsWith("data:") ? null : imageUrl, lng]
         );
       } catch (dbErr) {
-        console.error("[analyze] DB insert failed (continuing):", dbErr.message);
+        console.error(`[analyze] DB insert failed: ${dbErr.message}`);
       }
     }
 
-    // 5. Send to Telegram (if chat IDs provided)
+    // Send to Telegram (non-blocking)
     let telegramStatus = { telegramStatus: "skipped" };
     if (chatIDs.length > 0) {
       try {
@@ -158,9 +382,7 @@ export async function POST(request) {
           translations = (key) => {
             const keys = key.split(".");
             let val = translationData;
-            for (const k of keys) {
-              val = val?.[k];
-            }
+            for (const k of keys) val = val?.[k];
             return val || key;
           };
         } catch {
@@ -178,8 +400,8 @@ export async function POST(request) {
           translations,
         });
       } catch (err) {
-        console.error("[analyze] Telegram send failed:", err.message);
-        telegramStatus = { telegramStatus: "failed", error: err.message };
+        console.error(`[analyze] Telegram failed: ${err.message}`);
+        telegramStatus = { telegramStatus: "failed" };
       }
     }
 
@@ -190,9 +412,9 @@ export async function POST(request) {
       ...telegramStatus,
     });
   } catch (error) {
-    console.error("[analyze] Fatal error:", error.message, error.stack);
+    console.error(`[analyze] Fatal: ${error.message}`, error.stack);
     return NextResponse.json(
-      { error: error.message || "Analysis failed" },
+      { error: "An unexpected error occurred. Please try again." },
       { status: 500 }
     );
   }

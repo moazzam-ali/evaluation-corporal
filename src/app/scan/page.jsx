@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -14,8 +14,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 import SkinCamera from "@/components/SkinCamera/SkinCamera";
 import useAnalysisStore from "@/store/analysisStore";
+import { compressImage, dataUrlToBlob, validateImage } from "@/lib/image-utils";
+
+const ANALYSIS_TIMEOUT = 55000; // 55s — just under Vercel's 60s limit
 
 const formSchema = z.object({
   name: z.string().min(1, "Required"),
@@ -35,6 +39,8 @@ export default function ScanPage() {
   const [imageData, setImageData] = useState(null);
   const [activeTab, setActiveTab] = useState("camera");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisProgress, setAnalysisProgress] = useState(0);
+  const abortControllerRef = useRef(null);
 
   const chatIDs = searchParams.get("n")?.split(",").filter(Boolean) || [];
   const botIndex = searchParams.get("b") || "1";
@@ -65,11 +71,43 @@ export default function ScanPage() {
     }
 
     setIsAnalyzing(true);
-    try {
-      // Convert base64 to blob
-      const response = await fetch(imageData);
-      const blob = await response.blob();
+    setAnalysisProgress(5);
 
+    // Progress simulation (visual feedback while waiting for AI)
+    const progressInterval = setInterval(() => {
+      setAnalysisProgress((prev) => {
+        if (prev >= 90) return prev;
+        return prev + Math.random() * 8;
+      });
+    }, 1500);
+
+    // Abort controller for timeout
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+    const timeout = setTimeout(() => controller.abort(), ANALYSIS_TIMEOUT);
+
+    try {
+      // Step 1: Validate the image
+      setAnalysisProgress(10);
+      const validation = await validateImage(imageData);
+      if (!validation.valid) {
+        throw new Error(validation.error || "Invalid image");
+      }
+
+      // Step 2: Compress image to max 1024px (keeps it under 200KB for fast API calls)
+      setAnalysisProgress(15);
+      const compressed = await compressImage(imageData, {
+        maxWidth: 1024,
+        maxHeight: 1024,
+        quality: 0.85,
+      });
+
+      // Step 3: Convert to blob
+      setAnalysisProgress(20);
+      const blob = dataUrlToBlob(compressed);
+      console.log(`[scan] Image compressed: ${(blob.size / 1024).toFixed(0)}KB`);
+
+      // Step 4: Build form data
       const submitData = new FormData();
       submitData.append("image", blob, "skin-photo.jpg");
       submitData.append("formData", JSON.stringify(formData));
@@ -79,10 +117,15 @@ export default function ScanPage() {
       submitData.append("contactIDs", JSON.stringify(contactIDs));
       submitData.append("lng", lang);
 
+      // Step 5: Send to API
+      setAnalysisProgress(30);
       const res = await fetch("/api/analyze", {
         method: "POST",
         body: submitData,
+        signal: controller.signal,
       });
+
+      setAnalysisProgress(85);
 
       const result = await res.json();
 
@@ -90,8 +133,9 @@ export default function ScanPage() {
         throw new Error(result.error || "Analysis failed");
       }
 
-      // Store results in Zustand so results page can use them
-      // even if DB storage failed
+      setAnalysisProgress(100);
+
+      // Store results in Zustand
       useAnalysisStore.getState().setAnalysisFromResponse({
         results: result.results,
         formData,
@@ -100,9 +144,23 @@ export default function ScanPage() {
       toast.success(t("results.title", "Analysis complete!"));
       router.push(`/results/${result.id}`);
     } catch (error) {
-      toast.error(error.message || t("common.error"));
+      if (error.name === "AbortError") {
+        toast.error(t("common.timeout", "Analysis took too long. Please try again with a clearer photo."));
+      } else {
+        toast.error(error.message || t("common.error"));
+      }
     } finally {
+      clearTimeout(timeout);
+      clearInterval(progressInterval);
+      abortControllerRef.current = null;
       setIsAnalyzing(false);
+      setAnalysisProgress(0);
+    }
+  };
+
+  const cancelAnalysis = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
     }
   };
 
@@ -131,6 +189,20 @@ export default function ScanPage() {
           <p className="mt-2 text-sm text-muted-foreground">
             {t("scan.subtitle")}
           </p>
+          <div className="mt-6 w-full max-w-xs">
+            <Progress value={analysisProgress} className="h-2" />
+            <p className="mt-2 text-center text-xs text-muted-foreground">
+              {Math.round(analysisProgress)}%
+            </p>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={cancelAnalysis}
+            className="mt-4 text-muted-foreground"
+          >
+            {t("common.cancel", "Cancel")}
+          </Button>
         </motion.div>
       ) : (
         <div className="grid gap-8 lg:grid-cols-2">
