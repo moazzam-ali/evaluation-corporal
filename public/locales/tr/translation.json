@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "brand": "HL/Skin",
+    "home": "Ana Sayfa",
+    "scan": "Cildi Analiz Et"
+  },
+  "footer": {
+    "rights": "Tüm hakları saklıdır.",
+    "privacy": "Gizlilik Politikası",
+    "disclaimer": "Bu araç yalnızca kozmetik farkındalık amaçlıdır. Cilt puanları uygulanan makyaja göre değişiklik gösterebilir. Sonuçlar profesyonel dermatolojik tavsiyenin yerini tutmaz."
+  },
+  "landing": {
+    "hero_title": "Yapay Zeka Destekli Cilt Analizi",
+    "hero_subtitle": "Saniyeler içinde kişiselleştirilmiş cilt sağlığı puanı ve ürün önerileri alın",
+    "cta": "Cildimi Analiz Et",
+    "how_it_works": "Nasıl Çalışır",
+    "step1_title": "Fotoğraf Çekin",
+    "step1_desc": "Bir selfie çekin veya mevcut bir yüz fotoğrafınızı yükleyin",
+    "step2_title": "Yapay Zeka Analizi",
+    "step2_desc": "Yapay zekamız saniyeler içinde 12 temel cilt metriğini analiz eder",
+    "step3_title": "Sonuçları Alın",
+    "step3_desc": "Cilt puanınızı ve kişiselleştirilmiş ürün önerilerinizi alın",
+    "metrics_title": "Analiz Edilen 12 Cilt Metriği",
+    "trusted_by": "Dünya genelinde binlerce kullanıcı tarafından güveniliyor"
+  },
+  "scan": {
+    "title": "Cilt Analizi",
+    "subtitle": "En doğru sonuçlar için yüzünüzün net bir fotoğrafını çekin",
+    "camera_tab": "Kamera",
+    "upload_tab": "Yükle",
+    "capture": "Fotoğraf Çek",
+    "retake": "Yeniden Çek",
+    "upload_prompt": "Fotoğrafınızı buraya sürükleyip bırakın veya göz atmak için tıklayın",
+    "upload_formats": "JPG, PNG 10 MB'a kadar",
+    "analyzing": "Cildiniz analiz ediliyor...",
+    "analyze_btn": "Cildimi Analiz Et",
+    "tips_title": "En iyi sonuçlar için ipuçları",
+    "tip1": "Doğal aydınlatma kullanın",
+    "tip2": "Gözlük ve şapkaları çıkarın",
+    "tip3": "Doğrudan kameraya bakın",
+    "tip4": "Yüzünüzün tamamının görünür olduğundan emin olun",
+    "no_face": "Yüz algılanamadı. Lütfen daha net bir fotoğrafla tekrar deneyin.",
+    "enter_details": "Bilgilerinizi Girin",
+    "name": "Ad",
+    "surname": "Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "age": "Yaş",
+    "skin_type": "Cilt Tipi",
+    "skin_types": {
+      "oily": "Yağlı",
+      "dry": "Kuru",
+      "combination": "Karma",
+      "normal": "Normal",
+      "sensitive": "Hassas"
+    }
+  },
+  "results": {
+    "title": "Cilt Analiziniz",
+    "overall_score": "Genel Puan",
+    "skin_type": "Cilt Tipi",
+    "metrics_title": "Detaylı Metrikler",
+    "recommendations_title": "Önerilen Ürünler",
+    "summary_title": "Özet",
+    "email_cta": "Tam Raporunuzu Alın",
+    "email_placeholder": "E-postanızı girin",
+    "email_submit": "Raporu Gönder",
+    "email_success": "Rapor gönderildi! Gelen kutunuzu kontrol edin.",
+    "share": "Sonuçları Paylaş",
+    "new_scan": "Yeni Analiz",
+    "status": {
+      "good": "İyi",
+      "normal": "Normal",
+      "needs_attention": "Dikkat Gerektirir"
+    }
+  },
+  "metrics": {
+    "oily_skin": "Yağlı Cilt",
+    "moisture": "Nem",
+    "texture": "Doku",
+    "wrinkles": "Kırışıklıklar",
+    "dark_circles": "Göz Altı Halkaları",
+    "redness": "Kızarıklık",
+    "pores": "Gözenekler",
+    "firmness": "Sıkılık",
+    "radiance": "Parlaklık",
+    "acne": "Akne",
+    "dark_spots": "Koyu Lekeler",
+    "eye_area": "Göz Çevresi"
+  },
+  "products": {
+    "view": "Ürünü Görüntüle",
+    "priority": "Öncelik",
+    "reason": "Bunu neden öneriyoruz"
+  },
+  "privacy": {
+    "title": "Gizlilik Politikası",
+    "intro": "Gizliliğiniz bizim için önemlidir. Bu politika verilerinizi nasıl işlediğimizi açıklar.",
+    "data_handling_title": "Veri İşleme",
+    "data_handling": "Yüz görüntüleri HTTPS üzerinden iletilir ve işlenir ancak kalıcı olarak SAKLANMAZ. Yalnızca JSON analiz sonuçları ve e-postanız veritabanımızda saklanır. Görüntüler 24 saat sonra otomatik olarak silinir.",
+    "consent_title": "Onay",
+    "consent": "Hizmetimizi kullanarak, bu politikaya uygun olarak bilgilerin toplanmasına ve kullanılmasına onay vermiş olursunuz.",
+    "contact_title": "İletişim",
+    "contact": "Bu politika hakkında herhangi bir sorunuz varsa, lütfen bizimle iletişime geçin."
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir şeyler yanlış gitti",
+    "retry": "Tekrar Dene",
+    "back": "Geri Dön"
+  }
+}

@@ -4,6 +4,23 @@
     "home": "Inicio",
     "scan": "Analizar Piel"
   },
+  "home": {
+    "title": "Configuración",
+    "subtitle": "Configura los parámetros de notificación de Telegram y CRM, luego procede al formulario de análisis de piel.",
+    "form_title": "Parámetros",
+    "form_desc": "Configura bots de Telegram, IDs de CRM e idioma antes de comenzar.",
+    "chat_ids": "IDs de Chat",
+    "chat_ids_placeholder": "IDs de chat de Telegram separados por comas",
+    "chat_ids_help": "Ingresa uno o más IDs de chat de Telegram separados por comas.",
+    "bot_index": "Índice de Bot",
+    "bot_index_help": "Qué bot de Telegram usar (de la tabla de bots).",
+    "account_ids": "IDs de Cuenta",
+    "account_ids_placeholder": "IDs de cuenta CRM separados por comas",
+    "contact_ids": "IDs de Contacto",
+    "contact_ids_placeholder": "IDs de contacto CRM separados por comas",
+    "language": "Idioma",
+    "submit": "Proceder al Análisis de Piel"
+  },
   "footer": {
     "rights": "Todos los derechos reservados.",
     "privacy": "Política de Privacidad",

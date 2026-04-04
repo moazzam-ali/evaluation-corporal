@@ -1,147 +1,160 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { ArrowRight, Settings2, Sparkles } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Camera, Sparkles, BarChart3, ArrowRight } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-const metricsList = [
-  "oily_skin", "moisture", "texture", "wrinkles", "dark_circles", "redness",
-  "pores", "firmness", "radiance", "acne", "dark_spots", "eye_area",
-];
-
-const steps = [
-  { icon: Camera, key: "step1" },
-  { icon: Sparkles, key: "step2" },
-  { icon: BarChart3, key: "step3" },
+const languages = [
+  { code: "en", label: "English" },
+  { code: "es", label: "Español" },
+  { code: "fr", label: "Français" },
+  { code: "de", label: "Deutsch" },
+  { code: "it", label: "Italiano" },
+  { code: "tr", label: "Türkçe" },
+  { code: "in", label: "हिन्दी" },
+  { code: "pt", label: "Português" },
 ];
 
 export default function HomePage() {
   const { t } = useTranslation();
+  const router = useRouter();
+
+  const [chatIDs, setChatIDs] = useState("");
+  const [botIndex, setBotIndex] = useState("1");
+  const [accountIDs, setAccountIDs] = useState("");
+  const [contactIDs, setContactIDs] = useState("");
+  const [language, setLanguage] = useState("en");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams();
+    if (chatIDs.trim()) params.set("n", chatIDs.trim());
+    if (botIndex.trim()) params.set("b", botIndex.trim());
+    if (accountIDs.trim()) params.set("a", accountIDs.trim());
+    if (contactIDs.trim()) params.set("c", contactIDs.trim());
+    params.set("l", language);
+
+    router.push(`/scan?${params.toString()}`);
+  };
 
   return (
-    <div className="flex flex-col">
-      {/* Hero */}
-      <section className="relative flex min-h-[80vh] flex-col items-center justify-center px-4 text-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 max-w-3xl"
-        >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border bg-background px-4 py-1.5 text-sm text-muted-foreground">
-            <Sparkles className="h-4 w-4 text-primary" />
-            {t("landing.trusted_by")}
-          </div>
-          <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            {t("landing.hero_title")}
-          </h1>
-          <p className="mb-8 text-lg text-muted-foreground sm:text-xl">
-            {t("landing.hero_subtitle")}
-          </p>
-          <Link href="/scan">
-            <Button size="lg" className="gap-2 text-base px-8 py-6">
-              {t("landing.cta")}
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          </Link>
-        </motion.div>
-      </section>
-
-      {/* How It Works */}
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <motion.h2
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-12 text-center text-3xl font-bold"
-        >
-          {t("landing.how_it_works")}
-        </motion.h2>
-        <div className="grid gap-8 md:grid-cols-3">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.key}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-            >
-              <Card className="relative overflow-hidden border-0 bg-muted/50 transition-shadow hover:shadow-lg">
-                <CardContent className="flex flex-col items-center p-8 text-center">
-                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-                    <step.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">
-                    {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <h3 className="mb-2 text-lg font-semibold">
-                    {t(`landing.${step.key}_title`)}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t(`landing.${step.key}_desc`)}
-                  </p>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+    <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-8 text-center"
+      >
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5">
+          <Sparkles className="h-4 w-4 text-primary" />
+          <span className="text-sm font-medium text-primary">HL/Skin AI Analysis</span>
         </div>
-      </section>
+        <h1 className="text-3xl font-bold">{t("home.title", "Configuration")}</h1>
+        <p className="mt-2 text-muted-foreground">
+          {t("home.subtitle", "Set up the Telegram notification and CRM parameters, then proceed to the skin analysis form.")}
+        </p>
+      </motion.div>
 
-      {/* Metrics Grid */}
-      <section className="bg-muted/30 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mb-12 text-center text-3xl font-bold"
-          >
-            {t("landing.metrics_title")}
-          </motion.h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {metricsList.map((metric, i) => (
-              <motion.div
-                key={metric}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <Card className="border-0 bg-background transition-shadow hover:shadow-md">
-                  <CardContent className="flex items-center gap-3 p-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                      <span className="text-sm font-bold text-primary">{i + 1}</span>
-                    </div>
-                    <span className="text-sm font-medium">{t(`metrics.${metric}`)}</span>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+      >
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Settings2 className="h-5 w-5" />
+              {t("home.form_title", "Parameters")}
+            </CardTitle>
+            <CardDescription>
+              {t("home.form_desc", "Configure Telegram bots, CRM IDs, and language before starting.")}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Chat IDs */}
+              <div className="space-y-2">
+                <Label htmlFor="chatIDs">{t("home.chat_ids", "Chat IDs")}</Label>
+                <Input
+                  id="chatIDs"
+                  value={chatIDs}
+                  onChange={(e) => setChatIDs(e.target.value)}
+                  placeholder={t("home.chat_ids_placeholder", "Comma-separated Telegram chat IDs")}
+                />
+                <p className="text-xs text-muted-foreground">
+                  {t("home.chat_ids_help", "Enter one or more Telegram chat IDs separated by commas.")}
+                </p>
+              </div>
 
-      {/* Final CTA */}
-      <section className="py-20 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mx-auto max-w-2xl px-4"
-        >
-          <h2 className="mb-6 text-3xl font-bold">{t("landing.cta")}</h2>
-          <Link href="/scan">
-            <Button size="lg" className="gap-2 px-8 py-6 text-base">
-              {t("landing.cta")}
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          </Link>
-        </motion.div>
-      </section>
+              {/* Bot Index */}
+              <div className="space-y-2">
+                <Label htmlFor="botIndex">{t("home.bot_index", "Bot Index")}</Label>
+                <Input
+                  id="botIndex"
+                  value={botIndex}
+                  onChange={(e) => setBotIndex(e.target.value)}
+                  placeholder="1"
+                />
+                <p className="text-xs text-muted-foreground">
+                  {t("home.bot_index_help", "Which Telegram bot to use (from the bots table).")}
+                </p>
+              </div>
+
+              {/* Account IDs */}
+              <div className="space-y-2">
+                <Label htmlFor="accountIDs">{t("home.account_ids", "Account IDs")}</Label>
+                <Input
+                  id="accountIDs"
+                  value={accountIDs}
+                  onChange={(e) => setAccountIDs(e.target.value)}
+                  placeholder={t("home.account_ids_placeholder", "Comma-separated CRM account IDs")}
+                />
+              </div>
+
+              {/* Contact IDs */}
+              <div className="space-y-2">
+                <Label htmlFor="contactIDs">{t("home.contact_ids", "Contact IDs")}</Label>
+                <Input
+                  id="contactIDs"
+                  value={contactIDs}
+                  onChange={(e) => setContactIDs(e.target.value)}
+                  placeholder={t("home.contact_ids_placeholder", "Comma-separated CRM contact IDs")}
+                />
+              </div>
+
+              {/* Language */}
+              <div className="space-y-2">
+                <Label htmlFor="language">{t("home.language", "Language")}</Label>
+                <select
+                  id="language"
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  {languages.map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <Button type="submit" size="lg" className="w-full gap-2">
+                {t("home.submit", "Proceed to Skin Analysis")}
+                <ArrowRight className="h-5 w-5" />
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
   );
 }

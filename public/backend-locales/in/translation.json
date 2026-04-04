@@ -1,0 +1,28 @@
+{
+  "telegram": {
+    "header": "*Analisis HL/Kulit Baru*",
+    "member_details": "*Detail Anggota*\n\nNama: {name} {surname}\nEmail: {email}\nTelepon: {phone}\nUsia: {age}\nJenis Kulit: {skin_type}",
+    "analysis_results": "*Hasil Analisis*\n\nSkor Keseluruhan: {overall_score}%\nJenis Kulit: {skin_type_result}\n\n*Masalah Utama:*\n{concerns}\n\n*Ringkasan:*\n{summary}",
+    "analysis_link": "*Lihat Laporan Lengkap:*\nhttps://skin-doc.vercel.app/results/{id}?l={lng}",
+    "buttons": {
+      "sms": "Kirim SMS",
+      "call": "Telepon",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram"
+    },
+    "form_fields": {
+      "skin_types": {
+        "oily": "Berminyak",
+        "dry": "Kering",
+        "combination": "Kombinasi",
+        "normal": "Normal",
+        "sensitive": "Sensitif"
+      },
+      "status": {
+        "good": "Baik",
+        "normal": "Normal",
+        "needs_attention": "Perlu Perhatian"
+      }
+    }
+  }
+}

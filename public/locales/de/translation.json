@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "brand": "HL/Skin",
+    "home": "Startseite",
+    "scan": "Haut Analysieren"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "privacy": "Datenschutzrichtlinie",
+    "disclaimer": "Dieses Tool dient ausschließlich der kosmetischen Sensibilisierung. Hautwerte können je nach aufgetragenem Make-up variieren. Die Ergebnisse ersetzen keine professionelle dermatologische Beratung."
+  },
+  "landing": {
+    "hero_title": "KI-gestützte Hautanalyse",
+    "hero_subtitle": "Erhalten Sie in Sekunden einen personalisierten Hautgesundheitswert und Produktempfehlungen",
+    "cta": "Meine Haut Analysieren",
+    "how_it_works": "So Funktioniert Es",
+    "step1_title": "Foto Aufnehmen",
+    "step1_desc": "Machen Sie ein Selfie oder laden Sie ein vorhandenes Foto Ihres Gesichts hoch",
+    "step2_title": "KI-Analyse",
+    "step2_desc": "Unsere KI analysiert 12 wichtige Hautmetriken in Sekunden",
+    "step3_title": "Ergebnisse Erhalten",
+    "step3_desc": "Erhalten Sie Ihren Hautwert und personalisierte Produktempfehlungen",
+    "metrics_title": "12 Analysierte Hautmetriken",
+    "trusted_by": "Vertraut von Tausenden von Nutzern weltweit"
+  },
+  "scan": {
+    "title": "Hautanalyse",
+    "subtitle": "Machen Sie ein klares Foto Ihres Gesichts für die genauesten Ergebnisse",
+    "camera_tab": "Kamera",
+    "upload_tab": "Hochladen",
+    "capture": "Foto Aufnehmen",
+    "retake": "Neu Aufnehmen",
+    "upload_prompt": "Ziehen Sie Ihr Foto hierher oder klicken Sie zum Durchsuchen",
+    "upload_formats": "JPG, PNG bis zu 10 MB",
+    "analyzing": "Ihre Haut wird analysiert...",
+    "analyze_btn": "Meine Haut Analysieren",
+    "tips_title": "Tipps für beste Ergebnisse",
+    "tip1": "Verwenden Sie natürliches Licht",
+    "tip2": "Entfernen Sie Brillen und Hüte",
+    "tip3": "Schauen Sie direkt in die Kamera",
+    "tip4": "Stellen Sie sicher, dass Ihr ganzes Gesicht sichtbar ist",
+    "no_face": "Kein Gesicht erkannt. Bitte versuchen Sie es erneut mit einem klareren Foto.",
+    "enter_details": "Geben Sie Ihre Daten Ein",
+    "name": "Vorname",
+    "surname": "Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "age": "Alter",
+    "skin_type": "Hauttyp",
+    "skin_types": {
+      "oily": "Fettig",
+      "dry": "Trocken",
+      "combination": "Mischhaut",
+      "normal": "Normal",
+      "sensitive": "Empfindlich"
+    }
+  },
+  "results": {
+    "title": "Ihre Hautanalyse",
+    "overall_score": "Gesamtwert",
+    "skin_type": "Hauttyp",
+    "metrics_title": "Detaillierte Metriken",
+    "recommendations_title": "Empfohlene Produkte",
+    "summary_title": "Zusammenfassung",
+    "email_cta": "Vollständigen Bericht Erhalten",
+    "email_placeholder": "Geben Sie Ihre E-Mail ein",
+    "email_submit": "Bericht Senden",
+    "email_success": "Bericht gesendet! Überprüfen Sie Ihren Posteingang.",
+    "share": "Ergebnisse Teilen",
+    "new_scan": "Neue Analyse",
+    "status": {
+      "good": "Gut",
+      "normal": "Normal",
+      "needs_attention": "Benötigt Aufmerksamkeit"
+    }
+  },
+  "metrics": {
+    "oily_skin": "Fettige Haut",
+    "moisture": "Feuchtigkeit",
+    "texture": "Textur",
+    "wrinkles": "Falten",
+    "dark_circles": "Augenringe",
+    "redness": "Rötungen",
+    "pores": "Poren",
+    "firmness": "Festigkeit",
+    "radiance": "Ausstrahlung",
+    "acne": "Akne",
+    "dark_spots": "Dunkle Flecken",
+    "eye_area": "Augenbereich"
+  },
+  "products": {
+    "view": "Produkt Ansehen",
+    "priority": "Priorität",
+    "reason": "Warum wir dies empfehlen"
+  },
+  "privacy": {
+    "title": "Datenschutzrichtlinie",
+    "intro": "Ihre Privatsphäre ist uns wichtig. Diese Richtlinie erklärt, wie wir mit Ihren Daten umgehen.",
+    "data_handling_title": "Datenverarbeitung",
+    "data_handling": "Gesichtsbilder werden über HTTPS übertragen und verarbeitet, aber NICHT dauerhaft gespeichert. Nur die JSON-Analyseergebnisse und Ihre E-Mail werden in unserer Datenbank gespeichert. Bilder werden nach 24 Stunden automatisch gelöscht.",
+    "consent_title": "Einwilligung",
+    "consent": "Durch die Nutzung unseres Dienstes stimmen Sie der Erfassung und Verwendung von Informationen gemäß dieser Richtlinie zu.",
+    "contact_title": "Kontakt",
+    "contact": "Wenn Sie Fragen zu dieser Richtlinie haben, kontaktieren Sie uns bitte."
+  },
+  "common": {
+    "loading": "Wird geladen...",
+    "error": "Etwas ist schiefgelaufen",
+    "retry": "Erneut Versuchen",
+    "back": "Zurück"
+  }
+}

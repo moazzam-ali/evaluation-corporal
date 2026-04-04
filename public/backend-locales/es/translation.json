@@ -1,14 +1,28 @@
 {
   "telegram": {
-    "new_analysis": "Nuevo Análisis de Piel",
-    "name": "Nombre",
-    "email": "Correo",
-    "phone": "Teléfono",
-    "age": "Edad",
-    "skin_type": "Tipo de Piel",
-    "overall_score": "Puntuación General",
-    "concerns": "Preocupaciones Principales",
-    "recommendations": "Productos Recomendados",
-    "view_report": "Ver Informe Completo"
+    "header": "*Nuevo An\u00e1lisis HL/Piel*",
+    "member_details": "*Datos del Miembro*\n\nNombre: {name} {surname}\nCorreo: {email}\nTel\u00e9fono: {phone}\nEdad: {age}\nTipo de Piel: {skin_type}",
+    "analysis_results": "*Resultados del An\u00e1lisis*\n\nPuntuaci\u00f3n General: {overall_score}%\nTipo de Piel: {skin_type_result}\n\n*Preocupaciones Principales:*\n{concerns}\n\n*Resumen:*\n{summary}",
+    "analysis_link": "*Ver Informe Completo:*\nhttps://skin-doc.vercel.app/results/{id}?l={lng}",
+    "buttons": {
+      "sms": "Enviar SMS",
+      "call": "Llamar",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram"
+    },
+    "form_fields": {
+      "skin_types": {
+        "oily": "Grasa",
+        "dry": "Seca",
+        "combination": "Mixta",
+        "normal": "Normal",
+        "sensitive": "Sensible"
+      },
+      "status": {
+        "good": "Bueno",
+        "normal": "Normal",
+        "needs_attention": "Necesita Atenci\u00f3n"
+      }
+    }
   }
 }

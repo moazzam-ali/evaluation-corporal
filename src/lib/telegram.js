@@ -1,128 +1,218 @@
 import { query } from "./db";
 
-function sanitizeMarkdown(text) {
-  if (!text) return "";
-  return text
-    .replace(/([_*[\]()~`>#+\-=|{}.!])/g, "\\$1");
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Safely access nested translation keys like "telegram.buttons.sms"
+ */
+function getTranslation(translations, path) {
+  const parts = path.split(".");
+  let current = translations;
+  for (const part of parts) {
+    if (current && typeof current === "object") {
+      current = current[part];
+    } else {
+      return undefined;
+    }
+  }
+  return current;
 }
 
-async function sendTelegramMessage(botApiKey, chatId, text, replyMarkup = null) {
-  const body = {
-    chat_id: chatId,
-    text,
-    parse_mode: "Markdown",
-  };
-  if (replyMarkup) {
-    body.reply_markup = JSON.stringify(replyMarkup);
-  }
+/**
+ * Sanitize text to remove Markdown special characters for Telegram.
+ */
+function sanitizeMessage(message) {
+  return message.replace(/[*_`~[\]()]/g, "");
+}
 
-  let lastError;
-  const delays = [1000, 2000, 10000];
+/**
+ * Send a message to a single Telegram chat with retry logic.
+ * Matches the nutritional project's retry pattern: 3 attempts, exponential backoff.
+ */
+async function sendTelegramMessage(botApiKey, chatID, message, inlineKeyboards, maxRetries = 3) {
+  const telegramApiUrl = `https://api.telegram.org/bot${botApiKey}/sendMessage`;
 
-  for (let attempt = 0; attempt <= delays.length; attempt++) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      const response = await fetch(
-        `https://api.telegram.org/bot${botApiKey}/sendMessage`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }
-      );
+      console.log(`[telegram] Attempt ${attempt} to send message to chatID: ${chatID}`);
 
-      if (response.ok) return { success: true };
+      const body = {
+        chat_id: chatID,
+        text: sanitizeMessage(message),
+        parse_mode: "Markdown",
+      };
 
-      const data = await response.json();
-      lastError = data.description || "Unknown Telegram error";
-    } catch (err) {
-      lastError = err.message;
-    }
+      if (inlineKeyboards) {
+        body.reply_markup = { inline_keyboard: inlineKeyboards };
+      }
 
-    if (attempt < delays.length) {
-      await new Promise((r) => setTimeout(r, delays[attempt]));
+      const response = await fetch(telegramApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Telegram API error: ${JSON.stringify(errorData)}`);
+      }
+
+      const result = await response.json();
+      console.log(`[telegram] Successfully sent message to chatID: ${chatID}`);
+      return result;
+    } catch (error) {
+      console.error(`[telegram] Attempt ${attempt} failed:`, error.message);
+
+      if (attempt === maxRetries) {
+        throw new Error(`Failed to send message after ${maxRetries} attempts: ${error.message}`);
+      }
+
+      const backoffDelay = Math.min(1000 * Math.pow(2, attempt - 1), 10000);
+      console.log(`[telegram] Waiting ${backoffDelay}ms before retry...`);
+      await delay(backoffDelay);
     }
   }
-
-  return { success: false, error: lastError };
 }
 
+/**
+ * Build and send Telegram messages for a skin analysis.
+ * Follows the nutritional project pattern:
+ *   Message 1: Member details + analysis results
+ *   Message 2: Key concerns + product recommendations
+ *   Message 3: Analysis link with inline keyboard (SMS, Call, WhatsApp, Telegram)
+ */
 export async function sendAnalysisToTelegram({
   chatIDs,
   botIndex,
   analysisData,
-  resultsUrl,
   translations,
+  analysisId,
+  language,
 }) {
-  // Fetch bot config
+  // Fetch bot config from DB
   const botResult = await query("SELECT bot_api_key, language FROM bots WHERE id = $1", [botIndex]);
   if (botResult.rows.length === 0) {
     throw new Error(`Bot with index ${botIndex} not found`);
   }
 
-  const { bot_api_key } = botResult.rows[0];
-  const t = translations;
+  const { bot_api_key: botApiKey, language: defaultLanguage } = botResult.rows[0];
+  const t = (path) => getTranslation(translations, path);
 
   const { formData, results } = analysisData;
-  const safe = (val) => sanitizeMarkdown(String(val || "N/A"));
 
-  // Message 1: User details
-  const message1 = [
-    `*${t("telegram.new_analysis") || "New Skin Analysis"}*`,
-    "",
-    `*${t("telegram.name") || "Name"}:* ${safe(formData.name)} ${safe(formData.surname)}`,
-    `*${t("telegram.email") || "Email"}:* ${safe(formData.email)}`,
-    `*${t("telegram.phone") || "Phone"}:* ${safe(formData.phone)}`,
-    `*${t("telegram.age") || "Age"}:* ${safe(formData.age)}`,
-    `*${t("telegram.skin_type") || "Skin Type"}:* ${safe(formData.skin_type)}`,
-    "",
-    `*${t("telegram.overall_score") || "Overall Score"}:* ${results.overall_score}%`,
-  ].join("\n");
+  // Build Message 1: Member details
+  let memberDetailsMessage = t("telegram.member_details") || "";
+  memberDetailsMessage = memberDetailsMessage
+    .replace("{name}", formData.name || "Unknown")
+    .replace("{surname}", formData.surname || "Unknown")
+    .replace("{email}", formData.email || "Unknown")
+    .replace("{phone}", formData.phone || "Unknown")
+    .replace("{age}", formData.age || "Unknown")
+    .replace(
+      "{skin_type}",
+      t(`telegram.form_fields.skin_types.${formData.skin_type}`) || formData.skin_type || "Unknown"
+    );
 
-  // Message 2: Top concerns
-  const concerns = results.metrics
+  // Build Message 2: Analysis results
+  let analysisResultsMessage = t("telegram.analysis_results") || "";
+
+  // Build concerns list
+  const concerns = (results.metrics || [])
     .filter((m) => m.status === "needs_attention")
-    .map((m) => `  - ${m.label || m.id}: ${m.score}%`)
+    .map((m) => {
+      const metricName = m.id.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+      return `  - ${metricName}: ${m.score}% (${t(`telegram.form_fields.status.${m.status}`) || m.status})`;
+    })
     .join("\n");
 
-  const message2 = [
-    `*${t("telegram.concerns") || "Key Concerns"}:*`,
-    concerns || "  None detected",
-    "",
-    `*${t("telegram.recommendations") || "Recommended Products"}:*`,
-    ...(results.recommendations || []).map(
-      (r) => `  - ${r.product_name || r.product_id}`
-    ),
-  ].join("\n");
+  analysisResultsMessage = analysisResultsMessage
+    .replace("{overall_score}", results.overall_score || "N/A")
+    .replace(
+      "{skin_type_result}",
+      t(`telegram.form_fields.skin_types.${results.skin_type}`) || results.skin_type || "Unknown"
+    )
+    .replace("{concerns}", concerns || "  None detected")
+    .replace("{summary}", results.summary || "");
 
-  // Message 3: Link with inline keyboard
-  const message3 = `*${t("telegram.view_report") || "View Full Report"}:*\n${resultsUrl}`;
+  // Build Message 3: Analysis link
+  let analysisLinkMessage = t("telegram.analysis_link") || "";
+  analysisLinkMessage = analysisLinkMessage
+    .replace("{id}", analysisId)
+    .replace("{lng}", language || defaultLanguage || "en");
 
-  const inlineKeyboard = {
-    inline_keyboard: [
-      [
-        { text: "View Report", url: resultsUrl },
-      ],
+  // Inline keyboard buttons (same pattern as nutritional project)
+  const inlineKeyboards = [
+    [
+      {
+        text: t("telegram.buttons.sms") || "SMS",
+        url: `https://sms.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}`,
+      },
     ],
-  };
+    [
+      {
+        text: t("telegram.buttons.call") || "Call",
+        url: `https://call.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}`,
+      },
+    ],
+    [
+      {
+        text: t("telegram.buttons.whatsapp") || "WhatsApp",
+        url: `https://wa.me/${formData.phone || ""}`,
+      },
+    ],
+    [
+      {
+        text: t("telegram.buttons.telegram") || "Telegram",
+        url: `https://t.me/${formData.phone || ""}`,
+      },
+    ],
+  ];
 
+  // Prepare 3 messages (same structure as nutritional project)
+  const messages = [
+    memberDetailsMessage,          // Message 1: Member details
+    analysisResultsMessage,        // Message 2: Analysis results + concerns
+    analysisLinkMessage,           // Message 3: Link with inline keyboard
+  ];
+
+  // Build combined answers text for Elastic indexing (sanitized, no Markdown)
+  const answersText = messages.map(sanitizeMessage).join("\n");
+
+  // Send messages to all chat IDs
+  console.log("[telegram] Sending messages to", chatIDs.length, "chat IDs...");
   const results_ = [];
   const failedChats = [];
 
-  for (const chatId of chatIDs) {
-    const r1 = await sendTelegramMessage(bot_api_key, chatId, message1);
-    const r2 = await sendTelegramMessage(bot_api_key, chatId, message2);
-    const r3 = await sendTelegramMessage(bot_api_key, chatId, message3, inlineKeyboard);
-
-    if (r1.success && r2.success && r3.success) {
-      results_.push({ chatId, status: "success" });
-    } else {
-      failedChats.push({ chatId, errors: [r1.error, r2.error, r3.error].filter(Boolean) });
+  for (const chatID of chatIDs) {
+    try {
+      for (let i = 0; i < messages.length; i++) {
+        // Attach inline keyboard only with the third message
+        const keyboard = i === 2 ? inlineKeyboards : undefined;
+        await sendTelegramMessage(botApiKey, chatID, messages[i], keyboard);
+      }
+      results_.push({ chatID, success: true });
+    } catch (error) {
+      console.error(`[telegram] Failed to send to chatID ${chatID}:`, error.message);
+      failedChats.push({ chatID, error: error.message });
     }
   }
 
+  // Determine status (same as nutritional project)
+  let telegramStatus;
+  if (failedChats.length === 0) {
+    telegramStatus = "success";
+  } else if (failedChats.length === chatIDs.length) {
+    telegramStatus = "failed";
+  } else {
+    telegramStatus = "partial";
+  }
+
   return {
-    telegramStatus: failedChats.length === 0 ? "success" : results_.length > 0 ? "partial" : "failed",
+    telegramStatus,
     results: results_,
     failedChats,
+    answersText,
   };
 }
+
+export { getTranslation, sanitizeMessage };
