@@ -1,0 +1,28 @@
+{
+  "telegram": {
+    "header": "*Yeni HL/Cilt Analizi*",
+    "member_details": "*\u00dcye Bilgileri*\n\nAd: {name} {surname}\nE-posta: {email}\nTelefon: {phone}\nYa\u015f: {age}\nCilt Tipi: {skin_type}",
+    "analysis_results": "*Analiz Sonu\u00e7lar\u0131*\n\nGenel Puan: {overall_score}%\nCilt Tipi: {skin_type_result}\n\n*Temel Endi\u015feler:*\n{concerns}\n\n*\u00d6zet:*\n{summary}",
+    "analysis_link": "*Tam Raporu G\u00f6r\u00fcnt\u00fcle:*\nhttps://skin-doc.vercel.app/results/{id}?l={lng}",
+    "buttons": {
+      "sms": "SMS G\u00f6nder",
+      "call": "Ara",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram"
+    },
+    "form_fields": {
+      "skin_types": {
+        "oily": "Ya\u011fl\u0131",
+        "dry": "Kuru",
+        "combination": "Karma",
+        "normal": "Normal",
+        "sensitive": "Hassas"
+      },
+      "status": {
+        "good": "\u0130yi",
+        "normal": "Normal",
+        "needs_attention": "\u0130lgiye \u0130htiyac\u0131 Var"
+      }
+    }
+  }
+}

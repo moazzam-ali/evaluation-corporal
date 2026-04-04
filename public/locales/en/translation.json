@@ -4,6 +4,23 @@
     "home": "Home",
     "scan": "Analyze Skin"
   },
+  "home": {
+    "title": "Configuration",
+    "subtitle": "Set up the Telegram notification and CRM parameters, then proceed to the skin analysis form.",
+    "form_title": "Parameters",
+    "form_desc": "Configure Telegram bots, CRM IDs, and language before starting.",
+    "chat_ids": "Chat IDs",
+    "chat_ids_placeholder": "Comma-separated Telegram chat IDs",
+    "chat_ids_help": "Enter one or more Telegram chat IDs separated by commas.",
+    "bot_index": "Bot Index",
+    "bot_index_help": "Which Telegram bot to use (from the bots table).",
+    "account_ids": "Account IDs",
+    "account_ids_placeholder": "Comma-separated CRM account IDs",
+    "contact_ids": "Contact IDs",
+    "contact_ids_placeholder": "Comma-separated CRM contact IDs",
+    "language": "Language",
+    "submit": "Proceed to Skin Analysis"
+  },
   "footer": {
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",

@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "brand": "HL/Skin",
+    "home": "Accueil",
+    "scan": "Analyser la Peau"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "privacy": "Politique de Confidentialité",
+    "disclaimer": "Cet outil est destiné uniquement à des fins de sensibilisation cosmétique. Les scores de peau peuvent varier en fonction du maquillage appliqué. Les résultats ne remplacent pas les conseils dermatologiques professionnels."
+  },
+  "landing": {
+    "hero_title": "Analyse de Peau par IA",
+    "hero_subtitle": "Obtenez un score de santé cutanée personnalisé et des recommandations de produits en quelques secondes",
+    "cta": "Analyser Ma Peau",
+    "how_it_works": "Comment Ça Marche",
+    "step1_title": "Prenez une Photo",
+    "step1_desc": "Prenez un selfie ou téléchargez une photo existante de votre visage",
+    "step2_title": "Analyse par IA",
+    "step2_desc": "Notre IA analyse 12 métriques clés de la peau en quelques secondes",
+    "step3_title": "Obtenez les Résultats",
+    "step3_desc": "Recevez votre score de peau et des recommandations de produits personnalisées",
+    "metrics_title": "12 Métriques de Peau Analysées",
+    "trusted_by": "Approuvé par des milliers d'utilisateurs dans le monde"
+  },
+  "scan": {
+    "title": "Analyse de Peau",
+    "subtitle": "Prenez une photo claire de votre visage pour des résultats plus précis",
+    "camera_tab": "Caméra",
+    "upload_tab": "Télécharger",
+    "capture": "Prendre la Photo",
+    "retake": "Reprendre",
+    "upload_prompt": "Glissez-déposez votre photo ici, ou cliquez pour parcourir",
+    "upload_formats": "JPG, PNG jusqu'à 10 Mo",
+    "analyzing": "Analyse de votre peau en cours...",
+    "analyze_btn": "Analyser Ma Peau",
+    "tips_title": "Conseils pour de meilleurs résultats",
+    "tip1": "Utilisez un éclairage naturel",
+    "tip2": "Retirez lunettes et chapeaux",
+    "tip3": "Regardez directement la caméra",
+    "tip4": "Assurez-vous que votre visage entier est visible",
+    "no_face": "Aucun visage détecté. Veuillez réessayer avec une photo plus claire.",
+    "enter_details": "Entrez Vos Informations",
+    "name": "Prénom",
+    "surname": "Nom de Famille",
+    "email": "E-mail",
+    "phone": "Téléphone",
+    "age": "Âge",
+    "skin_type": "Type de Peau",
+    "skin_types": {
+      "oily": "Grasse",
+      "dry": "Sèche",
+      "combination": "Mixte",
+      "normal": "Normale",
+      "sensitive": "Sensible"
+    }
+  },
+  "results": {
+    "title": "Votre Analyse de Peau",
+    "overall_score": "Score Global",
+    "skin_type": "Type de Peau",
+    "metrics_title": "Métriques Détaillées",
+    "recommendations_title": "Produits Recommandés",
+    "summary_title": "Résumé",
+    "email_cta": "Obtenez Votre Rapport Complet",
+    "email_placeholder": "Entrez votre e-mail",
+    "email_submit": "Envoyer le Rapport",
+    "email_success": "Rapport envoyé ! Vérifiez votre boîte de réception.",
+    "share": "Partager les Résultats",
+    "new_scan": "Nouvelle Analyse",
+    "status": {
+      "good": "Bon",
+      "normal": "Normal",
+      "needs_attention": "Nécessite une Attention"
+    }
+  },
+  "metrics": {
+    "oily_skin": "Peau Grasse",
+    "moisture": "Hydratation",
+    "texture": "Texture",
+    "wrinkles": "Rides",
+    "dark_circles": "Cernes",
+    "redness": "Rougeurs",
+    "pores": "Pores",
+    "firmness": "Fermeté",
+    "radiance": "Éclat",
+    "acne": "Acné",
+    "dark_spots": "Taches Sombres",
+    "eye_area": "Contour des Yeux"
+  },
+  "products": {
+    "view": "Voir le Produit",
+    "priority": "Priorité",
+    "reason": "Pourquoi nous le recommandons"
+  },
+  "privacy": {
+    "title": "Politique de Confidentialité",
+    "intro": "Votre vie privée est importante pour nous. Cette politique explique comment nous traitons vos données.",
+    "data_handling_title": "Traitement des Données",
+    "data_handling": "Les images faciales sont transmises via HTTPS et traitées mais NE sont PAS stockées de manière permanente. Seuls les résultats d'analyse JSON et votre e-mail sont stockés dans notre base de données. Les images sont automatiquement supprimées après 24 heures.",
+    "consent_title": "Consentement",
+    "consent": "En utilisant notre service, vous consentez à la collecte et à l'utilisation des informations conformément à cette politique.",
+    "contact_title": "Contact",
+    "contact": "Si vous avez des questions concernant cette politique, veuillez nous contacter."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer",
+    "back": "Retour"
+  }
+}

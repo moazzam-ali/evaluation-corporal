@@ -1,0 +1,28 @@
+{
+  "telegram": {
+    "header": "*Nuova Analisi HL/Pelle*",
+    "member_details": "*Dettagli del Membro*\n\nNome: {name} {surname}\nEmail: {email}\nTelefono: {phone}\nEt\u00e0: {age}\nTipo di Pelle: {skin_type}",
+    "analysis_results": "*Risultati dell'Analisi*\n\nPunteggio Complessivo: {overall_score}%\nTipo di Pelle: {skin_type_result}\n\n*Problematiche Principali:*\n{concerns}\n\n*Riepilogo:*\n{summary}",
+    "analysis_link": "*Visualizza Rapporto Completo:*\nhttps://skin-doc.vercel.app/results/{id}?l={lng}",
+    "buttons": {
+      "sms": "Invia SMS",
+      "call": "Chiama",
+      "whatsapp": "WhatsApp",
+      "telegram": "Telegram"
+    },
+    "form_fields": {
+      "skin_types": {
+        "oily": "Grassa",
+        "dry": "Secca",
+        "combination": "Mista",
+        "normal": "Normale",
+        "sensitive": "Sensibile"
+      },
+      "status": {
+        "good": "Buono",
+        "normal": "Normale",
+        "needs_attention": "Necessita Attenzione"
+      }
+    }
+  }
+}

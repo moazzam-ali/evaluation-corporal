@@ -9,6 +9,12 @@ import { Button } from "@/components/ui/button";
 const languages = [
   { code: "en", label: "English" },
   { code: "es", label: "Español" },
+  { code: "fr", label: "Français" },
+  { code: "de", label: "Deutsch" },
+  { code: "it", label: "Italiano" },
+  { code: "tr", label: "Türkçe" },
+  { code: "in", label: "हिन्दी" },
+  { code: "pt", label: "Português" },
 ];
 
 export default function Navbar() {

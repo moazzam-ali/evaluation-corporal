@@ -6,8 +6,11 @@ import { uploadToCloudinary } from "@/lib/cloudinary";
 import { query } from "@/lib/db";
 import { getPromptForLanguage, METRIC_IDS } from "@/lib/prompts";
 import { sendAnalysisToTelegram } from "@/lib/telegram";
+import { indexDocumentsInAppSearch, buildElasticDocuments } from "@/lib/elastic";
 import { readFile } from "fs/promises";
 import { join } from "path";
+
+const SUPPORTED_LANGUAGES = ["en", "es", "fr", "de", "it", "tr", "in", "pt"];
 
 // Vercel function config — 60s for Hobby, up to 300s for Pro
 export const maxDuration = 60;
@@ -376,7 +379,7 @@ export async function POST(request) {
     }
 
     const botIndex = formDataReq.get("botIndex") || "1";
-    const lng = ["en", "es"].includes(formDataReq.get("lng")) ? formDataReq.get("lng") : "en";
+    const lng = SUPPORTED_LANGUAGES.includes(formDataReq.get("lng")) ? formDataReq.get("lng") : "en";
 
     // Generate unique ID
     const id = nanoid(22);
@@ -412,59 +415,89 @@ export async function POST(request) {
     const { results } = aiResult;
     console.log(`[analyze] Success in ${Date.now() - startTime}ms. Score: ${results.overall_score}, metrics: ${results.metrics.length}`);
 
-    // Store in PostgreSQL (non-blocking — don't fail the request)
+    // ------ Step 4: Store in PostgreSQL ------
     if (process.env.DATABASE_URL) {
       try {
         await query(
           "INSERT INTO analyses (id, form_data, results, image_url, language, created_at) VALUES ($1, $2, $3, $4, $5, NOW())",
           [id, JSON.stringify(formData), JSON.stringify(results), imageUrl.startsWith("data:") ? null : imageUrl, lng]
         );
+        console.log(`[analyze] Stored in DB: ${id}`);
       } catch (dbErr) {
         console.error(`[analyze] DB insert failed: ${dbErr.message}`);
       }
     }
 
-    // Send to Telegram (non-blocking)
-    let telegramStatus = { telegramStatus: "skipped" };
+    // ------ Step 5: Load backend translations ------
+    let translations = {};
+    try {
+      const translationsPath = join(process.cwd(), "public", "backend-locales", lng, "translation.json");
+      const file = await readFile(translationsPath, "utf-8");
+      translations = JSON.parse(file);
+    } catch (err) {
+      console.warn(`[analyze] Backend translations not loaded for ${lng}: ${err.message}`);
+    }
+
+    // ------ Step 6: Send to Telegram (same pattern as nutritional project) ------
+    let telegramResult = { telegramStatus: "skipped", results: [], failedChats: [], answersText: "" };
     if (chatIDs.length > 0) {
       try {
-        const translationsPath = join(process.cwd(), "public", "backend-locales", lng, "translation.json");
-        let translations;
-        try {
-          const file = await readFile(translationsPath, "utf-8");
-          const translationData = JSON.parse(file);
-          translations = (key) => {
-            const keys = key.split(".");
-            let val = translationData;
-            for (const k of keys) val = val?.[k];
-            return val || key;
-          };
-        } catch {
-          translations = (key) => key;
-        }
-
-        const baseUrl = request.headers.get("origin") || request.headers.get("host") || "";
-        const resultsUrl = `${baseUrl.startsWith("http") ? baseUrl : `https://${baseUrl}`}/results/${id}`;
-
-        telegramStatus = await sendAnalysisToTelegram({
+        telegramResult = await sendAnalysisToTelegram({
           chatIDs,
           botIndex: parseInt(botIndex),
           analysisData: { formData, results },
-          resultsUrl,
           translations,
+          analysisId: id,
+          language: lng,
         });
       } catch (err) {
         console.error(`[analyze] Telegram failed: ${err.message}`);
-        telegramStatus = { telegramStatus: "failed" };
+        telegramResult.telegramStatus = "failed";
       }
     }
 
-    return NextResponse.json({
+    // ------ Step 7: Index in Elasticsearch App Search ------
+    let elasticDocIds = [];
+    if (accountIDs.length > 0 || contactIDs.length > 0) {
+      try {
+        const documents = buildElasticDocuments({
+          formData,
+          results,
+          accountIDs,
+          contactIDs,
+          language: lng,
+          analysisId: id,
+          answersText: telegramResult.answersText || "",
+        });
+
+        if (documents.length > 0) {
+          console.log(`[analyze] Indexing ${documents.length} documents in Elastic`);
+          const ecResult = await indexDocumentsInAppSearch(documents);
+          elasticDocIds = ecResult.map((r) => r.id || null);
+        }
+      } catch (err) {
+        console.error(`[analyze] Elasticsearch indexing failed: ${err.message}`);
+      }
+    }
+
+    // ------ Build response (same structure as nutritional project) ------
+    const responseData = {
       id,
+      elasticDocIds,
       status: "success",
       results,
-      ...telegramStatus,
-    });
+      telegramStatus: telegramResult.telegramStatus,
+    };
+
+    if (telegramResult.failedChats.length > 0) {
+      responseData.status = telegramResult.telegramStatus === "failed" ? "partial_success" : "partial_success";
+      responseData.failedChats = telegramResult.failedChats;
+      responseData.message = "Analysis complete, but some Telegram notifications failed";
+    } else {
+      responseData.message = "Analysis complete and all notifications sent";
+    }
+
+    return NextResponse.json(responseData);
   } catch (error) {
     console.error(`[analyze] Fatal: ${error.message}`, error.stack);
     return NextResponse.json(

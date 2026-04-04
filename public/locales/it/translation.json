@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "brand": "HL/Skin",
+    "home": "Home",
+    "scan": "Analizza la Pelle"
+  },
+  "footer": {
+    "rights": "Tutti i diritti riservati.",
+    "privacy": "Informativa sulla Privacy",
+    "disclaimer": "Questo strumento è destinato esclusivamente a scopi di consapevolezza cosmetica. I punteggi della pelle possono variare in base al trucco applicato. I risultati non sostituiscono il consulto dermatologico professionale."
+  },
+  "landing": {
+    "hero_title": "Analisi della Pelle con IA",
+    "hero_subtitle": "Ottieni un punteggio personalizzato sulla salute della pelle e raccomandazioni sui prodotti in pochi secondi",
+    "cta": "Analizza la Mia Pelle",
+    "how_it_works": "Come Funziona",
+    "step1_title": "Scatta una Foto",
+    "step1_desc": "Scatta un selfie o carica una foto esistente del tuo viso",
+    "step2_title": "Analisi con IA",
+    "step2_desc": "La nostra IA analizza 12 metriche chiave della pelle in pochi secondi",
+    "step3_title": "Ottieni i Risultati",
+    "step3_desc": "Ricevi il tuo punteggio della pelle e raccomandazioni personalizzate sui prodotti",
+    "metrics_title": "12 Metriche della Pelle Analizzate",
+    "trusted_by": "Scelto da migliaia di utenti in tutto il mondo"
+  },
+  "scan": {
+    "title": "Analisi della Pelle",
+    "subtitle": "Scatta una foto chiara del tuo viso per i risultati più accurati",
+    "camera_tab": "Fotocamera",
+    "upload_tab": "Carica",
+    "capture": "Scatta Foto",
+    "retake": "Riscatta",
+    "upload_prompt": "Trascina e rilascia la tua foto qui, o clicca per sfogliare",
+    "upload_formats": "JPG, PNG fino a 10 MB",
+    "analyzing": "Analisi della tua pelle in corso...",
+    "analyze_btn": "Analizza la Mia Pelle",
+    "tips_title": "Consigli per risultati migliori",
+    "tip1": "Usa la luce naturale",
+    "tip2": "Rimuovi occhiali e cappelli",
+    "tip3": "Guarda direttamente la fotocamera",
+    "tip4": "Assicurati che il tuo viso sia completamente visibile",
+    "no_face": "Nessun viso rilevato. Riprova con una foto più chiara.",
+    "enter_details": "Inserisci i Tuoi Dati",
+    "name": "Nome",
+    "surname": "Cognome",
+    "email": "E-mail",
+    "phone": "Telefono",
+    "age": "Età",
+    "skin_type": "Tipo di Pelle",
+    "skin_types": {
+      "oily": "Grassa",
+      "dry": "Secca",
+      "combination": "Mista",
+      "normal": "Normale",
+      "sensitive": "Sensibile"
+    }
+  },
+  "results": {
+    "title": "La Tua Analisi della Pelle",
+    "overall_score": "Punteggio Complessivo",
+    "skin_type": "Tipo di Pelle",
+    "metrics_title": "Metriche Dettagliate",
+    "recommendations_title": "Prodotti Consigliati",
+    "summary_title": "Riepilogo",
+    "email_cta": "Ottieni il Tuo Report Completo",
+    "email_placeholder": "Inserisci la tua e-mail",
+    "email_submit": "Invia Report",
+    "email_success": "Report inviato! Controlla la tua casella di posta.",
+    "share": "Condividi Risultati",
+    "new_scan": "Nuova Analisi",
+    "status": {
+      "good": "Buono",
+      "normal": "Normale",
+      "needs_attention": "Richiede Attenzione"
+    }
+  },
+  "metrics": {
+    "oily_skin": "Pelle Grassa",
+    "moisture": "Idratazione",
+    "texture": "Texture",
+    "wrinkles": "Rughe",
+    "dark_circles": "Occhiaie",
+    "redness": "Rossore",
+    "pores": "Pori",
+    "firmness": "Compattezza",
+    "radiance": "Luminosità",
+    "acne": "Acne",
+    "dark_spots": "Macchie Scure",
+    "eye_area": "Contorno Occhi"
+  },
+  "products": {
+    "view": "Vedi Prodotto",
+    "priority": "Priorità",
+    "reason": "Perché lo consigliamo"
+  },
+  "privacy": {
+    "title": "Informativa sulla Privacy",
+    "intro": "La tua privacy è importante per noi. Questa informativa spiega come gestiamo i tuoi dati.",
+    "data_handling_title": "Gestione dei Dati",
+    "data_handling": "Le immagini facciali vengono trasmesse tramite HTTPS ed elaborate ma NON archiviate in modo permanente. Solo i risultati dell'analisi JSON e la tua e-mail vengono archiviati nel nostro database. Le immagini vengono automaticamente eliminate dopo 24 ore.",
+    "consent_title": "Consenso",
+    "consent": "Utilizzando il nostro servizio, acconsenti alla raccolta e all'utilizzo delle informazioni in conformità con questa informativa.",
+    "contact_title": "Contatto",
+    "contact": "Se hai domande riguardo a questa informativa, ti preghiamo di contattarci."
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "error": "Qualcosa è andato storto",
+    "retry": "Riprova",
+    "back": "Torna Indietro"
+  }
+}
