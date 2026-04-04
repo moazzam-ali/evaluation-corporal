@@ -127,7 +127,7 @@ async function callOpenAIWithRetry(imageUrl, formData, lng, { maxRetries = 2 } =
             content: [
               {
                 type: "text",
-                text: `Analyze this person's facial skin. Age: ${formData.age}. Self-reported skin type: ${formData.skin_type}. Return the JSON analysis now.`,
+                text: `Analyze this person's facial skin.${formData.birthDate ? ` Date of birth: ${formData.birthDate}.` : ""}${formData.skinType ? ` Self-reported skin type: ${formData.skinType}.` : ""}${formData.skinConcerns?.length ? ` Main concerns: ${formData.skinConcerns.join(", ")}.` : ""} Return the JSON analysis now.`,
               },
               {
                 type: "image_url",

@@ -100,6 +100,10 @@ export async function sendAnalysisToTelegram({
 
   const { formData, results } = analysisData;
 
+  // Helper to translate array fields
+  const translateArray = (arr, prefix) =>
+    (arr || []).map((key) => t(`${prefix}.${key}`) || key).join(", ") || "—";
+
   // Build Message 1: Member details
   let memberDetailsMessage = t("telegram.member_details") || "";
   memberDetailsMessage = memberDetailsMessage
@@ -107,16 +111,41 @@ export async function sendAnalysisToTelegram({
     .replace("{surname}", formData.surname || "Unknown")
     .replace("{email}", formData.email || "Unknown")
     .replace("{phone}", formData.phone || "Unknown")
-    .replace("{age}", formData.age || "Unknown")
-    .replace(
-      "{skin_type}",
-      t(`telegram.form_fields.skin_types.${formData.skin_type}`) || formData.skin_type || "Unknown"
-    );
+    .replace("{birthDate}", formData.birthDate || "Unknown")
+    .replace("{country}", formData.country || "Unknown")
+    .replace("{city}", formData.city || "Unknown");
 
-  // Build Message 2: Analysis results
+  // Build Message 2: Questionnaire summary
+  let questionnaireMessage = t("telegram.questionnaire_details") || "";
+  questionnaireMessage = questionnaireMessage
+    .replace("{skinConcerns}", translateArray(formData.skinConcerns, "telegram.form_fields.concerns"))
+    .replace("{priorityConcern}", formData.priorityConcern || "—")
+    .replace("{improvementZones}", translateArray(formData.improvementZones, "telegram.form_fields.zones"))
+    .replace("{skinType}", t(`telegram.form_fields.skin_types.${formData.skinType}`) || formData.skinType || "Unknown")
+    .replace("{skinFeelGeneral}", t(`telegram.form_fields.feel_general.${formData.skinFeelGeneral}`) || formData.skinFeelGeneral || "—")
+    .replace("{skinFeelEndOfDay}", t(`telegram.form_fields.feel_end_day.${formData.skinFeelEndOfDay}`) || formData.skinFeelEndOfDay || "—")
+    .replace("{routineFrequency}", t(`telegram.form_fields.routine_frequency.${formData.routineFrequency}`) || formData.routineFrequency || "—")
+    .replace("{productsUsed}", translateArray(formData.productsUsed, "telegram.form_fields.products"))
+    .replace("{essentialProduct}", formData.essentialProduct || "—")
+    .replace("{missingProduct}", formData.missingProduct || "—")
+    .replace("{supplements}", formData.supplements || "—")
+    .replace("{retinoidPreference}", t(`telegram.form_fields.retinoid.${formData.retinoidPreference}`) || formData.retinoidPreference || "—")
+    .replace("{reactionLevel}", t(`telegram.form_fields.reaction.${formData.reactionLevel}`) || formData.reactionLevel || "—")
+    .replace("{recentSigns}", translateArray(formData.recentSigns, "telegram.form_fields.signs"))
+    .replace("{sunscreenUse}", t(`telegram.form_fields.sunscreen.${formData.sunscreenUse}`) || formData.sunscreenUse || "—")
+    .replace("{makeupFrequency}", t(`telegram.form_fields.makeup.${formData.makeupFrequency}`) || formData.makeupFrequency || "—")
+    .replace("{sleepHours}", t(`telegram.form_fields.sleep.${formData.sleepHours}`) || formData.sleepHours || "—")
+    .replace("{stressImpact}", t(`telegram.form_fields.stress.${formData.stressImpact}`) || formData.stressImpact || "—")
+    .replace("{waterIntake}", t(`telegram.form_fields.water.${formData.waterIntake}`) || formData.waterIntake || "—")
+    .replace("{treatmentHistory}", t(`telegram.form_fields.history.${formData.treatmentHistory}`) || formData.treatmentHistory || "—")
+    .replace("{frustrations}", translateArray(formData.frustrations, "telegram.form_fields.frustrations"))
+    .replace("{lookingFor}", t(`telegram.form_fields.looking_for.${formData.lookingFor}`) || formData.lookingFor || "—")
+    .replace("{wantRoutineRecommendation}", t(`telegram.form_fields.recommendation.${formData.wantRoutineRecommendation}`) || formData.wantRoutineRecommendation || "—")
+    .replace("{budgetLevel}", t(`telegram.form_fields.budget.${formData.budgetLevel}`) || formData.budgetLevel || "—");
+
+  // Build Message 3: Analysis results
   let analysisResultsMessage = t("telegram.analysis_results") || "";
 
-  // Build concerns list
   const concerns = (results.metrics || [])
     .filter((m) => m.status === "needs_attention")
     .map((m) => {
@@ -127,52 +156,30 @@ export async function sendAnalysisToTelegram({
 
   analysisResultsMessage = analysisResultsMessage
     .replace("{overall_score}", results.overall_score || "N/A")
-    .replace(
-      "{skin_type_result}",
-      t(`telegram.form_fields.skin_types.${results.skin_type}`) || results.skin_type || "Unknown"
-    )
+    .replace("{skin_type_result}", t(`telegram.form_fields.skin_types.${results.skin_type}`) || results.skin_type || "Unknown")
     .replace("{concerns}", concerns || "  None detected")
     .replace("{summary}", results.summary || "");
 
-  // Build Message 3: Analysis link
+  // Build Message 4: Analysis link
   let analysisLinkMessage = t("telegram.analysis_link") || "";
   analysisLinkMessage = analysisLinkMessage
     .replace("{id}", analysisId)
     .replace("{lng}", language || defaultLanguage || "en");
 
-  // Inline keyboard buttons (same pattern as nutritional project)
+  // Inline keyboard buttons
   const inlineKeyboards = [
-    [
-      {
-        text: t("telegram.buttons.sms") || "SMS",
-        url: `https://sms.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}`,
-      },
-    ],
-    [
-      {
-        text: t("telegram.buttons.call") || "Call",
-        url: `https://call.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}`,
-      },
-    ],
-    [
-      {
-        text: t("telegram.buttons.whatsapp") || "WhatsApp",
-        url: `https://wa.me/${formData.phone || ""}`,
-      },
-    ],
-    [
-      {
-        text: t("telegram.buttons.telegram") || "Telegram",
-        url: `https://t.me/${formData.phone || ""}`,
-      },
-    ],
+    [{ text: t("telegram.buttons.sms") || "SMS", url: `https://sms.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}` }],
+    [{ text: t("telegram.buttons.call") || "Call", url: `https://call.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}` }],
+    [{ text: t("telegram.buttons.whatsapp") || "WhatsApp", url: `https://wa.me/${formData.phone || ""}` }],
+    [{ text: t("telegram.buttons.telegram") || "Telegram", url: `https://t.me/${formData.phone || ""}` }],
   ];
 
-  // Prepare 3 messages (same structure as nutritional project)
+  // 4 messages: member details, questionnaire, AI results, link with keyboard
   const messages = [
-    memberDetailsMessage,          // Message 1: Member details
-    analysisResultsMessage,        // Message 2: Analysis results + concerns
-    analysisLinkMessage,           // Message 3: Link with inline keyboard
+    memberDetailsMessage,
+    questionnaireMessage,
+    analysisResultsMessage,
+    analysisLinkMessage,
   ];
 
   // Build combined answers text for Elastic indexing (sanitized, no Markdown)
@@ -186,8 +193,8 @@ export async function sendAnalysisToTelegram({
   for (const chatID of chatIDs) {
     try {
       for (let i = 0; i < messages.length; i++) {
-        // Attach inline keyboard only with the third message
-        const keyboard = i === 2 ? inlineKeyboards : undefined;
+        // Attach inline keyboard only with the last message
+        const keyboard = i === messages.length - 1 ? inlineKeyboards : undefined;
         await sendTelegramMessage(botApiKey, chatID, messages[i], keyboard);
       }
       results_.push({ chatID, success: true });

@@ -4,6 +4,23 @@
     "home": "Ana Sayfa",
     "scan": "Cildi Analiz Et"
   },
+  "home": {
+    "title": "Yapılandırma",
+    "subtitle": "Telegram bildirim ve CRM parametrelerini ayarlayın, ardından cilt analizi formuna geçin.",
+    "form_title": "Parametreler",
+    "form_desc": "Başlamadan önce Telegram botlarını, CRM ID'lerini ve dili yapılandırın.",
+    "chat_ids": "Sohbet ID'leri",
+    "chat_ids_placeholder": "Virgülle ayrılmış Telegram sohbet ID'leri",
+    "chat_ids_help": "Virgülle ayrılmış bir veya daha fazla Telegram sohbet ID'si girin.",
+    "bot_index": "Bot İndeksi",
+    "bot_index_help": "Hangi Telegram botunun kullanılacağı (bot tablosundan).",
+    "account_ids": "Hesap ID'leri",
+    "account_ids_placeholder": "Virgülle ayrılmış CRM hesap ID'leri",
+    "contact_ids": "İletişim ID'leri",
+    "contact_ids_placeholder": "Virgülle ayrılmış CRM iletişim ID'leri",
+    "language": "Dil",
+    "submit": "Cilt Analizine Geç"
+  },
   "footer": {
     "rights": "Tüm hakları saklıdır.",
     "privacy": "Gizlilik Politikası",
@@ -39,20 +56,223 @@
     "tip2": "Gözlük ve şapkaları çıkarın",
     "tip3": "Doğrudan kameraya bakın",
     "tip4": "Yüzünüzün tamamının görünür olduğundan emin olun",
-    "no_face": "Yüz algılanamadı. Lütfen daha net bir fotoğrafla tekrar deneyin.",
-    "enter_details": "Bilgilerinizi Girin",
-    "name": "Ad",
-    "surname": "Soyad",
-    "email": "E-posta",
-    "phone": "Telefon",
-    "age": "Yaş",
-    "skin_type": "Cilt Tipi",
-    "skin_types": {
-      "oily": "Yağlı",
-      "dry": "Kuru",
-      "combination": "Karma",
-      "normal": "Normal",
-      "sensitive": "Hassas"
+    "no_photo": "Lütfen önce bir fotoğraf çekin veya yükleyin.",
+    "navigation": {
+      "next": "İleri",
+      "previous": "Geri",
+      "analyze": "Cildimi Analiz Et",
+      "step_of": "Adım {{current}} / {{total}}"
+    },
+    "step1": {
+      "nav": "Temel Bilgiler",
+      "title": "Temel Bilgiler",
+      "subtitle": "Bize kendinizden bahsedin",
+      "name": "Ad",
+      "surname": "Soyad",
+      "email": "E-posta",
+      "birthDate": "Doğum Tarihi",
+      "phone": "Telefon",
+      "country": "Ülke",
+      "city": "Şehir"
+    },
+    "step2": {
+      "nav": "Ana Hedef",
+      "title": "Ana Hedef",
+      "concerns_label": "Şu anda cildinizle ilgili sizi en çok ne endişelendiriyor? (en fazla 3)",
+      "concerns": {
+        "dryness": "Kuruluk / gerginlik",
+        "wrinkles": "Kırışıklıklar veya ince çizgiler",
+        "sagging": "Sarkma / elastikiyet kaybı",
+        "dark_spots": "Koyu lekeler / dengesiz ten rengi",
+        "dullness": "Donuk cilt / parlaklık eksikliği",
+        "blemishes": "Sivilceler / çıkıntılar",
+        "pores": "Görünür gözenekler",
+        "eye_area": "Göz altı halkaları / göz çevresi kırışıklıkları",
+        "sensitivity": "Hassasiyet / kızarıklık",
+        "other": "Diğer"
+      },
+      "priority_label": "Cildinizde sadece bir şeyi iyileştirebilseydiniz, ne olurdu?",
+      "priority_placeholder": "En önemli önceliğinizi tanımlayın...",
+      "zones_label": "En çok değişimi nerede görmek istersiniz?",
+      "zones": {
+        "full_face": "Tüm yüz",
+        "eye_contour": "Göz çevresi",
+        "neck": "Boyun",
+        "hands": "Eller",
+        "body": "Vücut"
+      }
+    },
+    "step3": {
+      "nav": "Cilt Algısı",
+      "title": "Cildinizi Nasıl Algılıyorsunuz",
+      "skin_type_label": "Cildinizi normalde nasıl tanımlarsınız?",
+      "skin_type": {
+        "dry": "Kuru",
+        "oily": "Yağlı",
+        "combination": "Karma",
+        "sensitive": "Hassas",
+        "dont_know": "Bilmiyorum"
+      },
+      "feel_general_label": "Cildiniz çoğu zaman nasıl hissediyor?",
+      "feel_general": {
+        "tight": "Gergin",
+        "shiny": "Parlak",
+        "comfortable": "Rahat / dengeli",
+        "sensitive_reactive": "Hassas / reaktif",
+        "dull": "Donuk",
+        "dont_know": "Bilmiyorum"
+      },
+      "feel_end_day_label": "Cildiniz gün sonunda nasıl hissediyor?",
+      "feel_end_day": {
+        "tight": "Gergin",
+        "shiny": "Parlak",
+        "comfortable": "Rahat / dengeli",
+        "irritated": "Tahriş olmuş",
+        "dull": "Donuk"
+      }
+    },
+    "step4": {
+      "nav": "Rutin",
+      "title": "Mevcut Rutin",
+      "frequency_label": "Genellikle bir yüz bakım rutininiz var mı?",
+      "frequency": {
+        "morning_only": "Sadece sabah",
+        "night_only": "Sadece gece",
+        "morning_and_night": "Sabah ve gece",
+        "no_routine": "Rutinim yok"
+      },
+      "products_label": "Şu anda hangi ürünleri kullanıyorsunuz?",
+      "products": {
+        "cleanser": "Temizleyici",
+        "toner": "Tonik",
+        "serum": "Serum",
+        "day_cream": "Gündüz kremi",
+        "sunscreen": "Güneş koruyucu",
+        "eye_contour": "Göz çevresi",
+        "night_cream": "Gece kremi",
+        "mask": "Maske",
+        "exfoliant": "Peeling",
+        "other": "Diğer"
+      },
+      "essential_label": "Rutininizden asla eksik olmayan ürün hangisi?",
+      "essential_placeholder": "ör., Nemlendirici",
+      "missing_label": "Hangi ürünün eksik olduğunu düşünüyorsunuz veya hangisini kullanacağınızı bilmiyorsunuz?",
+      "missing_placeholder": "ör., Serum",
+      "supplements_label": "Cildiniz için takviye alıyor musunuz? (ör., kolajen)",
+      "supplements_placeholder": "ör., Kolajen, C Vitamini",
+      "retinoid_label": "A vitamini veya retinoid içeren ürünlerden kaçınmayı mı tercih edersiniz?",
+      "retinoid": {
+        "yes": "Evet",
+        "no": "Hayır",
+        "dont_know": "Bilmiyorum"
+      }
+    },
+    "step5": {
+      "nav": "Hassasiyet",
+      "title": "Hassasiyet ve Tolerans",
+      "reaction_label": "Cildiniz bazı ürünlere kolayca tepki veriyor mu?",
+      "reaction": {
+        "yes_a_lot": "Evet, çok fazla",
+        "sometimes": "Bazen",
+        "no": "Hayır",
+        "dont_know": "Bilmiyorum"
+      },
+      "signs_label": "Son zamanlarda bu belirtilerden herhangi birini fark ettiniz mi?",
+      "signs": {
+        "redness": "Kızarıklık",
+        "itching": "Kaşıntı",
+        "flaking": "Pul pul dökülme",
+        "excess_shine": "Aşırı parlaklık",
+        "blemishes": "Sivilceler",
+        "dark_spots": "Koyu lekeler",
+        "tightness": "Gerginlik",
+        "none": "Hiçbiri"
+      }
+    },
+    "step6": {
+      "nav": "Alışkanlıklar",
+      "title": "Cildinizi Etkileyen Alışkanlıklar",
+      "sunscreenUse_label": "Her gün güneş koruyucu kullanıyor musunuz?",
+      "sunscreenUse": {
+        "daily": "Evet, her gün",
+        "sometimes": "Bazen",
+        "summer_only": "Sadece yazın",
+        "no": "Hayır"
+      },
+      "makeupFrequency_label": "Ne sıklıkla makyaj yapıyorsunuz?",
+      "makeupFrequency": {
+        "daily": "Her gün",
+        "several_times_week": "Haftada birkaç kez",
+        "occasionally": "Ara sıra",
+        "never": "Hiçbir zaman"
+      },
+      "sleepHours_label": "Normalde kaç saat uyuyorsunuz?",
+      "sleepHours": {
+        "less_than_5": "5'ten az",
+        "5_6": "5-6",
+        "7_8": "7-8",
+        "more_than_8": "8'den fazla"
+      },
+      "stressImpact_label": "Stresin cildinizi etkilediğini hissediyor musunuz?",
+      "stressImpact": {
+        "yes": "Evet",
+        "a_little": "Biraz",
+        "no": "Hayır"
+      },
+      "waterIntake_label": "Her gün yeterince su içiyor musunuz?",
+      "waterIntake": {
+        "yes": "Evet",
+        "sometimes": "Bazen",
+        "no": "Hayır"
+      }
+    },
+    "step7": {
+      "nav": "Deneyim",
+      "title": "Geçmiş Deneyim",
+      "history_label": "Daha önce cildinizi iyileştirmek için herhangi bir tedavi veya rutin denediniz mi?",
+      "history": {
+        "yes_worked": "Evet, iyi sonuç verdi",
+        "yes_no_results": "Evet, ama sonuç göremedim",
+        "tried_many_nothing_works": "Birçok şey denedim, hiçbiri işe yaramadı",
+        "barely_tried": "Hayır, neredeyse hiç denemedim"
+      },
+      "frustrations_label": "Kullandığınız ürünlerle ilgili sizi en çok ne hayal kırıklığına uğratıyor?",
+      "frustrations": {
+        "no_results": "Sonuç göremiyorum",
+        "irritation": "Tahriş ediyorlar",
+        "dont_know_how_to_combine": "Nasıl birleştireceğimi bilmiyorum",
+        "too_expensive": "Çok pahalılar",
+        "not_consistent": "Düzenli olamıyorum",
+        "other": "Diğer"
+      }
+    },
+    "step8": {
+      "nav": "Hedefler",
+      "title": "Hedefleriniz",
+      "looking_for_label": "Şu anda ne arıyorsunuz?",
+      "looking_for": {
+        "basic_routine": "Temel bir rutin",
+        "complete_routine": "Kapsamlı bir rutin",
+        "specific_problem": "Belirli bir sorunu iyileştirmek",
+        "prevention": "Önleme ve bakım",
+        "personalized_advice": "Kişiselleştirilmiş tavsiye"
+      },
+      "recommendation_label": "Cildinize ve hedefinize uygun bir rutin önermemizi ister misiniz?",
+      "recommendation": {
+        "yes": "Evet",
+        "no": "Hayır"
+      },
+      "budget_label": "Her ay cildinize bakım için hangi yatırım seviyesi sizin için uygundur?",
+      "budget": {
+        "basic": "Temel",
+        "medium": "Orta",
+        "premium": "Premium"
+      }
+    },
+    "step9": {
+      "nav": "Fotoğraf",
+      "title": "Fotoğrafınızı Yükleyin",
+      "subtitle": "Yapay zeka analizi için yüzünüzün net bir fotoğrafını çekin veya mevcut bir fotoğraf yükleyin."
     }
   },
   "results": {

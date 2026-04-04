@@ -5,109 +5,108 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
-import { Sparkles, Loader2 } from "lucide-react";
+import { Sparkles, Loader2, ArrowLeft, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
-import SkinCamera from "@/components/SkinCamera/SkinCamera";
 import useAnalysisStore from "@/store/analysisStore";
 import { compressImage, dataUrlToBlob, validateImage } from "@/lib/image-utils";
+import { fullScanSchema, STEP_FIELD_NAMES, DEFAULT_VALUES } from "@/lib/schemas/scan-schemas";
 
-const ANALYSIS_TIMEOUT = 55000; // 55s — just under Vercel's 60s limit
+import Step1BasicInfo from "@/components/Steps/Step1BasicInfo";
+import Step2MainGoal from "@/components/Steps/Step2MainGoal";
+import Step3SkinPerception from "@/components/Steps/Step3SkinPerception";
+import Step4CurrentRoutine from "@/components/Steps/Step4CurrentRoutine";
+import Step5Sensitivity from "@/components/Steps/Step5Sensitivity";
+import Step6Habits from "@/components/Steps/Step6Habits";
+import Step7PastExperience from "@/components/Steps/Step7PastExperience";
+import Step8GoalsCommercial from "@/components/Steps/Step8GoalsCommercial";
+import Step9PhotoUpload from "@/components/Steps/Step9PhotoUpload";
 
-const formSchema = z.object({
-  name: z.string().min(1, "Required"),
-  surname: z.string().min(1, "Required"),
-  email: z.string().email("Invalid email"),
-  phone: z.string().regex(/^\+?[0-9]{7,15}$/, "Invalid phone number"),
-  age: z.coerce.number().min(15).max(120),
-  skin_type: z.enum(["oily", "dry", "combination", "normal", "sensitive"]),
-});
+const STEP_COMPONENTS = [
+  Step1BasicInfo, Step2MainGoal, Step3SkinPerception,
+  Step4CurrentRoutine, Step5Sensitivity, Step6Habits,
+  Step7PastExperience, Step8GoalsCommercial, Step9PhotoUpload,
+];
 
-const skinTypeOptions = ["oily", "dry", "combination", "normal", "sensitive"];
+const TOTAL_STEPS = STEP_COMPONENTS.length;
+const ANALYSIS_TIMEOUT = 55000;
 
 export default function ScanPage() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const [currentStep, setCurrentStep] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [imageData, setImageData] = useState(null);
-  const [activeTab, setActiveTab] = useState("camera");
+  const [activeTab, setActiveTab] = useState("upload");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState(0);
   const abortControllerRef = useRef(null);
 
+  // URL params from config page
   const chatIDs = searchParams.get("n")?.split(",").filter(Boolean) || [];
   const botIndex = searchParams.get("b") || "1";
   const accountIDs = searchParams.get("a")?.split(",").filter(Boolean) || [];
   const contactIDs = searchParams.get("c")?.split(",").filter(Boolean) || [];
   const lang = searchParams.get("l") || i18n.language || "en";
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      surname: "",
-      email: "",
-      phone: "",
-      age: "",
-      skin_type: "normal",
-    },
+  const form = useForm({
+    resolver: zodResolver(fullScanSchema),
+    defaultValues: DEFAULT_VALUES,
+    mode: "onTouched",
   });
 
+  const { trigger, handleSubmit } = form;
+
+  // Navigation
+  const handleNext = async () => {
+    const fields = STEP_FIELD_NAMES[currentStep];
+    if (fields.length > 0) {
+      const valid = await trigger(fields);
+      if (!valid) return;
+    }
+    setDirection(1);
+    setCurrentStep((prev) => Math.min(prev + 1, TOTAL_STEPS - 1));
+  };
+
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentStep((prev) => Math.max(prev - 1, 0));
+  };
+
+  // Final submission
   const onSubmit = async (formData) => {
     if (!imageData) {
-      toast.error(t("scan.no_face", "Please capture or upload a photo first."));
+      toast.error(t("scan.no_photo", "Please capture or upload a photo first."));
       return;
     }
 
     setIsAnalyzing(true);
     setAnalysisProgress(5);
 
-    // Progress simulation (visual feedback while waiting for AI)
     const progressInterval = setInterval(() => {
-      setAnalysisProgress((prev) => {
-        if (prev >= 90) return prev;
-        return prev + Math.random() * 8;
-      });
+      setAnalysisProgress((prev) => (prev >= 90 ? prev : prev + Math.random() * 8));
     }, 1500);
 
-    // Abort controller for timeout
     const controller = new AbortController();
     abortControllerRef.current = controller;
     const timeout = setTimeout(() => controller.abort(), ANALYSIS_TIMEOUT);
 
     try {
-      // Step 1: Validate the image
       setAnalysisProgress(10);
       const validation = await validateImage(imageData);
-      if (!validation.valid) {
-        throw new Error(validation.error || "Invalid image");
-      }
+      if (!validation.valid) throw new Error(validation.error || "Invalid image");
 
-      // Step 2: Compress image to max 1024px (keeps it under 200KB for fast API calls)
       setAnalysisProgress(15);
-      const compressed = await compressImage(imageData, {
-        maxWidth: 1024,
-        maxHeight: 1024,
-        quality: 0.85,
-      });
+      const compressed = await compressImage(imageData, { maxWidth: 1024, maxHeight: 1024, quality: 0.85 });
 
-      // Step 3: Convert to blob
       setAnalysisProgress(20);
       const blob = dataUrlToBlob(compressed);
-      console.log(`[scan] Image compressed: ${(blob.size / 1024).toFixed(0)}KB`);
 
-      // Step 4: Build form data
       const submitData = new FormData();
       submitData.append("image", blob, "skin-photo.jpg");
       submitData.append("formData", JSON.stringify(formData));
@@ -117,7 +116,6 @@ export default function ScanPage() {
       submitData.append("contactIDs", JSON.stringify(contactIDs));
       submitData.append("lng", lang);
 
-      // Step 5: Send to API
       setAnalysisProgress(30);
       const res = await fetch("/api/analyze", {
         method: "POST",
@@ -126,26 +124,17 @@ export default function ScanPage() {
       });
 
       setAnalysisProgress(85);
-
       const result = await res.json();
 
-      if (!res.ok) {
-        throw new Error(result.error || "Analysis failed");
-      }
+      if (!res.ok) throw new Error(result.error || "Analysis failed");
 
       setAnalysisProgress(100);
-
-      // Store results in Zustand
-      useAnalysisStore.getState().setAnalysisFromResponse({
-        results: result.results,
-        formData,
-      });
-
+      useAnalysisStore.getState().setAnalysisFromResponse({ results: result.results, formData });
       toast.success(t("results.title", "Analysis complete!"));
       router.push(`/results/${result.id}`);
     } catch (error) {
       if (error.name === "AbortError") {
-        toast.error(t("common.timeout", "Analysis took too long. Please try again with a clearer photo."));
+        toast.error(t("common.timeout", "Analysis took too long. Please try again."));
       } else {
         toast.error(error.message || t("common.error"));
       }
@@ -158,145 +147,120 @@ export default function ScanPage() {
     }
   };
 
-  const cancelAnalysis = () => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
+  const cancelAnalysis = () => abortControllerRef.current?.abort();
+
+  // Current step component
+  const StepComponent = STEP_COMPONENTS[currentStep];
+  const isLastStep = currentStep === TOTAL_STEPS - 1;
+  const isFirstStep = currentStep === 0;
+
+  // Step titles for progress display
+  const stepTitles = [
+    t("scan.step1.nav", "Basic Info"),
+    t("scan.step2.nav", "Main Goal"),
+    t("scan.step3.nav", "Skin Perception"),
+    t("scan.step4.nav", "Routine"),
+    t("scan.step5.nav", "Sensitivity"),
+    t("scan.step6.nav", "Habits"),
+    t("scan.step7.nav", "Experience"),
+    t("scan.step8.nav", "Goals"),
+    t("scan.step9.nav", "Photo"),
+  ];
+
+  // Animation variants
+  const variants = {
+    enter: (d) => ({ x: d > 0 ? 200 : -200, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (d) => ({ x: d > 0 ? -200 : 200, opacity: 0 }),
   };
 
-  return (
-    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mb-8 text-center"
-      >
-        <h1 className="text-3xl font-bold">{t("scan.title")}</h1>
-        <p className="mt-2 text-muted-foreground">{t("scan.subtitle")}</p>
-      </motion.div>
-
-      {isAnalyzing ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="flex flex-col items-center justify-center py-20"
-        >
+  if (isAnalyzing) {
+    return (
+      <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center py-20">
           <div className="relative mb-6">
             <div className="h-24 w-24 animate-spin rounded-full border-4 border-primary border-t-transparent" />
             <Sparkles className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 text-primary" />
           </div>
           <p className="text-lg font-medium">{t("scan.analyzing")}</p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {t("scan.subtitle")}
-          </p>
           <div className="mt-6 w-full max-w-xs">
             <Progress value={analysisProgress} className="h-2" />
-            <p className="mt-2 text-center text-xs text-muted-foreground">
-              {Math.round(analysisProgress)}%
-            </p>
+            <p className="mt-2 text-center text-xs text-muted-foreground">{Math.round(analysisProgress)}%</p>
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={cancelAnalysis}
-            className="mt-4 text-muted-foreground"
-          >
+          <Button variant="ghost" size="sm" onClick={cancelAnalysis} className="mt-4 text-muted-foreground">
             {t("common.cancel", "Cancel")}
           </Button>
         </motion.div>
-      ) : (
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* Left: Camera */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            <SkinCamera
-              onImageCapture={setImageData}
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            />
-          </motion.div>
+      </div>
+    );
+  }
 
-          {/* Right: Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle>{t("scan.enter_details")}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">{t("scan.name")}</Label>
-                      <Input id="name" {...register("name")} />
-                      {errors.name && <p className="text-xs text-destructive">{errors.name.message}</p>}
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="surname">{t("scan.surname")}</Label>
-                      <Input id="surname" {...register("surname")} />
-                      {errors.surname && <p className="text-xs text-destructive">{errors.surname.message}</p>}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email">{t("scan.email")}</Label>
-                    <Input id="email" type="email" {...register("email")} />
-                    {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">{t("scan.phone")}</Label>
-                      <Input id="phone" {...register("phone")} placeholder="+1234567890" />
-                      {errors.phone && <p className="text-xs text-destructive">{errors.phone.message}</p>}
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="age">{t("scan.age")}</Label>
-                      <Input id="age" type="number" {...register("age")} />
-                      {errors.age && <p className="text-xs text-destructive">{errors.age.message}</p>}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="skin_type">{t("scan.skin_type")}</Label>
-                    <select
-                      id="skin_type"
-                      {...register("skin_type")}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    >
-                      {skinTypeOptions.map((type) => (
-                        <option key={type} value={type}>
-                          {t(`scan.skin_types.${type}`)}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full gap-2"
-                    disabled={!imageData || isAnalyzing}
-                  >
-                    {isAnalyzing ? (
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                    ) : (
-                      <Sparkles className="h-5 w-5" />
-                    )}
-                    {t("scan.analyze_btn")}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
+  return (
+    <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* Progress header */}
+      <div className="mb-8">
+        <div className="mb-2 flex items-center justify-between text-sm">
+          <span className="font-medium">{stepTitles[currentStep]}</span>
+          <span className="text-muted-foreground">
+            {t("scan.navigation.step_of", "Step {{current}} of {{total}}", { current: currentStep + 1, total: TOTAL_STEPS })}
+          </span>
         </div>
-      )}
+        <Progress value={((currentStep + 1) / TOTAL_STEPS) * 100} className="h-2" />
+      </div>
+
+      {/* Step content with animations */}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <AnimatePresence mode="wait" custom={direction}>
+          <motion.div
+            key={currentStep}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="rounded-xl border bg-card p-6 shadow-sm"
+          >
+            {currentStep === TOTAL_STEPS - 1 ? (
+              <StepComponent
+                imageData={imageData}
+                setImageData={setImageData}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                t={t}
+              />
+            ) : (
+              <StepComponent form={form} t={t} />
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation buttons */}
+        <div className="mt-6 flex items-center justify-between">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handlePrev}
+            disabled={isFirstStep}
+            className="gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            {t("scan.navigation.previous", "Previous")}
+          </Button>
+
+          {isLastStep ? (
+            <Button type="submit" size="lg" className="gap-2" disabled={!imageData}>
+              <Sparkles className="h-5 w-5" />
+              {t("scan.navigation.analyze", "Analyze My Skin")}
+            </Button>
+          ) : (
+            <Button type="button" onClick={handleNext} className="gap-2">
+              {t("scan.navigation.next", "Next")}
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
+      </form>
     </div>
   );
 }

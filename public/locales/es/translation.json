@@ -56,20 +56,223 @@
     "tip2": "Quítate las gafas y sombreros",
     "tip3": "Mira directamente a la cámara",
     "tip4": "Asegúrate de que todo tu rostro sea visible",
-    "no_face": "No se detectó un rostro. Intenta de nuevo con una foto más clara.",
-    "enter_details": "Ingresa Tus Datos",
-    "name": "Nombre",
-    "surname": "Apellido",
-    "email": "Correo Electrónico",
-    "phone": "Teléfono",
-    "age": "Edad",
-    "skin_type": "Tipo de Piel",
-    "skin_types": {
-      "oily": "Grasa",
-      "dry": "Seca",
-      "combination": "Mixta",
-      "normal": "Normal",
-      "sensitive": "Sensible"
+    "no_photo": "Por favor, captura o sube una foto primero.",
+    "navigation": {
+      "next": "Siguiente",
+      "previous": "Anterior",
+      "analyze": "Analizar Mi Piel",
+      "step_of": "Paso {{current}} de {{total}}"
+    },
+    "step1": {
+      "nav": "Datos Básicos",
+      "title": "Información Básica",
+      "subtitle": "Cuéntanos sobre ti",
+      "name": "Nombre",
+      "surname": "Apellido",
+      "email": "Correo Electrónico",
+      "birthDate": "Fecha de Nacimiento",
+      "phone": "Teléfono",
+      "country": "País",
+      "city": "Ciudad"
+    },
+    "step2": {
+      "nav": "Objetivo Principal",
+      "title": "Objetivo Principal",
+      "concerns_label": "¿Qué es lo que más te preocupa de tu piel ahora mismo? (hasta 3)",
+      "concerns": {
+        "dryness": "Sequedad / tirantez",
+        "wrinkles": "Arrugas o líneas finas",
+        "sagging": "Flacidez / falta de elasticidad",
+        "dark_spots": "Manchas oscuras / tono desigual",
+        "dullness": "Piel apagada / falta de luminosidad",
+        "blemishes": "Imperfecciones / granitos",
+        "pores": "Poros visibles",
+        "eye_area": "Ojeras / arrugas en el contorno de ojos",
+        "sensitivity": "Sensibilidad / rojeces",
+        "other": "Otro"
+      },
+      "priority_label": "Si pudieras mejorar solo una cosa de tu piel, ¿cuál sería?",
+      "priority_placeholder": "Describe tu principal prioridad...",
+      "zones_label": "¿Dónde te gustaría ver más cambio?",
+      "zones": {
+        "full_face": "Rostro completo",
+        "eye_contour": "Contorno de ojos",
+        "neck": "Cuello",
+        "hands": "Manos",
+        "body": "Cuerpo"
+      }
+    },
+    "step3": {
+      "nav": "Percepción de Piel",
+      "title": "Cómo Percibes Tu Piel",
+      "skin_type_label": "¿Cómo describirías normalmente tu piel?",
+      "skin_type": {
+        "dry": "Seca",
+        "oily": "Grasa",
+        "combination": "Mixta",
+        "sensitive": "Sensible",
+        "dont_know": "No lo sé"
+      },
+      "feel_general_label": "¿Cómo sientes tu piel la mayor parte del tiempo?",
+      "feel_general": {
+        "tight": "Tirante",
+        "shiny": "Brillante",
+        "comfortable": "Cómoda / equilibrada",
+        "sensitive_reactive": "Sensible / reactiva",
+        "dull": "Apagada",
+        "dont_know": "No lo sé"
+      },
+      "feel_end_day_label": "¿Cómo sientes tu piel al final del día?",
+      "feel_end_day": {
+        "tight": "Tirante",
+        "shiny": "Brillante",
+        "comfortable": "Cómoda / equilibrada",
+        "irritated": "Irritada",
+        "dull": "Apagada"
+      }
+    },
+    "step4": {
+      "nav": "Rutina",
+      "title": "Rutina Actual",
+      "frequency_label": "¿Sueles tener una rutina facial?",
+      "frequency": {
+        "morning_only": "Solo por la mañana",
+        "night_only": "Solo por la noche",
+        "morning_and_night": "Mañana y noche",
+        "no_routine": "No tengo rutina"
+      },
+      "products_label": "¿Qué productos usas actualmente?",
+      "products": {
+        "cleanser": "Limpiador",
+        "toner": "Tónico",
+        "serum": "Sérum",
+        "day_cream": "Crema de día",
+        "sunscreen": "Protector solar",
+        "eye_contour": "Contorno de ojos",
+        "night_cream": "Crema de noche",
+        "mask": "Mascarilla",
+        "exfoliant": "Exfoliante",
+        "other": "Otro"
+      },
+      "essential_label": "¿Qué producto nunca falta en tu rutina?",
+      "essential_placeholder": "p. ej., Hidratante",
+      "missing_label": "¿Qué producto crees que te falta o no sabes cuál usar?",
+      "missing_placeholder": "p. ej., Sérum",
+      "supplements_label": "¿Tomas algún suplemento para tu piel? (p. ej., colágeno)",
+      "supplements_placeholder": "p. ej., Colágeno, Vitamina C",
+      "retinoid_label": "¿Prefieres evitar productos con vitamina A o retinoides?",
+      "retinoid": {
+        "yes": "Sí",
+        "no": "No",
+        "dont_know": "No lo sé"
+      }
+    },
+    "step5": {
+      "nav": "Sensibilidad",
+      "title": "Sensibilidad y Tolerancia",
+      "reaction_label": "¿Tu piel reacciona fácilmente a algunos productos?",
+      "reaction": {
+        "yes_a_lot": "Sí, mucho",
+        "sometimes": "A veces",
+        "no": "No",
+        "dont_know": "No lo sé"
+      },
+      "signs_label": "¿Has notado alguno de estos signos últimamente?",
+      "signs": {
+        "redness": "Rojeces",
+        "itching": "Picazón",
+        "flaking": "Descamación",
+        "excess_shine": "Brillo excesivo",
+        "blemishes": "Imperfecciones",
+        "dark_spots": "Manchas oscuras",
+        "tightness": "Tirantez",
+        "none": "Ninguno"
+      }
+    },
+    "step6": {
+      "nav": "Hábitos",
+      "title": "Hábitos Que Afectan Tu Piel",
+      "sunscreenUse_label": "¿Usas protector solar a diario?",
+      "sunscreenUse": {
+        "daily": "Sí, todos los días",
+        "sometimes": "A veces",
+        "summer_only": "Solo en verano",
+        "no": "No"
+      },
+      "makeupFrequency_label": "¿Con qué frecuencia te maquillas?",
+      "makeupFrequency": {
+        "daily": "Todos los días",
+        "several_times_week": "Varias veces por semana",
+        "occasionally": "Ocasionalmente",
+        "never": "Nunca"
+      },
+      "sleepHours_label": "¿Cuántas horas duermes normalmente?",
+      "sleepHours": {
+        "less_than_5": "Menos de 5",
+        "5_6": "5-6",
+        "7_8": "7-8",
+        "more_than_8": "Más de 8"
+      },
+      "stressImpact_label": "¿Sientes que el estrés afecta tu piel?",
+      "stressImpact": {
+        "yes": "Sí",
+        "a_little": "Un poco",
+        "no": "No"
+      },
+      "waterIntake_label": "¿Bebes suficiente agua a diario?",
+      "waterIntake": {
+        "yes": "Sí",
+        "sometimes": "A veces",
+        "no": "No"
+      }
+    },
+    "step7": {
+      "nav": "Experiencia",
+      "title": "Experiencia Previa",
+      "history_label": "¿Has probado algún tratamiento o rutina para mejorar tu piel antes?",
+      "history": {
+        "yes_worked": "Sí, y me fue bien",
+        "yes_no_results": "Sí, pero no vi resultados",
+        "tried_many_nothing_works": "He probado muchas cosas y nada funciona",
+        "barely_tried": "No, apenas he probado nada"
+      },
+      "frustrations_label": "¿Qué es lo que más te frustra de los productos que has usado?",
+      "frustrations": {
+        "no_results": "No veo resultados",
+        "irritation": "Me irritan",
+        "dont_know_how_to_combine": "No sé cómo combinarlos",
+        "too_expensive": "Son demasiado caros",
+        "not_consistent": "No soy constante",
+        "other": "Otro"
+      }
+    },
+    "step8": {
+      "nav": "Objetivos",
+      "title": "Tus Objetivos",
+      "looking_for_label": "¿Qué estás buscando ahora mismo?",
+      "looking_for": {
+        "basic_routine": "Una rutina básica",
+        "complete_routine": "Una rutina completa",
+        "specific_problem": "Mejorar un problema específico",
+        "prevention": "Prevención y mantenimiento",
+        "personalized_advice": "Asesoramiento personalizado"
+      },
+      "recommendation_label": "¿Te gustaría que te recomendemos una rutina adaptada a tu piel y objetivo?",
+      "recommendation": {
+        "yes": "Sí",
+        "no": "No"
+      },
+      "budget_label": "¿Qué nivel de inversión es cómodo para ti para cuidar tu piel cada mes?",
+      "budget": {
+        "basic": "Básico",
+        "medium": "Medio",
+        "premium": "Premium"
+      }
+    },
+    "step9": {
+      "nav": "Foto",
+      "title": "Sube Tu Foto",
+      "subtitle": "Toma una foto clara de tu rostro o sube una existente para el análisis con IA."
     }
   },
   "results": {
