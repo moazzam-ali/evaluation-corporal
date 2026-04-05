@@ -91,6 +91,7 @@
         "sensitivity": "Sensibilité / rougeurs",
         "other": "Autre"
       },
+      "concerns_other_placeholder": "Veuillez décrire...",
       "priority_label": "Si vous pouviez améliorer une seule chose sur votre peau, ce serait quoi ?",
       "priority_placeholder": "Décrivez votre priorité principale...",
       "zones_label": "Où aimeriez-vous voir le plus de changement ?",
@@ -154,6 +155,7 @@
         "exfoliant": "Exfoliant",
         "other": "Autre"
       },
+      "products_other_placeholder": "Veuillez préciser...",
       "essential_label": "Quel produit ne manque jamais dans votre routine ?",
       "essential_placeholder": "ex., Crème hydratante",
       "missing_label": "Quel produit pensez-vous qu'il vous manque ou ne savez-vous pas lequel utiliser ?",
@@ -292,21 +294,40 @@
       "good": "Bon",
       "normal": "Normal",
       "needs_attention": "Nécessite une Attention"
+    },
+    "score_guide": {
+      "needs_attention": "Nécessite une Attention",
+      "normal": "Normal",
+      "good": "Bon"
     }
   },
   "metrics": {
     "oily_skin": "Peau Grasse",
-    "moisture": "Hydratation",
-    "texture": "Texture",
-    "wrinkles": "Rides",
-    "dark_circles": "Cernes",
-    "redness": "Rougeurs",
-    "pores": "Pores",
-    "firmness": "Fermeté",
+    "uneven_skin_tone": "Teint Irrégulier",
+    "eye_wrinkles": "Rides des Yeux",
+    "crows_feet": "Pattes d'Oie",
     "radiance": "Éclat",
-    "acne": "Acné",
+    "firmness": "Fermeté",
+    "hydration": "Hydratation",
     "dark_spots": "Taches Sombres",
-    "eye_area": "Contour des Yeux"
+    "smoothness": "Douceur",
+    "fine_lines_wrinkles": "Ridules et Rides",
+    "texture": "Texture",
+    "dark_circles": "Cernes"
+  },
+  "metrics_desc": {
+    "oily_skin": "Mesure la quantité d'excès de sébum sur la peau. Un score équilibré indique que la peau produit du sébum à un niveau normal sans être excessivement grasse.",
+    "uneven_skin_tone": "Désigne les irrégularités de couleur de la peau, comme les rougeurs, les zones ternes ou les taches de décoloration. Un meilleur score signifie que le teint paraît plus uniforme.",
+    "eye_wrinkles": "Évalue la présence de rides autour des yeux. Un score plus élevé indique une peau plus lisse et moins de rides visibles dans cette zone délicate.",
+    "crows_feet": "Mesure les ridules qui apparaissent aux coins extérieurs des yeux. Un meilleur résultat signifie que ces rides sont moins visibles.",
+    "radiance": "Indique à quel point la peau paraît lumineuse, fraîche et saine. Un score élevé signifie que la peau a un aspect éclatant et plein de vitalité.",
+    "firmness": "Mesure la fermeté, l'élasticité et la résistance de la peau. Un bon score suggère que la peau a un bon maintien et moins de relâchement visible.",
+    "hydration": "Indique le niveau d'hydratation de la peau. Une peau bien hydratée a tendance à paraître plus rebondie, plus saine et plus confortable.",
+    "dark_spots": "Évalue la visibilité des marques de pigmentation ou des zones de décoloration. Un score plus élevé signifie que les taches sombres sont minimales ou moins visibles.",
+    "smoothness": "Mesure la douceur et l'uniformité de la surface de la peau. Un score élevé indique une peau plus lisse et plus raffinée.",
+    "fine_lines_wrinkles": "Évalue l'apparence générale des ridules et des rides sur le visage. Un meilleur score signifie qu'elles sont moins visibles.",
+    "texture": "Désigne l'état général et la régularité de la surface de la peau. Un score très élevé suggère que la peau est raffinée, uniforme et bien équilibrée.",
+    "dark_circles": "Mesure l'apparence des cernes sous les yeux. Un score élevé signifie que le contour des yeux paraît plus lumineux et moins fatigué."
   },
   "products": {
     "view": "Voir le Produit",

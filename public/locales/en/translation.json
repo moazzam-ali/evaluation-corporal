@@ -91,6 +91,7 @@
         "sensitivity": "Sensitivity / Redness",
         "other": "Other"
       },
+      "concerns_other_placeholder": "Please describe...",
       "priority_label": "If you could improve just one thing about your skin, what would it be?",
       "priority_placeholder": "Describe your top priority...",
       "zones_label": "Where would you like to see the most change?",
@@ -154,6 +155,7 @@
         "exfoliant": "Exfoliant",
         "other": "Other"
       },
+      "products_other_placeholder": "Please specify...",
       "essential_label": "What product never misses from your routine?",
       "essential_placeholder": "e.g., Moisturizer",
       "missing_label": "What product do you think you're missing or don't know which to use?",
@@ -292,21 +294,40 @@
       "good": "Good",
       "normal": "Normal",
       "needs_attention": "Needs Attention"
+    },
+    "score_guide": {
+      "needs_attention": "Needs Attention",
+      "normal": "Normal",
+      "good": "Good"
     }
   },
   "metrics": {
     "oily_skin": "Oily Skin",
-    "moisture": "Moisture",
-    "texture": "Texture",
-    "wrinkles": "Wrinkles",
-    "dark_circles": "Dark Circles",
-    "redness": "Redness",
-    "pores": "Pores",
-    "firmness": "Firmness",
+    "uneven_skin_tone": "Uneven Skin Tone",
+    "eye_wrinkles": "Eye Wrinkles",
+    "crows_feet": "Crow's Feet",
     "radiance": "Radiance",
-    "acne": "Acne",
+    "firmness": "Firmness",
+    "hydration": "Hydration",
     "dark_spots": "Dark Spots",
-    "eye_area": "Eye Area"
+    "smoothness": "Smoothness",
+    "fine_lines_wrinkles": "Fine Lines and Wrinkles",
+    "texture": "Texture",
+    "dark_circles": "Dark Circles"
+  },
+  "metrics_desc": {
+    "oily_skin": "This measures the amount of excess oil or sebum on the skin. A balanced score suggests the skin is producing oil at a normal level without being overly greasy.",
+    "uneven_skin_tone": "This refers to irregularities in skin color, such as redness, dull areas, or patches of discoloration. A better score means the complexion looks more even and uniform.",
+    "eye_wrinkles": "This evaluates the presence of wrinkles around the eye area. A higher score indicates smoother skin and fewer visible lines in this delicate area.",
+    "crows_feet": "This measures the fine lines that appear at the outer corners of the eyes. A stronger result means these lines are less noticeable.",
+    "radiance": "This shows how bright, fresh, and healthy the skin looks. A high score means the skin appears luminous and full of vitality.",
+    "firmness": "This measures how tight, elastic, and resilient the skin is. A good score suggests the skin has strong support and less visible sagging.",
+    "hydration": "This indicates the level of moisture in the skin. Well-hydrated skin tends to look plumper, healthier, and more comfortable.",
+    "dark_spots": "This evaluates the visibility of pigmentation marks or areas of discoloration. A higher score means dark spots are minimal or less visible.",
+    "smoothness": "This measures how soft and even the surface of the skin feels and looks. A high score suggests refined, polished-looking skin.",
+    "fine_lines_wrinkles": "This assesses the overall appearance of expression lines and wrinkles across the face. A better score means they are less visible.",
+    "texture": "This refers to the overall condition and consistency of the skin's surface. A very high score suggests the skin looks refined, even, and well-balanced.",
+    "dark_circles": "This measures the appearance of darkness under the eyes. A high score means the under-eye area looks brighter and less tired."
   },
   "products": {
     "view": "View Product",

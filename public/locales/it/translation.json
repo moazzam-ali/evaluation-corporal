@@ -91,6 +91,7 @@
         "sensitivity": "Sensibilità / rossore",
         "other": "Altro"
       },
+      "concerns_other_placeholder": "Per favore, descrivi...",
       "priority_label": "Se potessi migliorare solo una cosa della tua pelle, quale sarebbe?",
       "priority_placeholder": "Descrivi la tua priorità principale...",
       "zones_label": "Dove vorresti vedere il maggior cambiamento?",
@@ -154,6 +155,7 @@
         "exfoliant": "Esfoliante",
         "other": "Altro"
       },
+      "products_other_placeholder": "Per favore, specifica...",
       "essential_label": "Quale prodotto non manca mai nella tua routine?",
       "essential_placeholder": "es., Crema idratante",
       "missing_label": "Quale prodotto pensi ti manchi o non sai quale usare?",
@@ -292,21 +294,40 @@
       "good": "Buono",
       "normal": "Normale",
       "needs_attention": "Richiede Attenzione"
+    },
+    "score_guide": {
+      "needs_attention": "Richiede Attenzione",
+      "normal": "Normale",
+      "good": "Buono"
     }
   },
   "metrics": {
     "oily_skin": "Pelle Grassa",
-    "moisture": "Idratazione",
-    "texture": "Texture",
-    "wrinkles": "Rughe",
-    "dark_circles": "Occhiaie",
-    "redness": "Rossore",
-    "pores": "Pori",
-    "firmness": "Compattezza",
+    "uneven_skin_tone": "Tono della Pelle Non Uniforme",
+    "eye_wrinkles": "Rughe degli Occhi",
+    "crows_feet": "Zampe di Gallina",
     "radiance": "Luminosità",
-    "acne": "Acne",
+    "firmness": "Compattezza",
+    "hydration": "Idratazione",
     "dark_spots": "Macchie Scure",
-    "eye_area": "Contorno Occhi"
+    "smoothness": "Levigatezza",
+    "fine_lines_wrinkles": "Linee Sottili e Rughe",
+    "texture": "Texture",
+    "dark_circles": "Occhiaie"
+  },
+  "metrics_desc": {
+    "oily_skin": "Misura la quantità di sebo in eccesso sulla pelle. Un punteggio equilibrato indica che la pelle produce sebo a un livello normale senza essere eccessivamente grassa.",
+    "uneven_skin_tone": "Si riferisce alle irregolarità nel colore della pelle, come rossore, zone spente o macchie di discromia. Un punteggio migliore significa che l'incarnato appare più uniforme.",
+    "eye_wrinkles": "Valuta la presenza di rughe nella zona del contorno occhi. Un punteggio più alto indica una pelle più liscia e meno linee visibili in questa zona delicata.",
+    "crows_feet": "Misura le linee sottili che compaiono agli angoli esterni degli occhi. Un risultato migliore significa che queste linee sono meno visibili.",
+    "radiance": "Indica quanto la pelle appare luminosa, fresca e sana. Un punteggio alto significa che la pelle ha un aspetto radioso e pieno di vitalità.",
+    "firmness": "Misura quanto la pelle è tonica, elastica e resistente. Un buon punteggio suggerisce che la pelle ha un buon sostegno e meno rilassamento visibile.",
+    "hydration": "Indica il livello di idratazione della pelle. Una pelle ben idratata tende ad apparire più tonica, sana e confortevole.",
+    "dark_spots": "Valuta la visibilità delle macchie di pigmentazione o delle zone scure. Un punteggio più alto significa che le macchie scure sono minime o meno visibili.",
+    "smoothness": "Misura quanto la superficie della pelle appare e si sente liscia e uniforme. Un punteggio alto indica una pelle più levigata e raffinata.",
+    "fine_lines_wrinkles": "Valuta l'aspetto generale delle linee di espressione e delle rughe sul viso. Un punteggio migliore significa che sono meno visibili.",
+    "texture": "Si riferisce alla condizione generale e all'uniformità della superficie della pelle. Un punteggio molto alto suggerisce che la pelle appare raffinata, uniforme e ben equilibrata.",
+    "dark_circles": "Misura l'aspetto delle occhiaie sotto gli occhi. Un punteggio alto significa che la zona sotto gli occhi appare più luminosa e meno stanca."
   },
   "products": {
     "view": "Vedi Prodotto",

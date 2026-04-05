@@ -14,6 +14,7 @@ export const basicInfoSchema = z.object({
 // Step 2: Main Goal
 export const mainGoalSchema = z.object({
   skinConcerns: z.array(z.string()).min(1, "Select at least one").max(3, "Max 3"),
+  skinConcernsOther: z.string().optional().default(""),
   priorityConcern: z.string().min(1, "Required"),
   improvementZones: z.array(z.string()).min(1, "Select at least one"),
 });
@@ -29,6 +30,7 @@ export const skinPerceptionSchema = z.object({
 export const currentRoutineSchema = z.object({
   routineFrequency: z.string().min(1, "Required"),
   productsUsed: z.array(z.string()).default([]),
+  productsUsedOther: z.string().optional().default(""),
   essentialProduct: z.string().optional().default(""),
   missingProduct: z.string().optional().default(""),
   supplements: z.string().optional().default(""),
@@ -93,9 +95,9 @@ export const STEP_SCHEMAS = [
 // Field names per step — used for per-step validation via trigger()
 export const STEP_FIELD_NAMES = [
   ["name", "surname", "email", "birthDate", "phone", "country", "city"],
-  ["skinConcerns", "priorityConcern", "improvementZones"],
+  ["skinConcerns", "skinConcernsOther", "priorityConcern", "improvementZones"],
   ["skinType", "skinFeelGeneral", "skinFeelEndOfDay"],
-  ["routineFrequency", "productsUsed", "essentialProduct", "missingProduct", "supplements", "retinoidPreference"],
+  ["routineFrequency", "productsUsed", "productsUsedOther", "essentialProduct", "missingProduct", "supplements", "retinoidPreference"],
   ["reactionLevel", "recentSigns"],
   ["sunscreenUse", "makeupFrequency", "sleepHours", "stressImpact", "waterIntake"],
   ["treatmentHistory", "frustrations"],
@@ -113,6 +115,7 @@ export const DEFAULT_VALUES = {
   country: "",
   city: "",
   skinConcerns: [],
+  skinConcernsOther: "",
   priorityConcern: "",
   improvementZones: [],
   skinType: "",
@@ -120,6 +123,7 @@ export const DEFAULT_VALUES = {
   skinFeelEndOfDay: "",
   routineFrequency: "",
   productsUsed: [],
+  productsUsedOther: "",
   essentialProduct: "",
   missingProduct: "",
   supplements: "",

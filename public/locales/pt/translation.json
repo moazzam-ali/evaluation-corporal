@@ -91,6 +91,7 @@
         "sensitivity": "Sensibilidade / vermelhidão",
         "other": "Outro"
       },
+      "concerns_other_placeholder": "Por favor, descreva...",
       "priority_label": "Se você pudesse melhorar apenas uma coisa na sua pele, o que seria?",
       "priority_placeholder": "Descreva sua principal prioridade...",
       "zones_label": "Onde você gostaria de ver mais mudança?",
@@ -154,6 +155,7 @@
         "exfoliant": "Esfoliante",
         "other": "Outro"
       },
+      "products_other_placeholder": "Por favor, especifique...",
       "essential_label": "Qual produto nunca falta na sua rotina?",
       "essential_placeholder": "ex., Hidratante",
       "missing_label": "Qual produto você acha que está faltando ou não sabe qual usar?",
@@ -292,21 +294,40 @@
       "good": "Bom",
       "normal": "Normal",
       "needs_attention": "Precisa de Atenção"
+    },
+    "score_guide": {
+      "needs_attention": "Precisa de Atenção",
+      "normal": "Normal",
+      "good": "Bom"
     }
   },
   "metrics": {
     "oily_skin": "Pele Oleosa",
-    "moisture": "Hidratação",
-    "texture": "Textura",
-    "wrinkles": "Rugas",
-    "dark_circles": "Olheiras",
-    "redness": "Vermelhidão",
-    "pores": "Poros",
-    "firmness": "Firmeza",
+    "uneven_skin_tone": "Tom de Pele Irregular",
+    "eye_wrinkles": "Rugas dos Olhos",
+    "crows_feet": "Pés de Galinha",
     "radiance": "Luminosidade",
-    "acne": "Acne",
+    "firmness": "Firmeza",
+    "hydration": "Hidratação",
     "dark_spots": "Manchas Escuras",
-    "eye_area": "Área dos Olhos"
+    "smoothness": "Suavidade",
+    "fine_lines_wrinkles": "Linhas Finas e Rugas",
+    "texture": "Textura",
+    "dark_circles": "Olheiras"
+  },
+  "metrics_desc": {
+    "oily_skin": "Mede a quantidade de excesso de oleosidade ou sebo na pele. Uma pontuação equilibrada indica que a pele produz oleosidade em nível normal sem ser excessivamente oleosa.",
+    "uneven_skin_tone": "Refere-se a irregularidades na cor da pele, como vermelhidão, áreas opacas ou manchas de descoloração. Uma pontuação melhor significa que a tez parece mais uniforme.",
+    "eye_wrinkles": "Avalia a presença de rugas na área ao redor dos olhos. Uma pontuação mais alta indica pele mais lisa e menos linhas visíveis nesta área delicada.",
+    "crows_feet": "Mede as linhas finas que aparecem nos cantos externos dos olhos. Um resultado melhor significa que essas linhas são menos perceptíveis.",
+    "radiance": "Mostra o quão brilhante, fresca e saudável a pele parece. Uma pontuação alta significa que a pele tem aparência luminosa e cheia de vitalidade.",
+    "firmness": "Mede o quão firme, elástica e resistente a pele está. Uma boa pontuação sugere que a pele tem bom suporte e menos flacidez visível.",
+    "hydration": "Indica o nível de hidratação da pele. Uma pele bem hidratada tende a parecer mais preenchida, saudável e confortável.",
+    "dark_spots": "Avalia a visibilidade de marcas de pigmentação ou áreas de descoloração. Uma pontuação mais alta significa que as manchas escuras são mínimas ou menos visíveis.",
+    "smoothness": "Mede o quão macia e uniforme a superfície da pele parece e se sente. Uma pontuação alta indica uma pele mais refinada e polida.",
+    "fine_lines_wrinkles": "Avalia a aparência geral das linhas de expressão e rugas no rosto. Uma pontuação melhor significa que são menos visíveis.",
+    "texture": "Refere-se à condição geral e à uniformidade da superfície da pele. Uma pontuação muito alta sugere que a pele parece refinada, uniforme e bem equilibrada.",
+    "dark_circles": "Mede a aparência de escuridão sob os olhos. Uma pontuação alta significa que a área sob os olhos parece mais clara e menos cansada."
   },
   "products": {
     "view": "Ver Produto",

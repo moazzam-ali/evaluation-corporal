@@ -91,6 +91,7 @@
         "sensitivity": "Hassasiyet / kızarıklık",
         "other": "Diğer"
       },
+      "concerns_other_placeholder": "Lütfen tanımlayın...",
       "priority_label": "Cildinizde sadece bir şeyi iyileştirebilseydiniz, ne olurdu?",
       "priority_placeholder": "En önemli önceliğinizi tanımlayın...",
       "zones_label": "En çok değişimi nerede görmek istersiniz?",
@@ -154,6 +155,7 @@
         "exfoliant": "Peeling",
         "other": "Diğer"
       },
+      "products_other_placeholder": "Lütfen belirtiniz...",
       "essential_label": "Rutininizden asla eksik olmayan ürün hangisi?",
       "essential_placeholder": "ör., Nemlendirici",
       "missing_label": "Hangi ürünün eksik olduğunu düşünüyorsunuz veya hangisini kullanacağınızı bilmiyorsunuz?",
@@ -292,21 +294,40 @@
       "good": "İyi",
       "normal": "Normal",
       "needs_attention": "Dikkat Gerektirir"
+    },
+    "score_guide": {
+      "needs_attention": "Dikkat Gerektirir",
+      "normal": "Normal",
+      "good": "İyi"
     }
   },
   "metrics": {
     "oily_skin": "Yağlı Cilt",
-    "moisture": "Nem",
-    "texture": "Doku",
-    "wrinkles": "Kırışıklıklar",
-    "dark_circles": "Göz Altı Halkaları",
-    "redness": "Kızarıklık",
-    "pores": "Gözenekler",
-    "firmness": "Sıkılık",
+    "uneven_skin_tone": "Dengesiz Cilt Tonu",
+    "eye_wrinkles": "Göz Kırışıklıkları",
+    "crows_feet": "Kaz Ayakları",
     "radiance": "Parlaklık",
-    "acne": "Akne",
+    "firmness": "Sıkılık",
+    "hydration": "Nem",
     "dark_spots": "Koyu Lekeler",
-    "eye_area": "Göz Çevresi"
+    "smoothness": "Pürüzsüzlük",
+    "fine_lines_wrinkles": "İnce Çizgiler ve Kırışıklıklar",
+    "texture": "Doku",
+    "dark_circles": "Göz Altı Halkaları"
+  },
+  "metrics_desc": {
+    "oily_skin": "Ciltteki aşırı yağ veya sebum miktarını ölçer. Dengeli bir puan, cildin aşırı yağlı olmadan normal düzeyde yağ ürettiğini gösterir.",
+    "uneven_skin_tone": "Kızarıklık, donuk bölgeler veya renk değişikliği gibi cilt rengindeki düzensizlikleri ifade eder. Daha iyi bir puan, tenin daha düzgün ve homojen göründüğü anlamına gelir.",
+    "eye_wrinkles": "Göz çevresindeki kırışıklıkların varlığını değerlendirir. Daha yüksek bir puan, bu hassas bölgede daha pürüzsüz bir cilt ve daha az görünür çizgi olduğunu gösterir.",
+    "crows_feet": "Gözlerin dış köşelerinde beliren ince çizgileri ölçer. Daha iyi bir sonuç, bu çizgilerin daha az belirgin olduğu anlamına gelir.",
+    "radiance": "Cildin ne kadar parlak, taze ve sağlıklı göründüğünü gösterir. Yüksek bir puan, cildin ışıltılı ve canlı bir görünüme sahip olduğu anlamına gelir.",
+    "firmness": "Cildin ne kadar sıkı, esnek ve dirençli olduğunu ölçer. İyi bir puan, cildin güçlü bir desteğe sahip olduğunu ve daha az görünür sarkma olduğunu gösterir.",
+    "hydration": "Ciltteki nem seviyesini gösterir. İyi nemlendirilmiş cilt, daha dolgun, sağlıklı ve konforlu görünme eğilimindedir.",
+    "dark_spots": "Pigmentasyon izlerinin veya renk değişikliği alanlarının görünürlüğünü değerlendirir. Daha yüksek bir puan, koyu lekelerin minimum düzeyde veya daha az görünür olduğu anlamına gelir.",
+    "smoothness": "Cilt yüzeyinin ne kadar yumuşak ve düzgün hissedildiğini ve göründüğünü ölçer. Yüksek bir puan, daha rafine ve cilalı bir cilt görünümü anlamına gelir.",
+    "fine_lines_wrinkles": "Yüzdeki ifade çizgilerinin ve kırışıklıkların genel görünümünü değerlendirir. Daha iyi bir puan, bunların daha az görünür olduğu anlamına gelir.",
+    "texture": "Cilt yüzeyinin genel durumunu ve tutarlılığını ifade eder. Çok yüksek bir puan, cildin rafine, düzgün ve dengeli göründüğünü gösterir.",
+    "dark_circles": "Göz altındaki koyu halkaların görünümünü ölçer. Yüksek bir puan, göz altı bölgesinin daha aydınlık ve daha az yorgun göründüğü anlamına gelir."
   },
   "products": {
     "view": "Ürünü Görüntüle",

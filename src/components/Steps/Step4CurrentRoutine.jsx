@@ -54,6 +54,15 @@ export default function Step4CurrentRoutine({ form, t }) {
             </label>
           ))}
         </div>
+
+        {/* "Other" text field — shown when "other" is selected */}
+        {productsUsed.includes("other") && (
+          <Input
+            {...register("productsUsedOther")}
+            placeholder={t("scan.step4.products_other_placeholder", "Please specify...")}
+            className="mt-2"
+          />
+        )}
       </div>
 
       {/* Essential product */}
