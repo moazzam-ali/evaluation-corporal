@@ -91,6 +91,7 @@
         "sensitivity": "Empfindlichkeit / Rötungen",
         "other": "Andere"
       },
+      "concerns_other_placeholder": "Bitte beschreiben Sie...",
       "priority_label": "Wenn Sie nur eine Sache an Ihrer Haut verbessern könnten, was wäre das?",
       "priority_placeholder": "Beschreiben Sie Ihre höchste Priorität...",
       "zones_label": "Wo möchten Sie die größte Veränderung sehen?",
@@ -154,6 +155,7 @@
         "exfoliant": "Peeling",
         "other": "Andere"
       },
+      "products_other_placeholder": "Bitte angeben...",
       "essential_label": "Welches Produkt fehlt nie in Ihrer Routine?",
       "essential_placeholder": "z.B., Feuchtigkeitscreme",
       "missing_label": "Welches Produkt fehlt Ihnen oder wissen Sie nicht, welches Sie verwenden sollen?",
@@ -292,21 +294,40 @@
       "good": "Gut",
       "normal": "Normal",
       "needs_attention": "Benötigt Aufmerksamkeit"
+    },
+    "score_guide": {
+      "needs_attention": "Benötigt Aufmerksamkeit",
+      "normal": "Normal",
+      "good": "Gut"
     }
   },
   "metrics": {
     "oily_skin": "Fettige Haut",
-    "moisture": "Feuchtigkeit",
-    "texture": "Textur",
-    "wrinkles": "Falten",
-    "dark_circles": "Augenringe",
-    "redness": "Rötungen",
-    "pores": "Poren",
-    "firmness": "Festigkeit",
+    "uneven_skin_tone": "Ungleichmäßiger Hautton",
+    "eye_wrinkles": "Augenfalten",
+    "crows_feet": "Krähenfüße",
     "radiance": "Ausstrahlung",
-    "acne": "Akne",
+    "firmness": "Festigkeit",
+    "hydration": "Feuchtigkeit",
     "dark_spots": "Dunkle Flecken",
-    "eye_area": "Augenbereich"
+    "smoothness": "Geschmeidigkeit",
+    "fine_lines_wrinkles": "Feine Linien und Falten",
+    "texture": "Textur",
+    "dark_circles": "Augenringe"
+  },
+  "metrics_desc": {
+    "oily_skin": "Misst die Menge an überschüssigem Öl oder Talg auf der Haut. Ein ausgewogener Wert deutet darauf hin, dass die Haut Talg in normalem Maße produziert, ohne übermäßig fettig zu sein.",
+    "uneven_skin_tone": "Bezieht sich auf Unregelmäßigkeiten in der Hautfarbe wie Rötungen, fahle Stellen oder Verfärbungen. Ein besserer Wert bedeutet, dass der Teint gleichmäßiger und einheitlicher aussieht.",
+    "eye_wrinkles": "Bewertet das Vorhandensein von Falten im Augenbereich. Ein höherer Wert zeigt glattere Haut und weniger sichtbare Linien in diesem empfindlichen Bereich an.",
+    "crows_feet": "Misst die feinen Linien an den äußeren Augenwinkeln. Ein besseres Ergebnis bedeutet, dass diese Linien weniger auffällig sind.",
+    "radiance": "Zeigt, wie strahlend, frisch und gesund die Haut aussieht. Ein hoher Wert bedeutet, dass die Haut leuchtend und voller Vitalität wirkt.",
+    "firmness": "Misst, wie straff, elastisch und widerstandsfähig die Haut ist. Ein guter Wert deutet auf starken Halt und weniger sichtbare Erschlaffung hin.",
+    "hydration": "Gibt den Feuchtigkeitsgehalt der Haut an. Gut durchfeuchtete Haut sieht tendenziell praller, gesünder und angenehmer aus.",
+    "dark_spots": "Bewertet die Sichtbarkeit von Pigmentflecken oder Verfärbungen. Ein höherer Wert bedeutet, dass dunkle Flecken minimal oder weniger sichtbar sind.",
+    "smoothness": "Misst, wie glatt und ebenmäßig die Hautoberfläche aussieht und sich anfühlt. Ein hoher Wert deutet auf eine verfeinerte, gepflegt wirkende Haut hin.",
+    "fine_lines_wrinkles": "Bewertet das Gesamterscheinungsbild von feinen Linien und Falten im Gesicht. Ein besserer Wert bedeutet, dass sie weniger sichtbar sind.",
+    "texture": "Bezieht sich auf den Gesamtzustand und die Gleichmäßigkeit der Hautoberfläche. Ein sehr hoher Wert deutet darauf hin, dass die Haut verfeinert, ebenmäßig und ausgewogen aussieht.",
+    "dark_circles": "Misst das Erscheinungsbild von Dunkelheit unter den Augen. Ein hoher Wert bedeutet, dass der Bereich unter den Augen heller und weniger müde aussieht."
   },
   "products": {
     "view": "Produkt Ansehen",

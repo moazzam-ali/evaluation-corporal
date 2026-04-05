@@ -11,17 +11,17 @@
 
 const METRIC_IDS = [
   "oily_skin",
-  "moisture",
-  "texture",
-  "wrinkles",
-  "dark_circles",
-  "redness",
-  "pores",
-  "firmness",
+  "uneven_skin_tone",
+  "eye_wrinkles",
+  "crows_feet",
   "radiance",
-  "acne",
+  "firmness",
+  "hydration",
   "dark_spots",
-  "eye_area",
+  "smoothness",
+  "fine_lines_wrinkles",
+  "texture",
+  "dark_circles",
 ];
 
 const PRODUCT_IDS = [
@@ -56,22 +56,22 @@ IMPORTANT RULES:
 3. Each score is an integer from 0 to 100, where 100 = healthiest/best.
 4. If a metric cannot be clearly assessed from the photo, give it a score of 50 (neutral) and note the limitation in the insight.
 5. ${insightLang}
-6. The "status" field MUST be exactly one of: "good" (score >= 70), "normal" (score 40-69), "needs_attention" (score < 40).
+6. The "status" field MUST be exactly one of: "good" (score >= 80), "normal" (score 40-79), "needs_attention" (score < 40).
 7. Recommend 1-4 products from the catalog based on the lowest-scoring metrics.
 
 THE 12 METRICS (you must include ALL of these, in this exact order):
 1. oily_skin — Sebum/oil balance (100=balanced, 0=extremely oily)
-2. moisture — Hydration level (100=well-hydrated, 0=very dry)
-3. texture — Smoothness (100=smooth, 0=rough/uneven)
-4. wrinkles — Fine lines and wrinkles (100=none, 0=deep wrinkles)
-5. dark_circles — Under-eye circles (100=none, 0=very dark)
-6. redness — Irritation/redness (100=none, 0=severe)
-7. pores — Pore visibility (100=invisible, 0=very enlarged)
-8. firmness — Elasticity (100=very firm, 0=saggy)
-9. radiance — Glow/luminosity (100=radiant, 0=dull)
-10. acne — Breakouts/blemishes (100=clear, 0=severe acne)
-11. dark_spots — Hyperpigmentation (100=even tone, 0=many spots)
-12. eye_area — Overall eye area health (100=healthy, 0=significant issues)
+2. uneven_skin_tone — Irregularities in skin color such as redness, dull areas, patches of discoloration (100=perfectly even, 0=very uneven)
+3. eye_wrinkles — Wrinkles around the eye contour area (100=smooth, 0=deep wrinkles)
+4. crows_feet — Fine lines at the outer corners of the eyes (100=none, 0=very pronounced)
+5. radiance — Glow, freshness, luminosity (100=radiant, 0=dull)
+6. firmness — Tightness, elasticity, resilience (100=very firm, 0=saggy)
+7. hydration — Moisture level, plumpness (100=well-hydrated, 0=very dry)
+8. dark_spots — Pigmentation marks, areas of discoloration (100=even tone, 0=many spots)
+9. smoothness — Surface softness and evenness (100=smooth, 0=rough)
+10. fine_lines_wrinkles — Expression lines and wrinkles across the face (100=none, 0=deep wrinkles)
+11. texture — Overall condition and consistency of the skin's surface (100=refined, 0=uneven)
+12. dark_circles — Darkness under the eyes (100=bright, 0=very dark)
 
 PRODUCT CATALOG (recommend by ID only):
 ${PRODUCT_IDS.map((id) => `- "${id}"`).join("\n")}

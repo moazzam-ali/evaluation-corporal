@@ -57,6 +57,15 @@ export default function Step2MainGoal({ form, t }) {
           ))}
         </div>
         {errors.skinConcerns && <p className="text-xs text-destructive">{errors.skinConcerns.message}</p>}
+
+        {/* "Other" text field — shown when "other" is selected */}
+        {skinConcerns.includes("other") && (
+          <Input
+            {...register("skinConcernsOther")}
+            placeholder={t("scan.step2.concerns_other_placeholder", "Please describe...")}
+            className="mt-2"
+          />
+        )}
       </div>
 
       {/* Priority concern */}

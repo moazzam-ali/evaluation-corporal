@@ -307,7 +307,7 @@ function attemptFix(parsed) {
       ...m,
       score: typeof m.score === "string" ? parseInt(m.score, 10) : m.score,
       // Fix: status might be missing — derive from score
-      status: m.status || (m.score >= 70 ? "good" : m.score >= 40 ? "normal" : "needs_attention"),
+      status: m.status || (m.score >= 80 ? "good" : m.score >= 40 ? "normal" : "needs_attention"),
     }));
 
     // Fix: metrics might be missing some — pad with defaults

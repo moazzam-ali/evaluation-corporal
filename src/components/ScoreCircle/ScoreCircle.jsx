@@ -1,6 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 function getStatusColor(status) {
   switch (status) {
@@ -15,7 +17,8 @@ function getStatusColor(status) {
   }
 }
 
-export default function ScoreCircle({ score, status, label, insight, delay = 0 }) {
+export default function ScoreCircle({ score, status, label, insight, description, delay = 0 }) {
+  const [expanded, setExpanded] = useState(false);
   const { stroke, bg, text } = getStatusColor(status);
   const radius = 36;
   const circumference = 2 * Math.PI * radius;
@@ -26,20 +29,12 @@ export default function ScoreCircle({ score, status, label, insight, delay = 0 }
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.4 }}
-      className={`flex flex-col items-center rounded-xl border p-4 ${bg} transition-shadow hover:shadow-md`}
+      className={`flex flex-col items-center rounded-xl border p-4 ${bg} transition-shadow hover:shadow-md cursor-pointer`}
+      onClick={() => setExpanded(!expanded)}
     >
       <div className="relative mb-3">
         <svg width="88" height="88" viewBox="0 0 88 88">
-          {/* Background circle */}
-          <circle
-            cx="44"
-            cy="44"
-            r={radius}
-            fill="none"
-            stroke="#e5e7eb"
-            strokeWidth="6"
-          />
-          {/* Score arc */}
+          <circle cx="44" cy="44" r={radius} fill="none" stroke="#e5e7eb" strokeWidth="6" />
           <motion.circle
             cx="44"
             cy="44"
@@ -70,6 +65,28 @@ export default function ScoreCircle({ score, status, label, insight, delay = 0 }
       {insight && (
         <p className="text-center text-xs text-muted-foreground line-clamp-2">{insight}</p>
       )}
+
+      {/* Expand/collapse indicator */}
+      {description && (
+        <div className="mt-2 flex items-center gap-1 text-xs text-muted-foreground">
+          {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+        </div>
+      )}
+
+      {/* Expanded description */}
+      <AnimatePresence>
+        {expanded && description && (
+          <motion.p
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="mt-2 overflow-hidden text-center text-xs text-muted-foreground border-t pt-2"
+          >
+            {description}
+          </motion.p>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

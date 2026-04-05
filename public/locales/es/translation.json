@@ -91,6 +91,7 @@
         "sensitivity": "Sensibilidad / rojeces",
         "other": "Otro"
       },
+      "concerns_other_placeholder": "Por favor, describe...",
       "priority_label": "Si pudieras mejorar solo una cosa de tu piel, ¿cuál sería?",
       "priority_placeholder": "Describe tu principal prioridad...",
       "zones_label": "¿Dónde te gustaría ver más cambio?",
@@ -154,6 +155,7 @@
         "exfoliant": "Exfoliante",
         "other": "Otro"
       },
+      "products_other_placeholder": "Por favor, especifica...",
       "essential_label": "¿Qué producto nunca falta en tu rutina?",
       "essential_placeholder": "p. ej., Hidratante",
       "missing_label": "¿Qué producto crees que te falta o no sabes cuál usar?",
@@ -292,21 +294,40 @@
       "good": "Bueno",
       "normal": "Normal",
       "needs_attention": "Necesita Atención"
+    },
+    "score_guide": {
+      "needs_attention": "Necesita Atención",
+      "normal": "Normal",
+      "good": "Buena"
     }
   },
   "metrics": {
     "oily_skin": "Piel Grasa",
-    "moisture": "Hidratación",
-    "texture": "Textura",
-    "wrinkles": "Arrugas",
-    "dark_circles": "Ojeras",
-    "redness": "Enrojecimiento",
-    "pores": "Poros",
-    "firmness": "Firmeza",
+    "uneven_skin_tone": "Tono de Piel Desigual",
+    "eye_wrinkles": "Arrugas en los Ojos",
+    "crows_feet": "Patas de Gallo",
     "radiance": "Luminosidad",
-    "acne": "Acné",
+    "firmness": "Firmeza",
+    "hydration": "Hidratación",
     "dark_spots": "Manchas Oscuras",
-    "eye_area": "Área de Ojos"
+    "smoothness": "Suavidad",
+    "fine_lines_wrinkles": "Líneas de Expresión y Arrugas",
+    "texture": "Textura",
+    "dark_circles": "Ojeras"
+  },
+  "metrics_desc": {
+    "oily_skin": "Mide la cantidad de grasa o sebo que produce la piel. Una puntuación equilibrada indica que la piel produce grasa en un nivel normal, sin verse excesivamente grasa.",
+    "uneven_skin_tone": "Se refiere a irregularidades en el color de la piel, como rojeces, zonas apagadas o manchas de diferente tono. Una mejor puntuación indica que la piel se ve más uniforme.",
+    "eye_wrinkles": "Evalúa la presencia de arrugas en la zona del contorno de ojos. Una puntuación más alta indica una piel más lisa y con menos líneas visibles en esta zona delicada.",
+    "crows_feet": "Mide las líneas finas que aparecen en las comisuras externas de los ojos. Un mejor resultado indica que estas líneas son menos visibles.",
+    "radiance": "Indica lo radiante, fresca y saludable que se ve la piel. Una puntuación alta significa que la piel tiene un aspecto más luminoso y lleno de vida.",
+    "firmness": "Mide cómo de firme, elástica y resistente se encuentra la piel. Una buena puntuación sugiere que la piel tiene mejor soporte y menos flacidez visible.",
+    "hydration": "Indica el nivel de agua y humedad en la piel. Una piel bien hidratada suele verse más rellena, saludable y confortable.",
+    "dark_spots": "Evalúa la visibilidad de manchas de pigmentación o zonas oscurecidas. Una puntuación más alta significa que las manchas son mínimas o menos visibles.",
+    "smoothness": "Mide lo lisa y uniforme que se ve y se siente la superficie de la piel. Una puntuación alta indica una piel más pulida y suave.",
+    "fine_lines_wrinkles": "Analiza el aspecto general de las líneas de expresión y arrugas del rostro. Una mejor puntuación significa que son menos visibles.",
+    "texture": "Se refiere al estado general y a la uniformidad de la superficie de la piel. Una puntuación muy alta sugiere una piel refinada, uniforme y equilibrada.",
+    "dark_circles": "Mide la apariencia de oscuridad bajo los ojos. Una puntuación alta indica una zona de la ojera más luminosa y con aspecto menos cansado."
   },
   "products": {
     "view": "Ver Producto",

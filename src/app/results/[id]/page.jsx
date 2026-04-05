@@ -88,6 +88,7 @@ export default function ResultsPage() {
               status={metric.status}
               label={t(`metrics.${metric.id}`, metric.id)}
               insight={metric.insight}
+              description={t(`metrics_desc.${metric.id}`, "")}
               delay={i * 0.08}
             />
           ))}
