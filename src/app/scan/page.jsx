@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { Suspense, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -11,6 +11,7 @@ import { Sparkles, Loader2, ArrowLeft, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import AnimatedLogo from "@/components/AnimatedLogo/AnimatedLogo";
 import useAnalysisStore from "@/store/analysisStore";
 import { compressImage, dataUrlToBlob, validateImage } from "@/lib/image-utils";
 import { fullScanSchema, STEP_FIELD_NAMES, DEFAULT_VALUES } from "@/lib/schemas/scan-schemas";
@@ -35,6 +36,14 @@ const TOTAL_STEPS = STEP_COMPONENTS.length;
 const ANALYSIS_TIMEOUT = 55000;
 
 export default function ScanPage() {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8"><div className="flex items-center justify-center py-20"><AnimatedLogo size={100} /></div></div>}>
+      <ScanPageInner />
+    </Suspense>
+  );
+}
+
+function ScanPageInner() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -178,9 +187,8 @@ export default function ScanPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center py-20">
-          <div className="relative mb-6">
-            <div className="h-24 w-24 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-            <Sparkles className="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 text-primary" />
+          <div className="mb-6">
+            <AnimatedLogo size={140} />
           </div>
           <p className="text-lg font-medium">{t("scan.analyzing")}</p>
           <div className="mt-6 w-full max-w-xs">

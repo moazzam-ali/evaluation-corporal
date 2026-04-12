@@ -1,6 +1,6 @@
 {
   "telegram": {
-    "header": "*New HL/Skin Analysis*",
+    "header": "*New Beauty & Glow AI Analysis*",
     "member_details": "*Member Details*\n\nName: {name} {surname}\nEmail: {email}\nPhone: {phone}\nDate of Birth: {birthDate}\nCountry: {country}\nCity: {city}",
     "questionnaire_details": "*Questionnaire*\n\nSkin Concerns: {skinConcerns}\nTop Priority: {priorityConcern}\nImprovement Zones: {improvementZones}\n\nSkin Type: {skinType}\nSkin Feel: {skinFeelGeneral}\nEnd of Day: {skinFeelEndOfDay}\n\nRoutine: {routineFrequency}\nProducts Used: {productsUsed}\nEssential: {essentialProduct}\nMissing: {missingProduct}\nSupplements: {supplements}\nAvoid Retinoids: {retinoidPreference}\n\nReaction Level: {reactionLevel}\nRecent Signs: {recentSigns}\n\nSunscreen: {sunscreenUse}\nMakeup: {makeupFrequency}\nSleep: {sleepHours}\nStress: {stressImpact}\nWater: {waterIntake}\n\nPast Experience: {treatmentHistory}\nFrustrations: {frustrations}\n\nLooking For: {lookingFor}\nWants Recommendation: {wantRoutineRecommendation}\nBudget: {budgetLevel}",
     "analysis_results": "*Analysis Results*\n\nOverall Score: {overall_score}%\nSkin Type: {skin_type_result}\n\n*Key Concerns:*\n{concerns}\n\n*Summary:*\n{summary}",

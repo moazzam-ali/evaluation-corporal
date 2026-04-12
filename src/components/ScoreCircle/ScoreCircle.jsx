@@ -7,13 +7,13 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 function getStatusColor(status) {
   switch (status) {
     case "good":
-      return { stroke: "#22c55e", bg: "bg-green-50", text: "text-green-600" };
+      return { stroke: "#5B9A8B", bg: "bg-[#5B9A8B]/10", text: "text-[#5B9A8B]" };
     case "normal":
-      return { stroke: "#f59e0b", bg: "bg-amber-50", text: "text-amber-600" };
+      return { stroke: "#D4A053", bg: "bg-[#D4A053]/10", text: "text-[#D4A053]" };
     case "needs_attention":
-      return { stroke: "#ef4444", bg: "bg-red-50", text: "text-red-600" };
+      return { stroke: "#E8728A", bg: "bg-[#E8728A]/10", text: "text-[#E8728A]" };
     default:
-      return { stroke: "#6b7280", bg: "bg-gray-50", text: "text-gray-600" };
+      return { stroke: "#8E8A9B", bg: "bg-[#8E8A9B]/10", text: "text-[#8E8A9B]" };
   }
 }
 
@@ -34,7 +34,7 @@ export default function ScoreCircle({ score, status, label, insight, description
     >
       <div className="relative mb-3">
         <svg width="88" height="88" viewBox="0 0 88 88">
-          <circle cx="44" cy="44" r={radius} fill="none" stroke="#e5e7eb" strokeWidth="6" />
+          <circle cx="44" cy="44" r={radius} fill="none" stroke="hsl(340, 15%, 90%)" strokeWidth="6" />
           <motion.circle
             cx="44"
             cy="44"

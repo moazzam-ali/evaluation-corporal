@@ -1,5 +1,5 @@
 {
-  "name": "skin-care",
+  "name": "beauty-glow-ai",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -31,11 +31,11 @@
     "i18next-http-backend": "^3.0.2",
     "lucide-react": "^1.7.0",
     "nanoid": "^3.3.11",
-    "next": "14.2.35",
+    "next": "^16.2.3",
     "openai": "^6.33.0",
     "pg": "^8.20.0",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-dropzone": "^15.0.0",
     "react-gauge-component": "^2.0.26",
     "react-hook-form": "^7.72.0",
@@ -43,15 +43,14 @@
     "react-i18next": "^17.0.1",
     "react-webcam": "^7.2.0",
     "recharts": "^3.8.1",
-    "resend": "^6.9.4",
     "tailwind-merge": "^3.5.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^4.3.6",
     "zustand": "^5.0.12"
   },
   "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.2.35",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1"
   }

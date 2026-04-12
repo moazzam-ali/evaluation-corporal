@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "HL/Skin",
+    "brand": "Beauty & Glow AI",
     "home": "होम",
     "scan": "त्वचा का विश्लेषण करें"
   },
@@ -284,10 +284,6 @@
     "metrics_title": "विस्तृत मेट्रिक्स",
     "recommendations_title": "अनुशंसित उत्पाद",
     "summary_title": "सारांश",
-    "email_cta": "अपनी पूरी रिपोर्ट प्राप्त करें",
-    "email_placeholder": "अपना ईमेल दर्ज करें",
-    "email_submit": "रिपोर्ट भेजें",
-    "email_success": "रिपोर्ट भेज दी गई! अपना इनबॉक्स जांचें।",
     "share": "परिणाम साझा करें",
     "new_scan": "नया स्कैन",
     "status": {

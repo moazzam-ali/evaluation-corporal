@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "HL/Skin",
+    "brand": "Beauty & Glow AI",
     "home": "Startseite",
     "scan": "Haut Analysieren"
   },
@@ -284,10 +284,6 @@
     "metrics_title": "Detaillierte Metriken",
     "recommendations_title": "Empfohlene Produkte",
     "summary_title": "Zusammenfassung",
-    "email_cta": "Vollständigen Bericht Erhalten",
-    "email_placeholder": "Geben Sie Ihre E-Mail ein",
-    "email_submit": "Bericht Senden",
-    "email_success": "Bericht gesendet! Überprüfen Sie Ihren Posteingang.",
     "share": "Ergebnisse Teilen",
     "new_scan": "Neue Analyse",
     "status": {
