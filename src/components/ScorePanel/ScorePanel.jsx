@@ -6,13 +6,13 @@ import { useTranslation } from "react-i18next";
 function getStatusColor(status) {
   switch (status) {
     case "good":
-      return "#22c55e";
+      return "#5B9A8B";
     case "normal":
-      return "#f59e0b";
+      return "#D4A053";
     case "needs_attention":
-      return "#ef4444";
+      return "#E8728A";
     default:
-      return "#6b7280";
+      return "#8E8A9B";
   }
 }
 
@@ -22,7 +22,7 @@ export default function ScorePanel({ overallScore, skinType, summary }) {
   const radius = 70;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (overallScore / 100) * circumference;
-  const color = overallScore >= 80 ? "#22c55e" : overallScore >= 40 ? "#f59e0b" : "#ef4444";
+  const color = overallScore >= 80 ? "#5B9A8B" : overallScore >= 40 ? "#D4A053" : "#E8728A";
 
   return (
     <motion.div
@@ -38,7 +38,7 @@ export default function ScorePanel({ overallScore, skinType, summary }) {
             cy="90"
             r={radius}
             fill="none"
-            stroke="#e5e7eb"
+            stroke="hsl(340, 15%, 90%)"
             strokeWidth="10"
           />
           <motion.circle
@@ -82,15 +82,15 @@ export default function ScorePanel({ overallScore, skinType, summary }) {
       {/* Score Guide */}
       <div className="mb-4 flex flex-wrap justify-center gap-4 text-xs">
         <div className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-red-500" />
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#E8728A]" />
           <span className="text-muted-foreground">{t("results.score_guide.needs_attention", "Needs Attention")}: 0–39</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-amber-500" />
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#D4A053]" />
           <span className="text-muted-foreground">{t("results.score_guide.normal", "Normal")}: 40–79</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-green-500" />
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#5B9A8B]" />
           <span className="text-muted-foreground">{t("results.score_guide.good", "Good")}: 80–100</span>
         </div>
       </div>

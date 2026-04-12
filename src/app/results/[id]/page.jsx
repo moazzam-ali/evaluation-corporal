@@ -8,13 +8,11 @@ import Link from "next/link";
 import { ArrowLeft, RefreshCw } from "lucide-react";
 
 import useAnalysisStore from "@/store/analysisStore";
-import { getProductsForRecommendations } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/Loader/Loader";
 import ScorePanel from "@/components/ScorePanel/ScorePanel";
 import ScoreCircle from "@/components/ScoreCircle/ScoreCircle";
-import ProductCard from "@/components/ProductCard/ProductCard";
-import EmailCapture from "@/components/EmailCapture/EmailCapture";
+
 
 export default function ResultsPage() {
   const { id } = useParams();
@@ -26,7 +24,6 @@ export default function ResultsPage() {
     overallScore,
     skinType,
     metrics,
-    recommendations,
     summary,
   } = useAnalysisStore();
 
@@ -54,8 +51,6 @@ export default function ResultsPage() {
       </div>
     );
   }
-
-  const products = getProductsForRecommendations(recommendations);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
@@ -94,23 +89,6 @@ export default function ResultsPage() {
           ))}
         </div>
       </div>
-
-      {/* Email Capture */}
-      <div className="mb-10">
-        <EmailCapture analysisId={id} />
-      </div>
-
-      {/* Product Recommendations */}
-      {products.length > 0 && (
-        <div className="mb-10">
-          <h2 className="mb-6 text-xl font-bold">{t("results.recommendations_title")}</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {products.map((product, i) => (
-              <ProductCard key={product.id} product={product} delay={i * 0.1} />
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Actions */}
       <div className="flex flex-wrap justify-center gap-4">
