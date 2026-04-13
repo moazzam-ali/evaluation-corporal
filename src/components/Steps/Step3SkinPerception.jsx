@@ -33,8 +33,8 @@ export default function Step3SkinPerception({ form, t }) {
   const { watch, setValue, formState: { errors } } = form;
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold">{t("scan.step3.title", "How You Perceive Your Skin")}</h2>
+    <div className="space-y-5">
+      <h2 className="text-lg font-semibold">{t("scan.step3.title", "How You Perceive Your Skin")}</h2>
 
       <RadioField
         label={t("scan.step3.skin_type_label", "How would you normally describe your skin?")}

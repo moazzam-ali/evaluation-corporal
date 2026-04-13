@@ -29,6 +29,9 @@
     --chart-3: 347 80% 81%;
     --chart-4: 25 80% 72%;
     --chart-5: 200 40% 60%;
+    --status-good: 163 31% 48%;
+    --status-normal: 37 58% 58%;
+    --status-alert: 349 73% 68%;
   }
 
   .dark {

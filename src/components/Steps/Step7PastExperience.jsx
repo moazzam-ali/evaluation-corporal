@@ -21,8 +21,8 @@ export default function Step7PastExperience({ form, t }) {
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold">{t("scan.step7.title", "Past Experience")}</h2>
+    <div className="space-y-5">
+      <h2 className="text-lg font-semibold">{t("scan.step7.title", "Past Experience")}</h2>
 
       <div className="space-y-3">
         <Label>{t("scan.step7.history_label", "Have you tried any treatment or routine to improve your skin before?")}</Label>

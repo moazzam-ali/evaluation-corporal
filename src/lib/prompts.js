@@ -25,19 +25,36 @@ const METRIC_IDS = [
 ];
 
 const PRODUCT_IDS = [
-  "daily_glow_cream",
-  "gentle_cleanser",
-  "firming_serum",
-  "spot_corrector",
-  "eye_renewal",
-  "hydra_boost",
-  "pore_refiner",
-  "soothing_toner",
-  "acne_control",
-  "night_repair",
-  "spf_shield",
-  "exfoliant",
+  "night_cream_539k",
+  "tension_cream_513k",
+  "niacinamide_serum_508k",
+  "eye_cream_515k",
+  "body_lotion_514k",
+  "gelo_cleanser_511k",
+  "coq10_gels_378k",
+  "collagen_booster_076k",
 ];
+
+const PRODUCT_CONTEXT = `
+PRODUCT CATALOG (recommend by ID only — include product context when choosing):
+
+TOPICAL PRODUCTS:
+- "gelo_cleanser_511k" — HL/Skin Resurfacing Gelo Cleanser: Gentle foaming cleanser. For: oily/congested skin, makeup removal, excess oil. Foundational step 1 of any routine.
+- "niacinamide_serum_508k" — HL/Skin 10% Niacinamide Serum: High-concentration brightening serum. For: uneven skin tone, hyperpigmentation, dark spots, dullness, enlarged pores, barrier repair.
+- "tension_cream_513k" — HL/Skin Ultimate Tension Cream: Anti-ageing day moisturiser with peptides. For: wrinkles, fine lines, loss of firmness/elasticity, dull radiance, dehydration. Use under makeup.
+- "night_cream_539k" — HL/Skin Revitalising Night Cream: Overnight recovery moisturiser. For: dryness, loss of elasticity, signs of ageing, rough texture. Evening use only.
+- "eye_cream_515k" — HL/Skin Nourishing Eye Cream: Targeted eye contour treatment. For: eye wrinkles, crow's feet, dark circles, puffiness, eye area dryness.
+- "body_lotion_514k" — HL/Skin Nourishing Hand & Body Lotion: 6% squalane body lotion. For: dry hands/body, rough skin texture. Only recommend for body concerns, not face.
+
+INGESTIBLE SUPPLEMENTS (inside-out support):
+- "collagen_booster_076k" — Herbalife Collagen Skin Booster: Verisol® collagen peptides powder. Clinically shown to reduce eye wrinkles and improve elasticity after 4 weeks. For: wrinkles, elasticity loss, hair/nail health. Strong complement to topical anti-ageing.
+- "coq10_gels_378k" — Herbalife Gels CoQ10VITA: Antioxidant chewable supplement with CoQ10, Vitamin E, Vitamin K. For: oxidative stress, cellular energy, antioxidant protection. Recommend for users 40+ or high environmental exposure.
+
+ROUTINE PAIRING (suggest products that form a coherent routine):
+- Morning: Cleanser → Serum → Day Cream → Eye Cream (+ remind about SPF)
+- Evening: Cleanser → Serum (optional) → Night Cream → Eye Cream
+- Supplements: Collagen Booster and/or CoQ10 for inside-out approach
+`.trim();
 
 export function getPromptForLanguage(lang = "en") {
   const isSpanish = lang === "es";
@@ -57,7 +74,10 @@ IMPORTANT RULES:
 4. If a metric cannot be clearly assessed from the photo, give it a score of 50 (neutral) and note the limitation in the insight.
 5. ${insightLang}
 6. The "status" field MUST be exactly one of: "good" (score >= 80), "normal" (score 40-79), "needs_attention" (score < 40).
-7. Recommend 1-4 products from the catalog based on the lowest-scoring metrics.
+7. Recommend 2-6 products from the catalog based on the lowest-scoring metrics. Build a coherent routine — not random individual products.
+8. You may recommend both topical products AND ingestible supplements when appropriate. Distinguish between them in the reason.
+9. Always include the Gelo Cleanser as a foundational recommendation if the user has oily skin or congested pores.
+10. For eye area concerns, always recommend the Eye Cream. For severe eye wrinkles, pair it with the Collagen Booster supplement.
 
 THE 12 METRICS (you must include ALL of these, in this exact order):
 1. oily_skin — Sebum/oil balance (100=balanced, 0=extremely oily)
@@ -73,8 +93,12 @@ THE 12 METRICS (you must include ALL of these, in this exact order):
 11. texture — Overall condition and consistency of the skin's surface (100=refined, 0=uneven)
 12. dark_circles — Darkness under the eyes (100=bright, 0=very dark)
 
-PRODUCT CATALOG (recommend by ID only):
-${PRODUCT_IDS.map((id) => `- "${id}"`).join("\n")}
+${PRODUCT_CONTEXT}
+
+ADDITIONAL ANALYSIS (provide deeper insight):
+11. Write a "detailed_analysis" field: 3-5 paragraphs covering skin strengths, areas of concern, what you observe about potential lifestyle/environmental factors from the skin condition, and how different facial zones compare. Be specific, professional, and encouraging.
+12. Write a "tips" field: array of 3-5 specific, actionable tips personalised to this person's results. Include skincare habits, lifestyle changes, and routine advice. Each tip should be 1-2 sentences.
+13. Write a "routine_note" field: 1-2 sentences explaining how the recommended products should be used together — what goes in the morning vs evening routine.
 
 REQUIRED JSON SCHEMA (follow this EXACTLY):
 {
@@ -91,11 +115,14 @@ REQUIRED JSON SCHEMA (follow this EXACTLY):
   "recommendations": [
     {
       "product_id": "<product ID from catalog>",
-      "priority": <integer 1-4>,
+      "priority": <integer 1-6>,
       "reason": "<1 sentence why>"
     }
   ],
-  "summary": "<2-3 sentence overall assessment>"
+  "summary": "<2-3 sentence overall assessment>",
+  "detailed_analysis": "<3-5 paragraphs of in-depth skin analysis>",
+  "tips": ["<tip 1>", "<tip 2>", "<tip 3>"],
+  "routine_note": "<1-2 sentences on how to combine the recommended products>"
 }
 
 The metrics array MUST contain exactly 12 objects, one for each metric ID listed above.`;

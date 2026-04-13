@@ -15,8 +15,8 @@ export default function Step6Habits({ form, t }) {
   const { watch, setValue, formState: { errors } } = form;
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold">{t("scan.step6.title", "Habits That Affect Your Skin")}</h2>
+    <div className="space-y-5">
+      <h2 className="text-lg font-semibold">{t("scan.step6.title", "Habits That Affect Your Skin")}</h2>
 
       {FIELDS.map(({ name, options }) => (
         <div key={name} className="space-y-3">

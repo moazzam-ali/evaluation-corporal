@@ -16,11 +16,11 @@ export default function Step1BasicInfo({ form, t }) {
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-semibold">{t("scan.step1.title", "Basic Information")}</h2>
+    <div className="space-y-5">
+      <h2 className="text-lg font-semibold">{t("scan.step1.title", "Basic Information")}</h2>
       <p className="text-sm text-muted-foreground">{t("scan.step1.subtitle", "Tell us about yourself")}</p>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label>{t("scan.step1.name", "First Name")}</Label>
           <Input {...register("name")} />
@@ -39,7 +39,7 @@ export default function Step1BasicInfo({ form, t }) {
         {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label>{t("scan.step1.birthDate", "Date of Birth")}</Label>
           <Input {...register("birthDate")} placeholder="DD/MM/YYYY" onInput={handleBirthDateInput} />
@@ -52,7 +52,7 @@ export default function Step1BasicInfo({ form, t }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label>{t("scan.step1.country", "Country")}</Label>
           <Input {...register("country")} />

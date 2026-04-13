@@ -33,8 +33,8 @@ export default function Step2MainGoal({ form, t }) {
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold">{t("scan.step2.title", "Main Goal")}</h2>
+    <div className="space-y-5">
+      <h2 className="text-lg font-semibold">{t("scan.step2.title", "Main Goal")}</h2>
 
       {/* Concerns — max 3 */}
       <div className="space-y-3">

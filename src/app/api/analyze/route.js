@@ -27,7 +27,7 @@ const MetricSchema = z.object({
 
 const RecommendationSchema = z.object({
   product_id: z.string(),
-  priority: z.number().min(1).max(10),
+  priority: z.number().min(1).max(8),
   reason: z.string().min(1),
 });
 
@@ -37,6 +37,9 @@ const AnalysisResultSchema = z.object({
   metrics: z.array(MetricSchema).min(1),
   recommendations: z.array(RecommendationSchema).min(1),
   summary: z.string().min(1),
+  detailed_analysis: z.string().optional(),
+  tips: z.array(z.string()).optional(),
+  routine_note: z.string().optional(),
 });
 
 // ------------------------------------------------------------------
@@ -139,7 +142,7 @@ async function callOpenAIWithRetry(imageUrl, formData, lng, { maxRetries = 2 } =
             ],
           },
         ],
-        max_tokens: 3000,
+        max_tokens: 4500,
         temperature: 0.2,
         response_format: {
           type: "json_schema",
@@ -179,8 +182,14 @@ async function callOpenAIWithRetry(imageUrl, formData, lng, { maxRetries = 2 } =
                   },
                 },
                 summary: { type: "string" },
+                detailed_analysis: { type: "string" },
+                tips: {
+                  type: "array",
+                  items: { type: "string" },
+                },
+                routine_note: { type: "string" },
               },
-              required: ["overall_score", "skin_type", "metrics", "recommendations", "summary"],
+              required: ["overall_score", "skin_type", "metrics", "recommendations", "summary", "detailed_analysis", "tips", "routine_note"],
               additionalProperties: false,
             },
           },

@@ -1,0 +1,249 @@
+[
+  {
+    "id": "night_cream_539k",
+    "sku": "539K",
+    "name": "HL/Skin Revitalising Night Cream",
+    "category": "Night Cream",
+    "type": "topical",
+    "concernCategory": "Healthy-Ageing",
+    "size": "50 ml / 1.7 fl oz",
+    "image": "/images/products/night-cream-539k.png",
+    "concerns": ["dryness", "elasticity", "ageing", "texture", "overnight_recovery"],
+    "benefits": [
+      "Delivers long-lasting hydration to improve dryness",
+      "Helps reduce visible signs of ageing and improves skin texture",
+      "Improves elasticity and enhances appearance of skin softness",
+      "Leaves skin feeling smooth, soft, plumped, and supple by morning",
+      "Supports skin moisturisation for comforted, replenished skin",
+      "Suitable for diverse skin types",
+      "No added parabens"
+    ],
+    "keyIngredients": [
+      { "name": "Glycerin", "role": "Attracts and retains moisture; improves hydration; softens skin" },
+      { "name": "Squalane", "role": "Supports long-lasting hydration; improves dryness and elasticity" },
+      { "name": "Sodium Hyaluronate", "role": "Deep hydration" },
+      { "name": "Centella Asiatica Extract", "role": "Soothing and skin-repairing" },
+      { "name": "Retinyl Palmitate (Vitamin A)", "role": "Anti-ageing" },
+      { "name": "Tocopherol (Vitamin E)", "role": "Antioxidant protection" },
+      { "name": "Chamomile, Licorice Root, Rosemary Leaf Extracts", "role": "Soothing and antioxidant botanicals" }
+    ],
+    "howToUse": "Apply to clean, dry skin every evening. Gently massage into face and neck in upward motions until absorbed.",
+    "cautions": ["Contains Vitamin A — consider daily intake before use", "Avoid contact with eyes", "External use only"],
+    "routineStep": { "time": "evening", "order": 3 }
+  },
+  {
+    "id": "tension_cream_513k",
+    "sku": "513K",
+    "name": "HL/Skin Ultimate Tension Cream",
+    "category": "Day Cream",
+    "type": "topical",
+    "concernCategory": "Healthy-Ageing",
+    "size": "50 ml / 1.7 fl oz",
+    "image": "/images/products/tension-cream-513k.png",
+    "concerns": ["wrinkles", "fine_lines", "firmness", "elasticity", "radiance", "dehydration"],
+    "benefits": [
+      "Reduces the appearance of wrinkles while enhancing skin elasticity",
+      "Leaves skin feeling smooth and soft",
+      "Provides effective moisturisation and improves skin hydration",
+      "Boosts skin radiance; restores a healthy, natural glow",
+      "Rich and velvety texture",
+      "Suitable for use under makeup",
+      "Suitable for diverse skin types",
+      "No added parabens or sulphates"
+    ],
+    "keyIngredients": [
+      { "name": "Adenosine", "role": "Targets early signs of ageing; reduces fine lines and wrinkles" },
+      { "name": "Niacinamide", "role": "Supports skin hydration; targets early signs of ageing" },
+      { "name": "Vitamin B5 (Panthenol)", "role": "Hydration; retains moisture; strengthens skin barrier" },
+      { "name": "Sodium Hyaluronate", "role": "Deep hydration" },
+      { "name": "Multiple Peptides", "role": "Anti-ageing, firming" },
+      { "name": "Tocopherol (Vitamin E)", "role": "Antioxidant" }
+    ],
+    "howToUse": "Apply to clean, dry skin each morning. Gently massage onto face and neck in upward motions. Follow with SPF during the day. Suitable under makeup.",
+    "cautions": ["Avoid contact with eyes", "External use only", "Use SPF protection during the day"],
+    "routineStep": { "time": "morning", "order": 3 }
+  },
+  {
+    "id": "niacinamide_serum_508k",
+    "sku": "508K",
+    "name": "HL/Skin 10% Niacinamide Serum",
+    "category": "Serum",
+    "type": "topical",
+    "concernCategory": "Brightness & Illumination",
+    "size": "30 ml / 1.0 fl oz",
+    "image": "/images/products/niacinamide-serum-508k.png",
+    "concerns": ["uneven_tone", "dullness", "pores", "barrier", "ageing", "oiliness"],
+    "benefits": [
+      "Contains 10% niacinamide (high-concentration formula)",
+      "Visibly brightens and evens skin tone",
+      "Supports skin's natural moisture balance",
+      "Minimises the look of imperfections",
+      "Helps fight signs of ageing and reduce wrinkles",
+      "Supports and strengthens the skin barrier",
+      "Boosts radiance for a healthy, luminous look",
+      "Lightweight, fast-absorbing texture",
+      "Suitable for diverse skin types",
+      "No added parabens or sulphates"
+    ],
+    "keyIngredients": [
+      { "name": "Niacinamide (10%)", "role": "Evens skin tone; supports barrier; provides hydration; reduces wrinkles" },
+      { "name": "Vitamin B5 (Panthenol)", "role": "Delivers hydration; helps retain moisture" },
+      { "name": "Glycerin", "role": "Attracts and locks in moisture; supports barrier function" },
+      { "name": "Beta-Glucan", "role": "Soothing; hydration" },
+      { "name": "Hydrolyzed Hyaluronic Acid", "role": "Penetrates deeper for intensive hydration" },
+      { "name": "Fructooligosaccharides", "role": "Prebiotic; supports skin microbiome" }
+    ],
+    "howToUse": "Apply a few drops to clean, dry skin on face and neck. Gently press into skin until absorbed. Use once daily. Follow with SPF during the day.",
+    "cautions": ["May cause irritation on initial use", "Avoid contact with eyes", "External use only", "Use SPF during the day"],
+    "routineStep": { "time": "both", "order": 2 }
+  },
+  {
+    "id": "eye_cream_515k",
+    "sku": "515K",
+    "name": "HL/Skin Nourishing Eye Cream",
+    "category": "Eye Cream",
+    "type": "topical",
+    "concernCategory": "Healthy-Ageing",
+    "size": "15 ml / 0.5 fl oz",
+    "image": "/images/products/eye-cream-515k.png",
+    "concerns": ["eye_wrinkles", "eye_dryness", "puffiness", "dark_circles", "eye_radiance"],
+    "benefits": [
+      "Targets wrinkles and fine lines around the eye area",
+      "Provides refreshing hydration",
+      "Locks in moisture to combat dryness",
+      "Improves smoothness and radiance around the eyes",
+      "Lightweight, non-greasy, and fast-absorbing",
+      "Suitable for use under makeup",
+      "Suitable for diverse skin types",
+      "No added parabens or sulphates"
+    ],
+    "keyIngredients": [
+      { "name": "Squalane", "role": "Provides hydration; maintains skin moisture" },
+      { "name": "Macadamia Seed Oil", "role": "Alleviates dryness; supports lasting hydration" },
+      { "name": "Shea Butter", "role": "Alleviates dryness; supports lasting hydration" },
+      { "name": "Adenosine & Niacinamide", "role": "Hydrate skin; reduce wrinkles; target early signs of ageing" },
+      { "name": "Vitamin B5 (Panthenol)", "role": "Supports moisture retention; strengthens skin barrier" },
+      { "name": "Ceramide NP", "role": "Supports and restores the skin barrier" }
+    ],
+    "howToUse": "Apply morning and evening to a cleansed face. Gently press and massage a small amount around the eye contour area.",
+    "cautions": ["Avoid contact with eyes", "External use only"],
+    "routineStep": { "time": "both", "order": 4 }
+  },
+  {
+    "id": "body_lotion_514k",
+    "sku": "514K",
+    "name": "HL/Skin Nourishing Hand & Body Lotion",
+    "category": "Body & Hand Lotion",
+    "type": "topical",
+    "concernCategory": "Moisture & Hydration",
+    "size": "147 ml / 5.0 fl oz",
+    "image": "/images/products/body-lotion-514k.png",
+    "concerns": ["body_dryness", "rough_skin", "suppleness", "daily_moisture"],
+    "benefits": [
+      "Formulated with 6% squalane for moisturising and skin-conditioning",
+      "Provides long-lasting moisture and hydration for hands and body",
+      "Helps improve dryness",
+      "Leaves skin feeling velvet-smooth, soft, and nourished",
+      "Lightweight, non-greasy texture absorbs quickly",
+      "Suitable for diverse skin types",
+      "No added parabens or sulphates"
+    ],
+    "keyIngredients": [
+      { "name": "Squalane (6%)", "role": "Long-lasting hydration throughout the day" },
+      { "name": "Glycerin", "role": "Attracts and retains moisture" },
+      { "name": "Niacinamide", "role": "Skin conditioning; barrier support" },
+      { "name": "Ceramide NP", "role": "Restores and supports skin barrier" },
+      { "name": "Shea Butter, Jojoba Butter, Cupuaçu Seed Butter", "role": "Rich emollients for deep nourishment" },
+      { "name": "Centella Asiatica Extract", "role": "Soothing and hydrating" }
+    ],
+    "howToUse": "Apply daily as needed onto clean, dry skin until absorbed. For hands and body.",
+    "cautions": ["Avoid contact with eyes", "External use only"],
+    "routineStep": { "time": "any", "order": 1 }
+  },
+  {
+    "id": "gelo_cleanser_511k",
+    "sku": "511K",
+    "name": "HL/Skin Resurfacing Gelo Cleanser",
+    "category": "Facial Cleanser",
+    "type": "topical",
+    "concernCategory": "Brightness & Illumination",
+    "size": "147 ml / 5.0 fl oz",
+    "image": "/images/products/gelo-cleanser-511k.png",
+    "concerns": ["makeup_removal", "excess_oil", "impurities", "congestion", "over_drying"],
+    "benefits": [
+      "Effectively removes makeup, impurities, and excess oil",
+      "Gently purifies skin without over-drying",
+      "Leaves skin feeling clean, balanced, and refreshed",
+      "Lightweight, foaming gel texture",
+      "Suitable for diverse skin types",
+      "No added parabens or sulphates"
+    ],
+    "keyIngredients": [
+      { "name": "Glycerin", "role": "Maintains moisture during cleansing; prevents dryness" },
+      { "name": "Coconut-derived Surfactants", "role": "Gentle cleansing" },
+      { "name": "Centella Asiatica Extract", "role": "Soothing" },
+      { "name": "Beta-Glucan & Ceramide NP", "role": "Hydrating and barrier-protective" },
+      { "name": "Hydrolyzed Hyaluronic Acid", "role": "Hydration during cleansing" },
+      { "name": "Fructooligosaccharides", "role": "Prebiotic support for skin microbiome" }
+    ],
+    "howToUse": "Apply to wet hands and work into a light foam. Gently massage in circular motions over face and neck. Rinse thoroughly with warm water and pat dry. Use morning and evening.",
+    "cautions": ["Avoid contact with eyes", "External use only"],
+    "routineStep": { "time": "both", "order": 1 }
+  },
+  {
+    "id": "coq10_gels_378k",
+    "sku": "378K",
+    "name": "Herbalife Gels CoQ10VITA",
+    "category": "Chewable Supplement",
+    "type": "ingestible",
+    "concernCategory": "Antioxidant Protection",
+    "size": "30 chewable gels (1/day)",
+    "image": "/images/products/coq10-gels-378k.png",
+    "concerns": ["oxidative_stress", "cardiovascular_support", "cellular_energy", "antioxidant"],
+    "benefits": [
+      "Contains CoQ10 (100 mg per serving) for cellular energy production",
+      "High Vitamin E (12 mg, 100% RI) — protects cells from oxidative damage",
+      "High Vitamin K (75 µg, 100% RI) — supports blood clotting and bone maintenance",
+      "Delicious cherry flavour",
+      "Sugar-free and gluten-free"
+    ],
+    "keyIngredients": [
+      { "name": "Coenzyme Q10 (100 mg)", "role": "Antioxidant; energy production in cells and heart" },
+      { "name": "Vitamin E (12 mg)", "role": "Cell protection from oxidative stress" },
+      { "name": "Vitamin K2 (75 µg)", "role": "Blood coagulation; bone health" }
+    ],
+    "howToUse": "Take 1 chewable gel per day as part of a varied and balanced diet.",
+    "cautions": ["Do not exceed recommended daily dose", "Not a substitute for a balanced diet", "Keep out of reach of young children"],
+    "routineStep": { "time": "daily", "order": 1 }
+  },
+  {
+    "id": "collagen_booster_076k",
+    "sku": "076K",
+    "name": "Herbalife Collagen Skin Booster",
+    "category": "Powder Supplement",
+    "type": "ingestible",
+    "concernCategory": "Collagen Support",
+    "size": "30 servings (1 scoop/day)",
+    "image": "/images/products/collagen-booster-076k.png",
+    "concerns": ["wrinkles", "elasticity_loss", "ageing_skin", "hair_health", "nail_health", "collagen_support"],
+    "benefits": [
+      "Contains Verisol® P bioactive collagen peptides — clinically shown to reduce eye wrinkles and improve elasticity after 4 weeks",
+      "Vitamin C contributes to normal collagen formation for skin",
+      "Biotin, Niacin, Iodine, Vitamin A, Zinc contribute to normal skin maintenance",
+      "Selenium, Biotin, Zinc contribute to normal hair maintenance",
+      "Zinc, Selenium contribute to normal nail maintenance",
+      "Refreshing strawberry & lemon flavour",
+      "Gluten-free"
+    ],
+    "keyIngredients": [
+      { "name": "Verisol® P Collagen Hydrolysate (2.5 g)", "role": "Clinically studied; reduces eye wrinkles; improves elasticity" },
+      { "name": "Vitamin C (40 mg)", "role": "Collagen synthesis support" },
+      { "name": "Vitamin A (400 µg)", "role": "Skin maintenance" },
+      { "name": "Vitamin E (6 mg)", "role": "Antioxidant" },
+      { "name": "Zinc (5 mg), Biotin (25 µg), Selenium (28 µg)", "role": "Skin, hair, and nail support" }
+    ],
+    "howToUse": "Mix 1 scoop (5.7 g) with 250 ml water. Enjoy once daily with a meal.",
+    "cautions": ["Food supplement — not a substitute for a balanced diet", "Keep out of reach of children"],
+    "routineStep": { "time": "daily", "order": 2 }
+  }
+]

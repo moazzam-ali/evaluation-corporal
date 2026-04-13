@@ -12,7 +12,11 @@ const useAnalysisStore = create((set, get) => ({
   metrics: [],
   recommendations: [],
   summary: "",
+  detailedAnalysis: "",
+  tips: [],
+  routineNote: "",
   formData: null,
+  imageUrl: null,
 
   // Actions
   fetchAnalysis: async (id) => {
@@ -23,7 +27,7 @@ const useAnalysisStore = create((set, get) => ({
         throw new Error("Analysis not found");
       }
       const data = await response.json();
-      const { results, formData } = data.data;
+      const { results, formData, imageUrl } = data.data;
 
       set({
         analysisData: data.data,
@@ -32,7 +36,11 @@ const useAnalysisStore = create((set, get) => ({
         metrics: results.metrics || [],
         recommendations: results.recommendations || [],
         summary: results.summary || "",
+        detailedAnalysis: results.detailed_analysis || "",
+        tips: results.tips || [],
+        routineNote: results.routine_note || "",
         formData: formData || null,
+        imageUrl: imageUrl || null,
         isLoading: false,
       });
     } catch (error) {
@@ -41,7 +49,7 @@ const useAnalysisStore = create((set, get) => ({
   },
 
   setAnalysisFromResponse: (data) => {
-    const { results, formData } = data;
+    const { results, formData, imageUrl } = data;
     set({
       analysisData: data,
       overallScore: results.overall_score || 0,
@@ -49,7 +57,11 @@ const useAnalysisStore = create((set, get) => ({
       metrics: results.metrics || [],
       recommendations: results.recommendations || [],
       summary: results.summary || "",
+      detailedAnalysis: results.detailed_analysis || "",
+      tips: results.tips || [],
+      routineNote: results.routine_note || "",
       formData: formData || null,
+      imageUrl: imageUrl || null,
     });
   },
 
@@ -63,7 +75,11 @@ const useAnalysisStore = create((set, get) => ({
       metrics: [],
       recommendations: [],
       summary: "",
+      detailedAnalysis: "",
+      tips: [],
+      routineNote: "",
       formData: null,
+      imageUrl: null,
     });
   },
 }));
