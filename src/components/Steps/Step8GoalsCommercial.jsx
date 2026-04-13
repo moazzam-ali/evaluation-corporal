@@ -17,8 +17,8 @@ export default function Step8GoalsCommercial({ form, t }) {
   ];
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold">{t("scan.step8.title", "Your Goals")}</h2>
+    <div className="space-y-5">
+      <h2 className="text-lg font-semibold">{t("scan.step8.title", "Your Goals")}</h2>
 
       {fields.map(({ name, label, options, prefix }) => (
         <div key={name} className="space-y-3">

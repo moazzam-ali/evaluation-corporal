@@ -138,7 +138,7 @@ function ScanPageInner() {
       if (!res.ok) throw new Error(result.error || "Analysis failed");
 
       setAnalysisProgress(100);
-      useAnalysisStore.getState().setAnalysisFromResponse({ results: result.results, formData });
+      useAnalysisStore.getState().setAnalysisFromResponse({ results: result.results, formData, imageUrl: imageData });
       toast.success(t("results.title", "Analysis complete!"));
       router.push(`/results/${result.id}`);
     } catch (error) {

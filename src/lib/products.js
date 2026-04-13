@@ -1,137 +1,54 @@
-export const PRODUCT_CATALOG = [
-  {
-    id: "daily_glow_cream",
-    name: "Daily Glow Cream",
-    name_es: "Crema de Brillo Diario",
-    description: "Lightweight daily moisturizer that boosts radiance and provides lasting hydration throughout the day.",
-    description_es: "Hidratante diaria ligera que potencia la luminosidad y proporciona hidratación duradera durante todo el día.",
-    image: "/images/products/daily-glow-cream.jpg",
-    price: "$42.00",
-    concerns: ["radiance", "moisture"],
-  },
-  {
-    id: "gentle_cleanser",
-    name: "Gentle Foaming Cleanser",
-    name_es: "Limpiador Espumoso Suave",
-    description: "A mild foaming cleanser that removes impurities without stripping the skin's natural moisture barrier.",
-    description_es: "Limpiador espumoso suave que elimina impurezas sin dañar la barrera natural de humedad de la piel.",
-    image: "/images/products/gentle-cleanser.jpg",
-    price: "$28.00",
-    concerns: ["oily_skin", "texture", "acne"],
-  },
-  {
-    id: "firming_serum",
-    name: "Firming Peptide Serum",
-    name_es: "Sérum Reafirmante de Péptidos",
-    description: "Advanced anti-aging serum with peptides and retinol to firm skin and reduce the appearance of wrinkles.",
-    description_es: "Sérum antiedad avanzado con péptidos y retinol para reafirmar la piel y reducir la apariencia de arrugas.",
-    image: "/images/products/firming-serum.jpg",
-    price: "$65.00",
-    concerns: ["firmness", "wrinkles"],
-  },
-  {
-    id: "spot_corrector",
-    name: "Vitamin C Spot Corrector",
-    name_es: "Corrector de Manchas con Vitamina C",
-    description: "Targeted treatment with vitamin C and niacinamide to fade dark spots and even out skin tone.",
-    description_es: "Tratamiento con vitamina C y niacinamida para atenuar manchas oscuras y unificar el tono de la piel.",
-    image: "/images/products/spot-corrector.jpg",
-    price: "$48.00",
-    concerns: ["dark_spots", "radiance"],
-  },
-  {
-    id: "eye_renewal",
-    name: "Eye Contour Renewal Cream",
-    name_es: "Crema Renovadora de Contorno de Ojos",
-    description: "Rich eye cream that reduces dark circles, puffiness, and fine lines around the delicate eye area.",
-    description_es: "Crema de ojos que reduce ojeras, hinchazón y líneas finas alrededor del área delicada de los ojos.",
-    image: "/images/products/eye-renewal.jpg",
-    price: "$52.00",
-    concerns: ["eye_area", "dark_circles"],
-  },
-  {
-    id: "hydra_boost",
-    name: "Hydra Boost Serum",
-    name_es: "Sérum Hidratación Intensiva",
-    description: "Intensive hydration booster with hyaluronic acid for deep moisture replenishment.",
-    description_es: "Potenciador de hidratación intensiva con ácido hialurónico para una profunda reposición de humedad.",
-    image: "/images/products/hydra-boost.jpg",
-    price: "$55.00",
-    concerns: ["moisture", "texture"],
-  },
-  {
-    id: "pore_refiner",
-    name: "Pore Minimizing Treatment",
-    name_es: "Tratamiento Minimizador de Poros",
-    description: "Oil-free treatment that visibly reduces pore size and controls excess sebum production.",
-    description_es: "Tratamiento sin aceite que reduce visiblemente el tamaño de los poros y controla la producción de sebo.",
-    image: "/images/products/pore-refiner.jpg",
-    price: "$38.00",
-    concerns: ["pores", "oily_skin"],
-  },
-  {
-    id: "soothing_toner",
-    name: "Calming Botanical Toner",
-    name_es: "Tónico Botánico Calmante",
-    description: "Alcohol-free toner with aloe vera and chamomile to soothe redness and calm sensitive skin.",
-    description_es: "Tónico sin alcohol con aloe vera y manzanilla para calmar el enrojecimiento y la piel sensible.",
-    image: "/images/products/soothing-toner.jpg",
-    price: "$32.00",
-    concerns: ["redness", "texture"],
-  },
-  {
-    id: "acne_control",
-    name: "Blemish Control Gel",
-    name_es: "Gel de Control de Imperfecciones",
-    description: "Fast-acting blemish treatment with salicylic acid to clear breakouts and prevent new ones.",
-    description_es: "Tratamiento de acción rápida con ácido salicílico para eliminar brotes y prevenir nuevos.",
-    image: "/images/products/acne-control.jpg",
-    price: "$35.00",
-    concerns: ["acne", "oily_skin"],
-  },
-  {
-    id: "night_repair",
-    name: "Overnight Repair Cream",
-    name_es: "Crema de Reparación Nocturna",
-    description: "Rich night cream that works while you sleep to repair, restore, and rejuvenate skin cells.",
-    description_es: "Crema nocturna rica que actúa mientras duermes para reparar, restaurar y rejuvenecer las células de la piel.",
-    image: "/images/products/night-repair.jpg",
-    price: "$58.00",
-    concerns: ["firmness", "wrinkles", "texture"],
-  },
-  {
-    id: "spf_shield",
-    name: "Daily SPF 50 Shield",
-    name_es: "Protector Solar Diario SPF 50",
-    description: "Lightweight daily sunscreen with broad-spectrum SPF 50 protection that won't clog pores.",
-    description_es: "Protector solar diario ligero con protección de amplio espectro SPF 50 que no obstruye los poros.",
-    image: "/images/products/spf-shield.jpg",
-    price: "$36.00",
-    concerns: ["dark_spots", "wrinkles", "redness"],
-  },
-  {
-    id: "exfoliant",
-    name: "Gentle Chemical Exfoliant",
-    name_es: "Exfoliante Químico Suave",
-    description: "AHA/BHA blend that gently removes dead skin cells, revealing smoother and brighter skin underneath.",
-    description_es: "Mezcla de AHA/BHA que elimina suavemente las células muertas, revelando una piel más suave y luminosa.",
-    image: "/images/products/exfoliant.jpg",
-    price: "$40.00",
-    concerns: ["texture", "pores", "dark_spots"],
-  },
-];
+import productData from "@/data/products.json";
+import metricProductMap from "@/data/metric-product-map.json";
+
+export const PRODUCT_CATALOG = productData;
+
+export function getProducts() {
+  return PRODUCT_CATALOG;
+}
 
 export function getProductById(id) {
   return PRODUCT_CATALOG.find((p) => p.id === id);
 }
 
+export function getProductsByConcern(concernId) {
+  return PRODUCT_CATALOG.filter((p) => p.concerns.includes(concernId));
+}
+
+export function getProductsForMetrics(metrics) {
+  const scored = new Map();
+
+  for (const metric of metrics) {
+    if (metric.score >= 80) continue;
+
+    const productIds = metricProductMap[metric.id];
+    if (!productIds) continue;
+
+    const weight = metric.score < 40 ? 3 : metric.score < 60 ? 2 : 1;
+
+    for (const pid of productIds) {
+      scored.set(pid, (scored.get(pid) || 0) + weight);
+    }
+  }
+
+  return Array.from(scored.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([id], i) => {
+      const product = getProductById(id);
+      if (!product) return null;
+      return { ...product, priority: i + 1 };
+    })
+    .filter(Boolean);
+}
+
 export function getProductsForRecommendations(recommendations) {
-  return recommendations.map((rec) => {
-    const product = getProductById(rec.product_id);
-    return {
-      ...product,
-      priority: rec.priority,
-      reason: rec.reason,
-    };
-  }).filter(Boolean);
+  if (!recommendations || !Array.isArray(recommendations)) return [];
+
+  return recommendations
+    .map((rec) => {
+      const product = getProductById(rec.product_id);
+      if (!product) return null;
+      return { ...product, priority: rec.priority, reason: rec.reason };
+    })
+    .filter(Boolean);
 }

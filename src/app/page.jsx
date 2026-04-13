@@ -51,14 +51,14 @@ export default function HomePage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8 text-center"
+        className="mb-10 text-center"
       >
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5">
-          <Sparkles className="h-4 w-4 text-primary" />
-          <span className="text-sm font-medium text-primary">Beauty & Glow AI Analysis</span>
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5">
+          <Sparkles className="h-4 w-4 text-secondary" />
+          <span className="text-sm font-medium text-primary">Beauty &amp; Glow AI</span>
         </div>
-        <h1 className="text-3xl font-bold">{t("home.title", "Configuration")}</h1>
-        <p className="mt-2 text-muted-foreground">
+        <h1 className="text-3xl font-bold tracking-tight">{t("home.title", "Configuration")}</h1>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {t("home.subtitle", "Set up the Telegram notification and CRM parameters, then proceed to the skin analysis form.")}
         </p>
       </motion.div>

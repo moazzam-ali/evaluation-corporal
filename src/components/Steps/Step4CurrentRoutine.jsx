@@ -26,8 +26,8 @@ export default function Step4CurrentRoutine({ form, t }) {
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold">{t("scan.step4.title", "Current Routine")}</h2>
+    <div className="space-y-5">
+      <h2 className="text-lg font-semibold">{t("scan.step4.title", "Current Routine")}</h2>
 
       {/* Routine frequency */}
       <div className="space-y-3">
@@ -46,7 +46,7 @@ export default function Step4CurrentRoutine({ form, t }) {
       {/* Products used */}
       <div className="space-y-3">
         <Label>{t("scan.step4.products_label", "What products do you currently use?")}</Label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {PRODUCT_OPTIONS.map((key) => (
             <label key={key} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${productsUsed.includes(key) ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}>
               <Checkbox checked={productsUsed.includes(key)} onCheckedChange={() => toggleProduct(key)} />

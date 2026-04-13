@@ -29,7 +29,7 @@ export default function ScoreCircle({ score, status, label, insight, description
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.4 }}
-      className={`flex flex-col items-center rounded-xl border p-4 ${bg} transition-shadow hover:shadow-md cursor-pointer`}
+      className={`flex flex-col items-center rounded-xl border p-4 shadow-sm ${bg} transition-all duration-200 hover:shadow-md cursor-pointer ${expanded ? "border-primary ring-1 ring-primary/20" : ""}`}
       onClick={() => setExpanded(!expanded)}
     >
       <div className="relative mb-3">
@@ -61,7 +61,7 @@ export default function ScoreCircle({ score, status, label, insight, description
           </motion.span>
         </div>
       </div>
-      <p className="mb-1 text-center text-sm font-semibold">{label}</p>
+      <p className="mb-1 text-center text-sm font-semibold line-clamp-1">{label}</p>
       {insight && (
         <p className="text-center text-xs text-muted-foreground line-clamp-2">{insight}</p>
       )}

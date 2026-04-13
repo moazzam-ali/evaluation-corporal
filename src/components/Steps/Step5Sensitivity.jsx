@@ -26,8 +26,8 @@ export default function Step5Sensitivity({ form, t }) {
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="text-xl font-semibold">{t("scan.step5.title", "Sensitivity & Tolerance")}</h2>
+    <div className="space-y-5">
+      <h2 className="text-lg font-semibold">{t("scan.step5.title", "Sensitivity & Tolerance")}</h2>
 
       <div className="space-y-3">
         <Label>{t("scan.step5.reaction_label", "Does your skin react easily to some products?")}</Label>
@@ -44,7 +44,7 @@ export default function Step5Sensitivity({ form, t }) {
 
       <div className="space-y-3">
         <Label>{t("scan.step5.signs_label", "Have you noticed any of these signs lately?")}</Label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {SIGN_OPTIONS.map((key) => (
             <label key={key} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${recentSigns.includes(key) ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}>
               <Checkbox checked={recentSigns.includes(key)} onCheckedChange={() => toggleSign(key)} />

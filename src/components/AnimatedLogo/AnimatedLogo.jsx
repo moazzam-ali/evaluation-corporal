@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 
-const PINK_ARC = "#E8728A";
-const NAVY_FACE = "#1A1A2E";
-const PINK_DOT = "#F4A7B9";
+const NAVY_ARC = "#1A1A2E";
+const BLUSH_FACE = "#F4A7B9";
+const ROSE_DOT = "#E8728A";
 
 export default function AnimatedLogo({ size = 120, showText = false, text = "" }) {
   const s = size;
@@ -43,7 +43,7 @@ export default function AnimatedLogo({ size = 120, showText = false, text = "" }
           cx={cx}
           cy={cy}
           r={arcRadius}
-          stroke={PINK_ARC}
+          stroke={NAVY_ARC}
           strokeWidth={arcStroke}
           strokeLinecap="round"
           fill="none"
@@ -72,7 +72,7 @@ export default function AnimatedLogo({ size = 120, showText = false, text = "" }
           cy={faceCy}
           rx={faceRx}
           ry={faceRy}
-          fill={NAVY_FACE}
+          fill={BLUSH_FACE}
           initial={{ scale: 0, opacity: 0 }}
           animate={{
             scale: [0, 1, 1, 1, 0],
@@ -93,7 +93,7 @@ export default function AnimatedLogo({ size = 120, showText = false, text = "" }
           cx={dotCx}
           cy={dotCy}
           r={dotR}
-          fill={PINK_DOT}
+          fill={ROSE_DOT}
           initial={{ scale: 0, opacity: 0 }}
           animate={{
             scale: [0, 0, 1.3, 1, 1.15, 1, 0],

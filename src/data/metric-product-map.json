@@ -1,0 +1,14 @@
+{
+  "hydration": ["night_cream_539k", "tension_cream_513k", "eye_cream_515k", "body_lotion_514k"],
+  "fine_lines_wrinkles": ["tension_cream_513k", "night_cream_539k", "eye_cream_515k", "collagen_booster_076k"],
+  "firmness": ["tension_cream_513k", "collagen_booster_076k", "night_cream_539k"],
+  "uneven_skin_tone": ["niacinamide_serum_508k", "tension_cream_513k"],
+  "oily_skin": ["gelo_cleanser_511k", "niacinamide_serum_508k"],
+  "dark_spots": ["niacinamide_serum_508k", "tension_cream_513k"],
+  "eye_wrinkles": ["eye_cream_515k", "collagen_booster_076k"],
+  "crows_feet": ["eye_cream_515k", "collagen_booster_076k"],
+  "dark_circles": ["eye_cream_515k", "collagen_booster_076k"],
+  "radiance": ["niacinamide_serum_508k", "tension_cream_513k"],
+  "texture": ["niacinamide_serum_508k", "gelo_cleanser_511k", "night_cream_539k"],
+  "smoothness": ["night_cream_539k", "niacinamide_serum_508k"]
+}
