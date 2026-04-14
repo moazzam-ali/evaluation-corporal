@@ -96,7 +96,11 @@ THE 12 METRICS (you must include ALL of these, in this exact order):
 ${PRODUCT_CONTEXT}
 
 ADDITIONAL ANALYSIS (provide deeper insight):
-11. Write a "detailed_analysis" field: 3-5 paragraphs covering skin strengths, areas of concern, what you observe about potential lifestyle/environmental factors from the skin condition, and how different facial zones compare. Be specific, professional, and encouraging.
+11. Write an "insights" field: an array of exactly 4 objects, one for each category below. Each has a "category" (string), "title" (string), and "points" (array of 2-4 short bullet-point strings). The categories are:
+    - "strengths": Title the section positively (e.g. "Your Skin Strengths"). List what's going well — high-scoring metrics, healthy signs, compliments.
+    - "concerns": Title it constructively (e.g. "Areas to Focus On"). List the key problem areas — low-scoring metrics, visible issues.
+    - "lifestyle": Title it observationally (e.g. "Lifestyle Observations"). What you can infer about habits, sleep, hydration, sun exposure, stress from the skin's condition.
+    - "goals": Title it motivationally (e.g. "Based on Your Goals"). Connect the user's stated concerns and goals to specific advice and expected outcomes.
 12. Write a "tips" field: array of 3-5 specific, actionable tips personalised to this person's results. Include skincare habits, lifestyle changes, and routine advice. Each tip should be 1-2 sentences.
 13. Write a "routine_note" field: 1-2 sentences explaining how the recommended products should be used together — what goes in the morning vs evening routine.
 
@@ -120,12 +124,19 @@ REQUIRED JSON SCHEMA (follow this EXACTLY):
     }
   ],
   "summary": "<2-3 sentence overall assessment>",
-  "detailed_analysis": "<3-5 paragraphs of in-depth skin analysis>",
+  "insights": [
+    {
+      "category": "<strengths|concerns|lifestyle|goals>",
+      "title": "<section title>",
+      "points": ["<bullet 1>", "<bullet 2>", "<bullet 3>"]
+    }
+  ],
   "tips": ["<tip 1>", "<tip 2>", "<tip 3>"],
   "routine_note": "<1-2 sentences on how to combine the recommended products>"
 }
 
-The metrics array MUST contain exactly 12 objects, one for each metric ID listed above.`;
+The metrics array MUST contain exactly 12 objects, one for each metric ID listed above.
+The insights array MUST contain exactly 4 objects, one for each category: strengths, concerns, lifestyle, goals.`;
 }
 
 export { METRIC_IDS, PRODUCT_IDS };

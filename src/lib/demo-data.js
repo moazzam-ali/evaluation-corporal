@@ -109,8 +109,44 @@ export const DEMO_ANALYSIS = {
     ],
     summary:
       "Your skin is in good overall condition with strong firmness and minimal wrinkles for your age. The main areas to focus on are the under-eye area, which shows dark circles, and the T-zone, which has some oiliness and visible pores. A targeted eye cream paired with a brightening serum and gentle cleanser would significantly improve your scores.",
-    detailed_analysis:
-      "Your skin presents a healthy foundation with several notable strengths. Firmness and elasticity are excellent, scoring well above average — this suggests good collagen production and overall structural integrity. Fine lines and wrinkles are minimal, which is consistent with your age group and indicates that your skin is ageing gracefully.\n\nThe primary area of concern is the under-eye region. Dark circles scored significantly below the healthy threshold, which can be attributed to a combination of factors including genetics, sleep patterns, and potentially insufficient hydration in the periorbital area. This is the single biggest opportunity for visible improvement in your skin's appearance.\n\nYour T-zone shows moderate oiliness with visible pores, particularly around the nose and inner cheeks. This is characteristic of combination skin and is manageable with the right cleansing routine. The cheek area, by contrast, tends slightly toward dryness, reinforcing the combination skin type diagnosis.\n\nSkin radiance and tone could benefit from targeted brightening. While there are no significant dark spots or hyperpigmentation issues, the overall luminosity is subdued — likely influenced by the uneven moisture distribution across different facial zones. A niacinamide-based treatment would address both the tone unevenness and the pore visibility simultaneously.\n\nOverall, your skin is in a strong position. With a focused routine targeting the under-eye area, T-zone balance, and overall radiance, you could see meaningful improvements within 4-6 weeks.",
+    insights: [
+      {
+        category: "strengths",
+        title: "Your Skin Strengths",
+        points: [
+          "Excellent firmness and elasticity — suggests healthy collagen production and structural integrity.",
+          "Minimal fine lines and wrinkles, consistent with your age group — your skin is ageing gracefully.",
+          "No significant hyperpigmentation or dark spots — your base skin tone is even and healthy.",
+        ],
+      },
+      {
+        category: "concerns",
+        title: "Areas to Focus On",
+        points: [
+          "Dark circles under both eyes scored well below the healthy threshold — this is your biggest improvement opportunity.",
+          "T-zone oiliness with visible pores around the nose and inner cheeks, characteristic of combination skin.",
+          "Overall skin radiance is subdued — luminosity could be boosted with a targeted brightening routine.",
+        ],
+      },
+      {
+        category: "lifestyle",
+        title: "Lifestyle Observations",
+        points: [
+          "Under-eye darkness suggests possible sleep deficiency or high screen time before bed.",
+          "Hydration levels indicate you may not be drinking enough water throughout the day.",
+          "The uneven moisture distribution (oily T-zone, drier cheeks) points to environmental stress or inconsistent skincare habits.",
+        ],
+      },
+      {
+        category: "goals",
+        title: "Based on Your Goals",
+        points: [
+          "A targeted eye cream will address your most visible concern — expect noticeable improvement within 2-3 weeks of consistent use.",
+          "A niacinamide serum will simultaneously tackle pore visibility, tone unevenness, and radiance.",
+          "With a focused 4-step routine, you could see meaningful overall improvement within 4-6 weeks.",
+        ],
+      },
+    ],
     tips: [
       "Apply eye cream with your ring finger using gentle tapping motions — never pull or drag the delicate skin around the eyes.",
       "Keep your T-zone clean but avoid over-washing, which can trigger rebound oil production. Twice daily cleansing is ideal.",

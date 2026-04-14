@@ -3,7 +3,7 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-const SKIN_TYPE_OPTIONS = ["dry", "oily", "combination", "sensitive", "dont_know"];
+const SKIN_TYPE_OPTIONS = ["dry", "oily", "combination", "sensitive", "dehydrated", "dont_know"];
 const FEEL_GENERAL_OPTIONS = ["tight", "shiny", "comfortable", "sensitive_reactive", "dull", "dont_know"];
 const FEEL_END_DAY_OPTIONS = ["tight", "shiny", "comfortable", "irritated", "dull"];
 

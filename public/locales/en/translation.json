@@ -27,9 +27,10 @@
     "disclaimer": "This tool is intended only for cosmetic awareness purposes. Skin scores may vary based on applied makeup. Results are not a substitute for professional dermatological advice."
   },
   "landing": {
+    "tagline": "Your skin. Analyzed. Understood.",
     "hero_title": "AI-Powered Skin Analysis",
     "hero_subtitle": "Get a personalized skin health score and product recommendations in seconds",
-    "cta": "Analyze My Skin",
+    "cta": "Scan My Skin",
     "how_it_works": "How It Works",
     "step1_title": "Take a Photo",
     "step1_desc": "Capture a selfie or upload an existing photo of your face",
@@ -112,6 +113,7 @@
         "oily": "Oily",
         "combination": "Combination",
         "sensitive": "Sensitive",
+        "dehydrated": "Dehydrated",
         "dont_know": "I don't know"
       },
       "feel_general_label": "How does your skin feel most of the time?",
@@ -266,9 +268,9 @@
       },
       "budget_label": "What level of investment is comfortable for you to care for your skin each month?",
       "budget": {
-        "basic": "Basic",
-        "medium": "Medium",
-        "premium": "Premium"
+        "basic": "Basic (cleanser + serum ~ €100 approx)",
+        "medium": "Medium (cleanser, serum + eye cream or tension cream ~ €150/170 approx)",
+        "premium": "Premium (full HL/Skin line ~ €300 approx)"
       }
     },
     "step9": {

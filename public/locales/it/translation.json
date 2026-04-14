@@ -27,6 +27,7 @@
     "disclaimer": "Questo strumento è destinato esclusivamente a scopi di consapevolezza cosmetica. I punteggi della pelle possono variare in base al trucco applicato. I risultati non sostituiscono il consulto dermatologico professionale."
   },
   "landing": {
+    "tagline": "La tua pelle. Analizzata. Compresa.",
     "hero_title": "Analisi della Pelle con IA",
     "hero_subtitle": "Ottieni un punteggio personalizzato sulla salute della pelle e raccomandazioni sui prodotti in pochi secondi",
     "cta": "Analizza la Mia Pelle",
@@ -112,6 +113,7 @@
         "oily": "Grassa",
         "combination": "Mista",
         "sensitive": "Sensibile",
+        "dehydrated": "Disidratata",
         "dont_know": "Non lo so"
       },
       "feel_general_label": "Come si sente la tua pelle la maggior parte del tempo?",
@@ -266,9 +268,9 @@
       },
       "budget_label": "Quale livello di investimento è comodo per te per prenderti cura della tua pelle ogni mese?",
       "budget": {
-        "basic": "Base",
-        "medium": "Medio",
-        "premium": "Premium"
+        "basic": "Base (detergente + siero ~ 100€ circa)",
+        "medium": "Medio (detergente, siero + contorno occhi o crema tensore ~ 150/170€ circa)",
+        "premium": "Premium (tutta la linea HL/Skin ~ 300€ circa)"
       }
     },
     "step9": {
