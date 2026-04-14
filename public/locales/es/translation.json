@@ -27,6 +27,7 @@
     "disclaimer": "Esta herramienta está destinada únicamente para fines de concienciación cosmética. Las puntuaciones de la piel pueden variar según el maquillaje aplicado. Los resultados no sustituyen el consejo dermatológico profesional."
   },
   "landing": {
+    "tagline": "Tu piel. Analizada. Comprendida.",
     "hero_title": "Análisis de Piel con IA",
     "hero_subtitle": "Obtén una puntuación de salud de tu piel y recomendaciones de productos en segundos",
     "cta": "Analizar Mi Piel",
@@ -112,6 +113,7 @@
         "oily": "Grasa",
         "combination": "Mixta",
         "sensitive": "Sensible",
+        "dehydrated": "Deshidratada",
         "dont_know": "No lo sé"
       },
       "feel_general_label": "¿Cómo sientes tu piel la mayor parte del tiempo?",
@@ -266,9 +268,9 @@
       },
       "budget_label": "¿Qué nivel de inversión es cómodo para ti para cuidar tu piel cada mes?",
       "budget": {
-        "basic": "Básico",
-        "medium": "Medio",
-        "premium": "Premium"
+        "basic": "Básico (limpiador y sérum ~ 100€ aprox)",
+        "medium": "Medio (limpiador, sérum y contorno o crema tensora ~ 150/170€ aprox)",
+        "premium": "Premium (todos los de la nueva línea ~ 300€ aprox)"
       }
     },
     "step9": {

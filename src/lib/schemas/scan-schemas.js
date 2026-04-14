@@ -6,7 +6,7 @@ export const basicInfoSchema = z.object({
   surname: z.string().min(1, "Required"),
   email: z.string().email("Invalid email"),
   birthDate: z.string().min(1, "Required"),
-  phone: z.string().regex(/^\+?[0-9]{7,15}$/, "Invalid phone number"),
+  phone: z.string().regex(/^\+?[\d\s\-()]{6,20}$/, "Invalid phone number"),
   country: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
 });

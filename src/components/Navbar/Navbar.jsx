@@ -44,6 +44,9 @@ export default function Navbar() {
           <Link href="/scan" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             {t("nav.scan", "Scan")}
           </Link>
+          <Link href="/config" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            {t("nav.config", "Config")}
+          </Link>
 
           {/* Language selector */}
           <div className="relative">

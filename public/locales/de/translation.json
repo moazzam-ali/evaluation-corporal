@@ -27,9 +27,10 @@
     "disclaimer": "Dieses Tool dient ausschließlich der kosmetischen Sensibilisierung. Hautwerte können je nach aufgetragenem Make-up variieren. Die Ergebnisse ersetzen keine professionelle dermatologische Beratung."
   },
   "landing": {
+    "tagline": "Ihre Haut. Analysiert. Verstanden.",
     "hero_title": "KI-gestützte Hautanalyse",
     "hero_subtitle": "Erhalten Sie in Sekunden einen personalisierten Hautgesundheitswert und Produktempfehlungen",
-    "cta": "Meine Haut Analysieren",
+    "cta": "Meine Haut Scannen",
     "how_it_works": "So Funktioniert Es",
     "step1_title": "Foto Aufnehmen",
     "step1_desc": "Machen Sie ein Selfie oder laden Sie ein vorhandenes Foto Ihres Gesichts hoch",
@@ -112,6 +113,7 @@
         "oily": "Fettig",
         "combination": "Mischhaut",
         "sensitive": "Empfindlich",
+        "dehydrated": "Dehydriert",
         "dont_know": "Ich weiß es nicht"
       },
       "feel_general_label": "Wie fühlt sich Ihre Haut die meiste Zeit an?",
@@ -266,9 +268,9 @@
       },
       "budget_label": "Welches Investitionsniveau ist für Sie angenehm, um monatlich Ihre Haut zu pflegen?",
       "budget": {
-        "basic": "Basis",
-        "medium": "Mittel",
-        "premium": "Premium"
+        "basic": "Basis (Reiniger + Serum ~ 100€ ca.)",
+        "medium": "Mittel (Reiniger, Serum + Augencreme oder Straffungscreme ~ 150/170€ ca.)",
+        "premium": "Premium (komplette HL/Skin Linie ~ 300€ ca.)"
       }
     },
     "step9": {

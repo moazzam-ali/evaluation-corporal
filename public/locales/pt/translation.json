@@ -27,6 +27,7 @@
     "disclaimer": "Esta ferramenta destina-se apenas a fins de conscientização cosmética. As pontuações da pele podem variar com base na maquiagem aplicada. Os resultados não substituem o aconselhamento dermatológico profissional."
   },
   "landing": {
+    "tagline": "Sua pele. Analisada. Compreendida.",
     "hero_title": "Análise de Pele com IA",
     "hero_subtitle": "Obtenha uma pontuação personalizada de saúde da pele e recomendações de produtos em segundos",
     "cta": "Analisar Minha Pele",
@@ -112,6 +113,7 @@
         "oily": "Oleosa",
         "combination": "Mista",
         "sensitive": "Sensível",
+        "dehydrated": "Desidratada",
         "dont_know": "Não sei"
       },
       "feel_general_label": "Como sua pele se sente na maior parte do tempo?",
@@ -266,9 +268,9 @@
       },
       "budget_label": "Qual nível de investimento é confortável para você cuidar da sua pele a cada mês?",
       "budget": {
-        "basic": "Básico",
-        "medium": "Médio",
-        "premium": "Premium"
+        "basic": "Básico (limpador + sérum ~ 100€ aprox)",
+        "medium": "Médio (limpador, sérum + contorno olhos ou creme tensor ~ 150/170€ aprox)",
+        "premium": "Premium (toda a linha HL/Skin ~ 300€ aprox)"
       }
     },
     "step9": {

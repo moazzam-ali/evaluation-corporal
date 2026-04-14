@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { METRIC_ICONS } from "@/lib/metric-icons";
 
 function getStatusColor(status) {
   switch (status) {
@@ -17,12 +18,14 @@ function getStatusColor(status) {
   }
 }
 
-export default function ScoreCircle({ score, status, label, insight, description, delay = 0 }) {
+export default function ScoreCircle({ metricId, score, status, label, insight, description, delay = 0 }) {
   const [expanded, setExpanded] = useState(false);
   const { stroke, bg, text } = getStatusColor(status);
   const radius = 36;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (score / 100) * circumference;
+
+  const Icon = METRIC_ICONS[metricId];
 
   return (
     <motion.div
@@ -32,8 +35,16 @@ export default function ScoreCircle({ score, status, label, insight, description
       className={`flex flex-col items-center rounded-xl border p-4 shadow-sm ${bg} transition-all duration-200 hover:shadow-md cursor-pointer ${expanded ? "border-primary ring-1 ring-primary/20" : ""}`}
       onClick={() => setExpanded(!expanded)}
     >
+      {/* Metric icon */}
+      {Icon && (
+        <div className="mb-2">
+          <Icon className="h-4 w-4 text-muted-foreground" />
+        </div>
+      )}
+
+      {/* Score circle */}
       <div className="relative mb-3">
-        <svg width="88" height="88" viewBox="0 0 88 88">
+        <svg width="80" height="80" viewBox="0 0 88 88">
           <circle cx="44" cy="44" r={radius} fill="none" stroke="hsl(340, 15%, 90%)" strokeWidth="6" />
           <motion.circle
             cx="44"
@@ -61,9 +72,10 @@ export default function ScoreCircle({ score, status, label, insight, description
           </motion.span>
         </div>
       </div>
-      <p className="mb-1 text-center text-sm font-semibold line-clamp-1">{label}</p>
+
+      <p className="mb-1 text-center text-xs font-semibold line-clamp-1">{label}</p>
       {insight && (
-        <p className="text-center text-xs text-muted-foreground line-clamp-2">{insight}</p>
+        <p className="text-center text-[11px] leading-snug text-muted-foreground line-clamp-2">{insight}</p>
       )}
 
       {/* Expand/collapse indicator */}
@@ -81,7 +93,7 @@ export default function ScoreCircle({ score, status, label, insight, description
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="mt-2 overflow-hidden text-center text-xs text-muted-foreground border-t pt-2"
+            className="mt-2 overflow-hidden text-center text-[11px] leading-snug text-muted-foreground border-t pt-2"
           >
             {description}
           </motion.p>

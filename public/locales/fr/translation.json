@@ -27,6 +27,7 @@
     "disclaimer": "Cet outil est destiné uniquement à des fins de sensibilisation cosmétique. Les scores de peau peuvent varier en fonction du maquillage appliqué. Les résultats ne remplacent pas les conseils dermatologiques professionnels."
   },
   "landing": {
+    "tagline": "Votre peau. Analysée. Comprise.",
     "hero_title": "Analyse de Peau par IA",
     "hero_subtitle": "Obtenez un score de santé cutanée personnalisé et des recommandations de produits en quelques secondes",
     "cta": "Analyser Ma Peau",
@@ -112,6 +113,7 @@
         "oily": "Grasse",
         "combination": "Mixte",
         "sensitive": "Sensible",
+        "dehydrated": "Déshydratée",
         "dont_know": "Je ne sais pas"
       },
       "feel_general_label": "Comment votre peau se sent-elle la plupart du temps ?",
@@ -266,9 +268,9 @@
       },
       "budget_label": "Quel niveau d'investissement est confortable pour vous pour prendre soin de votre peau chaque mois ?",
       "budget": {
-        "basic": "Basique",
-        "medium": "Moyen",
-        "premium": "Premium"
+        "basic": "Basique (nettoyant + sérum ~ 100€ env.)",
+        "medium": "Moyen (nettoyant, sérum + contour yeux ou crème tenseur ~ 150/170€ env.)",
+        "premium": "Premium (toute la gamme HL/Skin ~ 300€ env.)"
       }
     },
     "step9": {

@@ -27,9 +27,10 @@
     "disclaimer": "Bu araç yalnızca kozmetik farkındalık amaçlıdır. Cilt puanları uygulanan makyaja göre değişiklik gösterebilir. Sonuçlar profesyonel dermatolojik tavsiyenin yerini tutmaz."
   },
   "landing": {
+    "tagline": "Cildiniz. Analiz edildi. Anlaşıldı.",
     "hero_title": "Yapay Zeka Destekli Cilt Analizi",
     "hero_subtitle": "Saniyeler içinde kişiselleştirilmiş cilt sağlığı puanı ve ürün önerileri alın",
-    "cta": "Cildimi Analiz Et",
+    "cta": "Cildimi Tara",
     "how_it_works": "Nasıl Çalışır",
     "step1_title": "Fotoğraf Çekin",
     "step1_desc": "Bir selfie çekin veya mevcut bir yüz fotoğrafınızı yükleyin",
@@ -112,6 +113,7 @@
         "oily": "Yağlı",
         "combination": "Karma",
         "sensitive": "Hassas",
+        "dehydrated": "Susuz (Dehidrate)",
         "dont_know": "Bilmiyorum"
       },
       "feel_general_label": "Cildiniz çoğu zaman nasıl hissediyor?",
@@ -266,9 +268,9 @@
       },
       "budget_label": "Her ay cildinize bakım için hangi yatırım seviyesi sizin için uygundur?",
       "budget": {
-        "basic": "Temel",
-        "medium": "Orta",
-        "premium": "Premium"
+        "basic": "Temel (temizleyici + serum ~ 100€ yaklaşık)",
+        "medium": "Orta (temizleyici, serum + göz kremi veya sıkılaştırıcı krem ~ 150/170€ yaklaşık)",
+        "premium": "Premium (tüm HL/Skin serisi ~ 300€ yaklaşık)"
       }
     },
     "step9": {

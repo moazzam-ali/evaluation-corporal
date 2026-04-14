@@ -86,3 +86,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.5);
 }
+
+/* Dotted background drift animation */
+@keyframes dotDrift {
+  from { background-position: 0 0; }
+  to { background-position: 28px 28px; }
+}
