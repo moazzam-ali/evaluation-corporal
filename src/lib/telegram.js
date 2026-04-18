@@ -83,19 +83,18 @@ async function sendTelegramMessage(botApiKey, chatID, message, inlineKeyboards, 
  */
 export async function sendAnalysisToTelegram({
   chatIDs,
-  botIndex,
+  bot,
   analysisData,
   translations,
   analysisId,
   language,
 }) {
-  // Fetch bot config from DB
-  const botResult = await query("SELECT bot_api_key, language FROM bots WHERE id = $1", [botIndex]);
-  if (botResult.rows.length === 0) {
-    throw new Error(`Bot with index ${botIndex} not found`);
+  if (!bot || !bot.api_key) {
+    throw new Error("Bot configuration missing");
   }
 
-  const { bot_api_key: botApiKey, language: defaultLanguage } = botResult.rows[0];
+  const botApiKey = bot.api_key;
+  const defaultLanguage = bot.language;
   const t = (path) => getTranslation(translations, path);
 
   const { formData, results } = analysisData;

@@ -8,7 +8,6 @@ import Link from "next/link";
 import { ArrowLeft, RefreshCw, Lightbulb, CalendarClock } from "lucide-react";
 
 import useAnalysisStore from "@/store/analysisStore";
-import { getProductsForRecommendations } from "@/lib/products";
 import { INSIGHT_CATEGORIES } from "@/lib/metric-icons";
 import { Button } from "@/components/ui/button";
 import Loader from "@/components/Loader/Loader";
@@ -26,7 +25,7 @@ export default function ResultsPage() {
     overallScore,
     skinType,
     metrics,
-    recommendations,
+    enrichedProducts,
     summary,
     insights,
     tips,
@@ -58,7 +57,7 @@ export default function ResultsPage() {
     );
   }
 
-  const products = getProductsForRecommendations(recommendations);
+  const products = enrichedProducts || [];
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">

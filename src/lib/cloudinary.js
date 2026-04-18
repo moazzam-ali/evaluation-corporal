@@ -1,4 +1,4 @@
-export async function uploadToCloudinary(imageBuffer, filename) {
+export async function uploadToCloudinary(imageBuffer, filename, { folder = "skin-analysis" } = {}) {
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
   const apiKey = process.env.CLOUDINARY_API_KEY;
@@ -6,16 +6,16 @@ export async function uploadToCloudinary(imageBuffer, filename) {
 
   const timestamp = Math.round(new Date().getTime() / 1000);
 
-  // Create signature for signed upload
+  // Create signature for signed upload (params MUST be alphabetical)
   const { createHash } = await import("crypto");
-  const signatureString = `folder=skin-analysis&invalidate=true&timestamp=${timestamp}&upload_preset=${uploadPreset}${apiSecret}`;
+  const signatureString = `folder=${folder}&invalidate=true&timestamp=${timestamp}&upload_preset=${uploadPreset}${apiSecret}`;
   const signature = createHash("sha1").update(signatureString).digest("hex");
 
   const formData = new FormData();
   const blob = new Blob([imageBuffer], { type: "image/jpeg" });
   formData.append("file", blob, filename || "skin-photo.jpg");
   formData.append("upload_preset", uploadPreset);
-  formData.append("folder", "skin-analysis");
+  formData.append("folder", folder);
   formData.append("invalidate", "true");
   formData.append("timestamp", timestamp.toString());
   formData.append("api_key", apiKey);
