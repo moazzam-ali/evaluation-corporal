@@ -5,6 +5,8 @@ import getOpenAI from "@/lib/openai";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { query } from "@/lib/db";
 import { getPromptForLanguage, METRIC_IDS } from "@/lib/prompts";
+import { enrichRecommendations } from "@/lib/products";
+import { resolveBot } from "@/lib/bots";
 import { sendAnalysisToTelegram } from "@/lib/telegram";
 import { indexDocumentsInAppSearch, buildElasticDocuments } from "@/lib/elastic";
 import { readFile } from "fs/promises";
@@ -372,8 +374,19 @@ function attemptFix(parsed) {
 export async function POST(request) {
   const startTime = Date.now();
 
+  // Step tracker — each step records its own status
+  const steps = {
+    cloudinary:   { status: "pending", error: null },
+    ai_analysis:  { status: "pending", error: null },
+    products:     { status: "pending", error: null },
+    database:     { status: "pending", error: null },
+    translations: { status: "pending", error: null },
+    telegram:     { status: "pending", error: null },
+    elasticsearch:{ status: "pending", error: null },
+  };
+
   try {
-    // Parse form data
+    // ── Parse & validate request (blocking — no point continuing if bad) ──
     let formDataReq;
     try {
       formDataReq = await request.formData();
@@ -407,10 +420,8 @@ export async function POST(request) {
     const botIndex = formDataReq.get("botIndex") || "1";
     const lng = SUPPORTED_LANGUAGES.includes(formDataReq.get("lng")) ? formDataReq.get("lng") : "en";
 
-    // Generate unique ID
     const id = nanoid(22);
 
-    // Validate image
     const imageBuffer = Buffer.from(await image.arrayBuffer());
     const imageValidation = validateImageBuffer(imageBuffer);
     if (!imageValidation.valid) {
@@ -419,72 +430,138 @@ export async function POST(request) {
 
     console.log(`[analyze] ID: ${id}, image: ${imageBuffer.length} bytes (${imageValidation.mime}), lang: ${lng}`);
 
-    // Upload to Cloudinary or fallback to base64
+    // ── Step 1: Upload to Cloudinary ──
     let imageUrl;
     try {
       const cloudResult = await uploadToCloudinary(imageBuffer, `skin-${id}.jpg`);
       imageUrl = cloudResult.url;
-      console.log(`[analyze] Cloudinary upload OK: ${imageUrl}`);
+      steps.cloudinary.status = "success";
+      steps.cloudinary.url = imageUrl;
+      console.log(`[analyze] Step 1/7 Cloudinary OK: ${imageUrl}`);
     } catch (err) {
-      console.warn(`[analyze] Cloudinary skipped: ${err.message}`);
+      steps.cloudinary.status = "failed";
+      steps.cloudinary.error = err.message;
+      // Fallback to base64 so analysis can still proceed
       imageUrl = `data:${imageValidation.mime};base64,${imageBuffer.toString("base64")}`;
+      console.warn(`[analyze] Step 1/7 Cloudinary failed (using base64 fallback): ${err.message}`);
     }
 
-    // Call OpenAI with retry
+    // ── Step 2: AI Analysis (blocking — the core of the flow) ──
     const aiResult = await callOpenAIWithRetry(imageUrl, formData, lng);
 
     if (!aiResult.success) {
+      steps.ai_analysis.status = "failed";
+      steps.ai_analysis.error = aiResult.error;
+      console.error(`[analyze] Step 2/7 AI analysis failed: ${aiResult.error}`);
       const status = aiResult.retryable ? 502 : 400;
-      return NextResponse.json({ error: aiResult.error }, { status });
+      return NextResponse.json({
+        error: aiResult.error,
+        steps,
+        duration: Date.now() - startTime,
+      }, { status });
     }
 
     const { results } = aiResult;
-    console.log(`[analyze] Success in ${Date.now() - startTime}ms. Score: ${results.overall_score}, metrics: ${results.metrics.length}`);
+    steps.ai_analysis.status = "success";
+    steps.ai_analysis.score = results.overall_score;
+    console.log(`[analyze] Step 2/7 AI OK in ${Date.now() - startTime}ms — score: ${results.overall_score}`);
 
-    // ------ Step 4: Store in PostgreSQL ------
-    if (process.env.DATABASE_URL) {
+    // ── Step 3: Enrich product recommendations ──
+    try {
+      const enriched = await enrichRecommendations(results.recommendations, lng);
+      results.enriched_products = enriched;
+      steps.products.status = "success";
+      steps.products.count = enriched.length;
+      console.log(`[analyze] Step 3/7 Products OK: ${enriched.length} enriched`);
+    } catch (err) {
+      steps.products.status = "failed";
+      steps.products.error = err.message;
+      results.enriched_products = [];
+      console.warn(`[analyze] Step 3/7 Products failed: ${err.message}`);
+    }
+
+    // ── Step 4: Save to PostgreSQL ──
+    if (!process.env.DATABASE_URL) {
+      steps.database.status = "skipped";
+      steps.database.error = "DATABASE_URL not configured";
+      console.warn(`[analyze] Step 4/7 Database skipped: no DATABASE_URL`);
+    } else {
       try {
         await query(
           "INSERT INTO analyses (id, form_data, results, image_url, language, created_at) VALUES ($1, $2, $3, $4, $5, NOW())",
           [id, JSON.stringify(formData), JSON.stringify(results), imageUrl.startsWith("data:") ? null : imageUrl, lng]
         );
-        console.log(`[analyze] Stored in DB: ${id}`);
-      } catch (dbErr) {
-        console.error(`[analyze] DB insert failed: ${dbErr.message}`);
+        steps.database.status = "success";
+        console.log(`[analyze] Step 4/7 Database OK: ${id}`);
+      } catch (err) {
+        steps.database.status = "failed";
+        steps.database.error = err.message;
+        console.error(`[analyze] Step 4/7 Database failed: ${err.message}`);
       }
     }
 
-    // ------ Step 5: Load backend translations ------
+    // ── Step 5: Load backend translations ──
     let translations = {};
     try {
       const translationsPath = join(process.cwd(), "public", "backend-locales", lng, "translation.json");
       const file = await readFile(translationsPath, "utf-8");
       translations = JSON.parse(file);
+      steps.translations.status = "success";
+      console.log(`[analyze] Step 5/7 Translations OK: ${lng}`);
     } catch (err) {
-      console.warn(`[analyze] Backend translations not loaded for ${lng}: ${err.message}`);
+      steps.translations.status = "failed";
+      steps.translations.error = err.message;
+      console.warn(`[analyze] Step 5/7 Translations failed for ${lng}: ${err.message}`);
     }
 
-    // ------ Step 6: Send to Telegram (same pattern as nutritional project) ------
+    // ── Step 6: Send to Telegram ──
     let telegramResult = { telegramStatus: "skipped", results: [], failedChats: [], answersText: "" };
-    if (chatIDs.length > 0) {
+    if (chatIDs.length === 0) {
+      steps.telegram.status = "skipped";
+      steps.telegram.error = "No chat IDs provided";
+    } else {
       try {
-        telegramResult = await sendAnalysisToTelegram({
-          chatIDs,
-          botIndex: parseInt(botIndex),
-          analysisData: { formData, results },
-          translations,
-          analysisId: id,
-          language: lng,
-        });
+        const bot = await resolveBot(botIndex ? parseInt(botIndex) : null, lng);
+        if (!bot) {
+          steps.telegram.status = "failed";
+          steps.telegram.error = `No bot found for botIndex=${botIndex} or language=${lng}`;
+          console.warn(`[analyze] Step 6/7 Telegram: ${steps.telegram.error}`);
+        } else {
+          telegramResult = await sendAnalysisToTelegram({
+            chatIDs,
+            bot,
+            analysisData: { formData, results },
+            translations,
+            analysisId: id,
+            language: lng,
+          });
+
+          if (telegramResult.failedChats.length === 0) {
+            steps.telegram.status = "success";
+            steps.telegram.sentTo = chatIDs.length;
+          } else if (telegramResult.failedChats.length < chatIDs.length) {
+            steps.telegram.status = "partial";
+            steps.telegram.sentTo = chatIDs.length - telegramResult.failedChats.length;
+            steps.telegram.failedChats = telegramResult.failedChats;
+          } else {
+            steps.telegram.status = "failed";
+            steps.telegram.failedChats = telegramResult.failedChats;
+          }
+          console.log(`[analyze] Step 6/7 Telegram ${steps.telegram.status}: ${chatIDs.length} chats, ${telegramResult.failedChats.length} failed`);
+        }
       } catch (err) {
-        console.error(`[analyze] Telegram failed: ${err.message}`);
-        telegramResult.telegramStatus = "failed";
+        steps.telegram.status = "failed";
+        steps.telegram.error = err.message;
+        console.error(`[analyze] Step 6/7 Telegram failed: ${err.message}`);
       }
     }
 
-    // ------ Step 7: Index in Elasticsearch App Search ------
+    // ── Step 7: Index in Elasticsearch App Search ──
     let elasticDocIds = [];
-    if (accountIDs.length > 0 || contactIDs.length > 0) {
+    if (accountIDs.length === 0 && contactIDs.length === 0) {
+      steps.elasticsearch.status = "skipped";
+      steps.elasticsearch.error = "No account/contact IDs provided";
+    } else {
       try {
         const documents = buildElasticDocuments({
           formData,
@@ -497,37 +574,58 @@ export async function POST(request) {
         });
 
         if (documents.length > 0) {
-          console.log(`[analyze] Indexing ${documents.length} documents in Elastic`);
           const ecResult = await indexDocumentsInAppSearch(documents);
           elasticDocIds = ecResult.map((r) => r.id || null);
+          steps.elasticsearch.status = "success";
+          steps.elasticsearch.indexed = elasticDocIds.length;
+          console.log(`[analyze] Step 7/7 Elasticsearch OK: ${elasticDocIds.length} docs`);
+        } else {
+          steps.elasticsearch.status = "skipped";
+          steps.elasticsearch.error = "No documents to index";
         }
       } catch (err) {
-        console.error(`[analyze] Elasticsearch indexing failed: ${err.message}`);
+        steps.elasticsearch.status = "failed";
+        steps.elasticsearch.error = err.message;
+        console.error(`[analyze] Step 7/7 Elasticsearch failed: ${err.message}`);
       }
     }
 
-    // ------ Build response (same structure as nutritional project) ------
-    const responseData = {
-      id,
-      elasticDocIds,
-      status: "success",
-      results,
-      telegramStatus: telegramResult.telegramStatus,
-    };
+    // ── Build response with full step report ──
+    const failedSteps = Object.entries(steps).filter(([, s]) => s.status === "failed");
+    const succeededSteps = Object.entries(steps).filter(([, s]) => s.status === "success");
+    const skippedSteps = Object.entries(steps).filter(([, s]) => s.status === "skipped");
 
-    if (telegramResult.failedChats.length > 0) {
-      responseData.status = telegramResult.telegramStatus === "failed" ? "partial_success" : "partial_success";
-      responseData.failedChats = telegramResult.failedChats;
-      responseData.message = "Analysis complete, but some Telegram notifications failed";
+    let overallStatus;
+    if (failedSteps.length === 0) {
+      overallStatus = "success";
+    } else if (succeededSteps.length > 0) {
+      overallStatus = "partial_success";
     } else {
-      responseData.message = "Analysis complete and all notifications sent";
+      overallStatus = "failed";
     }
 
-    return NextResponse.json(responseData);
+    const duration = Date.now() - startTime;
+    console.log(`[analyze] Done in ${duration}ms — ${overallStatus}: ${succeededSteps.length} ok, ${failedSteps.length} failed, ${skippedSteps.length} skipped`);
+
+    return NextResponse.json({
+      id,
+      status: overallStatus,
+      results,
+      steps,
+      elasticDocIds,
+      duration,
+      message: failedSteps.length > 0
+        ? `Analysis complete. Failed: ${failedSteps.map(([k]) => k).join(", ")}`
+        : "Analysis complete — all steps succeeded",
+    });
   } catch (error) {
     console.error(`[analyze] Fatal: ${error.message}`, error.stack);
     return NextResponse.json(
-      { error: "An unexpected error occurred. Please try again." },
+      {
+        error: "An unexpected error occurred. Please try again.",
+        steps,
+        duration: Date.now() - startTime,
+      },
       { status: 500 }
     );
   }

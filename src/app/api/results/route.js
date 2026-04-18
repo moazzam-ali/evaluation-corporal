@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
 import { DEMO_ANALYSIS } from "@/lib/demo-data";
+import { enrichRecommendations } from "@/lib/products";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -10,9 +11,21 @@ export async function GET(request) {
     return NextResponse.json({ error: "Missing analysis ID" }, { status: 400 });
   }
 
-  // Return demo data without hitting the database
+  // Demo data — enrich with current DB products
   if (id === "demo") {
-    return NextResponse.json({ data: DEMO_ANALYSIS });
+    const data = { ...DEMO_ANALYSIS };
+    try {
+      data.results = {
+        ...data.results,
+        enriched_products: await enrichRecommendations(
+          data.results.recommendations,
+          data.language || "en"
+        ),
+      };
+    } catch (err) {
+      console.warn("[results] Demo enrichment failed:", err.message);
+    }
+    return NextResponse.json({ data });
   }
 
   try {
@@ -26,11 +39,26 @@ export async function GET(request) {
     }
 
     const row = result.rows[0];
+    const results = typeof row.results === "string" ? JSON.parse(row.results) : row.results;
+
+    // If stored analysis doesn't have enriched_products yet, enrich on the fly
+    if (!results.enriched_products && results.recommendations) {
+      try {
+        results.enriched_products = await enrichRecommendations(
+          results.recommendations,
+          row.language || "en"
+        );
+      } catch (err) {
+        console.warn("[results] Enrichment failed:", err.message);
+        results.enriched_products = [];
+      }
+    }
+
     return NextResponse.json({
       data: {
         id: row.id,
         formData: typeof row.form_data === "string" ? JSON.parse(row.form_data) : row.form_data,
-        results: typeof row.results === "string" ? JSON.parse(row.results) : row.results,
+        results,
         imageUrl: row.image_url,
         language: row.language,
         createdAt: row.created_at,
