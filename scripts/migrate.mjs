@@ -121,7 +121,7 @@ const BOTS = [
   [10, 'th', 'coach_hbl_th_bot',       '5708046834:AAFyiW_83ADWmp_gHfBoRg_c0uW6yq2FDBA'],
   [11, 'mx', 'coach_hbl_mx_bot',       '1970661883:AAEN2yAs1xRxYcX94VX8qFbqym-R_0uFVfg'],
   [12, 'in', 'coach_hbl_in_bot',       '1978279063:AAFWrLQ5U5dx8nrBCQ5pftx1TRIUCka07v4'],
-  [14, 'es', 'hblprecios_bot',         '1290427990:AAE7Q_1-_19QeLacUkBZfCuqHTbjZ8z82Ow'],
+  [14, 'es', 'hlskin_bot',              '8296673752:AAE2UBOrRu3YoIAn5THG0Jb3KDm_LiEjBd0'],
   [20, 'es', 'coach_hatipikal_bot',    '6630724535:AAE98vXCdDYhD8noyqCkYWfeMFFEJaPjhSk'],
 ];
 

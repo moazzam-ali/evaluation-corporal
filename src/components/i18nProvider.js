@@ -6,10 +6,13 @@ import i18n from "@/i18n";
 import Loader from "@/components/Loader/Loader";
 
 export default function I18nProvider({ children }) {
-  const [isReady, setIsReady] = useState(() => i18n.isInitialized);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (isReady) return;
+    if (i18n.isInitialized) {
+      setIsReady(true);
+      return;
+    }
 
     const timeout = setTimeout(() => setIsReady(true), 10000);
 
@@ -24,7 +27,7 @@ export default function I18nProvider({ children }) {
       clearTimeout(timeout);
       i18n.off("initialized", onInitialized);
     };
-  }, [isReady]);
+  }, []);
 
   if (!isReady) return <Loader />;
 
