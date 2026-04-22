@@ -10,7 +10,6 @@ const PRODUCT_OPTIONS = [
   "cleanser", "toner", "serum", "day_cream", "sunscreen",
   "eye_contour", "night_cream", "mask", "exfoliant", "other",
 ];
-const RETINOID_OPTIONS = ["yes", "no", "dont_know"];
 
 export default function Step4CurrentRoutine({ form, t }) {
   const { register, watch, setValue, formState: { errors } } = form;
@@ -83,19 +82,6 @@ export default function Step4CurrentRoutine({ form, t }) {
         <Input {...register("supplements")} placeholder={t("scan.step4.supplements_placeholder", "e.g., Collagen, Vitamin C")} />
       </div>
 
-      {/* Retinoid preference */}
-      <div className="space-y-3">
-        <Label>{t("scan.step4.retinoid_label", "Do you prefer to avoid products with vitamin A or retinoids?")}</Label>
-        <RadioGroup value={watch("retinoidPreference")} onValueChange={(v) => setValue("retinoidPreference", v, { shouldValidate: true })} className="flex gap-3">
-          {RETINOID_OPTIONS.map((key) => (
-            <label key={key} className={`flex items-center gap-2 rounded-full border px-4 py-2 cursor-pointer text-sm transition-colors ${watch("retinoidPreference") === key ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}>
-              <RadioGroupItem value={key} />
-              {t(`scan.step4.retinoid.${key}`, key)}
-            </label>
-          ))}
-        </RadioGroup>
-        {errors.retinoidPreference && <p className="text-xs text-destructive">{errors.retinoidPreference.message}</p>}
-      </div>
     </div>
   );
 }

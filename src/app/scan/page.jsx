@@ -80,11 +80,13 @@ function ScanPageInner() {
     }
     setDirection(1);
     setCurrentStep((prev) => Math.min(prev + 1, TOTAL_STEPS - 1));
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePrev = () => {
     setDirection(-1);
     setCurrentStep((prev) => Math.max(prev - 1, 0));
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Final submission

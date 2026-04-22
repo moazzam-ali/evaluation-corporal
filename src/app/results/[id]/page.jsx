@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, RefreshCw, Lightbulb, CalendarClock } from "lucide-react";
+import { ArrowLeft, RefreshCw, Lightbulb, CalendarClock, ClipboardList } from "lucide-react";
 
 import useAnalysisStore from "@/store/analysisStore";
 import { INSIGHT_CATEGORIES } from "@/lib/metric-icons";
@@ -14,10 +14,12 @@ import Loader from "@/components/Loader/Loader";
 import ScorePanel from "@/components/ScorePanel/ScorePanel";
 import ScoreCircle from "@/components/ScoreCircle/ScoreCircle";
 import ProductCard from "@/components/ProductCard/ProductCard";
+import FormDataModal from "@/components/FormDataModal/FormDataModal";
 
 export default function ResultsPage() {
   const { id } = useParams();
   const { t } = useTranslation();
+  const [formDataOpen, setFormDataOpen] = useState(false);
   const {
     fetchAnalysis,
     isLoading,
@@ -31,6 +33,7 @@ export default function ResultsPage() {
     tips,
     routineNote,
     imageUrl,
+    formData,
   } = useAnalysisStore();
 
   useEffect(() => {
@@ -232,6 +235,12 @@ export default function ResultsPage() {
         transition={{ delay: 0.8 }}
         className="flex flex-wrap justify-center gap-4"
       >
+        {formData && (
+          <Button variant="outline" className="gap-2" onClick={() => setFormDataOpen(true)}>
+            <ClipboardList className="h-4 w-4" />
+            {t("results.view_responses", "View My Responses")}
+          </Button>
+        )}
         <Link href="/scan">
           <Button variant="outline" className="gap-2">
             <RefreshCw className="h-4 w-4" />
@@ -239,6 +248,8 @@ export default function ResultsPage() {
           </Button>
         </Link>
       </motion.div>
+
+      <FormDataModal open={formDataOpen} onOpenChange={setFormDataOpen} formData={formData} />
     </div>
   );
 }

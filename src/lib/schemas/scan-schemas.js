@@ -34,7 +34,6 @@ export const currentRoutineSchema = z.object({
   essentialProduct: z.string().optional().default(""),
   missingProduct: z.string().optional().default(""),
   supplements: z.string().optional().default(""),
-  retinoidPreference: z.string().min(1, "Required"),
 });
 
 // Step 5: Sensitivity
@@ -97,7 +96,7 @@ export const STEP_FIELD_NAMES = [
   ["name", "surname", "email", "birthDate", "phone", "country", "city"],
   ["skinConcerns", "skinConcernsOther", "priorityConcern", "improvementZones"],
   ["skinType", "skinFeelGeneral", "skinFeelEndOfDay"],
-  ["routineFrequency", "productsUsed", "productsUsedOther", "essentialProduct", "missingProduct", "supplements", "retinoidPreference"],
+  ["routineFrequency", "productsUsed", "productsUsedOther", "essentialProduct", "missingProduct", "supplements"],
   ["reactionLevel", "recentSigns"],
   ["sunscreenUse", "makeupFrequency", "sleepHours", "stressImpact", "waterIntake"],
   ["treatmentHistory", "frustrations"],
@@ -127,7 +126,6 @@ export const DEFAULT_VALUES = {
   essentialProduct: "",
   missingProduct: "",
   supplements: "",
-  retinoidPreference: "",
   reactionLevel: "",
   recentSigns: [],
   sunscreenUse: "",
