@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "header": "*Nuova Analisi HL/Pelle*",
-    "member_details": "*Dettagli del Membro*\n\nNome: {name} {surname}\nEmail: {email}\nTelefono: {phone}\nEt\u00e0: {age}\nTipo di Pelle: {skin_type}",
-    "analysis_results": "*Risultati dell'Analisi*\n\nPunteggio Complessivo: {overall_score}%\nTipo di Pelle: {skin_type_result}\n\n*Problematiche Principali:*\n{concerns}\n\n*Riepilogo:*\n{summary}",
-    "analysis_link": "*Visualizza Rapporto Completo:*\nhttps://skin-doc.vercel.app/results/{id}?l={lng}",
+    "member_details": "*Beauty & Glow AI — Nuova Scansione*\n━━━━━━━━━━━━━━━━━━━━\n\n*Profilo Cliente*\n\nNome: {name} {surname}\nEmail: {email}\nTelefono: {phone}\nData di Nascita: {birthDate}\nLocalità: {city}, {country}",
+    "questionnaire_details": "*Questionario Pelle*\n━━━━━━━━━━━━━━━━━━━━\n\n*Obiettivi e Preoccupazioni*\nPreoccupazioni: {skinConcerns}\nPriorità: {priorityConcern}\nZone: {improvementZones}\n\n*Profilo Pelle*\nTipo: {skinType}\nSensazione: {skinFeelGeneral}\nFine Giornata: {skinFeelEndOfDay}\n\n*Routine Attuale*\nFrequenza: {routineFrequency}\nProdotti: {productsUsed}\nEssenziale: {essentialProduct}\nMancante: {missingProduct}\nIntegratori: {supplements}\n\n*Sensibilità*\nReazioni: {reactionLevel}\nSegni: {recentSigns}\n\n*Stile di Vita*\nProtezione Solare: {sunscreenUse}\nTrucco: {makeupFrequency}\nSonno: {sleepHours}\nStress: {stressImpact}\nAcqua: {waterIntake}\n\n*Esperienza e Obiettivi*\nStorico: {treatmentHistory}\nFrustrazioni: {frustrations}\nCerca: {lookingFor}\nVuole Raccomandazione: {wantRoutineRecommendation}\nBudget: {budgetLevel}",
+    "analysis_results": "*Risultati dell'Analisi*\n━━━━━━━━━━━━━━━━━━━━\n\nPunteggio Complessivo: *{overall_score}%*\nTipo di Pelle: *{skin_type_result}*\n\n*Dettaglio Metriche:*\n{metrics}\n\n*Riepilogo:*\n{summary}",
+    "analysis_link": "*Visualizza Rapporto Completo*\n━━━━━━━━━━━━━━━━━━━━\nhttps://skin-doc.vercel.app/results/{id}?l={lng}",
     "buttons": {
       "sms": "Invia SMS",
       "call": "Chiama",
@@ -12,17 +12,53 @@
     },
     "form_fields": {
       "skin_types": {
-        "oily": "Grassa",
-        "dry": "Secca",
-        "combination": "Mista",
-        "normal": "Normale",
-        "sensitive": "Sensibile"
+        "oily": "Grassa", "dry": "Secca", "combination": "Mista", "normal": "Normale", "sensitive": "Sensibile", "dehydrated": "Disidratata", "dont_know": "Sconosciuto"
       },
       "status": {
-        "good": "Buono",
-        "normal": "Normale",
-        "needs_attention": "Necessita Attenzione"
-      }
+        "good": "Buono", "normal": "Normale", "needs_attention": "Necessita Attenzione"
+      },
+      "concerns": {
+        "dryness": "Secchezza", "wrinkles": "Rughe", "sagging": "Rilassamento", "dark_spots": "Macchie scure",
+        "dullness": "Opacità", "blemishes": "Imperfezioni", "pores": "Pori", "eye_area": "Contorno occhi",
+        "sensitivity": "Sensibilità", "other": "Altro"
+      },
+      "zones": {
+        "full_face": "Viso intero", "eye_contour": "Contorno occhi", "neck": "Collo", "hands": "Mani", "body": "Corpo"
+      },
+      "feel_general": {
+        "tight": "Tesa", "shiny": "Lucida", "comfortable": "Comoda", "sensitive_reactive": "Sensibile", "dull": "Spenta", "dont_know": "Sconosciuto"
+      },
+      "feel_end_day": {
+        "tight": "Tesa", "shiny": "Lucida", "comfortable": "Comoda", "irritated": "Irritata", "dull": "Spenta"
+      },
+      "routine_frequency": {
+        "morning_only": "Solo mattina", "night_only": "Solo sera", "morning_and_night": "Mattina e sera", "no_routine": "Nessuna routine"
+      },
+      "products": {
+        "cleanser": "Detergente", "toner": "Tonico", "serum": "Siero", "day_cream": "Crema giorno", "sunscreen": "Protezione solare",
+        "eye_contour": "Contorno occhi", "night_cream": "Crema notte", "mask": "Maschera", "exfoliant": "Esfoliante", "other": "Altro"
+      },
+"reaction": { "yes_a_lot": "Sì, molto", "sometimes": "A volte", "no": "No", "dont_know": "Sconosciuto" },
+      "signs": {
+        "redness": "Rossore", "itching": "Prurito", "flaking": "Desquamazione", "excess_shine": "Lucidità eccessiva",
+        "blemishes": "Imperfezioni", "dark_spots": "Macchie scure", "tightness": "Tensione", "none": "Nessuno"
+      },
+      "sunscreen": { "daily": "Quotidiano", "sometimes": "A volte", "summer_only": "Solo estate", "no": "No" },
+      "makeup": { "daily": "Quotidiano", "several_times_week": "Più volte/settimana", "occasionally": "Occasionalmente", "never": "Mai" },
+      "sleep": { "less_than_5": "<5h", "5_6": "5-6h", "7_8": "7-8h", "more_than_8": ">8h" },
+      "stress": { "yes": "Sì", "a_little": "Un po'", "no": "No" },
+      "water": { "yes": "Sì", "sometimes": "A volte", "no": "No" },
+      "history": { "yes_worked": "Sì, ha funzionato", "yes_no_results": "Sì, senza risultati", "tried_many_nothing_works": "Provato tanto, niente funziona", "barely_tried": "Appena provato" },
+      "frustrations": {
+        "no_results": "Nessun risultato", "irritation": "Irritazione", "dont_know_how_to_combine": "Non so combinare",
+        "too_expensive": "Troppo costoso", "not_consistent": "Non costante", "other": "Altro"
+      },
+      "looking_for": {
+        "basic_routine": "Routine base", "complete_routine": "Routine completa", "specific_problem": "Problema specifico",
+        "prevention": "Prevenzione", "personalized_advice": "Consiglio personalizzato"
+      },
+      "recommendation": { "yes": "Sì", "no": "No" },
+      "budget": { "basic": "Base", "medium": "Medio", "premium": "Premium" }
     }
   }
 }

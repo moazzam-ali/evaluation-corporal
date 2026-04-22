@@ -1,12 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Globe, Settings2, ChevronRight } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
 import products from "@/data/products.json";
 
 /* ── tiny helpers ──────────────────────────────────────────────── */
@@ -93,10 +93,24 @@ function MetricIcon({ index }) {
    LANDING PAGE
    ══════════════════════════════════════════════════════════════════ */
 export default function LandingPage() {
+  return (
+    <Suspense fallback={null}>
+      <LandingPageInner />
+    </Suspense>
+  );
+}
+
+function LandingPageInner() {
   const { t, i18n } = useTranslation();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [langOpen, setLangOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Forward any URL params (n, b, a, c, l) to /scan links
+  const paramString = searchParams.toString();
+  const scanHref = paramString ? `/scan?${paramString}` : "/scan";
+  const configHref = paramString ? `/config?${paramString}` : "/config";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -139,7 +153,7 @@ export default function LandingPage() {
           {/* Right side CTAs */}
           <div className="flex items-center gap-2.5">
             <Link
-              href="/config"
+              href={configHref}
               className="hidden items-center gap-1.5 rounded-full border border-[rgba(26,26,46,0.14)] bg-transparent px-4 py-2 text-xs text-[hsl(240,10%,46%)] transition-colors hover:border-[#1A1A2E] hover:text-[#1A1A2E] sm:inline-flex"
               style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
             >
@@ -147,7 +161,7 @@ export default function LandingPage() {
               Config
             </Link>
             <Link
-              href="/scan"
+              href={scanHref}
               className="inline-flex items-center gap-2 rounded-full bg-[#E8728A] px-4 py-2 text-xs text-white transition-all hover:-translate-y-px hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]"
               style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500, fontSize: 13 }}
             >
@@ -218,7 +232,7 @@ export default function LandingPage() {
 
             <Reveal delay={0.24} className="flex flex-wrap justify-center gap-3">
               <Link
-                href="/scan"
+                href={scanHref}
                 className="inline-flex items-center gap-2.5 rounded-full bg-[#E8728A] px-5 py-3.5 text-sm font-medium text-white transition-all hover:-translate-y-px hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]"
                 style={{ fontFamily: "var(--font-dm-sans)" }}
               >
@@ -517,7 +531,7 @@ export default function LandingPage() {
                 <p className="text-xl italic text-[#F4EEE8]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
                   This scan took <em className="not-italic text-[#F4A7B9]">6.8 seconds.</em> Yours will too.
                 </p>
-                <Link href="/scan" className="inline-flex items-center gap-2.5 rounded-full bg-[#E8728A] px-5 py-3.5 text-sm font-medium text-white transition-all hover:-translate-y-px hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                <Link href={scanHref} className="inline-flex items-center gap-2.5 rounded-full bg-[#E8728A] px-5 py-3.5 text-sm font-medium text-white transition-all hover:-translate-y-px hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
                   Try it on your face
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </Link>
@@ -602,7 +616,7 @@ export default function LandingPage() {
           {/* CTA */}
           <Reveal>
             <div className="mt-12 flex justify-center">
-              <Link href="/scan" className="inline-flex items-center gap-2.5 rounded-full bg-[#1A1A2E] px-6 py-3.5 text-sm font-medium text-[#F4EEE8] transition-all hover:-translate-y-px hover:bg-[#2A2A42] hover:shadow-[0_10px_28px_rgba(26,26,46,0.22)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+              <Link href={scanHref} className="inline-flex items-center gap-2.5 rounded-full bg-[#1A1A2E] px-6 py-3.5 text-sm font-medium text-[#F4EEE8] transition-all hover:-translate-y-px hover:bg-[#2A2A42] hover:shadow-[0_10px_28px_rgba(26,26,46,0.22)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 Get your personalized routine
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </Link>
@@ -732,7 +746,7 @@ export default function LandingPage() {
                     ))}
                   </ul>
                   <Link
-                    href="/scan"
+                    href={scanHref}
                     className={`flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-medium transition-all hover:-translate-y-px ${
                       plan.featured
                         ? "bg-[#E8728A] text-white hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]"
@@ -800,8 +814,8 @@ export default function LandingPage() {
               <h5 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgba(244,238,232,0.5)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Quick links</h5>
               <ul className="space-y-3">
                 {[
-                  { label: "Scan my skin", href: "/scan" },
-                  { label: "Configuration", href: "/config" },
+                  { label: "Scan my skin", href: scanHref },
+                  { label: "Configuration", href: configHref },
                   { label: "Privacy policy", href: "/privacy" },
                 ].map((l) => (
                   <li key={l.label}>
