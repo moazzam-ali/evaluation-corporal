@@ -6,17 +6,9 @@ import { useTranslation } from "react-i18next";
 import { Menu, X, Globe } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { LANGUAGES } from "@/lib/languages";
 
-const languages = [
-  { code: "en", label: "English" },
-  { code: "es", label: "Español" },
-  { code: "fr", label: "Français" },
-  { code: "de", label: "Deutsch" },
-  { code: "it", label: "Italiano" },
-  { code: "tr", label: "Türkçe" },
-  { code: "in", label: "हिन्दी" },
-  { code: "pt", label: "Português" },
-];
+const languages = LANGUAGES;
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
@@ -68,7 +60,7 @@ export default function Navbar() {
                       i18n.language === lang.code ? "font-semibold text-primary" : "text-foreground"
                     }`}
                   >
-                    {lang.label}
+                    {lang.nativeLabel}
                   </button>
                 ))}
               </div>
@@ -105,7 +97,7 @@ export default function Navbar() {
                     i18n.language === lang.code ? "bg-primary text-primary-foreground border-primary" : "border-border"
                   }`}
                 >
-                  {lang.label}
+                  {lang.nativeLabel}
                 </button>
               ))}
             </div>

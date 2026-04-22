@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Globe, Settings2, ChevronRight } from "lucide-react";
 import { useState, useRef, useEffect, Suspense } from "react";
 import products from "@/data/products.json";
+import { LANGUAGES } from "@/lib/languages";
 
 /* ── tiny helpers ──────────────────────────────────────────────── */
 function Reveal({ children, className = "", delay = 0 }) {
@@ -26,16 +27,7 @@ function Reveal({ children, className = "", delay = 0 }) {
   );
 }
 
-const languages = [
-  { code: "en", label: "EN" },
-  { code: "es", label: "ES" },
-  { code: "fr", label: "FR" },
-  { code: "de", label: "DE" },
-  { code: "it", label: "IT" },
-  { code: "tr", label: "TR" },
-  { code: "pt", label: "PT" },
-  { code: "in", label: "IN" },
-];
+const languages = LANGUAGES;
 
 const METRICS = [
   { name: "Hydration",       desc: "Stratum-corneum moisture cues across forehead, cheek, chin.",   tier: "good",  fill: 82 },
@@ -143,11 +135,11 @@ function LandingPageInner() {
 
           {/* Desktop links */}
           <div className="hidden items-center gap-7 lg:flex" style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 500 }}>
-            <a href="#how" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">How it works</a>
-            <a href="#metrics" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">Metrics</a>
-            <a href="#demo" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">Live demo</a>
-            <a href="#products" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">Products</a>
-            <a href="#pricing" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">Pricing</a>
+            <a href="#how" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_how", "How it works")}</a>
+            <a href="#metrics" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_metrics", "Metrics")}</a>
+            <a href="#demo" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_demo", "Live demo")}</a>
+            <a href="#products" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_products", "Products")}</a>
+            <a href="#pricing" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_pricing", "Pricing")}</a>
           </div>
 
           {/* Right side CTAs */}
@@ -158,7 +150,7 @@ function LandingPageInner() {
               style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
             >
               <Settings2 className="h-3.5 w-3.5" />
-              Config
+              {t("landing.nav_config", "Config")}
             </Link>
             <Link
               href={scanHref}
@@ -211,7 +203,7 @@ function LandingPageInner() {
             <Reveal className="flex justify-center">
               <span className="inline-flex items-center gap-2.5 rounded-full border border-[rgba(26,26,46,0.08)] bg-white px-3.5 py-1.5 text-xs" style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}>
                 <span className="rounded-full bg-[#FDEEF1] px-2 py-0.5 text-[10px] font-bold tracking-wider text-[#D45571]">LIVE</span>
-                12 metrics · dermatologist-trained
+                {t("landing.hero_badge", "12 metrics \u00b7 dermatologist-trained")}
               </span>
             </Reveal>
 
@@ -220,13 +212,13 @@ function LandingPageInner() {
                 className="mx-auto mb-6 mt-6 max-w-[14ch] text-[clamp(60px,8vw,120px)] leading-[1.02] tracking-[-0.01em] text-[#1A1A2E]"
                 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}
               >
-                Skin analysis,<br /><em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>no appointment</em> needed.
+                {t("landing.hero_title_1", "Skin analysis,")}<br /><em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>{t("landing.hero_title_2", "no appointment")}</em> {t("landing.hero_title_3", "needed.")}
               </h1>
             </Reveal>
 
             <Reveal delay={0.16}>
               <p className="mx-auto mb-8 max-w-[54ch] text-[19px] leading-relaxed text-[hsl(240,10%,46%)]">
-                One camera. Twelve clinical metrics. A plan your skin actually asked for.
+                {t("landing.hero_subtitle", "One camera. Twelve clinical metrics. A plan your skin actually asked for.")}
               </p>
             </Reveal>
 
@@ -244,7 +236,7 @@ function LandingPageInner() {
                 className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-[rgba(26,26,46,0.14)] bg-transparent px-5 py-3.5 text-sm text-[#1A1A2E] transition-colors hover:border-[#1A1A2E]"
                 style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
               >
-                Watch the demo
+                {t("landing.hero_demo_cta", "Watch the demo")}
               </a>
             </Reveal>
 
@@ -335,28 +327,28 @@ function LandingPageInner() {
             <div>
               <Reveal>
                 <span className="inline-flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-[hsl(240,10%,46%)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                  <span className="h-px w-6 bg-[#E8728A]" />Process
+                  <span className="h-px w-6 bg-[#E8728A]" />{t("landing.how_label", "Process")}
                 </span>
               </Reveal>
               <Reveal delay={0.08}>
                 <h2 className="mt-4 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.01em] text-[#1A1A2E]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300, textWrap: "balance" }}>
-                  From selfie to<br /><em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>skincare plan</em> in four beats.
+                  {t("landing.how_title_1", "From selfie to")}<br /><em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>{t("landing.how_title_2", "skincare plan")}</em> {t("landing.how_title_3", "in four beats.")}
                 </h2>
               </Reveal>
             </div>
             <Reveal delay={0.16}>
               <p className="max-w-[58ch] text-[17px] leading-relaxed text-[hsl(240,10%,46%)]" style={{ textWrap: "pretty" }}>
-                No questionnaires, no skin-type quizzes. The camera does the reading — your routine updates every time you scan.
+                {t("landing.how_subtitle", "No questionnaires, no skin-type quizzes. The camera does the reading \u2014 your routine updates every time you scan.")}
               </p>
             </Reveal>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {[
-              { num: "01", title: "Frame your face", text: "Natural light, no makeup. Hold steady for three seconds — we auto-capture five frames, pick the sharpest.", time: "~8 seconds", icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="4" y="9" width="24" height="18" rx="4" stroke="#E8728A" strokeWidth="1.5"/><circle cx="16" cy="18" r="5" stroke="#E8728A" strokeWidth="1.5"/><circle cx="16" cy="18" r="2" fill="#E8728A"/><path d="M11 9l2-3h6l2 3" stroke="#E8728A" strokeWidth="1.5" strokeLinejoin="round"/></svg> },
-              { num: "02", title: "AI reads 12 metrics", text: "Hydration, barrier, pore visibility, tone evenness, redness, fine lines, sebum, texture and four more — all mapped to skin zones.", time: "~3 seconds", icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="#E8728A" strokeWidth="1.5"/><circle cx="16" cy="16" r="6" stroke="#E8728A" strokeWidth="1.5" strokeDasharray="2 2"/><circle cx="16" cy="16" r="2" fill="#E8728A"/><path d="M16 2v4M16 26v4M2 16h4M26 16h4" stroke="#E8728A" strokeWidth="1.5" strokeLinecap="round"/></svg> },
-              { num: "03", title: "Get your report", text: "A plain-English readout — what's strong, what's stressed, what's changed since last time. Zones highlighted, trends tracked.", time: "Instant", icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="6" y="4" width="20" height="24" rx="3" stroke="#E8728A" strokeWidth="1.5"/><path d="M11 11h10M11 16h10M11 21h6" stroke="#E8728A" strokeWidth="1.5" strokeLinecap="round"/></svg> },
-              { num: "04", title: "Routine, curated", text: "Products matched to your exact metrics. We tell you which ingredient does which job — and when to use them.", time: "Personalized", icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M12 4c-3 3-3 8 0 11s8 3 11 0-3-11-11-11z" stroke="#E8728A" strokeWidth="1.5" strokeLinejoin="round"/><path d="M12 15l-7 7 2 2 7-7" stroke="#E8728A" strokeWidth="1.5" strokeLinejoin="round"/><circle cx="20" cy="10" r="1.5" fill="#E8728A"/></svg> },
+              { num: "01", title: t("landing.how_step1_title", "Frame your face"), text: t("landing.how_step1_text", "Natural light, no makeup. Hold steady for three seconds \u2014 we auto-capture five frames, pick the sharpest."), time: t("landing.how_step1_time", "~8 seconds"), icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="4" y="9" width="24" height="18" rx="4" stroke="#E8728A" strokeWidth="1.5"/><circle cx="16" cy="18" r="5" stroke="#E8728A" strokeWidth="1.5"/><circle cx="16" cy="18" r="2" fill="#E8728A"/><path d="M11 9l2-3h6l2 3" stroke="#E8728A" strokeWidth="1.5" strokeLinejoin="round"/></svg> },
+              { num: "02", title: t("landing.how_step2_title", "AI reads 12 metrics"), text: t("landing.how_step2_text", "Hydration, barrier, pore visibility, tone evenness, redness, fine lines, sebum, texture and four more \u2014 all mapped to skin zones."), time: t("landing.how_step2_time", "~3 seconds"), icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="10" stroke="#E8728A" strokeWidth="1.5"/><circle cx="16" cy="16" r="6" stroke="#E8728A" strokeWidth="1.5" strokeDasharray="2 2"/><circle cx="16" cy="16" r="2" fill="#E8728A"/><path d="M16 2v4M16 26v4M2 16h4M26 16h4" stroke="#E8728A" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+              { num: "03", title: t("landing.how_step3_title", "Get your report"), text: t("landing.how_step3_text", "A plain-English readout \u2014 what\u2019s strong, what\u2019s stressed, what\u2019s changed since last time. Zones highlighted, trends tracked."), time: t("landing.how_step3_time", "Instant"), icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="6" y="4" width="20" height="24" rx="3" stroke="#E8728A" strokeWidth="1.5"/><path d="M11 11h10M11 16h10M11 21h6" stroke="#E8728A" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+              { num: "04", title: t("landing.how_step4_title", "Routine, curated"), text: t("landing.how_step4_text", "Products matched to your exact metrics. We tell you which ingredient does which job \u2014 and when to use them."), time: t("landing.how_step4_time", "Personalized"), icon: <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M12 4c-3 3-3 8 0 11s8 3 11 0-3-11-11-11z" stroke="#E8728A" strokeWidth="1.5" strokeLinejoin="round"/><path d="M12 15l-7 7 2 2 7-7" stroke="#E8728A" strokeWidth="1.5" strokeLinejoin="round"/><circle cx="20" cy="10" r="1.5" fill="#E8728A"/></svg> },
             ].map((step, i) => (
               <Reveal key={step.num} delay={i * 0.08}>
                 <div className="group h-full rounded-[20px] border border-[rgba(26,26,46,0.08)] bg-white p-6 pb-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_-10px_rgba(26,26,46,0.12)]">
@@ -381,17 +373,17 @@ function LandingPageInner() {
           <div className="mb-16 max-w-[720px]">
             <Reveal>
               <span className="inline-flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-[hsl(240,10%,46%)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                <span className="h-px w-6 bg-[#E8728A]" />The science surface
+                <span className="h-px w-6 bg-[#E8728A]" />{t("landing.metrics_label", "The science surface")}
               </span>
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="mt-4 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.01em] text-[#1A1A2E]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-                Twelve things we measure,<br />so you don&apos;t have to <em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>guess.</em>
+                {t("landing.metrics_title_1", "Twelve things we measure,")}<br />{t("landing.metrics_title_2", "so you don\u2019t have to")} <em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>{t("landing.metrics_title_3", "guess.")}</em>
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mt-5 max-w-[58ch] text-[17px] leading-relaxed text-[hsl(240,10%,46%)]">
-                Each metric has a clinical proxy — hydration tracks stratum-corneum moisture cues, barrier tracks transepidermal water-loss indicators, and so on. Scores are 0–100, relative to your demographic cohort.
+                {t("landing.metrics_subtitle", "Each metric has a clinical proxy \u2014 hydration tracks stratum-corneum moisture cues, barrier tracks transepidermal water-loss indicators, and so on. Scores are 0\u2013100, relative to your demographic cohort.")}
               </p>
             </Reveal>
           </div>
@@ -427,7 +419,7 @@ function LandingPageInner() {
           <Reveal>
             <div className="mt-10 inline-flex items-center gap-2.5 text-xs tracking-wide text-[hsl(240,10%,46%)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
               <span className="h-px w-5 bg-[rgba(26,26,46,0.14)]" />
-              Methodology and confidence intervals published quarterly · last update April 2026
+              {t("landing.metrics_methodology", "Methodology and confidence intervals published quarterly \u00b7 last update April 2026")}
             </div>
           </Reveal>
         </div>
@@ -439,17 +431,17 @@ function LandingPageInner() {
           <div className="mb-16 max-w-[720px]">
             <Reveal>
               <span className="inline-flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-[rgba(244,238,232,0.65)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                <span className="h-px w-6 bg-[#F4A7B9]" />See one in action
+                <span className="h-px w-6 bg-[#F4A7B9]" />{t("landing.demo_label", "See one in action")}
               </span>
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="mt-4 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.01em] text-[#F4EEE8]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-                Watch the scan<br />think out <em className="not-italic text-[#F4A7B9]" style={{ fontWeight: 400 }}>loud.</em>
+                {t("landing.demo_title_1", "Watch the scan")}<br />{t("landing.demo_title_2", "think out")} <em className="not-italic text-[#F4A7B9]" style={{ fontWeight: 400 }}>{t("landing.demo_title_3", "loud.")}</em>
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mt-5 text-[17px] leading-relaxed text-[rgba(244,238,232,0.65)]">
-                Here&apos;s a real analysis running — three regions of interest, bars filling as the model resolves each metric. Your scan looks exactly like this.
+                {t("landing.demo_subtitle", "Here\u2019s a real analysis running \u2014 three regions of interest, bars filling as the model resolves each metric. Your scan looks exactly like this.")}
               </p>
             </Reveal>
           </div>
@@ -477,8 +469,8 @@ function LandingPageInner() {
                     { pos: "top-[28%] left-[32%]", anim: "floatA_6s" },
                     { pos: "top-[46%] right-[28%]", anim: "floatB_5s" },
                     { pos: "bottom-[26%] left-[38%]", anim: "floatA_7s" },
-                  ].map((t, i) => (
-                    <div key={i} className={`absolute ${t.pos} flex h-14 w-14 items-center justify-center rounded-full border-[1.5px] border-[rgba(244,238,232,0.6)] animate-[${t.anim}_ease-in-out_infinite]`}>
+                  ].map((td, i) => (
+                    <div key={i} className={`absolute ${td.pos} flex h-14 w-14 items-center justify-center rounded-full border-[1.5px] border-[rgba(244,238,232,0.6)] animate-[${td.anim}_ease-in-out_infinite]`}>
                       <span className="h-2.5 w-2.5 rounded-full bg-[#E8728A] shadow-[0_0_0_4px_rgba(232,114,138,0.3)]" />
                     </div>
                   ))}
@@ -529,10 +521,10 @@ function LandingPageInner() {
               {/* Demo CTA */}
               <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-[rgba(255,255,255,0.08)] pt-8">
                 <p className="text-xl italic text-[#F4EEE8]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-                  This scan took <em className="not-italic text-[#F4A7B9]">6.8 seconds.</em> Yours will too.
+                  {t("landing.demo_time_1", "This scan took")} <em className="not-italic text-[#F4A7B9]">{t("landing.demo_time_2", "6.8 seconds.")}</em> {t("landing.demo_time_3", "Yours will too.")}
                 </p>
                 <Link href={scanHref} className="inline-flex items-center gap-2.5 rounded-full bg-[#E8728A] px-5 py-3.5 text-sm font-medium text-white transition-all hover:-translate-y-px hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                  Try it on your face
+                  {t("landing.demo_cta", "Try it on your face")}
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
                 </Link>
               </div>
@@ -548,18 +540,18 @@ function LandingPageInner() {
             <div>
               <Reveal>
                 <span className="inline-flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-[hsl(240,10%,46%)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                  <span className="h-px w-6 bg-[#E8728A]" />Curated, not catalogued
+                  <span className="h-px w-6 bg-[#E8728A]" />{t("landing.products_label", "Curated, not catalogued")}
                 </span>
               </Reveal>
               <Reveal delay={0.08}>
                 <h2 className="mt-4 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.01em] text-[#1A1A2E]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-                  Products matched<br />to <em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>your</em> skin.
+                  {t("landing.products_title_1", "Products matched")}<br />{t("landing.products_title_2", "to")} <em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>{t("landing.products_title_3", "your")}</em> {t("landing.products_title_4", "skin.")}
                 </h2>
               </Reveal>
             </div>
             <Reveal delay={0.16}>
               <p className="max-w-[58ch] text-[17px] leading-relaxed text-[hsl(240,10%,46%)]">
-                Our AI matches HL/Skin products to your exact metrics. Each recommendation comes with ingredient breakdowns and routine placement.
+                {t("landing.products_subtitle", "Our AI matches HL/Skin products to your exact metrics. Each recommendation comes with ingredient breakdowns and routine placement.")}
               </p>
             </Reveal>
           </div>
@@ -583,7 +575,7 @@ function LandingPageInner() {
                     </span>
                     {product.type === "ingestible" && (
                       <span className="absolute right-3 top-3 rounded-full bg-[#1A1A2E] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                        Supplement
+                        {t("landing.products_supplement", "Supplement")}
                       </span>
                     )}
                   </div>
@@ -617,7 +609,7 @@ function LandingPageInner() {
           <Reveal>
             <div className="mt-12 flex justify-center">
               <Link href={scanHref} className="inline-flex items-center gap-2.5 rounded-full bg-[#1A1A2E] px-6 py-3.5 text-sm font-medium text-[#F4EEE8] transition-all hover:-translate-y-px hover:bg-[#2A2A42] hover:shadow-[0_10px_28px_rgba(26,26,46,0.22)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                Get your personalized routine
+                {t("landing.products_cta", "Get your personalized routine")}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </Link>
             </div>
@@ -631,26 +623,26 @@ function LandingPageInner() {
           <div className="mb-16 max-w-[720px]">
             <Reveal>
               <span className="inline-flex items-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-[rgba(244,238,232,0.65)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                <span className="h-px w-6 bg-[#F4A7B9]" />The ingredient layer
+                <span className="h-px w-6 bg-[#F4A7B9]" />{t("landing.science_label", "The ingredient layer")}
               </span>
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="mt-4 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.01em] text-[#F4EEE8]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-                We rank molecules,<br />not <em className="not-italic text-[#F4A7B9]" style={{ fontWeight: 400 }}>marketing.</em>
+                {t("landing.science_title_1", "We rank molecules,")}<br />{t("landing.science_title_2", "not")} <em className="not-italic text-[#F4A7B9]" style={{ fontWeight: 400 }}>{t("landing.science_title_3", "marketing.")}</em>
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mt-5 text-[17px] leading-relaxed text-[rgba(244,238,232,0.65)]">
-                Every product is broken down to its active ingredients, cross-referenced against your metrics. Three we lean on the most — and why.
+                {t("landing.science_subtitle", "Every product is broken down to its active ingredients, cross-referenced against your metrics. Three we lean on the most \u2014 and why.")}
               </p>
             </Reveal>
           </div>
 
           <div className="grid gap-5 lg:grid-cols-3">
             {[
-              { name: "Niacinamide", inci: "INCI · Nicotinamide · Vit. B3", formula: "C₆H₆N₂O", desc: "The ingredient that quietly fixes four things at once: strengthens ceramide synthesis, calms redness, regulates sebum, and softens hyperpigmentation. Works at 2–5%.", targets: "Barrier · Redness", evidence: "42 RCTs" },
-              { name: "Bakuchiol", inci: "INCI · Meroterpene · Plant-derived", formula: "C₁₈H₂₄O", desc: "The retinol alternative your barrier can tolerate. Up-regulates collagen expression without the peeling, photo-sensitivity or pregnancy caveats of tretinoin.", targets: "Fine lines · Tone", evidence: "18 clinical studies" },
-              { name: "Tranexamic Acid", inci: "INCI · Trans-4-aminomethyl", formula: "C₈H₁₅NO₂", desc: "The gold standard for stubborn melasma and post-inflammatory pigmentation. Interrupts the melanocyte-keratinocyte pathway — without irritating a sensitive barrier.", targets: "Pigmentation", evidence: "27 peer-reviewed papers" },
+              { name: "Niacinamide", inci: "INCI \u00b7 Nicotinamide \u00b7 Vit. B3", formula: "C\u2086H\u2086N\u2082O", desc: t("landing.science_niacinamide_desc", "The ingredient that quietly fixes four things at once: strengthens ceramide synthesis, calms redness, regulates sebum, and softens hyperpigmentation. Works at 2\u20135%."), targets: "Barrier \u00b7 Redness", evidence: "42 RCTs" },
+              { name: "Bakuchiol", inci: "INCI \u00b7 Meroterpene \u00b7 Plant-derived", formula: "C\u2081\u2088H\u2082\u2084O", desc: t("landing.science_bakuchiol_desc", "The retinol alternative your barrier can tolerate. Up-regulates collagen expression without the peeling, photo-sensitivity or pregnancy caveats of tretinoin."), targets: "Fine lines \u00b7 Tone", evidence: "18 clinical studies" },
+              { name: "Tranexamic Acid", inci: "INCI \u00b7 Trans-4-aminomethyl", formula: "C\u2088H\u2081\u2085NO\u2082", desc: t("landing.science_tranexamic_desc", "The gold standard for stubborn melasma and post-inflammatory pigmentation. Interrupts the melanocyte-keratinocyte pathway \u2014 without irritating a sensitive barrier."), targets: "Pigmentation", evidence: "27 peer-reviewed papers" },
             ].map((ing, i) => (
               <Reveal key={ing.name} delay={i * 0.08}>
                 <div className="h-full rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-7 sm:p-8 transition-all duration-300 hover:-translate-y-[3px] hover:border-[rgba(232,114,138,0.4)] hover:bg-[rgba(255,255,255,0.06)]">
@@ -660,11 +652,11 @@ function LandingPageInner() {
                   <p className="mb-5 text-sm leading-relaxed text-[rgba(244,238,232,0.78)]">{ing.desc}</p>
                   <div className="grid grid-cols-2 gap-3 border-t border-[rgba(255,255,255,0.08)] pt-5">
                     <div>
-                      <div className="text-[10px] uppercase tracking-[0.14em] text-[rgba(244,238,232,0.55)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Targets</div>
+                      <div className="text-[10px] uppercase tracking-[0.14em] text-[rgba(244,238,232,0.55)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{t("landing.science_targets", "Targets")}</div>
                       <div className="mt-1 text-xl text-[#F4EEE8]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400 }}>{ing.targets}</div>
                     </div>
                     <div>
-                      <div className="text-[10px] uppercase tracking-[0.14em] text-[rgba(244,238,232,0.55)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Evidence</div>
+                      <div className="text-[10px] uppercase tracking-[0.14em] text-[rgba(244,238,232,0.55)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{t("landing.science_evidence", "Evidence")}</div>
                       <div className="mt-1 text-xl text-[#F4EEE8]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400 }}><span className="text-[#F4A7B9]">{ing.evidence.split(" ")[0]}</span> {ing.evidence.split(" ").slice(1).join(" ")}</div>
                     </div>
                   </div>
@@ -676,10 +668,10 @@ function LandingPageInner() {
           {/* Stats footer */}
           <div className="mt-14 grid grid-cols-2 gap-6 border-t border-[rgba(255,255,255,0.08)] pt-12 sm:grid-cols-4">
             {[
-              { n: "4,200+", l: "Products in our graph" },
-              { n: "312", l: "Actives ranked by efficacy" },
-              { n: "0", l: "Affiliate placements. Ever." },
-              { n: "Q", l: "Quarterly methodology refresh" },
+              { n: "4,200+", l: t("landing.science_stat1", "Products in our graph") },
+              { n: "312", l: t("landing.science_stat2", "Actives ranked by efficacy") },
+              { n: "0", l: t("landing.science_stat3", "Affiliate placements. Ever.") },
+              { n: "Q", l: t("landing.science_stat4", "Quarterly methodology refresh") },
             ].map((stat) => (
               <Reveal key={stat.n}>
                 <div>
@@ -700,26 +692,26 @@ function LandingPageInner() {
           <div className="mx-auto mb-16 max-w-[680px] text-center">
             <Reveal>
               <span className="inline-flex items-center justify-center gap-2.5 text-[11px] font-medium uppercase tracking-[0.18em] text-[hsl(240,10%,46%)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                <span className="h-px w-6 bg-[#E8728A]" />Pricing
+                <span className="h-px w-6 bg-[#E8728A]" />{t("landing.pricing_label", "Pricing")}
               </span>
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="mt-4 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.01em] text-[#1A1A2E]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-                Free to <em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>scan.</em><br />Always.
+                {t("landing.pricing_title_1", "Free to")} <em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>{t("landing.pricing_title_2", "scan.")}</em><br />{t("landing.pricing_title_3", "Always.")}
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mx-auto mt-5 max-w-[58ch] text-[17px] leading-relaxed text-[hsl(240,10%,46%)]">
-                Your first scan and your first plan are free — forever. If you want history, trends, and on-demand scans, there&apos;s a plan for that.
+                {t("landing.pricing_subtitle", "Your first scan and your first plan are free \u2014 forever. If you want history, trends, and on-demand scans, there\u2019s a plan for that.")}
               </p>
             </Reveal>
           </div>
 
           <div className="mx-auto grid max-w-[1100px] gap-4 lg:grid-cols-3">
             {[
-              { name: "Free", desc: "One scan. One plan. No card needed. Ever.", price: "$0", cadence: "", sub: "Forever · no trial expiry", features: ["One complete 12-metric scan", "Plain-English skin report", "5-product routine, matched", "Daily skincare reminders"], cta: "Start free", featured: false },
-              { name: "Plus", desc: "Scan anytime. Track changes. Rebalance your routine as your skin shifts.", price: "$9", cadence: "/ month", sub: "or $79/yr · cancel anytime", features: ["Unlimited scans", "12-month trend tracking", "Weekly routine auto-tuning", "Ingredient deep-dives", "Shopping list sync"], cta: "Go Plus", featured: true, badge: "Most loved" },
-              { name: "Pro", desc: "For estheticians, content creators, and anyone running skin journeys for clients.", price: "$29", cadence: "/ month", sub: "team pricing available", features: ["Everything in Plus", "Up to 25 client profiles", "Before/after export (PDF)", "White-label report covers", "API access (500 scans/mo)"], cta: "Talk to sales", featured: false },
+              { name: t("landing.plan_free_name", "Free"), desc: t("landing.plan_free_desc", "One scan. One plan. No card needed. Ever."), price: "$0", cadence: "", sub: t("landing.plan_free_sub", "Forever \u00b7 no trial expiry"), features: [t("landing.plan_free_f1", "One complete 12-metric scan"), t("landing.plan_free_f2", "Plain-English skin report"), t("landing.plan_free_f3", "5-product routine, matched"), t("landing.plan_free_f4", "Daily skincare reminders")], cta: t("landing.plan_free_cta", "Start free"), featured: false },
+              { name: t("landing.plan_plus_name", "Plus"), desc: t("landing.plan_plus_desc", "Scan anytime. Track changes. Rebalance your routine as your skin shifts."), price: "$9", cadence: "/ month", sub: t("landing.plan_plus_sub", "or $79/yr \u00b7 cancel anytime"), features: [t("landing.plan_plus_f1", "Unlimited scans"), t("landing.plan_plus_f2", "12-month trend tracking"), t("landing.plan_plus_f3", "Weekly routine auto-tuning"), t("landing.plan_plus_f4", "Ingredient deep-dives"), t("landing.plan_plus_f5", "Shopping list sync")], cta: t("landing.plan_plus_cta", "Go Plus"), featured: true, badge: t("landing.plan_plus_badge", "Most loved") },
+              { name: t("landing.plan_pro_name", "Pro"), desc: t("landing.plan_pro_desc", "For estheticians, content creators, and anyone running skin journeys for clients."), price: "$29", cadence: "/ month", sub: t("landing.plan_pro_sub", "team pricing available"), features: [t("landing.plan_pro_f1", "Everything in Plus"), t("landing.plan_pro_f2", "Up to 25 client profiles"), t("landing.plan_pro_f3", "Before/after export (PDF)"), t("landing.plan_pro_f4", "White-label report covers"), t("landing.plan_pro_f5", "API access (500 scans/mo)")], cta: t("landing.plan_pro_cta", "Talk to sales"), featured: false },
             ].map((plan) => (
               <Reveal key={plan.name}>
                 <div className={`relative flex h-full flex-col rounded-3xl border p-7 sm:p-8 transition-transform duration-300 ${
@@ -763,7 +755,7 @@ function LandingPageInner() {
 
           <Reveal>
             <p className="mt-8 text-center text-xs tracking-wide text-[hsl(240,10%,46%)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-              Prices in USD. No hidden fees. You own your scan data — export or delete anytime.
+              {t("landing.pricing_disclaimer", "Prices in USD. No hidden fees. You own your scan data \u2014 export or delete anytime.")}
             </p>
           </Reveal>
         </div>
@@ -784,7 +776,7 @@ function LandingPageInner() {
                 </span>
               </Link>
               <h4 className="my-5 max-w-[15ch] text-4xl leading-tight text-[#F4EEE8]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-                Your skin, <em className="not-italic text-[#F4A7B9]" style={{ fontWeight: 400 }}>quantified</em> softly.
+                {t("landing.footer_tagline_1", "Your skin,")} <em className="not-italic text-[#F4A7B9]" style={{ fontWeight: 400 }}>{t("landing.footer_tagline_2", "quantified")}</em> {t("landing.footer_tagline_3", "softly.")}
               </h4>
               <p className="max-w-[36ch] text-sm leading-relaxed text-[rgba(244,238,232,0.65)]">
                 {t("footer.disclaimer", "This tool is intended only for cosmetic awareness purposes. Results are not a substitute for professional dermatological advice.")}
@@ -793,16 +785,16 @@ function LandingPageInner() {
 
             {/* Product column */}
             <div>
-              <h5 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgba(244,238,232,0.5)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Product</h5>
+              <h5 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgba(244,238,232,0.5)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{t("landing.footer_col_product", "Product")}</h5>
               <ul className="space-y-3">
                 {[
-                  { label: "How it works", href: "#how" },
-                  { label: "The 12 metrics", href: "#metrics" },
-                  { label: "Live demo", href: "#demo" },
-                  { label: "Products", href: "#products" },
-                  { label: "Pricing", href: "#pricing" },
+                  { label: t("landing.footer_how", "How it works"), href: "#how" },
+                  { label: t("landing.footer_metrics", "The 12 metrics"), href: "#metrics" },
+                  { label: t("landing.footer_demo", "Live demo"), href: "#demo" },
+                  { label: t("landing.footer_products", "Products"), href: "#products" },
+                  { label: t("landing.footer_pricing", "Pricing"), href: "#pricing" },
                 ].map((l) => (
-                  <li key={l.label}>
+                  <li key={l.href}>
                     <a href={l.href} className="text-[13px] text-[rgba(244,238,232,0.85)] transition-colors hover:text-[#F4A7B9]" style={{ fontFamily: "var(--font-dm-sans)" }}>{l.label}</a>
                   </li>
                 ))}
@@ -811,14 +803,14 @@ function LandingPageInner() {
 
             {/* Quick links */}
             <div>
-              <h5 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgba(244,238,232,0.5)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Quick links</h5>
+              <h5 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgba(244,238,232,0.5)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{t("landing.footer_col_links", "Quick links")}</h5>
               <ul className="space-y-3">
                 {[
-                  { label: "Scan my skin", href: scanHref },
-                  { label: "Configuration", href: configHref },
-                  { label: "Privacy policy", href: "/privacy" },
+                  { label: t("landing.footer_scan", "Scan my skin"), href: scanHref },
+                  { label: t("landing.footer_config", "Configuration"), href: configHref },
+                  { label: t("landing.footer_privacy", "Privacy policy"), href: "/privacy" },
                 ].map((l) => (
-                  <li key={l.label}>
+                  <li key={l.href}>
                     <Link href={l.href} className="text-[13px] text-[rgba(244,238,232,0.85)] transition-colors hover:text-[#F4A7B9]" style={{ fontFamily: "var(--font-dm-sans)" }}>{l.label}</Link>
                   </li>
                 ))}
@@ -827,11 +819,11 @@ function LandingPageInner() {
 
             {/* Science column */}
             <div>
-              <h5 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgba(244,238,232,0.5)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Science</h5>
+              <h5 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[rgba(244,238,232,0.5)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{t("landing.footer_col_science", "Science")}</h5>
               <ul className="space-y-3">
                 {[
-                  { label: "Ingredient science", href: "#science" },
-                  { label: "Methodology", href: "#science" },
+                  { label: t("landing.footer_ingredient", "Ingredient science"), href: "#science" },
+                  { label: t("landing.footer_methodology", "Methodology"), href: "#science" },
                 ].map((l) => (
                   <li key={l.label}>
                     <a href={l.href} className="text-[13px] text-[rgba(244,238,232,0.85)] transition-colors hover:text-[#F4A7B9]" style={{ fontFamily: "var(--font-dm-sans)" }}>{l.label}</a>
@@ -845,7 +837,7 @@ function LandingPageInner() {
           <div className="flex flex-wrap items-center justify-between gap-6 pt-8 text-xs text-[rgba(244,238,232,0.55)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
             <div>&copy; {new Date().getFullYear()} Beauty &amp; Glow AI</div>
             <div className="flex gap-6">
-              <Link href="/privacy" className="transition-colors hover:text-[#F4EEE8]">Privacy</Link>
+              <Link href="/privacy" className="transition-colors hover:text-[#F4EEE8]">{t("landing.footer_privacy_link", "Privacy")}</Link>
             </div>
           </div>
         </div>

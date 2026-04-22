@@ -11,8 +11,9 @@ import { sendAnalysisToTelegram } from "@/lib/telegram";
 import { indexDocumentsInAppSearch, buildElasticDocuments } from "@/lib/elastic";
 import { readFile } from "fs/promises";
 import { join } from "path";
+import { SUPPORTED_LANGUAGE_CODES } from "@/lib/languages";
 
-const SUPPORTED_LANGUAGES = ["en", "es", "fr", "de", "it", "tr", "in", "pt"];
+const SUPPORTED_LANGUAGES = SUPPORTED_LANGUAGE_CODES;
 
 // Vercel function config — 60s for Hobby, up to 300s for Pro
 export const maxDuration = 60;
