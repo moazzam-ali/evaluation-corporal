@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "validate-locales": "node scripts/validate-locales.mjs"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^9.3.4",

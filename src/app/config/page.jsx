@@ -11,17 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LANGUAGES } from "@/lib/languages";
 
-const languages = [
-  { code: "en", label: "English" },
-  { code: "es", label: "Español" },
-  { code: "fr", label: "Français" },
-  { code: "de", label: "Deutsch" },
-  { code: "it", label: "Italiano" },
-  { code: "tr", label: "Türkçe" },
-  { code: "in", label: "हिन्दी" },
-  { code: "pt", label: "Português" },
-];
+const languages = LANGUAGES;
 
 export default function HomePage() {
   const { t } = useTranslation();
@@ -141,7 +133,7 @@ export default function HomePage() {
                 >
                   {languages.map((lang) => (
                     <option key={lang.code} value={lang.code}>
-                      {lang.label}
+                      {lang.nativeLabel}
                     </option>
                   ))}
                 </select>
