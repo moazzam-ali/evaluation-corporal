@@ -85,10 +85,8 @@ async function sendTelegramMessage(botApiKey, chatID, message, inlineKeyboards, 
 
 /**
  * Build and send Telegram messages for a skin analysis.
- *   Message 1: Member details (client profile)
- *   Message 2: Questionnaire summary (grouped by section)
- *   Message 3: Analysis results with all metrics
- *   Message 4: Report link with inline keyboard (SMS, Call, WhatsApp, Telegram)
+ *   Message 1: Member details + Questionnaire summary
+ *   Message 2: Analysis results + Report link with inline keyboard
  */
 export async function sendAnalysisToTelegram({
   chatIDs,
@@ -164,8 +162,9 @@ export async function sendAnalysisToTelegram({
     .map((m) => {
       const metricName = m.id.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
       const statusIcon =
-        m.status === "good" ? "✅" :
-        m.status === "normal" ? "🟡" :
+        m.score >= 80 ? "🟢" :
+        m.score >= 60 ? "🟡" :
+        m.score >= 40 ? "🟠" :
         "🔴";
       return `${statusIcon} ${metricName} — ${m.score}%`;
     })
@@ -191,12 +190,10 @@ export async function sendAnalysisToTelegram({
     [{ text: t("telegram.buttons.telegram") || "✈️ Telegram", url: `https://t.me/${formData.phone || ""}` }],
   ];
 
-  // 4 messages: member details, questionnaire, AI results, link with keyboard
+  // 2 messages: client data (profile + questionnaire), results (analysis + link)
   const messages = [
-    memberDetailsMessage,
-    questionnaireMessage,
-    analysisResultsMessage,
-    analysisLinkMessage,
+    memberDetailsMessage + "\n\n" + questionnaireMessage,
+    analysisResultsMessage + "\n\n" + analysisLinkMessage,
   ];
 
   // Build combined answers text for Elastic indexing (sanitized, no Markdown)
