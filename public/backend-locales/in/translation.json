@@ -3,7 +3,7 @@
     "member_details": "*Beauty & Glow AI — Scan Baru*\n━━━━━━━━━━━━━━━━━━━━\n\n*Profil Klien*\n\nNama: {name} {surname}\nEmail: {email}\nTelepon: {phone}\nTanggal Lahir: {birthDate}\nLokasi: {city}, {country}",
     "questionnaire_details": "*Kuesioner Kulit*\n━━━━━━━━━━━━━━━━━━━━\n\n*Tujuan dan Masalah*\nMasalah: {skinConcerns}\nPrioritas: {priorityConcern}\nArea: {improvementZones}\n\n*Profil Kulit*\nTipe: {skinType}\nRasa: {skinFeelGeneral}\nAkhir Hari: {skinFeelEndOfDay}\n\n*Rutinitas Saat Ini*\nFrekuensi: {routineFrequency}\nProduk: {productsUsed}\nWajib: {essentialProduct}\nKurang: {missingProduct}\nSuplemen: {supplements}\n\n*Sensitivitas*\nReaksi: {reactionLevel}\nTanda: {recentSigns}\n\n*Gaya Hidup*\nTabir Surya: {sunscreenUse}\nMakeup: {makeupFrequency}\nTidur: {sleepHours}\nStres: {stressImpact}\nAir: {waterIntake}\n\n*Pengalaman dan Tujuan*\nRiwayat: {treatmentHistory}\nFrustrasi: {frustrations}\nMencari: {lookingFor}\nIngin Rekomendasi: {wantRoutineRecommendation}\nAnggaran: {budgetLevel}",
     "analysis_results": "*Hasil Analisis*\n━━━━━━━━━━━━━━━━━━━━\n\nSkor Keseluruhan: *{overall_score}%*\nJenis Kulit: *{skin_type_result}*\n\n*Rincian Metrik:*\n{metrics}\n\n*Ringkasan:*\n{summary}",
-    "analysis_link": "*Lihat Laporan Lengkap*\n━━━━━━━━━━━━━━━━━━━━\nhttps://skin-doc.vercel.app/results/{id}?l={lng}",
+    "analysis_link": "*Lihat Laporan Lengkap*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
     "buttons": {
       "sms": "Kirim SMS",
       "call": "Telepon",
