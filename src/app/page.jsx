@@ -697,21 +697,20 @@ function LandingPageInner() {
             </Reveal>
             <Reveal delay={0.08}>
               <h2 className="mt-4 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.01em] text-[#1A1A2E]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-                {t("landing.pricing_title_1", "Free to")} <em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>{t("landing.pricing_title_2", "scan.")}</em><br />{t("landing.pricing_title_3", "Always.")}
+                {t("landing.pricing_title_1", "Your first scan is")} <em className="not-italic text-[#E8728A]" style={{ fontWeight: 400 }}>{t("landing.pricing_title_2", "free.")}</em>
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mx-auto mt-5 max-w-[58ch] text-[17px] leading-relaxed text-[hsl(240,10%,46%)]">
-                {t("landing.pricing_subtitle", "Your first scan and your first plan are free \u2014 forever. If you want history, trends, and on-demand scans, there\u2019s a plan for that.")}
+                {t("landing.pricing_subtitle", "First-time users and active members scan for free. Want unlimited access? One simple plan.")}
               </p>
             </Reveal>
           </div>
 
-          <div className="mx-auto grid max-w-[1100px] gap-4 lg:grid-cols-3">
+          <div className="mx-auto grid max-w-[820px] gap-4 lg:grid-cols-2">
             {[
-              { name: t("landing.plan_free_name", "Free"), desc: t("landing.plan_free_desc", "One scan. One plan. No card needed. Ever."), price: "$0", cadence: "", sub: t("landing.plan_free_sub", "Forever \u00b7 no trial expiry"), features: [t("landing.plan_free_f1", "One complete 12-metric scan"), t("landing.plan_free_f2", "Plain-English skin report"), t("landing.plan_free_f3", "5-product routine, matched"), t("landing.plan_free_f4", "Daily skincare reminders")], cta: t("landing.plan_free_cta", "Start free"), featured: false },
-              { name: t("landing.plan_plus_name", "Plus"), desc: t("landing.plan_plus_desc", "Scan anytime. Track changes. Rebalance your routine as your skin shifts."), price: "$9", cadence: "/ month", sub: t("landing.plan_plus_sub", "or $79/yr \u00b7 cancel anytime"), features: [t("landing.plan_plus_f1", "Unlimited scans"), t("landing.plan_plus_f2", "12-month trend tracking"), t("landing.plan_plus_f3", "Weekly routine auto-tuning"), t("landing.plan_plus_f4", "Ingredient deep-dives"), t("landing.plan_plus_f5", "Shopping list sync")], cta: t("landing.plan_plus_cta", "Go Plus"), featured: true, badge: t("landing.plan_plus_badge", "Most loved") },
-              { name: t("landing.plan_pro_name", "Pro"), desc: t("landing.plan_pro_desc", "For estheticians, content creators, and anyone running skin journeys for clients."), price: "$29", cadence: "/ month", sub: t("landing.plan_pro_sub", "team pricing available"), features: [t("landing.plan_pro_f1", "Everything in Plus"), t("landing.plan_pro_f2", "Up to 25 client profiles"), t("landing.plan_pro_f3", "Before/after export (PDF)"), t("landing.plan_pro_f4", "White-label report covers"), t("landing.plan_pro_f5", "API access (500 scans/mo)")], cta: t("landing.plan_pro_cta", "Talk to sales"), featured: false },
+              { name: t("landing.plan_free_name", "Free"), desc: t("landing.plan_free_desc", "Your first AI skin scan is on us \u2014 no strings attached."), price: "\u00a30", cadence: "", sub: t("landing.plan_free_sub", "No card needed \u00b7 no expiry"), features: [t("landing.plan_free_f1", "One complete AI skin scan"), t("landing.plan_free_f2", "Full skin report with insights"), t("landing.plan_free_f3", "Personalised routine recommendation")], memberNote: t("landing.plan_free_member_note", "Already a member? You get unlimited scans \u2014 completely free."), cta: t("landing.plan_free_cta", "Scan for free"), featured: false },
+              { name: t("landing.plan_premium_name", "Premium"), desc: t("landing.plan_premium_desc", "Unlimited scans, tracking, and personalised skincare guidance \u2014 all in one plan."), price: "\u00a329", cadence: "/ month", sub: t("landing.plan_premium_sub", "cancel anytime"), features: [t("landing.plan_premium_f1", "Unlimited AI skin scans"), t("landing.plan_premium_f2", "Progress tracking over time"), t("landing.plan_premium_f3", "Routine auto-tuning as skin changes"), t("landing.plan_premium_f4", "Ingredient deep-dives"), t("landing.plan_premium_f5", "Priority support")], cta: t("landing.plan_premium_cta", "Go Premium"), featured: true, badge: t("landing.plan_premium_badge", "Best value") },
             ].map((plan) => (
               <Reveal key={plan.name}>
                 <div className={`relative flex h-full flex-col rounded-3xl border p-7 sm:p-8 transition-transform duration-300 ${
@@ -737,6 +736,11 @@ function LandingPageInner() {
                       </li>
                     ))}
                   </ul>
+                  {plan.memberNote && (
+                    <div className="mb-6 rounded-xl border border-[#5B9A8B]/20 bg-[#5B9A8B]/[0.06] px-4 py-3 text-center text-[12.5px] leading-relaxed text-[#3D7A6B]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                      {plan.memberNote}
+                    </div>
+                  )}
                   <Link
                     href={scanHref}
                     className={`flex w-full items-center justify-center gap-2 rounded-full py-3.5 text-sm font-medium transition-all hover:-translate-y-px ${
@@ -755,7 +759,7 @@ function LandingPageInner() {
 
           <Reveal>
             <p className="mt-8 text-center text-xs tracking-wide text-[hsl(240,10%,46%)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-              {t("landing.pricing_disclaimer", "Prices in USD. No hidden fees. You own your scan data \u2014 export or delete anytime.")}
+              {t("landing.pricing_disclaimer", "Prices in GBP. No hidden fees. Cancel anytime.")}
             </p>
           </Reveal>
         </div>
