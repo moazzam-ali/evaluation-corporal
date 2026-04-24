@@ -431,20 +431,28 @@ export async function POST(request) {
 
     console.log(`[analyze] ID: ${id}, image: ${imageBuffer.length} bytes (${imageValidation.mime}), lang: ${lng}`);
 
-    // ── Step 1: Upload to Cloudinary ──
+    // ── Step 1: Upload to Cloudinary (3 attempts) ──
     let imageUrl;
-    try {
-      const cloudResult = await uploadToCloudinary(imageBuffer, `skin-${id}.jpg`);
-      imageUrl = cloudResult.url;
-      steps.cloudinary.status = "success";
-      steps.cloudinary.url = imageUrl;
-      console.log(`[analyze] Step 1/7 Cloudinary OK: ${imageUrl}`);
-    } catch (err) {
-      steps.cloudinary.status = "failed";
-      steps.cloudinary.error = err.message;
-      // Fallback to base64 so analysis can still proceed
-      imageUrl = `data:${imageValidation.mime};base64,${imageBuffer.toString("base64")}`;
-      console.warn(`[analyze] Step 1/7 Cloudinary failed (using base64 fallback): ${err.message}`);
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const cloudResult = await uploadToCloudinary(imageBuffer, `skin-${id}.jpg`);
+        imageUrl = cloudResult.url;
+        steps.cloudinary.status = "success";
+        steps.cloudinary.url = imageUrl;
+        console.log(`[analyze] Step 1/7 Cloudinary OK (attempt ${attempt}): ${imageUrl}`);
+        break;
+      } catch (err) {
+        console.warn(`[analyze] Step 1/7 Cloudinary attempt ${attempt}/3 failed: ${err.message}`);
+        if (attempt === 3) {
+          steps.cloudinary.status = "failed";
+          steps.cloudinary.error = err.message;
+          // Fallback to base64 so AI analysis can still proceed, but image won't persist on reload
+          imageUrl = `data:${imageValidation.mime};base64,${imageBuffer.toString("base64")}`;
+          console.warn(`[analyze] Step 1/7 Cloudinary exhausted retries, using base64 fallback`);
+        } else {
+          await new Promise((r) => setTimeout(r, 1000 * attempt));
+        }
+      }
     }
 
     // ── Step 2: AI Analysis (blocking — the core of the flow) ──
