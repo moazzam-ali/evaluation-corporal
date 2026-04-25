@@ -38,7 +38,7 @@ function sanitizeMessage(message) {
  * Send a message to a single Telegram chat with retry logic.
  * 3 attempts, exponential backoff.
  */
-async function sendTelegramMessage(botApiKey, chatID, message, inlineKeyboards, maxRetries = 3) {
+async function sendTelegramMessage(botApiKey, chatID, message, { inlineKeyboards, replyToMessageId } = {}, maxRetries = 3) {
   const telegramApiUrl = `https://api.telegram.org/bot${botApiKey}/sendMessage`;
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -50,6 +50,10 @@ async function sendTelegramMessage(botApiKey, chatID, message, inlineKeyboards, 
         text: message,
         parse_mode: "Markdown",
       };
+
+      if (replyToMessageId) {
+        body.reply_to_message_id = replyToMessageId;
+      }
 
       if (inlineKeyboards) {
         body.reply_markup = { inline_keyboard: inlineKeyboards };
@@ -85,8 +89,9 @@ async function sendTelegramMessage(botApiKey, chatID, message, inlineKeyboards, 
 
 /**
  * Build and send Telegram messages for a skin analysis.
- *   Message 1: Member details + Questionnaire summary
- *   Message 2: Analysis results + Report link with inline keyboard
+ *   Message 1: Member details
+ *   Message 2: Questionnaire summary (reply to Message 1)
+ *   Message 3: Analysis results + Report link with inline keyboard (reply to Message 2)
  */
 export async function sendAnalysisToTelegram({
   chatIDs,
@@ -190,26 +195,32 @@ export async function sendAnalysisToTelegram({
     [{ text: t("telegram.buttons.telegram") || "✈️ Telegram", url: `https://t.me/${formData.phone || ""}` }],
   ];
 
-  // 2 messages: client data (profile + questionnaire), results (analysis + link)
+  // 3 messages: member details, questionnaire, analysis results + link
   const messages = [
-    memberDetailsMessage + "\n\n" + questionnaireMessage,
+    memberDetailsMessage,
+    questionnaireMessage,
     analysisResultsMessage + "\n\n" + analysisLinkMessage,
   ];
 
   // Build combined answers text for Elastic indexing (sanitized, no Markdown)
   const answersText = messages.map(sanitizeMessage).join("\n");
 
-  // Send messages to all chat IDs
+  // Send messages to all chat IDs, chaining each as a reply to the previous
   console.log("[telegram] Sending messages to", chatIDs.length, "chat IDs...");
   const results_ = [];
   const failedChats = [];
 
   for (const chatID of chatIDs) {
     try {
+      let lastMessageId = null;
       for (let i = 0; i < messages.length; i++) {
-        // Attach inline keyboard only with the last message
         const keyboard = i === messages.length - 1 ? inlineKeyboards : undefined;
-        await sendTelegramMessage(botApiKey, chatID, messages[i], keyboard);
+        const result = await sendTelegramMessage(botApiKey, chatID, messages[i], {
+          inlineKeyboards: keyboard,
+          replyToMessageId: lastMessageId,
+        });
+        // Capture message_id so the next message replies to this one
+        lastMessageId = result?.result?.message_id || null;
       }
       results_.push({ chatID, success: true });
     } catch (error) {
