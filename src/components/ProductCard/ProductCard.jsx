@@ -4,9 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import Image from "next/image";
-import { Droplets, Pill, Sparkles, FlaskConical, ChevronRight } from "lucide-react";
 
-export default function ProductCard({ product, delay = 0, rank }) {
+export default function ProductCard({ product, delay = 0 }) {
   const { t } = useTranslation();
   const [imgError, setImgError] = useState(false);
   const [showIngredients, setShowIngredients] = useState(false);
@@ -16,124 +15,161 @@ export default function ProductCard({ product, delay = 0, rank }) {
   const topIngredients = product.keyIngredients?.slice(0, 3) || [];
 
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.5, ease: "easeOut" }}
-      className="group"
+      className="flex flex-col overflow-hidden"
+      style={{
+        background: "white",
+        border: "1px solid rgba(26,26,46,0.10)",
+        borderRadius: "20px",
+        transition: "transform 280ms cubic-bezier(0.22,1,0.36,1), box-shadow 280ms",
+      }}
+      whileHover={{ y: -3, boxShadow: "0 14px 32px rgba(26,26,46,0.10)" }}
     >
-      <div className="relative overflow-hidden rounded-2xl border bg-card transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-        {/* Priority rank indicator */}
+      {/* Image area */}
+      <div
+        className="relative overflow-hidden"
+        style={{
+          aspectRatio: "4 / 3",
+          background: isIngestible
+            ? "linear-gradient(160deg, #FAF1DE 0%, #F4D9A6 100%)"
+            : "linear-gradient(160deg, #FDEEF1 0%, #F9D1D9 100%)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}
+      >
+        {showImage ? (
+          <Image
+            src={product.image}
+            alt={product.name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <span style={{ width: "96px", height: "96px", color: "rgba(255,255,255,0.6)" }}>
+            {isIngestible ? (
+              <svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M10.5 3.5L3.5 10.5a4.95 4.95 0 0 0 7 7l7-7a4.95 4.95 0 0 0-7-7z"/><path opacity="0.4" d="M10.5 3.5L7 7l7 7 3.5-3.5a4.95 4.95 0 0 0-7-7z"/></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" width="100%" height="100%" fill="currentColor"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.32 0z" opacity="0.6"/></svg>
+            )}
+          </span>
+        )}
+
+        {/* Priority badge */}
         {product.priority && (
-          <div className="absolute left-0 top-5 z-10 flex items-center gap-1.5 rounded-r-full bg-primary px-3 py-1 shadow-md">
-            <Sparkles className="h-3 w-3 text-primary-foreground" />
-            <span className="text-[11px] font-semibold text-primary-foreground">
-              #{product.priority} {t("products.pick", "Pick")}
-            </span>
+          <span
+            className="absolute top-4 left-0 inline-flex items-center gap-1.5"
+            style={{
+              padding: "5px 12px", background: "#1A1A2E", color: "white",
+              fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 600,
+              letterSpacing: "0.1em", textTransform: "uppercase",
+              borderRadius: "0 999px 999px 0",
+            }}
+          >
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            #{product.priority} {t("products.pick", "pick")}
+          </span>
+        )}
+
+        {/* Category pill */}
+        <span
+          className="absolute bottom-3.5 right-3.5 inline-flex items-center gap-1.5"
+          style={{
+            background: isIngestible ? "rgba(212,160,83,0.94)" : "rgba(255,255,255,0.94)",
+            color: isIngestible ? "white" : "#1A1A2E",
+            padding: "5px 10px", borderRadius: "999px",
+            fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 500,
+            letterSpacing: "0.04em", backdropFilter: "blur(6px)",
+          }}
+        >
+          {isIngestible ? (
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.5 3.5L3.5 10.5a4.95 4.95 0 0 0 7 7l7-7a4.95 4.95 0 0 0-7-7z"/></svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.32 0z"/></svg>
+          )}
+          {isIngestible ? t("products.supplement", "Supplement") : product.category}
+        </span>
+      </div>
+
+      {/* Body */}
+      <div className="flex flex-col gap-3 flex-1" style={{ padding: "18px 20px 20px" }}>
+        <div className="flex flex-col gap-0.5">
+          <h3 style={{ fontFamily: "var(--font-dm-sans)", fontSize: "14.5px", fontWeight: 600, margin: 0, color: "#1A1A2E", lineHeight: 1.3 }}>
+            {product.name}
+          </h3>
+          <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: "#6B6B7A" }}>
+            {product.size}
+          </span>
+        </div>
+
+        {product.reason && (
+          <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", color: "#44444F", lineHeight: 1.55, margin: 0 }}>
+            {product.reason}
+          </p>
+        )}
+
+        {/* Key ingredient pills */}
+        {topIngredients.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {topIngredients.map((ing, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setShowIngredients(!showIngredients)}
+                className="inline-flex items-center gap-1"
+                style={{
+                  background: "#F6EDE3", color: "#1A1A2E",
+                  padding: "4px 10px", borderRadius: "999px",
+                  fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 500,
+                  border: "1px solid rgba(26,26,46,0.10)", cursor: "pointer",
+                }}
+              >
+                <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#E8728A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 2v6L4 17a3 3 0 0 0 3 4h10a3 3 0 0 0 3-4l-5-9V2"/><line x1="9" y1="2" x2="15" y2="2"/></svg>
+                {ing.name?.split("(")[0].trim()}
+              </button>
+            ))}
           </div>
         )}
 
-        {/* Image area */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-muted/50 to-accent/5">
-          {showImage ? (
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center">
-              {isIngestible ? (
-                <Pill className="h-16 w-16 text-secondary/30" />
-              ) : (
-                <Droplets className="h-16 w-16 text-primary/15" />
-              )}
-            </div>
+        {/* Expandable ingredient details */}
+        <AnimatePresence>
+          {showIngredients && product.keyIngredients?.length > 0 && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <div className="space-y-1.5 rounded-xl p-3" style={{ background: "#FBF6F1" }}>
+                {product.keyIngredients.slice(0, 4).map((ing, i) => (
+                  <p key={i} style={{ fontSize: "11px", lineHeight: 1.5, color: "#6B6B7A", margin: 0 }}>
+                    <span style={{ fontWeight: 600, color: "#1A1A2E" }}>{ing.name}</span>
+                    <span style={{ margin: "0 4px", color: "rgba(26,26,46,0.16)" }}>—</span>
+                    {ing.role}
+                  </p>
+                ))}
+              </div>
+            </motion.div>
           )}
+        </AnimatePresence>
 
-          {/* Category pill — bottom of image */}
-          <div className="absolute bottom-3 right-3">
-            <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-medium backdrop-blur-md ${
-              isIngestible
-                ? "bg-secondary/90 text-white"
-                : "bg-white/90 text-foreground"
-            }`}>
-              {isIngestible ? (
-                <Pill className="h-2.5 w-2.5" />
-              ) : (
-                <Droplets className="h-2.5 w-2.5" />
-              )}
-              {isIngestible ? t("products.supplement", "Supplement") : product.category}
+        {/* How to use */}
+        {product.howToUse && (
+          <div
+            className="flex gap-2 items-start mt-auto"
+            style={{ background: "#FBF6F1", borderRadius: "10px", padding: "10px 12px" }}
+          >
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#E8728A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span style={{ fontFamily: "var(--font-inter)", fontSize: "12px", color: "#6B6B7A", lineHeight: 1.5 }}>
+              {product.howToUse}
             </span>
           </div>
-        </div>
-
-        {/* Content */}
-        <div className="p-4">
-          {/* Name + size */}
-          <h3 className="text-sm font-bold leading-snug">{product.name}</h3>
-          <p className="mt-0.5 text-[11px] text-muted-foreground">{product.size}</p>
-
-          {/* AI reason — the star of the card */}
-          {product.reason && (
-            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-              {product.reason}
-            </p>
-          )}
-
-          {/* Key ingredients as compact pills */}
-          {topIngredients.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {topIngredients.map((ing, i) => (
-                <button
-                  key={i}
-                  onClick={() => setShowIngredients(!showIngredients)}
-                  className="inline-flex items-center gap-1 rounded-full border border-border/60 bg-muted/50 px-2 py-0.5 text-[10px] text-muted-foreground transition-colors hover:border-accent hover:bg-accent/10 hover:text-foreground"
-                >
-                  <FlaskConical className="h-2.5 w-2.5" />
-                  {ing.name.split("(")[0].trim()}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Expandable ingredient details */}
-          <AnimatePresence>
-            {showIngredients && topIngredients.length > 0 && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="overflow-hidden"
-              >
-                <div className="mt-3 space-y-1.5 rounded-lg bg-muted/30 p-3">
-                  {product.keyIngredients.slice(0, 4).map((ing, i) => (
-                    <p key={i} className="text-[11px] leading-snug text-muted-foreground">
-                      <span className="font-semibold text-foreground">{ing.name}</span>
-                      <span className="mx-1 text-border">—</span>
-                      {ing.role}
-                    </p>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* How to use — subtle hint */}
-          {product.howToUse && (
-            <div className="mt-3 flex items-start gap-1.5 rounded-lg bg-accent/5 px-3 py-2">
-              <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-accent-foreground/50" />
-              <p className="text-[11px] leading-snug text-muted-foreground line-clamp-2">
-                {product.howToUse}
-              </p>
-            </div>
-          )}
-        </div>
+        )}
       </div>
-    </motion.div>
+    </motion.article>
   );
 }

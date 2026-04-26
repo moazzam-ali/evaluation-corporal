@@ -2,7 +2,9 @@
   "nav": {
     "brand": "Beauty & Glow AI",
     "home": "Beranda",
-    "scan": "Analisis Kulit"
+    "scan": "Analisis Kulit",
+    "config": "Konfigurasi",
+    "saved": "Disimpan otomatis"
   },
   "home": {
     "title": "Konfigurasi",
@@ -172,6 +174,19 @@
     "tip3": "Hadapkan wajah langsung ke kamera",
     "tip4": "Pastikan seluruh wajah Anda terlihat",
     "no_photo": "Silakan ambil atau unggah foto terlebih dahulu.",
+    "rail_eyebrow": "Analisis kulit",
+    "rail_title_1": "Ceritakan tentang",
+    "rail_title_2": "kulit Anda.",
+    "rail_sub": "Delapan langkah singkat dan satu foto. Sekitar tiga menit — rutinitas Anda dibangun dari sini.",
+    "step_label": "Langkah",
+    "time_estimate": "sekitar 3 menit total",
+    "camera_help_title": "Tahan stabil — kami otomatis menangkap frame paling tajam.",
+    "camera_help_body": "Pastikan seluruh wajah Anda terlihat di dalam oval putus-putus, dengan pencahayaan merata di kedua sisi.",
+    "upload_title_1": "Seret & lepas foto Anda di sini,",
+    "upload_title_2": "atau klik untuk menelusuri.",
+    "upload_browse": "Pilih file",
+    "upload_help_title": "Foto Anda diproses dengan aman.",
+    "upload_help_body": "Gambar Anda dikirim melalui HTTPS dan disimpan dengan aman untuk laporan Anda. Hanya Anda yang dapat mengaksesnya.",
     "navigation": {
       "next": "Selanjutnya",
       "previous": "Sebelumnya",
@@ -182,6 +197,10 @@
       "nav": "Info Dasar",
       "title": "Informasi Dasar",
       "subtitle": "Ceritakan tentang diri Anda",
+      "display_title": "Informasi",
+      "display_title_em": "dasar",
+      "display_sub": "Ceritakan tentang diri Anda — kami menggunakan ini untuk menyesuaikan laporan dan mengirimkan hasil kepada Anda.",
+      "email_help": "Kami mengirim laporan lengkap dan rutinitas Anda ke sini. Tidak pernah digunakan untuk pemasaran.",
       "name": "Nama Depan",
       "surname": "Nama Belakang",
       "email": "Email",
@@ -193,6 +212,9 @@
     "step2": {
       "nav": "Tujuan Utama",
       "title": "Tujuan Utama",
+      "display_title": "Tujuan",
+      "display_title_em": "utama Anda",
+      "display_sub": "Pilih hingga tiga kekhawatiran. Jawaban pertama menentukan urutan produk Anda; sisanya menyempurnakan.",
       "concerns_label": "Apa yang paling mengkhawatirkan Anda tentang kulit saat ini? (maksimal 3)",
       "concerns": {
         "dryness": "Kekeringan / Ketarikan",
@@ -221,6 +243,9 @@
     "step3": {
       "nav": "Persepsi Kulit",
       "title": "Bagaimana Anda Melihat Kulit Anda",
+      "display_title": "Bagaimana Anda",
+      "display_title_em": "melihat kulit Anda",
+      "display_sub": "Cara Anda mendeskripsikan kulit itu penting — kami membandingkannya dengan apa yang dilihat kamera nanti.",
       "skin_type_label": "Bagaimana Anda biasanya mendeskripsikan kulit Anda?",
       "skin_type": {
         "dry": "Kering",
@@ -251,6 +276,9 @@
     "step4": {
       "nav": "Rutinitas",
       "title": "Rutinitas Saat Ini",
+      "display_title": "Rutinitas",
+      "display_title_em": "Anda saat ini",
+      "display_sub": "Kami tidak akan meminta Anda membuang apa pun. Kami akan menyesuaikan dengan apa yang sudah berhasil.",
       "frequency_label": "Apakah Anda biasanya memiliki rutinitas perawatan wajah?",
       "frequency": {
         "morning_only": "Hanya di pagi hari",
@@ -282,6 +310,9 @@
     "step5": {
       "nav": "Sensitivitas",
       "title": "Sensitivitas & Toleransi",
+      "display_title": "Sensitivitas &",
+      "display_title_em": "toleransi",
+      "display_sub": "Seberapa toleran kulit Anda menentukan bahan aktif apa yang kami rekomendasikan, dan pada konsentrasi berapa.",
       "reaction_label": "Apakah kulit Anda mudah bereaksi terhadap beberapa produk?",
       "reaction": {
         "yes_a_lot": "Ya, sangat",
@@ -304,6 +335,9 @@
     "step6": {
       "nav": "Kebiasaan",
       "title": "Kebiasaan yang Mempengaruhi Kulit Anda",
+      "display_title": "Kebiasaan yang",
+      "display_title_em": "mempengaruhi kulit Anda",
+      "display_sub": "Tidur, matahari, dan air memiliki dampak lebih besar dari kebanyakan produk. Kami memperhitungkannya.",
       "sunscreenUse_label": "Apakah Anda menggunakan tabir surya setiap hari?",
       "sunscreenUse": {
         "daily": "Ya, setiap hari",
@@ -341,6 +375,9 @@
     "step7": {
       "nav": "Pengalaman",
       "title": "Pengalaman Sebelumnya",
+      "display_title": "Pengalaman",
+      "display_title_em": "Anda sebelumnya",
+      "display_sub": "Kami belajar dari apa yang tidak berhasil sama banyaknya dengan apa yang berhasil.",
       "history_label": "Pernahkah Anda mencoba perawatan atau rutinitas untuk memperbaiki kulit sebelumnya?",
       "history": {
         "yes_worked": "Ya, dan hasilnya bagus",
@@ -361,6 +398,9 @@
     "step8": {
       "nav": "Tujuan",
       "title": "Tujuan Anda",
+      "display_title": "Tujuan",
+      "display_title_em": "Anda",
+      "display_sub": "Seberapa banyak rutinitas, dan pada tingkat investasi berapa — agar rekomendasi benar-benar cocok.",
       "looking_for_label": "Apa yang sedang Anda cari saat ini?",
       "looking_for": {
         "basic_routine": "Rutinitas dasar",
@@ -384,7 +424,18 @@
     "step9": {
       "nav": "Foto",
       "title": "Unggah Foto Anda",
-      "subtitle": "Ambil foto wajah yang jelas atau unggah foto yang sudah ada untuk analisis AI."
+      "subtitle": "Ambil foto wajah yang jelas atau unggah foto yang sudah ada untuk analisis AI.",
+      "display_title": "Unggah",
+      "display_title_em": "foto Anda",
+      "display_sub": "Ambil foto wajah yang jelas atau unggah foto yang sudah ada untuk analisis AI."
+    },
+    "skin_types": {
+      "dry": "Kering",
+      "oily": "Berminyak",
+      "combination": "Kombinasi",
+      "sensitive": "Sensitif",
+      "dehydrated": "Dehidrasi",
+      "normal": "Normal"
     }
   },
   "results": {
@@ -395,14 +446,38 @@
     "recommendations_title": "Produk yang Direkomendasikan",
     "summary_title": "Ringkasan",
     "share": "Bagikan Hasil",
-    "new_scan": "Pemindaian Baru",
+    "new_scan": "Jalankan pemindaian baru",
     "view_responses": "Lihat Jawaban Saya",
     "form_data_title": "Jawaban Pemindaian Anda",
     "form_data_desc": "Semua informasi yang Anda berikan selama pemindaian kulit.",
     "recommendations_subtitle": "Dipersonalisasi untuk analisis kulit Anda",
     "analysis_title": "Analisis Mendalam",
-    "tips_title": "Tips yang Dipersonalisasi",
+    "tips_title": "Tips yang dipersonalisasi",
     "routine_title": "Rutinitas Anda",
+    "clinical_eyebrow": "Laporan klinis",
+    "clinical_title": "Penilaian kulit",
+    "clinical_for": "untuk",
+    "metrics_analysed": "metrik dianalisis",
+    "metrics_eyebrow": "Metrik detail",
+    "metrics_title_1": "Dua belas pembacaan,",
+    "metrics_title_2": "satu wajah.",
+    "metrics_lede": "Setiap metrik diberi skor 0–100 terhadap kelompok demografis Anda. Ketuk kartu untuk deskripsi lengkap.",
+    "insights_eyebrow": "Analisis mendalam",
+    "insights_title_1": "Apa arti angka-angka",
+    "insights_title_2": "bagi Anda.",
+    "insights_lede": "Empat sudut pandang pada data yang sama — apa yang berhasil, apa yang bermasalah, dampak kebiasaan Anda, dan ke mana harus bergerak selanjutnya.",
+    "tips_eyebrow": "Untuk Anda · Bulan ini",
+    "tips_title_1": "Lima tips,",
+    "tips_title_2": "satu rutinitas.",
+    "tips_lede": "Penyesuaian kecil, berurutan. Rutinitas dibangun berdasarkan kekhawatiran Anda — urutan, frekuensi, dan waktu sudah termasuk.",
+    "products_eyebrow": "Produk yang direkomendasikan",
+    "products_title_1": "Dikurasi untuk",
+    "products_title_2": "pembacaan Anda.",
+    "products_lede": "Dipersonalisasi untuk analisis kulit Anda — pilihan diurutkan berdasarkan seberapa langsung menargetkan metrik terendah Anda.",
+    "score_good": "Kulit dalam keseimbangan yang baik secara keseluruhan",
+    "score_normal": "Beberapa area perlu perhatian",
+    "score_alert": "Beberapa area perlu perawatan",
+    "footnote": "Alat ini hanya ditujukan untuk kesadaran kosmetik. Skor kulit dapat bervariasi berdasarkan riasan yang digunakan. Hasil ini bukan pengganti saran dermatologis profesional.",
     "status": {
       "good": "Baik",
       "normal": "Normal",
@@ -445,13 +520,15 @@
   "products": {
     "view": "Lihat Produk",
     "priority": "Prioritas",
-    "reason": "Mengapa kami merekomendasikan ini"
+    "reason": "Mengapa kami merekomendasikan ini",
+    "pick": "pilihan",
+    "supplement": "Suplemen"
   },
   "privacy": {
     "title": "Kebijakan Privasi",
     "intro": "Privasi Anda penting bagi kami. Kebijakan ini menjelaskan cara kami menangani data Anda.",
     "data_handling_title": "Penanganan Data",
-    "data_handling": "Gambar wajah ditransmisikan melalui HTTPS dan diproses tetapi TIDAK disimpan secara permanen. Hanya hasil analisis JSON dan email Anda yang disimpan di database kami. Gambar secara otomatis dihapus setelah 24 jam.",
+    "data_handling": "Gambar wajah dikirim melalui HTTPS dan disimpan dengan aman. Hasil analisis JSON, email Anda, dan foto pemindaian Anda disimpan di sistem kami untuk menyediakan laporan Anda.",
     "consent_title": "Persetujuan",
     "consent": "Dengan menggunakan layanan kami, Anda menyetujui pengumpulan dan penggunaan informasi sesuai dengan kebijakan ini.",
     "contact_title": "Kontak",
@@ -461,6 +538,9 @@
     "loading": "Memuat...",
     "error": "Terjadi kesalahan",
     "retry": "Coba Lagi",
-    "back": "Kembali"
+    "back": "Kembali",
+    "cancel": "Batal",
+    "optional": "Opsional",
+    "timeout": "Analisis terlalu lama. Silakan coba lagi."
   }
 }

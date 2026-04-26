@@ -1,9 +1,5 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
 const REACTION_OPTIONS = ["yes_a_lot", "sometimes", "no", "dont_know"];
 const SIGN_OPTIONS = ["redness", "itching", "flaking", "excess_shine", "blemishes", "dark_spots", "tightness", "none"];
 
@@ -26,31 +22,36 @@ export default function Step5Sensitivity({ form, t }) {
   };
 
   return (
-    <div className="space-y-5">
-      <h2 className="text-lg font-semibold">{t("scan.step5.title", "Sensitivity & Tolerance")}</h2>
-
-      <div className="space-y-3">
-        <Label>{t("scan.step5.reaction_label", "Does your skin react easily to some products?")}</Label>
-        <RadioGroup value={reactionLevel} onValueChange={(v) => setValue("reactionLevel", v, { shouldValidate: true })} className="grid gap-2 sm:grid-cols-2">
+    <div className="flex flex-col gap-[22px]">
+      <div className="flex flex-col gap-2">
+        <label className="scan-label">{t("scan.step5.reaction_label", "Does your skin react easily to some products?")}</label>
+        <div className="grid gap-2 sm:grid-cols-2">
           {REACTION_OPTIONS.map((key) => (
-            <label key={key} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${reactionLevel === key ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}>
-              <RadioGroupItem value={key} />
-              <span className="text-sm">{t(`scan.step5.reaction.${key}`, key)}</span>
+            <label key={key} className={`scan-radio ${reactionLevel === key ? "is-checked" : ""}`} onClick={() => setValue("reactionLevel", key, { shouldValidate: true })}>
+              <input type="radio" checked={reactionLevel === key} onChange={() => setValue("reactionLevel", key, { shouldValidate: true })} className="sr-only" />
+              <span className="scan-radio-dot" />
+              <span>{t(`scan.step5.reaction.${key}`, key)}</span>
             </label>
           ))}
-        </RadioGroup>
-        {errors.reactionLevel && <p className="text-xs text-destructive">{errors.reactionLevel.message}</p>}
+        </div>
+        {errors.reactionLevel && <p className="scan-error">{errors.reactionLevel.message}</p>}
       </div>
 
-      <div className="space-y-3">
-        <Label>{t("scan.step5.signs_label", "Have you noticed any of these signs lately?")}</Label>
+      <div className="flex flex-col gap-2">
+        <label className="scan-label">{t("scan.step5.signs_label", "Have you noticed any of these signs lately?")}</label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {SIGN_OPTIONS.map((key) => (
-            <label key={key} className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${recentSigns.includes(key) ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"}`}>
-              <Checkbox checked={recentSigns.includes(key)} onCheckedChange={() => toggleSign(key)} />
-              <span className="text-sm">{t(`scan.step5.signs.${key}`, key)}</span>
-            </label>
-          ))}
+          {SIGN_OPTIONS.map((key) => {
+            const checked = recentSigns.includes(key);
+            return (
+              <label key={key} className={`scan-checkbox ${checked ? "is-checked" : ""}`}>
+                <input type="checkbox" checked={checked} onChange={() => toggleSign(key)} className="sr-only" />
+                <span className="scan-checkbox-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <span>{t(`scan.step5.signs.${key}`, key)}</span>
+              </label>
+            );
+          })}
         </div>
       </div>
     </div>

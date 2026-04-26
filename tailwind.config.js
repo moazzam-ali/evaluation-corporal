@@ -8,7 +8,29 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ['var(--font-cormorant)', 'Georgia', 'serif'],
+        sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+      },
       colors: {
+        navy: '#1A1A2E',
+        'navy-soft': '#2A2A42',
+        rose: '#E8728A',
+        'rose-deep': '#D45571',
+        blush: '#F4A7B9',
+        'blush-soft': '#F9D1D9',
+        'blush-wash': '#FDEEF1',
+        paper: '#FBF6F1',
+        'paper-strong': '#F6EDE3',
+        cream: '#FDF8F3',
+        sage: '#5B9A8B',
+        'sage-wash': '#E6F1ED',
+        amber: '#D4A053',
+        'amber-wash': '#FAF1DE',
+        'status-good': '#5B9A8B',
+        'status-normal': '#D4A053',
+        'status-alert': '#E8728A',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

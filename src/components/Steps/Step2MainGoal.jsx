@@ -1,14 +1,9 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-
 const CONCERN_OPTIONS = [
   "dryness", "wrinkles", "sagging", "dark_spots", "dullness",
   "blemishes", "pores", "eye_area", "sensitivity", "other",
 ];
-
 const ZONE_OPTIONS = ["full_face", "eye_contour", "neck", "hands", "body"];
 
 export default function Step2MainGoal({ form, t }) {
@@ -33,69 +28,56 @@ export default function Step2MainGoal({ form, t }) {
   };
 
   return (
-    <div className="space-y-5">
-      <h2 className="text-lg font-semibold">{t("scan.step2.title", "Main Goal")}</h2>
-
-      {/* Concerns — max 3 */}
-      <div className="space-y-3">
-        <Label>{t("scan.step2.concerns_label", "What concerns you most about your skin right now? (up to 3)")}</Label>
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {CONCERN_OPTIONS.map((key) => (
-            <label
-              key={key}
-              className={`flex items-center gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${
-                skinConcerns.includes(key) ? "border-primary bg-primary/5" : "border-border hover:border-primary/50"
-              } ${skinConcerns.length >= 3 && !skinConcerns.includes(key) ? "opacity-40 cursor-not-allowed" : ""}`}
-            >
-              <Checkbox
-                checked={skinConcerns.includes(key)}
-                onCheckedChange={() => toggleConcern(key)}
-                disabled={skinConcerns.length >= 3 && !skinConcerns.includes(key)}
-              />
-              <span className="text-sm">{t(`scan.step2.concerns.${key}`, key)}</span>
-            </label>
-          ))}
+    <div className="flex flex-col gap-[22px]">
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center justify-between mb-1">
+          <label className="scan-label">{t("scan.step2.concerns_label", "What concerns you most about your skin right now?")}</label>
+          <span className="scan-counter">{skinConcerns.length} of 3</span>
         </div>
-        {errors.skinConcerns && <p className="text-xs text-destructive">{errors.skinConcerns.message}</p>}
-
-        {/* "Other" text field — shown when "other" is selected */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {CONCERN_OPTIONS.map((key) => {
+            const checked = skinConcerns.includes(key);
+            const disabled = skinConcerns.length >= 3 && !checked;
+            return (
+              <label key={key} className={`scan-checkbox ${checked ? "is-checked" : ""} ${disabled ? "is-disabled" : ""}`}>
+                <input type="checkbox" checked={checked} onChange={() => toggleConcern(key)} disabled={disabled} className="sr-only" />
+                <span className="scan-checkbox-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <span>{t(`scan.step2.concerns.${key}`, key)}</span>
+              </label>
+            );
+          })}
+        </div>
+        {errors.skinConcerns && <p className="scan-error">{errors.skinConcerns.message}</p>}
         {skinConcerns.includes("other") && (
-          <Input
-            {...register("skinConcernsOther")}
-            placeholder={t("scan.step2.concerns_other_placeholder", "Please describe...")}
-            className="mt-2"
-          />
+          <input className="scan-input mt-2" {...register("skinConcernsOther")} placeholder={t("scan.step2.concerns_other_placeholder", "Please describe...")} />
         )}
       </div>
 
-      {/* Priority concern */}
-      <div className="space-y-2">
-        <Label>{t("scan.step2.priority_label", "If you could improve just one thing about your skin, what would it be?")}</Label>
-        <Input {...register("priorityConcern")} placeholder={t("scan.step2.priority_placeholder", "Describe your top priority...")} />
-        {errors.priorityConcern && <p className="text-xs text-destructive">{errors.priorityConcern.message}</p>}
+      <div className="flex flex-col gap-1.5">
+        <label className="scan-label">{t("scan.step2.priority_label", "If you could improve just one thing about your skin, what would it be?")}</label>
+        <textarea className="scan-textarea" placeholder={t("scan.step2.priority_placeholder", "Describe your top priority...")} {...register("priorityConcern")} />
+        {errors.priorityConcern && <p className="scan-error">{errors.priorityConcern.message}</p>}
       </div>
 
-      {/* Improvement zones */}
-      <div className="space-y-3">
-        <Label>{t("scan.step2.zones_label", "Where would you like to see the most change?")}</Label>
+      <div className="flex flex-col gap-1.5">
+        <label className="scan-label">{t("scan.step2.zones_label", "Where would you like to see the most change?")}</label>
         <div className="flex flex-wrap gap-2">
-          {ZONE_OPTIONS.map((key) => (
-            <label
-              key={key}
-              className={`flex items-center gap-2 rounded-full border px-4 py-2 cursor-pointer text-sm transition-colors ${
-                improvementZones.includes(key) ? "border-primary bg-primary/5 text-primary" : "border-border hover:border-primary/50"
-              }`}
-            >
-              <Checkbox
-                checked={improvementZones.includes(key)}
-                onCheckedChange={() => toggleZone(key)}
-                className="h-3.5 w-3.5"
-              />
-              {t(`scan.step2.zones.${key}`, key)}
-            </label>
-          ))}
+          {ZONE_OPTIONS.map((key) => {
+            const checked = improvementZones.includes(key);
+            return (
+              <label key={key} className={`scan-chip ${checked ? "is-checked" : ""}`}>
+                <input type="checkbox" checked={checked} onChange={() => toggleZone(key)} className="sr-only" />
+                <span className="scan-chip-tick">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                {t(`scan.step2.zones.${key}`, key)}
+              </label>
+            );
+          })}
         </div>
-        {errors.improvementZones && <p className="text-xs text-destructive">{errors.improvementZones.message}</p>}
+        {errors.improvementZones && <p className="scan-error">{errors.improvementZones.message}</p>}
       </div>
     </div>
   );

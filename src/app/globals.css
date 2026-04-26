@@ -32,6 +32,44 @@
     --status-good: 163 31% 48%;
     --status-normal: 37 58% 58%;
     --status-alert: 349 73% 68%;
+
+    /* Brand core (flat hex) */
+    --bg-navy: #1A1A2E;
+    --bg-navy-soft: #2A2A42;
+    --blush: #F4A7B9;
+    --blush-soft: #F9D1D9;
+    --rose: #E8728A;
+    --rose-deep: #D45571;
+
+    /* Warm paper palette */
+    --paper: #FBF6F1;
+    --paper-strong: #F6EDE3;
+    --cream: #FDF8F3;
+    --blush-wash: #FDEEF1;
+    --sage-wash: #E6F1ED;
+    --amber-wash: #FAF1DE;
+    --line: rgba(26, 26, 46, 0.10);
+    --line-strong: rgba(26, 26, 46, 0.16);
+    --muted-fg: #6B6B7A;
+
+    /* Status hex */
+    --sage: #5B9A8B;
+    --amber: #D4A053;
+
+    /* Radii */
+    --radius-pill: 999px;
+    --radius-xl: 16px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(26, 26, 46, 0.04);
+    --shadow-md: 0 4px 12px rgba(26, 26, 46, 0.06);
+    --shadow-lg: 0 12px 28px rgba(26, 26, 46, 0.08);
+    --shadow-rose: 0 8px 24px rgba(232, 114, 138, 0.20);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --dur-fast: 180ms;
+    --dur-med: 320ms;
   }
 
   .dark {
@@ -67,8 +105,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: var(--paper, #FBF6F1);
     font-family: var(--font-inter), sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
@@ -86,6 +126,123 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.5);
 }
+
+/* ---- Scan form component styles (from design system) ---- */
+.scan-label {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: #1A1A2E; letter-spacing: 0.02em;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.scan-input, .scan-textarea, .scan-select {
+  width: 100%;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 14px; color: #1A1A2E;
+  background: white;
+  border: 1.5px solid rgba(26,26,46,0.10);
+  border-radius: 12px; padding: 12px 14px;
+  transition: border-color 180ms, box-shadow 180ms;
+  outline: none;
+}
+.scan-input::placeholder, .scan-textarea::placeholder { color: #A8A8B5; }
+.scan-input:hover, .scan-textarea:hover, .scan-select:hover { border-color: rgba(26,26,46,0.16); }
+.scan-input:focus, .scan-textarea:focus, .scan-select:focus {
+  border-color: #1A1A2E;
+  box-shadow: 0 0 0 4px rgba(26,26,46,0.08);
+}
+.scan-textarea { resize: vertical; min-height: 96px; line-height: 1.55; }
+.scan-select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'><path d='M6 8l4 4 4-4' stroke='%231A1A2E' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
+}
+.scan-help {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 12px; color: #6B6B7A; line-height: 1.4;
+}
+.scan-error {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 12px; color: #C7344E;
+}
+.scan-counter {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #E8728A; background: #FDEEF1;
+  padding: 2px 8px; border-radius: 999px;
+}
+
+/* Radio card */
+.scan-radio {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: #FDF8F3; border: 1.5px solid rgba(26,26,46,0.10);
+  border-radius: 12px;
+  font-family: var(--font-inter), system-ui, sans-serif; font-size: 14px; color: #1A1A2E;
+  cursor: pointer; transition: border-color 180ms, background 180ms;
+  user-select: none;
+}
+.scan-radio:hover { border-color: rgba(26,26,46,0.16); }
+.scan-radio.is-checked { border-color: #E8728A; background: #FDEEF1; }
+.scan-radio-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid rgba(26,26,46,0.16); flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: border-color 180ms, background 180ms;
+}
+.scan-radio-dot::after {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  background: white; transform: scale(0); transition: transform 180ms cubic-bezier(0.22,1,0.36,1);
+}
+.scan-radio.is-checked .scan-radio-dot {
+  border-color: #E8728A; background: #E8728A;
+}
+.scan-radio.is-checked .scan-radio-dot::after { transform: scale(1); }
+
+/* Checkbox card */
+.scan-checkbox {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: #FDF8F3; border: 1.5px solid rgba(26,26,46,0.10);
+  border-radius: 12px;
+  font-family: var(--font-inter), system-ui, sans-serif; font-size: 14px; color: #1A1A2E;
+  cursor: pointer; transition: border-color 180ms, background 180ms;
+  user-select: none;
+}
+.scan-checkbox:hover { border-color: rgba(26,26,46,0.16); }
+.scan-checkbox.is-checked { border-color: #E8728A; background: #FDEEF1; }
+.scan-checkbox.is-disabled { opacity: 0.4; pointer-events: none; }
+.scan-checkbox-box {
+  width: 18px; height: 18px; border-radius: 5px;
+  border: 1.5px solid rgba(26,26,46,0.16); flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: border-color 180ms, background 180ms;
+}
+.scan-checkbox-box svg { width: 12px; height: 12px; color: white; opacity: 0; transform: scale(0.8); transition: opacity 180ms, transform 180ms; }
+.scan-checkbox.is-checked .scan-checkbox-box { border-color: #E8728A; background: #E8728A; }
+.scan-checkbox.is-checked .scan-checkbox-box svg { opacity: 1; transform: scale(1); }
+
+/* Chip pill */
+.scan-chip {
+  position: relative; display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px 8px 12px;
+  background: white; border: 1.5px solid rgba(26,26,46,0.10);
+  border-radius: 999px;
+  font-family: var(--font-dm-sans), system-ui, sans-serif; font-size: 13px; font-weight: 500;
+  color: #1A1A2E; cursor: pointer; transition: border-color 180ms, background 180ms;
+  user-select: none;
+}
+.scan-chip:hover { border-color: rgba(26,26,46,0.16); }
+.scan-chip.is-checked { border-color: #E8728A; background: #FDEEF1; color: #E8728A; }
+.scan-chip-tick {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid rgba(26,26,46,0.16);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: border-color 180ms, background 180ms;
+}
+.scan-chip-tick svg { width: 10px; height: 10px; color: white; opacity: 0; transition: opacity 180ms; }
+.scan-chip.is-checked .scan-chip-tick { border-color: #E8728A; background: #E8728A; }
+.scan-chip.is-checked .scan-chip-tick svg { opacity: 1; }
 
 /* Dotted background drift animation */
 @keyframes dotDrift {
