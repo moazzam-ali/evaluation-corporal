@@ -2,7 +2,9 @@
   "nav": {
     "brand": "Beauty & Glow AI",
     "home": "Início",
-    "scan": "Analisar Pele"
+    "scan": "Analisar Pele",
+    "config": "Configuração",
+    "saved": "Salvo automaticamente"
   },
   "home": {
     "title": "Configuração",
@@ -172,6 +174,19 @@
     "tip3": "Olhe diretamente para a câmera",
     "tip4": "Certifique-se de que seu rosto inteiro esteja visível",
     "no_photo": "Por favor, capture ou envie uma foto primeiro.",
+    "rail_eyebrow": "Análise de pele",
+    "rail_title_1": "Conte-nos sobre",
+    "rail_title_2": "a sua pele.",
+    "rail_sub": "Oito passos curtos e uma foto. Cerca de três minutos — a sua rotina é construída a partir disso.",
+    "step_label": "Passo",
+    "time_estimate": "cerca de 3 min no total",
+    "camera_help_title": "Segure firme — capturamos automaticamente o frame mais nítido.",
+    "camera_help_body": "Certifique-se de que seu rosto inteiro está visível dentro do oval tracejado, com iluminação uniforme dos dois lados.",
+    "upload_title_1": "Arraste e solte sua foto aqui,",
+    "upload_title_2": "ou clique para procurar.",
+    "upload_browse": "Escolher arquivo",
+    "upload_help_title": "Sua foto é processada com segurança.",
+    "upload_help_body": "Sua imagem é transmitida via HTTPS e armazenada com segurança para seu relatório. Apenas você pode acessá-la.",
     "navigation": {
       "next": "Próximo",
       "previous": "Anterior",
@@ -182,6 +197,10 @@
       "nav": "Dados Básicos",
       "title": "Informações Básicas",
       "subtitle": "Conte-nos sobre você",
+      "display_title": "Informações",
+      "display_title_em": "básicas",
+      "display_sub": "Conte-nos sobre você — usamos isso para personalizar seu relatório e enviar os resultados.",
+      "email_help": "Enviamos seu relatório completo e rotina para cá. Nunca usado para marketing.",
       "name": "Nome",
       "surname": "Sobrenome",
       "email": "E-mail",
@@ -193,6 +212,9 @@
     "step2": {
       "nav": "Objetivo Principal",
       "title": "Objetivo Principal",
+      "display_title": "Seu",
+      "display_title_em": "objetivo principal",
+      "display_sub": "Escolha até três preocupações. A primeira resposta define a ordem dos seus produtos; as demais refinam a seleção.",
       "concerns_label": "O que mais te preocupa na sua pele agora? (até 3)",
       "concerns": {
         "dryness": "Ressecamento / repuxamento",
@@ -221,6 +243,9 @@
     "step3": {
       "nav": "Percepção da Pele",
       "title": "Como Você Percebe Sua Pele",
+      "display_title": "Como você",
+      "display_title_em": "percebe sua pele",
+      "display_sub": "Como você descreve sua pele importa — cruzamos isso com o que a câmera vê depois.",
       "skin_type_label": "Como você normalmente descreveria sua pele?",
       "skin_type": {
         "dry": "Seca",
@@ -251,6 +276,9 @@
     "step4": {
       "nav": "Rotina",
       "title": "Rotina Atual",
+      "display_title": "Sua",
+      "display_title_em": "rotina atual",
+      "display_sub": "Não vamos pedir para você jogar nada fora. Vamos complementar o que já funciona.",
       "frequency_label": "Você costuma ter uma rotina facial?",
       "frequency": {
         "morning_only": "Apenas de manhã",
@@ -282,6 +310,9 @@
     "step5": {
       "nav": "Sensibilidade",
       "title": "Sensibilidade e Tolerância",
+      "display_title": "Sensibilidade &",
+      "display_title_em": "tolerância",
+      "display_sub": "O quanto sua pele é tolerante determina quais ativos recomendamos e em qual concentração.",
       "reaction_label": "Sua pele reage facilmente a alguns produtos?",
       "reaction": {
         "yes_a_lot": "Sim, muito",
@@ -304,6 +335,9 @@
     "step6": {
       "nav": "Hábitos",
       "title": "Hábitos Que Afetam Sua Pele",
+      "display_title": "Hábitos que",
+      "display_title_em": "afetam sua pele",
+      "display_sub": "Sono, sol e água têm mais impacto do que a maioria dos produtos. Levamos isso em conta.",
       "sunscreenUse_label": "Você usa protetor solar diariamente?",
       "sunscreenUse": {
         "daily": "Sim, todos os dias",
@@ -341,6 +375,9 @@
     "step7": {
       "nav": "Experiência",
       "title": "Experiência Anterior",
+      "display_title": "Sua",
+      "display_title_em": "experiência anterior",
+      "display_sub": "Aprendemos tanto com o que não funcionou quanto com o que deu certo.",
       "history_label": "Você já experimentou algum tratamento ou rotina para melhorar sua pele?",
       "history": {
         "yes_worked": "Sim, e funcionou bem",
@@ -361,6 +398,9 @@
     "step8": {
       "nav": "Objetivos",
       "title": "Seus Objetivos",
+      "display_title": "Seus",
+      "display_title_em": "objetivos",
+      "display_sub": "Quanta rotina e com qual nível de investimento — para que as recomendações realmente se encaixem.",
       "looking_for_label": "O que você está procurando agora?",
       "looking_for": {
         "basic_routine": "Uma rotina básica",
@@ -384,7 +424,18 @@
     "step9": {
       "nav": "Foto",
       "title": "Envie Sua Foto",
-      "subtitle": "Tire uma foto clara do seu rosto ou envie uma existente para a análise com IA."
+      "subtitle": "Tire uma foto clara do seu rosto ou envie uma existente para a análise com IA.",
+      "display_title": "Envie sua",
+      "display_title_em": "foto",
+      "display_sub": "Tire uma foto clara do seu rosto ou envie uma existente para a análise com IA."
+    },
+    "skin_types": {
+      "dry": "Seca",
+      "oily": "Oleosa",
+      "combination": "Mista",
+      "sensitive": "Sensível",
+      "dehydrated": "Desidratada",
+      "normal": "Normal"
     }
   },
   "results": {
@@ -395,14 +446,38 @@
     "recommendations_title": "Produtos Recomendados",
     "summary_title": "Resumo",
     "share": "Compartilhar Resultados",
-    "new_scan": "Nova Análise",
+    "new_scan": "Iniciar nova análise",
     "view_responses": "Ver Minhas Respostas",
     "form_data_title": "Suas Respostas da Análise",
     "form_data_desc": "Todas as informações que você forneceu durante a análise de pele.",
     "recommendations_subtitle": "Personalizado para a sua análise de pele",
     "analysis_title": "Análise Aprofundada",
-    "tips_title": "Dicas Personalizadas",
-    "routine_title": "Sua Rotina",
+    "tips_title": "Dicas personalizadas",
+    "routine_title": "Sua rotina",
+    "clinical_eyebrow": "Relatório clínico",
+    "clinical_title": "Avaliação da pele",
+    "clinical_for": "para",
+    "metrics_analysed": "métricas analisadas",
+    "metrics_eyebrow": "Métricas detalhadas",
+    "metrics_title_1": "Doze leituras,",
+    "metrics_title_2": "um rosto.",
+    "metrics_lede": "Cada métrica é pontuada de 0 a 100 em relação ao seu grupo demográfico. Toque em um cartão para a descrição completa.",
+    "insights_eyebrow": "Análise aprofundada",
+    "insights_title_1": "O que os números",
+    "insights_title_2": "significam para você.",
+    "insights_lede": "Quatro perspectivas sobre os mesmos dados — o que está funcionando, o que está comprometido, o que seus hábitos estão causando e para onde mirar.",
+    "tips_eyebrow": "Para você · Este mês",
+    "tips_title_1": "Cinco dicas,",
+    "tips_title_2": "uma rotina.",
+    "tips_lede": "Pequenos ajustes, sequenciados. A rotina é construída em torno das suas preocupações — ordem, frequência e horário incluídos.",
+    "products_eyebrow": "Produtos recomendados",
+    "products_title_1": "Selecionados para",
+    "products_title_2": "suas leituras.",
+    "products_lede": "Personalizado para sua análise de pele — escolhas classificadas pela relevância direta com suas métricas mais baixas.",
+    "score_good": "Pele em bom equilíbrio geral",
+    "score_normal": "Algumas áreas precisam de atenção",
+    "score_alert": "Várias áreas precisam de cuidado",
+    "footnote": "Esta ferramenta destina-se apenas a fins de conscientização cosmética. As pontuações da pele podem variar com base na maquiagem aplicada. Os resultados não substituem o aconselhamento dermatológico profissional.",
     "status": {
       "good": "Bom",
       "normal": "Normal",
@@ -445,13 +520,15 @@
   "products": {
     "view": "Ver Produto",
     "priority": "Prioridade",
-    "reason": "Por que recomendamos isto"
+    "reason": "Por que recomendamos isto",
+    "pick": "seleção",
+    "supplement": "Suplemento"
   },
   "privacy": {
     "title": "Política de Privacidade",
     "intro": "Sua privacidade é importante para nós. Esta política explica como lidamos com seus dados.",
     "data_handling_title": "Tratamento de Dados",
-    "data_handling": "As imagens faciais são transmitidas via HTTPS e processadas, mas NÃO armazenadas permanentemente. Apenas os resultados da análise JSON e seu e-mail são armazenados em nosso banco de dados. As imagens são automaticamente excluídas após 24 horas.",
+    "data_handling": "As imagens faciais são transmitidas via HTTPS e armazenadas com segurança. Os resultados da análise JSON, seu e-mail e sua foto de escaneamento são armazenados em nosso sistema para fornecer seu relatório.",
     "consent_title": "Consentimento",
     "consent": "Ao usar nosso serviço, você consente com a coleta e o uso de informações de acordo com esta política.",
     "contact_title": "Contato",
@@ -461,6 +538,9 @@
     "loading": "Carregando...",
     "error": "Algo deu errado",
     "retry": "Tentar Novamente",
-    "back": "Voltar"
+    "back": "Voltar",
+    "cancel": "Cancelar",
+    "optional": "Opcional",
+    "timeout": "A análise demorou muito. Por favor, tente novamente."
   }
 }

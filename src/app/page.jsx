@@ -124,12 +124,28 @@ function LandingPageInner() {
       >
         <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
           {/* Wordmark */}
-          <Link href="/" className="flex items-center gap-2" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>
-            <Image src="/logo-new.svg" alt="" width={32} height={32} />
-            <span className="flex items-center whitespace-nowrap text-xl text-[#1A1A2E]">
-              Beauty <span className="px-[0.12em] italic text-[#E8728A]" style={{ fontWeight: 400 }}>&amp;</span> Glow
-              <span className="mx-2 inline-block h-[0.7em] w-px bg-current opacity-35" />
-              <span className="text-[0.38em] tracking-[0.14em] text-[#E8728A]" style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500, transform: "translateY(-0.4em)" }}>AI</span>
+          <Link href="/" className="inline-flex items-center gap-3 shrink-0">
+            <Image src="/logo-new.svg" alt="" width={32} height={32} className="w-8 h-8 shrink-0" />
+            <span
+              className="inline-flex items-baseline gap-1.5 whitespace-nowrap"
+              style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontSize: "20px", color: "#1A1A2E" }}
+            >
+              Beauty &amp; Glow
+              <span
+                style={{
+                  fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
+                  fontWeight: 700,
+                  fontSize: "9px",
+                  letterSpacing: "0.2em",
+                  color: "#E8728A",
+                  padding: "2px 6px",
+                  border: "1px solid rgba(232,114,138,0.3)",
+                  borderRadius: "4px",
+                  lineHeight: 1,
+                }}
+              >
+                AI
+              </span>
             </span>
           </Link>
 
@@ -771,12 +787,28 @@ function LandingPageInner() {
           <div className="grid gap-12 border-b border-[rgba(255,255,255,0.08)] pb-16 sm:grid-cols-2 lg:grid-cols-[2.2fr_1fr_1fr_1fr]">
             {/* Brand column */}
             <div>
-              <Link href="/" className="flex items-center gap-2" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300, fontSize: 22 }}>
-                <Image src="/logo-new.svg" alt="" width={28} height={28} className="brightness-0 invert" />
-                <span className="flex items-center text-[#F4EEE8]">
-                  Beauty <span className="px-[0.12em] italic text-[#F4A7B9]" style={{ fontWeight: 400 }}>&amp;</span> Glow
-                  <span className="mx-2 inline-block h-[0.7em] w-px bg-current opacity-35" />
-                  <span className="text-[0.38em] tracking-[0.14em] text-[#F4A7B9]" style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500, transform: "translateY(-0.4em)" }}>AI</span>
+              <Link href="/" className="inline-flex items-center gap-3 shrink-0">
+                <Image src="/logo-new.svg" alt="" width={28} height={28} className="w-7 h-7 shrink-0 brightness-0 invert" />
+                <span
+                  className="inline-flex items-baseline gap-1.5 whitespace-nowrap"
+                  style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontSize: "20px", color: "#F4EEE8" }}
+                >
+                  Beauty &amp; Glow
+                  <span
+                    style={{
+                      fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "9px",
+                      letterSpacing: "0.2em",
+                      color: "#F4A7B9",
+                      padding: "2px 6px",
+                      border: "1px solid rgba(244,167,185,0.3)",
+                      borderRadius: "4px",
+                      lineHeight: 1,
+                    }}
+                  >
+                    AI
+                  </span>
                 </span>
               </Link>
               <h4 className="my-5 max-w-[15ch] text-4xl leading-tight text-[#F4EEE8]" style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300 }}>

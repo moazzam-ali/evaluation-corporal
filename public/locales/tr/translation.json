@@ -2,7 +2,9 @@
   "nav": {
     "brand": "Beauty & Glow AI",
     "home": "Ana Sayfa",
-    "scan": "Cildi Analiz Et"
+    "scan": "Cildi Analiz Et",
+    "config": "Ayarlar",
+    "saved": "Otomatik kaydedildi"
   },
   "home": {
     "title": "Yapılandırma",
@@ -172,6 +174,19 @@
     "tip3": "Doğrudan kameraya bakın",
     "tip4": "Yüzünüzün tamamının görünür olduğundan emin olun",
     "no_photo": "Lütfen önce bir fotoğraf çekin veya yükleyin.",
+    "rail_eyebrow": "Cilt analizi",
+    "rail_title_1": "Bize cildiniz",
+    "rail_title_2": "hakkında bilgi verin.",
+    "rail_sub": "Sekiz kısa adım ve bir fotoğraf. Yaklaşık üç dakika — rutininiz bundan oluşturulur.",
+    "step_label": "Adım",
+    "time_estimate": "toplamda yaklaşık 3 dk",
+    "camera_help_title": "Sabit tutun — en net kareyi otomatik olarak yakalarız.",
+    "camera_help_body": "Yüzünüzün tamamının kesikli ovalin içinde göründüğünden ve her iki tarafta eşit aydınlatma olduğundan emin olun.",
+    "upload_title_1": "Fotoğrafınızı buraya sürükleyip bırakın,",
+    "upload_title_2": "veya göz atmak için tıklayın.",
+    "upload_browse": "Dosya seç",
+    "upload_help_title": "Fotoğrafınız güvenli bir şekilde işlenir.",
+    "upload_help_body": "Görüntünüz HTTPS üzerinden iletilir ve raporunuz için güvenli şekilde saklanır. Yalnızca siz erişebilirsiniz.",
     "navigation": {
       "next": "İleri",
       "previous": "Geri",
@@ -182,6 +197,10 @@
       "nav": "Temel Bilgiler",
       "title": "Temel Bilgiler",
       "subtitle": "Bize kendinizden bahsedin",
+      "display_title": "Temel",
+      "display_title_em": "bilgiler",
+      "display_sub": "Bize kendinizden bahsedin — raporunuzu kişiselleştirmek ve sonuçlarınızı iletmek için kullanıyoruz.",
+      "email_help": "Tam raporunuzu ve rutininizi buraya e-posta ile göndeririz. Pazarlama için asla kullanılmaz.",
       "name": "Ad",
       "surname": "Soyad",
       "email": "E-posta",
@@ -193,6 +212,9 @@
     "step2": {
       "nav": "Ana Hedef",
       "title": "Ana Hedef",
+      "display_title": "Ana",
+      "display_title_em": "hedefiniz",
+      "display_sub": "En fazla üç endişe seçin. İlk cevap ürün sıralamanızı belirler; diğerleri ince ayar yapar.",
       "concerns_label": "Şu anda cildinizle ilgili sizi en çok ne endişelendiriyor? (en fazla 3)",
       "concerns": {
         "dryness": "Kuruluk / gerginlik",
@@ -221,6 +243,9 @@
     "step3": {
       "nav": "Cilt Algısı",
       "title": "Cildinizi Nasıl Algılıyorsunuz",
+      "display_title": "Cildinizi nasıl",
+      "display_title_em": "algılıyorsunuz",
+      "display_sub": "Cildinizi nasıl tanımladığınız önemli — bunu kameranın daha sonra gördükleriyle çapraz referanslarız.",
       "skin_type_label": "Cildinizi normalde nasıl tanımlarsınız?",
       "skin_type": {
         "dry": "Kuru",
@@ -251,6 +276,9 @@
     "step4": {
       "nav": "Rutin",
       "title": "Mevcut Rutin",
+      "display_title": "Mevcut",
+      "display_title_em": "rutininiz",
+      "display_sub": "Hiçbir şeyi atmanızı istemeyeceğiz. Zaten işe yarayan şeylere uyum sağlarız.",
       "frequency_label": "Genellikle bir yüz bakım rutininiz var mı?",
       "frequency": {
         "morning_only": "Sadece sabah",
@@ -282,6 +310,9 @@
     "step5": {
       "nav": "Hassasiyet",
       "title": "Hassasiyet ve Tolerans",
+      "display_title": "Hassasiyet &",
+      "display_title_em": "tolerans",
+      "display_sub": "Cildinizin ne kadar toleranslı olduğu, hangi aktif maddeleri ve hangi konsantrasyonda önerdiğimizi belirler.",
       "reaction_label": "Cildiniz bazı ürünlere kolayca tepki veriyor mu?",
       "reaction": {
         "yes_a_lot": "Evet, çok fazla",
@@ -304,6 +335,9 @@
     "step6": {
       "nav": "Alışkanlıklar",
       "title": "Cildinizi Etkileyen Alışkanlıklar",
+      "display_title": "Cildinizi",
+      "display_title_em": "etkileyen alışkanlıklar",
+      "display_sub": "Uyku, güneş ve su çoğu üründen daha büyük etkiye sahiptir. Bunları hesaba katarız.",
       "sunscreenUse_label": "Her gün güneş koruyucu kullanıyor musunuz?",
       "sunscreenUse": {
         "daily": "Evet, her gün",
@@ -341,6 +375,9 @@
     "step7": {
       "nav": "Deneyim",
       "title": "Geçmiş Deneyim",
+      "display_title": "Geçmiş",
+      "display_title_em": "deneyiminiz",
+      "display_sub": "İşe yaramayan şeylerden de işe yarayanlar kadar çok şey öğreniyoruz.",
       "history_label": "Daha önce cildinizi iyileştirmek için herhangi bir tedavi veya rutin denediniz mi?",
       "history": {
         "yes_worked": "Evet, iyi sonuç verdi",
@@ -361,6 +398,9 @@
     "step8": {
       "nav": "Hedefler",
       "title": "Hedefleriniz",
+      "display_title": "Sizin",
+      "display_title_em": "hedefleriniz",
+      "display_sub": "Ne kadar rutin ve hangi yatırım seviyesinde — böylece öneriler gerçekten size uyar.",
       "looking_for_label": "Şu anda ne arıyorsunuz?",
       "looking_for": {
         "basic_routine": "Temel bir rutin",
@@ -384,7 +424,18 @@
     "step9": {
       "nav": "Fotoğraf",
       "title": "Fotoğrafınızı Yükleyin",
-      "subtitle": "Yapay zeka analizi için yüzünüzün net bir fotoğrafını çekin veya mevcut bir fotoğraf yükleyin."
+      "subtitle": "Yapay zeka analizi için yüzünüzün net bir fotoğrafını çekin veya mevcut bir fotoğraf yükleyin.",
+      "display_title": "Fotoğrafınızı",
+      "display_title_em": "yükleyin",
+      "display_sub": "Yapay zeka analizi için yüzünüzün net bir fotoğrafını çekin veya mevcut bir fotoğraf yükleyin."
+    },
+    "skin_types": {
+      "dry": "Kuru",
+      "oily": "Yağlı",
+      "combination": "Karma",
+      "sensitive": "Hassas",
+      "dehydrated": "Susuz (Dehidrate)",
+      "normal": "Normal"
     }
   },
   "results": {
@@ -395,14 +446,38 @@
     "recommendations_title": "Önerilen Ürünler",
     "summary_title": "Özet",
     "share": "Sonuçları Paylaş",
-    "new_scan": "Yeni Analiz",
+    "new_scan": "Yeni bir analiz başlat",
     "view_responses": "Yanıtlarımı Görüntüle",
     "form_data_title": "Tarama Yanıtlarınız",
     "form_data_desc": "Cilt taramanız sırasında verdiğiniz tüm bilgiler.",
     "recommendations_subtitle": "Cilt analizinize özel kişiselleştirilmiş",
     "analysis_title": "Derinlemesine Analiz",
-    "tips_title": "Kişiselleştirilmiş İpuçları",
+    "tips_title": "Kişiselleştirilmiş ipuçları",
     "routine_title": "Rutininiz",
+    "clinical_eyebrow": "Klinik rapor",
+    "clinical_title": "Cilt değerlendirmesi",
+    "clinical_for": "için",
+    "metrics_analysed": "metrik analiz edildi",
+    "metrics_eyebrow": "Detaylı metrikler",
+    "metrics_title_1": "On iki ölçüm,",
+    "metrics_title_2": "bir yüz.",
+    "metrics_lede": "Her metrik, demografik grubunuza göre 0–100 arasında puanlanır. Tam açıklama için bir karta dokunun.",
+    "insights_eyebrow": "Derinlemesine analiz",
+    "insights_title_1": "Rakamların sizin için",
+    "insights_title_2": "ne anlama geldiği.",
+    "insights_lede": "Aynı veriye dört farklı bakış — neyin işe yaradığı, neyin zorlandığı, alışkanlıklarınızın etkisi ve sonraki hedef.",
+    "tips_eyebrow": "Sizin için · Bu ay",
+    "tips_title_1": "Beş ipucu,",
+    "tips_title_2": "bir rutin.",
+    "tips_lede": "Küçük ayarlamalar, sıralı. Rutin endişeleriniz etrafında oluşturulur — sıra, sıklık ve zamanlama dahil.",
+    "products_eyebrow": "Önerilen ürünler",
+    "products_title_1": "Ölçümlerinize göre",
+    "products_title_2": "seçilmiş.",
+    "products_lede": "Cilt analizinize göre kişiselleştirilmiş — en düşük puanlı metriklerinizi doğrudan hedefleyen ürünler sıralanmış.",
+    "score_good": "Cilt genel olarak iyi dengede",
+    "score_normal": "Bazı alanlar dikkat gerektiriyor",
+    "score_alert": "Birkaç alan bakım gerektiriyor",
+    "footnote": "Bu araç yalnızca kozmetik farkındalık amaçlıdır. Cilt puanları uygulanan makyaja göre değişiklik gösterebilir. Sonuçlar profesyonel dermatolojik tavsiyenin yerini tutmaz.",
     "status": {
       "good": "İyi",
       "normal": "Normal",
@@ -445,13 +520,15 @@
   "products": {
     "view": "Ürünü Görüntüle",
     "priority": "Öncelik",
-    "reason": "Bunu neden öneriyoruz"
+    "reason": "Bunu neden öneriyoruz",
+    "pick": "seçim",
+    "supplement": "Takviye"
   },
   "privacy": {
     "title": "Gizlilik Politikası",
     "intro": "Gizliliğiniz bizim için önemlidir. Bu politika verilerinizi nasıl işlediğimizi açıklar.",
     "data_handling_title": "Veri İşleme",
-    "data_handling": "Yüz görüntüleri HTTPS üzerinden iletilir ve işlenir ancak kalıcı olarak SAKLANMAZ. Yalnızca JSON analiz sonuçları ve e-postanız veritabanımızda saklanır. Görüntüler 24 saat sonra otomatik olarak silinir.",
+    "data_handling": "Yüz görüntüleri HTTPS üzerinden iletilir ve güvenli bir şekilde saklanır. JSON analiz sonuçları, e-postanız ve tarama fotoğrafınız raporunuzu sunmak için sistemimizde saklanır.",
     "consent_title": "Onay",
     "consent": "Hizmetimizi kullanarak, bu politikaya uygun olarak bilgilerin toplanmasına ve kullanılmasına onay vermiş olursunuz.",
     "contact_title": "İletişim",
@@ -461,6 +538,9 @@
     "loading": "Yükleniyor...",
     "error": "Bir şeyler yanlış gitti",
     "retry": "Tekrar Dene",
-    "back": "Geri Dön"
+    "back": "Geri Dön",
+    "cancel": "İptal",
+    "optional": "İsteğe bağlı",
+    "timeout": "Analiz çok uzun sürdü. Lütfen tekrar deneyin."
   }
 }
