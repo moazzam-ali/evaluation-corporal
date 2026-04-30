@@ -2,7 +2,9 @@
   "nav": {
     "brand": "Beauty & Glow AI",
     "home": "Home",
-    "scan": "Analizza la Pelle"
+    "scan": "Analizza la Pelle",
+    "config": "Configurazione",
+    "saved": "Salvato automaticamente"
   },
   "home": {
     "title": "Configurazione",
@@ -172,6 +174,19 @@
     "tip3": "Guarda direttamente la fotocamera",
     "tip4": "Assicurati che il tuo viso sia completamente visibile",
     "no_photo": "Per favore, scatta o carica una foto prima.",
+    "rail_eyebrow": "Analisi della pelle",
+    "rail_title_1": "Raccontaci della",
+    "rail_title_2": "tua pelle.",
+    "rail_sub": "Otto brevi passaggi e una foto. Circa tre minuti — la tua routine viene costruita da qui.",
+    "step_label": "Passo",
+    "time_estimate": "circa 3 min in totale",
+    "camera_help_title": "Resta fermo — catturiamo automaticamente il fotogramma più nitido.",
+    "camera_help_body": "Assicurati che il tuo viso sia completamente visibile all'interno dell'ovale tratteggiato, con illuminazione uniforme su entrambi i lati.",
+    "upload_title_1": "Trascina e rilascia la tua foto qui,",
+    "upload_title_2": "o clicca per sfogliare.",
+    "upload_browse": "Scegli file",
+    "upload_help_title": "La tua foto viene elaborata in modo sicuro.",
+    "upload_help_body": "La tua immagine viene trasmessa tramite HTTPS e archiviata in modo sicuro per il tuo report. Solo tu puoi accedervi.",
     "navigation": {
       "next": "Avanti",
       "previous": "Indietro",
@@ -182,6 +197,10 @@
       "nav": "Dati Base",
       "title": "Informazioni di Base",
       "subtitle": "Parlaci di te",
+      "display_title": "Informazioni",
+      "display_title_em": "di base",
+      "display_sub": "Parlaci di te — usiamo queste informazioni per personalizzare il tuo report e inviarti i risultati.",
+      "email_help": "Inviamo il tuo report completo e la routine qui. Mai usata per marketing.",
       "name": "Nome",
       "surname": "Cognome",
       "email": "E-mail",
@@ -193,6 +212,9 @@
     "step2": {
       "nav": "Obiettivo Principale",
       "title": "Obiettivo Principale",
+      "display_title": "Il tuo",
+      "display_title_em": "obiettivo principale",
+      "display_sub": "Scegli fino a tre preoccupazioni. La prima risposta determina l'ordine dei prodotti; le altre affinano la selezione.",
       "concerns_label": "Cosa ti preoccupa di più della tua pelle in questo momento? (fino a 3)",
       "concerns": {
         "dryness": "Secchezza / sensazione di pelle che tira",
@@ -221,6 +243,9 @@
     "step3": {
       "nav": "Percezione della Pelle",
       "title": "Come Percepisci la Tua Pelle",
+      "display_title": "Come",
+      "display_title_em": "percepisci la tua pelle",
+      "display_sub": "Come descrivi la tua pelle è importante — lo incrociamo con quello che la fotocamera vede dopo.",
       "skin_type_label": "Come descriveresti normalmente la tua pelle?",
       "skin_type": {
         "dry": "Secca",
@@ -251,6 +276,9 @@
     "step4": {
       "nav": "Routine",
       "title": "Routine Attuale",
+      "display_title": "La tua",
+      "display_title_em": "routine attuale",
+      "display_sub": "Non ti chiederemo di buttare nulla. Ci integriamo con quello che già funziona.",
       "frequency_label": "Hai di solito una routine per il viso?",
       "frequency": {
         "morning_only": "Solo al mattino",
@@ -282,6 +310,9 @@
     "step5": {
       "nav": "Sensibilità",
       "title": "Sensibilità e Tolleranza",
+      "display_title": "Sensibilità &",
+      "display_title_em": "tolleranza",
+      "display_sub": "Quanto è tollerante la tua pelle determina quali attivi raccomandiamo e a quale concentrazione.",
       "reaction_label": "La tua pelle reagisce facilmente ad alcuni prodotti?",
       "reaction": {
         "yes_a_lot": "Sì, molto",
@@ -304,6 +335,9 @@
     "step6": {
       "nav": "Abitudini",
       "title": "Abitudini Che Influenzano la Tua Pelle",
+      "display_title": "Abitudini che",
+      "display_title_em": "influenzano la tua pelle",
+      "display_sub": "Sonno, sole e acqua contano più della maggior parte dei prodotti. Li teniamo in considerazione.",
       "sunscreenUse_label": "Usi la protezione solare ogni giorno?",
       "sunscreenUse": {
         "daily": "Sì, ogni giorno",
@@ -341,6 +375,9 @@
     "step7": {
       "nav": "Esperienza",
       "title": "Esperienza Passata",
+      "display_title": "La tua",
+      "display_title_em": "esperienza passata",
+      "display_sub": "Impariamo tanto da ciò che non ha funzionato quanto da ciò che ha funzionato.",
       "history_label": "Hai mai provato un trattamento o una routine per migliorare la tua pelle?",
       "history": {
         "yes_worked": "Sì, e ha funzionato bene",
@@ -361,6 +398,9 @@
     "step8": {
       "nav": "Obiettivi",
       "title": "I Tuoi Obiettivi",
+      "display_title": "I tuoi",
+      "display_title_em": "obiettivi",
+      "display_sub": "Quanta routine e a quale livello di investimento — così le raccomandazioni si adattano davvero a te.",
       "looking_for_label": "Cosa stai cercando in questo momento?",
       "looking_for": {
         "basic_routine": "Una routine di base",
@@ -384,7 +424,18 @@
     "step9": {
       "nav": "Foto",
       "title": "Carica la Tua Foto",
-      "subtitle": "Scatta una foto chiara del tuo viso o caricane una esistente per l'analisi con IA."
+      "subtitle": "Scatta una foto chiara del tuo viso o caricane una esistente per l'analisi con IA.",
+      "display_title": "Carica la tua",
+      "display_title_em": "foto",
+      "display_sub": "Scatta una foto chiara del tuo viso o caricane una esistente per l'analisi con IA."
+    },
+    "skin_types": {
+      "dry": "Secca",
+      "oily": "Grassa",
+      "combination": "Mista",
+      "sensitive": "Sensibile",
+      "dehydrated": "Disidratata",
+      "normal": "Normale"
     }
   },
   "results": {
@@ -395,14 +446,38 @@
     "recommendations_title": "Prodotti Consigliati",
     "summary_title": "Riepilogo",
     "share": "Condividi Risultati",
-    "new_scan": "Nuova Analisi",
+    "new_scan": "Avvia una nuova analisi",
     "view_responses": "Vedi le Mie Risposte",
     "form_data_title": "Le Tue Risposte alla Scansione",
     "form_data_desc": "Tutte le informazioni che hai fornito durante la scansione della pelle.",
     "recommendations_subtitle": "Personalizzato per la tua analisi della pelle",
     "analysis_title": "Analisi Approfondita",
-    "tips_title": "Consigli Personalizzati",
-    "routine_title": "La Tua Routine",
+    "tips_title": "Consigli personalizzati",
+    "routine_title": "La tua routine",
+    "clinical_eyebrow": "Report clinico",
+    "clinical_title": "Valutazione della pelle",
+    "clinical_for": "per",
+    "metrics_analysed": "metriche analizzate",
+    "metrics_eyebrow": "Metriche dettagliate",
+    "metrics_title_1": "Dodici letture,",
+    "metrics_title_2": "un viso.",
+    "metrics_lede": "Ogni metrica ha un punteggio da 0 a 100 rispetto alla tua coorte demografica. Tocca una scheda per la descrizione completa.",
+    "insights_eyebrow": "Analisi approfondita",
+    "insights_title_1": "Cosa significano i numeri",
+    "insights_title_2": "per te.",
+    "insights_lede": "Quattro prospettive sugli stessi dati — cosa funziona, cosa è sotto stress, l'effetto delle tue abitudini e dove puntare.",
+    "tips_eyebrow": "Per te · Questo mese",
+    "tips_title_1": "Cinque consigli,",
+    "tips_title_2": "una routine.",
+    "tips_lede": "Piccoli aggiustamenti, in sequenza. La routine è costruita intorno alle tue preoccupazioni — ordine, frequenza e tempistica inclusi.",
+    "products_eyebrow": "Prodotti consigliati",
+    "products_title_1": "Selezionati per",
+    "products_title_2": "le tue letture.",
+    "products_lede": "Personalizzato per la tua analisi della pelle — prodotti ordinati per rilevanza diretta con le tue metriche più basse.",
+    "score_good": "Pelle in buon equilibrio generale",
+    "score_normal": "Alcune aree necessitano attenzione",
+    "score_alert": "Diverse aree necessitano di cura",
+    "footnote": "Questo strumento è destinato esclusivamente a scopi di consapevolezza cosmetica. I punteggi della pelle possono variare in base al trucco applicato. I risultati non sostituiscono il consulto dermatologico professionale.",
     "status": {
       "good": "Buono",
       "normal": "Normale",
@@ -445,13 +520,15 @@
   "products": {
     "view": "Vedi Prodotto",
     "priority": "Priorità",
-    "reason": "Perché lo consigliamo"
+    "reason": "Perché lo consigliamo",
+    "pick": "selezione",
+    "supplement": "Integratore"
   },
   "privacy": {
     "title": "Informativa sulla Privacy",
     "intro": "La tua privacy è importante per noi. Questa informativa spiega come gestiamo i tuoi dati.",
     "data_handling_title": "Gestione dei Dati",
-    "data_handling": "Le immagini facciali vengono trasmesse tramite HTTPS ed elaborate ma NON archiviate in modo permanente. Solo i risultati dell'analisi JSON e la tua e-mail vengono archiviati nel nostro database. Le immagini vengono automaticamente eliminate dopo 24 ore.",
+    "data_handling": "Le immagini facciali vengono trasmesse tramite HTTPS e archiviate in modo sicuro. I risultati dell'analisi JSON, la tua e-mail e la tua foto di scansione vengono archiviati nel nostro sistema per fornirti il report.",
     "consent_title": "Consenso",
     "consent": "Utilizzando il nostro servizio, acconsenti alla raccolta e all'utilizzo delle informazioni in conformità con questa informativa.",
     "contact_title": "Contatto",
@@ -461,6 +538,9 @@
     "loading": "Caricamento...",
     "error": "Qualcosa è andato storto",
     "retry": "Riprova",
-    "back": "Torna Indietro"
+    "back": "Torna Indietro",
+    "cancel": "Annulla",
+    "optional": "Facoltativo",
+    "timeout": "L'analisi ha impiegato troppo tempo. Per favore, riprova."
   }
 }
