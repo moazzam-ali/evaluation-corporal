@@ -7,10 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
-import { Sparkles, Loader2, ArrowLeft, ArrowRight } from "lucide-react";
+import { Check } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import AnimatedLogo from "@/components/AnimatedLogo/AnimatedLogo";
 import useAnalysisStore from "@/store/analysisStore";
 import { compressImage, dataUrlToBlob, validateImage } from "@/lib/image-utils";
@@ -35,9 +33,25 @@ const STEP_COMPONENTS = [
 const TOTAL_STEPS = STEP_COMPONENTS.length;
 const ANALYSIS_TIMEOUT = 55000;
 
+const STEP_META = [
+  { label: "Basic Info",       title: "Basic",           titleEm: "information",          sub: "Tell us about yourself — we use this to tailor your report and reach you with results." },
+  { label: "Main Goal",        title: "Your",            titleEm: "main goal",            sub: "Pick up to three concerns. The first answer ranks your product order; the rest fine-tune it." },
+  { label: "Skin Perception",  title: "How you",         titleEm: "perceive your skin",   sub: "How you describe your skin matters — we cross-reference it with what the camera sees later." },
+  { label: "Routine",          title: "Your",            titleEm: "current routine",      sub: "We won't ask you to throw anything away. We'll plug into what's already working." },
+  { label: "Sensitivity",      title: "Sensitivity &",   titleEm: "tolerance",            sub: "How forgiving your skin is shapes which actives we recommend, and at what concentration." },
+  { label: "Habits",           title: "Habits that",     titleEm: "affect your skin",     sub: "Sleep, sun, and water are bigger inputs than most products. We weigh them." },
+  { label: "Experience",       title: "Your",            titleEm: "past experience",      sub: "We learn from what didn't work as much as from what did." },
+  { label: "Goals",            title: "Your",            titleEm: "goals",                sub: "How much routine, and at what level of investment — so the recommendations actually fit." },
+  { label: "Photo",            title: "Upload your",     titleEm: "photo",                sub: "Take a clear photo of your face or upload an existing one for the AI analysis." },
+];
+
 export default function ScanPage() {
   return (
-    <Suspense fallback={<div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8"><div className="flex items-center justify-center py-20"><AnimatedLogo size={100} /></div></div>}>
+    <Suspense fallback={
+      <div className="flex items-center justify-center" style={{ minHeight: "60vh" }}>
+        <AnimatedLogo size={100} />
+      </div>
+    }>
       <ScanPageInner />
     </Suspense>
   );
@@ -56,7 +70,6 @@ function ScanPageInner() {
   const [analysisProgress, setAnalysisProgress] = useState(0);
   const abortControllerRef = useRef(null);
 
-  // URL params from config page
   const chatIDs = searchParams.get("n")?.split(",").filter(Boolean) || [];
   const botIndex = searchParams.get("b") || "1";
   const accountIDs = searchParams.get("a")?.split(",").filter(Boolean) || [];
@@ -71,7 +84,6 @@ function ScanPageInner() {
 
   const { trigger, handleSubmit } = form;
 
-  // Navigation
   const handleNext = async () => {
     const fields = STEP_FIELD_NAMES[currentStep];
     if (fields.length > 0) {
@@ -89,7 +101,13 @@ function ScanPageInner() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Final submission
+  const goToStep = (idx) => {
+    if (idx < currentStep) {
+      setDirection(-1);
+      setCurrentStep(idx);
+    }
+  };
+
   const onSubmit = async (formData) => {
     if (!imageData) {
       toast.error(t("scan.no_photo", "Please capture or upload a photo first."));
@@ -160,117 +178,319 @@ function ScanPageInner() {
 
   const cancelAnalysis = () => abortControllerRef.current?.abort();
 
-  // Current step component
   const StepComponent = STEP_COMPONENTS[currentStep];
   const isLastStep = currentStep === TOTAL_STEPS - 1;
   const isFirstStep = currentStep === 0;
+  const meta = STEP_META[currentStep];
+  const pct = Math.round(((currentStep + 1) / TOTAL_STEPS) * 100);
 
-  // Step titles for progress display
-  const stepTitles = [
-    t("scan.step1.nav", "Basic Info"),
-    t("scan.step2.nav", "Main Goal"),
-    t("scan.step3.nav", "Skin Perception"),
-    t("scan.step4.nav", "Routine"),
-    t("scan.step5.nav", "Sensitivity"),
-    t("scan.step6.nav", "Habits"),
-    t("scan.step7.nav", "Experience"),
-    t("scan.step8.nav", "Goals"),
-    t("scan.step9.nav", "Photo"),
-  ];
-
-  // Animation variants
   const variants = {
     enter: (d) => ({ x: d > 0 ? 200 : -200, opacity: 0 }),
     center: { x: 0, opacity: 1 },
     exit: (d) => ({ x: d > 0 ? -200 : 200, opacity: 0 }),
   };
 
+  // Analyzing overlay
   if (isAnalyzing) {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center justify-center py-20">
+      <div className="flex flex-col items-center justify-center" style={{ minHeight: "70vh" }}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center">
           <div className="mb-6">
             <AnimatedLogo size={140} />
           </div>
-          <p className="text-lg font-medium">{t("scan.analyzing")}</p>
+          <p style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 300, color: "#1A1A2E" }}>
+            {t("scan.analyzing", "Analyzing your skin...")}
+          </p>
           <div className="mt-6 w-full max-w-xs">
-            <Progress value={analysisProgress} className="h-2" />
-            <p className="mt-2 text-center text-xs text-muted-foreground">{Math.round(analysisProgress)}%</p>
+            <div style={{ height: "4px", borderRadius: "999px", background: "rgba(232,114,138,0.18)", overflow: "hidden" }}>
+              <div
+                style={{
+                  height: "100%",
+                  width: `${analysisProgress}%`,
+                  background: "linear-gradient(90deg, #F4A7B9 0%, #E8728A 100%)",
+                  borderRadius: "999px",
+                  transition: "width 320ms cubic-bezier(0.22,1,0.36,1)",
+                }}
+              />
+            </div>
+            <p className="mt-2 text-center" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.06em", color: "#6B6B7A" }}>
+              {Math.round(analysisProgress)}%
+            </p>
           </div>
-          <Button variant="ghost" size="sm" onClick={cancelAnalysis} className="mt-4 text-muted-foreground">
+          <button
+            onClick={cancelAnalysis}
+            className="mt-4"
+            style={{
+              fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
+              color: "#6B6B7A", padding: "8px 16px", borderRadius: "999px",
+              border: "1.5px solid rgba(26,26,46,0.16)", background: "transparent", cursor: "pointer",
+            }}
+          >
             {t("common.cancel", "Cancel")}
-          </Button>
+          </button>
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 lg:px-8">
-      {/* Progress header */}
-      <div className="mb-8">
-        <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="font-medium">{stepTitles[currentStep]}</span>
-          <span className="text-muted-foreground">
-            {t("scan.navigation.step_of", "Step {{current}} of {{total}}", { current: currentStep + 1, total: TOTAL_STEPS })}
-          </span>
+    <div className="mx-auto max-w-[1280px]" style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: "56px", padding: "48px 32px 80px" }}>
+      {/* ===== LEFT RAIL ===== */}
+      <aside className="hidden md:block" style={{ position: "sticky", top: "96px", alignSelf: "start" }}>
+        {/* Eyebrow */}
+        <div
+          className="inline-flex items-center gap-2.5 mb-3"
+          style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#6B6B7A" }}
+        >
+          <span style={{ width: "24px", height: "1px", background: "#E8728A" }} />
+          {t("scan.rail_eyebrow", "Skin analysis")}
         </div>
-        <Progress value={((currentStep + 1) / TOTAL_STEPS) * 100} className="h-2" />
-      </div>
 
-      {/* Step content with animations */}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={currentStep}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="rounded-xl border bg-card p-6 shadow-sm"
-          >
-            {currentStep === TOTAL_STEPS - 1 ? (
-              <StepComponent
-                imageData={imageData}
-                setImageData={setImageData}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-                t={t}
-              />
-            ) : (
-              <StepComponent form={form} t={t} />
-            )}
-          </motion.div>
-        </AnimatePresence>
+        {/* Title */}
+        <h1 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300, fontSize: "36px", color: "#1A1A2E", margin: "0 0 6px", lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+          {t("scan.rail_title_1", "Tell us about")} <em style={{ fontStyle: "italic", color: "#E8728A", fontWeight: 400 }}>{t("scan.rail_title_2", "your skin.")}</em>
+        </h1>
+        <p style={{ fontSize: "13.5px", color: "#6B6B7A", lineHeight: 1.55, margin: "0 0 24px" }}>
+          {t("scan.rail_sub", "Eight short steps and one photo. Takes about three minutes — your routine is built from this.")}
+        </p>
 
-        {/* Navigation buttons */}
-        <div className="mt-6 flex items-center justify-between">
-          <Button
+        {/* Progress bar */}
+        <div style={{ height: "4px", borderRadius: "999px", background: "rgba(232,114,138,0.18)", overflow: "hidden", marginBottom: "6px" }}>
+          <div style={{
+            height: "100%", width: `${pct}%`,
+            background: "linear-gradient(90deg, #F4A7B9 0%, #E8728A 100%)",
+            borderRadius: "999px",
+            transition: "width 320ms cubic-bezier(0.22,1,0.36,1)",
+          }} />
+        </div>
+        <div className="flex justify-between mb-7" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.06em", color: "#6B6B7A" }}>
+          <span>{t("scan.navigation.step_of", "Step {{current}} of {{total}}", { current: currentStep + 1, total: TOTAL_STEPS })}</span>
+          <span>{pct}%</span>
+        </div>
+
+        {/* Timeline */}
+        <ol className="relative" style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          {/* Connecting line */}
+          <div style={{
+            position: "absolute", left: "14px", top: "16px", bottom: "16px", width: "2px",
+            background: "rgba(232,114,138,0.18)", borderRadius: "2px",
+          }} />
+          {STEP_META.map((s, i) => {
+            const isDone = i < currentStep;
+            const isActive = i === currentStep;
+            return (
+              <li key={i} className="relative" style={{ padding: "0 0 4px 44px" }}>
+                <button
+                  type="button"
+                  onClick={() => goToStep(i)}
+                  disabled={i > currentStep}
+                  className="w-full flex items-center text-left"
+                  style={{
+                    padding: "9px 12px 9px 0", background: "transparent", border: 0,
+                    fontFamily: "var(--font-dm-sans)", fontSize: "13.5px",
+                    color: isDone || isActive ? "#1A1A2E" : "#6B6B7A",
+                    borderRadius: "8px", cursor: i <= currentStep ? "pointer" : "default",
+                    opacity: i > currentStep ? 0.5 : 1,
+                  }}
+                >
+                  {/* Number circle */}
+                  <span
+                    className="absolute flex items-center justify-center"
+                    style={{
+                      left: 0, top: "6px", width: "30px", height: "30px", borderRadius: "50%",
+                      fontSize: "12px", fontWeight: 600,
+                      background: isDone ? "#5B9A8B" : isActive ? "#E8728A" : "white",
+                      border: isDone ? "none" : isActive ? "none" : "1.5px solid rgba(232,114,138,0.30)",
+                      color: isDone || isActive ? "white" : "#E8728A",
+                      boxShadow: isActive ? "0 0 0 5px rgba(232,114,138,0.18)" : "none",
+                      transform: isActive ? "scale(1.06)" : "none",
+                      transition: "all 220ms cubic-bezier(0.22,1,0.36,1)",
+                    }}
+                  >
+                    {isDone ? <Check size={12} /> : i + 1}
+                  </span>
+                  <span className="flex flex-col gap-0.5 min-w-0">
+                    <span style={{
+                      fontFamily: "var(--font-dm-sans)", fontSize: "10px", letterSpacing: "0.14em",
+                      textTransform: "uppercase", color: isActive ? "#E8728A" : "#6B6B7A",
+                    }}>
+                      {t("scan.step_label", "Step")} {i + 1}
+                    </span>
+                    <span style={{ fontWeight: isActive ? 600 : 500 }}>
+                      {t(`scan.step${i + 1}.nav`, s.label)}
+                    </span>
+                  </span>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+      </aside>
+
+      {/* ===== STAGE (right column) ===== */}
+      <section
+        className="flex flex-col overflow-hidden"
+        style={{
+          background: "white", border: "1px solid rgba(26,26,46,0.10)",
+          borderRadius: "24px", boxShadow: "0 1px 2px rgba(26,26,46,0.04)",
+          minHeight: "720px",
+        }}
+      >
+        {/* Stage header */}
+        <div
+          className="flex flex-wrap items-end justify-between gap-6"
+          style={{
+            padding: "32px 40px 24px",
+            borderBottom: "1px solid rgba(26,26,46,0.10)",
+            background: "linear-gradient(180deg, #FDF8F3 0%, white 100%)",
+          }}
+        >
+          <div className="min-w-0">
+            <div
+              className="inline-flex items-center gap-2 mb-2"
+              style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8728A" }}
+            >
+              <span style={{ width: "18px", height: "1px", background: "#E8728A" }} />
+              {t("scan.navigation.step_of", "Step {{current}} of {{total}}", { current: currentStep + 1, total: TOTAL_STEPS })}
+            </div>
+            <h2 style={{
+              fontFamily: "var(--font-cormorant)", fontWeight: 300,
+              fontSize: "clamp(28px, 3.2vw, 38px)", color: "#1A1A2E",
+              margin: 0, lineHeight: 1.1, letterSpacing: "-0.01em",
+            }}>
+              {t(`scan.step${currentStep + 1}.display_title`, meta.title)}{" "}
+              <em style={{ fontStyle: "italic", color: "#E8728A", fontWeight: 400 }}>
+                {t(`scan.step${currentStep + 1}.display_title_em`, meta.titleEm)}
+              </em>
+            </h2>
+            <p style={{ margin: "8px 0 0", color: "#6B6B7A", fontSize: "14px", maxWidth: "60ch", lineHeight: 1.55 }}>
+              {t(`scan.step${currentStep + 1}.display_sub`, meta.sub)}
+            </p>
+          </div>
+        </div>
+
+        {/* Stage body */}
+        <div className="flex-1" style={{ padding: "32px 40px" }}>
+          <form onSubmit={handleSubmit(onSubmit)} id="scan-form">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={currentStep}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+              >
+                {isLastStep ? (
+                  <StepComponent
+                    imageData={imageData}
+                    setImageData={setImageData}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                    t={t}
+                  />
+                ) : (
+                  <StepComponent form={form} t={t} />
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </form>
+        </div>
+
+        {/* Stage footer */}
+        <div
+          className="flex flex-wrap items-center justify-between gap-4"
+          style={{
+            padding: "18px 40px 22px",
+            borderTop: "1px solid rgba(26,26,46,0.10)",
+            background: "#FDF8F3",
+          }}
+        >
+          <button
             type="button"
-            variant="outline"
             onClick={handlePrev}
             disabled={isFirstStep}
-            className="gap-2"
+            className="inline-flex items-center justify-center gap-2"
+            style={{
+              fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
+              padding: "11px 20px", borderRadius: "999px", whiteSpace: "nowrap",
+              border: "1.5px solid rgba(26,26,46,0.16)", background: "transparent",
+              color: "#1A1A2E", cursor: isFirstStep ? "not-allowed" : "pointer",
+              opacity: isFirstStep ? 0.45 : 1,
+              transition: "transform 180ms, border-color 180ms",
+            }}
           >
-            <ArrowLeft className="h-4 w-4" />
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
             {t("scan.navigation.previous", "Previous")}
-          </Button>
+          </button>
+
+          <span className="hidden sm:inline-flex items-center gap-2.5" style={{
+            fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: "#6B6B7A", whiteSpace: "nowrap",
+          }}>
+            {t("scan.step_label", "Step")} {currentStep + 1} · {t(`scan.step${currentStep + 1}.nav`, meta.label)}
+            <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "rgba(26,26,46,0.16)" }} />
+            {t("scan.time_estimate", "about 3 min total")}
+          </span>
 
           {isLastStep ? (
-            <Button type="submit" size="lg" className="gap-2" disabled={!imageData}>
-              <Sparkles className="h-5 w-5" />
+            <button
+              type="submit"
+              form="scan-form"
+              disabled={!imageData}
+              className="inline-flex items-center justify-center gap-2"
+              style={{
+                fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
+                padding: "11px 20px", borderRadius: "999px", whiteSpace: "nowrap",
+                border: 0, background: "#E8728A", color: "white",
+                cursor: !imageData ? "not-allowed" : "pointer",
+                opacity: !imageData ? 0.45 : 1,
+                transition: "transform 180ms, box-shadow 320ms, background 180ms",
+              }}
+            >
               {t("scan.navigation.analyze", "Analyze My Skin")}
-            </Button>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
           ) : (
-            <Button type="button" onClick={handleNext} className="gap-2">
+            <button
+              type="button"
+              onClick={handleNext}
+              className="inline-flex items-center justify-center gap-2"
+              style={{
+                fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
+                padding: "11px 20px", borderRadius: "999px", whiteSpace: "nowrap",
+                border: 0, background: "#E8728A", color: "white", cursor: "pointer",
+                transition: "transform 180ms, box-shadow 320ms, background 180ms",
+              }}
+            >
               {t("scan.navigation.next", "Next")}
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
           )}
         </div>
-      </form>
+      </section>
+
+      {/* Mobile-only: show progress + step info below nav on small screens */}
+      <style jsx global>{`
+        @media (max-width: 980px) {
+          .mx-auto.max-w-\\[1280px\\] {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+            padding: 32px 20px 64px !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .flex.flex-wrap.items-end.justify-between {
+            padding: 24px 22px 18px !important;
+          }
+          .flex-1[style*="padding: 32px 40px"] {
+            padding: 24px 22px !important;
+          }
+          .flex.flex-wrap.items-center.justify-between[style*="padding: 18px 40px"] {
+            padding: 16px 22px 18px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

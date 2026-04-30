@@ -2,7 +2,9 @@
   "nav": {
     "brand": "Beauty & Glow AI",
     "home": "Home",
-    "scan": "Analyze Skin"
+    "scan": "Analyze Skin",
+    "config": "Config",
+    "saved": "Saved automatically"
   },
   "home": {
     "title": "Configuration",
@@ -172,6 +174,19 @@
     "tip3": "Face the camera directly",
     "tip4": "Ensure your full face is visible",
     "no_photo": "Please capture or upload a photo first.",
+    "rail_eyebrow": "Skin analysis",
+    "rail_title_1": "Tell us about",
+    "rail_title_2": "your skin.",
+    "rail_sub": "Eight short steps and one photo. Takes about three minutes — your routine is built from this.",
+    "step_label": "Step",
+    "time_estimate": "about 3 min total",
+    "camera_help_title": "Hold steady — we auto-capture the sharpest frame.",
+    "camera_help_body": "Make sure your full face is visible inside the dashed oval, with even lighting on both sides.",
+    "upload_title_1": "Drag & drop your photo here,",
+    "upload_title_2": "or click to browse.",
+    "upload_browse": "Choose file",
+    "upload_help_title": "Your photo is securely processed.",
+    "upload_help_body": "Your image is transmitted over HTTPS and stored securely for your report. Only you can access it.",
     "navigation": {
       "next": "Next",
       "previous": "Previous",
@@ -182,6 +197,10 @@
       "nav": "Basic Info",
       "title": "Basic Information",
       "subtitle": "Tell us about yourself",
+      "display_title": "Basic",
+      "display_title_em": "information",
+      "display_sub": "Tell us about yourself — we use this to tailor your report and reach you with results.",
+      "email_help": "We email your full report and routine here. Never used for marketing.",
       "name": "First Name",
       "surname": "Last Name",
       "email": "Email",
@@ -193,6 +212,9 @@
     "step2": {
       "nav": "Main Goal",
       "title": "Main Goal",
+      "display_title": "Your",
+      "display_title_em": "main goal",
+      "display_sub": "Pick up to three concerns. The first answer ranks your product order; the rest fine-tune it.",
       "concerns_label": "What concerns you most about your skin right now? (up to 3)",
       "concerns": {
         "dryness": "Dryness / Tightness",
@@ -221,6 +243,9 @@
     "step3": {
       "nav": "Skin Perception",
       "title": "How You Perceive Your Skin",
+      "display_title": "How you",
+      "display_title_em": "perceive your skin",
+      "display_sub": "How you describe your skin matters — we cross-reference it with what the camera sees later.",
       "skin_type_label": "How would you normally describe your skin?",
       "skin_type": {
         "dry": "Dry",
@@ -251,6 +276,9 @@
     "step4": {
       "nav": "Routine",
       "title": "Current Routine",
+      "display_title": "Your",
+      "display_title_em": "current routine",
+      "display_sub": "We won't ask you to throw anything away. We'll plug into what's already working.",
       "frequency_label": "Do you usually have a facial routine?",
       "frequency": {
         "morning_only": "Only in the morning",
@@ -282,6 +310,9 @@
     "step5": {
       "nav": "Sensitivity",
       "title": "Sensitivity & Tolerance",
+      "display_title": "Sensitivity &",
+      "display_title_em": "tolerance",
+      "display_sub": "How forgiving your skin is shapes which actives we recommend, and at what concentration.",
       "reaction_label": "Does your skin react easily to some products?",
       "reaction": {
         "yes_a_lot": "Yes, a lot",
@@ -304,6 +335,9 @@
     "step6": {
       "nav": "Habits",
       "title": "Habits That Affect Your Skin",
+      "display_title": "Habits that",
+      "display_title_em": "affect your skin",
+      "display_sub": "Sleep, sun, and water are bigger inputs than most products. We weigh them.",
       "sunscreenUse_label": "Do you use sunscreen daily?",
       "sunscreenUse": {
         "daily": "Yes, every day",
@@ -341,6 +375,9 @@
     "step7": {
       "nav": "Experience",
       "title": "Past Experience",
+      "display_title": "Your",
+      "display_title_em": "past experience",
+      "display_sub": "We learn from what didn't work as much as from what did.",
       "history_label": "Have you tried any treatment or routine to improve your skin before?",
       "history": {
         "yes_worked": "Yes, and it worked well",
@@ -361,6 +398,9 @@
     "step8": {
       "nav": "Goals",
       "title": "Your Goals",
+      "display_title": "Your",
+      "display_title_em": "goals",
+      "display_sub": "How much routine, and at what level of investment — so the recommendations actually fit.",
       "looking_for_label": "What are you looking for right now?",
       "looking_for": {
         "basic_routine": "A basic routine",
@@ -384,25 +424,60 @@
     "step9": {
       "nav": "Photo",
       "title": "Upload Your Photo",
-      "subtitle": "Take a clear photo of your face or upload an existing one for the AI analysis."
+      "subtitle": "Take a clear photo of your face or upload an existing one for the AI analysis.",
+      "display_title": "Upload your",
+      "display_title_em": "photo",
+      "display_sub": "Take a clear photo of your face or upload an existing one for the AI analysis."
+    },
+    "skin_types": {
+      "dry": "Dry",
+      "oily": "Oily",
+      "combination": "Combination",
+      "sensitive": "Sensitive",
+      "dehydrated": "Dehydrated",
+      "normal": "Normal"
     }
   },
   "results": {
     "title": "Your Skin Analysis",
     "overall_score": "Overall Score",
-    "skin_type": "Skin Type",
+    "skin_type": "Skin type",
     "metrics_title": "Detailed Metrics",
     "recommendations_title": "Recommended Products",
     "summary_title": "Summary",
     "share": "Share Results",
-    "new_scan": "New Scan",
+    "new_scan": "Run a new scan",
     "view_responses": "View My Responses",
     "form_data_title": "Your Scan Responses",
     "form_data_desc": "All the information you provided during your skin scan.",
     "recommendations_subtitle": "Personalised for your skin analysis",
     "analysis_title": "In-Depth Analysis",
-    "tips_title": "Personalised Tips",
-    "routine_title": "Your Routine",
+    "tips_title": "Personalised tips",
+    "routine_title": "Your routine",
+    "clinical_eyebrow": "Clinical Report",
+    "clinical_title": "Skin assessment",
+    "clinical_for": "for",
+    "metrics_analysed": "metrics analysed",
+    "metrics_eyebrow": "Detailed metrics",
+    "metrics_title_1": "Twelve readings,",
+    "metrics_title_2": "one face.",
+    "metrics_lede": "Each metric is scored 0–100 against your demographic cohort. Tap a card for the full description.",
+    "insights_eyebrow": "In-depth analysis",
+    "insights_title_1": "What the numbers",
+    "insights_title_2": "mean for you.",
+    "insights_lede": "Four lenses on the same data — what's working, what's stressed, what your habits are doing to it, and where to aim next.",
+    "tips_eyebrow": "For you · This month",
+    "tips_title_1": "Five tips,",
+    "tips_title_2": "one routine.",
+    "tips_lede": "Small adjustments, sequenced. The routine is built around your concerns — order, frequency, and timing all included.",
+    "products_eyebrow": "Recommended products",
+    "products_title_1": "Curated for",
+    "products_title_2": "your readings.",
+    "products_lede": "Personalised for your skin analysis — picks ranked by how directly they target your lowest-scoring metrics.",
+    "score_good": "Skin in good balance overall",
+    "score_normal": "Some areas need attention",
+    "score_alert": "Several areas need care",
+    "footnote": "This tool is intended only for cosmetic awareness purposes. Skin scores may vary based on applied makeup. Results are not a substitute for professional dermatological advice.",
     "status": {
       "good": "Good",
       "normal": "Normal",
@@ -445,13 +520,15 @@
   "products": {
     "view": "View Product",
     "priority": "Priority",
-    "reason": "Why we recommend this"
+    "reason": "Why we recommend this",
+    "pick": "pick",
+    "supplement": "Supplement"
   },
   "privacy": {
     "title": "Privacy Policy",
     "intro": "Your privacy is important to us. This policy explains how we handle your data.",
     "data_handling_title": "Data Handling",
-    "data_handling": "Facial images are transmitted over HTTPS and processed but NOT permanently stored. Only the JSON analysis results and your email are stored in our database. Images are automatically deleted after 24 hours.",
+    "data_handling": "Facial images are transmitted over HTTPS and stored securely. The JSON analysis results, your email, and your scan photo are stored in our system to provide your report.",
     "consent_title": "Consent",
     "consent": "By using our service, you consent to the collection and use of information in accordance with this policy.",
     "contact_title": "Contact",
@@ -461,6 +538,9 @@
     "loading": "Loading...",
     "error": "Something went wrong",
     "retry": "Try Again",
-    "back": "Go Back"
+    "back": "Go Back",
+    "cancel": "Cancel",
+    "optional": "Optional",
+    "timeout": "Analysis took too long. Please try again."
   }
 }
