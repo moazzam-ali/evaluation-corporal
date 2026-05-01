@@ -89,9 +89,8 @@ async function sendTelegramMessage(botApiKey, chatID, message, { inlineKeyboards
 
 /**
  * Build and send Telegram messages for a skin analysis.
- *   Message 1: Member details
- *   Message 2: Questionnaire summary (reply to Message 1)
- *   Message 3: Analysis results + Report link with inline keyboard (reply to Message 2)
+ *   Message 1: Member details + Questionnaire summary
+ *   Message 2: Analysis results + Report link with inline keyboard (reply to Message 1)
  */
 export async function sendAnalysisToTelegram({
   chatIDs,
@@ -181,25 +180,26 @@ export async function sendAnalysisToTelegram({
     .replace("{metrics}", metricsLines || "  No metrics available")
     .replace("{summary}", s(results.summary) || "");
 
-  // ── Message 4: Analysis link ──
-  let analysisLinkMessage = t("telegram.analysis_link") || "";
-  analysisLinkMessage = analysisLinkMessage
-    .replace("{id}", analysisId)
-    .replace("{lng}", language || defaultLanguage || "en");
+  // Build the report URL — used by both the inline button and the Markdown link in the body.
+  // Markdown link form `[text](url)` keeps underscores in the nanoid from being parsed as italic.
+  const reportUrl = `https://beauty-glow-ai.vercel.app/results/${analysisId}?l=${language || defaultLanguage || "en"}`;
 
-  // Inline keyboard buttons
+  // Inline keyboard buttons — View Report first so it's the most prominent action.
   const inlineKeyboards = [
+    [{ text: t("telegram.buttons.view_report") || "📋 View Report", url: reportUrl }],
     [{ text: t("telegram.buttons.sms") || "📩 SMS", url: `https://sms.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}` }],
     [{ text: t("telegram.buttons.call") || "📞 Call", url: `https://call.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}` }],
     [{ text: t("telegram.buttons.whatsapp") || "💬 WhatsApp", url: `https://wa.me/${formData.phone || ""}` }],
     [{ text: t("telegram.buttons.telegram") || "✈️ Telegram", url: `https://t.me/${formData.phone || ""}` }],
   ];
 
-  // 3 messages: member details, questionnaire, analysis results + link
+  // 2 messages: client data (profile + questionnaire), results (analysis + report link).
+  // The link is wrapped in Markdown link syntax so underscores in the nanoid don't break parsing.
+  // Message 2 is sent as a reply to Message 1 to keep the thread visually connected.
+  const reportLinkLabel = t("telegram.buttons.view_report") || "View Full Report";
   const messages = [
-    memberDetailsMessage,
-    questionnaireMessage,
-    analysisResultsMessage + "\n\n" + analysisLinkMessage,
+    memberDetailsMessage + "\n\n" + questionnaireMessage,
+    analysisResultsMessage + `\n\n[${reportLinkLabel}](${reportUrl})`,
   ];
 
   // Build combined answers text for Elastic indexing (sanitized, no Markdown)
