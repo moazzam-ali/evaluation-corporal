@@ -5,6 +5,7 @@
     "analysis_results": "*Analiz Sonuçları*\n━━━━━━━━━━━━━━━━━━━━\n\nGenel Puan: *{overall_score}%*\nCilt Tipi: *{skin_type_result}*\n\n*Metrik Dökümü:*\n{metrics}\n\n*Özet:*\n{summary}",
     "analysis_link": "*Tam Raporu Görüntüle*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
     "buttons": {
+      "view_report": "📋 Raporu görüntüle",
       "sms": "SMS Gönder",
       "call": "Ara",
       "whatsapp": "WhatsApp",

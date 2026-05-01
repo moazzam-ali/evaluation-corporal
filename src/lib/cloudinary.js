@@ -32,8 +32,12 @@ export async function uploadToCloudinary(imageBuffer, filename, { folder = "skin
   }
 
   const data = await response.json();
+  const url = data.secure_url || data.url;
+  if (!url) {
+    throw new Error(`Cloudinary upload returned no URL. Response: ${JSON.stringify(data).slice(0, 500)}`);
+  }
   return {
-    url: data.secure_url,
+    url,
     publicId: data.public_id,
   };
 }

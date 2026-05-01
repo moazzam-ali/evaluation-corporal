@@ -176,24 +176,25 @@ export async function sendAnalysisToTelegram({
     .replace("{metrics}", metricsLines || "  No metrics available")
     .replace("{summary}", s(results.summary) || "");
 
-  // ── Message 4: Analysis link ──
-  let analysisLinkMessage = t("telegram.analysis_link") || "";
-  analysisLinkMessage = analysisLinkMessage
-    .replace("{id}", analysisId)
-    .replace("{lng}", language || defaultLanguage || "en");
+  // Build the report URL — used by both the inline button and the Markdown link in the body.
+  // Markdown link form `[text](url)` keeps underscores in the nanoid from being parsed as italic.
+  const reportUrl = `https://beauty-glow-ai.vercel.app/results/${analysisId}?l=${language || defaultLanguage || "en"}`;
 
-  // Inline keyboard buttons
+  // Inline keyboard buttons — View Report first so it's the most prominent action.
   const inlineKeyboards = [
+    [{ text: t("telegram.buttons.view_report") || "📋 View Report", url: reportUrl }],
     [{ text: t("telegram.buttons.sms") || "📩 SMS", url: `https://sms.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}` }],
     [{ text: t("telegram.buttons.call") || "📞 Call", url: `https://call.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}` }],
     [{ text: t("telegram.buttons.whatsapp") || "💬 WhatsApp", url: `https://wa.me/${formData.phone || ""}` }],
     [{ text: t("telegram.buttons.telegram") || "✈️ Telegram", url: `https://t.me/${formData.phone || ""}` }],
   ];
 
-  // 2 messages: client data (profile + questionnaire), results (analysis + link)
+  // 2 messages: client data (profile + questionnaire), results (analysis + report link).
+  // The link is wrapped in Markdown link syntax so underscores in the nanoid don't break parsing.
+  const reportLinkLabel = t("telegram.buttons.view_report") || "View Full Report";
   const messages = [
     memberDetailsMessage + "\n\n" + questionnaireMessage,
-    analysisResultsMessage + "\n\n" + analysisLinkMessage,
+    analysisResultsMessage + `\n\n[${reportLinkLabel}](${reportUrl})`,
   ];
 
   // Build combined answers text for Elastic indexing (sanitized, no Markdown)
