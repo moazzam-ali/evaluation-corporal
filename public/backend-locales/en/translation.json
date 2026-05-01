@@ -3,7 +3,7 @@
     "member_details": "*Beauty & Glow AI — New Scan*\n━━━━━━━━━━━━━━━━━━━━\n\n*Client Profile*\n\nName: {name} {surname}\nEmail: {email}\nPhone: {phone}\nDate of Birth: {birthDate}\nLocation: {city}, {country}",
     "questionnaire_details": "*Skin Questionnaire*\n━━━━━━━━━━━━━━━━━━━━\n\n*Goals & Concerns*\nConcerns: {skinConcerns}\nPriority: {priorityConcern}\nZones: {improvementZones}\n\n*Skin Profile*\nType: {skinType}\nFeel: {skinFeelGeneral}\nEnd of Day: {skinFeelEndOfDay}\n\n*Current Routine*\nFrequency: {routineFrequency}\nProducts: {productsUsed}\nEssential: {essentialProduct}\nMissing: {missingProduct}\nSupplements: {supplements}\n\n*Sensitivity*\nReactions: {reactionLevel}\nSigns: {recentSigns}\n\n*Lifestyle*\nSunscreen: {sunscreenUse}\nMakeup: {makeupFrequency}\nSleep: {sleepHours}\nStress: {stressImpact}\nWater: {waterIntake}\n\n*Experience & Goals*\nHistory: {treatmentHistory}\nFrustrations: {frustrations}\nLooking For: {lookingFor}\nWants Recommendation: {wantRoutineRecommendation}\nBudget: {budgetLevel}",
     "analysis_results": "*Analysis Results*\n━━━━━━━━━━━━━━━━━━━━\n\nOverall Score: *{overall_score}%*\nSkin Type: *{skin_type_result}*\n\n*Metric Breakdown:*\n{metrics}\n\n*Summary:*\n{summary}",
-    "analysis_link": "*View Full Report*\n━━━━━━━━━━━━━━━━━━━━\nhttps://skin-doc.vercel.app/results/{id}?l={lng}",
+    "analysis_link": "*View Full Report*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
     "buttons": {
       "sms": "Send SMS",
       "call": "Call",
