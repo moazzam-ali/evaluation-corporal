@@ -432,23 +432,31 @@ export async function POST(request) {
     console.log(`[analyze] ID: ${id}, image: ${imageBuffer.length} bytes (${imageValidation.mime}), lang: ${lng}`);
 
     // ── Step 1: Upload to Cloudinary (3 attempts) ──
+    // cloudinaryUrl is the persistent URL we want to store in the DB.
+    // imageUrl is what we hand to OpenAI — falls back to base64 when Cloudinary fails so
+    // the AI analysis can still proceed, but in that case cloudinaryUrl stays null and
+    // the DB image_url column stays null too.
     let imageUrl;
+    let cloudinaryUrl = null;
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
         const cloudResult = await uploadToCloudinary(imageBuffer, `skin-${id}.jpg`);
-        imageUrl = cloudResult.url;
+        if (!cloudResult?.url) {
+          throw new Error("Cloudinary upload returned an empty URL");
+        }
+        cloudinaryUrl = cloudResult.url;
+        imageUrl = cloudinaryUrl;
         steps.cloudinary.status = "success";
-        steps.cloudinary.url = imageUrl;
-        console.log(`[analyze] Step 1/7 Cloudinary OK (attempt ${attempt}): ${imageUrl}`);
+        steps.cloudinary.url = cloudinaryUrl;
+        console.log(`[analyze] Step 1/7 Cloudinary OK (attempt ${attempt}): ${cloudinaryUrl}`);
         break;
       } catch (err) {
         console.warn(`[analyze] Step 1/7 Cloudinary attempt ${attempt}/3 failed: ${err.message}`);
         if (attempt === 3) {
           steps.cloudinary.status = "failed";
           steps.cloudinary.error = err.message;
-          // Fallback to base64 so AI analysis can still proceed, but image won't persist on reload
           imageUrl = `data:${imageValidation.mime};base64,${imageBuffer.toString("base64")}`;
-          console.warn(`[analyze] Step 1/7 Cloudinary exhausted retries, using base64 fallback`);
+          console.warn(`[analyze] Step 1/7 Cloudinary exhausted retries, using base64 for AI only`);
         } else {
           await new Promise((r) => setTimeout(r, 1000 * attempt));
         }
@@ -496,9 +504,10 @@ export async function POST(request) {
       console.warn(`[analyze] Step 4/7 Database skipped: no DATABASE_URL`);
     } else {
       try {
+        console.log(`[analyze] Step 4/7 Database storing image_url: ${cloudinaryUrl || "null"}`);
         await query(
           "INSERT INTO analyses (id, form_data, results, image_url, language, created_at) VALUES ($1, $2, $3, $4, $5, NOW())",
-          [id, JSON.stringify(formData), JSON.stringify(results), imageUrl.startsWith("data:") ? null : imageUrl, lng]
+          [id, JSON.stringify(formData), JSON.stringify(results), cloudinaryUrl, lng]
         );
         steps.database.status = "success";
         console.log(`[analyze] Step 4/7 Database OK: ${id}`);
