@@ -5,6 +5,7 @@
     "analysis_results": "*Analyseergebnisse*\n━━━━━━━━━━━━━━━━━━━━\n\nGesamtbewertung: *{overall_score}%*\nHauttyp: *{skin_type_result}*\n\n*Metrik-Übersicht:*\n{metrics}\n\n*Zusammenfassung:*\n{summary}",
     "analysis_link": "*Vollständigen Bericht Anzeigen*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
     "buttons": {
+      "view_report": "📋 Bericht ansehen",
       "sms": "SMS Senden",
       "call": "Anrufen",
       "whatsapp": "WhatsApp",
