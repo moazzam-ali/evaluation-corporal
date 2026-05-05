@@ -1,0 +1,156 @@
+{
+  "telegram": {
+    "member_details": "*Beauty & Glow AI — Neuer Scan*\n━━━━━━━━━━━━━━━━━━━━\n\n*Kundenprofil*\n\nName: {name} {surname}\nE-Mail: {email}\nTelefon: {phone}\nGeburtsdatum: {birthDate}\nStandort: {city}, {country}",
+    "questionnaire_details": "*Hautfragebogen*\n━━━━━━━━━━━━━━━━━━━━\n\n*Ziele und Anliegen*\nAnliegen: {skinConcerns}\nPriorität: {priorityConcern}\nZonen: {improvementZones}\n\n*Hautprofil*\nTyp: {skinType}\nGefühl: {skinFeelGeneral}\nTagesende: {skinFeelEndOfDay}\n\n*Aktuelle Routine*\nHäufigkeit: {routineFrequency}\nProdukte: {productsUsed}\nUnverzichtbar: {essentialProduct}\nFehlt: {missingProduct}\nNahrungsergänzung: {supplements}\n\n*Empfindlichkeit*\nReaktionen: {reactionLevel}\nAnzeichen: {recentSigns}\n\n*Lebensstil*\nSonnenschutz: {sunscreenUse}\nMake-up: {makeupFrequency}\nSchlaf: {sleepHours}\nStress: {stressImpact}\nWasser: {waterIntake}\n\n*Erfahrung und Ziele*\nHistorie: {treatmentHistory}\nFrustrationen: {frustrations}\nSucht nach: {lookingFor}\nMöchte Empfehlung: {wantRoutineRecommendation}\nBudget: {budgetLevel}",
+    "analysis_results": "*Analyseergebnisse*\n━━━━━━━━━━━━━━━━━━━━\n\nGesamtbewertung: *{overall_score}%*\nHauttyp: *{skin_type_result}*\n\n*Metrik-Übersicht:*\n{metrics}\n\n*Zusammenfassung:*\n{summary}",
+    "analysis_link": "*Vollständigen Bericht Anzeigen*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
+    "buttons": {
+      "view_report": "📋 Bericht ansehen",
+      "sms": "✉️ SMS senden",
+      "call": "☎️ Anrufen",
+      "whatsapp": "💬 WhatsApp"
+    },
+    "form_fields": {
+      "skin_types": {
+        "oily": "Fettig",
+        "dry": "Trocken",
+        "combination": "Mischhaut",
+        "normal": "Normal",
+        "sensitive": "Empfindlich",
+        "dehydrated": "Dehydriert",
+        "dont_know": "Unbekannt"
+      },
+      "status": {
+        "good": "Gut",
+        "normal": "Normal",
+        "needs_attention": "Braucht Aufmerksamkeit"
+      },
+      "concerns": {
+        "dryness": "Trockenheit",
+        "wrinkles": "Falten",
+        "sagging": "Erschlaffung",
+        "dark_spots": "Dunkle Flecken",
+        "dullness": "Fahler Teint",
+        "blemishes": "Unreinheiten",
+        "pores": "Poren",
+        "eye_area": "Augenpartie",
+        "sensitivity": "Empfindlichkeit",
+        "other": "Sonstiges"
+      },
+      "zones": {
+        "full_face": "Ganzes Gesicht",
+        "eye_contour": "Augenkontur",
+        "neck": "Hals",
+        "hands": "Hände",
+        "body": "Körper"
+      },
+      "feel_general": {
+        "tight": "Spannt",
+        "shiny": "Glänzend",
+        "comfortable": "Angenehm",
+        "sensitive_reactive": "Empfindlich",
+        "dull": "Fahl",
+        "dont_know": "Unbekannt"
+      },
+      "feel_end_day": {
+        "tight": "Spannt",
+        "shiny": "Glänzend",
+        "comfortable": "Angenehm",
+        "irritated": "Gereizt",
+        "dull": "Fahl"
+      },
+      "routine_frequency": {
+        "morning_only": "Nur morgens",
+        "night_only": "Nur abends",
+        "morning_and_night": "Morgens und abends",
+        "no_routine": "Keine Routine"
+      },
+      "products": {
+        "cleanser": "Reiniger",
+        "toner": "Toner",
+        "serum": "Serum",
+        "day_cream": "Tagescreme",
+        "sunscreen": "Sonnenschutz",
+        "eye_contour": "Augenpflege",
+        "night_cream": "Nachtcreme",
+        "mask": "Maske",
+        "exfoliant": "Peeling",
+        "other": "Sonstiges"
+      },
+      "reaction": {
+        "yes_a_lot": "Ja, sehr",
+        "sometimes": "Manchmal",
+        "no": "Nein",
+        "dont_know": "Unbekannt"
+      },
+      "signs": {
+        "redness": "Rötungen",
+        "itching": "Juckreiz",
+        "flaking": "Schuppung",
+        "excess_shine": "Übermäßiger Glanz",
+        "blemishes": "Unreinheiten",
+        "dark_spots": "Dunkle Flecken",
+        "tightness": "Spannung",
+        "none": "Keine"
+      },
+      "sunscreen": {
+        "daily": "Täglich",
+        "sometimes": "Manchmal",
+        "summer_only": "Nur im Sommer",
+        "no": "Nein"
+      },
+      "makeup": {
+        "daily": "Täglich",
+        "several_times_week": "Mehrmals/Woche",
+        "occasionally": "Gelegentlich",
+        "never": "Nie"
+      },
+      "sleep": {
+        "less_than_5": "<5h",
+        "5_6": "5-6h",
+        "7_8": "7-8h",
+        "more_than_8": ">8h"
+      },
+      "stress": {
+        "yes": "Ja",
+        "a_little": "Etwas",
+        "no": "Nein"
+      },
+      "water": {
+        "yes": "Ja",
+        "sometimes": "Manchmal",
+        "no": "Nein"
+      },
+      "history": {
+        "yes_worked": "Ja, hat geholfen",
+        "yes_no_results": "Ja, ohne Ergebnis",
+        "tried_many_nothing_works": "Vieles versucht, nichts hilft",
+        "barely_tried": "Kaum versucht"
+      },
+      "frustrations": {
+        "no_results": "Keine Ergebnisse",
+        "irritation": "Reizung",
+        "dont_know_how_to_combine": "Weiß nicht wie kombinieren",
+        "too_expensive": "Zu teuer",
+        "not_consistent": "Nicht konsequent",
+        "other": "Sonstiges"
+      },
+      "looking_for": {
+        "basic_routine": "Basis-Routine",
+        "complete_routine": "Komplette Routine",
+        "specific_problem": "Spezifisches Problem",
+        "prevention": "Vorbeugung",
+        "personalized_advice": "Persönliche Beratung"
+      },
+      "recommendation": {
+        "yes": "Ja",
+        "no": "Nein"
+      },
+      "budget": {
+        "basic": "Basis",
+        "medium": "Mittel",
+        "premium": "Premium"
+      }
+    }
+  }
+}
