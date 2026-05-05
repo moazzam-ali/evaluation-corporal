@@ -41,8 +41,9 @@ export async function GET(request) {
     const row = result.rows[0];
     const results = typeof row.results === "string" ? JSON.parse(row.results) : row.results;
 
-    // If stored analysis doesn't have enriched_products yet, enrich on the fly
-    if (!results.enriched_products && results.recommendations) {
+    // Always re-enrich products from DB so translations are applied fresh.
+    // This ensures old scans benefit from newly added translations.
+    if (results.recommendations) {
       try {
         results.enriched_products = await enrichRecommendations(
           results.recommendations,
@@ -50,7 +51,7 @@ export async function GET(request) {
         );
       } catch (err) {
         console.warn("[results] Enrichment failed:", err.message);
-        results.enriched_products = [];
+        if (!results.enriched_products) results.enriched_products = [];
       }
     }
 
