@@ -6,60 +6,152 @@
     "analysis_link": "*View Full Report*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
     "buttons": {
       "view_report": "📋 View Report",
-      "sms": "Send SMS",
-      "call": "Call",
-      "whatsapp": "WhatsApp",
-      "telegram": "Telegram"
+      "sms": "✉️ Send SMS",
+      "call": "☎️ Call",
+      "whatsapp": "💬 WhatsApp",
+      "telegram": "✈️ Telegram"
     },
     "form_fields": {
       "skin_types": {
-        "oily": "Oily", "dry": "Dry", "combination": "Combination", "normal": "Normal", "sensitive": "Sensitive", "dehydrated": "Dehydrated", "dont_know": "Unknown"
+        "oily": "Oily",
+        "dry": "Dry",
+        "combination": "Combination",
+        "normal": "Normal",
+        "sensitive": "Sensitive",
+        "dehydrated": "Dehydrated",
+        "dont_know": "Unknown"
       },
       "status": {
-        "good": "Good", "normal": "Normal", "needs_attention": "Needs Attention"
+        "good": "Good",
+        "normal": "Normal",
+        "needs_attention": "Needs Attention"
       },
       "concerns": {
-        "dryness": "Dryness", "wrinkles": "Wrinkles", "sagging": "Sagging", "dark_spots": "Dark Spots",
-        "dullness": "Dullness", "blemishes": "Blemishes", "pores": "Pores", "eye_area": "Eye Area",
-        "sensitivity": "Sensitivity", "other": "Other"
+        "dryness": "Dryness",
+        "wrinkles": "Wrinkles",
+        "sagging": "Sagging",
+        "dark_spots": "Dark Spots",
+        "dullness": "Dullness",
+        "blemishes": "Blemishes",
+        "pores": "Pores",
+        "eye_area": "Eye Area",
+        "sensitivity": "Sensitivity",
+        "other": "Other"
       },
       "zones": {
-        "full_face": "Full Face", "eye_contour": "Eye Contour", "neck": "Neck", "hands": "Hands", "body": "Body"
+        "full_face": "Full Face",
+        "eye_contour": "Eye Contour",
+        "neck": "Neck",
+        "hands": "Hands",
+        "body": "Body"
       },
       "feel_general": {
-        "tight": "Tight", "shiny": "Shiny", "comfortable": "Comfortable", "sensitive_reactive": "Sensitive", "dull": "Dull", "dont_know": "Unknown"
+        "tight": "Tight",
+        "shiny": "Shiny",
+        "comfortable": "Comfortable",
+        "sensitive_reactive": "Sensitive",
+        "dull": "Dull",
+        "dont_know": "Unknown"
       },
       "feel_end_day": {
-        "tight": "Tight", "shiny": "Shiny", "comfortable": "Comfortable", "irritated": "Irritated", "dull": "Dull"
+        "tight": "Tight",
+        "shiny": "Shiny",
+        "comfortable": "Comfortable",
+        "irritated": "Irritated",
+        "dull": "Dull"
       },
       "routine_frequency": {
-        "morning_only": "Morning only", "night_only": "Night only", "morning_and_night": "Morning & Night", "no_routine": "No routine"
+        "morning_only": "Morning only",
+        "night_only": "Night only",
+        "morning_and_night": "Morning & Night",
+        "no_routine": "No routine"
       },
       "products": {
-        "cleanser": "Cleanser", "toner": "Toner", "serum": "Serum", "day_cream": "Day Cream", "sunscreen": "Sunscreen",
-        "eye_contour": "Eye Contour", "night_cream": "Night Cream", "mask": "Mask", "exfoliant": "Exfoliant", "other": "Other"
+        "cleanser": "Cleanser",
+        "toner": "Toner",
+        "serum": "Serum",
+        "day_cream": "Day Cream",
+        "sunscreen": "Sunscreen",
+        "eye_contour": "Eye Contour",
+        "night_cream": "Night Cream",
+        "mask": "Mask",
+        "exfoliant": "Exfoliant",
+        "other": "Other"
       },
-"reaction": { "yes_a_lot": "Yes, a lot", "sometimes": "Sometimes", "no": "No", "dont_know": "Unknown" },
+      "reaction": {
+        "yes_a_lot": "Yes, a lot",
+        "sometimes": "Sometimes",
+        "no": "No",
+        "dont_know": "Unknown"
+      },
       "signs": {
-        "redness": "Redness", "itching": "Itching", "flaking": "Flaking", "excess_shine": "Excess Shine",
-        "blemishes": "Blemishes", "dark_spots": "Dark Spots", "tightness": "Tightness", "none": "None"
+        "redness": "Redness",
+        "itching": "Itching",
+        "flaking": "Flaking",
+        "excess_shine": "Excess Shine",
+        "blemishes": "Blemishes",
+        "dark_spots": "Dark Spots",
+        "tightness": "Tightness",
+        "none": "None"
       },
-      "sunscreen": { "daily": "Daily", "sometimes": "Sometimes", "summer_only": "Summer only", "no": "No" },
-      "makeup": { "daily": "Daily", "several_times_week": "Several times/week", "occasionally": "Occasionally", "never": "Never" },
-      "sleep": { "less_than_5": "<5h", "5_6": "5-6h", "7_8": "7-8h", "more_than_8": ">8h" },
-      "stress": { "yes": "Yes", "a_little": "A little", "no": "No" },
-      "water": { "yes": "Yes", "sometimes": "Sometimes", "no": "No" },
-      "history": { "yes_worked": "Yes, worked", "yes_no_results": "Yes, no results", "tried_many_nothing_works": "Tried many, nothing works", "barely_tried": "Barely tried" },
+      "sunscreen": {
+        "daily": "Daily",
+        "sometimes": "Sometimes",
+        "summer_only": "Summer only",
+        "no": "No"
+      },
+      "makeup": {
+        "daily": "Daily",
+        "several_times_week": "Several times/week",
+        "occasionally": "Occasionally",
+        "never": "Never"
+      },
+      "sleep": {
+        "less_than_5": "<5h",
+        "5_6": "5-6h",
+        "7_8": "7-8h",
+        "more_than_8": ">8h"
+      },
+      "stress": {
+        "yes": "Yes",
+        "a_little": "A little",
+        "no": "No"
+      },
+      "water": {
+        "yes": "Yes",
+        "sometimes": "Sometimes",
+        "no": "No"
+      },
+      "history": {
+        "yes_worked": "Yes, worked",
+        "yes_no_results": "Yes, no results",
+        "tried_many_nothing_works": "Tried many, nothing works",
+        "barely_tried": "Barely tried"
+      },
       "frustrations": {
-        "no_results": "No results", "irritation": "Irritation", "dont_know_how_to_combine": "Don't know how to combine",
-        "too_expensive": "Too expensive", "not_consistent": "Not consistent", "other": "Other"
+        "no_results": "No results",
+        "irritation": "Irritation",
+        "dont_know_how_to_combine": "Don't know how to combine",
+        "too_expensive": "Too expensive",
+        "not_consistent": "Not consistent",
+        "other": "Other"
       },
       "looking_for": {
-        "basic_routine": "Basic routine", "complete_routine": "Complete routine", "specific_problem": "Specific problem",
-        "prevention": "Prevention", "personalized_advice": "Personalized advice"
+        "basic_routine": "Basic routine",
+        "complete_routine": "Complete routine",
+        "specific_problem": "Specific problem",
+        "prevention": "Prevention",
+        "personalized_advice": "Personalized advice"
       },
-      "recommendation": { "yes": "Yes", "no": "No" },
-      "budget": { "basic": "Basic", "medium": "Medium", "premium": "Premium" }
+      "recommendation": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "budget": {
+        "basic": "Basic",
+        "medium": "Medium",
+        "premium": "Premium"
+      }
     }
   }
 }

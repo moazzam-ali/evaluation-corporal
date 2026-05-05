@@ -5,61 +5,153 @@
     "analysis_results": "*Analiz Sonuçları*\n━━━━━━━━━━━━━━━━━━━━\n\nGenel Puan: *{overall_score}%*\nCilt Tipi: *{skin_type_result}*\n\n*Metrik Dökümü:*\n{metrics}\n\n*Özet:*\n{summary}",
     "analysis_link": "*Tam Raporu Görüntüle*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
     "buttons": {
-      "view_report": "📋 Raporu görüntüle",
-      "sms": "SMS Gönder",
-      "call": "Ara",
-      "whatsapp": "WhatsApp",
-      "telegram": "Telegram"
+      "view_report": "📋 Raporu Gör",
+      "sms": "✉️ SMS Gönder",
+      "call": "☎️ Ara",
+      "whatsapp": "💬 WhatsApp",
+      "telegram": "✈️ Telegram"
     },
     "form_fields": {
       "skin_types": {
-        "oily": "Yağlı", "dry": "Kuru", "combination": "Karma", "normal": "Normal", "sensitive": "Hassas", "dehydrated": "Susuz", "dont_know": "Bilinmiyor"
+        "oily": "Yağlı",
+        "dry": "Kuru",
+        "combination": "Karma",
+        "normal": "Normal",
+        "sensitive": "Hassas",
+        "dehydrated": "Susuz",
+        "dont_know": "Bilinmiyor"
       },
       "status": {
-        "good": "İyi", "normal": "Normal", "needs_attention": "İlgiye İhtiyacı Var"
+        "good": "İyi",
+        "normal": "Normal",
+        "needs_attention": "İlgiye İhtiyacı Var"
       },
       "concerns": {
-        "dryness": "Kuruluk", "wrinkles": "Kırışıklıklar", "sagging": "Sarkma", "dark_spots": "Lekeler",
-        "dullness": "Donukluk", "blemishes": "Kusurlar", "pores": "Gözenekler", "eye_area": "Göz Çevresi",
-        "sensitivity": "Hassasiyet", "other": "Diğer"
+        "dryness": "Kuruluk",
+        "wrinkles": "Kırışıklıklar",
+        "sagging": "Sarkma",
+        "dark_spots": "Lekeler",
+        "dullness": "Donukluk",
+        "blemishes": "Kusurlar",
+        "pores": "Gözenekler",
+        "eye_area": "Göz Çevresi",
+        "sensitivity": "Hassasiyet",
+        "other": "Diğer"
       },
       "zones": {
-        "full_face": "Tüm Yüz", "eye_contour": "Göz Çevresi", "neck": "Boyun", "hands": "Eller", "body": "Vücut"
+        "full_face": "Tüm Yüz",
+        "eye_contour": "Göz Çevresi",
+        "neck": "Boyun",
+        "hands": "Eller",
+        "body": "Vücut"
       },
       "feel_general": {
-        "tight": "Gergin", "shiny": "Parlak", "comfortable": "Rahat", "sensitive_reactive": "Hassas", "dull": "Donuk", "dont_know": "Bilinmiyor"
+        "tight": "Gergin",
+        "shiny": "Parlak",
+        "comfortable": "Rahat",
+        "sensitive_reactive": "Hassas",
+        "dull": "Donuk",
+        "dont_know": "Bilinmiyor"
       },
       "feel_end_day": {
-        "tight": "Gergin", "shiny": "Parlak", "comfortable": "Rahat", "irritated": "Tahriş olmuş", "dull": "Donuk"
+        "tight": "Gergin",
+        "shiny": "Parlak",
+        "comfortable": "Rahat",
+        "irritated": "Tahriş olmuş",
+        "dull": "Donuk"
       },
       "routine_frequency": {
-        "morning_only": "Sadece sabah", "night_only": "Sadece gece", "morning_and_night": "Sabah ve gece", "no_routine": "Rutin yok"
+        "morning_only": "Sadece sabah",
+        "night_only": "Sadece gece",
+        "morning_and_night": "Sabah ve gece",
+        "no_routine": "Rutin yok"
       },
       "products": {
-        "cleanser": "Temizleyici", "toner": "Tonik", "serum": "Serum", "day_cream": "Gündüz Kremi", "sunscreen": "Güneş Kremi",
-        "eye_contour": "Göz Çevresi", "night_cream": "Gece Kremi", "mask": "Maske", "exfoliant": "Peeling", "other": "Diğer"
+        "cleanser": "Temizleyici",
+        "toner": "Tonik",
+        "serum": "Serum",
+        "day_cream": "Gündüz Kremi",
+        "sunscreen": "Güneş Kremi",
+        "eye_contour": "Göz Çevresi",
+        "night_cream": "Gece Kremi",
+        "mask": "Maske",
+        "exfoliant": "Peeling",
+        "other": "Diğer"
       },
-"reaction": { "yes_a_lot": "Evet, çok", "sometimes": "Bazen", "no": "Hayır", "dont_know": "Bilinmiyor" },
+      "reaction": {
+        "yes_a_lot": "Evet, çok",
+        "sometimes": "Bazen",
+        "no": "Hayır",
+        "dont_know": "Bilinmiyor"
+      },
       "signs": {
-        "redness": "Kızarıklık", "itching": "Kaşıntı", "flaking": "Pullanma", "excess_shine": "Aşırı Parlaklık",
-        "blemishes": "Kusurlar", "dark_spots": "Lekeler", "tightness": "Gerginlik", "none": "Yok"
+        "redness": "Kızarıklık",
+        "itching": "Kaşıntı",
+        "flaking": "Pullanma",
+        "excess_shine": "Aşırı Parlaklık",
+        "blemishes": "Kusurlar",
+        "dark_spots": "Lekeler",
+        "tightness": "Gerginlik",
+        "none": "Yok"
       },
-      "sunscreen": { "daily": "Her gün", "sometimes": "Bazen", "summer_only": "Sadece yaz", "no": "Hayır" },
-      "makeup": { "daily": "Her gün", "several_times_week": "Haftada birkaç kez", "occasionally": "Ara sıra", "never": "Hiç" },
-      "sleep": { "less_than_5": "<5s", "5_6": "5-6s", "7_8": "7-8s", "more_than_8": ">8s" },
-      "stress": { "yes": "Evet", "a_little": "Biraz", "no": "Hayır" },
-      "water": { "yes": "Evet", "sometimes": "Bazen", "no": "Hayır" },
-      "history": { "yes_worked": "Evet, işe yaradı", "yes_no_results": "Evet, sonuçsuz", "tried_many_nothing_works": "Çok denedim, hiçbiri işe yaramadı", "barely_tried": "Neredeyse hiç denemedim" },
+      "sunscreen": {
+        "daily": "Her gün",
+        "sometimes": "Bazen",
+        "summer_only": "Sadece yaz",
+        "no": "Hayır"
+      },
+      "makeup": {
+        "daily": "Her gün",
+        "several_times_week": "Haftada birkaç kez",
+        "occasionally": "Ara sıra",
+        "never": "Hiç"
+      },
+      "sleep": {
+        "less_than_5": "<5s",
+        "5_6": "5-6s",
+        "7_8": "7-8s",
+        "more_than_8": ">8s"
+      },
+      "stress": {
+        "yes": "Evet",
+        "a_little": "Biraz",
+        "no": "Hayır"
+      },
+      "water": {
+        "yes": "Evet",
+        "sometimes": "Bazen",
+        "no": "Hayır"
+      },
+      "history": {
+        "yes_worked": "Evet, işe yaradı",
+        "yes_no_results": "Evet, sonuçsuz",
+        "tried_many_nothing_works": "Çok denedim, hiçbiri işe yaramadı",
+        "barely_tried": "Neredeyse hiç denemedim"
+      },
       "frustrations": {
-        "no_results": "Sonuç yok", "irritation": "Tahriş", "dont_know_how_to_combine": "Nasıl kombine edeceğimi bilmiyorum",
-        "too_expensive": "Çok pahalı", "not_consistent": "Tutarlı değilim", "other": "Diğer"
+        "no_results": "Sonuç yok",
+        "irritation": "Tahriş",
+        "dont_know_how_to_combine": "Nasıl kombine edeceğimi bilmiyorum",
+        "too_expensive": "Çok pahalı",
+        "not_consistent": "Tutarlı değilim",
+        "other": "Diğer"
       },
       "looking_for": {
-        "basic_routine": "Temel rutin", "complete_routine": "Komple rutin", "specific_problem": "Spesifik sorun",
-        "prevention": "Önleme", "personalized_advice": "Kişisel danışmanlık"
+        "basic_routine": "Temel rutin",
+        "complete_routine": "Komple rutin",
+        "specific_problem": "Spesifik sorun",
+        "prevention": "Önleme",
+        "personalized_advice": "Kişisel danışmanlık"
       },
-      "recommendation": { "yes": "Evet", "no": "Hayır" },
-      "budget": { "basic": "Temel", "medium": "Orta", "premium": "Premium" }
+      "recommendation": {
+        "yes": "Evet",
+        "no": "Hayır"
+      },
+      "budget": {
+        "basic": "Temel",
+        "medium": "Orta",
+        "premium": "Premium"
+      }
     }
   }
 }

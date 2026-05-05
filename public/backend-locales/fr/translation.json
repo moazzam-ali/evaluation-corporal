@@ -5,61 +5,153 @@
     "analysis_results": "*Résultats de l'Analyse*\n━━━━━━━━━━━━━━━━━━━━\n\nScore Global: *{overall_score}%*\nType de Peau: *{skin_type_result}*\n\n*Détail des Métriques:*\n{metrics}\n\n*Résumé:*\n{summary}",
     "analysis_link": "*Voir le Rapport Complet*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
     "buttons": {
-      "view_report": "📋 Voir le rapport",
-      "sms": "Envoyer SMS",
-      "call": "Appeler",
-      "whatsapp": "WhatsApp",
-      "telegram": "Telegram"
+      "view_report": "📋 Voir le Rapport",
+      "sms": "✉️ Envoyer SMS",
+      "call": "☎️ Appeler",
+      "whatsapp": "💬 WhatsApp",
+      "telegram": "✈️ Telegram"
     },
     "form_fields": {
       "skin_types": {
-        "oily": "Grasse", "dry": "Sèche", "combination": "Mixte", "normal": "Normale", "sensitive": "Sensible", "dehydrated": "Déshydratée", "dont_know": "Inconnu"
+        "oily": "Grasse",
+        "dry": "Sèche",
+        "combination": "Mixte",
+        "normal": "Normale",
+        "sensitive": "Sensible",
+        "dehydrated": "Déshydratée",
+        "dont_know": "Inconnu"
       },
       "status": {
-        "good": "Bon", "normal": "Normal", "needs_attention": "Nécessite Attention"
+        "good": "Bon",
+        "normal": "Normal",
+        "needs_attention": "Nécessite Attention"
       },
       "concerns": {
-        "dryness": "Sécheresse", "wrinkles": "Rides", "sagging": "Relâchement", "dark_spots": "Taches brunes",
-        "dullness": "Teint terne", "blemishes": "Imperfections", "pores": "Pores", "eye_area": "Contour des yeux",
-        "sensitivity": "Sensibilité", "other": "Autre"
+        "dryness": "Sécheresse",
+        "wrinkles": "Rides",
+        "sagging": "Relâchement",
+        "dark_spots": "Taches brunes",
+        "dullness": "Teint terne",
+        "blemishes": "Imperfections",
+        "pores": "Pores",
+        "eye_area": "Contour des yeux",
+        "sensitivity": "Sensibilité",
+        "other": "Autre"
       },
       "zones": {
-        "full_face": "Visage entier", "eye_contour": "Contour des yeux", "neck": "Cou", "hands": "Mains", "body": "Corps"
+        "full_face": "Visage entier",
+        "eye_contour": "Contour des yeux",
+        "neck": "Cou",
+        "hands": "Mains",
+        "body": "Corps"
       },
       "feel_general": {
-        "tight": "Tiraillée", "shiny": "Brillante", "comfortable": "Confortable", "sensitive_reactive": "Sensible", "dull": "Terne", "dont_know": "Inconnu"
+        "tight": "Tiraillée",
+        "shiny": "Brillante",
+        "comfortable": "Confortable",
+        "sensitive_reactive": "Sensible",
+        "dull": "Terne",
+        "dont_know": "Inconnu"
       },
       "feel_end_day": {
-        "tight": "Tiraillée", "shiny": "Brillante", "comfortable": "Confortable", "irritated": "Irritée", "dull": "Terne"
+        "tight": "Tiraillée",
+        "shiny": "Brillante",
+        "comfortable": "Confortable",
+        "irritated": "Irritée",
+        "dull": "Terne"
       },
       "routine_frequency": {
-        "morning_only": "Matin seulement", "night_only": "Soir seulement", "morning_and_night": "Matin et soir", "no_routine": "Pas de routine"
+        "morning_only": "Matin seulement",
+        "night_only": "Soir seulement",
+        "morning_and_night": "Matin et soir",
+        "no_routine": "Pas de routine"
       },
       "products": {
-        "cleanser": "Nettoyant", "toner": "Tonique", "serum": "Sérum", "day_cream": "Crème de jour", "sunscreen": "Écran solaire",
-        "eye_contour": "Contour des yeux", "night_cream": "Crème de nuit", "mask": "Masque", "exfoliant": "Exfoliant", "other": "Autre"
+        "cleanser": "Nettoyant",
+        "toner": "Tonique",
+        "serum": "Sérum",
+        "day_cream": "Crème de jour",
+        "sunscreen": "Écran solaire",
+        "eye_contour": "Contour des yeux",
+        "night_cream": "Crème de nuit",
+        "mask": "Masque",
+        "exfoliant": "Exfoliant",
+        "other": "Autre"
       },
-"reaction": { "yes_a_lot": "Oui, beaucoup", "sometimes": "Parfois", "no": "Non", "dont_know": "Inconnu" },
+      "reaction": {
+        "yes_a_lot": "Oui, beaucoup",
+        "sometimes": "Parfois",
+        "no": "Non",
+        "dont_know": "Inconnu"
+      },
       "signs": {
-        "redness": "Rougeurs", "itching": "Démangeaisons", "flaking": "Desquamation", "excess_shine": "Brillance excessive",
-        "blemishes": "Imperfections", "dark_spots": "Taches brunes", "tightness": "Tiraillements", "none": "Aucun"
+        "redness": "Rougeurs",
+        "itching": "Démangeaisons",
+        "flaking": "Desquamation",
+        "excess_shine": "Brillance excessive",
+        "blemishes": "Imperfections",
+        "dark_spots": "Taches brunes",
+        "tightness": "Tiraillements",
+        "none": "Aucun"
       },
-      "sunscreen": { "daily": "Quotidien", "sometimes": "Parfois", "summer_only": "Été seulement", "no": "Non" },
-      "makeup": { "daily": "Quotidien", "several_times_week": "Plusieurs fois/semaine", "occasionally": "Occasionnellement", "never": "Jamais" },
-      "sleep": { "less_than_5": "<5h", "5_6": "5-6h", "7_8": "7-8h", "more_than_8": ">8h" },
-      "stress": { "yes": "Oui", "a_little": "Un peu", "no": "Non" },
-      "water": { "yes": "Oui", "sometimes": "Parfois", "no": "Non" },
-      "history": { "yes_worked": "Oui, efficace", "yes_no_results": "Oui, sans résultats", "tried_many_nothing_works": "Essayé beaucoup, rien ne marche", "barely_tried": "À peine essayé" },
+      "sunscreen": {
+        "daily": "Quotidien",
+        "sometimes": "Parfois",
+        "summer_only": "Été seulement",
+        "no": "Non"
+      },
+      "makeup": {
+        "daily": "Quotidien",
+        "several_times_week": "Plusieurs fois/semaine",
+        "occasionally": "Occasionnellement",
+        "never": "Jamais"
+      },
+      "sleep": {
+        "less_than_5": "<5h",
+        "5_6": "5-6h",
+        "7_8": "7-8h",
+        "more_than_8": ">8h"
+      },
+      "stress": {
+        "yes": "Oui",
+        "a_little": "Un peu",
+        "no": "Non"
+      },
+      "water": {
+        "yes": "Oui",
+        "sometimes": "Parfois",
+        "no": "Non"
+      },
+      "history": {
+        "yes_worked": "Oui, efficace",
+        "yes_no_results": "Oui, sans résultats",
+        "tried_many_nothing_works": "Essayé beaucoup, rien ne marche",
+        "barely_tried": "À peine essayé"
+      },
       "frustrations": {
-        "no_results": "Sans résultats", "irritation": "Irritation", "dont_know_how_to_combine": "Ne sait pas combiner",
-        "too_expensive": "Trop cher", "not_consistent": "Pas constant", "other": "Autre"
+        "no_results": "Sans résultats",
+        "irritation": "Irritation",
+        "dont_know_how_to_combine": "Ne sait pas combiner",
+        "too_expensive": "Trop cher",
+        "not_consistent": "Pas constant",
+        "other": "Autre"
       },
       "looking_for": {
-        "basic_routine": "Routine basique", "complete_routine": "Routine complète", "specific_problem": "Problème spécifique",
-        "prevention": "Prévention", "personalized_advice": "Conseil personnalisé"
+        "basic_routine": "Routine basique",
+        "complete_routine": "Routine complète",
+        "specific_problem": "Problème spécifique",
+        "prevention": "Prévention",
+        "personalized_advice": "Conseil personnalisé"
       },
-      "recommendation": { "yes": "Oui", "no": "Non" },
-      "budget": { "basic": "Basique", "medium": "Moyen", "premium": "Premium" }
+      "recommendation": {
+        "yes": "Oui",
+        "no": "Non"
+      },
+      "budget": {
+        "basic": "Basique",
+        "medium": "Moyen",
+        "premium": "Premium"
+      }
     }
   }
 }
