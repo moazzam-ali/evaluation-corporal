@@ -436,7 +436,15 @@
       "sensitive": "Sensitive",
       "dehydrated": "Dehydrated",
       "normal": "Normal"
-    }
+    },
+    "access_title": "Access required",
+    "access_message": "To use the skin scanner, you need a personalised access link from your coach. Please contact your coach to get started.",
+    "access_home": "Back to home",
+    "complete_toast": "Analysis complete!",
+    "complete_title": "Analysis complete!",
+    "complete_message": "Your skin analysis has been processed successfully. Your coach will share the detailed results with you shortly. Please contact your coach to receive your personalised report and product recommendations.",
+    "complete_hint": "Your coach has been notified and will reach out with your results.",
+    "complete_home": "Back to home"
   },
   "results": {
     "title": "Your Skin Analysis",

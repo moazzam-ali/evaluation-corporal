@@ -31,21 +31,18 @@
   "landing": {
     "cta": "Cildimi Tara",
     "hero_cta": "Cildimi Tara — Ücretsiz",
-
     "nav_how": "Nasıl çalışır",
     "nav_metrics": "Metrikler",
     "nav_demo": "Canlı demo",
     "nav_products": "Ürünler",
     "nav_pricing": "Fiyatlandırma",
     "nav_config": "Ayarlar",
-
     "hero_badge": "12 metrik · dermatolog eğitimli",
     "hero_title_1": "Cilt analizi,",
     "hero_title_2": "randevuya",
     "hero_title_3": "gerek yok.",
     "hero_subtitle": "Tek bir kamera. On iki klinik metrik. Cildinizin gerçekten ihtiyaç duyduğu bir plan.",
     "hero_demo_cta": "Demoyu izle",
-
     "how_label": "Süreç",
     "how_title_1": "Selfieden",
     "how_title_2": "cilt bakım planına",
@@ -63,14 +60,12 @@
     "how_step4_title": "Özenle seçilmiş rutin",
     "how_step4_text": "Metriklerinize tam olarak eşleşen ürünler. Hangi bileşenin ne işe yaradığını ve ne zaman kullanılacağını söyleriz.",
     "how_step4_time": "Kişiselleştirilmiş",
-
     "metrics_label": "Bilimsel yüzey",
     "metrics_title_1": "Ölçtüğümüz on iki şey,",
     "metrics_title_2": "böylece tahmin etmek",
     "metrics_title_3": "zorunda kalmazsınız.",
     "metrics_subtitle": "Her metriğin klinik bir karşılığı var — nem, stratum korneum nem ipuçlarını izler; bariyer, transepidermal su kaybı göstergelerini takip eder ve devam eder. Puanlar 0–100 arasındadır, demografik grubunuza göre oranlanır.",
     "metrics_methodology": "Metodoloji ve güven aralıkları üç ayda bir yayımlanır · son güncelleme Nisan 2026",
-
     "demo_label": "Uygulamada görün",
     "demo_title_1": "Taramanın nasıl",
     "demo_title_2": "sesli düşündüğünü",
@@ -80,7 +75,6 @@
     "demo_time_2": "6,8 saniye sürdü.",
     "demo_time_3": "Sizinki de öyle olacak.",
     "demo_cta": "Kendi yüzünüzde deneyin",
-
     "products_label": "Katalog değil, özenle seçilmiş",
     "products_title_1": "Cildinize",
     "products_title_2": "özel",
@@ -89,7 +83,6 @@
     "products_subtitle": "AI'mız HL/Skin ürünlerini metriklerinize tam olarak eşleştirir. Her öneri bileşen dökümü ve rutin yerleşimi ile gelir.",
     "products_supplement": "Takviye",
     "products_cta": "Kişisel rutininizi alın",
-
     "science_label": "Bileşen katmanı",
     "science_title_1": "Molekülleri sıralıyoruz,",
     "science_title_2": "pazarlamayı",
@@ -104,7 +97,6 @@
     "science_stat2": "Etkinliğe göre sıralanan aktifler",
     "science_stat3": "Satış ortaklığı yerleşimi. Asla.",
     "science_stat4": "Üç aylık metodoloji yenilemesi",
-
     "pricing_label": "Fiyatlandırma",
     "pricing_title_1": "Taramak",
     "pricing_title_2": "ücretsiz.",
@@ -138,7 +130,6 @@
     "plan_pro_f4": "Beyaz etiketli rapor kapakları",
     "plan_pro_f5": "API erişimi (500 tarama/ay)",
     "plan_pro_cta": "Satışla konuşun",
-
     "footer_tagline_1": "Cildiniz,",
     "footer_tagline_2": "nazikçe",
     "footer_tagline_3": "ölçülmüş.",
@@ -436,7 +427,15 @@
       "sensitive": "Hassas",
       "dehydrated": "Susuz (Dehidrate)",
       "normal": "Normal"
-    }
+    },
+    "access_title": "Erişim gerekli",
+    "access_message": "Cilt tarayıcısını kullanmak için koçunuzdan kişiselleştirilmiş bir erişim bağlantısına ihtiyacınız var. Başlamak için lütfen koçunuzla iletişime geçin.",
+    "access_home": "Ana sayfaya dön",
+    "complete_toast": "Analiz tamamlandı!",
+    "complete_title": "Analiz tamamlandı!",
+    "complete_message": "Cilt analiziniz başarıyla işlendi. Koçunuz detaylı sonuçları kısa süre içinde sizinle paylaşacaktır. Kişiselleştirilmiş raporunuzu ve ürün önerilerinizi almak için lütfen koçunuzla iletişime geçin.",
+    "complete_hint": "Koçunuz bilgilendirildi ve sonuçlarınızla size ulaşacaktır.",
+    "complete_home": "Ana sayfaya dön"
   },
   "results": {
     "title": "Cilt Analiziniz",

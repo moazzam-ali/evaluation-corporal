@@ -68,6 +68,7 @@ function ScanPageInner() {
   const [activeTab, setActiveTab] = useState("upload");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState(0);
+  const [analysisComplete, setAnalysisComplete] = useState(false);
   const abortControllerRef = useRef(null);
 
   const chatIDs = searchParams.get("n")?.split(",").filter(Boolean) || [];
@@ -197,8 +198,8 @@ function ScanPageInner() {
 
       setAnalysisProgress(100);
       useAnalysisStore.getState().setAnalysisFromResponse({ results: result.results, formData, imageUrl: imageData });
-      toast.success(t("results.title", "Analysis complete!"));
-      router.push(`/results/${result.id}`);
+      toast.success(t("scan.complete_toast", "Analysis complete!"));
+      setAnalysisComplete(true);
     } catch (error) {
       if (error.name === "AbortError") {
         toast.error(t("common.timeout", "Analysis took too long. Please try again."));
@@ -266,6 +267,47 @@ function ScanPageInner() {
           >
             {t("common.cancel", "Cancel")}
           </button>
+        </motion.div>
+      </div>
+    );
+  }
+
+  // Analysis complete — tell user their coach will share results
+  if (analysisComplete) {
+    return (
+      <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto w-full max-w-md rounded-3xl border border-[rgba(26,26,46,0.10)] bg-white p-8 shadow-sm"
+        >
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#E6F1ED]">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#5B9A8B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h2
+            className="mb-2 text-[28px] text-[#1A1A2E]"
+            style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, lineHeight: 1.2 }}
+          >
+            {t("scan.complete_title", "Analysis complete!")}
+          </h2>
+          <p className="mb-6 text-[14px] leading-relaxed text-[#6B6B7A]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+            {t("scan.complete_message", "Your skin analysis has been processed successfully. Your coach will share the detailed results with you shortly. Please contact your coach to receive your personalised report and product recommendations.")}
+          </p>
+          <div className="rounded-xl border border-[rgba(232,114,138,0.2)] bg-[#FDEEF1] px-4 py-3 text-[13px] leading-relaxed text-[#D45571]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+            {t("scan.complete_hint", "Your coach has been notified and will reach out with your results.")}
+          </div>
+          <div className="mt-6">
+            <a
+              href="/"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-[rgba(26,26,46,0.14)] bg-transparent px-5 py-3 text-sm font-medium text-[#1A1A2E] transition-colors hover:border-[#1A1A2E]"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
+            >
+              {t("scan.complete_home", "Back to home")}
+            </a>
+          </div>
         </motion.div>
       </div>
     );
