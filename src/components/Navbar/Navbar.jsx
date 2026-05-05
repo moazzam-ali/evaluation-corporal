@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { Menu, X, Globe, ChevronDown, ChevronRight, Settings2 } from "lucide-react";
+import { Menu, X, Globe, ChevronDown, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { LANGUAGES } from "@/lib/languages";
@@ -118,15 +118,6 @@ export default function Navbar() {
               {t("nav.saved", "Saved automatically")}
             </span>
           )}
-
-          <Link
-            href={configHref}
-            className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(26,26,46,0.14)] bg-transparent px-4 py-2 text-xs text-[hsl(240,10%,46%)] transition-colors hover:border-[#1A1A2E] hover:text-[#1A1A2E]"
-            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
-          >
-            <Settings2 className="h-3.5 w-3.5" />
-            {t("landing.nav_config", "Config")}
-          </Link>
 
           <Link
             href={scanHref}
