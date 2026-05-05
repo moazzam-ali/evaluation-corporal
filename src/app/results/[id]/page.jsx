@@ -79,7 +79,7 @@ export default function ResultsPage() {
   const dateStr = now.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
   return (
-    <div className="mx-auto" style={{ maxWidth: "1100px", padding: "56px 32px 96px" }}>
+    <div className="mx-auto" style={{ maxWidth: "1100px", padding: "clamp(32px, 5vw, 56px) clamp(16px, 4vw, 32px) 96px" }}>
       {/* ===== HEADER STRIP (clinical variant) ===== */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: "56px" }}>
         <div

@@ -21,14 +21,12 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
     <motion.section
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="overflow-hidden"
+      className="overflow-hidden grid grid-cols-1 md:grid-cols-[320px_1fr]"
       style={{
         background: "white",
         border: "1px solid rgba(26,26,46,0.10)",
         borderRadius: "24px",
         boxShadow: "0 1px 2px rgba(26,26,46,0.04)",
-        display: "grid",
-        gridTemplateColumns: "320px 1fr",
       }}
     >
       {/* Photo column */}
@@ -75,8 +73,8 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
       </div>
 
       {/* Score info column */}
-      <div className="flex flex-col gap-6 p-9">
-        <div className="flex items-center gap-7">
+      <div className="flex flex-col gap-6 p-6 md:p-9">
+        <div className="flex flex-col items-center md:flex-row md:items-center gap-6 md:gap-7">
           {/* Score ring + label below */}
           <div className="flex flex-col items-center shrink-0">
             <div className="relative" style={{ width: "132px", height: "132px" }}>
@@ -108,7 +106,7 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
           </div>
 
           {/* Score info */}
-          <div className="flex flex-col gap-3.5 min-w-0">
+          <div className="flex flex-col items-center md:items-start gap-3.5 min-w-0">
             <span
               className="inline-flex items-center gap-2 self-start"
               style={{
@@ -153,12 +151,6 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
         )}
       </div>
 
-      {/* Responsive override */}
-      <style jsx>{`
-        @media (max-width: 800px) {
-          section { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </motion.section>
   );
 }
