@@ -6,8 +6,8 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
-import { useRef, Suspense } from "react";
-import products from "@/data/products.json";
+import { useRef, useState, useEffect, useCallback, Suspense } from "react";
+import staticProducts from "@/data/products.json";
 /* ── tiny helpers ──────────────────────────────────────────────── */
 function Reveal({ children, className = "", delay = 0 }) {
   const ref = useRef(null);
@@ -74,8 +74,25 @@ export default function LandingPage() {
 }
 
 function LandingPageInner() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const searchParams = useSearchParams();
+  const [products, setProducts] = useState(staticProducts);
+
+  // Fetch translated products from DB when language changes
+  const fetchProducts = useCallback(async (lang) => {
+    try {
+      const res = await fetch(`/api/products?lang=${lang}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.products?.length > 0) setProducts(data.products);
+    } catch {
+      // Keep static products as fallback
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProducts(i18n.language);
+  }, [i18n.language, fetchProducts]);
 
   // Forward any URL params (n, b, a, c, l) to /scan links
   const paramString = searchParams.toString();

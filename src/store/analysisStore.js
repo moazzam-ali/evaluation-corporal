@@ -50,6 +50,17 @@ const useAnalysisStore = create((set, get) => ({
     }
   },
 
+  reEnrichProducts: async (id, language) => {
+    try {
+      const response = await fetch(`/api/results/products?id=${id}&lang=${language}`);
+      if (!response.ok) return;
+      const data = await response.json();
+      set({ enrichedProducts: data.enrichedProducts || [] });
+    } catch (err) {
+      console.warn("[store] Re-enrichment failed:", err.message);
+    }
+  },
+
   setAnalysisFromResponse: (data) => {
     const { results, formData, imageUrl } = data;
     set({

@@ -6,6 +6,7 @@ import { enrichRecommendations } from "@/lib/products";
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
+  const langOverride = searchParams.get("lang");
 
   if (!id) {
     return NextResponse.json({ error: "Missing analysis ID" }, { status: 400 });
@@ -19,7 +20,7 @@ export async function GET(request) {
         ...data.results,
         enriched_products: await enrichRecommendations(
           data.results.recommendations,
-          data.language || "en"
+          langOverride || data.language || "en"
         ),
       };
     } catch (err) {
@@ -47,7 +48,7 @@ export async function GET(request) {
       try {
         results.enriched_products = await enrichRecommendations(
           results.recommendations,
-          row.language || "en"
+          langOverride || row.language || "en"
         );
       } catch (err) {
         console.warn("[results] Enrichment failed:", err.message);
