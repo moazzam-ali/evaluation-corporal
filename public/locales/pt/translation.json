@@ -4,7 +4,9 @@
     "home": "Início",
     "scan": "Analisar Pele",
     "config": "Configuração",
-    "saved": "Salvo automaticamente"
+    "saved": "Salvo automaticamente",
+    "aria_change_language": "Mudar idioma",
+    "aria_toggle_menu": "Abrir menu de navegação"
   },
   "home": {
     "title": "Configuração",
@@ -146,7 +148,81 @@
     "footer_privacy": "Política de privacidade",
     "footer_ingredient": "Ciência dos ingredientes",
     "footer_methodology": "Metodologia",
-    "footer_privacy_link": "Privacidade"
+    "footer_privacy_link": "Privacidade",
+
+    "metric_hydration": "Hidratação",
+    "metric_hydration_desc": "Indicadores de umidade do estrato córneo na testa, bochechas e queixo.",
+    "metric_barrier": "Barreira",
+    "metric_barrier_desc": "Integridade ceramida-lipídica inferida da recuperação tonal.",
+    "metric_pore_visibility": "Visibilidade dos poros",
+    "metric_pore_visibility_desc": "Tamanho e profundidade de sombra na zona T e bochechas.",
+    "metric_even_tone": "Tom uniforme",
+    "metric_even_tone_desc": "Variância dos valores L*a*b* em relação ao patch de referência.",
+    "metric_redness": "Vermelhidão",
+    "metric_redness_desc": "Índice de eritema derivado do isolamento do canal vermelho.",
+    "metric_fine_lines": "Linhas finas",
+    "metric_fine_lines_desc": "Micro-pregas na testa, sob os olhos e zonas periorais.",
+    "metric_sebum": "Sebo",
+    "metric_sebum_desc": "Mapeamento de brilho na zona T com separação especular.",
+    "metric_texture": "Textura",
+    "metric_texture_desc": "Detalhes de superfície de alta frequência — congestão, descamação.",
+    "metric_dark_circles": "Olheiras",
+    "metric_dark_circles_desc": "Sombra periorbital + descoloração, corrigida pela iluminação.",
+    "metric_pigmentation": "Pigmentação",
+    "metric_pigmentation_desc": "Manchas hiperpigmentadas discretas avaliadas por área + contraste.",
+    "metric_elasticity": "Elasticidade",
+    "metric_elasticity_desc": "Rebote inferido das diferenças de micro-expressão entre quadros.",
+    "metric_glow": "Luminosidade",
+    "metric_glow_desc": "Composto: hidratação × tom uniforme × baixa vermelhidão.",
+
+    "tier_optimal": "Ótimo",
+    "tier_watch": "Observar",
+    "tier_flag": "Alerta",
+    "tier_good": "Bom",
+
+    "marquee_1": "12 métricas com IA",
+    "marquee_2": "Rotinas personalizadas",
+    "marquee_3": "Gama de produtos HL/Skin",
+    "marquee_4": "Ciência dos ingredientes",
+    "marquee_5": "Suporte multilíngue",
+    "marquee_6": "Análise instantânea",
+    "marquee_7": "Insights de nível dermatológico",
+    "marquee_8": "Rotinas matinais e noturnas",
+    "marquee_9": "Alimentado por GPT-4o Vision",
+    "marquee_10": "8 idiomas disponíveis",
+
+    "score_label": "Pontuação",
+
+    "demo_zone_1": "Testa · Hidratação",
+    "demo_zone_2": "Bochechas · Integridade da barreira",
+    "demo_zone_3": "Nariz · Índice de vermelhidão",
+    "demo_zone_4": "Geral · Tom uniforme",
+
+    "science_niacinamide_name": "Niacinamida",
+    "science_niacinamide_inci": "INCI · Nicotinamida · Vit. B3",
+    "science_niacinamide_targets": "Barreira · Vermelhidão",
+    "science_niacinamide_evidence": "42 ECR",
+    "science_bakuchiol_name": "Bakuchiol",
+    "science_bakuchiol_inci": "INCI · Meroterpeno · De origem vegetal",
+    "science_bakuchiol_targets": "Linhas finas · Tom",
+    "science_bakuchiol_evidence": "18 estudos clínicos",
+    "science_tranexamic_name": "Ácido tranexâmico",
+    "science_tranexamic_inci": "INCI · Trans-4-aminometil",
+    "science_tranexamic_targets": "Pigmentação",
+    "science_tranexamic_evidence": "27 artigos revisados por pares",
+
+    "plan_premium_cadence": "/ mês",
+    "plan_free_member_note": "Já é membro? Você tem scans ilimitados — completamente grátis.",
+    "plan_premium_name": "Premium",
+    "plan_premium_desc": "Scans ilimitados, acompanhamento e orientação personalizada de cuidados com a pele — tudo em um plano.",
+    "plan_premium_sub": "cancele a qualquer momento",
+    "plan_premium_f1": "Scans de pele com IA ilimitados",
+    "plan_premium_f2": "Acompanhamento de progresso ao longo do tempo",
+    "plan_premium_f3": "Ajuste automático da rotina",
+    "plan_premium_f4": "Análise aprofundada de ingredientes",
+    "plan_premium_f5": "Suporte prioritário",
+    "plan_premium_cta": "Assinar Premium",
+    "plan_premium_badge": "Melhor custo-benefício"
   },
   "scan": {
     "title": "Análise de Pele",
@@ -435,7 +511,10 @@
     "complete_title": "Análise concluída!",
     "complete_message": "Sua análise de pele foi processada com sucesso. Seu coach compartilhará os resultados detalhados com você em breve. Entre em contato com seu coach para receber seu relatório personalizado e recomendações de produtos.",
     "complete_hint": "Seu coach foi notificado e entrará em contato com seus resultados.",
-    "complete_home": "Voltar ao início"
+    "complete_home": "Voltar ao início",
+    "photo_alt_captured": "Capturada",
+    "photo_alt_uploaded": "Carregada",
+    "camera_live": "Ao vivo"
   },
   "results": {
     "title": "Sua Análise de Pele",
@@ -476,6 +555,10 @@
     "score_good": "Pele em bom equilíbrio geral",
     "score_normal": "Algumas áreas precisam de atenção",
     "score_alert": "Várias áreas precisam de cuidado",
+    "photo_alt": "Scan de pele",
+    "photo_label": "Selfie · 1024 × 1024",
+    "metric_details": "Detalhes",
+    "metric_less": "Menos",
     "footnote": "Esta ferramenta destina-se apenas a fins de conscientização cosmética. As pontuações da pele podem variar com base na maquiagem aplicada. Os resultados não substituem o aconselhamento dermatológico profissional.",
     "status": {
       "good": "Bom",
@@ -540,6 +623,7 @@
     "back": "Voltar",
     "cancel": "Cancelar",
     "optional": "Opcional",
-    "timeout": "A análise demorou muito. Por favor, tente novamente."
+    "timeout": "A análise demorou muito. Por favor, tente novamente.",
+    "close": "Fechar"
   }
 }

@@ -4,7 +4,9 @@
     "home": "Ana Sayfa",
     "scan": "Cildi Analiz Et",
     "config": "Ayarlar",
-    "saved": "Otomatik kaydedildi"
+    "saved": "Otomatik kaydedildi",
+    "aria_change_language": "Dili değiştir",
+    "aria_toggle_menu": "Gezinme menüsünü aç"
   },
   "home": {
     "title": "Yapılandırma",
@@ -146,7 +148,81 @@
     "footer_privacy": "Gizlilik politikası",
     "footer_ingredient": "Bileşen bilimi",
     "footer_methodology": "Metodoloji",
-    "footer_privacy_link": "Gizlilik"
+    "footer_privacy_link": "Gizlilik",
+
+    "metric_hydration": "Nem",
+    "metric_hydration_desc": "Alın, yanak ve çenede stratum korneum nem göstergeleri.",
+    "metric_barrier": "Bariyer",
+    "metric_barrier_desc": "Tonal iyileşmeden çıkarılan seramid-lipid bütünlüğü.",
+    "metric_pore_visibility": "Gözenek görünürlüğü",
+    "metric_pore_visibility_desc": "T-bölgesi ve yanakta boyut ve gölge derinliği.",
+    "metric_even_tone": "Düzgün ton",
+    "metric_even_tone_desc": "Referans yamaya göre L*a*b* değerlerinin varyansı.",
+    "metric_redness": "Kızarıklık",
+    "metric_redness_desc": "Kırmızı kanal izolasyonundan elde edilen eritem indeksi.",
+    "metric_fine_lines": "İnce çizgiler",
+    "metric_fine_lines_desc": "Alın, göz altı ve ağız çevresi bölgelerinde mikro kırışıklıklar.",
+    "metric_sebum": "Sebum",
+    "metric_sebum_desc": "T-bölgesinde speküler ayırma ile parlaklık haritalaması.",
+    "metric_texture": "Doku",
+    "metric_texture_desc": "Yüksek frekanslı yüzey detayları — tıkanıklık, pullanma.",
+    "metric_dark_circles": "Göz altı halkaları",
+    "metric_dark_circles_desc": "Periorbital gölge + renk değişikliği, aydınlatma için düzeltilmiş.",
+    "metric_pigmentation": "Pigmentasyon",
+    "metric_pigmentation_desc": "Alan + kontrasta göre puanlanan ayrık hiperpigmentli lekeler.",
+    "metric_elasticity": "Esneklik",
+    "metric_elasticity_desc": "Mikro ifade kare farklarından çıkarılan geri tepme.",
+    "metric_glow": "Parıltı",
+    "metric_glow_desc": "Bileşik: nem × düzgün ton × düşük kızarıklık.",
+
+    "tier_optimal": "Optimal",
+    "tier_watch": "İzle",
+    "tier_flag": "Uyarı",
+    "tier_good": "İyi",
+
+    "marquee_1": "12 yapay zeka destekli metrik",
+    "marquee_2": "Kişiselleştirilmiş rutinler",
+    "marquee_3": "HL/Skin ürün yelpazesi",
+    "marquee_4": "İçerik bilimi",
+    "marquee_5": "Çok dilli destek",
+    "marquee_6": "Anında analiz",
+    "marquee_7": "Dermatolog düzeyinde içgörüler",
+    "marquee_8": "Sabah ve akşam rutinleri",
+    "marquee_9": "GPT-4o Vision ile güçlendirilmiş",
+    "marquee_10": "8 dil destekleniyor",
+
+    "score_label": "Puan",
+
+    "demo_zone_1": "Alın · Nem",
+    "demo_zone_2": "Yanaklar · Bariyer bütünlüğü",
+    "demo_zone_3": "Burun · Kızarıklık indeksi",
+    "demo_zone_4": "Genel · Düzgün ton",
+
+    "science_niacinamide_name": "Niasinamid",
+    "science_niacinamide_inci": "INCI · Nikotinamid · Vit. B3",
+    "science_niacinamide_targets": "Bariyer · Kızarıklık",
+    "science_niacinamide_evidence": "42 RKÇ",
+    "science_bakuchiol_name": "Bakuchiol",
+    "science_bakuchiol_inci": "INCI · Meroterpen · Bitki kaynaklı",
+    "science_bakuchiol_targets": "İnce çizgiler · Ton",
+    "science_bakuchiol_evidence": "18 klinik çalışma",
+    "science_tranexamic_name": "Traneksamik Asit",
+    "science_tranexamic_inci": "INCI · Trans-4-aminometil",
+    "science_tranexamic_targets": "Pigmentasyon",
+    "science_tranexamic_evidence": "27 hakemli makale",
+
+    "plan_premium_cadence": "/ ay",
+    "plan_free_member_note": "Zaten üye misiniz? Sınırsız tarama hakkınız var — tamamen ücretsiz.",
+    "plan_premium_name": "Premium",
+    "plan_premium_desc": "Sınırsız tarama, takip ve kişiselleştirilmiş cilt bakımı rehberliği — hepsi tek planda.",
+    "plan_premium_sub": "istediğiniz zaman iptal edin",
+    "plan_premium_f1": "Sınırsız yapay zeka cilt taraması",
+    "plan_premium_f2": "Zaman içinde ilerleme takibi",
+    "plan_premium_f3": "Otomatik rutin ayarlaması",
+    "plan_premium_f4": "Derinlemesine içerik analizi",
+    "plan_premium_f5": "Öncelikli destek",
+    "plan_premium_cta": "Premium'a Geç",
+    "plan_premium_badge": "En iyi değer"
   },
   "scan": {
     "title": "Cilt Analizi",
@@ -435,7 +511,10 @@
     "complete_title": "Analiz tamamlandı!",
     "complete_message": "Cilt analiziniz başarıyla işlendi. Koçunuz detaylı sonuçları kısa süre içinde sizinle paylaşacaktır. Kişiselleştirilmiş raporunuzu ve ürün önerilerinizi almak için lütfen koçunuzla iletişime geçin.",
     "complete_hint": "Koçunuz bilgilendirildi ve sonuçlarınızla size ulaşacaktır.",
-    "complete_home": "Ana sayfaya dön"
+    "complete_home": "Ana sayfaya dön",
+    "photo_alt_captured": "Çekildi",
+    "photo_alt_uploaded": "Yüklendi",
+    "camera_live": "Canlı"
   },
   "results": {
     "title": "Cilt Analiziniz",
@@ -476,6 +555,10 @@
     "score_good": "Cilt genel olarak iyi dengede",
     "score_normal": "Bazı alanlar dikkat gerektiriyor",
     "score_alert": "Birkaç alan bakım gerektiriyor",
+    "photo_alt": "Cilt taraması",
+    "photo_label": "Selfie · 1024 × 1024",
+    "metric_details": "Ayrıntılar",
+    "metric_less": "Daha az",
     "footnote": "Bu araç yalnızca kozmetik farkındalık amaçlıdır. Cilt puanları uygulanan makyaja göre değişiklik gösterebilir. Sonuçlar profesyonel dermatolojik tavsiyenin yerini tutmaz.",
     "status": {
       "good": "İyi",
@@ -540,6 +623,7 @@
     "back": "Geri Dön",
     "cancel": "İptal",
     "optional": "İsteğe bağlı",
-    "timeout": "Analiz çok uzun sürdü. Lütfen tekrar deneyin."
+    "timeout": "Analiz çok uzun sürdü. Lütfen tekrar deneyin.",
+    "close": "Kapat"
   }
 }

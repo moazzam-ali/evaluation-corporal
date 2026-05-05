@@ -2,16 +2,19 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
-const STATUS_COLORS = {
-  good: { stroke: "#5B9A8B", label: "Good" },
-  normal: { stroke: "#D4A053", label: "Normal" },
-  needs_attention: { stroke: "#E8728A", label: "Needs attention" },
+const STATUS_STROKES = {
+  good: "#5B9A8B",
+  normal: "#D4A053",
+  needs_attention: "#E8728A",
 };
 
 export default function ScoreCircle({ metricId, score, status, label, insight, description, delay = 0 }) {
   const [expanded, setExpanded] = useState(false);
-  const { stroke, label: statusLabel } = STATUS_COLORS[status] || STATUS_COLORS.normal;
+  const { t } = useTranslation();
+  const stroke = STATUS_STROKES[status] || STATUS_STROKES.normal;
+  const statusLabel = t(`results.status.${status}`, status);
   const radius = 32;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (score / 100) * circumference;
@@ -98,7 +101,7 @@ export default function ScoreCircle({ metricId, score, status, label, insight, d
           >
             <polyline points="6 9 12 15 18 9" />
           </svg>
-          {expanded ? "Less" : "Details"}
+          {expanded ? t("results.metric_less", "Less") : t("results.metric_details", "Details")}
         </div>
       )}
 

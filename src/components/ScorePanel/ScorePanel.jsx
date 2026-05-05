@@ -47,7 +47,7 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
           }}
         >
           {imageUrl ? (
-            <Image src={imageUrl} alt="Skin scan" fill className="object-cover" sizes="256px" />
+            <Image src={imageUrl} alt={t("results.photo_alt", "Skin scan")} fill className="object-cover" sizes="256px" />
           ) : (
             <div className="flex h-full w-full items-center justify-center">
               <svg viewBox="0 0 256 256" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
@@ -68,7 +68,7 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
           }}
         >
           <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#E8728A", boxShadow: "0 0 0 3px rgba(232,114,138,0.25)" }} />
-          Selfie · 1024 × 1024
+          {t("results.photo_label", "Selfie · 1024 × 1024")}
         </span>
       </div>
 

@@ -25,38 +25,23 @@ function Reveal({ children, className = "", delay = 0 }) {
   );
 }
 
-const METRICS = [
-  { name: "Hydration",       desc: "Stratum-corneum moisture cues across forehead, cheek, chin.",   tier: "good",  fill: 82 },
-  { name: "Barrier",         desc: "Ceramide-lipid integrity inferred from tonal recovery.",        tier: "mid",   fill: 64 },
-  { name: "Pore visibility", desc: "Size and shadow depth across T-zone and mid-cheek.",            tier: "mid",   fill: 58 },
-  { name: "Even tone",       desc: "Variance of L*a*b* values vs. baseline patch.",                 tier: "good",  fill: 78 },
-  { name: "Redness",         desc: "Erythema index derived from red-channel isolation.",            tier: "alert", fill: 41 },
-  { name: "Fine lines",      desc: "Micro-creasing at forehead, under-eye, peri-oral zones.",       tier: "mid",   fill: 58 },
-  { name: "Sebum",           desc: "Shine mapping across T-zone with specular separation.",         tier: "good",  fill: 72 },
-  { name: "Texture",         desc: "High-frequency surface detail — congestion, flakiness.",        tier: "good",  fill: 76 },
-  { name: "Dark circles",    desc: "Periorbital shadow + discoloration, corrected for lighting.",   tier: "mid",   fill: 62 },
-  { name: "Pigmentation",    desc: "Discrete hyperpigmented spots scored by area + contrast.",      tier: "good",  fill: 74 },
-  { name: "Elasticity",      desc: "Inferred recoil from micro-expression frame differences.",      tier: "good",  fill: 80 },
-  { name: "Glow",            desc: "Composite: hydration × even tone × low redness.",               tier: "good",  fill: 84 },
+const METRIC_DATA = [
+  { key: "hydration",       tier: "good",  fill: 82 },
+  { key: "barrier",         tier: "mid",   fill: 64 },
+  { key: "pore_visibility", tier: "mid",   fill: 58 },
+  { key: "even_tone",       tier: "good",  fill: 78 },
+  { key: "redness",         tier: "alert", fill: 41 },
+  { key: "fine_lines",      tier: "mid",   fill: 58 },
+  { key: "sebum",           tier: "good",  fill: 72 },
+  { key: "texture",         tier: "good",  fill: 76 },
+  { key: "dark_circles",    tier: "mid",   fill: 62 },
+  { key: "pigmentation",    tier: "good",  fill: 74 },
+  { key: "elasticity",      tier: "good",  fill: 80 },
+  { key: "glow",            tier: "good",  fill: 84 },
 ];
 
-const MARQUEE_ITEMS = [
-  "12 AI-Powered Metrics",
-  "Personalized Routines",
-  "HL/Skin Product Range",
-  "Ingredient Science",
-  "Multi-Language Support",
-  "Instant Analysis",
-  "Dermatologist-Grade Insights",
-  "Morning & Evening Routines",
-  "Powered by GPT-4o Vision",
-  "8 Languages Supported",
-];
-
-const tierColor = (t) =>
-  t === "good" ? "#5B9A8B" : t === "mid" ? "#D4A053" : "#E8728A";
-const tierLabel = (t) =>
-  t === "good" ? "Optimal" : t === "mid" ? "Watch" : "Flag";
+const tierColor = (v) =>
+  v === "good" ? "#5B9A8B" : v === "mid" ? "#D4A053" : "#E8728A";
 
 /* ── Metric icons (inline SVGs, simplified) ────────────────────── */
 function MetricIcon({ index }) {
@@ -96,6 +81,28 @@ function LandingPageInner() {
   const paramString = searchParams.toString();
   const scanHref = paramString ? `/scan?${paramString}` : "/scan";
   const configHref = paramString ? `/config?${paramString}` : "/config";
+
+  const tierLabel = (tier) =>
+    tier === "good" ? t("landing.tier_optimal", "Optimal") : tier === "mid" ? t("landing.tier_watch", "Watch") : t("landing.tier_flag", "Flag");
+
+  const METRICS = METRIC_DATA.map((m) => ({
+    ...m,
+    name: t(`landing.metric_${m.key}`, m.key),
+    desc: t(`landing.metric_${m.key}_desc`, ""),
+  }));
+
+  const MARQUEE_ITEMS = [
+    t("landing.marquee_1", "12 AI-Powered Metrics"),
+    t("landing.marquee_2", "Personalized Routines"),
+    t("landing.marquee_3", "HL/Skin Product Range"),
+    t("landing.marquee_4", "Ingredient Science"),
+    t("landing.marquee_5", "Multi-Language Support"),
+    t("landing.marquee_6", "Instant Analysis"),
+    t("landing.marquee_7", "Dermatologist-Grade Insights"),
+    t("landing.marquee_8", "Morning & Evening Routines"),
+    t("landing.marquee_9", "Powered by GPT-4o Vision"),
+    t("landing.marquee_10", "8 Languages Supported"),
+  ];
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden" style={{ background: "#FAFAFB" }}>
@@ -182,10 +189,10 @@ function LandingPageInner() {
 
                 {/* Floating metric bubbles */}
                 {[
-                  { label: "Hydration", value: 82, status: "Optimal", tier: "good", pos: { top: "8%", left: "6%" }, anim: "floatA 6s ease-in-out infinite" },
-                  { label: "Barrier", value: 64, status: "Watch", tier: "mid", pos: { top: "14%", right: "4%" }, anim: "floatB 7s ease-in-out infinite" },
-                  { label: "Redness", value: 41, status: "Flag", tier: "alert", pos: { bottom: "12%", left: "10%" }, anim: "floatB 6.5s ease-in-out infinite 0.5s" },
-                  { label: "Even tone", value: 78, status: "Good", tier: "good", pos: { bottom: "8%", right: "6%" }, anim: "floatA 5.5s ease-in-out infinite 0.3s" },
+                  { label: t("landing.metric_hydration", "Hydration"), value: 82, status: t("landing.tier_optimal", "Optimal"), tier: "good", pos: { top: "8%", left: "6%" }, anim: "floatA 6s ease-in-out infinite" },
+                  { label: t("landing.metric_barrier", "Barrier"), value: 64, status: t("landing.tier_watch", "Watch"), tier: "mid", pos: { top: "14%", right: "4%" }, anim: "floatB 7s ease-in-out infinite" },
+                  { label: t("landing.metric_redness", "Redness"), value: 41, status: t("landing.tier_flag", "Flag"), tier: "alert", pos: { bottom: "12%", left: "10%" }, anim: "floatB 6.5s ease-in-out infinite 0.5s" },
+                  { label: t("landing.metric_even_tone", "Even tone"), value: 78, status: t("landing.tier_good", "Good"), tier: "good", pos: { bottom: "8%", right: "6%" }, anim: "floatA 5.5s ease-in-out infinite 0.3s" },
                 ].map((bubble) => (
                   <div
                     key={bubble.label}
@@ -312,7 +319,7 @@ function LandingPageInner() {
                   </div>
                   <div className="mt-2.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider" style={{ fontFamily: "var(--font-dm-sans)", color: tierColor(m.tier) }}>
                     <span className="h-1.5 w-1.5 rounded-full" style={{ background: tierColor(m.tier) }} />
-                    Score {m.fill}
+                    {t("landing.score_label", "Score")} {m.fill}
                   </div>
                 </div>
               </Reveal>
@@ -382,10 +389,10 @@ function LandingPageInner() {
                 {/* Readout rows */}
                 <div className="flex flex-col gap-3.5">
                   {[
-                    { zone: "Forehead · Hydration", value: 82, fill: 82, tier: "good" },
-                    { zone: "Cheeks · Barrier integrity", value: 64, fill: 64, tier: "mid" },
-                    { zone: "Nose · Redness index", value: 41, fill: 41, tier: "alert" },
-                    { zone: "Overall · Even tone", value: 78, fill: 78, tier: "good" },
+                    { zone: t("landing.demo_zone_1", "Forehead · Hydration"), value: 82, fill: 82, tier: "good" },
+                    { zone: t("landing.demo_zone_2", "Cheeks · Barrier integrity"), value: 64, fill: 64, tier: "mid" },
+                    { zone: t("landing.demo_zone_3", "Nose · Redness index"), value: 41, fill: 41, tier: "alert" },
+                    { zone: t("landing.demo_zone_4", "Overall · Even tone"), value: 78, fill: 78, tier: "good" },
                   ].map((row) => (
                     <div key={row.zone} className="rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-4 sm:p-5 transition-colors hover:bg-[rgba(255,255,255,0.06)]">
                       <div className="flex items-center justify-between gap-4">
@@ -543,9 +550,9 @@ function LandingPageInner() {
 
           <div className="grid gap-5 lg:grid-cols-3">
             {[
-              { name: "Niacinamide", inci: "INCI \u00b7 Nicotinamide \u00b7 Vit. B3", formula: "C\u2086H\u2086N\u2082O", desc: t("landing.science_niacinamide_desc", "The ingredient that quietly fixes four things at once: strengthens ceramide synthesis, calms redness, regulates sebum, and softens hyperpigmentation. Works at 2\u20135%."), targets: "Barrier \u00b7 Redness", evidence: "42 RCTs" },
-              { name: "Bakuchiol", inci: "INCI \u00b7 Meroterpene \u00b7 Plant-derived", formula: "C\u2081\u2088H\u2082\u2084O", desc: t("landing.science_bakuchiol_desc", "The retinol alternative your barrier can tolerate. Up-regulates collagen expression without the peeling, photo-sensitivity or pregnancy caveats of tretinoin."), targets: "Fine lines \u00b7 Tone", evidence: "18 clinical studies" },
-              { name: "Tranexamic Acid", inci: "INCI \u00b7 Trans-4-aminomethyl", formula: "C\u2088H\u2081\u2085NO\u2082", desc: t("landing.science_tranexamic_desc", "The gold standard for stubborn melasma and post-inflammatory pigmentation. Interrupts the melanocyte-keratinocyte pathway \u2014 without irritating a sensitive barrier."), targets: "Pigmentation", evidence: "27 peer-reviewed papers" },
+              { name: t("landing.science_niacinamide_name", "Niacinamide"), inci: t("landing.science_niacinamide_inci", "INCI \u00b7 Nicotinamide \u00b7 Vit. B3"), formula: "C\u2086H\u2086N\u2082O", desc: t("landing.science_niacinamide_desc", "The ingredient that quietly fixes four things at once: strengthens ceramide synthesis, calms redness, regulates sebum, and softens hyperpigmentation. Works at 2\u20135%."), targets: t("landing.science_niacinamide_targets", "Barrier \u00b7 Redness"), evidence: t("landing.science_niacinamide_evidence", "42 RCTs") },
+              { name: t("landing.science_bakuchiol_name", "Bakuchiol"), inci: t("landing.science_bakuchiol_inci", "INCI \u00b7 Meroterpene \u00b7 Plant-derived"), formula: "C\u2081\u2088H\u2082\u2084O", desc: t("landing.science_bakuchiol_desc", "The retinol alternative your barrier can tolerate. Up-regulates collagen expression without the peeling, photo-sensitivity or pregnancy caveats of tretinoin."), targets: t("landing.science_bakuchiol_targets", "Fine lines \u00b7 Tone"), evidence: t("landing.science_bakuchiol_evidence", "18 clinical studies") },
+              { name: t("landing.science_tranexamic_name", "Tranexamic Acid"), inci: t("landing.science_tranexamic_inci", "INCI \u00b7 Trans-4-aminomethyl"), formula: "C\u2088H\u2081\u2085NO\u2082", desc: t("landing.science_tranexamic_desc", "The gold standard for stubborn melasma and post-inflammatory pigmentation. Interrupts the melanocyte-keratinocyte pathway \u2014 without irritating a sensitive barrier."), targets: t("landing.science_tranexamic_targets", "Pigmentation"), evidence: t("landing.science_tranexamic_evidence", "27 peer-reviewed papers") },
             ].map((ing, i) => (
               <Reveal key={ing.name} delay={i * 0.08}>
                 <div className="h-full rounded-3xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-7 sm:p-8 transition-all duration-300 hover:-translate-y-[3px] hover:border-[rgba(232,114,138,0.4)] hover:bg-[rgba(255,255,255,0.06)]">
@@ -613,7 +620,7 @@ function LandingPageInner() {
           <div className="mx-auto grid max-w-[820px] gap-4 lg:grid-cols-2">
             {[
               { name: t("landing.plan_free_name", "Free"), desc: t("landing.plan_free_desc", "Your first AI skin scan is on us \u2014 no strings attached."), price: "\u00a30", cadence: "", sub: t("landing.plan_free_sub", "No card needed \u00b7 no expiry"), features: [t("landing.plan_free_f1", "One complete AI skin scan"), t("landing.plan_free_f2", "Full skin report with insights"), t("landing.plan_free_f3", "Personalised routine recommendation")], memberNote: t("landing.plan_free_member_note", "Already a member? You get unlimited scans \u2014 completely free."), cta: t("landing.plan_free_cta", "Scan for free"), featured: false },
-              { name: t("landing.plan_premium_name", "Premium"), desc: t("landing.plan_premium_desc", "Unlimited scans, tracking, and personalised skincare guidance \u2014 all in one plan."), price: "\u00a329", cadence: "/ month", sub: t("landing.plan_premium_sub", "cancel anytime"), features: [t("landing.plan_premium_f1", "Unlimited AI skin scans"), t("landing.plan_premium_f2", "Progress tracking over time"), t("landing.plan_premium_f3", "Routine auto-tuning as skin changes"), t("landing.plan_premium_f4", "Ingredient deep-dives"), t("landing.plan_premium_f5", "Priority support")], cta: t("landing.plan_premium_cta", "Go Premium"), featured: true, badge: t("landing.plan_premium_badge", "Best value") },
+              { name: t("landing.plan_premium_name", "Premium"), desc: t("landing.plan_premium_desc", "Unlimited scans, tracking, and personalised skincare guidance \u2014 all in one plan."), price: "\u00a329", cadence: t("landing.plan_premium_cadence", "/ month"), sub: t("landing.plan_premium_sub", "cancel anytime"), features: [t("landing.plan_premium_f1", "Unlimited AI skin scans"), t("landing.plan_premium_f2", "Progress tracking over time"), t("landing.plan_premium_f3", "Routine auto-tuning as skin changes"), t("landing.plan_premium_f4", "Ingredient deep-dives"), t("landing.plan_premium_f5", "Priority support")], cta: t("landing.plan_premium_cta", "Go Premium"), featured: true, badge: t("landing.plan_premium_badge", "Best value") },
             ].map((plan) => (
               <Reveal key={plan.name}>
                 <div className={`relative flex h-full flex-col rounded-3xl border p-7 sm:p-8 transition-transform duration-300 ${

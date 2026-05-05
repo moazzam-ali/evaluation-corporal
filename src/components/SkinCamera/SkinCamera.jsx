@@ -106,7 +106,7 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
           >
             {capturedImage ? (
               <>
-                <img src={capturedImage} alt="Captured" className="absolute inset-0 w-full h-full object-cover" />
+                <img src={capturedImage} alt={t("scan.photo_alt_captured", "Captured")} className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute bottom-5 left-0 right-0 flex justify-center">
                   <button
                     type="button"
@@ -146,7 +146,7 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
                   }}
                 >
                   <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#FF5C7A", boxShadow: "0 0 0 3px rgba(255,92,122,0.30)" }} />
-                  Live
+                  {t("scan.camera_live", "Live")}
                 </span>
                 {/* Shutter button */}
                 <div className="absolute bottom-5 left-0 right-0 flex items-center justify-center gap-3.5">
@@ -191,7 +191,7 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
         <div className="flex flex-col gap-[18px]">
           {uploadedImage ? (
             <div className="relative" style={{ borderRadius: "18px", overflow: "hidden" }}>
-              <img src={uploadedImage} alt="Uploaded" className="w-full" />
+              <img src={uploadedImage} alt={t("scan.photo_alt_uploaded", "Uploaded")} className="w-full" />
               <div className="absolute bottom-5 left-0 right-0 flex justify-center">
                 <button
                   type="button"
