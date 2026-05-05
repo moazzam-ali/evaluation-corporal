@@ -8,8 +8,7 @@
       "view_report": "📋 Raporu Gör",
       "sms": "✉️ SMS Gönder",
       "call": "☎️ Ara",
-      "whatsapp": "💬 WhatsApp",
-      "telegram": "✈️ Telegram"
+      "whatsapp": "💬 WhatsApp"
     },
     "form_fields": {
       "skin_types": {
