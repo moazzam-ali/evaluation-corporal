@@ -481,7 +481,7 @@ function LandingPageInner() {
                       />
                     )}
                     <span className="absolute left-3 top-3 rounded-full bg-[#FAFAFB] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[#1A1A2E]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                      {product.category}
+                      {t(`products.categories.${product.category}`, product.category)}
                     </span>
                     {product.type === "ingestible" && (
                       <span className="absolute right-3 top-3 rounded-full bg-[#1A1A2E] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white" style={{ fontFamily: "var(--font-dm-sans)" }}>
@@ -501,7 +501,7 @@ function LandingPageInner() {
                   <div className="mt-auto flex flex-wrap gap-1.5 border-t border-[rgba(26,26,46,0.08)] pt-3">
                     {product.concerns.slice(0, 3).map((c) => (
                       <span key={c} className="rounded-full bg-[#FDEEF1] px-2 py-0.5 text-[10px] font-medium text-[#D45571]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                        {c.replace(/_/g, " ")}
+                        {t(`products.concerns.${c}`, c.replace(/_/g, " "))}
                       </span>
                     ))}
                     {product.size && (

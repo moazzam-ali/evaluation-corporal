@@ -90,7 +90,7 @@ export default function ProductCard({ product, delay = 0 }) {
           ) : (
             <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.32 0z"/></svg>
           )}
-          {isIngestible ? t("products.supplement", "Supplement") : product.category}
+          {isIngestible ? t("products.supplement", "Supplement") : t(`products.categories.${product.category}`, product.category)}
         </span>
       </div>
 
