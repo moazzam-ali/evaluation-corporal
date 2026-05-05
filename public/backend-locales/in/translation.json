@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "member_details": "*Beauty & Glow AI — Scan Baru*\n━━━━━━━━━━━━━━━━━━━━\n\n*Profil Klien*\n\nNama: {name} {surname}\nEmail: {email}\nTelepon: {phone}\nTanggal Lahir: {birthDate}\nLokasi: {city}, {country}",
-    "questionnaire_details": "*Kuesioner Kulit*\n━━━━━━━━━━━━━━━━━━━━\n\n*Tujuan dan Masalah*\nMasalah: {skinConcerns}\nPrioritas: {priorityConcern}\nArea: {improvementZones}\n\n*Profil Kulit*\nTipe: {skinType}\nRasa: {skinFeelGeneral}\nAkhir Hari: {skinFeelEndOfDay}\n\n*Rutinitas Saat Ini*\nFrekuensi: {routineFrequency}\nProduk: {productsUsed}\nWajib: {essentialProduct}\nKurang: {missingProduct}\nSuplemen: {supplements}\n\n*Sensitivitas*\nReaksi: {reactionLevel}\nTanda: {recentSigns}\n\n*Gaya Hidup*\nTabir Surya: {sunscreenUse}\nMakeup: {makeupFrequency}\nTidur: {sleepHours}\nStres: {stressImpact}\nAir: {waterIntake}\n\n*Pengalaman dan Tujuan*\nRiwayat: {treatmentHistory}\nFrustrasi: {frustrations}\nMencari: {lookingFor}\nIngin Rekomendasi: {wantRoutineRecommendation}\nAnggaran: {budgetLevel}",
-    "analysis_results": "*Hasil Analisis*\n━━━━━━━━━━━━━━━━━━━━\n\nSkor Keseluruhan: *{overall_score}%*\nJenis Kulit: *{skin_type_result}*\n\n*Rincian Metrik:*\n{metrics}\n\n*Ringkasan:*\n{summary}",
-    "analysis_link": "*Lihat Laporan Lengkap*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
+    "member_details": "*Beauty & Glow AI — नया स्कैन*\n━━━━━━━━━━━━━━━━━━━━\n\n*ग्राहक प्रोफ़ाइल*\n\nनाम: {name} {surname}\nईमेल: {email}\nफ़ोन: {phone}\nजन्म तिथि: {birthDate}\nस्थान: {city}, {country}",
+    "questionnaire_details": "*त्वचा प्रश्नावली*\n━━━━━━━━━━━━━━━━━━━━\n\n*लक्ष्य और समस्याएँ*\nसमस्याएँ: {skinConcerns}\nप्राथमिकता: {priorityConcern}\nक्षेत्र: {improvementZones}\n\n*त्वचा प्रोफ़ाइल*\nप्रकार: {skinType}\nअनुभव: {skinFeelGeneral}\nदिन के अंत में: {skinFeelEndOfDay}\n\n*वर्तमान दिनचर्या*\nआवृत्ति: {routineFrequency}\nउत्पाद: {productsUsed}\nज़रूरी: {essentialProduct}\nकमी: {missingProduct}\nसप्लीमेंट: {supplements}\n\n*संवेदनशीलता*\nप्रतिक्रिया: {reactionLevel}\nलक्षण: {recentSigns}\n\n*जीवनशैली*\nसनस्क्रीन: {sunscreenUse}\nमेकअप: {makeupFrequency}\nनींद: {sleepHours}\nतनाव: {stressImpact}\nपानी: {waterIntake}\n\n*अनुभव और लक्ष्य*\nइतिहास: {treatmentHistory}\nनिराशा: {frustrations}\nतलाश: {lookingFor}\nसिफ़ारिश चाहिए: {wantRoutineRecommendation}\nबजट: {budgetLevel}",
+    "analysis_results": "*विश्लेषण परिणाम*\n━━━━━━━━━━━━━━━━━━━━\n\nकुल स्कोर: *{overall_score}%*\nत्वचा का प्रकार: *{skin_type_result}*\n\n*मेट्रिक विवरण:*\n{metrics}\n\n*सारांश:*\n{summary}",
+    "analysis_link": "*पूरी रिपोर्ट देखें*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
     "buttons": {
       "view_report": "📋 रिपोर्ट देखें",
       "sms": "✉️ SMS भेजें",
@@ -12,144 +12,144 @@
     },
     "form_fields": {
       "skin_types": {
-        "oily": "Berminyak",
-        "dry": "Kering",
-        "combination": "Kombinasi",
-        "normal": "Normal",
-        "sensitive": "Sensitif",
-        "dehydrated": "Dehidrasi",
-        "dont_know": "Tidak tahu"
+        "oily": "तैलीय",
+        "dry": "रूखी",
+        "combination": "मिश्रित",
+        "normal": "सामान्य",
+        "sensitive": "संवेदनशील",
+        "dehydrated": "निर्जलित",
+        "dont_know": "पता नहीं"
       },
       "status": {
-        "good": "Baik",
-        "normal": "Normal",
-        "needs_attention": "Perlu Perhatian"
+        "good": "अच्छी",
+        "normal": "सामान्य",
+        "needs_attention": "ध्यान देने की ज़रूरत"
       },
       "concerns": {
-        "dryness": "Kekeringan",
-        "wrinkles": "Kerutan",
-        "sagging": "Kendur",
-        "dark_spots": "Noda hitam",
-        "dullness": "Kusam",
-        "blemishes": "Noda",
-        "pores": "Pori-pori",
-        "eye_area": "Area Mata",
-        "sensitivity": "Sensitivitas",
-        "other": "Lainnya"
+        "dryness": "रूखापन",
+        "wrinkles": "झुर्रियाँ",
+        "sagging": "ढीलापन",
+        "dark_spots": "काले धब्बे",
+        "dullness": "बेजान त्वचा",
+        "blemishes": "दाग-धब्बे",
+        "pores": "रोमछिद्र",
+        "eye_area": "आँखों का क्षेत्र",
+        "sensitivity": "संवेदनशीलता",
+        "other": "अन्य"
       },
       "zones": {
-        "full_face": "Seluruh Wajah",
-        "eye_contour": "Kontur Mata",
-        "neck": "Leher",
-        "hands": "Tangan",
-        "body": "Tubuh"
+        "full_face": "पूरा चेहरा",
+        "eye_contour": "आँखों का समोच्च",
+        "neck": "गर्दन",
+        "hands": "हाथ",
+        "body": "शरीर"
       },
       "feel_general": {
-        "tight": "Kencang",
-        "shiny": "Berkilau",
-        "comfortable": "Nyaman",
-        "sensitive_reactive": "Sensitif",
-        "dull": "Kusam",
-        "dont_know": "Tidak tahu"
+        "tight": "खिंचाव",
+        "shiny": "चमकदार",
+        "comfortable": "आरामदायक",
+        "sensitive_reactive": "संवेदनशील",
+        "dull": "बेजान",
+        "dont_know": "पता नहीं"
       },
       "feel_end_day": {
-        "tight": "Kencang",
-        "shiny": "Berkilau",
-        "comfortable": "Nyaman",
-        "irritated": "Iritasi",
-        "dull": "Kusam"
+        "tight": "खिंचाव",
+        "shiny": "चमकदार",
+        "comfortable": "आरामदायक",
+        "irritated": "चिड़चिड़ी",
+        "dull": "बेजान"
       },
       "routine_frequency": {
-        "morning_only": "Pagi saja",
-        "night_only": "Malam saja",
-        "morning_and_night": "Pagi dan malam",
-        "no_routine": "Tidak ada rutinitas"
+        "morning_only": "केवल सुबह",
+        "night_only": "केवल रात",
+        "morning_and_night": "सुबह और रात",
+        "no_routine": "कोई दिनचर्या नहीं"
       },
       "products": {
-        "cleanser": "Pembersih",
-        "toner": "Toner",
-        "serum": "Serum",
-        "day_cream": "Krim Siang",
-        "sunscreen": "Tabir Surya",
-        "eye_contour": "Kontur Mata",
-        "night_cream": "Krim Malam",
-        "mask": "Masker",
-        "exfoliant": "Eksfolian",
-        "other": "Lainnya"
+        "cleanser": "क्लींज़र",
+        "toner": "टोनर",
+        "serum": "सीरम",
+        "day_cream": "डे क्रीम",
+        "sunscreen": "सनस्क्रीन",
+        "eye_contour": "आई कंटूर",
+        "night_cream": "नाइट क्रीम",
+        "mask": "मास्क",
+        "exfoliant": "एक्सफ़ोलिएंट",
+        "other": "अन्य"
       },
       "reaction": {
-        "yes_a_lot": "Ya, sangat",
-        "sometimes": "Kadang",
-        "no": "Tidak",
-        "dont_know": "Tidak tahu"
+        "yes_a_lot": "हाँ, बहुत",
+        "sometimes": "कभी-कभी",
+        "no": "नहीं",
+        "dont_know": "पता नहीं"
       },
       "signs": {
-        "redness": "Kemerahan",
-        "itching": "Gatal",
-        "flaking": "Mengelupas",
-        "excess_shine": "Kilau berlebih",
-        "blemishes": "Noda",
-        "dark_spots": "Noda hitam",
-        "tightness": "Ketegangan",
-        "none": "Tidak ada"
+        "redness": "लालिमा",
+        "itching": "खुजली",
+        "flaking": "पपड़ी",
+        "excess_shine": "अत्यधिक चमक",
+        "blemishes": "दाग-धब्बे",
+        "dark_spots": "काले धब्बे",
+        "tightness": "खिंचाव",
+        "none": "कोई नहीं"
       },
       "sunscreen": {
-        "daily": "Setiap hari",
-        "sometimes": "Kadang",
-        "summer_only": "Musim panas saja",
-        "no": "Tidak"
+        "daily": "रोज़ाना",
+        "sometimes": "कभी-कभी",
+        "summer_only": "केवल गर्मियों में",
+        "no": "नहीं"
       },
       "makeup": {
-        "daily": "Setiap hari",
-        "several_times_week": "Beberapa kali/minggu",
-        "occasionally": "Sesekali",
-        "never": "Tidak pernah"
+        "daily": "रोज़ाना",
+        "several_times_week": "हफ़्ते में कई बार",
+        "occasionally": "कभी-कभार",
+        "never": "कभी नहीं"
       },
       "sleep": {
-        "less_than_5": "<5j",
-        "5_6": "5-6j",
-        "7_8": "7-8j",
-        "more_than_8": ">8j"
+        "less_than_5": "<5 घंटे",
+        "5_6": "5-6 घंटे",
+        "7_8": "7-8 घंटे",
+        "more_than_8": ">8 घंटे"
       },
       "stress": {
-        "yes": "Ya",
-        "a_little": "Sedikit",
-        "no": "Tidak"
+        "yes": "हाँ",
+        "a_little": "थोड़ा",
+        "no": "नहीं"
       },
       "water": {
-        "yes": "Ya",
-        "sometimes": "Kadang",
-        "no": "Tidak"
+        "yes": "हाँ",
+        "sometimes": "कभी-कभी",
+        "no": "नहीं"
       },
       "history": {
-        "yes_worked": "Ya, berhasil",
-        "yes_no_results": "Ya, tanpa hasil",
-        "tried_many_nothing_works": "Banyak mencoba, tidak ada yang berhasil",
-        "barely_tried": "Hampir tidak mencoba"
+        "yes_worked": "हाँ, काम किया",
+        "yes_no_results": "हाँ, कोई परिणाम नहीं",
+        "tried_many_nothing_works": "बहुत कोशिश की, कुछ काम नहीं आया",
+        "barely_tried": "लगभग कोशिश नहीं की"
       },
       "frustrations": {
-        "no_results": "Tanpa hasil",
-        "irritation": "Iritasi",
-        "dont_know_how_to_combine": "Tidak tahu cara mengombinasikan",
-        "too_expensive": "Terlalu mahal",
-        "not_consistent": "Tidak konsisten",
-        "other": "Lainnya"
+        "no_results": "कोई परिणाम नहीं",
+        "irritation": "जलन",
+        "dont_know_how_to_combine": "मिलाना नहीं आता",
+        "too_expensive": "बहुत महँगा",
+        "not_consistent": "नियमित नहीं",
+        "other": "अन्य"
       },
       "looking_for": {
-        "basic_routine": "Rutinitas dasar",
-        "complete_routine": "Rutinitas lengkap",
-        "specific_problem": "Masalah spesifik",
-        "prevention": "Pencegahan",
-        "personalized_advice": "Saran personal"
+        "basic_routine": "बुनियादी दिनचर्या",
+        "complete_routine": "संपूर्ण दिनचर्या",
+        "specific_problem": "विशिष्ट समस्या",
+        "prevention": "रोकथाम",
+        "personalized_advice": "व्यक्तिगत सलाह"
       },
       "recommendation": {
-        "yes": "Ya",
-        "no": "Tidak"
+        "yes": "हाँ",
+        "no": "नहीं"
       },
       "budget": {
-        "basic": "Dasar",
-        "medium": "Menengah",
-        "premium": "Premium"
+        "basic": "बुनियादी",
+        "medium": "मध्यम",
+        "premium": "प्रीमियम"
       }
     }
   }

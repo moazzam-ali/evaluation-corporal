@@ -58,18 +58,6 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
             </div>
           )}
         </div>
-        <span
-          className="absolute bottom-5 left-5 inline-flex items-center gap-2"
-          style={{
-            fontFamily: "var(--font-dm-sans)", fontSize: "10px", letterSpacing: "0.14em", textTransform: "uppercase",
-            background: "white", color: "#1A1A2E",
-            padding: "6px 12px", borderRadius: "999px",
-            boxShadow: "0 4px 12px rgba(26,26,46,0.10)",
-          }}
-        >
-          <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#E8728A", boxShadow: "0 0 0 3px rgba(232,114,138,0.25)" }} />
-          {t("results.photo_label", "Selfie · 1024 × 1024")}
-        </span>
       </div>
 
       {/* Score info column */}

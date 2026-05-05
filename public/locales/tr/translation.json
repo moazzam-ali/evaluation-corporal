@@ -562,12 +562,12 @@
     "footnote": "Bu araç yalnızca kozmetik farkındalık amaçlıdır. Cilt puanları uygulanan makyaja göre değişiklik gösterebilir. Sonuçlar profesyonel dermatolojik tavsiyenin yerini tutmaz.",
     "status": {
       "good": "İyi",
-      "normal": "Normal",
+      "normal": "Orta",
       "needs_attention": "Dikkat Gerektirir"
     },
     "score_guide": {
       "needs_attention": "Dikkat Gerektirir",
-      "normal": "Normal",
+      "normal": "Orta",
       "good": "İyi"
     }
   },
