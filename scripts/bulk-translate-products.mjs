@@ -17,7 +17,7 @@ import OpenAI from "openai";
 const LANGUAGES = ["es", "fr", "de", "it", "tr", "in", "pt"];
 const LANGUAGE_NAMES = {
   es: "Spanish", fr: "French", de: "German",
-  it: "Italian", tr: "Turkish", in: "Indonesian", pt: "Portuguese",
+  it: "Italian", tr: "Turkish", in: "Hindi", pt: "Portuguese",
 };
 
 const force = process.argv.includes("--force");

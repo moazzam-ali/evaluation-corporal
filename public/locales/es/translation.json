@@ -274,7 +274,10 @@
       "birthDate": "Fecha de Nacimiento",
       "phone": "Teléfono",
       "country": "País",
-      "city": "Ciudad"
+      "city": "Ciudad",
+      "consent_text": "Acepto que mis datos personales (incluida mi foto) sean procesados por IA para generar un análisis de piel. Los resultados serán almacenados y compartidos con mi coach.",
+      "consent_link": "Leer nuestra Política de Privacidad",
+      "consent_required": "Debes aceptar para continuar"
     },
     "step2": {
       "nav": "Objetivo Principal",
@@ -658,13 +661,26 @@
   },
   "privacy": {
     "title": "Política de Privacidad",
-    "intro": "Tu privacidad es importante para nosotros. Esta política explica cómo manejamos tus datos.",
-    "data_handling_title": "Manejo de Datos",
-    "data_handling": "Las imágenes faciales se transmiten por HTTPS y se almacenan de forma segura. Los resultados del análisis en JSON, tu correo electrónico y tu foto de escaneo se almacenan en nuestro sistema para proporcionarte tu informe.",
-    "consent_title": "Consentimiento",
-    "consent": "Al usar nuestro servicio, aceptas la recopilación y el uso de información de acuerdo con esta política.",
-    "contact_title": "Contacto",
-    "contact": "Si tienes alguna pregunta sobre esta política, por favor contáctanos."
+    "last_updated": "Última actualización: mayo 2026",
+    "intro": "Tu privacidad es importante para nosotros. Esta política explica qué datos personales recopilamos, cómo los procesamos, con quién los compartimos y qué derechos tienes según las leyes de protección de datos aplicables, incluido el RGPD.",
+    "data_collected_title": "Datos que recopilamos",
+    "data_collected": "Recopilamos los siguientes datos personales: nombre, correo electrónico, teléfono, fecha de nacimiento, país, ciudad, respuestas del cuestionario sobre tu piel, una foto facial y los resultados del análisis generados por IA.",
+    "how_we_process_title": "Cómo procesamos tus datos",
+    "how_we_process": "Tu foto se envía de forma segura a nuestro proveedor de IA (OpenAI) para su análisis. La foto también se almacena a través de Cloudinary para tu informe. La IA genera una evaluación de la piel con puntuaciones, información y recomendaciones de productos. Todos los datos se almacenan en nuestra base de datos segura.",
+    "lawful_basis_title": "Base legal del tratamiento",
+    "lawful_basis": "Procesamos tus datos personales con base en tu consentimiento explícito, que otorgas al marcar la casilla de consentimiento. Puedes retirar tu consentimiento en cualquier momento contactándonos.",
+    "third_parties_title": "Terceros procesadores",
+    "third_parties": "Utilizamos los siguientes servicios de terceros: OpenAI (análisis IA), Cloudinary (almacenamiento de imágenes), Vercel (alojamiento) y Neon (alojamiento de base de datos). Cada proveedor procesa los datos de acuerdo con sus propias políticas de privacidad.",
+    "data_retention_title": "Retención de datos",
+    "data_retention": "Tus datos se conservan el tiempo necesario para prestar nuestros servicios. Puedes solicitar su eliminación en cualquier momento. Eliminaremos tus datos dentro de los 30 días posteriores a una solicitud válida.",
+    "your_rights_title": "Tus derechos",
+    "your_rights": "Según el RGPD, tienes derecho a: acceder a tus datos, rectificarlos, eliminarlos, limitar el tratamiento, portabilidad de datos, oponerte al tratamiento y retirar tu consentimiento en cualquier momento.",
+    "how_to_contact_title": "Cómo ejercer tus derechos",
+    "how_to_contact": "Contáctanos en: privacy@beautyandglow.ai. Responderemos en un plazo de 30 días.",
+    "cookies_title": "Cookies",
+    "cookies": "Esta aplicación solo utiliza cookies esenciales necesarias para el funcionamiento del servicio (ej.: preferencia de idioma). No utilizamos cookies de seguimiento, publicitarias ni analíticas.",
+    "changes_title": "Cambios en esta política",
+    "changes": "Podemos actualizar esta política de privacidad. Los cambios se indicarán con la fecha de actualización en la parte superior de esta página."
   },
   "common": {
     "loading": "Cargando...",

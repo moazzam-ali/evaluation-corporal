@@ -283,7 +283,10 @@
       "birthDate": "Date of Birth",
       "phone": "Phone",
       "country": "Country",
-      "city": "City"
+      "city": "City",
+      "consent_text": "I agree that my personal data (including my photo) will be processed by AI to generate a skin analysis. Results will be stored and shared with my coach.",
+      "consent_link": "Read our Privacy Policy",
+      "consent_required": "You must agree to continue"
     },
     "step2": {
       "nav": "Main Goal",
@@ -667,13 +670,26 @@
   },
   "privacy": {
     "title": "Privacy Policy",
-    "intro": "Your privacy is important to us. This policy explains how we handle your data.",
-    "data_handling_title": "Data Handling",
-    "data_handling": "Facial images are transmitted over HTTPS and stored securely. The JSON analysis results, your email, and your scan photo are stored in our system to provide your report.",
-    "consent_title": "Consent",
-    "consent": "By using our service, you consent to the collection and use of information in accordance with this policy.",
-    "contact_title": "Contact",
-    "contact": "If you have any questions about this policy, please contact us."
+    "last_updated": "Last updated: May 2026",
+    "intro": "Your privacy is important to us. This policy explains what personal data we collect, how we process it, who we share it with, and what rights you have under applicable data protection laws including the EU General Data Protection Regulation (GDPR).",
+    "data_collected_title": "What Data We Collect",
+    "data_collected": "We collect the following personal data when you use our skin analysis service: your name, email address, phone number, date of birth, country, city, questionnaire responses about your skin, a facial photograph, and the AI-generated skin analysis results.",
+    "how_we_process_title": "How We Process Your Data",
+    "how_we_process": "Your facial photograph is sent securely over HTTPS to our AI provider (OpenAI) for analysis. The photo is also stored via Cloudinary for your report. The AI generates a skin assessment with scores, insights, and product recommendations. All data is stored in our secure database to provide your report and allow your coach to review results with you.",
+    "lawful_basis_title": "Lawful Basis for Processing",
+    "lawful_basis": "We process your personal data based on your explicit consent, which you provide by checking the consent box before submitting the skin analysis form. You may withdraw your consent at any time by contacting us.",
+    "third_parties_title": "Third-Party Processors",
+    "third_parties": "We use the following third-party services to process your data: OpenAI (AI skin analysis), Cloudinary (image storage), Vercel (application hosting), and Neon (database hosting). Each provider processes data in accordance with their own privacy policies and applicable data protection standards.",
+    "data_retention_title": "Data Retention",
+    "data_retention": "Your personal data and analysis results are retained for as long as necessary to provide our services. You may request deletion of your data at any time. Upon receiving a valid deletion request, we will erase your data within 30 days.",
+    "your_rights_title": "Your Rights",
+    "your_rights": "Under the GDPR and applicable data protection laws, you have the right to: access your personal data, rectify inaccurate data, erase your data (right to be forgotten), restrict processing, data portability, object to processing, and withdraw consent at any time. Exercising these rights will not affect the lawfulness of processing carried out before withdrawal.",
+    "how_to_contact_title": "How to Exercise Your Rights",
+    "how_to_contact": "To exercise any of your rights, or if you have questions about this policy, please contact us at: privacy@beautyandglow.ai. We will respond to your request within 30 days.",
+    "cookies_title": "Cookies",
+    "cookies": "This application uses only essential cookies required for the service to function (e.g., language preference). We do not use tracking cookies, advertising cookies, or analytics cookies.",
+    "changes_title": "Changes to This Policy",
+    "changes": "We may update this privacy policy from time to time. When we make changes, we will update the 'Last updated' date at the top of this page."
   },
   "common": {
     "loading": "Loading...",

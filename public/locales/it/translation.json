@@ -274,7 +274,10 @@
       "birthDate": "Data di Nascita",
       "phone": "Telefono",
       "country": "Paese",
-      "city": "Città"
+      "city": "Città",
+      "consent_text": "Accetto che i miei dati personali (inclusa la mia foto) vengano elaborati dall'IA per generare un'analisi della pelle. I risultati saranno archiviati e condivisi con il mio coach.",
+      "consent_link": "Leggi la nostra Informativa sulla Privacy",
+      "consent_required": "Devi accettare per continuare"
     },
     "step2": {
       "nav": "Obiettivo Principale",
@@ -658,13 +661,26 @@
   },
   "privacy": {
     "title": "Informativa sulla Privacy",
-    "intro": "La tua privacy è importante per noi. Questa informativa spiega come gestiamo i tuoi dati.",
-    "data_handling_title": "Gestione dei Dati",
-    "data_handling": "Le immagini facciali vengono trasmesse tramite HTTPS e archiviate in modo sicuro. I risultati dell'analisi JSON, la tua e-mail e la tua foto di scansione vengono archiviati nel nostro sistema per fornirti il report.",
-    "consent_title": "Consenso",
-    "consent": "Utilizzando il nostro servizio, acconsenti alla raccolta e all'utilizzo delle informazioni in conformità con questa informativa.",
-    "contact_title": "Contatto",
-    "contact": "Se hai domande riguardo a questa informativa, ti preghiamo di contattarci."
+    "last_updated": "Ultimo aggiornamento: maggio 2026",
+    "intro": "La tua privacy è importante per noi. Questa informativa spiega quali dati personali raccogliamo, come li trattiamo, con chi li condividiamo e quali diritti hai ai sensi del GDPR.",
+    "data_collected_title": "Dati raccolti",
+    "data_collected": "Raccogliamo i seguenti dati personali: nome, email, telefono, data di nascita, paese, città, risposte al questionario sulla pelle, una foto del viso e i risultati dell'analisi generati dall'IA.",
+    "how_we_process_title": "Come trattiamo i tuoi dati",
+    "how_we_process": "La tua foto viene inviata in modo sicuro al nostro fornitore di IA (OpenAI) per l'analisi. La foto viene anche archiviata tramite Cloudinary per il tuo report. L'IA genera una valutazione della pelle con punteggi, approfondimenti e raccomandazioni di prodotti.",
+    "lawful_basis_title": "Base giuridica del trattamento",
+    "lawful_basis": "Trattiamo i tuoi dati sulla base del tuo consenso esplicito, fornito spuntando la casella di consenso. Puoi revocare il consenso in qualsiasi momento contattandoci.",
+    "third_parties_title": "Responsabili terzi",
+    "third_parties": "Utilizziamo i seguenti servizi: OpenAI (analisi IA), Cloudinary (archiviazione immagini), Vercel (hosting) e Neon (hosting database). Ogni fornitore tratta i dati secondo le proprie informative sulla privacy.",
+    "data_retention_title": "Conservazione dei dati",
+    "data_retention": "I tuoi dati vengono conservati per il tempo necessario a fornire i nostri servizi. Puoi richiederne la cancellazione in qualsiasi momento. Cancelleremo i tuoi dati entro 30 giorni da una richiesta valida.",
+    "your_rights_title": "I tuoi diritti",
+    "your_rights": "Ai sensi del GDPR hai diritto a: accesso, rettifica, cancellazione, limitazione del trattamento, portabilità dei dati, opposizione al trattamento e revoca del consenso in qualsiasi momento.",
+    "how_to_contact_title": "Come esercitare i tuoi diritti",
+    "how_to_contact": "Contattaci a: privacy@beautyandglow.ai. Risponderemo entro 30 giorni.",
+    "cookies_title": "Cookie",
+    "cookies": "Questa applicazione utilizza solo cookie essenziali necessari per il funzionamento del servizio. Non utilizziamo cookie di tracciamento, pubblicitari o analitici.",
+    "changes_title": "Modifiche a questa informativa",
+    "changes": "Potremmo aggiornare questa informativa. Le modifiche saranno indicate dalla data di aggiornamento in cima a questa pagina."
   },
   "common": {
     "loading": "Caricamento...",

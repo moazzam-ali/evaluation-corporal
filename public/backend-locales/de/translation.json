@@ -8,7 +8,8 @@
       "view_report": "📋 Bericht ansehen",
       "sms": "✉️ SMS senden",
       "call": "☎️ Anrufen",
-      "whatsapp": "💬 WhatsApp"
+      "whatsapp": "💬 WhatsApp",
+      "telegram": "✈️ Telegram"
     },
     "form_fields": {
       "skin_types": {

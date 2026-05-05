@@ -8,7 +8,8 @@
       "view_report": "📋 रिपोर्ट देखें",
       "sms": "✉️ SMS भेजें",
       "call": "☎️ कॉल करें",
-      "whatsapp": "💬 WhatsApp"
+      "whatsapp": "💬 WhatsApp",
+      "telegram": "✈️ Telegram"
     },
     "form_fields": {
       "skin_types": {
