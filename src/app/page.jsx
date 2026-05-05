@@ -256,9 +256,9 @@ function LandingPageInner() {
               </a>
             </Reveal>
 
-            {/* Canvas with face + rings + metric bubbles */}
+            {/* Canvas with face + rings + metric bubbles — desktop only */}
             <Reveal delay={0.32}>
-              <div className="pointer-events-none relative mx-auto mt-14" style={{ maxWidth: 880, aspectRatio: "16/9" }}>
+              <div className="pointer-events-none relative mx-auto mt-14 hidden md:block" style={{ maxWidth: 880, aspectRatio: "16/9" }}>
                 {/* Concentric dashed rings */}
                 <div className="absolute inset-0">
                   {[780, 600, 420].map((size, i) => (
