@@ -50,6 +50,8 @@ export default function ResultsPage() {
     summary, insights, tips, routineNote, imageUrl, formData,
   } = useAnalysisStore();
 
+  const [formModalOpen, setFormModalOpen] = useState(false);
+
   useEffect(() => {
     const hasData = useAnalysisStore.getState().metrics.length > 0;
     if (!hasData && id) fetchAnalysis(id);
@@ -73,8 +75,6 @@ export default function ResultsPage() {
       </div>
     );
   }
-
-  const [formModalOpen, setFormModalOpen] = useState(false);
   const products = enrichedProducts || [];
   const userName = formData?.name || "";
   const now = new Date();
