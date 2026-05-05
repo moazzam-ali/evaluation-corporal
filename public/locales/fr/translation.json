@@ -31,21 +31,18 @@
   "landing": {
     "cta": "Analyser Ma Peau",
     "hero_cta": "Analyser Ma Peau — Gratuit",
-
     "nav_how": "Comment ça marche",
     "nav_metrics": "Métriques",
     "nav_demo": "Démo en direct",
     "nav_products": "Produits",
     "nav_pricing": "Tarifs",
     "nav_config": "Configuration",
-
     "hero_badge": "12 métriques · entraîné par des dermatologues",
     "hero_title_1": "Analyse de peau,",
     "hero_title_2": "sans rendez-vous",
     "hero_title_3": "nécessaire.",
     "hero_subtitle": "Un appareil photo. Douze métriques cliniques. Un programme que votre peau a vraiment demandé.",
     "hero_demo_cta": "Voir la démo",
-
     "how_label": "Processus",
     "how_title_1": "Du selfie au",
     "how_title_2": "programme de soin",
@@ -63,14 +60,12 @@
     "how_step4_title": "Routine sur mesure",
     "how_step4_text": "Des produits adaptés à vos métriques exactes. Nous vous expliquons quel ingrédient fait quoi — et quand l'utiliser.",
     "how_step4_time": "Personnalisé",
-
     "metrics_label": "La surface scientifique",
     "metrics_title_1": "Douze choses que nous mesurons,",
     "metrics_title_2": "pour que vous n'ayez plus à",
     "metrics_title_3": "deviner.",
     "metrics_subtitle": "Chaque métrique a un proxy clinique — l'hydratation suit les indicateurs d'humidité du stratum corneum, la barrière suit les indicateurs de perte en eau transépidermique, et ainsi de suite. Les scores vont de 0 à 100, relatifs à votre cohorte démographique.",
     "metrics_methodology": "Méthodologie et intervalles de confiance publiés trimestriellement · dernière mise à jour avril 2026",
-
     "demo_label": "Voyez par vous-même",
     "demo_title_1": "Regardez le scan",
     "demo_title_2": "réfléchir à",
@@ -80,7 +75,6 @@
     "demo_time_2": "6,8 secondes.",
     "demo_time_3": "Le vôtre aussi.",
     "demo_cta": "Essayez sur votre visage",
-
     "products_label": "Sélection, pas catalogue",
     "products_title_1": "Des produits adaptés",
     "products_title_2": "à",
@@ -89,7 +83,6 @@
     "products_subtitle": "Notre IA associe les produits HL/Skin à vos métriques exactes. Chaque recommandation inclut le détail des ingrédients et sa place dans la routine.",
     "products_supplement": "Complément",
     "products_cta": "Obtenez votre routine personnalisée",
-
     "science_label": "La couche ingrédients",
     "science_title_1": "Nous classons les molécules,",
     "science_title_2": "pas",
@@ -104,7 +97,6 @@
     "science_stat2": "Actifs classés par efficacité",
     "science_stat3": "Placements affiliés. Jamais.",
     "science_stat4": "Mise à jour méthodologique trimestrielle",
-
     "pricing_label": "Tarifs",
     "pricing_title_1": "Gratuit pour",
     "pricing_title_2": "scanner.",
@@ -138,7 +130,6 @@
     "plan_pro_f4": "Couvertures de rapport en marque blanche",
     "plan_pro_f5": "Accès API (500 scans/mois)",
     "plan_pro_cta": "Contacter les ventes",
-
     "footer_tagline_1": "Votre peau,",
     "footer_tagline_2": "quantifiée",
     "footer_tagline_3": "en douceur.",
@@ -436,7 +427,15 @@
       "sensitive": "Sensible",
       "dehydrated": "Déshydratée",
       "normal": "Normale"
-    }
+    },
+    "access_title": "Accès requis",
+    "access_message": "Pour utiliser le scanner de peau, vous avez besoin d'un lien d'accès personnalisé de votre coach. Veuillez contacter votre coach pour commencer.",
+    "access_home": "Retour à l'accueil",
+    "complete_toast": "Analyse terminée !",
+    "complete_title": "Analyse terminée !",
+    "complete_message": "Votre analyse de peau a été traitée avec succès. Votre coach partagera bientôt les résultats détaillés avec vous. Veuillez contacter votre coach pour recevoir votre rapport personnalisé et vos recommandations de produits.",
+    "complete_hint": "Votre coach a été notifié et vous contactera avec vos résultats.",
+    "complete_home": "Retour à l'accueil"
   },
   "results": {
     "title": "Votre Analyse de Peau",

@@ -57,11 +57,19 @@ ROUTINE PAIRING (suggest products that form a coherent routine):
 `.trim();
 
 export function getPromptForLanguage(lang = "en") {
-  const isSpanish = lang === "es";
+  const LANG_NAMES = {
+    en: "English",
+    es: "Spanish",
+    fr: "French",
+    de: "German",
+    it: "Italian",
+    tr: "Turkish",
+    pt: "Portuguese",
+    in: "Hindi",
+  };
 
-  const insightLang = isSpanish
-    ? "Write ALL insight text and the summary in Spanish."
-    : "Write ALL insight text and the summary in English.";
+  const langName = LANG_NAMES[lang] || "English";
+  const insightLang = `Write ALL text content in ${langName}. This includes: the "summary", all "insight" strings (titles and points), all "tips", the "routine_note", and all "reason" fields in recommendations. Metric IDs and product IDs must remain in English (they are identifiers), but every human-readable string MUST be in ${langName}.`;
 
   return `You are a professional AI cosmetic skin assessment system. You will receive a facial photograph and must analyze the visible skin condition.
 

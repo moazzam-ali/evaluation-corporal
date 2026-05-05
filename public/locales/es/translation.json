@@ -31,21 +31,18 @@
   "landing": {
     "cta": "Analizar Mi Piel",
     "hero_cta": "Analizar Mi Piel — Gratis",
-
     "nav_how": "Cómo funciona",
     "nav_metrics": "Métricas",
     "nav_demo": "Demo en vivo",
     "nav_products": "Productos",
     "nav_pricing": "Precios",
     "nav_config": "Configuración",
-
     "hero_badge": "12 métricas · basado en dermatología",
     "hero_title_1": "Análisis de piel,",
     "hero_title_2": "sin cita",
     "hero_title_3": "previa.",
     "hero_subtitle": "Una cámara. Doce métricas clínicas. Un plan que tu piel realmente necesita.",
     "hero_demo_cta": "Ver la demo",
-
     "how_label": "Proceso",
     "how_title_1": "Del selfie al",
     "how_title_2": "plan de cuidado",
@@ -63,14 +60,12 @@
     "how_step4_title": "Rutina personalizada",
     "how_step4_text": "Productos seleccionados según tus métricas exactas. Te explicamos qué ingrediente cumple qué función — y cuándo usarlo.",
     "how_step4_time": "Personalizada",
-
     "metrics_label": "La base científica",
     "metrics_title_1": "Doce cosas que medimos,",
     "metrics_title_2": "para que no tengas que",
     "metrics_title_3": "adivinar.",
     "metrics_subtitle": "Cada métrica tiene un indicador clínico — la hidratación rastrea señales de humedad del estrato córneo, la barrera rastrea indicadores de pérdida transepidérmica de agua, y así sucesivamente. Las puntuaciones van de 0 a 100, relativas a tu grupo demográfico.",
     "metrics_methodology": "Metodología e intervalos de confianza publicados trimestralmente · última actualización abril 2026",
-
     "demo_label": "Míralo en acción",
     "demo_title_1": "Mira cómo el análisis",
     "demo_title_2": "piensa en",
@@ -80,7 +75,6 @@
     "demo_time_2": "6,8 segundos.",
     "demo_time_3": "El tuyo también.",
     "demo_cta": "Pruébalo con tu rostro",
-
     "products_label": "Seleccionados, no catalogados",
     "products_title_1": "Productos adaptados",
     "products_title_2": "a",
@@ -89,7 +83,6 @@
     "products_subtitle": "Nuestra IA empareja productos HL/Skin con tus métricas exactas. Cada recomendación incluye desglose de ingredientes y ubicación en la rutina.",
     "products_supplement": "Suplemento",
     "products_cta": "Obtén tu rutina personalizada",
-
     "science_label": "La capa de ingredientes",
     "science_title_1": "Clasificamos moléculas,",
     "science_title_2": "no",
@@ -104,7 +97,6 @@
     "science_stat2": "Activos clasificados por eficacia",
     "science_stat3": "Publicidad encubierta. Nunca.",
     "science_stat4": "Revisión metodológica trimestral",
-
     "pricing_label": "Precios",
     "pricing_title_1": "Gratis para",
     "pricing_title_2": "analizar.",
@@ -138,7 +130,6 @@
     "plan_pro_f4": "Portadas de informes con tu marca",
     "plan_pro_f5": "Acceso API (500 análisis/mes)",
     "plan_pro_cta": "Hablar con ventas",
-
     "footer_tagline_1": "Tu piel,",
     "footer_tagline_2": "cuantificada",
     "footer_tagline_3": "con suavidad.",
@@ -436,7 +427,15 @@
       "sensitive": "Sensible",
       "dehydrated": "Deshidratada",
       "normal": "Normal"
-    }
+    },
+    "access_title": "Acceso requerido",
+    "access_message": "Para usar el escáner de piel, necesitas un enlace de acceso personalizado de tu coach. Por favor, contacta a tu coach para comenzar.",
+    "access_home": "Volver al inicio",
+    "complete_toast": "¡Análisis completo!",
+    "complete_title": "¡Análisis completo!",
+    "complete_message": "Tu análisis de piel ha sido procesado con éxito. Tu coach compartirá los resultados detallados contigo en breve. Por favor, contacta a tu coach para recibir tu informe personalizado y recomendaciones de productos.",
+    "complete_hint": "Tu coach ha sido notificado y se pondrá en contacto contigo con los resultados.",
+    "complete_home": "Volver al inicio"
   },
   "results": {
     "title": "Tu Análisis de Piel",
