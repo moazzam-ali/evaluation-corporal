@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
@@ -43,19 +43,29 @@ function SectionHead({ eyebrow, title, titleEm, lede }) {
 
 export default function ResultsPage() {
   const { id } = useParams();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
-    fetchAnalysis, isLoading, error,
+    fetchAnalysis, reEnrichProducts, isLoading, error,
     overallScore, skinType, metrics, enrichedProducts,
     summary, insights, tips, routineNote, imageUrl, formData,
   } = useAnalysisStore();
 
   const [formModalOpen, setFormModalOpen] = useState(false);
+  const hasLoadedRef = useRef(false);
 
   useEffect(() => {
     const hasData = useAnalysisStore.getState().metrics.length > 0;
     if (!hasData && id) fetchAnalysis(id);
   }, [id, fetchAnalysis]);
+
+  // Re-enrich products when user switches language
+  useEffect(() => {
+    if (!hasLoadedRef.current) {
+      hasLoadedRef.current = true;
+      return;
+    }
+    if (id) reEnrichProducts(id, i18n.language);
+  }, [i18n.language, id, reEnrichProducts]);
 
   if (isLoading) return <Loader />;
 
