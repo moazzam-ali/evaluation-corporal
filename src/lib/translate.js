@@ -6,7 +6,7 @@ const LANGUAGE_NAMES = {
   de: "German",
   it: "Italian",
   tr: "Turkish",
-  in: "Indonesian",
+  in: "Hindi",
   pt: "Portuguese",
 };
 

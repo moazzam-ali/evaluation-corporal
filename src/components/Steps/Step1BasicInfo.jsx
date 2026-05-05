@@ -58,6 +58,25 @@ export default function Step1BasicInfo({ form, t }) {
           {errors.city && <p className="scan-error">{errors.city.message}</p>}
         </div>
       </div>
+      {/* GDPR Consent */}
+      <div className="flex items-start gap-3 rounded-xl border border-[rgba(26,26,46,0.10)] bg-[#FDF8F3] p-4">
+        <input
+          type="checkbox"
+          id="consent"
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 accent-[#E8728A] cursor-pointer"
+          {...register("consent")}
+        />
+        <label htmlFor="consent" className="text-[12.5px] leading-relaxed text-[#44444F] cursor-pointer" style={{ fontFamily: "var(--font-dm-sans)" }}>
+          {t("scan.step1.consent_text", "I agree that my personal data (including my photo) will be processed by AI to generate a skin analysis. Results will be stored and shared with my coach.")}
+          {" "}
+          <a href="/privacy" target="_blank" className="text-[#E8728A] underline underline-offset-2 hover:text-[#D45571]">
+            {t("scan.step1.consent_link", "Read our Privacy Policy")}
+          </a>
+          {" "}
+          <span className="text-[#E8728A]">*</span>
+        </label>
+      </div>
+      {errors.consent && <p className="scan-error">{errors.consent.message}</p>}
     </div>
   );
 }

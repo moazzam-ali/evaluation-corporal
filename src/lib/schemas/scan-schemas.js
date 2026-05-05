@@ -9,6 +9,7 @@ export const basicInfoSchema = z.object({
   phone: z.string().regex(/^\+?[\d\s\-()]{6,20}$/, "Invalid phone number"),
   country: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
+  consent: z.literal(true, { errorMap: () => ({ message: "Consent is required" }) }),
 });
 
 // Step 2: Main Goal
@@ -93,7 +94,7 @@ export const STEP_SCHEMAS = [
 
 // Field names per step — used for per-step validation via trigger()
 export const STEP_FIELD_NAMES = [
-  ["name", "surname", "email", "birthDate", "phone", "country", "city"],
+  ["name", "surname", "email", "birthDate", "phone", "country", "city", "consent"],
   ["skinConcerns", "skinConcernsOther", "priorityConcern", "improvementZones"],
   ["skinType", "skinFeelGeneral", "skinFeelEndOfDay"],
   ["routineFrequency", "productsUsed", "productsUsedOther", "essentialProduct", "missingProduct", "supplements"],
@@ -113,6 +114,7 @@ export const DEFAULT_VALUES = {
   phone: "",
   country: "",
   city: "",
+  consent: false,
   skinConcerns: [],
   skinConcernsOther: "",
   priorityConcern: "",
