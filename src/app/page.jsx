@@ -1,15 +1,13 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Globe, Settings2, ChevronRight } from "lucide-react";
-import { useState, useRef, useEffect, Suspense } from "react";
+import { ChevronRight } from "lucide-react";
+import { useRef, Suspense } from "react";
 import products from "@/data/products.json";
-import { LANGUAGES } from "@/lib/languages";
-
 /* ── tiny helpers ──────────────────────────────────────────────── */
 function Reveal({ children, className = "", delay = 0 }) {
   const ref = useRef(null);
@@ -26,8 +24,6 @@ function Reveal({ children, className = "", delay = 0 }) {
     </motion.div>
   );
 }
-
-const languages = LANGUAGES;
 
 const METRICS = [
   { name: "Hydration",       desc: "Stratum-corneum moisture cues across forehead, cheek, chin.",   tier: "good",  fill: 82 },
@@ -93,119 +89,17 @@ export default function LandingPage() {
 }
 
 function LandingPageInner() {
-  const { t, i18n } = useTranslation();
-  const router = useRouter();
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
-  const [langOpen, setLangOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   // Forward any URL params (n, b, a, c, l) to /scan links
   const paramString = searchParams.toString();
   const scanHref = paramString ? `/scan?${paramString}` : "/scan";
   const configHref = paramString ? `/config?${paramString}` : "/config";
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden" style={{ background: "#FAFAFB" }}>
 
-      {/* ─── STICKY NAV ──────────────────────────────────────────── */}
-      <nav
-        className={`sticky top-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "border-b border-[rgba(26,26,46,0.08)] bg-[rgba(250,250,251,0.92)]"
-            : "bg-[rgba(250,250,251,0.82)]"
-        }`}
-        style={{ backdropFilter: "saturate(180%) blur(18px)", WebkitBackdropFilter: "saturate(180%) blur(18px)" }}
-      >
-        <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
-          {/* Wordmark */}
-          <Link href="/" className="inline-flex items-center gap-3 shrink-0">
-            <Image src="/logo-new.svg" alt="" width={32} height={32} className="w-8 h-8 shrink-0" />
-            <span
-              className="inline-flex items-baseline gap-1.5 whitespace-nowrap"
-              style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontSize: "20px", color: "#1A1A2E" }}
-            >
-              Beauty &amp; Glow
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "9px",
-                  letterSpacing: "0.2em",
-                  color: "#E8728A",
-                  padding: "2px 6px",
-                  border: "1px solid rgba(232,114,138,0.3)",
-                  borderRadius: "4px",
-                  lineHeight: 1,
-                }}
-              >
-                AI
-              </span>
-            </span>
-          </Link>
-
-          {/* Desktop links */}
-          <div className="hidden items-center gap-7 lg:flex" style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 500 }}>
-            <a href="#how" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_how", "How it works")}</a>
-            <a href="#metrics" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_metrics", "Metrics")}</a>
-            <a href="#demo" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_demo", "Live demo")}</a>
-            <a href="#products" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_products", "Products")}</a>
-            <a href="#pricing" className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">{t("landing.nav_pricing", "Pricing")}</a>
-          </div>
-
-          {/* Right side CTAs */}
-          <div className="flex items-center gap-2.5">
-            <Link
-              href={configHref}
-              className="hidden items-center gap-1.5 rounded-full border border-[rgba(26,26,46,0.14)] bg-transparent px-4 py-2 text-xs text-[hsl(240,10%,46%)] transition-colors hover:border-[#1A1A2E] hover:text-[#1A1A2E] sm:inline-flex"
-              style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
-            >
-              <Settings2 className="h-3.5 w-3.5" />
-              {t("landing.nav_config", "Config")}
-            </Link>
-            <Link
-              href={scanHref}
-              className="inline-flex items-center gap-2 rounded-full bg-[#E8728A] px-4 py-2 text-xs text-white transition-all hover:-translate-y-px hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]"
-              style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500, fontSize: 13 }}
-            >
-              {t("landing.cta", "Scan My Skin")}
-              <ChevronRight className="h-3.5 w-3.5" />
-            </Link>
-
-            {/* Language */}
-            <div className="relative">
-              <button
-                onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1 rounded-full border border-[hsl(340,15%,90%)] px-3 py-2 text-xs text-[hsl(240,10%,46%)] transition-colors hover:border-[#1A1A2E]/30 hover:text-[#1A1A2E]"
-                aria-label="Change language"
-              >
-                <Globe className="h-3.5 w-3.5" />
-                {i18n.language?.toUpperCase().slice(0, 2)}
-              </button>
-              {langOpen && (
-                <div className="absolute right-0 mt-2 flex gap-1 rounded-lg border bg-white p-2 shadow-lg">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => { i18n.changeLanguage(lang.code); setLangOpen(false); }}
-                      className={`rounded-md px-2 py-1 text-[10px] transition-colors ${
-                        i18n.language === lang.code ? "bg-[#E8728A] text-white" : "text-[hsl(240,10%,46%)] hover:text-[#1A1A2E]"
-                      }`}
-                    >
-                      {lang.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
 
       {/* ─── HERO ─ Variant B : Clinical Centered ──────────────────── */}
       <section className="relative overflow-hidden bg-white pb-24 pt-16 sm:pb-32" id="hero">
@@ -238,7 +132,7 @@ function LandingPageInner() {
               </p>
             </Reveal>
 
-            <Reveal delay={0.24} className="flex flex-wrap justify-center gap-3">
+            <Reveal delay={0.24} className="flex justify-center">
               <Link
                 href={scanHref}
                 className="inline-flex items-center gap-2.5 rounded-full bg-[#E8728A] px-5 py-3.5 text-sm font-medium text-white transition-all hover:-translate-y-px hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]"
@@ -247,13 +141,6 @@ function LandingPageInner() {
                 {t("landing.hero_cta", "Scan My Skin — Free")}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </Link>
-              <a
-                href="#demo"
-                className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-[rgba(26,26,46,0.14)] bg-transparent px-5 py-3.5 text-sm text-[#1A1A2E] transition-colors hover:border-[#1A1A2E]"
-                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
-              >
-                {t("landing.hero_demo_cta", "Watch the demo")}
-              </a>
             </Reveal>
 
             {/* Canvas with face + rings + metric bubbles — desktop only */}

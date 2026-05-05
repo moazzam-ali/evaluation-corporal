@@ -76,6 +76,44 @@ function ScanPageInner() {
   const contactIDs = searchParams.get("c")?.split(",").filter(Boolean) || [];
   const lang = searchParams.get("l") || i18n.language || "en";
 
+  // Gate: require config params to proceed
+  const hasRequiredParams = chatIDs.length > 0 && accountIDs.length > 0 && contactIDs.length > 0;
+
+  if (!hasRequiredParams) {
+    return (
+      <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+        <div
+          className="mx-auto w-full max-w-md rounded-3xl border border-[rgba(26,26,46,0.10)] bg-white p-8 shadow-sm"
+          style={{ fontFamily: "var(--font-dm-sans)" }}
+        >
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#FDEEF1]">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E8728A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+          </div>
+          <h2
+            className="mb-2 text-[28px] text-[#1A1A2E]"
+            style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, lineHeight: 1.2 }}
+          >
+            {t("scan.access_title", "Access required")}
+          </h2>
+          <p className="mb-6 text-[14px] leading-relaxed text-[#6B6B7A]">
+            {t("scan.access_message", "To use the skin scanner, you need a personalised access link from your coach. Please contact your coach to get started.")}
+          </p>
+          <div className="flex flex-col gap-3">
+            <a
+              href="/"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-[rgba(26,26,46,0.14)] bg-transparent px-5 py-3 text-sm font-medium text-[#1A1A2E] transition-colors hover:border-[#1A1A2E]"
+            >
+              {t("scan.access_home", "Back to home")}
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const form = useForm({
     resolver: zodResolver(fullScanSchema),
     defaultValues: DEFAULT_VALUES,
