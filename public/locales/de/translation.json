@@ -562,12 +562,12 @@
     "footnote": "Dieses Tool dient ausschließlich der kosmetischen Sensibilisierung. Hautwerte können je nach aufgetragenem Make-up variieren. Die Ergebnisse ersetzen keine professionelle dermatologische Beratung.",
     "status": {
       "good": "Gut",
-      "normal": "Normal",
+      "normal": "Mäßig",
       "needs_attention": "Benötigt Aufmerksamkeit"
     },
     "score_guide": {
       "needs_attention": "Benötigt Aufmerksamkeit",
-      "normal": "Normal",
+      "normal": "Mäßig",
       "good": "Gut"
     }
   },

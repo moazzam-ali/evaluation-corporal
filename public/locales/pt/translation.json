@@ -562,12 +562,12 @@
     "footnote": "Esta ferramenta destina-se apenas a fins de conscientização cosmética. As pontuações da pele podem variar com base na maquiagem aplicada. Os resultados não substituem o aconselhamento dermatológico profissional.",
     "status": {
       "good": "Bom",
-      "normal": "Normal",
+      "normal": "Moderado",
       "needs_attention": "Precisa de Atenção"
     },
     "score_guide": {
       "needs_attention": "Precisa de Atenção",
-      "normal": "Normal",
+      "normal": "Moderado",
       "good": "Bom"
     }
   },
