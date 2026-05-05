@@ -274,7 +274,10 @@
       "birthDate": "Geburtsdatum",
       "phone": "Telefon",
       "country": "Land",
-      "city": "Stadt"
+      "city": "Stadt",
+      "consent_text": "Ich stimme zu, dass meine persönlichen Daten (einschließlich meines Fotos) von KI verarbeitet werden, um eine Hautanalyse zu erstellen. Die Ergebnisse werden gespeichert und mit meinem Coach geteilt.",
+      "consent_link": "Unsere Datenschutzrichtlinie lesen",
+      "consent_required": "Sie müssen zustimmen, um fortzufahren"
     },
     "step2": {
       "nav": "Hauptziel",
@@ -658,13 +661,26 @@
   },
   "privacy": {
     "title": "Datenschutzrichtlinie",
-    "intro": "Ihre Privatsphäre ist uns wichtig. Diese Richtlinie erklärt, wie wir mit Ihren Daten umgehen.",
-    "data_handling_title": "Datenverarbeitung",
-    "data_handling": "Gesichtsbilder werden über HTTPS übertragen und sicher gespeichert. Die JSON-Analyseergebnisse, Ihre E-Mail und Ihr Scanfoto werden in unserem System gespeichert, um Ihren Bericht bereitzustellen.",
-    "consent_title": "Einwilligung",
-    "consent": "Durch die Nutzung unseres Dienstes stimmen Sie der Erfassung und Verwendung von Informationen gemäß dieser Richtlinie zu.",
-    "contact_title": "Kontakt",
-    "contact": "Wenn Sie Fragen zu dieser Richtlinie haben, kontaktieren Sie uns bitte."
+    "last_updated": "Zuletzt aktualisiert: Mai 2026",
+    "intro": "Ihre Privatsphäre ist uns wichtig. Diese Richtlinie erklärt, welche personenbezogenen Daten wir erheben, wie wir sie verarbeiten, mit wem wir sie teilen und welche Rechte Sie gemäß den geltenden Datenschutzgesetzen einschließlich der DSGVO haben.",
+    "data_collected_title": "Erhobene Daten",
+    "data_collected": "Wir erheben folgende personenbezogene Daten: Name, E-Mail-Adresse, Telefonnummer, Geburtsdatum, Land, Stadt, Fragebogenantworten zu Ihrer Haut, ein Gesichtsfoto und die KI-generierten Analyseergebnisse.",
+    "how_we_process_title": "Wie wir Ihre Daten verarbeiten",
+    "how_we_process": "Ihr Foto wird sicher über HTTPS an unseren KI-Anbieter (OpenAI) zur Analyse gesendet. Das Foto wird auch über Cloudinary für Ihren Bericht gespeichert. Die KI erstellt eine Hautbewertung mit Scores, Erkenntnissen und Produktempfehlungen. Alle Daten werden in unserer sicheren Datenbank gespeichert.",
+    "lawful_basis_title": "Rechtsgrundlage der Verarbeitung",
+    "lawful_basis": "Wir verarbeiten Ihre Daten auf Grundlage Ihrer ausdrücklichen Einwilligung, die Sie durch Ankreuzen des Einwilligungsfelds erteilen. Sie können Ihre Einwilligung jederzeit widerrufen.",
+    "third_parties_title": "Drittanbieter",
+    "third_parties": "Wir nutzen folgende Drittanbieter: OpenAI (KI-Analyse), Cloudinary (Bildspeicherung), Vercel (Hosting) und Neon (Datenbank-Hosting). Jeder Anbieter verarbeitet Daten gemäß seinen eigenen Datenschutzrichtlinien.",
+    "data_retention_title": "Datenspeicherung",
+    "data_retention": "Ihre Daten werden so lange aufbewahrt, wie es für die Erbringung unserer Dienste erforderlich ist. Sie können jederzeit die Löschung beantragen. Wir löschen Ihre Daten innerhalb von 30 Tagen nach einem gültigen Antrag.",
+    "your_rights_title": "Ihre Rechte",
+    "your_rights": "Gemäß der DSGVO haben Sie das Recht auf: Zugang, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit, Widerspruch gegen die Verarbeitung und jederzeitigen Widerruf der Einwilligung.",
+    "how_to_contact_title": "So üben Sie Ihre Rechte aus",
+    "how_to_contact": "Kontaktieren Sie uns unter: privacy@beautyandglow.ai. Wir antworten innerhalb von 30 Tagen.",
+    "cookies_title": "Cookies",
+    "cookies": "Diese Anwendung verwendet nur essenzielle Cookies, die für den Betrieb des Dienstes erforderlich sind (z. B. Spracheinstellung). Wir verwenden keine Tracking-, Werbe- oder Analyse-Cookies.",
+    "changes_title": "Änderungen dieser Richtlinie",
+    "changes": "Wir können diese Datenschutzrichtlinie von Zeit zu Zeit aktualisieren. Änderungen werden durch das Aktualisierungsdatum oben auf dieser Seite angezeigt."
   },
   "common": {
     "loading": "Wird geladen...",

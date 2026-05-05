@@ -274,7 +274,10 @@
       "birthDate": "Doğum Tarihi",
       "phone": "Telefon",
       "country": "Ülke",
-      "city": "Şehir"
+      "city": "Şehir",
+      "consent_text": "Kişisel verilerimin (fotoğrafım dahil) cilt analizi oluşturmak için yapay zeka tarafından işlenmesini kabul ediyorum. Sonuçlar saklanacak ve koçumla paylaşılacaktır.",
+      "consent_link": "Gizlilik Politikamızı okuyun",
+      "consent_required": "Devam etmek için kabul etmelisiniz"
     },
     "step2": {
       "nav": "Ana Hedef",
@@ -658,13 +661,26 @@
   },
   "privacy": {
     "title": "Gizlilik Politikası",
-    "intro": "Gizliliğiniz bizim için önemlidir. Bu politika verilerinizi nasıl işlediğimizi açıklar.",
-    "data_handling_title": "Veri İşleme",
-    "data_handling": "Yüz görüntüleri HTTPS üzerinden iletilir ve güvenli bir şekilde saklanır. JSON analiz sonuçları, e-postanız ve tarama fotoğrafınız raporunuzu sunmak için sistemimizde saklanır.",
-    "consent_title": "Onay",
-    "consent": "Hizmetimizi kullanarak, bu politikaya uygun olarak bilgilerin toplanmasına ve kullanılmasına onay vermiş olursunuz.",
-    "contact_title": "İletişim",
-    "contact": "Bu politika hakkında herhangi bir sorunuz varsa, lütfen bizimle iletişime geçin."
+    "last_updated": "Son güncelleme: Mayıs 2026",
+    "intro": "Gizliliğiniz bizim için önemlidir. Bu politika, hangi kişisel verileri topladığımızı, nasıl işlediğimizi, kiminle paylaştığımızı ve KVKK/GDPR kapsamındaki haklarınızı açıklar.",
+    "data_collected_title": "Toplanan veriler",
+    "data_collected": "Şu kişisel verileri topluyoruz: ad, e-posta, telefon, doğum tarihi, ülke, şehir, cilt anketi yanıtları, yüz fotoğrafı ve yapay zeka tarafından oluşturulan analiz sonuçları.",
+    "how_we_process_title": "Verilerinizi nasıl işliyoruz",
+    "how_we_process": "Fotoğrafınız güvenli bir şekilde yapay zeka sağlayıcımıza (OpenAI) gönderilir. Fotoğraf ayrıca Cloudinary üzerinden raporunuz için saklanır. Yapay zeka, puanlar, içgörüler ve ürün önerileri içeren bir cilt değerlendirmesi oluşturur.",
+    "lawful_basis_title": "İşlemenin hukuki dayanağı",
+    "lawful_basis": "Verilerinizi, onay kutusunu işaretleyerek verdiğiniz açık rızanız temelinde işliyoruz. Rızanızı istediğiniz zaman geri çekebilirsiniz.",
+    "third_parties_title": "Üçüncü taraf işleyiciler",
+    "third_parties": "Şu hizmetleri kullanıyoruz: OpenAI (yapay zeka analizi), Cloudinary (görüntü depolama), Vercel (barındırma) ve Neon (veritabanı barındırma). Her sağlayıcı verileri kendi gizlilik politikalarına uygun olarak işler.",
+    "data_retention_title": "Veri saklama",
+    "data_retention": "Verileriniz hizmetlerimizi sunmak için gerekli olduğu sürece saklanır. İstediğiniz zaman silme talebinde bulunabilirsiniz. Geçerli bir talep üzerine verilerinizi 30 gün içinde sileriz.",
+    "your_rights_title": "Haklarınız",
+    "your_rights": "GDPR kapsamında şu haklara sahipsiniz: erişim, düzeltme, silme, işlemeyi kısıtlama, veri taşınabilirliği, işlemeye itiraz ve istediğiniz zaman rızanızı geri çekme.",
+    "how_to_contact_title": "Haklarınızı nasıl kullanırsınız",
+    "how_to_contact": "Bize privacy@beautyandglow.ai adresinden ulaşın. 30 gün içinde yanıt vereceğiz.",
+    "cookies_title": "Çerezler",
+    "cookies": "Bu uygulama yalnızca hizmetin çalışması için gerekli temel çerezleri kullanır. İzleme, reklam veya analitik çerezleri kullanmıyoruz.",
+    "changes_title": "Bu politikadaki değişiklikler",
+    "changes": "Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Değişiklikler sayfanın üst kısmındaki güncelleme tarihi ile belirtilecektir."
   },
   "common": {
     "loading": "Yükleniyor...",

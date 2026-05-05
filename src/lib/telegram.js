@@ -190,6 +190,7 @@ export async function sendAnalysisToTelegram({
     [{ text: t("telegram.buttons.sms") || "📩 SMS", url: `https://sms.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}` }],
     [{ text: t("telegram.buttons.call") || "📞 Call", url: `https://call.coachhbl.com/to?p=${encodeURIComponent(formData.phone || "")}` }],
     [{ text: t("telegram.buttons.whatsapp") || "💬 WhatsApp", url: `https://wa.me/${formData.phone || ""}` }],
+    [{ text: t("telegram.buttons.telegram") || "✈️ Telegram", url: `https://t.me/+${(formData.phone || "").replace(/^\+/, "")}?profile` }],
   ];
 
   // 2 messages: client data (profile + questionnaire), results (analysis + report link).

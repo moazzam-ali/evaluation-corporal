@@ -274,7 +274,10 @@
       "birthDate": "Date de Naissance",
       "phone": "Téléphone",
       "country": "Pays",
-      "city": "Ville"
+      "city": "Ville",
+      "consent_text": "J'accepte que mes données personnelles (y compris ma photo) soient traitées par l'IA pour générer une analyse de peau. Les résultats seront stockés et partagés avec mon coach.",
+      "consent_link": "Lire notre Politique de Confidentialité",
+      "consent_required": "Vous devez accepter pour continuer"
     },
     "step2": {
       "nav": "Objectif Principal",
@@ -658,13 +661,26 @@
   },
   "privacy": {
     "title": "Politique de Confidentialité",
-    "intro": "Votre vie privée est importante pour nous. Cette politique explique comment nous traitons vos données.",
-    "data_handling_title": "Traitement des Données",
-    "data_handling": "Les images faciales sont transmises via HTTPS et stockées en toute sécurité. Les résultats d'analyse JSON, votre e-mail et votre photo de scan sont stockés dans notre système pour fournir votre rapport.",
-    "consent_title": "Consentement",
-    "consent": "En utilisant notre service, vous consentez à la collecte et à l'utilisation des informations conformément à cette politique.",
-    "contact_title": "Contact",
-    "contact": "Si vous avez des questions concernant cette politique, veuillez nous contacter."
+    "last_updated": "Dernière mise à jour : mai 2026",
+    "intro": "Votre vie privée est importante pour nous. Cette politique explique quelles données personnelles nous collectons, comment nous les traitons, avec qui nous les partageons, et quels droits vous avez en vertu des lois applicables en matière de protection des données, y compris le RGPD.",
+    "data_collected_title": "Données collectées",
+    "data_collected": "Nous collectons les données personnelles suivantes lorsque vous utilisez notre service d'analyse de peau : nom, adresse e-mail, numéro de téléphone, date de naissance, pays, ville, réponses au questionnaire sur votre peau, une photo de votre visage et les résultats d'analyse générés par l'IA.",
+    "how_we_process_title": "Comment nous traitons vos données",
+    "how_we_process": "Votre photo est envoyée de manière sécurisée via HTTPS à notre fournisseur d'IA (OpenAI) pour analyse. La photo est également stockée via Cloudinary pour votre rapport. L'IA génère une évaluation de la peau avec des scores, des informations et des recommandations de produits. Toutes les données sont stockées dans notre base de données sécurisée.",
+    "lawful_basis_title": "Base légale du traitement",
+    "lawful_basis": "Nous traitons vos données personnelles sur la base de votre consentement explicite, que vous donnez en cochant la case de consentement avant de soumettre le formulaire. Vous pouvez retirer votre consentement à tout moment en nous contactant.",
+    "third_parties_title": "Sous-traitants tiers",
+    "third_parties": "Nous utilisons les services tiers suivants : OpenAI (analyse IA), Cloudinary (stockage d'images), Vercel (hébergement), et Neon (hébergement de base de données). Chaque fournisseur traite les données conformément à ses propres politiques de confidentialité.",
+    "data_retention_title": "Conservation des données",
+    "data_retention": "Vos données personnelles sont conservées aussi longtemps que nécessaire pour fournir nos services. Vous pouvez demander la suppression à tout moment. Nous effacerons vos données dans les 30 jours suivant une demande valide.",
+    "your_rights_title": "Vos droits",
+    "your_rights": "En vertu du RGPD, vous avez le droit : d'accéder à vos données, de les rectifier, de les effacer, de limiter le traitement, à la portabilité des données, de vous opposer au traitement et de retirer votre consentement à tout moment.",
+    "how_to_contact_title": "Comment exercer vos droits",
+    "how_to_contact": "Pour exercer vos droits ou pour toute question, contactez-nous à : privacy@beautyandglow.ai. Nous répondrons dans les 30 jours.",
+    "cookies_title": "Cookies",
+    "cookies": "Cette application utilise uniquement des cookies essentiels nécessaires au fonctionnement du service (ex. : préférence de langue). Nous n'utilisons pas de cookies de suivi, publicitaires ou analytiques.",
+    "changes_title": "Modifications de cette politique",
+    "changes": "Nous pouvons mettre à jour cette politique de confidentialité. Les modifications seront indiquées par la date de mise à jour en haut de cette page."
   },
   "common": {
     "loading": "Chargement...",

@@ -407,6 +407,10 @@ export async function POST(request) {
       return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
     }
 
+    if (!formData.consent) {
+      return NextResponse.json({ error: "Consent is required to process your data" }, { status: 400 });
+    }
+
     let chatIDs, accountIDs, contactIDs;
     try {
       chatIDs = JSON.parse(formDataReq.get("chatIDs") || "[]");
