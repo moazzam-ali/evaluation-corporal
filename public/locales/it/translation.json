@@ -562,12 +562,12 @@
     "footnote": "Questo strumento è destinato esclusivamente a scopi di consapevolezza cosmetica. I punteggi della pelle possono variare in base al trucco applicato. I risultati non sostituiscono il consulto dermatologico professionale.",
     "status": {
       "good": "Buono",
-      "normal": "Normale",
+      "normal": "Moderato",
       "needs_attention": "Richiede Attenzione"
     },
     "score_guide": {
       "needs_attention": "Richiede Attenzione",
-      "normal": "Normale",
+      "normal": "Moderato",
       "good": "Buono"
     }
   },

@@ -562,12 +562,12 @@
     "footnote": "Esta herramienta está destinada únicamente para fines de concienciación cosmética. Las puntuaciones de la piel pueden variar según el maquillaje aplicado. Los resultados no sustituyen el consejo dermatológico profesional.",
     "status": {
       "good": "Bueno",
-      "normal": "Normal",
+      "normal": "Moderado",
       "needs_attention": "Necesita Atención"
     },
     "score_guide": {
       "needs_attention": "Necesita Atención",
-      "normal": "Normal",
+      "normal": "Moderado",
       "good": "Bueno"
     }
   },

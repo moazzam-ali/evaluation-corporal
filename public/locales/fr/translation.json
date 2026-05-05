@@ -562,12 +562,12 @@
     "footnote": "Cet outil est destiné uniquement à des fins de sensibilisation cosmétique. Les scores de peau peuvent varier en fonction du maquillage appliqué. Les résultats ne remplacent pas les conseils dermatologiques professionnels.",
     "status": {
       "good": "Bon",
-      "normal": "Normal",
+      "normal": "Modéré",
       "needs_attention": "Nécessite une Attention"
     },
     "score_guide": {
       "needs_attention": "Nécessite une Attention",
-      "normal": "Normal",
+      "normal": "Modéré",
       "good": "Bon"
     }
   },
