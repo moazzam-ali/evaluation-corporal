@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
@@ -12,6 +12,7 @@ import Loader from "@/components/Loader/Loader";
 import ScorePanel from "@/components/ScorePanel/ScorePanel";
 import ScoreCircle from "@/components/ScoreCircle/ScoreCircle";
 import ProductCard from "@/components/ProductCard/ProductCard";
+import FormDataModal from "@/components/FormDataModal/FormDataModal";
 
 /* Section header helper */
 function SectionHead({ eyebrow, title, titleEm, lede }) {
@@ -73,6 +74,7 @@ export default function ResultsPage() {
     );
   }
 
+  const [formModalOpen, setFormModalOpen] = useState(false);
   const products = enrichedProducts || [];
   const userName = formData?.name || "";
   const now = new Date();
@@ -293,14 +295,30 @@ export default function ResultsPage() {
         </motion.section>
       )}
 
-      {/* ===== ACTIONS (simplified — only "Run a new scan") ===== */}
+      {/* ===== ACTIONS ===== */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
-        className="flex justify-center"
+        className="flex justify-center gap-3 flex-wrap"
         style={{ marginTop: "60px", paddingTop: "32px", borderTop: "1px solid rgba(26,26,46,0.10)" }}
       >
+        {formData && (
+          <button
+            onClick={() => setFormModalOpen(true)}
+            className="inline-flex items-center justify-center gap-2"
+            style={{
+              fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 500,
+              padding: "13px 24px", borderRadius: "999px",
+              background: "transparent", color: "#1A1A2E", textDecoration: "none",
+              border: "1.5px solid rgba(26,26,46,0.16)", cursor: "pointer",
+              transition: "transform 180ms, border-color 180ms",
+            }}
+          >
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            {t("results.view_responses", "View My Responses")}
+          </button>
+        )}
         <Link
           href="/scan"
           className="inline-flex items-center justify-center gap-2"
@@ -316,14 +334,8 @@ export default function ResultsPage() {
         </Link>
       </motion.div>
 
-      {/* ===== FOOTNOTE ===== */}
-      <p style={{
-        marginTop: "48px", textAlign: "center",
-        fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: "#6B6B7A",
-        letterSpacing: "0.04em", maxWidth: "56ch", marginInline: "auto", lineHeight: 1.6,
-      }}>
-        {t("results.footnote", "This tool is intended only for cosmetic awareness purposes. Skin scores may vary based on applied makeup. Results are not a substitute for professional dermatological advice.")}
-      </p>
+      {/* Form responses modal */}
+      <FormDataModal open={formModalOpen} onOpenChange={setFormModalOpen} formData={formData} />
     </div>
   );
 }
