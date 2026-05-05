@@ -4,7 +4,9 @@
     "home": "Home",
     "scan": "Analyze Skin",
     "config": "Config",
-    "saved": "Saved automatically"
+    "saved": "Saved automatically",
+    "aria_change_language": "Change language",
+    "aria_toggle_menu": "Toggle navigation menu"
   },
   "home": {
     "title": "Configuration",
@@ -155,7 +157,81 @@
     "footer_privacy": "Privacy policy",
     "footer_ingredient": "Ingredient science",
     "footer_methodology": "Methodology",
-    "footer_privacy_link": "Privacy"
+    "footer_privacy_link": "Privacy",
+
+    "metric_hydration": "Hydration",
+    "metric_hydration_desc": "Stratum-corneum moisture cues across forehead, cheek, chin.",
+    "metric_barrier": "Barrier",
+    "metric_barrier_desc": "Ceramide-lipid integrity inferred from tonal recovery.",
+    "metric_pore_visibility": "Pore visibility",
+    "metric_pore_visibility_desc": "Size and shadow depth across T-zone and mid-cheek.",
+    "metric_even_tone": "Even tone",
+    "metric_even_tone_desc": "Variance of L*a*b* values vs. baseline patch.",
+    "metric_redness": "Redness",
+    "metric_redness_desc": "Erythema index derived from red-channel isolation.",
+    "metric_fine_lines": "Fine lines",
+    "metric_fine_lines_desc": "Micro-creasing at forehead, under-eye, peri-oral zones.",
+    "metric_sebum": "Sebum",
+    "metric_sebum_desc": "Shine mapping across T-zone with specular separation.",
+    "metric_texture": "Texture",
+    "metric_texture_desc": "High-frequency surface detail — congestion, flakiness.",
+    "metric_dark_circles": "Dark circles",
+    "metric_dark_circles_desc": "Periorbital shadow + discoloration, corrected for lighting.",
+    "metric_pigmentation": "Pigmentation",
+    "metric_pigmentation_desc": "Discrete hyperpigmented spots scored by area + contrast.",
+    "metric_elasticity": "Elasticity",
+    "metric_elasticity_desc": "Inferred recoil from micro-expression frame differences.",
+    "metric_glow": "Glow",
+    "metric_glow_desc": "Composite: hydration × even tone × low redness.",
+
+    "tier_optimal": "Optimal",
+    "tier_watch": "Watch",
+    "tier_flag": "Flag",
+    "tier_good": "Good",
+
+    "marquee_1": "12 AI-Powered Metrics",
+    "marquee_2": "Personalized Routines",
+    "marquee_3": "HL/Skin Product Range",
+    "marquee_4": "Ingredient Science",
+    "marquee_5": "Multi-Language Support",
+    "marquee_6": "Instant Analysis",
+    "marquee_7": "Dermatologist-Grade Insights",
+    "marquee_8": "Morning & Evening Routines",
+    "marquee_9": "Powered by GPT-4o Vision",
+    "marquee_10": "8 Languages Supported",
+
+    "score_label": "Score",
+
+    "demo_zone_1": "Forehead · Hydration",
+    "demo_zone_2": "Cheeks · Barrier integrity",
+    "demo_zone_3": "Nose · Redness index",
+    "demo_zone_4": "Overall · Even tone",
+
+    "science_niacinamide_name": "Niacinamide",
+    "science_niacinamide_inci": "INCI · Nicotinamide · Vit. B3",
+    "science_niacinamide_targets": "Barrier · Redness",
+    "science_niacinamide_evidence": "42 RCTs",
+    "science_bakuchiol_name": "Bakuchiol",
+    "science_bakuchiol_inci": "INCI · Meroterpene · Plant-derived",
+    "science_bakuchiol_targets": "Fine lines · Tone",
+    "science_bakuchiol_evidence": "18 clinical studies",
+    "science_tranexamic_name": "Tranexamic Acid",
+    "science_tranexamic_inci": "INCI · Trans-4-aminomethyl",
+    "science_tranexamic_targets": "Pigmentation",
+    "science_tranexamic_evidence": "27 peer-reviewed papers",
+
+    "plan_premium_cadence": "/ month",
+    "plan_free_member_note": "Already a member? You get unlimited scans — completely free.",
+    "plan_premium_name": "Premium",
+    "plan_premium_desc": "Unlimited scans, tracking, and personalised skincare guidance — all in one plan.",
+    "plan_premium_sub": "cancel anytime",
+    "plan_premium_f1": "Unlimited AI skin scans",
+    "plan_premium_f2": "Progress tracking over time",
+    "plan_premium_f3": "Routine auto-tuning as skin changes",
+    "plan_premium_f4": "Ingredient deep-dives",
+    "plan_premium_f5": "Priority support",
+    "plan_premium_cta": "Go Premium",
+    "plan_premium_badge": "Best value"
   },
   "scan": {
     "title": "Skin Analysis",
@@ -444,7 +520,10 @@
     "complete_title": "Analysis complete!",
     "complete_message": "Your skin analysis has been processed successfully. Your coach will share the detailed results with you shortly. Please contact your coach to receive your personalised report and product recommendations.",
     "complete_hint": "Your coach has been notified and will reach out with your results.",
-    "complete_home": "Back to home"
+    "complete_home": "Back to home",
+    "photo_alt_captured": "Captured",
+    "photo_alt_uploaded": "Uploaded",
+    "camera_live": "Live"
   },
   "results": {
     "title": "Your Skin Analysis",
@@ -485,6 +564,10 @@
     "score_good": "Skin in good balance overall",
     "score_normal": "Some areas need attention",
     "score_alert": "Several areas need care",
+    "photo_alt": "Skin scan",
+    "photo_label": "Selfie · 1024 × 1024",
+    "metric_details": "Details",
+    "metric_less": "Less",
     "footnote": "This tool is intended only for cosmetic awareness purposes. Skin scores may vary based on applied makeup. Results are not a substitute for professional dermatological advice.",
     "status": {
       "good": "Good",
@@ -549,6 +632,7 @@
     "back": "Go Back",
     "cancel": "Cancel",
     "optional": "Optional",
-    "timeout": "Analysis took too long. Please try again."
+    "timeout": "Analysis took too long. Please try again.",
+    "close": "Close"
   }
 }

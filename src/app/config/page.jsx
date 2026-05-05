@@ -25,14 +25,22 @@ export default function HomePage() {
   const [contactIDs, setContactIDs] = useState("");
   const [language, setLanguage] = useState("en");
 
+  /** Strip decimals from comma-separated numeric IDs (e.g. "239.0" → "239") */
+  const cleanIDs = (raw) =>
+    raw.split(",").map((s) => {
+      const trimmed = s.trim();
+      const n = Number(trimmed);
+      return trimmed && !isNaN(n) ? String(Math.trunc(n)) : trimmed;
+    }).filter(Boolean).join(",");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const params = new URLSearchParams();
-    if (chatIDs.trim()) params.set("n", chatIDs.trim());
-    if (botIndex.trim()) params.set("b", botIndex.trim());
-    if (accountIDs.trim()) params.set("a", accountIDs.trim());
-    if (contactIDs.trim()) params.set("c", contactIDs.trim());
+    if (chatIDs.trim()) params.set("n", cleanIDs(chatIDs));
+    if (botIndex.trim()) params.set("b", String(Math.trunc(Number(botIndex)) || botIndex.trim()));
+    if (accountIDs.trim()) params.set("a", cleanIDs(accountIDs));
+    if (contactIDs.trim()) params.set("c", cleanIDs(contactIDs));
     params.set("l", language);
 
     router.push(`/scan?${params.toString()}`);

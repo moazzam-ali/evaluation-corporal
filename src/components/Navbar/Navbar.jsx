@@ -142,7 +142,7 @@ export default function Navbar() {
             <button
               onClick={() => setLangMenuOpen(!langMenuOpen)}
               className="flex items-center gap-1 rounded-full border border-[hsl(340,15%,90%)] px-3 py-2 text-xs text-[hsl(240,10%,46%)] transition-colors hover:border-[#1A1A2E]/30 hover:text-[#1A1A2E]"
-              aria-label="Change language"
+              aria-label={t("nav.aria_change_language", "Change language")}
             >
               <Globe className="h-3.5 w-3.5" />
               {i18n.language?.toUpperCase().slice(0, 2)}
@@ -173,7 +173,7 @@ export default function Navbar() {
         <button
           className="lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
+          aria-label={t("nav.aria_toggle_menu", "Toggle navigation menu")}
           style={{ color: "#1A1A2E" }}
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

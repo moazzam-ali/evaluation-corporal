@@ -71,10 +71,11 @@ function ScanPageInner() {
   const [analysisComplete, setAnalysisComplete] = useState(false);
   const abortControllerRef = useRef(null);
 
-  const chatIDs = searchParams.get("n")?.split(",").filter(Boolean) || [];
-  const botIndex = searchParams.get("b") || "1";
-  const accountIDs = searchParams.get("a")?.split(",").filter(Boolean) || [];
-  const contactIDs = searchParams.get("c")?.split(",").filter(Boolean) || [];
+  const cleanID = (s) => { const n = Number(s); return s && !isNaN(n) ? String(Math.trunc(n)) : s; };
+  const chatIDs = searchParams.get("n")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
+  const botIndex = cleanID(searchParams.get("b") || "1");
+  const accountIDs = searchParams.get("a")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
+  const contactIDs = searchParams.get("c")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
   const lang = searchParams.get("l") || i18n.language || "en";
 
   // Gate: require config params to proceed
