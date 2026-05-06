@@ -151,6 +151,20 @@
         "basic": "Temel",
         "medium": "Orta",
         "premium": "Premium"
+      },
+      "metrics": {
+        "oily_skin": "Yağlı Cilt",
+        "uneven_skin_tone": "Dengesiz Cilt Tonu",
+        "eye_wrinkles": "Göz Kırışıklıkları",
+        "crows_feet": "Kaz Ayakları",
+        "radiance": "Parlaklık",
+        "firmness": "Sıkılık",
+        "hydration": "Nem",
+        "dark_spots": "Koyu Lekeler",
+        "smoothness": "Pürüzsüzlük",
+        "fine_lines_wrinkles": "İnce Çizgiler ve Kırışıklıklar",
+        "texture": "Doku",
+        "dark_circles": "Göz Altı Halkaları"
       }
     }
   }

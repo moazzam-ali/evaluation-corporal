@@ -151,6 +151,20 @@
         "basic": "Básica",
         "medium": "Media",
         "premium": "Premium"
+      },
+      "metrics": {
+        "oily_skin": "Piel Grasa",
+        "uneven_skin_tone": "Tono de Piel Desigual",
+        "eye_wrinkles": "Arrugas en los Ojos",
+        "crows_feet": "Patas de Gallo",
+        "radiance": "Luminosidad",
+        "firmness": "Firmeza",
+        "hydration": "Hidratación",
+        "dark_spots": "Manchas Oscuras",
+        "smoothness": "Suavidad",
+        "fine_lines_wrinkles": "Líneas de Expresión y Arrugas",
+        "texture": "Textura",
+        "dark_circles": "Ojeras"
       }
     }
   }

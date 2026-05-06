@@ -151,6 +151,20 @@
         "basic": "Basis",
         "medium": "Mittel",
         "premium": "Premium"
+      },
+      "metrics": {
+        "oily_skin": "Fettige Haut",
+        "uneven_skin_tone": "Ungleichmäßiger Hautton",
+        "eye_wrinkles": "Augenfalten",
+        "crows_feet": "Krähenfüße",
+        "radiance": "Ausstrahlung",
+        "firmness": "Festigkeit",
+        "hydration": "Feuchtigkeit",
+        "dark_spots": "Dunkle Flecken",
+        "smoothness": "Geschmeidigkeit",
+        "fine_lines_wrinkles": "Feine Linien und Falten",
+        "texture": "Textur",
+        "dark_circles": "Augenringe"
       }
     }
   }

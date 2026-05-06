@@ -164,7 +164,7 @@ export async function sendAnalysisToTelegram({
 
   const metricsLines = (results.metrics || [])
     .map((m) => {
-      const metricName = m.id.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+      const metricName = t(`telegram.form_fields.metrics.${m.id}`) || m.id.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
       const statusIcon =
         m.score >= 80 ? "🟢" :
         m.score >= 60 ? "🟡" :

@@ -151,6 +151,20 @@
         "basic": "Básico",
         "medium": "Médio",
         "premium": "Premium"
+      },
+      "metrics": {
+        "oily_skin": "Pele Oleosa",
+        "uneven_skin_tone": "Tom de Pele Irregular",
+        "eye_wrinkles": "Rugas dos Olhos",
+        "crows_feet": "Pés de Galinha",
+        "radiance": "Luminosidade",
+        "firmness": "Firmeza",
+        "hydration": "Hidratação",
+        "dark_spots": "Manchas Escuras",
+        "smoothness": "Suavidade",
+        "fine_lines_wrinkles": "Linhas Finas e Rugas",
+        "texture": "Textura",
+        "dark_circles": "Olheiras"
       }
     }
   }

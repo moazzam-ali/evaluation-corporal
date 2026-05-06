@@ -151,6 +151,20 @@
         "basic": "Base",
         "medium": "Medio",
         "premium": "Premium"
+      },
+      "metrics": {
+        "oily_skin": "Pelle Grassa",
+        "uneven_skin_tone": "Tono della Pelle Non Uniforme",
+        "eye_wrinkles": "Rughe degli Occhi",
+        "crows_feet": "Zampe di Gallina",
+        "radiance": "Luminosità",
+        "firmness": "Compattezza",
+        "hydration": "Idratazione",
+        "dark_spots": "Macchie Scure",
+        "smoothness": "Levigatezza",
+        "fine_lines_wrinkles": "Linee Sottili e Rughe",
+        "texture": "Texture",
+        "dark_circles": "Occhiaie"
       }
     }
   }
