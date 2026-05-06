@@ -151,6 +151,20 @@
         "basic": "Basic",
         "medium": "Medium",
         "premium": "Premium"
+      },
+      "metrics": {
+        "oily_skin": "Oily Skin",
+        "uneven_skin_tone": "Uneven Skin Tone",
+        "eye_wrinkles": "Eye Wrinkles",
+        "crows_feet": "Crow's Feet",
+        "radiance": "Radiance",
+        "firmness": "Firmness",
+        "hydration": "Hydration",
+        "dark_spots": "Dark Spots",
+        "smoothness": "Smoothness",
+        "fine_lines_wrinkles": "Fine Lines and Wrinkles",
+        "texture": "Texture",
+        "dark_circles": "Dark Circles"
       }
     }
   }

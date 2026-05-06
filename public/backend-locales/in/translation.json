@@ -151,6 +151,20 @@
         "basic": "बुनियादी",
         "medium": "मध्यम",
         "premium": "प्रीमियम"
+      },
+      "metrics": {
+        "oily_skin": "तैलीय त्वचा",
+        "uneven_skin_tone": "असमान त्वचा टोन",
+        "eye_wrinkles": "आंखों की झुर्रियां",
+        "crows_feet": "कौवा के पैर",
+        "radiance": "चमक",
+        "firmness": "कसावट",
+        "hydration": "हाइड्रेशन",
+        "dark_spots": "डार्क स्पॉट",
+        "smoothness": "चिकनाई",
+        "fine_lines_wrinkles": "महीन रेखाएं और झुर्रियां",
+        "texture": "टेक्सचर",
+        "dark_circles": "डार्क सर्कल्स"
       }
     }
   }
