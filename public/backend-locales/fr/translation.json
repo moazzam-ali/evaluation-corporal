@@ -151,6 +151,20 @@
         "basic": "Basique",
         "medium": "Moyen",
         "premium": "Premium"
+      },
+      "metrics": {
+        "oily_skin": "Peau Grasse",
+        "uneven_skin_tone": "Teint Irrégulier",
+        "eye_wrinkles": "Rides des Yeux",
+        "crows_feet": "Pattes d'Oie",
+        "radiance": "Éclat",
+        "firmness": "Fermeté",
+        "hydration": "Hydratation",
+        "dark_spots": "Taches Sombres",
+        "smoothness": "Douceur",
+        "fine_lines_wrinkles": "Ridules et Rides",
+        "texture": "Texture",
+        "dark_circles": "Cernes"
       }
     }
   }
