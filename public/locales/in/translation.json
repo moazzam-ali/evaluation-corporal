@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Nutritional",
+    "brand": "Evaluación Corporal",
     "home": "होम",
     "scan": "स्कैन शुरू करें",
     "config": "कॉन्फिगरेशन",
@@ -33,14 +33,12 @@
   "landing": {
     "cta": "मुफ्त स्कैन शुरू करें",
     "hero_cta": "अपना मुफ्त स्कैन शुरू करें",
-
     "nav_product": "उत्पाद",
     "nav_how": "कैसे काम करता है",
     "nav_science": "विज्ञान",
     "nav_pricing": "मूल्य निर्धारण",
     "nav_coaches": "कोच के लिए",
     "nav_signin": "साइन इन",
-
     "hero_badge_new": "नया",
     "hero_badge": "बॉडी कम्पोज़िशन स्कैन · बीटा में",
     "hero_title_1": "अपना शरीर देखें।",
@@ -50,9 +48,7 @@
     "hero_trust_1": "कोई कार्ड नहीं · बीटा में मुफ्त",
     "hero_trust_2": "अपलोड पर EXIF हटा दिया जाता है",
     "hero_trust_3": "GDPR अनुकूल",
-
     "trust_strip": "फ़ीचर किया गया · साझेदारी",
-
     "stats_1_value": "98%",
     "stats_1_label": "उपयोगकर्ताओं ने अपना पहला स्कैन 6 मिनट से कम में पूरा किया।",
     "stats_2_value": "3.5×",
@@ -61,7 +57,6 @@
     "stats_3_label": "प्रति स्कैन विश्लेषित बॉडी, न्यूट्रिशन और लाइफस्टाइल सिग्नल।",
     "stats_4_value": "12",
     "stats_4_label": "भाषाएं — अंग्रेज़ी, ES, DE, FR, JP में पूर्ण स्थानीयकरण।",
-
     "services_label": "हम क्या पढ़ते हैं",
     "services_title_1": "छह क्षेत्र।",
     "services_title_2": "बारह सिग्नल।",
@@ -85,7 +80,6 @@
     "service_plan_body": "जब आपका स्कैन पूरा होता है, तो हम आज की थाली, इस हफ़्ते की ट्रेनिंग, और आपका सप्लीमेंट स्टैक तैयार करते हैं। चार हफ़्ते बाद दोबारा स्कैन करें — हम उसके अनुसार एडजस्ट करते हैं जो वास्तव में बदला।",
     "service_plan_cta_1": "इंजन कैसे काम करता है",
     "service_plan_cta_2": "विज्ञान पढ़ें",
-
     "how_label": "कैसे काम करता है",
     "how_title_1": "चार चरण।",
     "how_title_2": "छह मिनट।",
@@ -101,7 +95,6 @@
     "how_step4_num": "04",
     "how_step4_title": "ट्रैक करें",
     "how_step4_text": "भोजन लॉग करें, वर्कआउट पूरा करें। 4 हफ़्ते बाद दोबारा स्कैन करें। ट्रेंड लाइनों को बदलते देखें।",
-
     "testimonials_label": "क्लाइंट परिणाम",
     "testimonials_title_1": "संस्थापक और एथलीट,",
     "testimonials_title_2": "रिकॉर्ड पर",
@@ -123,14 +116,12 @@
     "testimonial_5_text": "सप्लीमेंट स्टैक स्पष्ट है — और सटीक। तीन आइटम, सभी किसी ऐसी चीज़ से जुड़े जो उन्होंने पढ़ी।",
     "testimonial_5_name": "Léa Morel",
     "testimonial_5_role": "फार्मासिस्ट, ल्यों",
-
     "cta_label": "बीटा में मुफ्त",
     "cta_title_1": "आपका पहला स्कैन",
     "cta_title_2": "छह मिनट",
     "cta_body": "तीन फोटो, एक छोटी प्रश्नावली, और आपकी कॉफ़ी ठंडी होने से पहले आपके पास कम्पोज़िशन रीडिंग, आज की थाली और इस हफ़्ते की ट्रेनिंग होगी।",
     "cta_primary": "अपना मुफ्त स्कैन शुरू करें",
     "cta_secondary": "कोच से बात करें",
-
     "footer_tagline": "विज्ञान, डिज़ाइन और AI के ज़रिए स्वस्थ शरीर बनाना।",
     "footer_col_product": "उत्पाद",
     "footer_col_company": "कंपनी",
@@ -142,9 +133,8 @@
     "footer_contact_email": "hello@nutritional.app",
     "footer_contact_phone": "+1 415 762 8841",
     "footer_contact_city": "San Francisco, CA",
-    "footer_copyright": "© 2026 Nutritional. सर्वाधिकार सुरक्षित।",
+    "footer_copyright": "© 2026 Evaluación Corporal. सर्वाधिकार सुरक्षित।",
     "footer_disclaimer": "AI अनुमान · चिकित्सा सलाह नहीं है।",
-
     "score_label": "स्कोर",
     "tier_good": "अच्छा",
     "tier_normal": "सामान्य",

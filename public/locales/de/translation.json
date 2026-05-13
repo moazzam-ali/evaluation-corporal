@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Nutritional",
+    "brand": "Evaluación Corporal",
     "home": "Startseite",
     "scan": "Scan Starten",
     "config": "Einstellungen",
@@ -33,14 +33,12 @@
   "landing": {
     "cta": "Kostenloser Scan",
     "hero_cta": "Starten Sie Ihren kostenlosen Scan",
-
     "nav_product": "Produkt",
     "nav_how": "So funktioniert es",
     "nav_science": "Wissenschaft",
     "nav_pricing": "Preise",
     "nav_coaches": "Für Coaches",
     "nav_signin": "Anmelden",
-
     "hero_badge_new": "NEU",
     "hero_badge": "Körperkompositions-Scan · in der Beta",
     "hero_title_1": "Sieh deinen Körper.",
@@ -50,9 +48,7 @@
     "hero_trust_1": "Keine Karte · kostenlos in der Beta",
     "hero_trust_2": "EXIF beim Upload entfernt",
     "hero_trust_3": "DSGVO-konform",
-
     "trust_strip": "Bekannt aus · Partnerschaften mit",
-
     "stats_1_value": "98 %",
     "stats_1_label": "Der Nutzer schließen ihren ersten Scan in unter 6 Minuten ab.",
     "stats_2_value": "3,5×",
@@ -61,7 +57,6 @@
     "stats_3_label": "Körper-, Ernährungs- und Lifestyle-Signale pro Scan analysiert.",
     "stats_4_value": "12",
     "stats_4_label": "Sprachen — vollständige Lokalisierung in Englisch, ES, DE, FR, JP.",
-
     "services_label": "WAS WIR LESEN",
     "services_title_1": "Sechs Bereiche.",
     "services_title_2": "Zwölf Signale.",
@@ -85,7 +80,6 @@
     "service_plan_body": "Nach Abschluss Ihres Scans erstellen wir den Teller des Tages, das Training der Woche und Ihren Supplement-Stack. Scannen Sie in vier Wochen erneut — wir passen an, was sich tatsächlich verändert hat.",
     "service_plan_cta_1": "Wie die Engine funktioniert",
     "service_plan_cta_2": "Die Wissenschaft lesen",
-
     "how_label": "SO FUNKTIONIERT ES",
     "how_title_1": "Vier Schritte.",
     "how_title_2": "Sechs Minuten.",
@@ -101,7 +95,6 @@
     "how_step4_num": "04",
     "how_step4_title": "Verfolgen",
     "how_step4_text": "Mahlzeiten erfassen, Workouts abhaken. In 4 Wochen erneut scannen. Beobachten Sie, wie sich die Trendlinien verändern.",
-
     "testimonials_label": "KUNDENERGEBNISSE",
     "testimonials_title_1": "Gründer und Athleten,",
     "testimonials_title_2": "im O-Ton",
@@ -123,14 +116,12 @@
     "testimonial_5_text": "Der Supplement-Stack ist meinungsstark — und treffsicher. Drei Produkte, alle an etwas geknüpft, das sie gemessen haben.",
     "testimonial_5_name": "Léa Morel",
     "testimonial_5_role": "Apothekerin, Lyon",
-
     "cta_label": "KOSTENLOS IN DER BETA",
     "cta_title_1": "Ihr erster Scan dauert",
     "cta_title_2": "sechs Minuten",
     "cta_body": "Drei Fotos, ein kurzer Fragebogen, und Sie haben Ihren Kompositionsbefund, den Teller des Tages und das Training der Woche, bevor Ihr Kaffee kalt wird.",
     "cta_primary": "Starten Sie Ihren kostenlosen Scan",
     "cta_secondary": "Mit einem Coach sprechen",
-
     "footer_tagline": "Gesündere Körper durch Wissenschaft, Design und KI.",
     "footer_col_product": "PRODUKT",
     "footer_col_company": "UNTERNEHMEN",
@@ -142,9 +133,8 @@
     "footer_contact_email": "hello@nutritional.app",
     "footer_contact_phone": "+1 415 762 8841",
     "footer_contact_city": "San Francisco, CA",
-    "footer_copyright": "© 2026 Nutritional. Alle Rechte vorbehalten.",
+    "footer_copyright": "© 2026 Evaluación Corporal. Alle Rechte vorbehalten.",
     "footer_disclaimer": "KI-Schätzung · Kein medizinischer Rat.",
-
     "score_label": "Wert",
     "tier_good": "Gut",
     "tier_normal": "Normal",

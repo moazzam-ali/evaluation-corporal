@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Nutritional",
+    "brand": "Evaluación Corporal",
     "home": "Home",
     "scan": "Start Scan",
     "config": "Config",
@@ -33,14 +33,12 @@
   "landing": {
     "cta": "Start Free Assessment",
     "hero_cta": "Start your free assessment",
-
     "nav_product": "Product",
     "nav_how": "How it works",
     "nav_science": "Science",
     "nav_pricing": "Pricing",
     "nav_coaches": "For coaches",
     "nav_signin": "Sign in",
-
     "hero_badge_new": "FREE",
     "hero_badge": "Complete body assessment · 5 minutes",
     "hero_title_1": "Know your numbers.",
@@ -50,9 +48,7 @@
     "hero_trust_1": "Free · no card required",
     "hero_trust_2": "WHO-standard formulas",
     "hero_trust_3": "GDPR-compliant",
-
     "trust_strip": "Trusted by coaches & nutritionists worldwide",
-
     "stats_1_value": "20+",
     "stats_1_label": "Health metrics calculated from your measurements and lifestyle data.",
     "stats_2_value": "5 min",
@@ -61,12 +57,10 @@
     "stats_3_label": "Languages supported — full localisation for a global audience.",
     "stats_4_value": "100%",
     "stats_4_label": "Formula-based — every number is traceable to a published method.",
-
     "metrics_label": "WHAT WE CALCULATE",
     "metrics_title_1": "Twenty metrics.",
     "metrics_title_2": "One questionnaire.",
     "metrics_subtitle": "From five body measurements and a lifestyle questionnaire, we calculate everything a nutritionist needs to build your plan — using WHO-endorsed and peer-reviewed formulas.",
-
     "metric_1_title": "BMI",
     "metric_1_body": "Body Mass Index — weight relative to height squared. Categorised from underweight through obesity III using WHO thresholds.",
     "metric_1_formula": "weight ÷ height²",
@@ -91,7 +85,6 @@
     "metric_8_title": "Healthy Weight Range",
     "metric_8_body": "Your ideal weight range calculated from height and sex using the Lorentz formula. Gives you a concrete target, not just a BMI band.",
     "metric_8_formula": "Lorentz formula",
-
     "services_label": "YOUR FULL REPORT",
     "services_title_1": "Not just numbers.",
     "services_title_2": "A plan.",
@@ -115,7 +108,6 @@
     "service_plan_body": "BMI follows WHO standards. Body fat uses the Deurenberg equation. Metabolic rate uses Mifflin-St Jeor. Water uses Watson. Every metric links back to a published, peer-reviewed method.",
     "service_plan_cta_1": "View all formulas",
     "service_plan_cta_2": "Read the methodology",
-
     "how_label": "HOW IT WORKS",
     "how_title_1": "Seven steps.",
     "how_title_2": "Five minutes.",
@@ -131,7 +123,6 @@
     "how_step4_num": "04",
     "how_step4_title": "Your report",
     "how_step4_text": "Instant results — BMI gauge, body fat category, calorie target, macro split, recommended supplements, and a full health summary.",
-
     "formulas_label": "THE FORMULAS",
     "formulas_title_1": "Peer-reviewed.",
     "formulas_title_2": "Transparent.",
@@ -151,7 +142,6 @@
     "formula_3_eq": "Height + weight + age coefficients",
     "formula_3_desc": "Predicts total body water volume from anthropometric data. Used in clinical settings to assess hydration and guide fluid intake recommendations.",
     "formula_3_evidence": "Standard in clinical nutrition",
-
     "testimonials_label": "WHAT COACHES SAY",
     "testimonials_title_1": "Coaches & athletes,",
     "testimonials_title_2": "on the record",
@@ -173,14 +163,12 @@
     "testimonial_5_text": "The supplement recommendations are evidence-based and tied to actual conditions. No generic multivitamin suggestions — every pick has a reason.",
     "testimonial_5_name": "Léa Morel",
     "testimonial_5_role": "Pharmacist & health advisor, Lyon",
-
     "cta_label": "FREE · NO CARD REQUIRED",
     "cta_title_1": "Your full health report in",
     "cta_title_2": "five minutes",
     "cta_body": "Seven short steps, four body measurements, and you'll have your BMI, body fat, calorie target, macro split, and a supplement stack — calculated, not guessed.",
     "cta_primary": "Start your free assessment",
     "cta_secondary": "Talk to a coach",
-
     "footer_tagline": "Building healthier bodies through science, formulas, and care.",
     "footer_col_product": "PRODUCT",
     "footer_col_company": "COMPANY",
@@ -192,9 +180,8 @@
     "footer_contact_email": "hello@nutritional.app",
     "footer_contact_phone": "+1 415 762 8841",
     "footer_contact_city": "San Francisco, CA",
-    "footer_copyright": "© 2026 Nutritional. All rights reserved.",
+    "footer_copyright": "© 2026 Evaluación Corporal. All rights reserved.",
     "footer_disclaimer": "Health assessment · Not medical advice.",
-
     "score_label": "Score",
     "tier_good": "Good",
     "tier_normal": "Normal",
@@ -254,7 +241,11 @@
       "display_title_em": "information",
       "display_sub": "Your body measurements help us calculate your health metrics accurately.",
       "sex": "Sex",
-      "sex_options": { "select": "Select your gender", "male": "Masculine", "female": "Feminine" },
+      "sex_options": {
+        "select": "Select your gender",
+        "male": "Masculine",
+        "female": "Feminine"
+      },
       "weight": "Weight (kg)",
       "weight_placeholder": "Enter your weight",
       "height": "Height (cm)",
