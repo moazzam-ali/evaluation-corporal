@@ -64,7 +64,7 @@ export default async function AdminProductsPage() {
                 </td>
                 <td className="px-4 py-3">
                   {p.isActive ? (
-                    <CheckCircle className="h-4 w-4 text-[#5B9A8B]" />
+                    <CheckCircle className="h-4 w-4 text-[#2E8B6B]" />
                   ) : (
                     <XCircle className="h-4 w-4 text-muted-foreground" />
                   )}

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { Menu, X, Globe, ChevronDown, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -31,7 +30,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
@@ -44,15 +42,15 @@ export default function Navbar() {
 
   const navLinks = isLanding
     ? [
+        { label: t("landing.nav_product", "Product"), href: "#services" },
         { label: t("landing.nav_how", "How it works"), href: "#how" },
-        { label: t("landing.nav_metrics", "Metrics"), href: "#metrics" },
-        { label: t("landing.nav_demo", "Live demo"), href: "#demo" },
-        { label: t("landing.nav_products", "Products"), href: "#products" },
+        { label: t("landing.nav_science", "Science"), href: "#science" },
         { label: t("landing.nav_pricing", "Pricing"), href: "#pricing" },
+        { label: t("landing.nav_coaches", "For coaches"), href: "#coaches" },
       ]
     : [
         { label: t("nav.home", "Home"), href: "/" },
-        { label: t("nav.scan", "Scan"), href: scanHref },
+        { label: t("nav.scan", "Start Scan"), href: scanHref },
         { label: t("nav.config", "Config"), href: configHref },
       ];
 
@@ -60,47 +58,40 @@ export default function Navbar() {
     <nav
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "border-b border-[rgba(26,26,46,0.08)] bg-[rgba(250,250,251,0.92)]"
-          : "bg-[rgba(250,250,251,0.82)]"
+          ? "border-b bg-[rgba(250,251,253,0.92)]"
+          : "bg-[rgba(250,251,253,0.82)]"
       }`}
-      style={{ backdropFilter: "saturate(180%) blur(18px)", WebkitBackdropFilter: "saturate(180%) blur(18px)" }}
+      style={{
+        borderColor: scrolled ? "rgba(11,27,51,0.06)" : "transparent",
+        backdropFilter: "saturate(180%) blur(18px)",
+        WebkitBackdropFilter: "saturate(180%) blur(18px)",
+      }}
     >
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
         {/* Brand lockup */}
-        <Link href="/" className="inline-flex items-center gap-3 shrink-0">
-          <Image src="/logo-new.svg" alt="" width={32} height={32} className="w-8 h-8 shrink-0" />
+        <Link href="/" className="inline-flex items-center gap-2.5 shrink-0">
+          <svg width={28} height={28} viewBox="0 0 32 32" fill="none">
+            <rect x="0" y="0" width="32" height="32" rx="8" fill="#2C5BFF" />
+            <path d="M9 22 L9 10 L14 10 L19 18 L19 10 L23 10 L23 22 L18 22 L13 14 L13 22 Z" fill="white" />
+            <circle cx="25" cy="9" r="2.5" fill="#6FA0FF" />
+          </svg>
           <span
-            className="inline-flex items-baseline gap-1.5 whitespace-nowrap"
-            style={{ fontFamily: "var(--font-cormorant), Georgia, serif", fontWeight: 300, fontSize: "20px", color: "#1A1A2E" }}
+            className="whitespace-nowrap"
+            style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "20px", color: "var(--ink, #0B1B33)", letterSpacing: "-0.01em", lineHeight: 1 }}
           >
-            Beauty &amp; Glow
-            <span
-              style={{
-                fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
-                fontWeight: 700,
-                fontSize: "9px",
-                letterSpacing: "0.2em",
-                color: "#E8728A",
-                padding: "2px 6px",
-                border: "1px solid rgba(232,114,138,0.3)",
-                borderRadius: "4px",
-                lineHeight: 1,
-              }}
-            >
-              AI
-            </span>
+            {t("nav.brand", "Nutritional")}<span style={{ color: "#2C5BFF" }}>.</span>
           </span>
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hidden items-center gap-7 lg:flex" style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 500 }}>
+        <div className="hidden items-center gap-9 lg:flex" style={{ fontFamily: "var(--font-inter)", fontSize: 13.5, fontWeight: 500 }}>
           {navLinks.map((link) =>
             link.href.startsWith("#") ? (
-              <a key={link.href} href={link.href} className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">
+              <a key={link.href} href={link.href} className="transition-colors hover:text-[var(--ink)]" style={{ color: "var(--muted-fg)" }}>
                 {link.label}
               </a>
             ) : (
-              <Link key={link.href} href={link.href} className="text-[hsl(240,10%,46%)] transition-colors hover:text-[#1A1A2E]">
+              <Link key={link.href} href={link.href} className="transition-colors hover:text-[var(--ink)]" style={{ color: "var(--muted-fg)" }}>
                 {link.label}
               </Link>
             )
@@ -112,43 +103,44 @@ export default function Navbar() {
           {isScanPage && (
             <span
               className="inline-flex items-center gap-2 rounded-full px-3.5 py-2"
-              style={{ background: "#E6F1ED", color: "#5B9A8B", fontFamily: "var(--font-dm-sans)", fontSize: "12px", fontWeight: 500 }}
+              style={{ background: "var(--status-good-bg, #E1F2EA)", color: "var(--status-good-hex, #2E8B6B)", fontFamily: "var(--font-inter)", fontSize: "12px", fontWeight: 500 }}
             >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#5B9A8B", boxShadow: "0 0 0 3px rgba(91,154,139,0.25)" }} />
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--status-good-hex)", boxShadow: "0 0 0 3px rgba(46,139,107,0.25)" }} />
               {t("nav.saved", "Saved automatically")}
             </span>
           )}
 
           <Link
             href={scanHref}
-            className="inline-flex items-center gap-2 rounded-full bg-[#E8728A] px-4 py-2 text-xs text-white transition-all hover:-translate-y-px hover:bg-[#D45571] hover:shadow-[0_10px_28px_rgba(232,114,138,0.28)]"
-            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500, fontSize: 13 }}
+            className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] text-white transition-all hover:-translate-y-px hover:shadow-[var(--shadow-blue)]"
+            style={{ background: "var(--ink, #0B1B33)", fontFamily: "var(--font-inter)", fontWeight: 500 }}
           >
-            {t("landing.cta", "Scan My Skin")}
-            <ChevronRight className="h-3.5 w-3.5" />
+            {t("landing.cta", "Start Free Scan")}
+            <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
           </Link>
 
           {/* Language selector */}
           <div className="relative">
             <button
               onClick={() => setLangMenuOpen(!langMenuOpen)}
-              className="flex items-center gap-1 rounded-full border border-[hsl(340,15%,90%)] px-3 py-2 text-xs text-[hsl(240,10%,46%)] transition-colors hover:border-[#1A1A2E]/30 hover:text-[#1A1A2E]"
+              className="flex items-center gap-1 rounded-full border px-3 py-2 text-xs transition-colors hover:border-[var(--border-strong)]"
+              style={{ borderColor: "var(--border-hex, #E3E8F0)", color: "var(--muted-fg)" }}
               aria-label={t("nav.aria_change_language", "Change language")}
             >
               <Globe className="h-3.5 w-3.5" />
               {i18n.language?.toUpperCase().slice(0, 2)}
             </button>
             {langMenuOpen && (
-              <div className="absolute right-0 mt-2 w-36 rounded-xl border bg-white shadow-lg" style={{ borderColor: "rgba(26,26,46,0.10)" }}>
+              <div className="absolute right-0 mt-2 w-36 rounded-xl border bg-white shadow-lg" style={{ borderColor: "var(--border-hex)" }}>
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
                     onClick={() => changeLanguage(lang.code)}
-                    className="block w-full px-4 py-2 text-left text-sm transition-colors hover:bg-[#F6EDE3] first:rounded-t-xl last:rounded-b-xl"
+                    className="block w-full px-4 py-2 text-left text-sm transition-colors hover:bg-[var(--canvas)] first:rounded-t-xl last:rounded-b-xl"
                     style={{
-                      fontFamily: "var(--font-dm-sans)",
+                      fontFamily: "var(--font-inter)",
                       fontSize: "13px",
-                      color: i18n.language === lang.code ? "#1A1A2E" : "#6B6B7A",
+                      color: i18n.language === lang.code ? "var(--ink)" : "var(--muted-fg)",
                       fontWeight: i18n.language === lang.code ? 600 : 400,
                     }}
                   >
@@ -165,7 +157,7 @@ export default function Navbar() {
           className="lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={t("nav.aria_toggle_menu", "Toggle navigation menu")}
-          style={{ color: "#1A1A2E" }}
+          style={{ color: "var(--ink)" }}
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
@@ -175,7 +167,7 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div
           className="lg:hidden"
-          style={{ borderTop: "1px solid rgba(26,26,46,0.08)", background: "rgba(250,250,251,0.98)" }}
+          style={{ borderTop: "1px solid rgba(11,27,51,0.06)", background: "rgba(250,251,253,0.98)" }}
         >
           <div className="mx-auto max-w-[1280px] px-5 py-5 flex flex-col gap-1">
             {navLinks.map((link) =>
@@ -184,8 +176,8 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-xl px-4 py-3 text-[15px] text-[#1A1A2E] transition-colors hover:bg-[rgba(26,26,46,0.04)]"
-                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
+                  className="rounded-xl px-4 py-3 text-[15px] transition-colors hover:bg-[rgba(11,27,51,0.04)]"
+                  style={{ fontFamily: "var(--font-inter)", fontWeight: 500, color: "var(--ink)" }}
                 >
                   {link.label}
                 </a>
@@ -194,8 +186,8 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-xl px-4 py-3 text-[15px] text-[#1A1A2E] transition-colors hover:bg-[rgba(26,26,46,0.04)]"
-                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
+                  className="rounded-xl px-4 py-3 text-[15px] transition-colors hover:bg-[rgba(11,27,51,0.04)]"
+                  style={{ fontFamily: "var(--font-inter)", fontWeight: 500, color: "var(--ink)" }}
                 >
                   {link.label}
                 </Link>
@@ -203,18 +195,18 @@ export default function Navbar() {
             )}
 
             {/* Expandable language section */}
-            <div className="mt-1 border-t border-[rgba(26,26,46,0.08)] pt-2">
+            <div className="mt-1 border-t pt-2" style={{ borderColor: "rgba(11,27,51,0.06)" }}>
               <button
                 onClick={() => setMobileLangOpen(!mobileLangOpen)}
-                className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-[15px] text-[#1A1A2E] transition-colors hover:bg-[rgba(26,26,46,0.04)]"
-                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
+                className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-[15px] transition-colors hover:bg-[rgba(11,27,51,0.04)]"
+                style={{ fontFamily: "var(--font-inter)", fontWeight: 500, color: "var(--ink)" }}
               >
                 <span className="flex items-center gap-2.5">
-                  <Globe className="h-4 w-4 text-[#6B6B7A]" />
+                  <Globe className="h-4 w-4" style={{ color: "var(--muted-fg)" }} />
                   {t("nav.language", "Language")}
-                  <span className="text-xs text-[#6B6B7A] font-normal">({i18n.language?.toUpperCase().slice(0, 2)})</span>
+                  <span className="text-xs font-normal" style={{ color: "var(--muted-fg)" }}>({i18n.language?.toUpperCase().slice(0, 2)})</span>
                 </span>
-                <ChevronDown className={`h-4 w-4 text-[#6B6B7A] transition-transform duration-200 ${mobileLangOpen ? "rotate-180" : ""}`} />
+                <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileLangOpen ? "rotate-180" : ""}`} style={{ color: "var(--muted-fg)" }} />
               </button>
               {mobileLangOpen && (
                 <div className="ml-4 mt-1 flex flex-wrap gap-2 px-4 pb-2">
@@ -224,10 +216,10 @@ export default function Navbar() {
                       onClick={() => { changeLanguage(lang.code); setMobileMenuOpen(false); }}
                       className="rounded-full px-3 py-1.5 text-xs transition-colors"
                       style={{
-                        fontFamily: "var(--font-dm-sans)",
-                        background: i18n.language === lang.code ? "#1A1A2E" : "transparent",
-                        color: i18n.language === lang.code ? "white" : "#6B6B7A",
-                        border: i18n.language === lang.code ? "1px solid #1A1A2E" : "1px solid rgba(26,26,46,0.16)",
+                        fontFamily: "var(--font-inter)",
+                        background: i18n.language === lang.code ? "var(--ink)" : "transparent",
+                        color: i18n.language === lang.code ? "white" : "var(--muted-fg)",
+                        border: i18n.language === lang.code ? "1px solid var(--ink)" : "1px solid var(--border-hex)",
                         fontWeight: i18n.language === lang.code ? 600 : 400,
                       }}
                     >
@@ -239,14 +231,14 @@ export default function Navbar() {
             </div>
 
             {/* Mobile CTA */}
-            <div className="mt-3 border-t border-[rgba(26,26,46,0.08)] pt-4 px-4">
+            <div className="mt-3 border-t pt-4 px-4" style={{ borderColor: "rgba(11,27,51,0.06)" }}>
               <Link
                 href={scanHref}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#E8728A] px-5 py-3 text-sm font-medium text-white transition-all hover:bg-[#D45571]"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
+                className="flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-white transition-all hover:shadow-[var(--shadow-blue)]"
+                style={{ background: "var(--ink)", fontFamily: "var(--font-inter)" }}
               >
-                {t("landing.cta", "Scan My Skin")}
+                {t("landing.cta", "Start Free Scan")}
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </div>

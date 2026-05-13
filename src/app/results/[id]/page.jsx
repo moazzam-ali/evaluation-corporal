@@ -20,20 +20,20 @@ function SectionHead({ eyebrow, title, titleEm, lede }) {
     <div style={{ marginBottom: "28px" }}>
       <div
         className="inline-flex items-center gap-2.5 mb-3"
-        style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#6B6B7A" }}
+        style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#5A6B85" }}
       >
-        <span style={{ width: "24px", height: "1px", background: "#E8728A" }} />
+        <span style={{ width: "24px", height: "1px", background: "#2C5BFF" }} />
         {eyebrow}
       </div>
       <h2 style={{
-        fontFamily: "var(--font-cormorant)", fontWeight: 300,
-        fontSize: "clamp(30px, 3.5vw, 42px)", color: "#1A1A2E",
+        fontFamily: "var(--font-fraunces)", fontWeight: 300,
+        fontSize: "clamp(30px, 3.5vw, 42px)", color: "#0B1B33",
         margin: 0, lineHeight: 1.1, letterSpacing: "-0.01em",
       }}>
-        {title} <em style={{ fontStyle: "italic", color: "#E8728A", fontWeight: 400 }}>{titleEm}</em>
+        {title} <em style={{ fontStyle: "italic", color: "#2C5BFF", fontWeight: 400 }}>{titleEm}</em>
       </h2>
       {lede && (
-        <p style={{ margin: "12px 0 0", fontSize: "15px", color: "#6B6B7A", maxWidth: "60ch", lineHeight: 1.6 }}>
+        <p style={{ margin: "12px 0 0", fontSize: "15px", color: "#5A6B85", maxWidth: "60ch", lineHeight: 1.6 }}>
           {lede}
         </p>
       )}
@@ -72,13 +72,13 @@ export default function ResultsPage() {
   if (error) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
-        <p style={{ fontSize: "18px", color: "#C7344E", marginBottom: "16px" }}>{t("common.error")}</p>
-        <p style={{ fontSize: "14px", color: "#6B6B7A", marginBottom: "24px" }}>{error}</p>
+        <p style={{ fontSize: "18px", color: "#D8455B", marginBottom: "16px" }}>{t("common.error")}</p>
+        <p style={{ fontSize: "14px", color: "#5A6B85", marginBottom: "24px" }}>{error}</p>
         <Link href="/scan" style={{
           display: "inline-flex", alignItems: "center", gap: "8px",
           fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
           padding: "11px 20px", borderRadius: "999px",
-          border: "1.5px solid rgba(26,26,46,0.16)", background: "transparent", color: "#1A1A2E",
+          border: "1.5px solid rgba(11,27,51,0.16)", background: "transparent", color: "#0B1B33",
         }}>
           {t("common.back", "Go back")}
         </Link>
@@ -96,25 +96,25 @@ export default function ResultsPage() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: "56px" }}>
         <div
           className="inline-flex items-center gap-3 mb-4"
-          style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#6B6B7A" }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#5A6B85" }}
         >
-          <span style={{ width: "28px", height: "1px", background: "#E8728A" }} />
+          <span style={{ width: "28px", height: "1px", background: "#2C5BFF" }} />
           {t("results.clinical_eyebrow", "Clinical Report")}
         </div>
         <h1 style={{
-          fontFamily: "var(--font-cormorant)", fontWeight: 300,
-          fontSize: "clamp(40px, 5.5vw, 60px)", color: "#1A1A2E",
+          fontFamily: "var(--font-fraunces)", fontWeight: 300,
+          fontSize: "clamp(40px, 5.5vw, 60px)", color: "#0B1B33",
           margin: 0, lineHeight: 1.05, letterSpacing: "-0.01em",
         }}>
           {t("results.clinical_title", "Skin assessment")}{" "}
-          {userName && <em style={{ fontStyle: "italic", color: "#E8728A", fontWeight: 400 }}>{t("results.clinical_for", "for")} {userName}.</em>}
+          {userName && <em style={{ fontStyle: "italic", color: "#2C5BFF", fontWeight: 400 }}>{t("results.clinical_for", "for")} {userName}.</em>}
         </h1>
         <div
           className="flex items-center gap-4 flex-wrap mt-4"
-          style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: "#6B6B7A" }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: "#5A6B85" }}
         >
           <span>{dateStr}</span>
-          <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "rgba(26,26,46,0.16)" }} />
+          <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "rgba(11,27,51,0.16)" }} />
           <span>{metrics.length} {t("results.metrics_analysed", "metrics analysed")}</span>
         </div>
       </motion.div>
@@ -166,9 +166,9 @@ export default function ResultsPage() {
               const config = INSIGHT_CATEGORIES[insight.category];
               if (!config) return null;
               const CategoryIcon = config.icon;
-              const colorMap = { strengths: "#5B9A8B", concerns: "#E8728A", lifestyle: "#D4A053", goals: "#1A1A2E" };
-              const washMap = { strengths: "#E6F1ED", concerns: "#FDEEF1", lifestyle: "#FAF1DE", goals: "#F0F0F4" };
-              const clr = colorMap[insight.category] || "#1A1A2E";
+              const colorMap = { strengths: "#2E8B6B", concerns: "#2C5BFF", lifestyle: "#C68A2E", goals: "#0B1B33" };
+              const washMap = { strengths: "#E6F1ED", concerns: "#E6ECFF", lifestyle: "#FAF1DE", goals: "#F0F0F4" };
+              const clr = colorMap[insight.category] || "#0B1B33";
               const wash = washMap[insight.category] || "#F0F0F4";
 
               return (
@@ -179,7 +179,7 @@ export default function ResultsPage() {
                   transition={{ delay: 0.4 + i * 0.1 }}
                   className="relative overflow-hidden"
                   style={{
-                    background: "white", border: "1px solid rgba(26,26,46,0.10)",
+                    background: "white", border: "1px solid rgba(11,27,51,0.10)",
                     borderRadius: "18px", padding: "24px 24px 22px",
                   }}
                 >
@@ -193,7 +193,7 @@ export default function ResultsPage() {
                     >
                       <CategoryIcon style={{ width: "18px", height: "18px" }} />
                     </span>
-                    <h3 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, fontSize: "22px", margin: 0, color: "#1A1A2E", lineHeight: 1.2 }}>
+                    <h3 style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "22px", margin: 0, color: "#0B1B33", lineHeight: 1.2 }}>
                       {insight.title}
                     </h3>
                   </div>
@@ -227,12 +227,12 @@ export default function ResultsPage() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px" }}>
             {/* Tips card */}
             {tips.length > 0 && (
-              <div style={{ background: "white", border: "1px solid rgba(26,26,46,0.10)", borderRadius: "18px", padding: "24px 24px 22px" }}>
+              <div style={{ background: "white", border: "1px solid rgba(11,27,51,0.10)", borderRadius: "18px", padding: "24px 24px 22px" }}>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="inline-flex items-center justify-center shrink-0" style={{ width: "36px", height: "36px", borderRadius: "10px", background: "#FAF1DE", color: "#D4A053" }}>
+                  <span className="inline-flex items-center justify-center shrink-0" style={{ width: "36px", height: "36px", borderRadius: "10px", background: "#FAF1DE", color: "#C68A2E" }}>
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
                   </span>
-                  <h3 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, fontSize: "22px", margin: 0, color: "#1A1A2E" }}>
+                  <h3 style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "22px", margin: 0, color: "#0B1B33" }}>
                     {t("results.tips_title", "Personalised tips")}
                   </h3>
                 </div>
@@ -243,7 +243,7 @@ export default function ResultsPage() {
                         className="inline-flex items-center justify-center shrink-0"
                         style={{
                           width: "22px", height: "22px", borderRadius: "999px",
-                          background: "#FAF1DE", color: "#D4A053",
+                          background: "#FAF1DE", color: "#C68A2E",
                           fontFamily: "var(--font-dm-sans)", fontSize: "11px", fontWeight: 700,
                           marginTop: "1px",
                         }}
@@ -260,15 +260,15 @@ export default function ResultsPage() {
             {/* Routine card */}
             {routineNote && (
               <div style={{
-                background: "linear-gradient(160deg, #FDF8F3 0%, #FDEEF1 100%)",
-                border: "1px solid rgba(232,114,138,0.25)",
+                background: "linear-gradient(160deg, #F8FAFE 0%, #E6ECFF 100%)",
+                border: "1px solid rgba(44,91,255,0.25)",
                 borderRadius: "18px", padding: "24px 24px 22px",
               }}>
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="inline-flex items-center justify-center shrink-0" style={{ width: "36px", height: "36px", borderRadius: "10px", background: "white", color: "#E8728A" }}>
+                  <span className="inline-flex items-center justify-center shrink-0" style={{ width: "36px", height: "36px", borderRadius: "10px", background: "white", color: "#2C5BFF" }}>
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                   </span>
-                  <h3 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, fontSize: "22px", margin: 0, color: "#1A1A2E" }}>
+                  <h3 style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "22px", margin: 0, color: "#0B1B33" }}>
                     {t("results.routine_title", "Your routine")}
                   </h3>
                 </div>
@@ -311,7 +311,7 @@ export default function ResultsPage() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
         className="flex justify-center gap-3 flex-wrap"
-        style={{ marginTop: "60px", paddingTop: "32px", borderTop: "1px solid rgba(26,26,46,0.10)" }}
+        style={{ marginTop: "60px", paddingTop: "32px", borderTop: "1px solid rgba(11,27,51,0.10)" }}
       >
         {formData && (
           <button
@@ -320,8 +320,8 @@ export default function ResultsPage() {
             style={{
               fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 500,
               padding: "13px 24px", borderRadius: "999px",
-              background: "transparent", color: "#1A1A2E", textDecoration: "none",
-              border: "1.5px solid rgba(26,26,46,0.16)", cursor: "pointer",
+              background: "transparent", color: "#0B1B33", textDecoration: "none",
+              border: "1.5px solid rgba(11,27,51,0.16)", cursor: "pointer",
               transition: "transform 180ms, border-color 180ms",
             }}
           >
@@ -335,7 +335,7 @@ export default function ResultsPage() {
           style={{
             fontFamily: "var(--font-dm-sans)", fontSize: "14px", fontWeight: 500,
             padding: "13px 24px", borderRadius: "999px",
-            background: "#E8728A", color: "white", textDecoration: "none",
+            background: "#2C5BFF", color: "white", textDecoration: "none",
             transition: "transform 180ms, box-shadow 320ms, background 180ms",
           }}
         >

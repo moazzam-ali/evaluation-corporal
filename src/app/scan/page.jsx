@@ -85,28 +85,28 @@ function ScanPageInner() {
     return (
       <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
         <div
-          className="mx-auto w-full max-w-md rounded-3xl border border-[rgba(26,26,46,0.10)] bg-white p-8 shadow-sm"
+          className="mx-auto w-full max-w-md rounded-3xl border border-[rgba(11,27,51,0.10)] bg-white p-8 shadow-sm"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
-          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#FDEEF1]">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E8728A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#E6ECFF]">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#2C5BFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
               <path d="M7 11V7a5 5 0 0110 0v4"/>
             </svg>
           </div>
           <h2
-            className="mb-2 text-[28px] text-[#1A1A2E]"
-            style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, lineHeight: 1.2 }}
+            className="mb-2 text-[28px] text-[#0B1B33]"
+            style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, lineHeight: 1.2 }}
           >
             {t("scan.access_title", "Access required")}
           </h2>
-          <p className="mb-6 text-[14px] leading-relaxed text-[#6B6B7A]">
+          <p className="mb-6 text-[14px] leading-relaxed text-[#5A6B85]">
             {t("scan.access_message", "To use the skin scanner, you need a personalised access link from your coach. Please contact your coach to get started.")}
           </p>
           <div className="flex flex-col gap-3">
             <a
               href="/"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-[rgba(26,26,46,0.14)] bg-transparent px-5 py-3 text-sm font-medium text-[#1A1A2E] transition-colors hover:border-[#1A1A2E]"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-[rgba(11,27,51,0.14)] bg-transparent px-5 py-3 text-sm font-medium text-[#0B1B33] transition-colors hover:border-[#0B1B33]"
             >
               {t("scan.access_home", "Back to home")}
             </a>
@@ -238,22 +238,22 @@ function ScanPageInner() {
           <div className="mb-6">
             <AnimatedLogo size={140} />
           </div>
-          <p style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 300, color: "#1A1A2E" }}>
+          <p style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 300, color: "#0B1B33" }}>
             {t("scan.analyzing", "Analyzing your skin...")}
           </p>
           <div className="mt-6 w-full max-w-xs">
-            <div style={{ height: "4px", borderRadius: "999px", background: "rgba(232,114,138,0.18)", overflow: "hidden" }}>
+            <div style={{ height: "4px", borderRadius: "999px", background: "rgba(44,91,255,0.18)", overflow: "hidden" }}>
               <div
                 style={{
                   height: "100%",
                   width: `${analysisProgress}%`,
-                  background: "linear-gradient(90deg, #F4A7B9 0%, #E8728A 100%)",
+                  background: "linear-gradient(90deg, #6FA0FF 0%, #2C5BFF 100%)",
                   borderRadius: "999px",
                   transition: "width 320ms cubic-bezier(0.22,1,0.36,1)",
                 }}
               />
             </div>
-            <p className="mt-2 text-center" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.06em", color: "#6B6B7A" }}>
+            <p className="mt-2 text-center" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.06em", color: "#5A6B85" }}>
               {Math.round(analysisProgress)}%
             </p>
           </div>
@@ -262,8 +262,8 @@ function ScanPageInner() {
             className="mt-4"
             style={{
               fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
-              color: "#6B6B7A", padding: "8px 16px", borderRadius: "999px",
-              border: "1.5px solid rgba(26,26,46,0.16)", background: "transparent", cursor: "pointer",
+              color: "#5A6B85", padding: "8px 16px", borderRadius: "999px",
+              border: "1.5px solid rgba(11,27,51,0.16)", background: "transparent", cursor: "pointer",
             }}
           >
             {t("common.cancel", "Cancel")}
@@ -281,29 +281,29 @@ function ScanPageInner() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto w-full max-w-md rounded-3xl border border-[rgba(26,26,46,0.10)] bg-white p-8 shadow-sm"
+          className="mx-auto w-full max-w-md rounded-3xl border border-[rgba(11,27,51,0.10)] bg-white p-8 shadow-sm"
         >
           <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#E6F1ED]">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#5B9A8B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#2E8B6B" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </div>
           <h2
-            className="mb-2 text-[28px] text-[#1A1A2E]"
-            style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, lineHeight: 1.2 }}
+            className="mb-2 text-[28px] text-[#0B1B33]"
+            style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, lineHeight: 1.2 }}
           >
             {t("scan.complete_title", "Analysis complete!")}
           </h2>
-          <p className="mb-6 text-[14px] leading-relaxed text-[#6B6B7A]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+          <p className="mb-6 text-[14px] leading-relaxed text-[#5A6B85]" style={{ fontFamily: "var(--font-dm-sans)" }}>
             {t("scan.complete_message", "Your skin analysis has been processed successfully. Your coach will share the detailed results with you shortly. Please contact your coach to receive your personalised report and product recommendations.")}
           </p>
-          <div className="rounded-xl border border-[rgba(232,114,138,0.2)] bg-[#FDEEF1] px-4 py-3 text-[13px] leading-relaxed text-[#D45571]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+          <div className="rounded-xl border border-[rgba(44,91,255,0.2)] bg-[#E6ECFF] px-4 py-3 text-[13px] leading-relaxed text-[#1F44CC]" style={{ fontFamily: "var(--font-dm-sans)" }}>
             {t("scan.complete_hint", "Your coach has been notified and will reach out with your results.")}
           </div>
           <div className="mt-6">
             <a
               href="/"
-              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-[rgba(26,26,46,0.14)] bg-transparent px-5 py-3 text-sm font-medium text-[#1A1A2E] transition-colors hover:border-[#1A1A2E]"
+              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] border-[rgba(11,27,51,0.14)] bg-transparent px-5 py-3 text-sm font-medium text-[#0B1B33] transition-colors hover:border-[#0B1B33]"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {t("scan.complete_home", "Back to home")}
@@ -321,30 +321,30 @@ function ScanPageInner() {
         {/* Eyebrow */}
         <div
           className="inline-flex items-center gap-2.5 mb-3"
-          style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#6B6B7A" }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#5A6B85" }}
         >
-          <span style={{ width: "24px", height: "1px", background: "#E8728A" }} />
+          <span style={{ width: "24px", height: "1px", background: "#2C5BFF" }} />
           {t("scan.rail_eyebrow", "Skin analysis")}
         </div>
 
         {/* Title */}
-        <h1 style={{ fontFamily: "var(--font-cormorant)", fontWeight: 300, fontSize: "36px", color: "#1A1A2E", margin: "0 0 6px", lineHeight: 1.1, letterSpacing: "-0.01em" }}>
-          {t("scan.rail_title_1", "Tell us about")} <em style={{ fontStyle: "italic", color: "#E8728A", fontWeight: 400 }}>{t("scan.rail_title_2", "your skin.")}</em>
+        <h1 style={{ fontFamily: "var(--font-fraunces)", fontWeight: 300, fontSize: "36px", color: "#0B1B33", margin: "0 0 6px", lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+          {t("scan.rail_title_1", "Tell us about")} <em style={{ fontStyle: "italic", color: "#2C5BFF", fontWeight: 400 }}>{t("scan.rail_title_2", "your skin.")}</em>
         </h1>
-        <p style={{ fontSize: "13.5px", color: "#6B6B7A", lineHeight: 1.55, margin: "0 0 24px" }}>
+        <p style={{ fontSize: "13.5px", color: "#5A6B85", lineHeight: 1.55, margin: "0 0 24px" }}>
           {t("scan.rail_sub", "Eight short steps and one photo. Takes about three minutes — your routine is built from this.")}
         </p>
 
         {/* Progress bar */}
-        <div style={{ height: "4px", borderRadius: "999px", background: "rgba(232,114,138,0.18)", overflow: "hidden", marginBottom: "6px" }}>
+        <div style={{ height: "4px", borderRadius: "999px", background: "rgba(44,91,255,0.18)", overflow: "hidden", marginBottom: "6px" }}>
           <div style={{
             height: "100%", width: `${pct}%`,
-            background: "linear-gradient(90deg, #F4A7B9 0%, #E8728A 100%)",
+            background: "linear-gradient(90deg, #6FA0FF 0%, #2C5BFF 100%)",
             borderRadius: "999px",
             transition: "width 320ms cubic-bezier(0.22,1,0.36,1)",
           }} />
         </div>
-        <div className="flex justify-between mb-7" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.06em", color: "#6B6B7A" }}>
+        <div className="flex justify-between mb-7" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.06em", color: "#5A6B85" }}>
           <span>{t("scan.navigation.step_of", "Step {{current}} of {{total}}", { current: currentStep + 1, total: TOTAL_STEPS })}</span>
           <span>{pct}%</span>
         </div>
@@ -354,7 +354,7 @@ function ScanPageInner() {
           {/* Connecting line */}
           <div style={{
             position: "absolute", left: "14px", top: "16px", bottom: "16px", width: "2px",
-            background: "rgba(232,114,138,0.18)", borderRadius: "2px",
+            background: "rgba(44,91,255,0.18)", borderRadius: "2px",
           }} />
           {STEP_META.map((s, i) => {
             const isDone = i < currentStep;
@@ -369,7 +369,7 @@ function ScanPageInner() {
                   style={{
                     padding: "9px 12px 9px 0", background: "transparent", border: 0,
                     fontFamily: "var(--font-dm-sans)", fontSize: "13.5px",
-                    color: isDone || isActive ? "#1A1A2E" : "#6B6B7A",
+                    color: isDone || isActive ? "#0B1B33" : "#5A6B85",
                     borderRadius: "8px", cursor: i <= currentStep ? "pointer" : "default",
                     opacity: i > currentStep ? 0.5 : 1,
                   }}
@@ -380,10 +380,10 @@ function ScanPageInner() {
                     style={{
                       left: 0, top: "6px", width: "30px", height: "30px", borderRadius: "50%",
                       fontSize: "12px", fontWeight: 600,
-                      background: isDone ? "#5B9A8B" : isActive ? "#E8728A" : "white",
-                      border: isDone ? "none" : isActive ? "none" : "1.5px solid rgba(232,114,138,0.30)",
-                      color: isDone || isActive ? "white" : "#E8728A",
-                      boxShadow: isActive ? "0 0 0 5px rgba(232,114,138,0.18)" : "none",
+                      background: isDone ? "#2E8B6B" : isActive ? "#2C5BFF" : "white",
+                      border: isDone ? "none" : isActive ? "none" : "1.5px solid rgba(44,91,255,0.30)",
+                      color: isDone || isActive ? "white" : "#2C5BFF",
+                      boxShadow: isActive ? "0 0 0 5px rgba(44,91,255,0.18)" : "none",
                       transform: isActive ? "scale(1.06)" : "none",
                       transition: "all 220ms cubic-bezier(0.22,1,0.36,1)",
                     }}
@@ -393,7 +393,7 @@ function ScanPageInner() {
                   <span className="flex flex-col gap-0.5 min-w-0">
                     <span style={{
                       fontFamily: "var(--font-dm-sans)", fontSize: "10px", letterSpacing: "0.14em",
-                      textTransform: "uppercase", color: isActive ? "#E8728A" : "#6B6B7A",
+                      textTransform: "uppercase", color: isActive ? "#2C5BFF" : "#5A6B85",
                     }}>
                       {t("scan.step_label", "Step")} {i + 1}
                     </span>
@@ -412,8 +412,8 @@ function ScanPageInner() {
       <section
         className="flex flex-col overflow-hidden"
         style={{
-          background: "white", border: "1px solid rgba(26,26,46,0.10)",
-          borderRadius: "24px", boxShadow: "0 1px 2px rgba(26,26,46,0.04)",
+          background: "white", border: "1px solid rgba(11,27,51,0.10)",
+          borderRadius: "24px", boxShadow: "0 1px 2px rgba(11,27,51,0.04)",
           minHeight: "720px",
         }}
       >
@@ -422,29 +422,29 @@ function ScanPageInner() {
           className="flex flex-wrap items-end justify-between gap-6"
           style={{
             padding: "32px 40px 24px",
-            borderBottom: "1px solid rgba(26,26,46,0.10)",
-            background: "linear-gradient(180deg, #FDF8F3 0%, white 100%)",
+            borderBottom: "1px solid rgba(11,27,51,0.10)",
+            background: "linear-gradient(180deg, #F8FAFE 0%, white 100%)",
           }}
         >
           <div className="min-w-0">
             <div
               className="inline-flex items-center gap-2 mb-2"
-              style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#E8728A" }}
+              style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#2C5BFF" }}
             >
-              <span style={{ width: "18px", height: "1px", background: "#E8728A" }} />
+              <span style={{ width: "18px", height: "1px", background: "#2C5BFF" }} />
               {t("scan.navigation.step_of", "Step {{current}} of {{total}}", { current: currentStep + 1, total: TOTAL_STEPS })}
             </div>
             <h2 style={{
-              fontFamily: "var(--font-cormorant)", fontWeight: 300,
-              fontSize: "clamp(28px, 3.2vw, 38px)", color: "#1A1A2E",
+              fontFamily: "var(--font-fraunces)", fontWeight: 300,
+              fontSize: "clamp(28px, 3.2vw, 38px)", color: "#0B1B33",
               margin: 0, lineHeight: 1.1, letterSpacing: "-0.01em",
             }}>
               {t(`scan.step${currentStep + 1}.display_title`, meta.title)}{" "}
-              <em style={{ fontStyle: "italic", color: "#E8728A", fontWeight: 400 }}>
+              <em style={{ fontStyle: "italic", color: "#2C5BFF", fontWeight: 400 }}>
                 {t(`scan.step${currentStep + 1}.display_title_em`, meta.titleEm)}
               </em>
             </h2>
-            <p style={{ margin: "8px 0 0", color: "#6B6B7A", fontSize: "14px", maxWidth: "60ch", lineHeight: 1.55 }}>
+            <p style={{ margin: "8px 0 0", color: "#5A6B85", fontSize: "14px", maxWidth: "60ch", lineHeight: 1.55 }}>
               {t(`scan.step${currentStep + 1}.display_sub`, meta.sub)}
             </p>
           </div>
@@ -484,8 +484,8 @@ function ScanPageInner() {
           className="flex flex-wrap items-center justify-between gap-4"
           style={{
             padding: "18px 40px 22px",
-            borderTop: "1px solid rgba(26,26,46,0.10)",
-            background: "#FDF8F3",
+            borderTop: "1px solid rgba(11,27,51,0.10)",
+            background: "#F8FAFE",
           }}
         >
           <button
@@ -496,8 +496,8 @@ function ScanPageInner() {
             style={{
               fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
               padding: "11px 20px", borderRadius: "999px", whiteSpace: "nowrap",
-              border: "1.5px solid rgba(26,26,46,0.16)", background: "transparent",
-              color: "#1A1A2E", cursor: isFirstStep ? "not-allowed" : "pointer",
+              border: "1.5px solid rgba(11,27,51,0.16)", background: "transparent",
+              color: "#0B1B33", cursor: isFirstStep ? "not-allowed" : "pointer",
               opacity: isFirstStep ? 0.45 : 1,
               transition: "transform 180ms, border-color 180ms",
             }}
@@ -507,10 +507,10 @@ function ScanPageInner() {
           </button>
 
           <span className="hidden sm:inline-flex items-center gap-2.5" style={{
-            fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: "#6B6B7A", whiteSpace: "nowrap",
+            fontFamily: "var(--font-dm-sans)", fontSize: "12px", color: "#5A6B85", whiteSpace: "nowrap",
           }}>
             {t("scan.step_label", "Step")} {currentStep + 1} · {t(`scan.step${currentStep + 1}.nav`, meta.label)}
-            <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "rgba(26,26,46,0.16)" }} />
+            <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "rgba(11,27,51,0.16)" }} />
             {t("scan.time_estimate", "about 3 min total")}
           </span>
 
@@ -523,7 +523,7 @@ function ScanPageInner() {
               style={{
                 fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
                 padding: "11px 20px", borderRadius: "999px", whiteSpace: "nowrap",
-                border: 0, background: "#E8728A", color: "white",
+                border: 0, background: "#2C5BFF", color: "white",
                 cursor: !imageData ? "not-allowed" : "pointer",
                 opacity: !imageData ? 0.45 : 1,
                 transition: "transform 180ms, box-shadow 320ms, background 180ms",
@@ -540,7 +540,7 @@ function ScanPageInner() {
               style={{
                 fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
                 padding: "11px 20px", borderRadius: "999px", whiteSpace: "nowrap",
-                border: 0, background: "#E8728A", color: "white", cursor: "pointer",
+                border: 0, background: "#2C5BFF", color: "white", cursor: "pointer",
                 transition: "transform 180ms, box-shadow 320ms, background 180ms",
               }}
             >
