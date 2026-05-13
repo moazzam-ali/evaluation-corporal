@@ -23,7 +23,7 @@
     "contact_ids": "İletişim ID'leri",
     "contact_ids_placeholder": "Virgülle ayrılmış CRM iletişim ID'leri",
     "language": "Dil",
-    "submit": "Cilt Analizine Geç"
+    "submit": "Vücut Değerlendirmesine Geç"
   },
   "footer": {
     "rights": "Tüm hakları saklıdır.",
@@ -157,299 +157,211 @@
     "radar_muscle": "Kas"
   },
   "scan": {
-    "title": "Cilt Analizi",
-    "subtitle": "En doğru sonuçlar için yüzünüzün net bir fotoğrafını çekin",
-    "camera_tab": "Kamera",
-    "upload_tab": "Yükle",
-    "capture": "Fotoğraf Çek",
-    "retake": "Yeniden Çek",
-    "upload_prompt": "Fotoğrafınızı buraya sürükleyip bırakın veya göz atmak için tıklayın",
-    "upload_formats": "JPG, PNG 10 MB'a kadar",
-    "analyzing": "Cildiniz analiz ediliyor...",
-    "analyze_btn": "Cildimi Analiz Et",
-    "tips_title": "En iyi sonuçlar için ipuçları",
-    "tip1": "Doğal aydınlatma kullanın",
-    "tip2": "Gözlük ve şapkaları çıkarın",
-    "tip3": "Doğrudan kameraya bakın",
-    "tip4": "Yüzünüzün tamamının görünür olduğundan emin olun",
-    "no_photo": "Lütfen önce bir fotoğraf çekin veya yükleyin.",
-    "rail_eyebrow": "Cilt analizi",
-    "rail_title_1": "Bize cildiniz",
+    "rail_eyebrow": "Vücut değerlendirmesi",
+    "rail_title_1": "Bize vücudunuz",
     "rail_title_2": "hakkında bilgi verin.",
-    "rail_sub": "Sekiz kısa adım ve bir fotoğraf. Yaklaşık üç dakika — rutininiz bundan oluşturulur.",
+    "rail_sub": "Üç kısa adım. Yaklaşık beş dakika sürer — sağlık değerlendirmeniz bundan oluşturulur.",
     "step_label": "Adım",
-    "time_estimate": "toplamda yaklaşık 3 dk",
-    "camera_help_title": "Sabit tutun — en net kareyi otomatik olarak yakalarız.",
-    "camera_help_body": "Yüzünüzün tamamının kesikli ovalin içinde göründüğünden ve her iki tarafta eşit aydınlatma olduğundan emin olun.",
-    "upload_title_1": "Fotoğrafınızı buraya sürükleyip bırakın,",
-    "upload_title_2": "veya göz atmak için tıklayın.",
-    "upload_browse": "Dosya seç",
-    "upload_help_title": "Fotoğrafınız güvenli bir şekilde işlenir.",
-    "upload_help_body": "Görüntünüz HTTPS üzerinden iletilir ve raporunuz için güvenli şekilde saklanır. Yalnızca siz erişebilirsiniz.",
+    "time_estimate": "toplamda yaklaşık 5 dk",
+    "access_title": "Erişim gerekli",
+    "access_message": "Vücut değerlendirmesini kullanmak için koçunuzdan kişiselleştirilmiş bir erişim bağlantısına ihtiyacınız var. Başlamak için lütfen koçunuzla iletişime geçin.",
+    "access_home": "Ana sayfaya dön",
+    "complete_toast": "Gönderim tamamlandı!",
+    "complete_title": "Gönderim tamamlandı!",
+    "complete_home": "Ana sayfaya dön",
     "navigation": {
-      "next": "İleri",
-      "previous": "Geri",
-      "analyze": "Cildimi Analiz Et",
       "step_of": "Adım {{current}} / {{total}}"
     },
     "step1": {
-      "nav": "Temel Bilgiler",
-      "title": "Temel Bilgiler",
-      "subtitle": "Bize kendinizden bahsedin",
-      "display_title": "Temel",
+      "nav": "Kişisel Bilgiler",
+      "display_title": "Kişisel",
       "display_title_em": "bilgiler",
       "display_sub": "Bize kendinizden bahsedin — raporunuzu kişiselleştirmek ve sonuçlarınızı iletmek için kullanıyoruz.",
-      "email_help": "Tam raporunuzu ve rutininizi buraya e-posta ile göndeririz. Pazarlama için asla kullanılmaz.",
       "name": "Ad",
       "surname": "Soyad",
       "email": "E-posta",
-      "birthDate": "Doğum Tarihi",
-      "phone": "Telefon",
+      "birth_date": "Doğum Tarihi",
+      "phone": "Telefon numarası",
+      "phone_placeholder": "Ülke koduyla birlikte telefon numaranızı girin",
       "country": "Ülke",
+      "province": "İl/Eyalet",
       "city": "Şehir",
-      "consent_text": "Kişisel verilerimin (fotoğrafım dahil) cilt analizi oluşturmak için yapay zeka tarafından işlenmesini kabul ediyorum. Sonuçlar saklanacak ve koçumla paylaşılacaktır.",
-      "consent_link": "Gizlilik Politikamızı okuyun",
-      "consent_required": "Devam etmek için kabul etmelisiniz"
+      "disclaimer": "Raporunuzu doğrudan WhatsApp'ınıza göndereceğiz. Lütfen telefon numaranızın doğru olduğunu kontrol edin. Teşekkürler!"
     },
     "step2": {
-      "nav": "Ana Hedef",
-      "title": "Ana Hedef",
-      "display_title": "Ana",
-      "display_title_em": "hedefiniz",
-      "display_sub": "En fazla üç endişe seçin. İlk cevap ürün sıralamanızı belirler; diğerleri ince ayar yapar.",
-      "concerns_label": "Şu anda cildinizle ilgili sizi en çok ne endişelendiriyor? (en fazla 3)",
-      "concerns": {
-        "dryness": "Kuruluk / gerginlik",
-        "wrinkles": "Kırışıklıklar veya ince çizgiler",
-        "sagging": "Sarkma / elastikiyet kaybı",
-        "dark_spots": "Koyu lekeler / dengesiz ten rengi",
-        "dullness": "Donuk cilt / parlaklık eksikliği",
-        "blemishes": "Sivilceler / çıkıntılar",
-        "pores": "Görünür gözenekler",
-        "eye_area": "Göz altı halkaları / göz çevresi kırışıklıkları",
-        "sensitivity": "Hassasiyet / kızarıklık",
-        "other": "Diğer"
+      "nav": "Fiziksel Bilgiler",
+      "display_title": "Fiziksel",
+      "display_title_em": "bilgiler",
+      "display_sub": "Vücut ölçüleriniz sağlık metriklerinizi doğru hesaplamamıza yardımcı olur.",
+      "sex": "Cinsiyet",
+      "sex_options": {
+        "select": "Cinsiyetinizi seçin",
+        "male": "Erkek",
+        "female": "Kadın"
       },
-      "concerns_other_placeholder": "Lütfen tanımlayın...",
-      "priority_label": "Cildinizde sadece bir şeyi iyileştirebilseydiniz, ne olurdu?",
-      "priority_placeholder": "En önemli önceliğinizi tanımlayın...",
-      "zones_label": "En çok değişimi nerede görmek istersiniz?",
-      "zones": {
-        "full_face": "Tüm yüz",
-        "eye_contour": "Göz çevresi",
-        "neck": "Boyun",
-        "hands": "Eller",
-        "body": "Vücut"
-      }
+      "weight": "Kilo (kg)",
+      "weight_placeholder": "Kilonuzu girin",
+      "height": "Boy (cm)",
+      "height_placeholder": "Boyunuzu girin",
+      "measurement_intro": "Bel ve kalça ölçülerinizi biliyor musunuz? Sizin için ölçmemi ister misiniz? Sadece bir dakika sürecek. (Mezura önerilir.)",
+      "waist": "Bel ölçüsü (cm)",
+      "waist_placeholder": "Bel ölçünüzü girin",
+      "waist_help": "Bel-kalça oranınızı hesaplamak için kullanılır.",
+      "hip": "Kalça ölçüsü (cm)",
+      "hip_placeholder": "Kalça ölçünüzü girin",
+      "hip_help": "Bel-kalça oranınızı hesaplamak için kullanılır."
     },
     "step3": {
-      "nav": "Cilt Algısı",
-      "title": "Cildinizi Nasıl Algılıyorsunuz",
-      "display_title": "Cildinizi nasıl",
-      "display_title_em": "algılıyorsunuz",
-      "display_sub": "Cildinizi nasıl tanımladığınız önemli — bunu kameranın daha sonra gördükleriyle çapraz referanslarız.",
-      "skin_type_label": "Cildinizi normalde nasıl tanımlarsınız?",
-      "skin_type": {
-        "dry": "Kuru",
-        "oily": "Yağlı",
-        "combination": "Karma",
-        "sensitive": "Hassas",
-        "dehydrated": "Susuz (Dehidrate)",
-        "dont_know": "Bilmiyorum"
+      "nav": "Alışkanlıklar",
+      "display_title": "Yaşam tarzı &",
+      "display_title_em": "sağlık",
+      "display_sub": "Beslenme, egzersiz ve günlük alışkanlıklar — planınızı şekillendiren girdiler.",
+      "select": "Seçin...",
+      "yes": "Evet",
+      "no": "Hayır",
+      "diet_type": "Ne tür bir diyet uyguluyorsunuz?",
+      "diet_type_options": {
+        "omnivore": "Omnivor (her şey yer)",
+        "vegetarian": "Vejetaryen (bitkisel, yumurta, süt ürünleri)",
+        "vegan": "Vegan (yalnızca bitkisel gıdalar)"
       },
-      "feel_general_label": "Cildiniz çoğu zaman nasıl hissediyor?",
-      "feel_general": {
-        "tight": "Gergin",
-        "shiny": "Parlak",
-        "comfortable": "Rahat / dengeli",
-        "sensitive_reactive": "Hassas / reaktif",
-        "dull": "Donuk",
-        "dont_know": "Bilmiyorum"
+      "meals_per_day": "Günde kaç öğün yiyorsunuz?",
+      "meals_per_day_options": {
+        "less_than_3": "3'ten az",
+        "between_3_and_5": "3 ile 5 arası",
+        "more_than_5": "5'ten fazla"
       },
-      "feel_end_day_label": "Cildiniz gün sonunda nasıl hissediyor?",
-      "feel_end_day": {
-        "tight": "Gergin",
-        "shiny": "Parlak",
-        "comfortable": "Rahat / dengeli",
-        "irritated": "Tahriş olmuş",
-        "dull": "Donuk"
-      }
+      "has_breakfast": "Genellikle kahvaltı yapar mısınız?",
+      "breakfast_description": "Genellikle nasıl bir kahvaltı yaparsınız?",
+      "breakfast_description_placeholder": "Genellikle yediğiniz yiyecek kombinasyonunu kısaca açıklayın.",
+      "health_conditions": "Aşağıdaki durumlardan bir veya birkaçını seçin:",
+      "health_conditions_options": {
+        "low_bone_density": "Düşük kemik yoğunluğu",
+        "constipation": "Kabızlık",
+        "athlete_supplements": "Spor takviyesi alan sporcu",
+        "high_cholesterol": "Yüksek kolesterol",
+        "few_vegetables": "Çok az sebze yiyor",
+        "low_energy": "Gün boyunca enerji düşüklüğü hissediyor",
+        "trouble_sleeping": "Uyku problemi yaşıyor",
+        "poor_mental_agility": "Zihinsel çevikliği az",
+        "inflammation": "Sık sık iltihap sorunları yaşıyor",
+        "skin_cellulite": "Cilt ve/veya selülit görünümünü iyileştirmek istiyor",
+        "little_water": "Az su içiyor",
+        "demanding_job": "Fiziksel olarak çok yorucu bir işi var",
+        "belly_fat": "Karın yağını azaltmak istiyor",
+        "circulation_problems": "Dolaşım sorunları var"
+      },
+      "exercise_level": "Fiziksel egzersiz seviyeniz nedir?",
+      "exercise_level_options": {
+        "little": "Az veya hiç egzersiz / Ofis işi",
+        "light": "Haftada 1-3 gün fiziksel egzersiz",
+        "moderate": "Haftada 3-5 gün fiziksel egzersiz",
+        "active": "Haftada 6-7 gün fiziksel egzersiz",
+        "very_active": "Günde iki kez egzersiz"
+      },
+      "exercise_duration": "Ne kadar süredir egzersiz yapıyorsunuz?",
+      "exercise_duration_options": {
+        "never": "Hiç egzersiz yapmadım",
+        "less_than_6": "6 aydan az",
+        "6_to_12": "6 ile 12 ay arası",
+        "more_than_12": "12 aydan fazla"
+      },
+      "water_intake": "Günde kaç litre su içiyorsunuz?",
+      "water_intake_options": {
+        "less_than_2": "Günde 2 litreden az",
+        "about_2": "Günde yaklaşık 2 litre",
+        "more_than_2": "Günde 2 litreden fazla"
+      },
+      "goal": "Hangi hedefe ulaşmak istersiniz?",
+      "goal_options": {
+        "weight_control": "Kilomi kontrol etmek ve vücut yağ oranını azaltmak",
+        "maintain_care": "Kilomi korumak ama kendime daha iyi bakmaya başlamak",
+        "gain_weight": "Kilo ve/veya kas kütlesini artırmak"
+      },
+      "weight_at_ideal_age": "Gerçekçi olarak kaç kiloda kendinizi iyi hissedersiniz?",
+      "weight_at_ideal_age_placeholder": "Kiloyu girin (kg)",
+      "has_skincare_routine": "Şu anda günlük bir cilt, vücut veya saç bakım rutininiz var mı?",
+      "skincare_products": "Ne tür ürünler kullanıyorsunuz?",
+      "skincare_products_placeholder": "Ürünlerinizi kısaca açıklayın.",
+      "want_facial_evaluation": "Ücretsiz bir yüz değerlendirmesi ister misiniz?",
+      "privacy_policy": "Gizlilik Politikasını kabul ediyorum",
+      "privacy_policy_link": "Gizlilik Politikamızı okuyun",
+      "disclaimer": "Bu öz değerlendirme tanı veya tedavi amaçlı değildir. Yalnızca bilgilendirme amaçlıdır ve hiçbir durumda bir sağlık uzmanının değerlendirmesinin yerini tutmaz."
     },
     "step4": {
-      "nav": "Rutin",
-      "title": "Mevcut Rutin",
-      "display_title": "Mevcut",
-      "display_title_em": "rutininiz",
-      "display_sub": "Hiçbir şeyi atmanızı istemeyeceğiz. Zaten işe yarayan şeylere uyum sağlarız.",
-      "frequency_label": "Genellikle bir yüz bakım rutininiz var mı?",
-      "frequency": {
-        "morning_only": "Sadece sabah",
-        "night_only": "Sadece gece",
-        "morning_and_night": "Sabah ve gece",
-        "no_routine": "Rutinim yok"
-      },
-      "products_label": "Şu anda hangi ürünleri kullanıyorsunuz?",
-      "products": {
-        "cleanser": "Temizleyici",
-        "toner": "Tonik",
-        "serum": "Serum",
-        "day_cream": "Gündüz kremi",
-        "sunscreen": "Güneş koruyucu",
-        "eye_contour": "Göz çevresi",
-        "night_cream": "Gece kremi",
-        "mask": "Maske",
-        "exfoliant": "Peeling",
-        "other": "Diğer"
-      },
-      "products_other_placeholder": "Lütfen belirtiniz...",
-      "essential_label": "Rutininizden asla eksik olmayan ürün hangisi?",
-      "essential_placeholder": "ör., Nemlendirici",
-      "missing_label": "Hangi ürünün eksik olduğunu düşünüyorsunuz veya hangisini kullanacağınızı bilmiyorsunuz?",
-      "missing_placeholder": "ör., Serum",
-      "supplements_label": "Cildiniz için takviye alıyor musunuz? (ör., kolajen)",
-      "supplements_placeholder": "ör., Kolajen, C Vitamini"
+      "nav": "İnceleme",
+      "display_title": "Göndermeye",
+      "display_title_em": "hazır mısınız?",
+      "display_sub": "Bilgilerinizi gözden geçirin ve her şeyin doğru olduğundan emin olun.",
+      "title": "Göndermeye hazır mısınız?",
+      "description": "Bilgilerinizi gözden geçirin ve her şeyin doğru olduğundan emin olun.",
+      "note": "Göndermeden önce, verdiğiniz tüm bilgilerin doğru olduğundan emin olun.",
+      "tip": "E-postanızı ({{email}}) ve telefon numaranızı ({{phone}}) olası hatalar için kontrol edin.",
+      "open_results": "Merhaba {{customerName}},\n\nAnketi tamamladığınız ve vücut değerlendirmenizi bize emanet ettiğiniz için teşekkür ederiz!\n\nÇok yakında, sizi çalışmaya davet eden kişi rapor sonuçlarını sizinle paylaşmak için iletişime geçecektir.\n\nBu bilgileri tamamlamak ilk adımdır. Yakında sizinle iletişime geçeceğiz!\n\nSaygılarımızla."
+    }
+  },
+  "navigation": {
+    "next": "İleri",
+    "previous": "Geri",
+    "submit": "Gönder",
+    "submitting": "Gönderiliyor..."
+  },
+  "validation": {
+    "personal": {
+      "name_required": "Ad gereklidir.",
+      "surname_required": "Soyad gereklidir.",
+      "email_required": "E-posta gereklidir.",
+      "email_invalid": "Geçersiz e-posta formatı.",
+      "birth_date_required": "Doğum tarihi gereklidir.",
+      "phone_required": "Telefon numarası gereklidir.",
+      "phone_invalid": "Telefon numarası geçerli olmalıdır.",
+      "country_required": "Ülke gereklidir.",
+      "province_required": "İl/Eyalet gereklidir.",
+      "city_required": "Şehir gereklidir."
     },
-    "step5": {
-      "nav": "Hassasiyet",
-      "title": "Hassasiyet ve Tolerans",
-      "display_title": "Hassasiyet &",
-      "display_title_em": "tolerans",
-      "display_sub": "Cildinizin ne kadar toleranslı olduğu, hangi aktif maddeleri ve hangi konsantrasyonda önerdiğimizi belirler.",
-      "reaction_label": "Cildiniz bazı ürünlere kolayca tepki veriyor mu?",
-      "reaction": {
-        "yes_a_lot": "Evet, çok fazla",
-        "sometimes": "Bazen",
-        "no": "Hayır",
-        "dont_know": "Bilmiyorum"
-      },
-      "signs_label": "Son zamanlarda bu belirtilerden herhangi birini fark ettiniz mi?",
-      "signs": {
-        "redness": "Kızarıklık",
-        "itching": "Kaşıntı",
-        "flaking": "Pul pul dökülme",
-        "excess_shine": "Aşırı parlaklık",
-        "blemishes": "Sivilceler",
-        "dark_spots": "Koyu lekeler",
-        "tightness": "Gerginlik",
-        "none": "Hiçbiri"
-      }
+    "physical": {
+      "sex_required": "Cinsiyet gereklidir.",
+      "weight_required": "Kilo gereklidir.",
+      "height_required": "Boy gereklidir.",
+      "waist_required": "Bel ölçüsü gereklidir.",
+      "hip_required": "Kalça ölçüsü gereklidir."
     },
-    "step6": {
-      "nav": "Alışkanlıklar",
-      "title": "Cildinizi Etkileyen Alışkanlıklar",
-      "display_title": "Cildinizi",
-      "display_title_em": "etkileyen alışkanlıklar",
-      "display_sub": "Uyku, güneş ve su çoğu üründen daha büyük etkiye sahiptir. Bunları hesaba katarız.",
-      "sunscreenUse_label": "Her gün güneş koruyucu kullanıyor musunuz?",
-      "sunscreenUse": {
-        "daily": "Evet, her gün",
-        "sometimes": "Bazen",
-        "summer_only": "Sadece yazın",
-        "no": "Hayır"
-      },
-      "makeupFrequency_label": "Ne sıklıkla makyaj yapıyorsunuz?",
-      "makeupFrequency": {
-        "daily": "Her gün",
-        "several_times_week": "Haftada birkaç kez",
-        "occasionally": "Ara sıra",
-        "never": "Hiçbir zaman"
-      },
-      "sleepHours_label": "Normalde kaç saat uyuyorsunuz?",
-      "sleepHours": {
-        "less_than_5": "5'ten az",
-        "5_6": "5-6",
-        "7_8": "7-8",
-        "more_than_8": "8'den fazla"
-      },
-      "stressImpact_label": "Stresin cildinizi etkilediğini hissediyor musunuz?",
-      "stressImpact": {
-        "yes": "Evet",
-        "a_little": "Biraz",
-        "no": "Hayır"
-      },
-      "waterIntake_label": "Her gün yeterince su içiyor musunuz?",
-      "waterIntake": {
-        "yes": "Evet",
-        "sometimes": "Bazen",
-        "no": "Hayır"
-      }
-    },
-    "step7": {
-      "nav": "Deneyim",
-      "title": "Geçmiş Deneyim",
-      "display_title": "Geçmiş",
-      "display_title_em": "deneyiminiz",
-      "display_sub": "İşe yaramayan şeylerden de işe yarayanlar kadar çok şey öğreniyoruz.",
-      "history_label": "Daha önce cildinizi iyileştirmek için herhangi bir tedavi veya rutin denediniz mi?",
-      "history": {
-        "yes_worked": "Evet, iyi sonuç verdi",
-        "yes_no_results": "Evet, ama sonuç göremedim",
-        "tried_many_nothing_works": "Birçok şey denedim, hiçbiri işe yaramadı",
-        "barely_tried": "Hayır, neredeyse hiç denemedim"
-      },
-      "frustrations_label": "Kullandığınız ürünlerle ilgili sizi en çok ne hayal kırıklığına uğratıyor?",
-      "frustrations": {
-        "no_results": "Sonuç göremiyorum",
-        "irritation": "Tahriş ediyorlar",
-        "dont_know_how_to_combine": "Nasıl birleştireceğimi bilmiyorum",
-        "too_expensive": "Çok pahalılar",
-        "not_consistent": "Düzenli olamıyorum",
-        "other": "Diğer"
-      }
-    },
-    "step8": {
-      "nav": "Hedefler",
-      "title": "Hedefleriniz",
-      "display_title": "Sizin",
-      "display_title_em": "hedefleriniz",
-      "display_sub": "Ne kadar rutin ve hangi yatırım seviyesinde — böylece öneriler gerçekten size uyar.",
-      "looking_for_label": "Şu anda ne arıyorsunuz?",
-      "looking_for": {
-        "basic_routine": "Temel bir rutin",
-        "complete_routine": "Kapsamlı bir rutin",
-        "specific_problem": "Belirli bir sorunu iyileştirmek",
-        "prevention": "Önleme ve bakım",
-        "personalized_advice": "Kişiselleştirilmiş tavsiye"
-      },
-      "recommendation_label": "Cildinize ve hedefinize uygun bir rutin önermemizi ister misiniz?",
-      "recommendation": {
-        "yes": "Evet",
-        "no": "Hayır"
-      },
-      "budget_label": "Her ay cildinize bakım için hangi yatırım seviyesi sizin için uygundur?",
-      "budget": {
-        "basic": "Temel (temizleyici + serum ~ €100 yaklaşık)",
-        "medium": "Orta (temizleyici, serum + göz kremi veya sıkılaştırıcı krem ~ €150/170 yaklaşık)",
-        "premium": "Premium (tüm HL/Skin serisi ~ €300 yaklaşık)"
-      }
-    },
-    "step9": {
-      "nav": "Fotoğraf",
-      "title": "Fotoğrafınızı Yükleyin",
-      "subtitle": "Yapay zeka analizi için yüzünüzün net bir fotoğrafını çekin veya mevcut bir fotoğraf yükleyin.",
-      "display_title": "Fotoğrafınızı",
-      "display_title_em": "yükleyin",
-      "display_sub": "Yapay zeka analizi için yüzünüzün net bir fotoğrafını çekin veya mevcut bir fotoğraf yükleyin."
-    },
-    "skin_types": {
-      "dry": "Kuru",
-      "oily": "Yağlı",
-      "combination": "Karma",
-      "sensitive": "Hassas",
-      "dehydrated": "Susuz (Dehidrate)",
-      "normal": "Normal"
-    },
-    "access_title": "Erişim gerekli",
-    "access_message": "Cilt tarayıcısını kullanmak için koçunuzdan kişiselleştirilmiş bir erişim bağlantısına ihtiyacınız var. Başlamak için lütfen koçunuzla iletişime geçin.",
-    "access_home": "Ana sayfaya dön",
-    "complete_toast": "Analiz tamamlandı!",
-    "complete_title": "Analiz tamamlandı!",
-    "complete_message": "Cilt analiziniz başarıyla işlendi. Koçunuz detaylı sonuçları kısa süre içinde sizinle paylaşacaktır. Kişiselleştirilmiş raporunuzu ve ürün önerilerinizi almak için lütfen koçunuzla iletişime geçin.",
-    "complete_hint": "Koçunuz bilgilendirildi ve sonuçlarınızla size ulaşacaktır.",
-    "complete_home": "Ana sayfaya dön",
-    "photo_alt_captured": "Çekildi",
-    "photo_alt_uploaded": "Yüklendi",
-    "camera_live": "Canlı"
+    "habits": {
+      "diet_type_required": "Lütfen diyet türünüzü seçin.",
+      "meals_per_day_required": "Lütfen öğün sayısını seçin.",
+      "has_breakfast_required": "Lütfen genellikle kahvaltı yapıp yapmadığınızı belirtin.",
+      "exercise_level_required": "Lütfen egzersiz seviyenizi seçin.",
+      "exercise_duration_required": "Lütfen ne kadar süredir egzersiz yaptığınızı seçin.",
+      "water_intake_required": "Lütfen günlük su tüketiminizi seçin.",
+      "goal_required": "Lütfen hedefinizi seçin.",
+      "weight_at_ideal_age_required": "Lütfen ideal kilonuzu girin.",
+      "has_skincare_routine_required": "Lütfen bir bakım rutininiz olup olmadığını belirtin.",
+      "want_facial_evaluation_required": "Lütfen yüz değerlendirmesi isteyip istemediğinizi belirtin.",
+      "privacy_policy_required": "Devam etmek için gizlilik politikasını kabul etmelisiniz."
+    }
+  },
+  "privacy": {
+    "title": "Gizlilik Politikası",
+    "last_updated": "Son güncelleme: Mayıs 2026",
+    "intro": "Gizliliğiniz bizim için önemlidir. Bu politika, hangi kişisel verileri topladığımızı, nasıl işlediğimizi, kiminle paylaştığımızı ve KVKK/GDPR kapsamındaki haklarınızı açıklar.",
+    "data_collected_title": "Toplanan veriler",
+    "data_collected": "Vücut değerlendirme hizmetimizi kullandığınızda şu kişisel verileri topluyoruz: adınız, e-posta adresiniz, telefon numaranız, doğum tarihiniz, ülkeniz, şehriniz ve vücudunuz, yaşam tarzınız ve sağlık alışkanlıklarınız hakkındaki anket yanıtlarınız.",
+    "how_we_process_title": "Verilerinizi nasıl işliyoruz",
+    "how_we_process": "Anket yanıtlarınız veritabanımızda güvenli bir şekilde saklanır. Sağlık metrikleri (BMI, vücut yağ yüzdesi, bel-kalça oranı, kalori ihtiyacı vb.) ölçümlerinizden hesaplanır. Tüm veriler raporunuzu sunmak ve koçunuzun sonuçları sizinle incelemesi için saklanır.",
+    "lawful_basis_title": "İşlemenin hukuki dayanağı",
+    "lawful_basis": "Verilerinizi, vücut değerlendirme formunu göndermeden önce gizlilik politikasını kabul ederek verdiğiniz açık rızanız temelinde işliyoruz. Rızanızı istediğiniz zaman bizimle iletişime geçerek geri çekebilirsiniz.",
+    "third_parties_title": "Üçüncü taraf işleyiciler",
+    "third_parties": "Verilerinizi işlemek için şu üçüncü taraf hizmetleri kullanıyoruz: Vercel (uygulama barındırma) ve Neon (veritabanı barındırma). Her sağlayıcı verileri kendi gizlilik politikalarına ve geçerli veri koruma standartlarına uygun olarak işler.",
+    "data_retention_title": "Veri saklama",
+    "data_retention": "Verileriniz hizmetlerimizi sunmak için gerekli olduğu sürece saklanır. İstediğiniz zaman silme talebinde bulunabilirsiniz. Geçerli bir talep üzerine verilerinizi 30 gün içinde sileriz.",
+    "your_rights_title": "Haklarınız",
+    "your_rights": "GDPR kapsamında şu haklara sahipsiniz: erişim, düzeltme, silme, işlemeyi kısıtlama, veri taşınabilirliği, işlemeye itiraz ve istediğiniz zaman rızanızı geri çekme.",
+    "how_to_contact_title": "Haklarınızı nasıl kullanırsınız",
+    "how_to_contact": "Haklarınızdan herhangi birini kullanmak veya bu politika hakkında sorularınız için lütfen bize şu adresten ulaşın: privacy@nutritional.app. Talebinize 30 gün içinde yanıt vereceğiz.",
+    "cookies_title": "Çerezler",
+    "cookies": "Bu uygulama yalnızca hizmetin çalışması için gerekli temel çerezleri kullanır. İzleme, reklam veya analitik çerezleri kullanmıyoruz.",
+    "changes_title": "Bu politikadaki değişiklikler",
+    "changes": "Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Değişiklikler sayfanın üst kısmındaki güncelleme tarihi ile belirtilecektir."
   },
   "results": {
     "title": "Cilt Analiziniz",
@@ -590,29 +502,6 @@
       "nail_health": "Tırnak Sağlığı",
       "collagen_support": "Kolajen Desteği"
     }
-  },
-  "privacy": {
-    "title": "Gizlilik Politikası",
-    "last_updated": "Son güncelleme: Mayıs 2026",
-    "intro": "Gizliliğiniz bizim için önemlidir. Bu politika, hangi kişisel verileri topladığımızı, nasıl işlediğimizi, kiminle paylaştığımızı ve KVKK/GDPR kapsamındaki haklarınızı açıklar.",
-    "data_collected_title": "Toplanan veriler",
-    "data_collected": "Şu kişisel verileri topluyoruz: ad, e-posta, telefon, doğum tarihi, ülke, şehir, cilt anketi yanıtları, yüz fotoğrafı ve yapay zeka tarafından oluşturulan analiz sonuçları.",
-    "how_we_process_title": "Verilerinizi nasıl işliyoruz",
-    "how_we_process": "Fotoğrafınız güvenli bir şekilde yapay zeka sağlayıcımıza (OpenAI) gönderilir. Fotoğraf ayrıca Cloudinary üzerinden raporunuz için saklanır. Yapay zeka, puanlar, içgörüler ve ürün önerileri içeren bir cilt değerlendirmesi oluşturur.",
-    "lawful_basis_title": "İşlemenin hukuki dayanağı",
-    "lawful_basis": "Verilerinizi, onay kutusunu işaretleyerek verdiğiniz açık rızanız temelinde işliyoruz. Rızanızı istediğiniz zaman geri çekebilirsiniz.",
-    "third_parties_title": "Üçüncü taraf işleyiciler",
-    "third_parties": "Şu hizmetleri kullanıyoruz: OpenAI (yapay zeka analizi), Cloudinary (görüntü depolama), Vercel (barındırma) ve Neon (veritabanı barındırma). Her sağlayıcı verileri kendi gizlilik politikalarına uygun olarak işler.",
-    "data_retention_title": "Veri saklama",
-    "data_retention": "Verileriniz hizmetlerimizi sunmak için gerekli olduğu sürece saklanır. İstediğiniz zaman silme talebinde bulunabilirsiniz. Geçerli bir talep üzerine verilerinizi 30 gün içinde sileriz.",
-    "your_rights_title": "Haklarınız",
-    "your_rights": "GDPR kapsamında şu haklara sahipsiniz: erişim, düzeltme, silme, işlemeyi kısıtlama, veri taşınabilirliği, işlemeye itiraz ve istediğiniz zaman rızanızı geri çekme.",
-    "how_to_contact_title": "Haklarınızı nasıl kullanırsınız",
-    "how_to_contact": "Bize privacy@beautyandglow.ai adresinden ulaşın. 30 gün içinde yanıt vereceğiz.",
-    "cookies_title": "Çerezler",
-    "cookies": "Bu uygulama yalnızca hizmetin çalışması için gerekli temel çerezleri kullanır. İzleme, reklam veya analitik çerezleri kullanmıyoruz.",
-    "changes_title": "Bu politikadaki değişiklikler",
-    "changes": "Bu gizlilik politikasını zaman zaman güncelleyebiliriz. Değişiklikler sayfanın üst kısmındaki güncelleme tarihi ile belirtilecektir."
   },
   "common": {
     "loading": "Yükleniyor...",
