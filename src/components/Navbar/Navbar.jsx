@@ -76,7 +76,7 @@ export default function Navbar() {
             className="whitespace-nowrap"
             style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "20px", color: "var(--ink, #0B1B33)", letterSpacing: "-0.01em", lineHeight: 1 }}
           >
-            {t("nav.brand", "Nutritional")}<span style={{ color: "#2C5BFF" }}>.</span>
+            {t("nav.brand", "Evaluación Corporal")}
           </span>
         </Link>
 

@@ -20,8 +20,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: "Nutritional — AI Body & Nutrition Coach",
-  description: "AI-powered body composition analysis, nutrition planning, and wellness coaching by Nutritional.",
+  title: "Evaluación Corporal — Body & Nutrition Assessment",
+  description: "AI-powered body composition analysis, nutrition planning, and wellness coaching by Evaluación Corporal.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Nutritional",
+    "brand": "Evaluación Corporal",
     "home": "Inicio",
     "scan": "Iniciar Escaneo",
     "config": "Configuración",
@@ -33,14 +33,12 @@
   "landing": {
     "cta": "Escaneo Gratuito",
     "hero_cta": "Inicia tu escaneo gratuito",
-
     "nav_product": "Producto",
     "nav_how": "Cómo funciona",
     "nav_science": "Ciencia",
     "nav_pricing": "Precios",
     "nav_coaches": "Para coaches",
     "nav_signin": "Iniciar sesión",
-
     "hero_badge_new": "NUEVO",
     "hero_badge": "Escaneo de composición corporal · en beta",
     "hero_title_1": "Mira tu cuerpo.",
@@ -50,9 +48,7 @@
     "hero_trust_1": "Sin tarjeta · gratis durante la beta",
     "hero_trust_2": "EXIF eliminado al subir",
     "hero_trust_3": "Compatible con RGPD",
-
     "trust_strip": "Mencionado por · asociado con",
-
     "stats_1_value": "98%",
     "stats_1_label": "De los usuarios completan su primer escaneo en menos de 6 minutos.",
     "stats_2_value": "3,5×",
@@ -61,7 +57,6 @@
     "stats_3_label": "Señales de cuerpo, nutrición y estilo de vida analizadas por escaneo.",
     "stats_4_value": "12",
     "stats_4_label": "Idiomas — localización completa en inglés, ES, DE, FR, JP.",
-
     "services_label": "QUÉ LEEMOS",
     "services_title_1": "Seis dominios.",
     "services_title_2": "Doce señales.",
@@ -85,7 +80,6 @@
     "service_plan_body": "Una vez completo tu escaneo, generamos el plato de hoy, el entrenamiento de esta semana y tu pila de suplementos. Vuelve a escanear en cuatro semanas — ajustamos según lo que realmente cambió.",
     "service_plan_cta_1": "Cómo funciona el motor",
     "service_plan_cta_2": "Leer la ciencia",
-
     "how_label": "CÓMO FUNCIONA",
     "how_title_1": "Cuatro pasos.",
     "how_title_2": "Seis minutos.",
@@ -101,7 +95,6 @@
     "how_step4_num": "04",
     "how_step4_title": "Registra",
     "how_step4_text": "Registra comidas, marca entrenamientos hechos. Vuelve a escanear en 4 semanas. Observa cómo cambian las tendencias.",
-
     "testimonials_label": "RESULTADOS DE CLIENTES",
     "testimonials_title_1": "Fundadores y atletas,",
     "testimonials_title_2": "sobre la marcha",
@@ -123,14 +116,12 @@
     "testimonial_5_text": "La pila de suplementos es firme — y precisa. Tres productos, todos vinculados a algo que detectaron.",
     "testimonial_5_name": "Léa Morel",
     "testimonial_5_role": "Farmacéutica, Lyon",
-
     "cta_label": "GRATIS DURANTE LA BETA",
     "cta_title_1": "Tu primer escaneo toma",
     "cta_title_2": "seis minutos",
     "cta_body": "Tres fotos, un breve cuestionario, y tendrás tu lectura de composición, el plato de hoy y el entrenamiento de esta semana antes de que se enfríe tu café.",
     "cta_primary": "Inicia tu escaneo gratuito",
     "cta_secondary": "Habla con un coach",
-
     "footer_tagline": "Construyendo cuerpos más sanos a través de ciencia, diseño e IA.",
     "footer_col_product": "PRODUCTO",
     "footer_col_company": "EMPRESA",
@@ -142,9 +133,8 @@
     "footer_contact_email": "hello@nutritional.app",
     "footer_contact_phone": "+1 415 762 8841",
     "footer_contact_city": "San Francisco, CA",
-    "footer_copyright": "© 2026 Nutritional. Todos los derechos reservados.",
+    "footer_copyright": "© 2026 Evaluación Corporal. Todos los derechos reservados.",
     "footer_disclaimer": "Estimación de IA · No constituye consejo médico.",
-
     "score_label": "Puntuación",
     "tier_good": "Bueno",
     "tier_normal": "Normal",
