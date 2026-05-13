@@ -60,6 +60,9 @@ function ScanPageInner() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitComplete, setSubmitComplete] = useState(false);
   const [customerName, setCustomerName] = useState("");
+  const [analysisProgress, setAnalysisProgress] = useState(0);
+  const [activeAnalysisStep, setActiveAnalysisStep] = useState(0);
+  const progressRef = useRef(null);
 
   const cleanID = (s) => { const n = Number(s); return s && !isNaN(n) ? String(Math.trunc(n)) : s; };
   const chatIDs = searchParams.get("n")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
@@ -140,6 +143,25 @@ function ScanPageInner() {
   const onSubmit = async (formData) => {
     setIsSubmitting(true);
     setCustomerName(formData.name);
+    setAnalysisProgress(0);
+    setActiveAnalysisStep(0);
+
+    // Animate progress steps
+    const stepTimings = [
+      { step: 0, progress: 12, delay: 400 },
+      { step: 1, progress: 35, delay: 2000 },
+      { step: 2, progress: 58, delay: 4000 },
+      { step: 3, progress: 78, delay: 6000 },
+      { step: 4, progress: 92, delay: 8000 },
+    ];
+
+    const timers = stepTimings.map(({ step, progress, delay }) =>
+      setTimeout(() => {
+        setActiveAnalysisStep(step);
+        setAnalysisProgress(progress);
+      }, delay)
+    );
+    progressRef.current = timers;
 
     try {
       const res = await fetch("/api/forms", {
@@ -158,11 +180,16 @@ function ScanPageInner() {
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || "Submission failed");
 
+      setAnalysisProgress(100);
+      setActiveAnalysisStep(5);
+      await new Promise((r) => setTimeout(r, 600));
+
       toast.success(t("scan.complete_toast", "Submission complete!"));
       setSubmitComplete(true);
     } catch (error) {
       toast.error(error.message || t("common.error"));
     } finally {
+      timers.forEach(clearTimeout);
       setIsSubmitting(false);
     }
   };
@@ -179,18 +206,113 @@ function ScanPageInner() {
     exit: (d) => ({ x: d > 0 ? -200 : 200, opacity: 0 }),
   };
 
-  // Submitting overlay
+  // Analyzing overlay — premium dark screen
   if (isSubmitting) {
+    const ANALYSIS_STEPS = [
+      { key: "analyzing_step_1", fallback: "Calculating BMI & body composition" },
+      { key: "analyzing_step_2", fallback: "Estimating body fat percentage" },
+      { key: "analyzing_step_3", fallback: "Mapping waist-to-hip ratio" },
+      { key: "analyzing_step_4", fallback: "Computing caloric & macro targets" },
+      { key: "analyzing_step_5", fallback: "Composing your health plan" },
+    ];
+
     return (
-      <div className="flex flex-col items-center justify-center" style={{ minHeight: "70vh" }}>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center">
-          <div className="mb-6">
-            <AnimatedLogo size={140} />
+      <div
+        className="flex flex-col items-center justify-center relative overflow-hidden"
+        style={{
+          minHeight: "100vh",
+          background: "linear-gradient(160deg, #060F1F 0%, #0B1B33 60%, #1F44CC 100%)",
+          color: "white",
+          margin: "-1px -9999px", padding: "0 9999px",
+        }}
+      >
+        {/* Decorative arcs */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1280 800" preserveAspectRatio="none" style={{ opacity: 0.15 }}>
+          <circle cx="640" cy="400" r="200" fill="none" stroke="#6FA0FF" strokeWidth="1" />
+          <circle cx="640" cy="400" r="320" fill="none" stroke="#6FA0FF" strokeWidth="1" strokeDasharray="4 8" />
+          <circle cx="640" cy="400" r="440" fill="none" stroke="#6FA0FF" strokeWidth="1" />
+        </svg>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative z-10 flex flex-col items-center text-center px-6"
+        >
+          {/* Eyebrow */}
+          <div className="text-[11px] font-medium uppercase tracking-[0.18em]" style={{ color: "#6FA0FF" }}>
+            {t("scan.analyzing_label", "ASSESSMENT · ANALYZING")}
           </div>
-          <p style={{ fontFamily: "var(--font-fraunces)", fontSize: "24px", fontWeight: 400, color: "#0B1B33" }}>
-            {t("navigation.submitting", "Sending...")}
+
+          {/* Title */}
+          <h1 className="mt-3 text-[clamp(36px,6vw,56px)] leading-[1.05]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
+            {t("scan.analyzing_title", "Reading your body…")}
+          </h1>
+
+          {/* Subtitle */}
+          <p className="mt-3.5 max-w-[480px] text-[15px] leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+            {t("scan.analyzing_subtitle", "Calculating composition, estimating body fat, cross-checking your nutrition snapshot. Roughly 30 seconds.")}
           </p>
+
+          {/* Score Ring */}
+          <div className="mt-12 relative">
+            <svg width={260} height={260}>
+              <circle cx={130} cy={130} r={120} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={6} />
+              <circle
+                cx={130} cy={130} r={120} fill="none" stroke="#6FA0FF" strokeWidth={6}
+                strokeDasharray={2 * Math.PI * 120}
+                strokeDashoffset={2 * Math.PI * 120 - (analysisProgress / 100) * 2 * Math.PI * 120}
+                strokeLinecap="round"
+                transform="rotate(-90 130 130)"
+                style={{ transition: "stroke-dashoffset 1.2s cubic-bezier(0.22,1,0.36,1)" }}
+              />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div style={{ fontFamily: "var(--font-fraunces)", fontSize: 64, fontWeight: 400, lineHeight: 1 }}>
+                {Math.round(analysisProgress)}<span className="text-[24px]" style={{ color: "rgba(255,255,255,0.5)" }}>%</span>
+              </div>
+              <div className="mt-2 text-[11px] uppercase tracking-[0.18em]" style={{ color: "#6FA0FF" }}>
+                {activeAnalysisStep < ANALYSIS_STEPS.length
+                  ? t(`scan.${ANALYSIS_STEPS[activeAnalysisStep].key}`, ANALYSIS_STEPS[activeAnalysisStep].fallback).toUpperCase()
+                  : t("scan.analyzing_complete_label", "COMPLETE").toUpperCase()
+                }
+              </div>
+            </div>
+          </div>
+
+          {/* Status feed */}
+          <div className="mt-14 flex flex-col gap-2 items-center">
+            {ANALYSIS_STEPS.map((step, i) => {
+              const isDone = i < activeAnalysisStep;
+              const isActive = i === activeAnalysisStep;
+              return (
+                <div key={i} className="flex items-center gap-2.5 text-[13px]" style={{
+                  color: isDone ? "rgba(255,255,255,0.5)" : isActive ? "white" : "rgba(255,255,255,0.3)",
+                }}>
+                  {isDone ? (
+                    <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#6FA0FF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+                  ) : isActive ? (
+                    <span className="w-[14px] h-[14px] rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: "#6FA0FF", borderTopColor: "transparent" }} />
+                  ) : (
+                    <span className="w-[14px] h-[14px] rounded-full" style={{ border: "1px solid rgba(255,255,255,0.2)" }} />
+                  )}
+                  <span>{t(`scan.${step.key}`, step.fallback)}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Cancel */}
+          <button
+            onClick={() => { progressRef.current?.forEach(clearTimeout); setIsSubmitting(false); }}
+            className="mt-12 text-[13px] font-medium px-5 py-2.5 rounded-full transition-colors"
+            style={{ color: "white", border: "1px solid rgba(255,255,255,0.25)", background: "transparent" }}
+          >
+            {t("scan.analyzing_cancel", "Cancel")}
+          </button>
         </motion.div>
+
+        <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
       </div>
     );
   }
