@@ -171,10 +171,12 @@ function LandingPageInner() {
   const paramString = searchParams.toString();
   const scanHref = paramString ? `/scan?${paramString}` : "/scan";
 
-  const SERVICE_ICONS = ["user", "posture", "dumbbell", "droplet", "moon", "leaf"];
-  const STEP_ICONS = ["camera", "sparkle", "plan", "chart"];
+  const SERVICE_ICONS = ["chart", "user", "posture", "plan", "droplet", "leaf"];
+  const STEP_ICONS = ["user", "dumbbell", "leaf", "chart"];
 
-  const TRUST_BRANDS = ["BAREBELLS", "WHOOP", "MYPROTEIN", "ATHLETIC GREENS", "OURA", "WIRED"];
+  const TRUST_BRANDS = ["HERBALIFE", "WHOOP", "MYPROTEIN", "ATHLETIC GREENS", "OURA", "NOOM"];
+
+  const METRIC_ICONS = ["chart", "user", "posture", "plan", "sparkle", "dumbbell", "droplet", "flame"];
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden" style={{ background: "#FAFBFD" }}>
@@ -246,10 +248,10 @@ function LandingPageInner() {
               boxShadow: "0 30px 80px rgba(11,27,51,0.10), 0 4px 12px rgba(11,27,51,0.04)",
             }}>
               <div className="flex justify-between items-center">
-                <span className="text-[10px] font-medium tracking-[0.14em] uppercase" style={{ color: "var(--primary-hex)", fontFamily: "var(--font-inter)" }}>SCAN · LIVE</span>
+                <span className="text-[10px] font-medium tracking-[0.14em] uppercase" style={{ color: "var(--primary-hex)", fontFamily: "var(--font-inter)" }}>ASSESSMENT</span>
                 <span className="inline-flex items-center gap-1.5 text-[10px]" style={{ color: "var(--muted-fg)" }}>
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--status-good-hex)" }} />
-                  Reading
+                  Calculating
                 </span>
               </div>
 
@@ -280,58 +282,50 @@ function LandingPageInner() {
               </div>
             </div>
 
-            {/* Left floating card — wellness score */}
+            {/* Left floating card — BMI */}
             <div className="absolute" style={{ left: 100, top: 90, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", animation: "floatA 6s ease-in-out infinite" }}>
-              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>WELLNESS</div>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>BMI</div>
               <div className="flex items-center gap-3.5 mt-2">
-                <ScoreRing value={76} size={72} stroke={6} color="#2C5BFF" track="rgba(11,27,51,0.06)" />
+                <ScoreRing value={76} size={72} stroke={6} color="#2E8B6B" track="rgba(11,27,51,0.06)" />
                 <div>
-                  <div className="text-[13px] font-semibold" style={{ color: "var(--ink)" }}>Strong</div>
-                  <div className="text-[11px] mt-0.5 inline-flex items-center gap-1" style={{ color: "var(--status-good-hex)" }}>
-                    <Icon name="arrowUp" size={10} color="var(--status-good-hex)" /> +8 vs Mar
+                  <div className="text-[22px] font-medium" style={{ fontFamily: "var(--font-fraunces)", color: "var(--ink)" }}>23.4</div>
+                  <div className="text-[11px] mt-0.5 inline-flex items-center gap-1 rounded-full px-2 py-0.5" style={{ background: "var(--status-good-bg)", color: "var(--status-good-hex)" }}>
+                    Healthy
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right floating card — insight */}
-            <div className="absolute" style={{ right: 100, top: 200, width: 240, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", animation: "floatB 7s ease-in-out -2s infinite" }}>
-              <div className="flex items-center gap-2.5">
-                <div className="w-[30px] h-[30px] rounded-[9px] flex items-center justify-center" style={{ background: "var(--status-alert-bg)" }}>
-                  <Icon name="droplet" size={14} color="var(--status-alert-hex)" />
-                </div>
-                <div>
-                  <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>INSIGHT · WEEK 17</div>
-                  <div className="text-xs font-semibold" style={{ color: "var(--ink)" }}>Hydration −12%</div>
-                </div>
+            {/* Right floating card — Body Fat */}
+            <div className="absolute" style={{ right: 100, top: 180, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", animation: "floatB 7s ease-in-out -2s infinite" }}>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>BODY FAT</div>
+              <div className="flex items-baseline gap-2 mt-2">
+                <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>18.2</span>
+                <span className="text-[13px]" style={{ color: "var(--muted-fg)" }}>%</span>
               </div>
-              <p className="mt-3 text-xs leading-relaxed" style={{ color: "var(--muted-fg)" }}>
-                A 500ml glass at 12:30 typically closes the gap. Want a reminder?
-              </p>
+              <div className="h-1 rounded-full mt-2 overflow-hidden" style={{ background: "rgba(11,27,51,0.06)" }}>
+                <div className="h-full rounded-full" style={{ width: "45%", background: "var(--status-good-hex)" }} />
+              </div>
             </div>
 
             {/* Bottom-right dark card — calories */}
             <div className="absolute" style={{ right: 140, bottom: 40, width: 200, background: "var(--ink)", color: "white", borderRadius: 16, padding: 16, boxShadow: "0 18px 40px rgba(11,27,51,0.18)", animation: "floatA 8s ease-in-out -4s infinite" }}>
-              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>CALORIES TODAY</div>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>DAILY CALORIES</div>
               <div className="flex items-baseline gap-1.5 mt-1.5">
                 <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>2,148</span>
-                <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.5)" }}>kcal target</span>
+                <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.5)" }}>kcal</span>
               </div>
               <div className="h-1 rounded-full mt-2.5 overflow-hidden" style={{ background: "rgba(255,255,255,0.12)" }}>
                 <div className="h-full rounded-full" style={{ width: "62%", background: "var(--sky)" }} />
               </div>
             </div>
 
-            {/* Bottom-left — streak */}
+            {/* Bottom-left — WHR */}
             <div className="absolute" style={{ left: 150, bottom: 60, width: 180, background: "white", border: "1px solid var(--border-hex)", borderRadius: 16, padding: 14, boxShadow: "var(--shadow-lg)", animation: "floatB 7.5s ease-in-out -3s infinite" }}>
-              <div className="flex items-center gap-2.5">
-                <Icon name="flame" size={18} color="var(--status-normal-hex)" />
-                <span className="text-xs font-semibold">14-day streak</span>
-              </div>
-              <div className="flex gap-[3px] mt-2.5">
-                {Array.from({ length: 14 }, (_, i) => (
-                  <div key={i} className="flex-1 h-3 rounded-[2px]" style={{ background: i < 12 ? "var(--status-normal-hex)" : "var(--status-normal-bg)" }} />
-                ))}
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>WAIST-TO-HIP</div>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-[22px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>0.82</span>
+                <span className="text-[11px] rounded-full px-2 py-0.5" style={{ background: "var(--status-good-bg)", color: "var(--status-good-hex)" }}>Low risk</span>
               </div>
             </div>
           </div>
@@ -362,6 +356,53 @@ function LandingPageInner() {
                   </div>
                   <div className="text-[13px] leading-relaxed mt-2.5 mx-auto max-w-[26ch]" style={{ color: "var(--muted-fg)" }}>
                     {t(`landing.stats_${i}_label`)}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── METRICS WE CALCULATE ───────────── */}
+      <section className="py-24 lg:py-32 overflow-hidden" id="metrics" style={{ background: "white", borderTop: "1px solid var(--border-hex)" }}>
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          <div className="mb-16 max-w-[720px]">
+            <Reveal>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
+                {t("landing.metrics_label")}
+              </div>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="mt-3 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.025em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                {t("landing.metrics_title_1")} <span style={{ fontStyle: "italic", color: "var(--primary-hex)" }}>{t("landing.metrics_title_2")}</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <p className="mt-4 max-w-[58ch] text-base leading-relaxed" style={{ color: "var(--muted-fg)" }}>
+                {t("landing.metrics_subtitle")}
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i, idx) => (
+              <Reveal key={i} delay={(idx % 4) * 0.06}>
+                <div className="group h-full rounded-[20px] border bg-white p-6 transition-all hover:-translate-y-1 hover:border-[var(--primary-hex)] hover:shadow-[var(--shadow-md)]" style={{ borderColor: "var(--border-hex)" }}>
+                  <div className="mb-4 w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: "var(--primary-soft)" }}>
+                    <Icon name={METRIC_ICONS[idx]} size={20} color="var(--primary-hex)" />
+                  </div>
+                  <h3 className="text-[20px] tracking-[-0.01em] mb-1.5" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                    {t(`landing.metric_${i}_title`)}
+                  </h3>
+                  <p className="text-[12.5px] leading-relaxed mb-4" style={{ color: "var(--muted-fg)" }}>
+                    {t(`landing.metric_${i}_body`)}
+                  </p>
+                  <div className="mt-auto rounded-lg px-3 py-2" style={{ background: "var(--canvas)", border: "1px solid var(--border-hex)" }}>
+                    <div className="text-[10px] uppercase tracking-[0.12em] mb-0.5" style={{ color: "var(--muted-fg)" }}>FORMULA</div>
+                    <div className="text-[13px] font-medium" style={{ color: "var(--primary-hex)", fontFamily: "var(--font-inter)" }}>
+                      {t(`landing.metric_${i}_formula`)}
+                    </div>
                   </div>
                 </div>
               </Reveal>
@@ -480,6 +521,56 @@ function LandingPageInner() {
                   <p className="text-[13.5px] leading-relaxed" style={{ color: "var(--muted-fg)" }}>
                     {t(`landing.how_step${i}_text`)}
                   </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── FORMULAS / SCIENCE ───────────── */}
+      <section className="py-24 lg:py-32 overflow-hidden" id="science" style={{ background: "var(--ink)", color: "white" }}>
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          <div className="mb-16 max-w-[720px]">
+            <Reveal>
+              <div className="text-[11px] font-medium uppercase tracking-[0.18em]" style={{ color: "var(--sky)" }}>
+                {t("landing.formulas_label")}
+              </div>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="mt-3 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.025em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
+                {t("landing.formulas_title_1")} <span style={{ fontStyle: "italic", color: "var(--sky)" }}>{t("landing.formulas_title_2")}</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <p className="mt-4 max-w-[58ch] text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+                {t("landing.formulas_subtitle")}
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-5">
+            {[1, 2, 3].map((i, idx) => (
+              <Reveal key={i} delay={idx * 0.08}>
+                <div className="h-full rounded-3xl border p-7 sm:p-8 transition-all hover:-translate-y-1 hover:border-[rgba(111,160,255,0.4)]" style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}>
+                  <div className="mb-6 text-[11px] tracking-[0.2em]" style={{ color: "var(--sky)" }}>
+                    {t(`landing.formula_${i}_eq`)}
+                  </div>
+                  <h3 className="mb-1.5 text-[28px] leading-tight" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
+                    {t(`landing.formula_${i}_name`)}
+                  </h3>
+                  <div className="mb-4 text-[11px] uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>
+                    {t(`landing.formula_${i}_what`)}
+                  </div>
+                  <p className="mb-5 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.78)" }}>
+                    {t(`landing.formula_${i}_desc`)}
+                  </p>
+                  <div className="pt-5 border-t" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+                    <div className="text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.55)" }}>Evidence</div>
+                    <div className="mt-1 text-lg" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
+                      <span style={{ color: "var(--sky)" }}>{t(`landing.formula_${i}_evidence`)}</span>
+                    </div>
+                  </div>
                 </div>
               </Reveal>
             ))}
