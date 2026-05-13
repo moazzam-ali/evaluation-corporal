@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { Menu, X, Globe, ChevronDown, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -70,11 +71,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
         {/* Brand lockup */}
         <Link href="/" className="inline-flex items-center gap-2.5 shrink-0">
-          <svg width={28} height={28} viewBox="0 0 32 32" fill="none">
-            <rect x="0" y="0" width="32" height="32" rx="8" fill="#2C5BFF" />
-            <path d="M9 22 L9 10 L14 10 L19 18 L19 10 L23 10 L23 22 L18 22 L13 14 L13 22 Z" fill="white" />
-            <circle cx="25" cy="9" r="2.5" fill="#6FA0FF" />
-          </svg>
+          <Image src="/logo.svg" alt="" width={32} height={32} className="w-8 h-8 shrink-0" />
           <span
             className="whitespace-nowrap"
             style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "20px", color: "var(--ink, #0B1B33)", letterSpacing: "-0.01em", lineHeight: 1 }}

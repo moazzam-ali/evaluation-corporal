@@ -160,7 +160,7 @@
     "rail_eyebrow": "Vücut değerlendirmesi",
     "rail_title_1": "Bize vücudunuz",
     "rail_title_2": "hakkında bilgi verin.",
-    "rail_sub": "Üç kısa adım. Yaklaşık beş dakika sürer — sağlık değerlendirmeniz bundan oluşturulur.",
+    "rail_sub": "Yedi kısa adım. Yaklaşık beş dakika sürer — sağlık değerlendirmeniz bundan oluşturulur.",
     "step_label": "Adım",
     "time_estimate": "toplamda yaklaşık 5 dk",
     "access_title": "Erişim gerekli",
@@ -212,10 +212,10 @@
       "hip_help": "Bel-kalça oranınızı hesaplamak için kullanılır."
     },
     "step3": {
-      "nav": "Alışkanlıklar",
-      "display_title": "Yaşam tarzı &",
-      "display_title_em": "sağlık",
-      "display_sub": "Beslenme, egzersiz ve günlük alışkanlıklar — planınızı şekillendiren girdiler.",
+      "nav": "Diyet ve Beslenme",
+      "display_title": "Diyet ve",
+      "display_title_em": "beslenme",
+      "display_sub": "Ne yediğiniz her şeyi belirler — buradan başlıyoruz.",
       "select": "Seçin...",
       "yes": "Evet",
       "no": "Hayır",
@@ -233,24 +233,14 @@
       },
       "has_breakfast": "Genellikle kahvaltı yapar mısınız?",
       "breakfast_description": "Genellikle nasıl bir kahvaltı yaparsınız?",
-      "breakfast_description_placeholder": "Genellikle yediğiniz yiyecek kombinasyonunu kısaca açıklayın.",
-      "health_conditions": "Aşağıdaki durumlardan bir veya birkaçını seçin:",
-      "health_conditions_options": {
-        "low_bone_density": "Düşük kemik yoğunluğu",
-        "constipation": "Kabızlık",
-        "athlete_supplements": "Spor takviyesi alan sporcu",
-        "high_cholesterol": "Yüksek kolesterol",
-        "few_vegetables": "Çok az sebze yiyor",
-        "low_energy": "Gün boyunca enerji düşüklüğü hissediyor",
-        "trouble_sleeping": "Uyku problemi yaşıyor",
-        "poor_mental_agility": "Zihinsel çevikliği az",
-        "inflammation": "Sık sık iltihap sorunları yaşıyor",
-        "skin_cellulite": "Cilt ve/veya selülit görünümünü iyileştirmek istiyor",
-        "little_water": "Az su içiyor",
-        "demanding_job": "Fiziksel olarak çok yorucu bir işi var",
-        "belly_fat": "Karın yağını azaltmak istiyor",
-        "circulation_problems": "Dolaşım sorunları var"
-      },
+      "breakfast_description_placeholder": "Genellikle yediğiniz yiyecek kombinasyonunu kısaca açıklayın."
+    },
+    "step4": {
+      "nav": "Aktivite",
+      "display_title": "Aktivite ve",
+      "display_title_em": "hidrasyon",
+      "display_sub": "Nasıl hareket ettiğiniz ve ne kadar su içtiğiniz — iki büyük kaldıraç.",
+      "select": "Seçin...",
       "exercise_level": "Fiziksel egzersiz seviyeniz nedir?",
       "exercise_level_options": {
         "little": "Az veya hiç egzersiz / Ofis işi",
@@ -271,7 +261,40 @@
         "less_than_2": "Günde 2 litreden az",
         "about_2": "Günde yaklaşık 2 litre",
         "more_than_2": "Günde 2 litreden fazla"
+      }
+    },
+    "step5": {
+      "nav": "Sağlık",
+      "display_title": "Sağlık",
+      "display_title_em": "durumları",
+      "display_sub": "Geçerli olanları seçin — ürün önerilerini kişiselleştirmek için kullanıyoruz.",
+      "health_conditions": "Aşağıdaki durumlardan bir veya birkaçını seçin:",
+      "health_conditions_options": {
+        "low_bone_density": "Düşük kemik yoğunluğu",
+        "constipation": "Kabızlık",
+        "athlete_supplements": "Spor takviyesi alan sporcu",
+        "high_cholesterol": "Yüksek kolesterol",
+        "few_vegetables": "Çok az sebze yiyor",
+        "low_energy": "Gün boyunca enerji düşüklüğü hissediyor",
+        "trouble_sleeping": "Uyku problemi yaşıyor",
+        "poor_mental_agility": "Zihinsel çevikliği az",
+        "inflammation": "Sık sık iltihap sorunları yaşıyor",
+        "skin_cellulite": "Cilt ve/veya selülit görünümünü iyileştirmek istiyor",
+        "little_water": "Az su içiyor",
+        "demanding_job": "Fiziksel olarak çok yorucu bir işi var",
+        "belly_fat": "Karın yağını azaltmak istiyor",
+        "circulation_problems": "Dolaşım sorunları var"
       },
+      "selected_count": "{{count}} durum seçildi"
+    },
+    "step6": {
+      "nav": "Hedefler",
+      "display_title": "Hedefler ve",
+      "display_title_em": "bakım",
+      "display_sub": "Neyi hedeflediğiniz ve şu anda ne yaptığınız.",
+      "select": "Seçin...",
+      "yes": "Evet",
+      "no": "Hayır",
       "goal": "Hangi hedefe ulaşmak istersiniz?",
       "goal_options": {
         "weight_control": "Kilomi kontrol etmek ve vücut yağ oranını azaltmak",
@@ -288,7 +311,7 @@
       "privacy_policy_link": "Gizlilik Politikamızı okuyun",
       "disclaimer": "Bu öz değerlendirme tanı veya tedavi amaçlı değildir. Yalnızca bilgilendirme amaçlıdır ve hiçbir durumda bir sağlık uzmanının değerlendirmesinin yerini tutmaz."
     },
-    "step4": {
+    "step7": {
       "nav": "İnceleme",
       "display_title": "Göndermeye",
       "display_title_em": "hazır mısınız?",

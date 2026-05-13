@@ -160,7 +160,7 @@
     "rail_eyebrow": "Valutazione corporea",
     "rail_title_1": "Raccontaci del",
     "rail_title_2": "tuo corpo.",
-    "rail_sub": "Tre brevi passaggi. Circa cinque minuti — la tua valutazione della salute viene costruita da qui.",
+    "rail_sub": "Sette brevi passaggi. Circa cinque minuti — la tua valutazione della salute viene costruita da qui.",
     "step_label": "Passo",
     "time_estimate": "circa 5 min in totale",
     "access_title": "Accesso richiesto",
@@ -212,10 +212,10 @@
       "hip_help": "Utilizzata per calcolare il rapporto vita-fianchi."
     },
     "step3": {
-      "nav": "Abitudini",
-      "display_title": "Stile di vita e",
-      "display_title_em": "salute",
-      "display_sub": "Dieta, esercizio e abitudini quotidiane — i dati che modellano il tuo piano.",
+      "nav": "Dieta e Nutrizione",
+      "display_title": "Dieta e",
+      "display_title_em": "nutrizione",
+      "display_sub": "Quello che mangi determina tutto — iniziamo da qui.",
       "select": "Seleziona...",
       "yes": "Sì",
       "no": "No",
@@ -233,24 +233,14 @@
       },
       "has_breakfast": "Di solito fai colazione?",
       "breakfast_description": "Che tipo di colazione fai di solito?",
-      "breakfast_description_placeholder": "Descrivi brevemente la combinazione di cibi che mangi di solito.",
-      "health_conditions": "Seleziona una o più delle seguenti condizioni:",
-      "health_conditions_options": {
-        "low_bone_density": "Bassa densità ossea",
-        "constipation": "Stitichezza",
-        "athlete_supplements": "Atleta che assume integratori sportivi",
-        "high_cholesterol": "Colesterolo alto",
-        "few_vegetables": "Mangia pochissime verdure",
-        "low_energy": "Si sente scarico di energia durante il giorno",
-        "trouble_sleeping": "Ha difficoltà a dormire",
-        "poor_mental_agility": "Ha poca agilità mentale",
-        "inflammation": "Soffre spesso di infiammazione",
-        "skin_cellulite": "Vuole migliorare l'aspetto della pelle e/o della cellulite",
-        "little_water": "Beve poca acqua",
-        "demanding_job": "Ha un lavoro molto impegnativo e fisicamente estenuante",
-        "belly_fat": "Vuole ridurre il grasso addominale",
-        "circulation_problems": "Ha problemi di circolazione"
-      },
+      "breakfast_description_placeholder": "Descrivi brevemente la combinazione di cibi che mangi di solito."
+    },
+    "step4": {
+      "nav": "Attività",
+      "display_title": "Attività e",
+      "display_title_em": "idratazione",
+      "display_sub": "Come ti muovi e quanto bevi — due leve importanti.",
+      "select": "Seleziona...",
       "exercise_level": "Qual è il tuo livello di esercizio fisico?",
       "exercise_level_options": {
         "little": "Poco o nessun esercizio / Lavoro d'ufficio",
@@ -271,7 +261,40 @@
         "less_than_2": "Meno di 2 litri al giorno",
         "about_2": "Circa 2 litri al giorno",
         "more_than_2": "Più di 2 litri al giorno"
+      }
+    },
+    "step5": {
+      "nav": "Salute",
+      "display_title": "Condizioni",
+      "display_title_em": "di salute",
+      "display_sub": "Seleziona ciò che si applica — usiamo questo per personalizzare le raccomandazioni dei prodotti.",
+      "health_conditions": "Seleziona una o più delle seguenti condizioni:",
+      "health_conditions_options": {
+        "low_bone_density": "Bassa densità ossea",
+        "constipation": "Stitichezza",
+        "athlete_supplements": "Atleta che assume integratori sportivi",
+        "high_cholesterol": "Colesterolo alto",
+        "few_vegetables": "Mangia pochissime verdure",
+        "low_energy": "Si sente scarico di energia durante il giorno",
+        "trouble_sleeping": "Ha difficoltà a dormire",
+        "poor_mental_agility": "Ha poca agilità mentale",
+        "inflammation": "Soffre spesso di infiammazione",
+        "skin_cellulite": "Vuole migliorare l'aspetto della pelle e/o della cellulite",
+        "little_water": "Beve poca acqua",
+        "demanding_job": "Ha un lavoro molto impegnativo e fisicamente estenuante",
+        "belly_fat": "Vuole ridurre il grasso addominale",
+        "circulation_problems": "Ha problemi di circolazione"
       },
+      "selected_count": "{{count}} condizione/i selezionata/e"
+    },
+    "step6": {
+      "nav": "Obiettivi",
+      "display_title": "Obiettivi e",
+      "display_title_em": "cura",
+      "display_sub": "Cosa vuoi raggiungere e cosa stai già facendo.",
+      "select": "Seleziona...",
+      "yes": "Sì",
+      "no": "No",
       "goal": "Quale obiettivo vorresti raggiungere?",
       "goal_options": {
         "weight_control": "Controllare il mio peso e ridurre la percentuale di grasso corporeo",
@@ -288,7 +311,7 @@
       "privacy_policy_link": "Leggi la nostra Informativa sulla Privacy",
       "disclaimer": "Questa autovalutazione non ha scopi diagnostici né terapeutici. È solo informativa e non sostituisce in alcun caso la valutazione di un professionista sanitario."
     },
-    "step4": {
+    "step7": {
       "nav": "Revisione",
       "display_title": "Pronto per",
       "display_title_em": "inviare?",
