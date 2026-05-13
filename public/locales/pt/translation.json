@@ -23,7 +23,7 @@
     "contact_ids": "IDs de Contato",
     "contact_ids_placeholder": "IDs de contato CRM separados por vírgulas",
     "language": "Idioma",
-    "submit": "Prosseguir para Análise de Pele"
+    "submit": "Prosseguir para Avaliação Corporal"
   },
   "footer": {
     "rights": "Todos os direitos reservados.",
@@ -157,299 +157,211 @@
     "radar_muscle": "Músculo"
   },
   "scan": {
-    "title": "Análise de Pele",
-    "subtitle": "Tire uma foto clara do seu rosto para os resultados mais precisos",
-    "camera_tab": "Câmera",
-    "upload_tab": "Enviar",
-    "capture": "Capturar Foto",
-    "retake": "Tirar Novamente",
-    "upload_prompt": "Arraste e solte sua foto aqui, ou clique para procurar",
-    "upload_formats": "JPG, PNG até 10 MB",
-    "analyzing": "Analisando sua pele...",
-    "analyze_btn": "Analisar Minha Pele",
-    "tips_title": "Dicas para melhores resultados",
-    "tip1": "Use iluminação natural",
-    "tip2": "Remova óculos e chapéus",
-    "tip3": "Olhe diretamente para a câmera",
-    "tip4": "Certifique-se de que seu rosto inteiro esteja visível",
-    "no_photo": "Por favor, capture ou envie uma foto primeiro.",
-    "rail_eyebrow": "Análise de pele",
+    "rail_eyebrow": "Avaliação corporal",
     "rail_title_1": "Conte-nos sobre",
-    "rail_title_2": "a sua pele.",
-    "rail_sub": "Oito passos curtos e uma foto. Cerca de três minutos — a sua rotina é construída a partir disso.",
+    "rail_title_2": "o seu corpo.",
+    "rail_sub": "Três passos curtos. Cerca de cinco minutos — a sua avaliação de saúde é construída a partir disto.",
     "step_label": "Passo",
-    "time_estimate": "cerca de 3 min no total",
-    "camera_help_title": "Segure firme — capturamos automaticamente o frame mais nítido.",
-    "camera_help_body": "Certifique-se de que seu rosto inteiro está visível dentro do oval tracejado, com iluminação uniforme dos dois lados.",
-    "upload_title_1": "Arraste e solte sua foto aqui,",
-    "upload_title_2": "ou clique para procurar.",
-    "upload_browse": "Escolher arquivo",
-    "upload_help_title": "Sua foto é processada com segurança.",
-    "upload_help_body": "Sua imagem é transmitida via HTTPS e armazenada com segurança para seu relatório. Apenas você pode acessá-la.",
+    "time_estimate": "cerca de 5 min no total",
+    "access_title": "Acesso necessário",
+    "access_message": "Para usar a avaliação corporal, você precisa de um link de acesso personalizado do seu coach. Entre em contato com seu coach para começar.",
+    "access_home": "Voltar ao início",
+    "complete_toast": "Envio concluído!",
+    "complete_title": "Envio concluído!",
+    "complete_home": "Voltar ao início",
     "navigation": {
-      "next": "Próximo",
-      "previous": "Anterior",
-      "analyze": "Analisar Minha Pele",
       "step_of": "Passo {{current}} de {{total}}"
     },
     "step1": {
-      "nav": "Dados Básicos",
-      "title": "Informações Básicas",
-      "subtitle": "Conte-nos sobre você",
+      "nav": "Informações Pessoais",
       "display_title": "Informações",
-      "display_title_em": "básicas",
+      "display_title_em": "pessoais",
       "display_sub": "Conte-nos sobre você — usamos isso para personalizar seu relatório e enviar os resultados.",
-      "email_help": "Enviamos seu relatório completo e rotina para cá. Nunca usado para marketing.",
       "name": "Nome",
       "surname": "Sobrenome",
       "email": "E-mail",
-      "birthDate": "Data de Nascimento",
-      "phone": "Telefone",
+      "birth_date": "Data de nascimento",
+      "phone": "Número de telefone",
+      "phone_placeholder": "Insira seu número de telefone com código do país",
       "country": "País",
+      "province": "Estado/Província",
       "city": "Cidade",
-      "consent_text": "Aceito que os meus dados pessoais (incluindo a minha foto) sejam processados por IA para gerar uma análise de pele. Os resultados serão armazenados e partilhados com o meu coach.",
-      "consent_link": "Ler a nossa Política de Privacidade",
-      "consent_required": "Deve aceitar para continuar"
+      "disclaimer": "Enviaremos seu relatório diretamente para o seu WhatsApp. Por favor, verifique se o seu número de telefone está correto. Obrigado!"
     },
     "step2": {
-      "nav": "Objetivo Principal",
-      "title": "Objetivo Principal",
-      "display_title": "Seu",
-      "display_title_em": "objetivo principal",
-      "display_sub": "Escolha até três preocupações. A primeira resposta define a ordem dos seus produtos; as demais refinam a seleção.",
-      "concerns_label": "O que mais te preocupa na sua pele agora? (até 3)",
-      "concerns": {
-        "dryness": "Ressecamento / repuxamento",
-        "wrinkles": "Rugas ou linhas finas",
-        "sagging": "Flacidez / falta de elasticidade",
-        "dark_spots": "Manchas escuras / tom desigual",
-        "dullness": "Pele opaca / falta de luminosidade",
-        "blemishes": "Imperfeições / espinhas",
-        "pores": "Poros visíveis",
-        "eye_area": "Olheiras / rugas ao redor dos olhos",
-        "sensitivity": "Sensibilidade / vermelhidão",
-        "other": "Outro"
+      "nav": "Informações Físicas",
+      "display_title": "Informações",
+      "display_title_em": "físicas",
+      "display_sub": "Suas medidas corporais nos ajudam a calcular suas métricas de saúde com precisão.",
+      "sex": "Sexo",
+      "sex_options": {
+        "select": "Selecione seu gênero",
+        "male": "Masculino",
+        "female": "Feminino"
       },
-      "concerns_other_placeholder": "Por favor, descreva...",
-      "priority_label": "Se você pudesse melhorar apenas uma coisa na sua pele, o que seria?",
-      "priority_placeholder": "Descreva sua principal prioridade...",
-      "zones_label": "Onde você gostaria de ver mais mudança?",
-      "zones": {
-        "full_face": "Rosto inteiro",
-        "eye_contour": "Contorno dos olhos",
-        "neck": "Pescoço",
-        "hands": "Mãos",
-        "body": "Corpo"
-      }
+      "weight": "Peso (kg)",
+      "weight_placeholder": "Insira seu peso",
+      "height": "Altura (cm)",
+      "height_placeholder": "Insira sua altura",
+      "measurement_intro": "Você sabe suas medidas de cintura e quadril? Gostaria que eu as medisse para você? Levará apenas um momento. (Recomenda-se uma fita métrica.)",
+      "waist": "Medida da cintura (cm)",
+      "waist_placeholder": "Insira sua medida da cintura",
+      "waist_help": "Usado para calcular sua relação cintura-quadril.",
+      "hip": "Medida do quadril (cm)",
+      "hip_placeholder": "Insira sua medida do quadril",
+      "hip_help": "Usado para calcular sua relação cintura-quadril."
     },
     "step3": {
-      "nav": "Percepção da Pele",
-      "title": "Como Você Percebe Sua Pele",
-      "display_title": "Como você",
-      "display_title_em": "percebe sua pele",
-      "display_sub": "Como você descreve sua pele importa — cruzamos isso com o que a câmera vê depois.",
-      "skin_type_label": "Como você normalmente descreveria sua pele?",
-      "skin_type": {
-        "dry": "Seca",
-        "oily": "Oleosa",
-        "combination": "Mista",
-        "sensitive": "Sensível",
-        "dehydrated": "Desidratada",
-        "dont_know": "Não sei"
+      "nav": "Hábitos",
+      "display_title": "Estilo de vida &",
+      "display_title_em": "saúde",
+      "display_sub": "Dieta, exercício e hábitos diários — os dados que moldam o seu plano.",
+      "select": "Selecione...",
+      "yes": "Sim",
+      "no": "Não",
+      "diet_type": "Que tipo de dieta você segue?",
+      "diet_type_options": {
+        "omnivore": "Onívoro (come de tudo)",
+        "vegetarian": "Vegetariano (vegetais, ovos, laticínios)",
+        "vegan": "Vegano (apenas alimentos vegetais)"
       },
-      "feel_general_label": "Como sua pele se sente na maior parte do tempo?",
-      "feel_general": {
-        "tight": "Repuxada",
-        "shiny": "Brilhante",
-        "comfortable": "Confortável / equilibrada",
-        "sensitive_reactive": "Sensível / reativa",
-        "dull": "Opaca",
-        "dont_know": "Não sei"
+      "meals_per_day": "Quantas refeições por dia você faz?",
+      "meals_per_day_options": {
+        "less_than_3": "Menos de 3",
+        "between_3_and_5": "Entre 3 e 5",
+        "more_than_5": "Mais de 5"
       },
-      "feel_end_day_label": "Como sua pele se sente no final do dia?",
-      "feel_end_day": {
-        "tight": "Repuxada",
-        "shiny": "Brilhante",
-        "comfortable": "Confortável / equilibrada",
-        "irritated": "Irritada",
-        "dull": "Opaca"
-      }
+      "has_breakfast": "Você costuma tomar café da manhã?",
+      "breakfast_description": "Que tipo de café da manhã você costuma tomar?",
+      "breakfast_description_placeholder": "Descreva brevemente a combinação de alimentos que costuma comer.",
+      "health_conditions": "Selecione uma ou mais das seguintes condições:",
+      "health_conditions_options": {
+        "low_bone_density": "Baixa densidade óssea",
+        "constipation": "Constipação",
+        "athlete_supplements": "Atleta que toma suplementos esportivos",
+        "high_cholesterol": "Colesterol alto",
+        "few_vegetables": "Come muito poucos vegetais",
+        "low_energy": "Sente baixa energia durante o dia",
+        "trouble_sleeping": "Tem dificuldade para dormir",
+        "poor_mental_agility": "Tem pouca agilidade mental",
+        "inflammation": "Sofre frequentemente de inflamação",
+        "skin_cellulite": "Quer melhorar a aparência da pele e/ou celulite",
+        "little_water": "Bebe pouca água",
+        "demanding_job": "Tem um trabalho muito exigente e fisicamente desgastante",
+        "belly_fat": "Quer reduzir a gordura abdominal",
+        "circulation_problems": "Tem problemas de circulação"
+      },
+      "exercise_level": "Qual é o seu nível de exercício físico?",
+      "exercise_level_options": {
+        "little": "Pouco ou nenhum exercício / Trabalho de escritório",
+        "light": "Exercício físico 1-3 dias/semana",
+        "moderate": "Exercício físico 3-5 dias/semana",
+        "active": "Exercício físico 6-7 dias/semana",
+        "very_active": "Exercício duas vezes por dia"
+      },
+      "exercise_duration": "Há quanto tempo você se exercita?",
+      "exercise_duration_options": {
+        "never": "Nunca se exercitou",
+        "less_than_6": "Menos de 6 meses",
+        "6_to_12": "Entre 6 e 12 meses",
+        "more_than_12": "Mais de 12 meses"
+      },
+      "water_intake": "Quantos litros de água você bebe por dia?",
+      "water_intake_options": {
+        "less_than_2": "Menos de 2 litros por dia",
+        "about_2": "Cerca de 2 litros por dia",
+        "more_than_2": "Mais de 2 litros por dia"
+      },
+      "goal": "Qual objetivo você gostaria de alcançar?",
+      "goal_options": {
+        "weight_control": "Controlar meu peso e reduzir o percentual de gordura corporal",
+        "maintain_care": "Manter meu peso, mas começar a me cuidar melhor",
+        "gain_weight": "Aumentar peso e/ou massa muscular"
+      },
+      "weight_at_ideal_age": "Realisticamente, com qual peso você se sentiria bem?",
+      "weight_at_ideal_age_placeholder": "Insira o peso (kg)",
+      "has_skincare_routine": "Você tem atualmente uma rotina diária de cuidados com a pele, corpo ou cabelo?",
+      "skincare_products": "Que tipo de produtos você usa?",
+      "skincare_products_placeholder": "Descreva brevemente seus produtos.",
+      "want_facial_evaluation": "Gostaria de uma avaliação facial gratuita?",
+      "privacy_policy": "Aceito a Política de Privacidade",
+      "privacy_policy_link": "Leia nossa Política de Privacidade",
+      "disclaimer": "Esta autoavaliação não se destina a fins diagnósticos ou terapêuticos. É apenas para fins informativos e não substitui em nenhum caso a avaliação de um profissional de saúde."
     },
     "step4": {
-      "nav": "Rotina",
-      "title": "Rotina Atual",
-      "display_title": "Sua",
-      "display_title_em": "rotina atual",
-      "display_sub": "Não vamos pedir para você jogar nada fora. Vamos complementar o que já funciona.",
-      "frequency_label": "Você costuma ter uma rotina facial?",
-      "frequency": {
-        "morning_only": "Apenas de manhã",
-        "night_only": "Apenas à noite",
-        "morning_and_night": "Manhã e noite",
-        "no_routine": "Não tenho rotina"
-      },
-      "products_label": "Quais produtos você usa atualmente?",
-      "products": {
-        "cleanser": "Limpador",
-        "toner": "Tônico",
-        "serum": "Sérum",
-        "day_cream": "Creme diurno",
-        "sunscreen": "Protetor solar",
-        "eye_contour": "Contorno dos olhos",
-        "night_cream": "Creme noturno",
-        "mask": "Máscara",
-        "exfoliant": "Esfoliante",
-        "other": "Outro"
-      },
-      "products_other_placeholder": "Por favor, especifique...",
-      "essential_label": "Qual produto nunca falta na sua rotina?",
-      "essential_placeholder": "ex., Hidratante",
-      "missing_label": "Qual produto você acha que está faltando ou não sabe qual usar?",
-      "missing_placeholder": "ex., Sérum",
-      "supplements_label": "Você toma algum suplemento para a pele? (ex., colágeno)",
-      "supplements_placeholder": "ex., Colágeno, Vitamina C"
+      "nav": "Revisão",
+      "display_title": "Pronto para",
+      "display_title_em": "enviar?",
+      "display_sub": "Revise suas informações e certifique-se de que tudo está correto.",
+      "title": "Pronto para enviar?",
+      "description": "Revise suas informações e certifique-se de que tudo está correto.",
+      "note": "Antes de enviar, certifique-se de que todos os dados fornecidos estão corretos.",
+      "tip": "Verifique seu e-mail ({{email}}) e número de telefone ({{phone}}) para possíveis erros.",
+      "open_results": "Olá {{customerName}},\n\nObrigado por completar o questionário e confiar em nós para a sua avaliação corporal!\n\nEm breve, a pessoa que o convidou para o estudo entrará em contato para compartilhar os resultados do relatório.\n\nCompletar estas informações é o primeiro passo. Entraremos em contato em breve!\n\nCordialmente."
+    }
+  },
+  "navigation": {
+    "next": "Próximo",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "submitting": "Enviando..."
+  },
+  "validation": {
+    "personal": {
+      "name_required": "O nome é obrigatório.",
+      "surname_required": "O sobrenome é obrigatório.",
+      "email_required": "O e-mail é obrigatório.",
+      "email_invalid": "Formato de e-mail inválido.",
+      "birth_date_required": "A data de nascimento é obrigatória.",
+      "phone_required": "O número de telefone é obrigatório.",
+      "phone_invalid": "O número de telefone deve ser válido.",
+      "country_required": "O país é obrigatório.",
+      "province_required": "O estado/província é obrigatório.",
+      "city_required": "A cidade é obrigatória."
     },
-    "step5": {
-      "nav": "Sensibilidade",
-      "title": "Sensibilidade e Tolerância",
-      "display_title": "Sensibilidade &",
-      "display_title_em": "tolerância",
-      "display_sub": "O quanto sua pele é tolerante determina quais ativos recomendamos e em qual concentração.",
-      "reaction_label": "Sua pele reage facilmente a alguns produtos?",
-      "reaction": {
-        "yes_a_lot": "Sim, muito",
-        "sometimes": "Às vezes",
-        "no": "Não",
-        "dont_know": "Não sei"
-      },
-      "signs_label": "Você notou algum desses sinais ultimamente?",
-      "signs": {
-        "redness": "Vermelhidão",
-        "itching": "Coceira",
-        "flaking": "Descamação",
-        "excess_shine": "Brilho excessivo",
-        "blemishes": "Imperfeições",
-        "dark_spots": "Manchas escuras",
-        "tightness": "Repuxamento",
-        "none": "Nenhum"
-      }
+    "physical": {
+      "sex_required": "O sexo é obrigatório.",
+      "weight_required": "O peso é obrigatório.",
+      "height_required": "A altura é obrigatória.",
+      "waist_required": "A medida da cintura é obrigatória.",
+      "hip_required": "A medida do quadril é obrigatória."
     },
-    "step6": {
-      "nav": "Hábitos",
-      "title": "Hábitos Que Afetam Sua Pele",
-      "display_title": "Hábitos que",
-      "display_title_em": "afetam sua pele",
-      "display_sub": "Sono, sol e água têm mais impacto do que a maioria dos produtos. Levamos isso em conta.",
-      "sunscreenUse_label": "Você usa protetor solar diariamente?",
-      "sunscreenUse": {
-        "daily": "Sim, todos os dias",
-        "sometimes": "Às vezes",
-        "summer_only": "Apenas no verão",
-        "no": "Não"
-      },
-      "makeupFrequency_label": "Com que frequência você usa maquiagem?",
-      "makeupFrequency": {
-        "daily": "Todos os dias",
-        "several_times_week": "Várias vezes por semana",
-        "occasionally": "Ocasionalmente",
-        "never": "Nunca"
-      },
-      "sleepHours_label": "Quantas horas você normalmente dorme?",
-      "sleepHours": {
-        "less_than_5": "Menos de 5",
-        "5_6": "5-6",
-        "7_8": "7-8",
-        "more_than_8": "Mais de 8"
-      },
-      "stressImpact_label": "Você sente que o estresse está afetando sua pele?",
-      "stressImpact": {
-        "yes": "Sim",
-        "a_little": "Um pouco",
-        "no": "Não"
-      },
-      "waterIntake_label": "Você bebe água suficiente diariamente?",
-      "waterIntake": {
-        "yes": "Sim",
-        "sometimes": "Às vezes",
-        "no": "Não"
-      }
-    },
-    "step7": {
-      "nav": "Experiência",
-      "title": "Experiência Anterior",
-      "display_title": "Sua",
-      "display_title_em": "experiência anterior",
-      "display_sub": "Aprendemos tanto com o que não funcionou quanto com o que deu certo.",
-      "history_label": "Você já experimentou algum tratamento ou rotina para melhorar sua pele?",
-      "history": {
-        "yes_worked": "Sim, e funcionou bem",
-        "yes_no_results": "Sim, mas não vi resultados",
-        "tried_many_nothing_works": "Tentei muitas coisas e nada funciona",
-        "barely_tried": "Não, quase não tentei nada"
-      },
-      "frustrations_label": "O que mais te frustra nos produtos que você usou?",
-      "frustrations": {
-        "no_results": "Não vejo resultados",
-        "irritation": "Eles me irritam",
-        "dont_know_how_to_combine": "Não sei como combiná-los",
-        "too_expensive": "São muito caros",
-        "not_consistent": "Não sou consistente",
-        "other": "Outro"
-      }
-    },
-    "step8": {
-      "nav": "Objetivos",
-      "title": "Seus Objetivos",
-      "display_title": "Seus",
-      "display_title_em": "objetivos",
-      "display_sub": "Quanta rotina e com qual nível de investimento — para que as recomendações realmente se encaixem.",
-      "looking_for_label": "O que você está procurando agora?",
-      "looking_for": {
-        "basic_routine": "Uma rotina básica",
-        "complete_routine": "Uma rotina completa",
-        "specific_problem": "Melhorar um problema específico",
-        "prevention": "Prevenção e manutenção",
-        "personalized_advice": "Aconselhamento personalizado"
-      },
-      "recommendation_label": "Gostaria que recomendássemos uma rotina adaptada à sua pele e objetivo?",
-      "recommendation": {
-        "yes": "Sim",
-        "no": "Não"
-      },
-      "budget_label": "Qual nível de investimento é confortável para você cuidar da sua pele a cada mês?",
-      "budget": {
-        "basic": "Básico (limpador + sérum ~ €100 aprox)",
-        "medium": "Médio (limpador, sérum + contorno olhos ou creme tensor ~ €150/170 aprox)",
-        "premium": "Premium (toda a linha HL/Skin ~ €300 aprox)"
-      }
-    },
-    "step9": {
-      "nav": "Foto",
-      "title": "Envie Sua Foto",
-      "subtitle": "Tire uma foto clara do seu rosto ou envie uma existente para a análise com IA.",
-      "display_title": "Envie sua",
-      "display_title_em": "foto",
-      "display_sub": "Tire uma foto clara do seu rosto ou envie uma existente para a análise com IA."
-    },
-    "skin_types": {
-      "dry": "Seca",
-      "oily": "Oleosa",
-      "combination": "Mista",
-      "sensitive": "Sensível",
-      "dehydrated": "Desidratada",
-      "normal": "Normal"
-    },
-    "access_title": "Acesso necessário",
-    "access_message": "Para usar o scanner de pele, você precisa de um link de acesso personalizado do seu coach. Entre em contato com seu coach para começar.",
-    "access_home": "Voltar ao início",
-    "complete_toast": "Análise concluída!",
-    "complete_title": "Análise concluída!",
-    "complete_message": "Sua análise de pele foi processada com sucesso. Seu coach compartilhará os resultados detalhados com você em breve. Entre em contato com seu coach para receber seu relatório personalizado e recomendações de produtos.",
-    "complete_hint": "Seu coach foi notificado e entrará em contato com seus resultados.",
-    "complete_home": "Voltar ao início",
-    "photo_alt_captured": "Capturada",
-    "photo_alt_uploaded": "Carregada",
-    "camera_live": "Ao vivo"
+    "habits": {
+      "diet_type_required": "Por favor, selecione o tipo de dieta.",
+      "meals_per_day_required": "Por favor, selecione o número de refeições.",
+      "has_breakfast_required": "Por favor, indique se costuma tomar café da manhã.",
+      "exercise_level_required": "Por favor, selecione seu nível de exercício.",
+      "exercise_duration_required": "Por favor, selecione há quanto tempo se exercita.",
+      "water_intake_required": "Por favor, selecione sua ingestão diária de água.",
+      "goal_required": "Por favor, selecione seu objetivo.",
+      "weight_at_ideal_age_required": "Por favor, insira seu peso ideal.",
+      "has_skincare_routine_required": "Por favor, indique se tem uma rotina de cuidados.",
+      "want_facial_evaluation_required": "Por favor, indique se gostaria de uma avaliação facial.",
+      "privacy_policy_required": "Você deve aceitar a política de privacidade para continuar."
+    }
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "last_updated": "Última atualização: maio 2026",
+    "intro": "A sua privacidade é importante para nós. Esta política explica que dados pessoais recolhemos, como os processamos, com quem os partilhamos e quais os seus direitos ao abrigo do RGPD.",
+    "data_collected_title": "Dados recolhidos",
+    "data_collected": "Recolhemos os seguintes dados pessoais quando utiliza o nosso serviço de avaliação corporal: o seu nome, endereço de e-mail, número de telefone, data de nascimento, país, cidade e respostas ao questionário sobre o seu corpo, estilo de vida e hábitos de saúde.",
+    "how_we_process_title": "Como processamos os seus dados",
+    "how_we_process": "As suas respostas ao questionário são armazenadas de forma segura na nossa base de dados. As métricas de saúde (IMC, percentual de gordura corporal, relação cintura-quadril, necessidades calóricas, etc.) são calculadas a partir das suas medidas. Todos os dados são armazenados para fornecer o seu relatório e permitir que o seu coach revise os resultados consigo.",
+    "lawful_basis_title": "Base legal do tratamento",
+    "lawful_basis": "Processamos os seus dados pessoais com base no seu consentimento explícito, que fornece ao aceitar a política de privacidade antes de enviar o formulário de avaliação corporal. Pode retirar o seu consentimento a qualquer momento contactando-nos.",
+    "third_parties_title": "Subcontratantes terceiros",
+    "third_parties": "Utilizamos os seguintes serviços terceiros para processar os seus dados: Vercel (hospedagem da aplicação) e Neon (hospedagem da base de dados). Cada fornecedor processa os dados de acordo com as suas próprias políticas de privacidade e normas de proteção de dados aplicáveis.",
+    "data_retention_title": "Retenção de dados",
+    "data_retention": "Os seus dados são conservados pelo tempo necessário para prestar os nossos serviços. Pode solicitar a eliminação a qualquer momento. Eliminaremos os seus dados no prazo de 30 dias após um pedido válido.",
+    "your_rights_title": "Os seus direitos",
+    "your_rights": "Ao abrigo do RGPD, tem direito a: acesso, retificação, eliminação, limitação do tratamento, portabilidade dos dados, oposição ao tratamento e retirada do consentimento a qualquer momento.",
+    "how_to_contact_title": "Como exercer os seus direitos",
+    "how_to_contact": "Para exercer qualquer um dos seus direitos, ou se tiver dúvidas sobre esta política, contacte-nos em: privacy@nutritional.app. Responderemos ao seu pedido no prazo de 30 dias.",
+    "cookies_title": "Cookies",
+    "cookies": "Esta aplicação utiliza apenas cookies essenciais necessários para o funcionamento do serviço. Não utilizamos cookies de rastreamento, publicitários ou analíticos.",
+    "changes_title": "Alterações a esta política",
+    "changes": "Podemos atualizar esta política. As alterações serão indicadas pela data de atualização no topo desta página."
   },
   "results": {
     "title": "Sua Análise de Pele",
@@ -590,29 +502,6 @@
       "nail_health": "Saúde das unhas",
       "collagen_support": "Suporte ao colágeno"
     }
-  },
-  "privacy": {
-    "title": "Política de Privacidade",
-    "last_updated": "Última atualização: maio 2026",
-    "intro": "A sua privacidade é importante para nós. Esta política explica que dados pessoais recolhemos, como os processamos, com quem os partilhamos e quais os seus direitos ao abrigo do RGPD.",
-    "data_collected_title": "Dados recolhidos",
-    "data_collected": "Recolhemos os seguintes dados pessoais: nome, email, telefone, data de nascimento, país, cidade, respostas ao questionário sobre a sua pele, uma foto facial e os resultados da análise gerados por IA.",
-    "how_we_process_title": "Como processamos os seus dados",
-    "how_we_process": "A sua foto é enviada de forma segura ao nosso fornecedor de IA (OpenAI) para análise. A foto também é armazenada via Cloudinary para o seu relatório. A IA gera uma avaliação da pele com pontuações, insights e recomendações de produtos.",
-    "lawful_basis_title": "Base legal do tratamento",
-    "lawful_basis": "Processamos os seus dados com base no seu consentimento explícito, dado ao marcar a caixa de consentimento. Pode retirar o seu consentimento a qualquer momento contactando-nos.",
-    "third_parties_title": "Subcontratantes terceiros",
-    "third_parties": "Utilizamos os seguintes serviços: OpenAI (análise IA), Cloudinary (armazenamento de imagens), Vercel (alojamento) e Neon (alojamento de base de dados). Cada fornecedor processa os dados de acordo com as suas próprias políticas de privacidade.",
-    "data_retention_title": "Retenção de dados",
-    "data_retention": "Os seus dados são conservados pelo tempo necessário para prestar os nossos serviços. Pode solicitar a eliminação a qualquer momento. Eliminaremos os seus dados no prazo de 30 dias após um pedido válido.",
-    "your_rights_title": "Os seus direitos",
-    "your_rights": "Ao abrigo do RGPD, tem direito a: acesso, retificação, eliminação, limitação do tratamento, portabilidade dos dados, oposição ao tratamento e retirada do consentimento a qualquer momento.",
-    "how_to_contact_title": "Como exercer os seus direitos",
-    "how_to_contact": "Contacte-nos em: privacy@beautyandglow.ai. Responderemos no prazo de 30 dias.",
-    "cookies_title": "Cookies",
-    "cookies": "Esta aplicação utiliza apenas cookies essenciais necessários para o funcionamento do serviço. Não utilizamos cookies de rastreamento, publicitários ou analíticos.",
-    "changes_title": "Alterações a esta política",
-    "changes": "Podemos atualizar esta política. As alterações serão indicadas pela data de atualização no topo desta página."
   },
   "common": {
     "loading": "Carregando...",
