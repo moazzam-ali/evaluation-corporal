@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 
-const NAVY_ARC = "#1A1A2E";
-const BLUSH_FACE = "#F4A7B9";
-const ROSE_DOT = "#E8728A";
+const NAVY_ARC = "#0B1B33";
+const BLUSH_FACE = "#6FA0FF";
+const ROSE_DOT = "#2C5BFF";
 
 export default function AnimatedLogo({ size = 120, showText = false, text = "" }) {
   const s = size;

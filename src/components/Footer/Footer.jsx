@@ -7,24 +7,24 @@ export default function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer style={{ borderTop: "1px solid rgba(26,26,46,0.10)", background: "#FBF6F1" }}>
+    <footer style={{ borderTop: "1px solid var(--border-hex, #E3E8F0)", background: "var(--canvas, #F4F6FB)" }}>
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: "#6B6B7A" }}>
-            &copy; {new Date().getFullYear()} Beauty &amp; Glow AI. {t("footer.rights", "All rights reserved.")}
+          <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", color: "var(--muted-fg, #5A6B85)" }}>
+            &copy; {new Date().getFullYear()} {t("nav.brand", "Nutritional")}. {t("footer.rights", "All rights reserved.")}
           </p>
           <div className="flex gap-4">
-            <Link href="/privacy" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", color: "#6B6B7A", transition: "color 180ms" }}>
+            <Link href="/privacy" style={{ fontFamily: "var(--font-inter)", fontSize: "13px", color: "var(--muted-fg, #5A6B85)", transition: "color 200ms" }}>
               {t("footer.privacy", "Privacy Policy")}
             </Link>
           </div>
         </div>
         <p style={{
           marginTop: "16px", textAlign: "center",
-          fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: "#6B6B7A",
+          fontFamily: "var(--font-inter)", fontSize: "11px", color: "var(--muted-fg, #5A6B85)",
           letterSpacing: "0.04em", lineHeight: 1.6,
         }}>
-          {t("footer.disclaimer", "This tool is intended only for cosmetic awareness purposes. Results are not a substitute for professional dermatological advice.")}
+          {t("footer.disclaimer")}
         </p>
       </div>
     </footer>

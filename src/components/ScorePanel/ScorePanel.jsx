@@ -10,7 +10,7 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
   const radius = 58;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (overallScore / 100) * circumference;
-  const color = overallScore >= 80 ? "#5B9A8B" : overallScore >= 40 ? "#D4A053" : "#E8728A";
+  const color = overallScore >= 80 ? "#2E8B6B" : overallScore >= 40 ? "#C68A2E" : "#2C5BFF";
   const statusText = overallScore >= 80
     ? t("results.score_good", "Skin in good balance overall")
     : overallScore >= 40
@@ -24,16 +24,16 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
       className="overflow-hidden grid grid-cols-1 md:grid-cols-[320px_1fr]"
       style={{
         background: "white",
-        border: "1px solid rgba(26,26,46,0.10)",
+        border: "1px solid rgba(11,27,51,0.10)",
         borderRadius: "24px",
-        boxShadow: "0 1px 2px rgba(26,26,46,0.04)",
+        boxShadow: "0 1px 2px rgba(11,27,51,0.04)",
       }}
     >
       {/* Photo column */}
       <div
         className="relative flex items-center justify-center"
         style={{
-          background: "linear-gradient(160deg, #FDEEF1 0%, #F9D1D9 100%)",
+          background: "linear-gradient(160deg, #E6ECFF 0%, #B4C7FF 100%)",
           padding: "32px",
         }}
       >
@@ -42,7 +42,7 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
           style={{
             width: "100%", maxWidth: "256px", aspectRatio: "1",
             borderRadius: "20px", border: "3px solid white",
-            boxShadow: "0 12px 32px rgba(26,26,46,0.16)",
+            boxShadow: "0 12px 32px rgba(11,27,51,0.16)",
             background: "linear-gradient(160deg, #F8C8D2 0%, #E89BAB 60%, #D67285 100%)",
           }}
         >
@@ -52,8 +52,8 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
             <div className="flex h-full w-full items-center justify-center">
               <svg viewBox="0 0 256 256" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
                 <ellipse cx="128" cy="140" rx="78" ry="100" fill="#E89BAB" opacity="0.92"/>
-                <ellipse cx="105" cy="118" rx="5" ry="3" fill="#1A1A2E" opacity="0.75"/>
-                <ellipse cx="151" cy="118" rx="5" ry="3" fill="#1A1A2E" opacity="0.75"/>
+                <ellipse cx="105" cy="118" rx="5" ry="3" fill="#0B1B33" opacity="0.75"/>
+                <ellipse cx="151" cy="118" rx="5" ry="3" fill="#0B1B33" opacity="0.75"/>
               </svg>
             </div>
           )}
@@ -82,13 +82,13 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.8, duration: 0.4 }}
-                  style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, fontSize: "38px", color, lineHeight: 1 }}
+                  style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "38px", color, lineHeight: 1 }}
                 >
                   {overallScore}<span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "16px", color, marginLeft: "2px" }}>%</span>
                 </motion.strong>
               </div>
             </div>
-            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#6B6B7A", marginTop: "8px" }}>
+            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#5A6B85", marginTop: "8px" }}>
               {t("results.overall_score", "Overall Score")}
             </span>
           </div>
@@ -98,7 +98,7 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
             <span
               className="inline-flex items-center gap-2 self-start"
               style={{
-                background: "#E6F1ED", color: "#5B9A8B",
+                background: "#E6F1ED", color: "#2E8B6B",
                 padding: "6px 14px", borderRadius: "999px",
                 fontFamily: "var(--font-dm-sans)", fontSize: "12px", fontWeight: 500,
               }}
@@ -107,17 +107,17 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
               {statusText}
             </span>
 
-            <div style={{ fontFamily: "var(--font-cormorant)", fontWeight: 400, fontSize: "28px", color: "#1A1A2E", lineHeight: 1.15 }}>
-              {t("results.skin_type", "Skin type")} — <em style={{ fontStyle: "italic", color: "#E8728A" }}>{t(`scan.skin_types.${skinType}`, skinType)}</em>
+            <div style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "28px", color: "#0B1B33", lineHeight: 1.15 }}>
+              {t("results.skin_type", "Skin type")} — <em style={{ fontStyle: "italic", color: "#2C5BFF" }}>{t(`scan.skin_types.${skinType}`, skinType)}</em>
             </div>
 
             <div className="flex gap-4 flex-wrap">
               {[
-                { cls: "good", color: "#5B9A8B", label: `${t("results.score_guide.good", "Good")} · 80–100` },
-                { cls: "normal", color: "#D4A053", label: `${t("results.score_guide.normal", "Normal")} · 40–79` },
-                { cls: "alert", color: "#E8728A", label: `${t("results.score_guide.needs_attention", "Needs attention")} · 0–39` },
+                { cls: "good", color: "#2E8B6B", label: `${t("results.score_guide.good", "Good")} · 80–100` },
+                { cls: "normal", color: "#C68A2E", label: `${t("results.score_guide.normal", "Normal")} · 40–79` },
+                { cls: "alert", color: "#2C5BFF", label: `${t("results.score_guide.needs_attention", "Needs attention")} · 0–39` },
               ].map((l) => (
-                <span key={l.cls} className="inline-flex items-center gap-2 whitespace-nowrap" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: "#6B6B7A" }}>
+                <span key={l.cls} className="inline-flex items-center gap-2 whitespace-nowrap" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", color: "#5A6B85" }}>
                   <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: l.color }} />
                   {l.label}
                 </span>
@@ -130,8 +130,8 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
         {summary && (
           <p
             style={{
-              borderTop: "1px solid rgba(26,26,46,0.10)", paddingTop: "22px",
-              fontFamily: "var(--font-inter)", fontSize: "15px", color: "#1A1A2E",
+              borderTop: "1px solid rgba(11,27,51,0.10)", paddingTop: "22px",
+              fontFamily: "var(--font-inter)", fontSize: "15px", color: "#0B1B33",
               lineHeight: 1.65, margin: 0,
             }}
             dangerouslySetInnerHTML={{ __html: summary }}

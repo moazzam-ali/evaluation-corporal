@@ -34,18 +34,18 @@ export const METRIC_ICONS = {
 export const INSIGHT_CATEGORIES = {
   strengths: {
     icon: CheckCircle,
-    color: "#5B9A8B",
-    borderClass: "border-l-[#5B9A8B]",
+    color: "#2E8B6B",
+    borderClass: "border-l-[#2E8B6B]",
   },
   concerns: {
     icon: AlertTriangle,
-    color: "#E8728A",
-    borderClass: "border-l-[#E8728A]",
+    color: "#2C5BFF",
+    borderClass: "border-l-[#2C5BFF]",
   },
   lifestyle: {
     icon: Leaf,
-    color: "#D4A053",
-    borderClass: "border-l-[#D4A053]",
+    color: "#C68A2E",
+    borderClass: "border-l-[#C68A2E]",
   },
   goals: {
     icon: Target,
