@@ -14,11 +14,16 @@ import { fullScanSchema, STEP_FIELD_NAMES, DEFAULT_VALUES } from "@/lib/schemas/
 
 import Step1PersonalInfo from "@/components/Steps/Step1PersonalInfo";
 import Step2PhysicalInfo from "@/components/Steps/Step2PhysicalInfo";
-import Step3HabitsInfo from "@/components/Steps/Step3HabitsInfo";
-import Step4FinalSubmission from "@/components/Steps/Step4FinalSubmission";
+import Step3DietNutrition from "@/components/Steps/Step3DietNutrition";
+import Step4ActivityHydration from "@/components/Steps/Step4ActivityHydration";
+import Step5HealthConditions from "@/components/Steps/Step5HealthConditions";
+import Step6GoalsCare from "@/components/Steps/Step6GoalsCare";
+import Step7FinalSubmission from "@/components/Steps/Step7FinalSubmission";
 
 const STEP_COMPONENTS = [
-  Step1PersonalInfo, Step2PhysicalInfo, Step3HabitsInfo, Step4FinalSubmission,
+  Step1PersonalInfo, Step2PhysicalInfo, Step3DietNutrition,
+  Step4ActivityHydration, Step5HealthConditions, Step6GoalsCare,
+  Step7FinalSubmission,
 ];
 
 const TOTAL_STEPS = STEP_COMPONENTS.length;
@@ -26,8 +31,11 @@ const TOTAL_STEPS = STEP_COMPONENTS.length;
 const STEP_META = [
   { key: "step1", label: "Personal Info", title: "Personal", titleEm: "information", sub: "Tell us about yourself — we use this to tailor your report and reach you with results." },
   { key: "step2", label: "Physical Info", title: "Physical", titleEm: "information", sub: "Your body measurements help us calculate your health metrics accurately." },
-  { key: "step3", label: "Habits", title: "Lifestyle &", titleEm: "health", sub: "Diet, exercise, and daily habits — the inputs that shape your plan." },
-  { key: "step4", label: "Review", title: "Ready to", titleEm: "send?", sub: "Review your information and make sure everything is correct." },
+  { key: "step3", label: "Diet & Nutrition", title: "Diet &", titleEm: "nutrition", sub: "What you eat shapes everything — we start here." },
+  { key: "step4", label: "Activity", title: "Activity &", titleEm: "hydration", sub: "How you move and how much you drink — two big levers." },
+  { key: "step5", label: "Health", title: "Health", titleEm: "conditions", sub: "Select anything that applies — we use this to tailor product recommendations." },
+  { key: "step6", label: "Goals", title: "Goals &", titleEm: "care", sub: "What you're aiming for, and what you're already doing." },
+  { key: "step7", label: "Review", title: "Ready to", titleEm: "send?", sub: "Review your information and make sure everything is correct." },
 ];
 
 export default function ScanPage() {
@@ -209,7 +217,7 @@ function ScanPageInner() {
             {t("scan.complete_title", "Submission complete!")}
           </h2>
           <p className="mb-6 text-[14px] leading-relaxed text-[#5A6B85] whitespace-pre-line" style={{ fontFamily: "var(--font-inter)" }}>
-            {t("scan.step4.open_results", "Hello {{customerName}},\n\nThank you for completing the questionnaire and trusting us with your body assessment!\n\nVery soon, the person who invited you to the study will contact you to share the report results.\n\nCompleting this information is the first step. We will be in touch with you soon!\n\nKind regards.", { customerName })}
+            {t("scan.step7.open_results", "Hello {{customerName}},\n\nThank you for completing the questionnaire and trusting us with your body assessment!\n\nVery soon, the person who invited you to the study will contact you to share the report results.\n\nCompleting this information is the first step. We will be in touch with you soon!\n\nKind regards.", { customerName })}
           </p>
           <div className="mt-6">
             <a
