@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Nutritional",
+    "brand": "Evaluación Corporal",
     "home": "Ana Sayfa",
     "scan": "Taramayı Başlat",
     "config": "Ayarlar",
@@ -33,14 +33,12 @@
   "landing": {
     "cta": "Ücretsiz Taramayı Başlat",
     "hero_cta": "Ücretsiz taramanı başlat",
-
     "nav_product": "Ürün",
     "nav_how": "Nasıl çalışır",
     "nav_science": "Bilim",
     "nav_pricing": "Fiyatlandırma",
     "nav_coaches": "Koçlar için",
     "nav_signin": "Giriş yap",
-
     "hero_badge_new": "YENİ",
     "hero_badge": "Vücut kompozisyonu taraması · beta aşamasında",
     "hero_title_1": "Vücudunu gör.",
@@ -50,9 +48,7 @@
     "hero_trust_1": "Kart gerekmez · beta boyunca ücretsiz",
     "hero_trust_2": "Yükleme sırasında EXIF verileri temizlenir",
     "hero_trust_3": "GDPR uyumlu",
-
     "trust_strip": "Basında yer aldı · iş birliği yaptı",
-
     "stats_1_value": "98%",
     "stats_1_label": "Kullanıcıların ilk taramalarını 6 dakikadan kısa sürede tamamladı.",
     "stats_2_value": "3,5×",
@@ -61,7 +57,6 @@
     "stats_3_label": "Her taramada analiz edilen vücut, beslenme ve yaşam tarzı sinyali.",
     "stats_4_value": "12",
     "stats_4_label": "Dil — İngilizce, ES, DE, FR, JP genelinde tam yerelleştirme.",
-
     "services_label": "NELER OKUYORUZ",
     "services_title_1": "Altı alan.",
     "services_title_2": "On iki sinyal.",
@@ -85,7 +80,6 @@
     "service_plan_body": "Taramanız tamamlandığında bugünün tabağını, bu haftanın antrenmanını ve takviye paketinizi oluşturuyoruz. Dört hafta sonra tekrar tarayın — gerçekten değişen şeylere göre ayarlıyoruz.",
     "service_plan_cta_1": "Motor nasıl çalışır",
     "service_plan_cta_2": "Bilimi oku",
-
     "how_label": "NASIL ÇALIŞIR",
     "how_title_1": "Dört adım.",
     "how_title_2": "Altı dakika.",
@@ -101,7 +95,6 @@
     "how_step4_num": "04",
     "how_step4_title": "Takip et",
     "how_step4_text": "Öğünleri kaydedin, antrenmanları tamamlayın. 4 hafta sonra tekrar tarayın. Eğrilerin değiştiğini izleyin.",
-
     "testimonials_label": "KULLANICI SONUÇLARI",
     "testimonials_title_1": "Girişimciler ve sporcular,",
     "testimonials_title_2": "kayıt altında",
@@ -123,14 +116,12 @@
     "testimonial_5_text": "Takviye paketi net görüşlü — ve doğru. Üç ürün, hepsi okudukları bir şeye bağlı.",
     "testimonial_5_name": "Léa Morel",
     "testimonial_5_role": "Eczacı, Lyon",
-
     "cta_label": "BETA BOYUNCA ÜCRETSİZ",
     "cta_title_1": "İlk taramanız",
     "cta_title_2": "altı dakika",
     "cta_body": "Üç fotoğraf, kısa bir anket ve kahveniz soğumadan kompozisyon okumanız, bugünün tabağı ve bu haftanın antrenmanı elinizde olacak.",
     "cta_primary": "Ücretsiz taramanı başlat",
     "cta_secondary": "Bir koçla konuş",
-
     "footer_tagline": "Bilim, tasarım ve yapay zeka ile daha sağlıklı bedenler inşa etmek.",
     "footer_col_product": "ÜRÜN",
     "footer_col_company": "ŞİRKET",
@@ -142,9 +133,8 @@
     "footer_contact_email": "hello@nutritional.app",
     "footer_contact_phone": "+1 415 762 8841",
     "footer_contact_city": "San Francisco, CA",
-    "footer_copyright": "© 2026 Nutritional. Tüm hakları saklıdır.",
+    "footer_copyright": "© 2026 Evaluación Corporal. Tüm hakları saklıdır.",
     "footer_disclaimer": "Yapay zeka tahmini · Tıbbi tavsiye değildir.",
-
     "score_label": "Puan",
     "tier_good": "İyi",
     "tier_normal": "Normal",

@@ -1,6 +1,6 @@
 {
   "nav": {
-    "brand": "Nutritional",
+    "brand": "Evaluación Corporal",
     "home": "Accueil",
     "scan": "Lancer le Scan",
     "config": "Configuration",
@@ -33,14 +33,12 @@
   "landing": {
     "cta": "Scan Gratuit",
     "hero_cta": "Lancez votre scan gratuit",
-
     "nav_product": "Produit",
     "nav_how": "Comment ça marche",
     "nav_science": "Science",
     "nav_pricing": "Tarifs",
     "nav_coaches": "Pour les coachs",
     "nav_signin": "Connexion",
-
     "hero_badge_new": "NOUVEAU",
     "hero_badge": "Scan de composition corporelle · en bêta",
     "hero_title_1": "Voyez votre corps.",
@@ -50,9 +48,7 @@
     "hero_trust_1": "Sans carte · gratuit pendant la bêta",
     "hero_trust_2": "EXIF supprimé à l'envoi",
     "hero_trust_3": "Compatible RGPD",
-
     "trust_strip": "Mentionné par · partenaire de",
-
     "stats_1_value": "98 %",
     "stats_1_label": "Des utilisateurs terminent leur premier scan en moins de 6 minutes.",
     "stats_2_value": "3,5×",
@@ -61,7 +57,6 @@
     "stats_3_label": "Signaux corporels, nutritionnels et de mode de vie analysés par scan.",
     "stats_4_value": "12",
     "stats_4_label": "Langues — localisation complète en anglais, ES, DE, FR, JP.",
-
     "services_label": "CE QUE NOUS LISONS",
     "services_title_1": "Six domaines.",
     "services_title_2": "Douze signaux.",
@@ -85,7 +80,6 @@
     "service_plan_body": "Une fois votre scan terminé, nous générons l'assiette du jour, l'entraînement de la semaine et votre pile de compléments. Refaites un scan dans quatre semaines — nous ajustons en fonction de ce qui a réellement bougé.",
     "service_plan_cta_1": "Comment fonctionne le moteur",
     "service_plan_cta_2": "Lire la science",
-
     "how_label": "COMMENT ÇA MARCHE",
     "how_title_1": "Quatre étapes.",
     "how_title_2": "Six minutes.",
@@ -101,7 +95,6 @@
     "how_step4_num": "04",
     "how_step4_title": "Suivre",
     "how_step4_text": "Enregistrez les repas, cochez les séances. Refaites un scan dans 4 semaines. Observez les courbes évoluer.",
-
     "testimonials_label": "RÉSULTATS CLIENTS",
     "testimonials_title_1": "Entrepreneurs et athlètes,",
     "testimonials_title_2": "témoignent",
@@ -123,14 +116,12 @@
     "testimonial_5_text": "La pile de compléments est tranchée — et précise. Trois produits, tous liés à quelque chose qu'ils ont détecté.",
     "testimonial_5_name": "Léa Morel",
     "testimonial_5_role": "Pharmacienne, Lyon",
-
     "cta_label": "GRATUIT PENDANT LA BÊTA",
     "cta_title_1": "Votre premier scan prend",
     "cta_title_2": "six minutes",
     "cta_body": "Trois photos, un court questionnaire, et vous aurez votre bilan de composition, l'assiette du jour et l'entraînement de la semaine avant que votre café ne refroidisse.",
     "cta_primary": "Lancez votre scan gratuit",
     "cta_secondary": "Parler à un coach",
-
     "footer_tagline": "Des corps plus sains grâce à la science, au design et à l'IA.",
     "footer_col_product": "PRODUIT",
     "footer_col_company": "ENTREPRISE",
@@ -142,9 +133,8 @@
     "footer_contact_email": "hello@nutritional.app",
     "footer_contact_phone": "+1 415 762 8841",
     "footer_contact_city": "San Francisco, CA",
-    "footer_copyright": "© 2026 Nutritional. Tous droits réservés.",
+    "footer_copyright": "© 2026 Evaluación Corporal. Tous droits réservés.",
     "footer_disclaimer": "Estimation IA · Ne constitue pas un avis médical.",
-
     "score_label": "Score",
     "tier_good": "Bon",
     "tier_normal": "Normal",

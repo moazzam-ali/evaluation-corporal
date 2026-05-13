@@ -89,7 +89,7 @@ export function buildElasticDocuments({
       account_id: accountId.toString(),
       contact_id: contactId.toString(),
       language: language || "en",
-      typeform: "Nutritional Body Assessment",
+      typeform: "Evaluación Corporal Body Assessment",
       created_timestamp: Math.floor(now.getTime() / 1000),
       created_month: now.toISOString().slice(0, 7).replace("-", ""),
       answers: answersText,

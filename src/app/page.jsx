@@ -706,7 +706,7 @@ function LandingPageInner() {
               <Link href="/" className="inline-flex items-center gap-2.5">
                 <Image src="/logo.svg" alt="" width={28} height={28} className="w-7 h-7 shrink-0" />
                 <span className="text-xl tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
-                  {t("nav.brand")}<span style={{ color: "#2C5BFF" }}>.</span>
+                  {t("nav.brand")}
                 </span>
               </Link>
               <p className="mt-6 text-xl leading-[1.35] max-w-[26ch] tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
