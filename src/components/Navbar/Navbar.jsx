@@ -43,11 +43,9 @@ export default function Navbar() {
 
   const navLinks = isLanding
     ? [
-        { label: t("landing.nav_product", "Product"), href: "#services" },
+        { label: t("landing.nav_metrics", "Metrics"), href: "#metrics" },
         { label: t("landing.nav_how", "How it works"), href: "#how" },
         { label: t("landing.nav_science", "Science"), href: "#science" },
-        { label: t("landing.nav_pricing", "Pricing"), href: "#pricing" },
-        { label: t("landing.nav_coaches", "For coaches"), href: "#coaches" },
       ]
     : [
         { label: t("nav.home", "Home"), href: "/" },
