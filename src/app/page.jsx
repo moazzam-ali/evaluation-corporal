@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { useRef, Suspense } from "react";
 
 /* ── tiny helpers ──────────────────────────────────────────────── */
@@ -612,11 +613,7 @@ function LandingPageInner() {
             {/* Brand */}
             <div>
               <Link href="/" className="inline-flex items-center gap-2.5">
-                <svg width={28} height={28} viewBox="0 0 32 32" fill="none">
-                  <rect x="0" y="0" width="32" height="32" rx="8" fill="#2C5BFF" />
-                  <path d="M9 22 L9 10 L14 10 L19 18 L19 10 L23 10 L23 22 L18 22 L13 14 L13 22 Z" fill="white" />
-                  <circle cx="25" cy="9" r="2.5" fill="#6FA0FF" />
-                </svg>
+                <Image src="/logo.svg" alt="" width={28} height={28} className="w-7 h-7 shrink-0" />
                 <span className="text-xl tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
                   {t("nav.brand")}<span style={{ color: "#2C5BFF" }}>.</span>
                 </span>

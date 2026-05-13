@@ -160,7 +160,7 @@
     "rail_eyebrow": "Body assessment",
     "rail_title_1": "Tell us about",
     "rail_title_2": "your body.",
-    "rail_sub": "Three short steps. Takes about five minutes — your health assessment is built from this.",
+    "rail_sub": "Seven short steps. Takes about five minutes — your health assessment is built from this.",
     "step_label": "Step",
     "time_estimate": "about 5 min total",
     "access_title": "Access required",
@@ -194,11 +194,7 @@
       "display_title_em": "information",
       "display_sub": "Your body measurements help us calculate your health metrics accurately.",
       "sex": "Sex",
-      "sex_options": {
-        "select": "Select your gender",
-        "male": "Masculine",
-        "female": "Feminine"
-      },
+      "sex_options": { "select": "Select your gender", "male": "Masculine", "female": "Feminine" },
       "weight": "Weight (kg)",
       "weight_placeholder": "Enter your weight",
       "height": "Height (cm)",
@@ -212,10 +208,10 @@
       "hip_help": "Used to calculate your waist-to-hip ratio."
     },
     "step3": {
-      "nav": "Habits",
-      "display_title": "Lifestyle &",
-      "display_title_em": "health",
-      "display_sub": "Diet, exercise, and daily habits — the inputs that shape your plan.",
+      "nav": "Diet & Nutrition",
+      "display_title": "Diet &",
+      "display_title_em": "nutrition",
+      "display_sub": "What you eat shapes everything — we start here.",
       "select": "Select...",
       "yes": "Yes",
       "no": "No",
@@ -233,24 +229,14 @@
       },
       "has_breakfast": "Do you usually have breakfast?",
       "breakfast_description": "What kind of breakfast do you usually have?",
-      "breakfast_description_placeholder": "Briefly explain the combination of foods you usually eat.",
-      "health_conditions": "Select one or more of the following conditions:",
-      "health_conditions_options": {
-        "low_bone_density": "Low bone density",
-        "constipation": "Constipation",
-        "athlete_supplements": "Athlete who takes sports supplements",
-        "high_cholesterol": "High cholesterol",
-        "few_vegetables": "Eats very few vegetables",
-        "low_energy": "Feels low on energy during the day",
-        "trouble_sleeping": "Has trouble sleeping",
-        "poor_mental_agility": "Has little mental agility",
-        "inflammation": "Often suffers from inflammation",
-        "skin_cellulite": "Wants to improve the appearance of skin and/or cellulite",
-        "little_water": "Drinks little water",
-        "demanding_job": "Has a very demanding and physically exhausting job",
-        "belly_fat": "Wants to reduce abdominal fat",
-        "circulation_problems": "Has circulation problems"
-      },
+      "breakfast_description_placeholder": "Briefly explain the combination of foods you usually eat."
+    },
+    "step4": {
+      "nav": "Activity",
+      "display_title": "Activity &",
+      "display_title_em": "hydration",
+      "display_sub": "How you move and how much you drink — two big levers.",
+      "select": "Select...",
       "exercise_level": "What is your level of physical exercise?",
       "exercise_level_options": {
         "little": "Little or no exercise / Office work",
@@ -271,7 +257,40 @@
         "less_than_2": "Less than 2 liters a day",
         "about_2": "Around 2 liters a day",
         "more_than_2": "More than 2 liters a day"
+      }
+    },
+    "step5": {
+      "nav": "Health",
+      "display_title": "Health",
+      "display_title_em": "conditions",
+      "display_sub": "Select anything that applies — we use this to tailor product recommendations.",
+      "health_conditions": "Select one or more of the following conditions:",
+      "health_conditions_options": {
+        "low_bone_density": "Low bone density",
+        "constipation": "Constipation",
+        "athlete_supplements": "Athlete who takes sports supplements",
+        "high_cholesterol": "High cholesterol",
+        "few_vegetables": "Eats very few vegetables",
+        "low_energy": "Feels low on energy during the day",
+        "trouble_sleeping": "Has trouble sleeping",
+        "poor_mental_agility": "Has little mental agility",
+        "inflammation": "Often suffers from inflammation",
+        "skin_cellulite": "Wants to improve the appearance of skin and/or cellulite",
+        "little_water": "Drinks little water",
+        "demanding_job": "Has a very demanding and physically exhausting job",
+        "belly_fat": "Wants to reduce abdominal fat",
+        "circulation_problems": "Has circulation problems"
       },
+      "selected_count": "{{count}} condition(s) selected"
+    },
+    "step6": {
+      "nav": "Goals",
+      "display_title": "Goals &",
+      "display_title_em": "care",
+      "display_sub": "What you're aiming for, and what you're already doing.",
+      "select": "Select...",
+      "yes": "Yes",
+      "no": "No",
       "goal": "What goal would you like to achieve?",
       "goal_options": {
         "weight_control": "Control my weight and reduce body fat percentage",
@@ -288,7 +307,7 @@
       "privacy_policy_link": "Read our Privacy Policy",
       "disclaimer": "This self-assessment is not intended for diagnostic or therapeutic purposes. It is for informational purposes only and does not replace in any case the evaluation of a healthcare professional."
     },
-    "step4": {
+    "step7": {
       "nav": "Review",
       "display_title": "Ready to",
       "display_title_em": "send?",

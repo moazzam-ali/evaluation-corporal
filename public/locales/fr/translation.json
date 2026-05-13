@@ -160,7 +160,7 @@
     "rail_eyebrow": "Évaluation corporelle",
     "rail_title_1": "Parlez-nous de",
     "rail_title_2": "votre corps.",
-    "rail_sub": "Trois courtes étapes. Environ cinq minutes — votre évaluation de santé est construite à partir de cela.",
+    "rail_sub": "Sept courtes étapes. Environ cinq minutes — votre évaluation de santé est construite à partir de cela.",
     "step_label": "Étape",
     "time_estimate": "environ 5 min au total",
     "access_title": "Accès requis",
@@ -212,10 +212,10 @@
       "hip_help": "Utilisé pour calculer votre rapport taille-hanches."
     },
     "step3": {
-      "nav": "Habitudes",
-      "display_title": "Mode de vie et",
-      "display_title_em": "santé",
-      "display_sub": "Alimentation, exercice et habitudes quotidiennes — les données qui façonnent votre programme.",
+      "nav": "Alimentation",
+      "display_title": "Alimentation et",
+      "display_title_em": "nutrition",
+      "display_sub": "Ce que vous mangez conditionne tout — on commence par là.",
       "select": "Sélectionner...",
       "yes": "Oui",
       "no": "Non",
@@ -233,24 +233,14 @@
       },
       "has_breakfast": "Prenez-vous habituellement un petit-déjeuner ?",
       "breakfast_description": "Quel type de petit-déjeuner prenez-vous habituellement ?",
-      "breakfast_description_placeholder": "Décrivez brièvement la combinaison d'aliments que vous mangez habituellement.",
-      "health_conditions": "Sélectionnez une ou plusieurs des conditions suivantes :",
-      "health_conditions_options": {
-        "low_bone_density": "Faible densité osseuse",
-        "constipation": "Constipation",
-        "athlete_supplements": "Sportif prenant des compléments sportifs",
-        "high_cholesterol": "Cholestérol élevé",
-        "few_vegetables": "Mange très peu de légumes",
-        "low_energy": "Se sent fatigué pendant la journée",
-        "trouble_sleeping": "A des difficultés à dormir",
-        "poor_mental_agility": "A peu d'agilité mentale",
-        "inflammation": "Souffre souvent d'inflammation",
-        "skin_cellulite": "Souhaite améliorer l'apparence de la peau et/ou de la cellulite",
-        "little_water": "Boit peu d'eau",
-        "demanding_job": "A un travail très exigeant et physiquement épuisant",
-        "belly_fat": "Souhaite réduire la graisse abdominale",
-        "circulation_problems": "A des problèmes de circulation"
-      },
+      "breakfast_description_placeholder": "Décrivez brièvement la combinaison d'aliments que vous mangez habituellement."
+    },
+    "step4": {
+      "nav": "Activité",
+      "display_title": "Activité et",
+      "display_title_em": "hydratation",
+      "display_sub": "Comment vous bougez et combien vous buvez — deux leviers majeurs.",
+      "select": "Sélectionner...",
       "exercise_level": "Quel est votre niveau d'exercice physique ?",
       "exercise_level_options": {
         "little": "Peu ou pas d'exercice / Travail de bureau",
@@ -271,7 +261,40 @@
         "less_than_2": "Moins de 2 litres par jour",
         "about_2": "Environ 2 litres par jour",
         "more_than_2": "Plus de 2 litres par jour"
+      }
+    },
+    "step5": {
+      "nav": "Santé",
+      "display_title": "Conditions",
+      "display_title_em": "de santé",
+      "display_sub": "Sélectionnez ce qui s'applique — nous utilisons cela pour adapter les recommandations de produits.",
+      "health_conditions": "Sélectionnez une ou plusieurs des conditions suivantes :",
+      "health_conditions_options": {
+        "low_bone_density": "Faible densité osseuse",
+        "constipation": "Constipation",
+        "athlete_supplements": "Sportif prenant des compléments sportifs",
+        "high_cholesterol": "Cholestérol élevé",
+        "few_vegetables": "Mange très peu de légumes",
+        "low_energy": "Se sent fatigué pendant la journée",
+        "trouble_sleeping": "A des difficultés à dormir",
+        "poor_mental_agility": "A peu d'agilité mentale",
+        "inflammation": "Souffre souvent d'inflammation",
+        "skin_cellulite": "Souhaite améliorer l'apparence de la peau et/ou de la cellulite",
+        "little_water": "Boit peu d'eau",
+        "demanding_job": "A un travail très exigeant et physiquement épuisant",
+        "belly_fat": "Souhaite réduire la graisse abdominale",
+        "circulation_problems": "A des problèmes de circulation"
       },
+      "selected_count": "{{count}} condition(s) sélectionnée(s)"
+    },
+    "step6": {
+      "nav": "Objectifs",
+      "display_title": "Objectifs et",
+      "display_title_em": "soins",
+      "display_sub": "Ce que vous visez, et ce que vous faites déjà.",
+      "select": "Sélectionner...",
+      "yes": "Oui",
+      "no": "Non",
       "goal": "Quel objectif souhaitez-vous atteindre ?",
       "goal_options": {
         "weight_control": "Contrôler mon poids et réduire mon pourcentage de graisse corporelle",
@@ -288,7 +311,7 @@
       "privacy_policy_link": "Lire notre Politique de Confidentialité",
       "disclaimer": "Cette auto-évaluation n'a pas de but diagnostique ni thérapeutique. Elle est uniquement informative et ne remplace en aucun cas l'évaluation d'un professionnel de santé."
     },
-    "step4": {
+    "step7": {
       "nav": "Vérification",
       "display_title": "Prêt à",
       "display_title_em": "envoyer ?",

@@ -160,7 +160,7 @@
     "rail_eyebrow": "Körperbewertung",
     "rail_title_1": "Erzählen Sie uns von",
     "rail_title_2": "Ihrem Körper.",
-    "rail_sub": "Drei kurze Schritte. Etwa fünf Minuten — Ihre Gesundheitsbewertung wird daraus erstellt.",
+    "rail_sub": "Sieben kurze Schritte. Etwa fünf Minuten — Ihre Gesundheitsbewertung wird daraus erstellt.",
     "step_label": "Schritt",
     "time_estimate": "ca. 5 Min. insgesamt",
     "access_title": "Zugang erforderlich",
@@ -212,10 +212,10 @@
       "hip_help": "Wird zur Berechnung Ihres Taille-Hüft-Verhältnisses verwendet."
     },
     "step3": {
-      "nav": "Gewohnheiten",
-      "display_title": "Lebensstil &",
-      "display_title_em": "Gesundheit",
-      "display_sub": "Ernährung, Bewegung und tägliche Gewohnheiten — die Daten, die Ihren Plan formen.",
+      "nav": "Ernährung",
+      "display_title": "Ernährung &",
+      "display_title_em": "Nahrung",
+      "display_sub": "Was Sie essen, beeinflusst alles — wir beginnen hier.",
       "select": "Auswählen...",
       "yes": "Ja",
       "no": "Nein",
@@ -233,24 +233,14 @@
       },
       "has_breakfast": "Frühstücken Sie normalerweise?",
       "breakfast_description": "Was frühstücken Sie normalerweise?",
-      "breakfast_description_placeholder": "Beschreiben Sie kurz die Lebensmittelkombination, die Sie normalerweise essen.",
-      "health_conditions": "Wählen Sie eine oder mehrere der folgenden Bedingungen:",
-      "health_conditions_options": {
-        "low_bone_density": "Geringe Knochendichte",
-        "constipation": "Verstopfung",
-        "athlete_supplements": "Sportler, der Sporternährung nimmt",
-        "high_cholesterol": "Hoher Cholesterinspiegel",
-        "few_vegetables": "Isst sehr wenig Gemüse",
-        "low_energy": "Fühlt sich tagsüber energielos",
-        "trouble_sleeping": "Hat Schlafprobleme",
-        "poor_mental_agility": "Hat wenig geistige Beweglichkeit",
-        "inflammation": "Leidet häufig an Entzündungen",
-        "skin_cellulite": "Möchte das Erscheinungsbild der Haut und/oder Cellulite verbessern",
-        "little_water": "Trinkt wenig Wasser",
-        "demanding_job": "Hat einen sehr anspruchsvollen und körperlich erschöpfenden Beruf",
-        "belly_fat": "Möchte Bauchfett reduzieren",
-        "circulation_problems": "Hat Kreislaufprobleme"
-      },
+      "breakfast_description_placeholder": "Beschreiben Sie kurz die Lebensmittelkombination, die Sie normalerweise essen."
+    },
+    "step4": {
+      "nav": "Aktivität",
+      "display_title": "Aktivität &",
+      "display_title_em": "Flüssigkeit",
+      "display_sub": "Wie Sie sich bewegen und wie viel Sie trinken — zwei große Hebel.",
+      "select": "Auswählen...",
       "exercise_level": "Wie ist Ihr körperliches Aktivitätsniveau?",
       "exercise_level_options": {
         "little": "Wenig oder kein Sport / Büroarbeit",
@@ -271,7 +261,40 @@
         "less_than_2": "Weniger als 2 Liter pro Tag",
         "about_2": "Etwa 2 Liter pro Tag",
         "more_than_2": "Mehr als 2 Liter pro Tag"
+      }
+    },
+    "step5": {
+      "nav": "Gesundheit",
+      "display_title": "Gesundheits-",
+      "display_title_em": "zustand",
+      "display_sub": "Wählen Sie aus, was zutrifft — wir nutzen dies, um Produktempfehlungen anzupassen.",
+      "health_conditions": "Wählen Sie eine oder mehrere der folgenden Bedingungen:",
+      "health_conditions_options": {
+        "low_bone_density": "Geringe Knochendichte",
+        "constipation": "Verstopfung",
+        "athlete_supplements": "Sportler, der Sporternährung nimmt",
+        "high_cholesterol": "Hoher Cholesterinspiegel",
+        "few_vegetables": "Isst sehr wenig Gemüse",
+        "low_energy": "Fühlt sich tagsüber energielos",
+        "trouble_sleeping": "Hat Schlafprobleme",
+        "poor_mental_agility": "Hat wenig geistige Beweglichkeit",
+        "inflammation": "Leidet häufig an Entzündungen",
+        "skin_cellulite": "Möchte das Erscheinungsbild der Haut und/oder Cellulite verbessern",
+        "little_water": "Trinkt wenig Wasser",
+        "demanding_job": "Hat einen sehr anspruchsvollen und körperlich erschöpfenden Beruf",
+        "belly_fat": "Möchte Bauchfett reduzieren",
+        "circulation_problems": "Hat Kreislaufprobleme"
       },
+      "selected_count": "{{count}} Zustand/Zustände ausgewählt"
+    },
+    "step6": {
+      "nav": "Ziele",
+      "display_title": "Ziele &",
+      "display_title_em": "Pflege",
+      "display_sub": "Was Sie anstreben und was Sie bereits tun.",
+      "select": "Auswählen...",
+      "yes": "Ja",
+      "no": "Nein",
       "goal": "Welches Ziel möchten Sie erreichen?",
       "goal_options": {
         "weight_control": "Mein Gewicht kontrollieren und den Körperfettanteil reduzieren",
@@ -288,7 +311,7 @@
       "privacy_policy_link": "Unsere Datenschutzrichtlinie lesen",
       "disclaimer": "Diese Selbstbewertung dient weder diagnostischen noch therapeutischen Zwecken. Sie ist nur informativ und ersetzt in keinem Fall die Beurteilung durch einen Arzt."
     },
-    "step4": {
+    "step7": {
       "nav": "Überprüfung",
       "display_title": "Bereit zum",
       "display_title_em": "Absenden?",
