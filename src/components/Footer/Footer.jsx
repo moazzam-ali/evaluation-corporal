@@ -1,0 +1,32 @@
+"use client";
+
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
+
+export default function Footer() {
+  const { t } = useTranslation();
+
+  return (
+    <footer style={{ borderTop: "1px solid var(--border-hex, #E3E8F0)", background: "var(--canvas, #F4F6FB)" }}>
+      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <p style={{ fontFamily: "var(--font-inter)", fontSize: "13px", color: "var(--muted-fg, #5A6B85)" }}>
+            &copy; {new Date().getFullYear()} {t("nav.brand", "Nutritional")}. {t("footer.rights", "All rights reserved.")}
+          </p>
+          <div className="flex gap-4">
+            <Link href="/privacy" style={{ fontFamily: "var(--font-inter)", fontSize: "13px", color: "var(--muted-fg, #5A6B85)", transition: "color 200ms" }}>
+              {t("footer.privacy", "Privacy Policy")}
+            </Link>
+          </div>
+        </div>
+        <p style={{
+          marginTop: "16px", textAlign: "center",
+          fontFamily: "var(--font-inter)", fontSize: "11px", color: "var(--muted-fg, #5A6B85)",
+          letterSpacing: "0.04em", lineHeight: 1.6,
+        }}>
+          {t("footer.disclaimer")}
+        </p>
+      </div>
+    </footer>
+  );
+}

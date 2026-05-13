@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 216 67% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 216 67% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 67% 13%;
+    --primary: 225 100% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 216 67% 13%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 27% 96%;
+    --muted-foreground: 214 20% 44%;
+    --accent: 224 100% 95%;
+    --accent-foreground: 225 75% 46%;
+    --destructive: 349 64% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 218 25% 90%;
+    --input: 218 25% 90%;
+    --ring: 225 100% 59%;
+    --radius: 0.625rem;
+    --chart-1: 225 100% 59%;
+    --chart-2: 216 67% 13%;
+    --chart-3: 214 100% 72%;
+    --chart-4: 37 63% 47%;
+    --chart-5: 155 50% 36%;
+    --status-good: 155 50% 36%;
+    --status-normal: 37 63% 47%;
+    --status-alert: 349 64% 56%;
+
+    /* Brand core (flat hex) — Nutritional blue/dark theme */
+    --ink: #0B1B33;
+    --ink-soft: #1B2A47;
+    --ink-deep: #060F1F;
+    --primary-hex: #2C5BFF;
+    --primary-deep: #1F44CC;
+    --primary-soft: #E6ECFF;
+    --primary-tint: #F2F5FF;
+    --sky: #6FA0FF;
+
+    /* Neutral palette */
+    --canvas: #F4F6FB;
+    --surface: #FFFFFF;
+    --surface-2: #F8FAFE;
+    --muted-fg: #5A6B85;
+    --border-hex: #E3E8F0;
+    --border-strong: #C9D2E0;
+
+    /* Status backgrounds */
+    --status-good-hex: #2E8B6B;
+    --status-good-bg: #E1F2EA;
+    --status-normal-hex: #C68A2E;
+    --status-normal-bg: #FBF1DD;
+    --status-alert-hex: #D8455B;
+    --status-alert-bg: #FBE2E5;
+
+    /* Radii */
+    --r-sm: 6px;
+    --r-md: 10px;
+    --r-lg: 14px;
+    --r-xl: 20px;
+    --r-2xl: 28px;
+    --r-pill: 999px;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(11, 27, 51, 0.04);
+    --shadow-sm: 0 2px 6px rgba(11, 27, 51, 0.06);
+    --shadow-md: 0 8px 20px rgba(11, 27, 51, 0.07);
+    --shadow-lg: 0 18px 40px rgba(11, 27, 51, 0.10);
+    --shadow-blue: 0 12px 32px rgba(44, 91, 255, 0.28);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+    --dur-fast: 120ms;
+    --dur-base: 200ms;
+    --dur-slow: 320ms;
+  }
+
+  .dark {
+    --background: 220 45% 8%;
+    --foreground: 218 25% 95%;
+    --card: 220 40% 11%;
+    --card-foreground: 218 25% 95%;
+    --popover: 220 40% 11%;
+    --popover-foreground: 218 25% 95%;
+    --primary: 225 100% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 100% 72%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 30% 16%;
+    --muted-foreground: 218 15% 65%;
+    --accent: 220 40% 22%;
+    --accent-foreground: 225 100% 59%;
+    --destructive: 349 64% 35%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 30% 18%;
+    --input: 220 30% 18%;
+    --ring: 225 100% 59%;
+    --chart-1: 225 100% 59%;
+    --chart-2: 214 100% 72%;
+    --chart-3: 216 67% 30%;
+    --chart-4: 37 63% 47%;
+    --chart-5: 155 50% 36%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-foreground;
+    background: var(--canvas, #F4F6FB);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    color: var(--ink, #0B1B33);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ---- Scan form component styles (from design system) ---- */
+.scan-label {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 12px; font-weight: 500;
+  color: var(--ink, #0B1B33); letter-spacing: 0.02em;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.scan-input, .scan-textarea, .scan-select {
+  width: 100%;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 14px; color: var(--ink, #0B1B33);
+  background: white;
+  border: 1px solid var(--border-hex, #E3E8F0);
+  border-radius: 10px; padding: 12px 14px;
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+  outline: none;
+}
+.scan-input::placeholder, .scan-textarea::placeholder { color: var(--muted-fg, #5A6B85); }
+.scan-input:hover, .scan-textarea:hover, .scan-select:hover { border-color: var(--border-strong, #C9D2E0); }
+.scan-input:focus, .scan-textarea:focus, .scan-select:focus {
+  border-color: var(--primary-hex, #2C5BFF);
+  box-shadow: 0 0 0 4px rgba(44,91,255,0.12);
+}
+.scan-textarea { resize: vertical; min-height: 96px; line-height: 1.55; }
+.scan-select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'><path d='M6 8l4 4 4-4' stroke='%230B1B33' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
+}
+.scan-help {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 12px; color: var(--muted-fg, #5A6B85); line-height: 1.4;
+}
+.scan-error {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 12px; color: var(--status-alert-hex, #D8455B);
+}
+.scan-counter {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--primary-hex, #2C5BFF); background: var(--primary-soft, #E6ECFF);
+  padding: 2px 8px; border-radius: 999px;
+}
+
+/* Radio card */
+.scan-radio {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: #F8FAFE; border: 1.5px solid rgba(11,27,51,0.10);
+  border-radius: 12px;
+  font-family: var(--font-inter), system-ui, sans-serif; font-size: 14px; color: #0B1B33;
+  cursor: pointer; transition: border-color 180ms, background 180ms;
+  user-select: none;
+}
+.scan-radio:hover { border-color: rgba(11,27,51,0.16); }
+.scan-radio.is-checked { border-color: #2C5BFF; background: #E6ECFF; }
+.scan-radio-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid rgba(11,27,51,0.16); flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: border-color 180ms, background 180ms;
+}
+.scan-radio-dot::after {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  background: white; transform: scale(0); transition: transform 180ms cubic-bezier(0.22,1,0.36,1);
+}
+.scan-radio.is-checked .scan-radio-dot {
+  border-color: #2C5BFF; background: #2C5BFF;
+}
+.scan-radio.is-checked .scan-radio-dot::after { transform: scale(1); }
+
+/* Checkbox card */
+.scan-checkbox {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: #F8FAFE; border: 1.5px solid rgba(11,27,51,0.10);
+  border-radius: 12px;
+  font-family: var(--font-inter), system-ui, sans-serif; font-size: 14px; color: #0B1B33;
+  cursor: pointer; transition: border-color 180ms, background 180ms;
+  user-select: none;
+}
+.scan-checkbox:hover { border-color: rgba(11,27,51,0.16); }
+.scan-checkbox.is-checked { border-color: #2C5BFF; background: #E6ECFF; }
+.scan-checkbox.is-disabled { opacity: 0.4; pointer-events: none; }
+.scan-checkbox-box {
+  width: 18px; height: 18px; border-radius: 5px;
+  border: 1.5px solid rgba(11,27,51,0.16); flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: border-color 180ms, background 180ms;
+}
+.scan-checkbox-box svg { width: 12px; height: 12px; color: white; opacity: 0; transform: scale(0.8); transition: opacity 180ms, transform 180ms; }
+.scan-checkbox.is-checked .scan-checkbox-box { border-color: #2C5BFF; background: #2C5BFF; }
+.scan-checkbox.is-checked .scan-checkbox-box svg { opacity: 1; transform: scale(1); }
+
+/* Chip pill */
+.scan-chip {
+  position: relative; display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 14px 8px 12px;
+  background: white; border: 1.5px solid rgba(11,27,51,0.10);
+  border-radius: 999px;
+  font-family: var(--font-dm-sans), system-ui, sans-serif; font-size: 13px; font-weight: 500;
+  color: #0B1B33; cursor: pointer; transition: border-color 180ms, background 180ms;
+  user-select: none;
+}
+.scan-chip:hover { border-color: rgba(11,27,51,0.16); }
+.scan-chip.is-checked { border-color: #2C5BFF; background: #E6ECFF; color: #2C5BFF; }
+.scan-chip-tick {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid rgba(11,27,51,0.16);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: border-color 180ms, background 180ms;
+}
+.scan-chip-tick svg { width: 10px; height: 10px; color: white; opacity: 0; transition: opacity 180ms; }
+.scan-chip.is-checked .scan-chip-tick { border-color: #2C5BFF; background: #2C5BFF; }
+.scan-chip.is-checked .scan-chip-tick svg { opacity: 1; }
+
+/* Dotted background drift animation */
+@keyframes dotDrift {
+  from { background-position: 0 0; }
+  to { background-position: 28px 28px; }
+}
+
+/* Landing page animations */
+@keyframes arcSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes scanSweep {
+  0%   { background-position: 0 -30%; opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { background-position: 0 130%; opacity: 0; }
+}
+@keyframes floatA {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(44,91,255,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(44,91,255,0); }
+}
+@keyframes marqueeSlide {
+  to { transform: translateX(-50%); }
+}
+@keyframes targetPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}

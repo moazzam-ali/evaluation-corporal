@@ -1,0 +1,653 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { motion, useInView } from "framer-motion";
+import Link from "next/link";
+import { useRef, Suspense } from "react";
+
+/* ── tiny helpers ──────────────────────────────────────────────── */
+function Reveal({ children, className = "", delay = 0 }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/* ── Icon component (lucide-style) ─────────────────────────────── */
+function Icon({ name, size = 20, color = "currentColor", strokeWidth = 1.6 }) {
+  const props = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: color, strokeWidth, strokeLinecap: "round", strokeLinejoin: "round" };
+  const paths = {
+    arrow: <><path d="M5 12h14M13 5l7 7-7 7" /></>,
+    check: <path d="M5 13l4 4L19 7" />,
+    play: <polygon points="5 3 19 12 5 21 5 3" fill={color} stroke="none" />,
+    user: <><circle cx="12" cy="8" r="4" /><path d="M4 21v-1a8 8 0 0116 0v1" /></>,
+    posture: <><circle cx="12" cy="5" r="2" /><path d="M12 7v6M9 13h6M9 13l-2 8M15 13l2 8" /></>,
+    dumbbell: <><path d="M6 6v12M2 9v6M22 9v6M18 6v12M6 12h12" /></>,
+    droplet: <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0L12 2.69z" />,
+    moon: <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />,
+    leaf: <path d="M11 20A7 7 0 019.8 6.1C15.5 5 17 4.48 19.2 2.96c.5-.5 1-1 1-1s.4 5.4-1.5 9.4c-1.4 3-5 4.6-7.7 4.6 0 0-.5 4-3 4 0 0-3-1-1-7" />,
+    camera: <><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" /><circle cx="12" cy="13" r="4" /></>,
+    sparkle: <><path d="M12 2l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" /></>,
+    plan: <><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></>,
+    chart: <><path d="M3 3v18h18" /><path d="M7 14l4-4 4 4 5-5" /></>,
+    star: <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill={color} stroke="none" />,
+    flame: <path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z" />,
+    arrowUp: <><path d="M12 19V5M5 12l7-7 7 7" /></>,
+  };
+  return <svg {...props}>{paths[name] || null}</svg>;
+}
+
+/* ── Score Ring ─────────────────────────────────────────────────── */
+function ScoreRing({ value = 76, size = 120, stroke = 10, color = "var(--primary-hex)", track = "var(--muted)" }) {
+  const r = (size - stroke) / 2;
+  const c = 2 * Math.PI * r;
+  const offset = c - (value / 100) * c;
+  return (
+    <div style={{ position: "relative", width: size, height: size }}>
+      <svg width={size} height={size}>
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={track} strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={color} strokeWidth={stroke}
+          strokeDasharray={c} strokeDashoffset={offset} strokeLinecap="round"
+          transform={`rotate(-90 ${size / 2} ${size / 2})`} />
+      </svg>
+    </div>
+  );
+}
+
+/* ── Body Silhouette ───────────────────────────────────────────── */
+function BodySilhouette({ view = "front", width = 200, height = 380, fillColor, strokeColor, hotspots = [] }) {
+  const fill = fillColor || "rgba(44, 91, 255, 0.10)";
+  const stroke = strokeColor || "rgba(44, 91, 255, 0.45)";
+  const frontPath = "M100 20 C 88 20 80 30 80 44 C 80 56 86 64 92 68 L 88 76 C 70 80 56 90 54 110 L 50 150 C 48 162 50 174 56 184 L 60 200 L 56 240 C 56 250 60 258 64 264 L 60 320 C 60 332 64 344 70 354 L 76 366 L 90 366 L 92 354 L 90 320 L 92 270 L 100 270 L 108 270 L 110 320 L 108 354 L 110 366 L 124 366 L 130 354 C 136 344 140 332 140 320 L 136 264 C 140 258 144 250 144 240 L 140 200 L 144 184 C 150 174 152 162 150 150 L 146 110 C 144 90 130 80 112 76 L 108 68 C 114 64 120 56 120 44 C 120 30 112 20 100 20 Z";
+  return (
+    <div style={{ position: "relative", width, height }}>
+      <svg viewBox="0 0 200 380" width={width} height={height}>
+        <defs>
+          <linearGradient id={`bodyG-${view}`} x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stopColor={fill} />
+            <stop offset="1" stopColor="rgba(44, 91, 255, 0.04)" />
+          </linearGradient>
+        </defs>
+        <path d={frontPath} fill={`url(#bodyG-${view})`} stroke={stroke} strokeWidth="1" />
+        {hotspots.map((h, i) => (
+          <g key={i}>
+            <circle cx={h.x} cy={h.y} r="6" fill="white" stroke={h.color || "#2C5BFF"} strokeWidth="2" />
+            <circle cx={h.x} cy={h.y} r="3" fill={h.color || "#2C5BFF"} />
+            <circle cx={h.x} cy={h.y} r="10" fill={h.color || "#2C5BFF"} opacity="0.2">
+              <animate attributeName="r" values="6;14;6" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite" />
+            </circle>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+/* ── Radar Chart ───────────────────────────────────────────────── */
+function RadarChart({ t }) {
+  const labels = [
+    t("landing.radar_composition", "Composition"),
+    t("landing.radar_posture", "Posture"),
+    t("landing.radar_hydration", "Hydration"),
+    t("landing.radar_recovery", "Recovery"),
+    t("landing.radar_nutrition", "Nutrition"),
+    t("landing.radar_muscle", "Muscle"),
+  ];
+  const valsA = [0.62, 0.78, 0.45, 0.7, 0.6, 0.7];
+  const valsB = [0.78, 0.85, 0.62, 0.74, 0.72, 0.78];
+  const cx = 180, cy = 180, R = 120;
+  const pt = (v, i) => {
+    const a = (Math.PI * 2 / 6) * i - Math.PI / 2;
+    return [cx + Math.cos(a) * R * v, cy + Math.sin(a) * R * v];
+  };
+  const polyA = valsA.map((v, i) => pt(v, i).join(",")).join(" ");
+  const polyB = valsB.map((v, i) => pt(v, i).join(",")).join(" ");
+  return (
+    <svg width="360" height="360" viewBox="0 0 360 360">
+      {[0.25, 0.5, 0.75, 1].map(s => (
+        <polygon key={s} points={Array.from({ length: 6 }, (_, k) => pt(s, k).join(",")).join(" ")} fill="none" stroke="var(--border-hex, #E3E8F0)" strokeWidth="1" />
+      ))}
+      {Array.from({ length: 6 }, (_, k) => {
+        const [x, y] = pt(1, k);
+        return <line key={k} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--border-hex, #E3E8F0)" strokeWidth="1" />;
+      })}
+      <polygon points={polyA} fill="rgba(11,27,51,0.04)" stroke="rgba(11,27,51,0.4)" strokeWidth="1" strokeDasharray="3 4" />
+      <polygon points={polyB} fill="rgba(44,91,255,0.10)" stroke="var(--primary-hex, #2C5BFF)" strokeWidth="1.5" />
+      {labels.map((l, i) => {
+        const [x, y] = pt(1.18, i);
+        return <text key={l} x={x} y={y} fontSize="11" fill="var(--muted-fg, #5A6B85)" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-inter)" fontWeight="500">{l}</text>;
+      })}
+      {valsB.map((v, i) => { const [x2, y2] = pt(v, i); return <circle key={i} cx={x2} cy={y2} r="3" fill="white" stroke="var(--primary-hex, #2C5BFF)" strokeWidth="2" />; })}
+    </svg>
+  );
+}
+
+/* ── Avatar ─────────────────────────────────────────────────────── */
+function Avatar({ initials, size = 44 }) {
+  const palettes = [
+    "linear-gradient(135deg, #0B1B33, #2C5BFF)",
+    "linear-gradient(135deg, #2E8B6B, #6FA0FF)",
+    "linear-gradient(135deg, #C68A2E, #D8455B)",
+    "linear-gradient(135deg, #1F44CC, #6FA0FF)",
+    "linear-gradient(135deg, #1B2A47, #2E8B6B)",
+  ];
+  const idx = (initials.charCodeAt(0) + (initials.charCodeAt(1) || 0)) % palettes.length;
+  return (
+    <div style={{
+      width: size, height: size, borderRadius: 999, background: palettes[idx],
+      display: "flex", alignItems: "center", justifyContent: "center",
+      color: "white", fontWeight: 600, fontSize: size * 0.32, letterSpacing: "0.02em", flexShrink: 0,
+    }}>{initials}</div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   LANDING PAGE
+   ══════════════════════════════════════════════════════════════════ */
+export default function LandingPage() {
+  return (
+    <Suspense fallback={null}>
+      <LandingPageInner />
+    </Suspense>
+  );
+}
+
+function LandingPageInner() {
+  const { t } = useTranslation();
+  const searchParams = useSearchParams();
+
+  const paramString = searchParams.toString();
+  const scanHref = paramString ? `/scan?${paramString}` : "/scan";
+
+  const SERVICE_ICONS = ["user", "posture", "dumbbell", "droplet", "moon", "leaf"];
+  const STEP_ICONS = ["camera", "sparkle", "plan", "chart"];
+
+  const TRUST_BRANDS = ["BAREBELLS", "WHOOP", "MYPROTEIN", "ATHLETIC GREENS", "OURA", "WIRED"];
+
+  return (
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden" style={{ background: "#FAFBFD" }}>
+
+      {/* ───────────── HERO ───────────── */}
+      <section className="relative overflow-hidden pb-0 pt-16 sm:pt-20" id="hero" style={{ background: "#FAFBFD" }}>
+        <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(44,91,255,0.06) 0%, rgba(44,91,255,0) 55%)" }} />
+
+        <div className="mx-auto max-w-[920px] px-5 sm:px-8 relative text-center" style={{ paddingTop: 64 }}>
+          {/* Eyebrow pill */}
+          <Reveal className="flex justify-center">
+            <span className="inline-flex items-center gap-2 rounded-full border bg-white px-3.5 py-1.5 text-xs font-medium shadow-[var(--shadow-xs)]" style={{ borderColor: "var(--border-hex)", fontFamily: "var(--font-inter)" }}>
+              <span className="rounded-full px-2.5 py-0.5 text-[10px] font-bold tracking-[0.12em] text-white" style={{ background: "var(--ink)" }}>
+                {t("landing.hero_badge_new", "NEW")}
+              </span>
+              {t("landing.hero_badge", "Body composition scan · in beta")}
+            </span>
+          </Reveal>
+
+          {/* Title */}
+          <Reveal delay={0.08}>
+            <h1 className="mx-auto mt-7 text-[clamp(48px,7vw,84px)] leading-[0.98] tracking-[-0.035em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+              {t("landing.hero_title_1", "See your body.")}<br />
+              <span style={{ fontStyle: "italic", color: "var(--primary-hex)" }}>{t("landing.hero_title_2", "Know your plan.")}</span>
+            </h1>
+          </Reveal>
+
+          {/* Subtitle */}
+          <Reveal delay={0.16}>
+            <p className="mx-auto mt-7 max-w-[58ch] text-lg leading-relaxed" style={{ color: "var(--muted-fg)", fontWeight: 400 }}>
+              {t("landing.hero_subtitle")}
+            </p>
+          </Reveal>
+
+          {/* CTA buttons */}
+          <Reveal delay={0.24} className="flex flex-wrap justify-center gap-3 mt-9">
+            <Link href={scanHref} className="inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 text-sm font-medium text-white transition-all hover:-translate-y-px" style={{ background: "var(--ink)", fontFamily: "var(--font-inter)" }}>
+              {t("landing.hero_cta", "Start your free scan")}
+              <Icon name="arrow" size={14} color="white" />
+            </Link>
+            <button className="inline-flex items-center gap-2.5 rounded-full border px-5 py-3.5 text-sm font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)", borderColor: "var(--border-strong)", fontFamily: "var(--font-inter)" }}>
+              <Icon name="play" size={12} color="var(--ink)" />
+              {t("landing.hero_demo_cta", "Watch a 60-sec demo")}
+            </button>
+          </Reveal>
+
+          {/* Trust points */}
+          <Reveal delay={0.28} className="flex flex-wrap justify-center gap-6 mt-6 text-xs" style={{ color: "var(--muted-fg)" }}>
+            {["hero_trust_1", "hero_trust_2", "hero_trust_3"].map((key) => (
+              <span key={key} className="inline-flex items-center gap-1.5">
+                <Icon name="check" size={13} color="var(--primary-hex)" />
+                {t(`landing.${key}`)}
+              </span>
+            ))}
+          </Reveal>
+        </div>
+
+        {/* ── HERO VISUAL ── */}
+        <Reveal delay={0.32}>
+          <div className="relative mx-auto mt-16 hidden md:block" style={{ maxWidth: 1100, height: 540, marginBottom: 0 }}>
+            {/* Soft floor shadow */}
+            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 rounded-[50%]" style={{ width: 820, height: 520, background: "radial-gradient(ellipse at center, rgba(11,27,51,0.05), rgba(11,27,51,0))", filter: "blur(2px)" }} />
+
+            {/* Center card with body silhouette */}
+            <div className="absolute left-1/2 -translate-x-1/2" style={{
+              top: 30, width: 360, height: 480,
+              background: "linear-gradient(180deg, #FFFFFF 0%, #F4F6FB 100%)",
+              border: "1px solid var(--border-hex)", borderRadius: 28, padding: 24,
+              boxShadow: "0 30px 80px rgba(11,27,51,0.10), 0 4px 12px rgba(11,27,51,0.04)",
+            }}>
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] font-medium tracking-[0.14em] uppercase" style={{ color: "var(--primary-hex)", fontFamily: "var(--font-inter)" }}>SCAN · LIVE</span>
+                <span className="inline-flex items-center gap-1.5 text-[10px]" style={{ color: "var(--muted-fg)" }}>
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--status-good-hex)" }} />
+                  Reading
+                </span>
+              </div>
+
+              <div className="relative mt-2 flex justify-center items-center" style={{ height: 380 }}>
+                <svg className="absolute inset-0 m-auto" width="300" height="380" viewBox="0 0 300 380">
+                  <circle cx="150" cy="190" r="120" fill="none" stroke="rgba(44,91,255,0.10)" strokeWidth="1" />
+                  <circle cx="150" cy="190" r="80" fill="none" stroke="rgba(44,91,255,0.12)" strokeWidth="1" strokeDasharray="2 6" />
+                </svg>
+                <BodySilhouette view="front" width={180} height={340} fillColor="rgba(44,91,255,0.10)" strokeColor="rgba(44,91,255,0.55)" hotspots={[
+                  { x: 100, y: 120, color: "#2C5BFF" },
+                  { x: 144, y: 200, color: "#D8455B" },
+                  { x: 60, y: 200, color: "#2E8B6B" },
+                ]} />
+                {/* Scan line */}
+                <div className="absolute inset-x-[30px] inset-y-[30px] overflow-hidden rounded-2xl pointer-events-none">
+                  <div className="absolute inset-x-0 h-[2px] animate-[scanSweep_3.6s_ease-in-out_infinite]" style={{ background: "linear-gradient(90deg, rgba(44,91,255,0), rgba(44,91,255,0.6), rgba(44,91,255,0))", boxShadow: "0 0 18px rgba(44,91,255,0.5)" }} />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                {["FRONT", "SIDE", "BACK"].map((label, i) => (
+                  <div key={label} className="text-center text-[10px] font-semibold tracking-[0.14em] py-2 rounded-lg" style={{
+                    background: i === 0 ? "var(--primary-soft)" : "var(--muted)",
+                    border: i === 0 ? "1px solid rgba(44,91,255,0.25)" : "1px solid var(--border-hex)",
+                    color: i === 0 ? "var(--primary-deep)" : "var(--muted-fg)",
+                  }}>{label}</div>
+                ))}
+              </div>
+            </div>
+
+            {/* Left floating card — wellness score */}
+            <div className="absolute" style={{ left: 100, top: 90, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", animation: "floatA 6s ease-in-out infinite" }}>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>WELLNESS</div>
+              <div className="flex items-center gap-3.5 mt-2">
+                <ScoreRing value={76} size={72} stroke={6} color="#2C5BFF" track="rgba(11,27,51,0.06)" />
+                <div>
+                  <div className="text-[13px] font-semibold" style={{ color: "var(--ink)" }}>Strong</div>
+                  <div className="text-[11px] mt-0.5 inline-flex items-center gap-1" style={{ color: "var(--status-good-hex)" }}>
+                    <Icon name="arrowUp" size={10} color="var(--status-good-hex)" /> +8 vs Mar
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right floating card — insight */}
+            <div className="absolute" style={{ right: 100, top: 200, width: 240, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", animation: "floatB 7s ease-in-out -2s infinite" }}>
+              <div className="flex items-center gap-2.5">
+                <div className="w-[30px] h-[30px] rounded-[9px] flex items-center justify-center" style={{ background: "var(--status-alert-bg)" }}>
+                  <Icon name="droplet" size={14} color="var(--status-alert-hex)" />
+                </div>
+                <div>
+                  <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>INSIGHT · WEEK 17</div>
+                  <div className="text-xs font-semibold" style={{ color: "var(--ink)" }}>Hydration −12%</div>
+                </div>
+              </div>
+              <p className="mt-3 text-xs leading-relaxed" style={{ color: "var(--muted-fg)" }}>
+                A 500ml glass at 12:30 typically closes the gap. Want a reminder?
+              </p>
+            </div>
+
+            {/* Bottom-right dark card — calories */}
+            <div className="absolute" style={{ right: 140, bottom: 40, width: 200, background: "var(--ink)", color: "white", borderRadius: 16, padding: 16, boxShadow: "0 18px 40px rgba(11,27,51,0.18)", animation: "floatA 8s ease-in-out -4s infinite" }}>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>CALORIES TODAY</div>
+              <div className="flex items-baseline gap-1.5 mt-1.5">
+                <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>2,148</span>
+                <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.5)" }}>kcal target</span>
+              </div>
+              <div className="h-1 rounded-full mt-2.5 overflow-hidden" style={{ background: "rgba(255,255,255,0.12)" }}>
+                <div className="h-full rounded-full" style={{ width: "62%", background: "var(--sky)" }} />
+              </div>
+            </div>
+
+            {/* Bottom-left — streak */}
+            <div className="absolute" style={{ left: 150, bottom: 60, width: 180, background: "white", border: "1px solid var(--border-hex)", borderRadius: 16, padding: 14, boxShadow: "var(--shadow-lg)", animation: "floatB 7.5s ease-in-out -3s infinite" }}>
+              <div className="flex items-center gap-2.5">
+                <Icon name="flame" size={18} color="var(--status-normal-hex)" />
+                <span className="text-xs font-semibold">14-day streak</span>
+              </div>
+              <div className="flex gap-[3px] mt-2.5">
+                {Array.from({ length: 14 }, (_, i) => (
+                  <div key={i} className="flex-1 h-3 rounded-[2px]" style={{ background: i < 12 ? "var(--status-normal-hex)" : "var(--status-normal-bg)" }} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ───────────── TRUST STRIP ───────────── */}
+      <div className="border-y bg-white py-8" style={{ borderColor: "rgba(11,27,51,0.06)" }}>
+        <div className="text-center text-[11px] font-medium uppercase tracking-[0.18em] mb-5" style={{ color: "var(--muted-fg)" }}>
+          {t("landing.trust_strip", "As featured by · partnered with")}
+        </div>
+        <div className="flex gap-16 items-center justify-center flex-wrap opacity-55">
+          {TRUST_BRANDS.map(n => (
+            <span key={n} className="text-[13px] font-bold tracking-[0.16em]" style={{ color: "var(--ink)" }}>{n}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* ───────────── STATS ───────────── */}
+      <section className="py-[72px]" style={{ background: "#FAFBFD" }}>
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {[1, 2, 3, 4].map((i, idx) => (
+              <Reveal key={i} delay={idx * 0.06}>
+                <div className="text-center px-3" style={{ borderRight: idx < 3 ? "1px solid var(--border-hex)" : "none" }}>
+                  <div className="text-[clamp(40px,5vw,56px)] leading-none tracking-[-0.03em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                    {t(`landing.stats_${i}_value`)}
+                  </div>
+                  <div className="text-[13px] leading-relaxed mt-2.5 mx-auto max-w-[26ch]" style={{ color: "var(--muted-fg)" }}>
+                    {t(`landing.stats_${i}_label`)}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── SERVICES ───────────── */}
+      <section className="py-24 lg:py-32 bg-white" style={{ borderTop: "1px solid var(--border-hex)" }}>
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          <div className="text-center mb-16">
+            <Reveal>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
+                {t("landing.services_label")}
+              </div>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="mt-3 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.025em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                {t("landing.services_title_1")} <span style={{ fontStyle: "italic", color: "var(--primary-hex)" }}>{t("landing.services_title_2")}</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <p className="mt-4 max-w-[58ch] mx-auto text-base leading-relaxed" style={{ color: "var(--muted-fg)" }}>
+                {t("landing.services_subtitle")}
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[1, 2, 3, 4, 5, 6].map((i, idx) => (
+              <Reveal key={i} delay={idx * 0.06}>
+                <div className="flex flex-col gap-4 rounded-[20px] border bg-white p-7 shadow-[var(--shadow-xs)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]" style={{ borderColor: "var(--border-hex)" }}>
+                  <div className="w-12 h-12 rounded-[14px] flex items-center justify-center" style={{ background: "var(--primary-soft)", border: "1px solid rgba(44,91,255,0.12)" }}>
+                    <Icon name={SERVICE_ICONS[idx]} size={20} color="var(--primary-hex)" />
+                  </div>
+                  <div>
+                    <h3 className="text-[22px] tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                      {t(`landing.service_${i}_title`)}
+                    </h3>
+                    <p className="text-[13.5px] leading-relaxed mt-2.5" style={{ color: "var(--muted-fg)" }}>
+                      {t(`landing.service_${i}_body`)}
+                    </p>
+                  </div>
+                  <a className="mt-auto text-xs font-semibold inline-flex items-center gap-1.5" style={{ color: "var(--ink)" }}>
+                    {t("landing.service_learn")} <Icon name="arrow" size={12} />
+                  </a>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Plan engine callout */}
+          <Reveal delay={0.2}>
+            <div className="mt-16 rounded-3xl border p-12 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center" style={{ background: "#FAFBFD", borderColor: "var(--border-hex)" }}>
+              <div>
+                <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
+                  {t("landing.service_plan_label")}
+                </div>
+                <h3 className="mt-3 text-[clamp(28px,3vw,38px)] leading-[1.05] tracking-[-0.02em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                  {t("landing.service_plan_title_1")} <span style={{ fontStyle: "italic", color: "var(--primary-hex)" }}>{t("landing.service_plan_title_2")}</span>
+                </h3>
+                <p className="mt-4 text-[14.5px] leading-relaxed max-w-[44ch]" style={{ color: "var(--muted-fg)" }}>
+                  {t("landing.service_plan_body")}
+                </p>
+                <div className="flex gap-2.5 mt-6">
+                  <button className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[13px] font-medium text-white" style={{ background: "var(--ink)" }}>
+                    {t("landing.service_plan_cta_1")}
+                  </button>
+                  <button className="inline-flex items-center gap-2 rounded-full border px-5 py-3 text-[13px] font-medium" style={{ background: "white", color: "var(--ink)", borderColor: "var(--border-strong)" }}>
+                    {t("landing.service_plan_cta_2")}
+                  </button>
+                </div>
+              </div>
+              <div className="rounded-[18px] border bg-white p-7 flex justify-center" style={{ borderColor: "var(--border-hex)" }}>
+                <RadarChart t={t} />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ───────────── HOW IT WORKS ───────────── */}
+      <section className="py-24 lg:py-32" style={{ background: "#FAFBFD", borderTop: "1px solid var(--border-hex)" }} id="how">
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          <div className="text-center mb-16">
+            <Reveal>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
+                {t("landing.how_label")}
+              </div>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="mt-3 text-[clamp(36px,4.2vw,56px)] leading-[1.05] tracking-[-0.025em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                {t("landing.how_title_1")} <span style={{ fontStyle: "italic", color: "var(--primary-hex)" }}>{t("landing.how_title_2")}</span>
+              </h2>
+            </Reveal>
+          </div>
+
+          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 relative">
+            {/* Connector line */}
+            <div className="hidden xl:block absolute left-[12.5%] right-[12.5%] top-7 h-px border-t border-dashed" style={{ borderColor: "var(--border-strong)" }} />
+
+            {[1, 2, 3, 4].map((i, idx) => (
+              <Reveal key={i} delay={idx * 0.08}>
+                <div className="relative rounded-[20px] border bg-white p-7" style={{ borderColor: "var(--border-hex)" }}>
+                  {/* Step circle */}
+                  <div className="w-14 h-14 rounded-full bg-white border flex items-center justify-center relative -mt-14 shadow-[var(--shadow-xs)]" style={{ borderColor: "var(--border-hex)" }}>
+                    <Icon name={STEP_ICONS[idx]} size={20} color="var(--primary-hex)" />
+                  </div>
+                  <div className="text-[11px] font-medium uppercase tracking-[0.14em] mt-5" style={{ color: "var(--muted-fg)" }}>
+                    STEP {t(`landing.how_step${i}_num`, `0${i}`)}
+                  </div>
+                  <h3 className="text-[26px] tracking-[-0.01em] mt-2 mb-2.5" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                    {t(`landing.how_step${i}_title`)}
+                  </h3>
+                  <p className="text-[13.5px] leading-relaxed" style={{ color: "var(--muted-fg)" }}>
+                    {t(`landing.how_step${i}_text`)}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── TESTIMONIALS ───────────── */}
+      <section className="py-24 lg:py-32 bg-white" style={{ borderTop: "1px solid var(--border-hex)" }}>
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          {/* Header */}
+          <div className="grid lg:grid-cols-2 gap-12 items-end mb-14">
+            <div>
+              <Reveal>
+                <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
+                  {t("landing.testimonials_label")}
+                </div>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="mt-3 text-[clamp(32px,4vw,52px)] leading-[1.05] tracking-[-0.025em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                  {t("landing.testimonials_title_1")} <span style={{ fontStyle: "italic", color: "var(--primary-hex)" }}>{t("landing.testimonials_title_2")}</span>.
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={0.12}>
+              <div className="pb-2">
+                <p className="text-[15px] leading-relaxed max-w-[44ch]" style={{ color: "var(--muted-fg)" }}>
+                  {t("landing.testimonials_subtitle")}
+                </p>
+                <div className="flex gap-5 mt-5 items-center">
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }, (_, i) => <Icon key={i} name="star" size={16} color="var(--status-normal-hex)" />)}
+                  </div>
+                  <span className="text-[13px]" style={{ color: "var(--muted-fg)" }}>
+                    <strong style={{ color: "var(--ink)" }}>{t("landing.testimonials_rating")}</strong> {t("landing.testimonials_review_count")}
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Featured quote */}
+          <Reveal>
+            <div className="rounded-3xl border p-12 mb-4 relative" style={{ background: "#FAFBFD", borderColor: "var(--border-hex)" }}>
+              <div className="absolute top-6 right-8 select-none" style={{ fontFamily: "var(--font-fraunces)", fontSize: 140, lineHeight: 1, color: "var(--primary-soft)" }}>&ldquo;</div>
+              <div className="flex gap-1 mb-5">
+                {Array.from({ length: 5 }, (_, i) => <Icon key={i} name="star" size={16} color="var(--status-normal-hex)" />)}
+              </div>
+              <blockquote className="text-[clamp(22px,3vw,32px)] leading-[1.35] tracking-[-0.015em] max-w-[32ch]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                &ldquo;{t("landing.testimonial_1_text")}&rdquo;
+              </blockquote>
+              <div className="flex items-center gap-3.5 mt-8">
+                <Avatar initials="MC" />
+                <div>
+                  <div className="text-sm font-semibold" style={{ color: "var(--ink)" }}>{t("landing.testimonial_1_name")}</div>
+                  <div className="text-xs" style={{ color: "var(--muted-fg)" }}>{t("landing.testimonial_1_role")}</div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Smaller quotes grid */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[2, 3, 4, 5].map((i, idx) => {
+              const initials = [null, null, "SL", "DO", "PR", "LM"][i];
+              const stars = i === 4 ? 4 : 5;
+              return (
+                <Reveal key={i} delay={idx * 0.06}>
+                  <div className="rounded-[20px] border bg-white p-7" style={{ borderColor: "var(--border-hex)" }}>
+                    <div className="flex gap-0.5 mb-3.5">
+                      {Array.from({ length: 5 }, (_, k) => <Icon key={k} name="star" size={13} color={k < stars ? "var(--status-normal-hex)" : "var(--border-strong)"} />)}
+                    </div>
+                    <p className="text-[19px] leading-[1.4] tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                      &ldquo;{t(`landing.testimonial_${i}_text`)}&rdquo;
+                    </p>
+                    <div className="flex items-center gap-3 mt-6 pt-4.5 border-t" style={{ borderColor: "var(--border-hex)" }}>
+                      <Avatar initials={initials} size={36} />
+                      <div>
+                        <div className="text-[13px] font-semibold">{t(`landing.testimonial_${i}_name`)}</div>
+                        <div className="text-[11px]" style={{ color: "var(--muted-fg)" }}>{t(`landing.testimonial_${i}_role`)}</div>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────── BIG CTA ───────────── */}
+      <section className="py-24" style={{ background: "#FAFBFD" }}>
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-[32px] text-center text-white" style={{ background: "var(--ink)", padding: "72px 56px" }}>
+              {/* Decorative circles */}
+              <svg className="absolute inset-0 opacity-[0.18]" width="100%" height="100%" viewBox="0 0 1000 400" preserveAspectRatio="none">
+                <circle cx="500" cy="200" r="120" fill="none" stroke="#6FA0FF" strokeWidth="1" />
+                <circle cx="500" cy="200" r="200" fill="none" stroke="#6FA0FF" strokeWidth="1" strokeDasharray="3 6" />
+                <circle cx="500" cy="200" r="280" fill="none" stroke="#6FA0FF" strokeWidth="1" />
+              </svg>
+
+              <div className="relative">
+                <div className="text-[11px] font-medium uppercase tracking-[0.18em]" style={{ color: "var(--sky)" }}>
+                  {t("landing.cta_label")}
+                </div>
+                <div className="mt-4 text-[clamp(32px,4.5vw,56px)] leading-[1.05] tracking-[-0.025em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
+                  {t("landing.cta_title_1")} <span style={{ fontStyle: "italic", color: "var(--sky)" }}>{t("landing.cta_title_2")}</span>.
+                </div>
+                <p className="mx-auto mt-4 max-w-[52ch] text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>
+                  {t("landing.cta_body")}
+                </p>
+                <div className="flex flex-wrap gap-3 justify-center mt-8">
+                  <Link href={scanHref} className="inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 text-sm font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)" }}>
+                    {t("landing.cta_primary")} <Icon name="arrow" size={14} color="var(--ink)" />
+                  </Link>
+                  <button className="inline-flex items-center gap-2.5 rounded-full border px-5 py-3.5 text-sm font-medium text-white" style={{ borderColor: "rgba(255,255,255,0.3)", background: "transparent" }}>
+                    {t("landing.cta_secondary")}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ───────────── FOOTER ───────────── */}
+      <footer className="bg-white pt-16 pb-8" style={{ borderTop: "1px solid var(--border-hex)" }}>
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] mb-12">
+            {/* Brand */}
+            <div>
+              <Link href="/" className="inline-flex items-center gap-2.5">
+                <svg width={28} height={28} viewBox="0 0 32 32" fill="none">
+                  <rect x="0" y="0" width="32" height="32" rx="8" fill="#2C5BFF" />
+                  <path d="M9 22 L9 10 L14 10 L19 18 L19 10 L23 10 L23 22 L18 22 L13 14 L13 22 Z" fill="white" />
+                  <circle cx="25" cy="9" r="2.5" fill="#6FA0FF" />
+                </svg>
+                <span className="text-xl tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                  {t("nav.brand")}<span style={{ color: "#2C5BFF" }}>.</span>
+                </span>
+              </Link>
+              <p className="mt-6 text-xl leading-[1.35] max-w-[26ch] tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                {t("landing.footer_tagline")}
+              </p>
+            </div>
+
+            {/* Footer columns */}
+            {["product", "company", "resources", "contact"].map((col) => (
+              <div key={col}>
+                <div className="text-[11px] font-medium uppercase tracking-[0.14em] mb-3.5" style={{ color: "var(--muted-fg)" }}>
+                  {t(`landing.footer_col_${col}`)}
+                </div>
+                <div className="flex flex-col gap-2.5 text-[13px]" style={{ color: "var(--muted-fg)" }}>
+                  {t(`landing.footer_${col}_items`, "").split(",").map(item => (
+                    <a key={item} className="hover:text-[var(--ink)] transition-colors cursor-pointer">{item.trim()}</a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom row */}
+          <div className="pt-6 border-t flex flex-wrap justify-between gap-4 text-xs" style={{ borderColor: "var(--border-hex)", color: "var(--muted-fg)" }}>
+            <span>{t("landing.footer_copyright")}</span>
+            <span>{t("landing.footer_disclaimer")}</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

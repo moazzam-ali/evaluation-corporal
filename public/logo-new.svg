@@ -1,0 +1,16 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Navy arc (open at bottom, ~270 degrees) -->
+  <circle
+    cx="256" cy="256" r="195"
+    stroke="#1A1A2E"
+    stroke-width="23"
+    stroke-linecap="round"
+    fill="none"
+    stroke-dasharray="917 306"
+    transform="rotate(-225 256 256)"
+  />
+  <!-- Blush pink face oval -->
+  <ellipse cx="256" cy="271" rx="143" ry="169" fill="#F4A7B9" />
+  <!-- Rose dot -->
+  <circle cx="213" cy="314" r="18" fill="#E8728A" />
+</svg>

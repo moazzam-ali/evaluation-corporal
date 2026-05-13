@@ -1,0 +1,171 @@
+{
+  "telegram": {
+    "member_details": "*Beauty & Glow AI — नया स्कैन*\n━━━━━━━━━━━━━━━━━━━━\n\n*ग्राहक प्रोफ़ाइल*\n\nनाम: {name} {surname}\nईमेल: {email}\nफ़ोन: {phone}\nजन्म तिथि: {birthDate}\nस्थान: {city}, {country}",
+    "questionnaire_details": "*त्वचा प्रश्नावली*\n━━━━━━━━━━━━━━━━━━━━\n\n*लक्ष्य और समस्याएँ*\nसमस्याएँ: {skinConcerns}\nप्राथमिकता: {priorityConcern}\nक्षेत्र: {improvementZones}\n\n*त्वचा प्रोफ़ाइल*\nप्रकार: {skinType}\nअनुभव: {skinFeelGeneral}\nदिन के अंत में: {skinFeelEndOfDay}\n\n*वर्तमान दिनचर्या*\nआवृत्ति: {routineFrequency}\nउत्पाद: {productsUsed}\nज़रूरी: {essentialProduct}\nकमी: {missingProduct}\nसप्लीमेंट: {supplements}\n\n*संवेदनशीलता*\nप्रतिक्रिया: {reactionLevel}\nलक्षण: {recentSigns}\n\n*जीवनशैली*\nसनस्क्रीन: {sunscreenUse}\nमेकअप: {makeupFrequency}\nनींद: {sleepHours}\nतनाव: {stressImpact}\nपानी: {waterIntake}\n\n*अनुभव और लक्ष्य*\nइतिहास: {treatmentHistory}\nनिराशा: {frustrations}\nतलाश: {lookingFor}\nसिफ़ारिश चाहिए: {wantRoutineRecommendation}\nबजट: {budgetLevel}",
+    "analysis_results": "*विश्लेषण परिणाम*\n━━━━━━━━━━━━━━━━━━━━\n\nकुल स्कोर: *{overall_score}%*\nत्वचा का प्रकार: *{skin_type_result}*\n\n*मेट्रिक विवरण:*\n{metrics}\n\n*सारांश:*\n{summary}",
+    "analysis_link": "*पूरी रिपोर्ट देखें*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
+    "buttons": {
+      "view_report": "📋 रिपोर्ट देखें",
+      "sms": "✉️ SMS भेजें",
+      "call": "☎️ कॉल करें",
+      "whatsapp": "💬 WhatsApp",
+      "telegram": "✈️ Telegram"
+    },
+    "form_fields": {
+      "skin_types": {
+        "oily": "तैलीय",
+        "dry": "रूखी",
+        "combination": "मिश्रित",
+        "normal": "सामान्य",
+        "sensitive": "संवेदनशील",
+        "dehydrated": "निर्जलित",
+        "dont_know": "पता नहीं"
+      },
+      "status": {
+        "good": "अच्छी",
+        "normal": "सामान्य",
+        "needs_attention": "ध्यान देने की ज़रूरत"
+      },
+      "concerns": {
+        "dryness": "रूखापन",
+        "wrinkles": "झुर्रियाँ",
+        "sagging": "ढीलापन",
+        "dark_spots": "काले धब्बे",
+        "dullness": "बेजान त्वचा",
+        "blemishes": "दाग-धब्बे",
+        "pores": "रोमछिद्र",
+        "eye_area": "आँखों का क्षेत्र",
+        "sensitivity": "संवेदनशीलता",
+        "other": "अन्य"
+      },
+      "zones": {
+        "full_face": "पूरा चेहरा",
+        "eye_contour": "आँखों का समोच्च",
+        "neck": "गर्दन",
+        "hands": "हाथ",
+        "body": "शरीर"
+      },
+      "feel_general": {
+        "tight": "खिंचाव",
+        "shiny": "चमकदार",
+        "comfortable": "आरामदायक",
+        "sensitive_reactive": "संवेदनशील",
+        "dull": "बेजान",
+        "dont_know": "पता नहीं"
+      },
+      "feel_end_day": {
+        "tight": "खिंचाव",
+        "shiny": "चमकदार",
+        "comfortable": "आरामदायक",
+        "irritated": "चिड़चिड़ी",
+        "dull": "बेजान"
+      },
+      "routine_frequency": {
+        "morning_only": "केवल सुबह",
+        "night_only": "केवल रात",
+        "morning_and_night": "सुबह और रात",
+        "no_routine": "कोई दिनचर्या नहीं"
+      },
+      "products": {
+        "cleanser": "क्लींज़र",
+        "toner": "टोनर",
+        "serum": "सीरम",
+        "day_cream": "डे क्रीम",
+        "sunscreen": "सनस्क्रीन",
+        "eye_contour": "आई कंटूर",
+        "night_cream": "नाइट क्रीम",
+        "mask": "मास्क",
+        "exfoliant": "एक्सफ़ोलिएंट",
+        "other": "अन्य"
+      },
+      "reaction": {
+        "yes_a_lot": "हाँ, बहुत",
+        "sometimes": "कभी-कभी",
+        "no": "नहीं",
+        "dont_know": "पता नहीं"
+      },
+      "signs": {
+        "redness": "लालिमा",
+        "itching": "खुजली",
+        "flaking": "पपड़ी",
+        "excess_shine": "अत्यधिक चमक",
+        "blemishes": "दाग-धब्बे",
+        "dark_spots": "काले धब्बे",
+        "tightness": "खिंचाव",
+        "none": "कोई नहीं"
+      },
+      "sunscreen": {
+        "daily": "रोज़ाना",
+        "sometimes": "कभी-कभी",
+        "summer_only": "केवल गर्मियों में",
+        "no": "नहीं"
+      },
+      "makeup": {
+        "daily": "रोज़ाना",
+        "several_times_week": "हफ़्ते में कई बार",
+        "occasionally": "कभी-कभार",
+        "never": "कभी नहीं"
+      },
+      "sleep": {
+        "less_than_5": "<5 घंटे",
+        "5_6": "5-6 घंटे",
+        "7_8": "7-8 घंटे",
+        "more_than_8": ">8 घंटे"
+      },
+      "stress": {
+        "yes": "हाँ",
+        "a_little": "थोड़ा",
+        "no": "नहीं"
+      },
+      "water": {
+        "yes": "हाँ",
+        "sometimes": "कभी-कभी",
+        "no": "नहीं"
+      },
+      "history": {
+        "yes_worked": "हाँ, काम किया",
+        "yes_no_results": "हाँ, कोई परिणाम नहीं",
+        "tried_many_nothing_works": "बहुत कोशिश की, कुछ काम नहीं आया",
+        "barely_tried": "लगभग कोशिश नहीं की"
+      },
+      "frustrations": {
+        "no_results": "कोई परिणाम नहीं",
+        "irritation": "जलन",
+        "dont_know_how_to_combine": "मिलाना नहीं आता",
+        "too_expensive": "बहुत महँगा",
+        "not_consistent": "नियमित नहीं",
+        "other": "अन्य"
+      },
+      "looking_for": {
+        "basic_routine": "बुनियादी दिनचर्या",
+        "complete_routine": "संपूर्ण दिनचर्या",
+        "specific_problem": "विशिष्ट समस्या",
+        "prevention": "रोकथाम",
+        "personalized_advice": "व्यक्तिगत सलाह"
+      },
+      "recommendation": {
+        "yes": "हाँ",
+        "no": "नहीं"
+      },
+      "budget": {
+        "basic": "बुनियादी",
+        "medium": "मध्यम",
+        "premium": "प्रीमियम"
+      },
+      "metrics": {
+        "oily_skin": "तैलीय त्वचा",
+        "uneven_skin_tone": "असमान त्वचा टोन",
+        "eye_wrinkles": "आंखों की झुर्रियां",
+        "crows_feet": "कौवा के पैर",
+        "radiance": "चमक",
+        "firmness": "कसावट",
+        "hydration": "हाइड्रेशन",
+        "dark_spots": "डार्क स्पॉट",
+        "smoothness": "चिकनाई",
+        "fine_lines_wrinkles": "महीन रेखाएं और झुर्रियां",
+        "texture": "टेक्सचर",
+        "dark_circles": "डार्क सर्कल्स"
+      }
+    }
+  }
+}
