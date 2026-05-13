@@ -385,25 +385,19 @@ function LandingPageInner() {
             </Reveal>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4" style={{ alignItems: "stretch" }}>
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i, idx) => (
               <Reveal key={i} delay={(idx % 4) * 0.06}>
-                <div className="group h-full rounded-[20px] border bg-white p-6 transition-all hover:-translate-y-1 hover:border-[var(--primary-hex)] hover:shadow-[var(--shadow-md)]" style={{ borderColor: "var(--border-hex)" }}>
-                  <div className="mb-4 w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: "var(--primary-soft)" }}>
+                <div className="group flex flex-col h-full rounded-[20px] border bg-white p-6 transition-all hover:-translate-y-1 hover:border-[var(--primary-hex)] hover:shadow-[var(--shadow-md)]" style={{ borderColor: "var(--border-hex)" }}>
+                  <div className="mb-4 w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style={{ background: "var(--primary-soft)" }}>
                     <Icon name={METRIC_ICONS[idx]} size={20} color="var(--primary-hex)" />
                   </div>
                   <h3 className="text-[20px] tracking-[-0.01em] mb-1.5" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
                     {t(`landing.metric_${i}_title`)}
                   </h3>
-                  <p className="text-[12.5px] leading-relaxed mb-4" style={{ color: "var(--muted-fg)" }}>
+                  <p className="text-[12.5px] leading-relaxed flex-1" style={{ color: "var(--muted-fg)" }}>
                     {t(`landing.metric_${i}_body`)}
                   </p>
-                  <div className="mt-auto rounded-lg px-3 py-2" style={{ background: "var(--canvas)", border: "1px solid var(--border-hex)" }}>
-                    <div className="text-[10px] uppercase tracking-[0.12em] mb-0.5" style={{ color: "var(--muted-fg)" }}>FORMULA</div>
-                    <div className="text-[13px] font-medium" style={{ color: "var(--primary-hex)", fontFamily: "var(--font-inter)" }}>
-                      {t(`landing.metric_${i}_formula`)}
-                    </div>
-                  </div>
                 </div>
               </Reveal>
             ))}
@@ -432,24 +426,19 @@ function LandingPageInner() {
             </Reveal>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" style={{ alignItems: "stretch" }}>
             {[1, 2, 3, 4, 5, 6].map((i, idx) => (
               <Reveal key={i} delay={idx * 0.06}>
-                <div className="flex flex-col gap-4 rounded-[20px] border bg-white p-7 shadow-[var(--shadow-xs)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]" style={{ borderColor: "var(--border-hex)" }}>
-                  <div className="w-12 h-12 rounded-[14px] flex items-center justify-center" style={{ background: "var(--primary-soft)", border: "1px solid rgba(44,91,255,0.12)" }}>
+                <div className="flex flex-col h-full rounded-[20px] border bg-white p-7 shadow-[var(--shadow-xs)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]" style={{ borderColor: "var(--border-hex)" }}>
+                  <div className="w-12 h-12 rounded-[14px] flex items-center justify-center shrink-0 mb-4" style={{ background: "var(--primary-soft)", border: "1px solid rgba(44,91,255,0.12)" }}>
                     <Icon name={SERVICE_ICONS[idx]} size={20} color="var(--primary-hex)" />
                   </div>
-                  <div>
-                    <h3 className="text-[22px] tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
-                      {t(`landing.service_${i}_title`)}
-                    </h3>
-                    <p className="text-[13.5px] leading-relaxed mt-2.5" style={{ color: "var(--muted-fg)" }}>
-                      {t(`landing.service_${i}_body`)}
-                    </p>
-                  </div>
-                  <a className="mt-auto text-xs font-semibold inline-flex items-center gap-1.5" style={{ color: "var(--ink)" }}>
-                    {t("landing.service_learn")} <Icon name="arrow" size={12} />
-                  </a>
+                  <h3 className="text-[22px] tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
+                    {t(`landing.service_${i}_title`)}
+                  </h3>
+                  <p className="text-[13.5px] leading-relaxed mt-2.5 flex-1" style={{ color: "var(--muted-fg)" }}>
+                    {t(`landing.service_${i}_body`)}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -501,15 +490,15 @@ function LandingPageInner() {
             </Reveal>
           </div>
 
-          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 relative">
+          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4 relative" style={{ alignItems: "stretch" }}>
             {/* Connector line */}
             <div className="hidden xl:block absolute left-[12.5%] right-[12.5%] top-7 h-px border-t border-dashed" style={{ borderColor: "var(--border-strong)" }} />
 
             {[1, 2, 3, 4].map((i, idx) => (
               <Reveal key={i} delay={idx * 0.08}>
-                <div className="relative rounded-[20px] border bg-white p-7" style={{ borderColor: "var(--border-hex)" }}>
+                <div className="relative flex flex-col h-full rounded-[20px] border bg-white p-7" style={{ borderColor: "var(--border-hex)" }}>
                   {/* Step circle */}
-                  <div className="w-14 h-14 rounded-full bg-white border flex items-center justify-center relative -mt-14 shadow-[var(--shadow-xs)]" style={{ borderColor: "var(--border-hex)" }}>
+                  <div className="w-14 h-14 rounded-full bg-white border flex items-center justify-center relative -mt-14 shadow-[var(--shadow-xs)] shrink-0" style={{ borderColor: "var(--border-hex)" }}>
                     <Icon name={STEP_ICONS[idx]} size={20} color="var(--primary-hex)" />
                   </div>
                   <div className="text-[11px] font-medium uppercase tracking-[0.14em] mt-5" style={{ color: "var(--muted-fg)" }}>
@@ -518,7 +507,7 @@ function LandingPageInner() {
                   <h3 className="text-[26px] tracking-[-0.01em] mt-2 mb-2.5" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
                     {t(`landing.how_step${i}_title`)}
                   </h3>
-                  <p className="text-[13.5px] leading-relaxed" style={{ color: "var(--muted-fg)" }}>
+                  <p className="text-[13.5px] leading-relaxed flex-1" style={{ color: "var(--muted-fg)" }}>
                     {t(`landing.how_step${i}_text`)}
                   </p>
                 </div>
@@ -549,10 +538,10 @@ function LandingPageInner() {
             </Reveal>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-5">
+          <div className="grid lg:grid-cols-3 gap-5" style={{ alignItems: "stretch" }}>
             {[1, 2, 3].map((i, idx) => (
               <Reveal key={i} delay={idx * 0.08}>
-                <div className="h-full rounded-3xl border p-7 sm:p-8 transition-all hover:-translate-y-1 hover:border-[rgba(111,160,255,0.4)]" style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}>
+                <div className="flex flex-col h-full rounded-3xl border p-7 sm:p-8 transition-all hover:-translate-y-1 hover:border-[rgba(111,160,255,0.4)]" style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}>
                   <div className="mb-6 text-[11px] tracking-[0.2em]" style={{ color: "var(--sky)" }}>
                     {t(`landing.formula_${i}_eq`)}
                   </div>
@@ -562,10 +551,10 @@ function LandingPageInner() {
                   <div className="mb-4 text-[11px] uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>
                     {t(`landing.formula_${i}_what`)}
                   </div>
-                  <p className="mb-5 text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.78)" }}>
+                  <p className="mb-5 text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.78)" }}>
                     {t(`landing.formula_${i}_desc`)}
                   </p>
-                  <div className="pt-5 border-t" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+                  <div className="pt-5 border-t mt-auto" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
                     <div className="text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.55)" }}>Evidence</div>
                     <div className="mt-1 text-lg" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
                       <span style={{ color: "var(--sky)" }}>{t(`landing.formula_${i}_evidence`)}</span>
@@ -633,13 +622,13 @@ function LandingPageInner() {
           </Reveal>
 
           {/* Smaller quotes grid */}
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4" style={{ alignItems: "stretch" }}>
             {[2, 3, 4, 5].map((i, idx) => {
               const initials = [null, null, "SL", "DO", "PR", "LM"][i];
               const stars = i === 4 ? 4 : 5;
               return (
                 <Reveal key={i} delay={idx * 0.06}>
-                  <div className="rounded-[20px] border bg-white p-7" style={{ borderColor: "var(--border-hex)" }}>
+                  <div className="flex flex-col h-full rounded-[20px] border bg-white p-7" style={{ borderColor: "var(--border-hex)" }}>
                     <div className="flex gap-0.5 mb-3.5">
                       {Array.from({ length: 5 }, (_, k) => <Icon key={k} name="star" size={13} color={k < stars ? "var(--status-normal-hex)" : "var(--border-strong)"} />)}
                     </div>
