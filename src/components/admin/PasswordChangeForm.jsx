@@ -64,7 +64,7 @@ export default function PasswordChangeForm() {
       </div>
       {msg.text && (
         <p
-          className={`rounded-md px-3 py-2 text-xs ${msg.type === "error" ? "bg-destructive/10 text-destructive" : "bg-[#5B9A8B]/10 text-[#5B9A8B]"}`}
+          className={`rounded-md px-3 py-2 text-xs ${msg.type === "error" ? "bg-destructive/10 text-destructive" : "bg-[#2E8B6B]/10 text-[#2E8B6B]"}`}
         >
           {msg.text}
         </p>

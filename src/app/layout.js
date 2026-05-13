@@ -1,4 +1,4 @@
-import { Inter, Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Inter, Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
 
@@ -7,10 +7,10 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const cormorant = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["300", "400"],
-  variable: "--font-cormorant",
+  weight: ["300", "400", "500"],
+  variable: "--font-fraunces",
 });
 
 const dmSans = DM_Sans({
@@ -20,8 +20,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: "Beauty & Glow AI - AI Skin Analysis",
-  description: "AI-powered skin analysis and personalized product recommendations by Beauty & Glow AI",
+  title: "Nutritional — AI Body & Nutrition Coach",
+  description: "AI-powered body composition analysis, nutrition planning, and wellness coaching by Nutritional.",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -35,7 +35,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${cormorant.variable} ${dmSans.variable} antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} ${dmSans.variable} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
