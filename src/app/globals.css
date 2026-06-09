@@ -4,60 +4,61 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 216 67% 13%;
+    /* shadcn HSL tokens — re-tuned to warm cream / taupe palette */
+    --background: 36 36% 93%;          /* #F4EFE7 canvas */
+    --foreground: 60 4% 17%;           /* #2F2F2B ink */
     --card: 0 0% 100%;
-    --card-foreground: 216 67% 13%;
+    --card-foreground: 60 4% 17%;
     --popover: 0 0% 100%;
-    --popover-foreground: 216 67% 13%;
-    --primary: 225 100% 59%;
+    --popover-foreground: 60 4% 17%;
+    --primary: 26 16% 53%;             /* #9B8573 taupe */
     --primary-foreground: 0 0% 100%;
-    --secondary: 216 67% 13%;
+    --secondary: 60 4% 17%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 220 27% 96%;
-    --muted-foreground: 214 20% 44%;
-    --accent: 224 100% 95%;
-    --accent-foreground: 225 75% 46%;
-    --destructive: 349 64% 56%;
+    --muted: 36 33% 95%;               /* #F8F6F2 */
+    --muted-foreground: 26 19% 36%;    /* #6B5B4B mocha */
+    --accent: 36 39% 88%;              /* #EFE7DC */
+    --accent-foreground: 26 16% 36%;
+    --destructive: 11 35% 45%;         /* #9C5A4A terracotta */
     --destructive-foreground: 0 0% 100%;
-    --border: 218 25% 90%;
-    --input: 218 25% 90%;
-    --ring: 225 100% 59%;
+    --border: 36 36% 84%;              /* #E4D9C6 */
+    --input: 36 36% 84%;
+    --ring: 26 16% 53%;
     --radius: 0.625rem;
-    --chart-1: 225 100% 59%;
-    --chart-2: 216 67% 13%;
-    --chart-3: 214 100% 72%;
-    --chart-4: 37 63% 47%;
-    --chart-5: 155 50% 36%;
-    --status-good: 155 50% 36%;
-    --status-normal: 37 63% 47%;
-    --status-alert: 349 64% 56%;
+    --chart-1: 26 16% 53%;             /* taupe */
+    --chart-2: 60 4% 17%;              /* charcoal */
+    --chart-3: 36 41% 63%;             /* warm gold */
+    --chart-4: 100 9% 56%;             /* sage */
+    --chart-5: 26 19% 36%;             /* mocha */
+    --status-good: 100 9% 56%;
+    --status-normal: 36 41% 63%;
+    --status-alert: 11 35% 45%;
 
-    /* Brand core (flat hex) — Nutritional blue/dark theme */
-    --ink: #0B1B33;
-    --ink-soft: #1B2A47;
-    --ink-deep: #060F1F;
-    --primary-hex: #2C5BFF;
-    --primary-deep: #1F44CC;
-    --primary-soft: #E6ECFF;
-    --primary-tint: #F2F5FF;
-    --sky: #6FA0FF;
+    /* Brand core (flat hex) — warm neutrals theme */
+    --ink: #2F2F2B;
+    --ink-soft: #4A4A42;
+    --ink-deep: #1A1A18;
+    --primary-hex: #9B8573;
+    --primary-deep: #6B5B4B;
+    --primary-soft: #EFE7DC;
+    --primary-tint: #FAF8F4;
+    --sky: #C7A977;          /* renamed semantically: warm gold accent */
 
     /* Neutral palette */
-    --canvas: #F4F6FB;
+    --canvas: #F4EFE7;
     --surface: #FFFFFF;
-    --surface-2: #F8FAFE;
-    --muted-fg: #5A6B85;
-    --border-hex: #E3E8F0;
-    --border-strong: #C9D2E0;
+    --surface-2: #F8F6F2;
+    --muted-fg: #6B5B4B;
+    --border-hex: #E4D9C6;
+    --border-strong: #CDBFAE;
 
-    /* Status backgrounds */
-    --status-good-hex: #2E8B6B;
-    --status-good-bg: #E1F2EA;
-    --status-normal-hex: #C68A2E;
-    --status-normal-bg: #FBF1DD;
-    --status-alert-hex: #D8455B;
-    --status-alert-bg: #FBE2E5;
+    /* Status backgrounds — warm-tone friendly */
+    --status-good-hex: #8D9A84;      /* sage */
+    --status-good-bg: #EAEFE6;
+    --status-normal-hex: #C7A977;    /* warm gold */
+    --status-normal-bg: #F5EBD5;
+    --status-alert-hex: #9C5A4A;     /* terracotta */
+    --status-alert-bg: #EFDDD5;
 
     /* Radii */
     --r-sm: 6px;
@@ -67,12 +68,12 @@
     --r-2xl: 28px;
     --r-pill: 999px;
 
-    /* Shadows */
-    --shadow-xs: 0 1px 2px rgba(11, 27, 51, 0.04);
-    --shadow-sm: 0 2px 6px rgba(11, 27, 51, 0.06);
-    --shadow-md: 0 8px 20px rgba(11, 27, 51, 0.07);
-    --shadow-lg: 0 18px 40px rgba(11, 27, 51, 0.10);
-    --shadow-blue: 0 12px 32px rgba(44, 91, 255, 0.28);
+    /* Shadows — warm undertone */
+    --shadow-xs: 0 1px 2px rgba(47, 47, 43, 0.05);
+    --shadow-sm: 0 2px 6px rgba(47, 47, 43, 0.07);
+    --shadow-md: 0 8px 20px rgba(47, 47, 43, 0.08);
+    --shadow-lg: 0 18px 40px rgba(47, 47, 43, 0.10);
+    --shadow-blue: 0 12px 32px rgba(155, 133, 115, 0.28);
 
     /* Motion */
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -83,30 +84,30 @@
   }
 
   .dark {
-    --background: 220 45% 8%;
-    --foreground: 218 25% 95%;
-    --card: 220 40% 11%;
-    --card-foreground: 218 25% 95%;
-    --popover: 220 40% 11%;
-    --popover-foreground: 218 25% 95%;
-    --primary: 225 100% 59%;
+    --background: 60 6% 10%;
+    --foreground: 36 36% 93%;
+    --card: 60 6% 14%;
+    --card-foreground: 36 36% 93%;
+    --popover: 60 6% 14%;
+    --popover-foreground: 36 36% 93%;
+    --primary: 26 16% 53%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 214 100% 72%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 220 30% 16%;
-    --muted-foreground: 218 15% 65%;
-    --accent: 220 40% 22%;
-    --accent-foreground: 225 100% 59%;
-    --destructive: 349 64% 35%;
+    --secondary: 36 41% 63%;
+    --secondary-foreground: 60 6% 10%;
+    --muted: 60 6% 18%;
+    --muted-foreground: 36 25% 75%;
+    --accent: 26 16% 22%;
+    --accent-foreground: 36 36% 93%;
+    --destructive: 11 35% 35%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 30% 18%;
-    --input: 220 30% 18%;
-    --ring: 225 100% 59%;
-    --chart-1: 225 100% 59%;
-    --chart-2: 214 100% 72%;
-    --chart-3: 216 67% 30%;
-    --chart-4: 37 63% 47%;
-    --chart-5: 155 50% 36%;
+    --border: 60 6% 20%;
+    --input: 60 6% 20%;
+    --ring: 26 16% 53%;
+    --chart-1: 26 16% 53%;
+    --chart-2: 36 41% 63%;
+    --chart-3: 100 9% 56%;
+    --chart-4: 36 41% 63%;
+    --chart-5: 26 19% 50%;
   }
 }
 
@@ -116,9 +117,9 @@
   }
   body {
     @apply text-foreground;
-    background: var(--canvas, #F4F6FB);
-    font-family: var(--font-inter), system-ui, sans-serif;
-    color: var(--ink, #0B1B33);
+    background: var(--canvas, #F4EFE7);
+    font-family: var(--font-inter), "Montserrat", system-ui, sans-serif;
+    color: var(--ink, #2F2F2B);
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -140,46 +141,46 @@
 
 /* ---- Scan form component styles (from design system) ---- */
 .scan-label {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-family: var(--font-dm-sans), "Montserrat", system-ui, sans-serif;
   font-size: 12px; font-weight: 500;
-  color: var(--ink, #0B1B33); letter-spacing: 0.02em;
+  color: var(--ink, #2F2F2B); letter-spacing: 0.02em;
   display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
 }
 .scan-input, .scan-textarea, .scan-select {
   width: 100%;
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: 14px; color: var(--ink, #0B1B33);
+  font-family: var(--font-inter), "Montserrat", system-ui, sans-serif;
+  font-size: 14px; color: var(--ink, #2F2F2B);
   background: white;
-  border: 1px solid var(--border-hex, #E3E8F0);
+  border: 1px solid var(--border-hex, #E4D9C6);
   border-radius: 10px; padding: 12px 14px;
   transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
   outline: none;
 }
-.scan-input::placeholder, .scan-textarea::placeholder { color: var(--muted-fg, #5A6B85); }
-.scan-input:hover, .scan-textarea:hover, .scan-select:hover { border-color: var(--border-strong, #C9D2E0); }
+.scan-input::placeholder, .scan-textarea::placeholder { color: var(--muted-fg, #6B5B4B); }
+.scan-input:hover, .scan-textarea:hover, .scan-select:hover { border-color: var(--border-strong, #CDBFAE); }
 .scan-input:focus, .scan-textarea:focus, .scan-select:focus {
-  border-color: var(--primary-hex, #2C5BFF);
-  box-shadow: 0 0 0 4px rgba(44,91,255,0.12);
+  border-color: var(--primary-hex, #9B8573);
+  box-shadow: 0 0 0 4px rgba(155, 133, 115, 0.14);
 }
 .scan-textarea { resize: vertical; min-height: 96px; line-height: 1.55; }
 .scan-select {
   appearance: none; -webkit-appearance: none; cursor: pointer;
   padding-right: 40px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'><path d='M6 8l4 4 4-4' stroke='%230B1B33' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'><path d='M6 8l4 4 4-4' stroke='%232F2F2B' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>");
   background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
 }
 .scan-help {
-  font-family: var(--font-inter), system-ui, sans-serif;
-  font-size: 12px; color: var(--muted-fg, #5A6B85); line-height: 1.4;
+  font-family: var(--font-inter), "Montserrat", system-ui, sans-serif;
+  font-size: 12px; color: var(--muted-fg, #6B5B4B); line-height: 1.4;
 }
 .scan-error {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 12px; color: var(--status-alert-hex, #D8455B);
+  font-family: var(--font-dm-sans), "Montserrat", system-ui, sans-serif;
+  font-size: 12px; color: var(--status-alert-hex, #9C5A4A);
 }
 .scan-counter {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-family: var(--font-dm-sans), "Montserrat", system-ui, sans-serif;
   font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--primary-hex, #2C5BFF); background: var(--primary-soft, #E6ECFF);
+  color: var(--primary-hex, #9B8573); background: var(--primary-soft, #EFE7DC);
   padding: 2px 8px; border-radius: 999px;
 }
 
@@ -187,17 +188,17 @@
 .scan-radio {
   position: relative; display: flex; align-items: center; gap: 12px;
   padding: 14px 16px;
-  background: #F8FAFE; border: 1.5px solid rgba(11,27,51,0.10);
+  background: #F8F6F2; border: 1.5px solid rgba(47, 47, 43, 0.10);
   border-radius: 12px;
-  font-family: var(--font-inter), system-ui, sans-serif; font-size: 14px; color: #0B1B33;
+  font-family: var(--font-inter), "Montserrat", system-ui, sans-serif; font-size: 14px; color: #2F2F2B;
   cursor: pointer; transition: border-color 180ms, background 180ms;
   user-select: none;
 }
-.scan-radio:hover { border-color: rgba(11,27,51,0.16); }
-.scan-radio.is-checked { border-color: #2C5BFF; background: #E6ECFF; }
+.scan-radio:hover { border-color: rgba(47, 47, 43, 0.16); }
+.scan-radio.is-checked { border-color: #9B8573; background: #EFE7DC; }
 .scan-radio-dot {
   width: 18px; height: 18px; border-radius: 50%;
-  border: 1.5px solid rgba(11,27,51,0.16); flex-shrink: 0;
+  border: 1.5px solid rgba(47, 47, 43, 0.16); flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center;
   transition: border-color 180ms, background 180ms;
 }
@@ -206,7 +207,7 @@
   background: white; transform: scale(0); transition: transform 180ms cubic-bezier(0.22,1,0.36,1);
 }
 .scan-radio.is-checked .scan-radio-dot {
-  border-color: #2C5BFF; background: #2C5BFF;
+  border-color: #9B8573; background: #9B8573;
 }
 .scan-radio.is-checked .scan-radio-dot::after { transform: scale(1); }
 
@@ -214,45 +215,45 @@
 .scan-checkbox {
   position: relative; display: flex; align-items: center; gap: 12px;
   padding: 14px 16px;
-  background: #F8FAFE; border: 1.5px solid rgba(11,27,51,0.10);
+  background: #F8F6F2; border: 1.5px solid rgba(47, 47, 43, 0.10);
   border-radius: 12px;
-  font-family: var(--font-inter), system-ui, sans-serif; font-size: 14px; color: #0B1B33;
+  font-family: var(--font-inter), "Montserrat", system-ui, sans-serif; font-size: 14px; color: #2F2F2B;
   cursor: pointer; transition: border-color 180ms, background 180ms;
   user-select: none;
 }
-.scan-checkbox:hover { border-color: rgba(11,27,51,0.16); }
-.scan-checkbox.is-checked { border-color: #2C5BFF; background: #E6ECFF; }
+.scan-checkbox:hover { border-color: rgba(47, 47, 43, 0.16); }
+.scan-checkbox.is-checked { border-color: #9B8573; background: #EFE7DC; }
 .scan-checkbox.is-disabled { opacity: 0.4; pointer-events: none; }
 .scan-checkbox-box {
   width: 18px; height: 18px; border-radius: 5px;
-  border: 1.5px solid rgba(11,27,51,0.16); flex-shrink: 0;
+  border: 1.5px solid rgba(47, 47, 43, 0.16); flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center;
   transition: border-color 180ms, background 180ms;
 }
 .scan-checkbox-box svg { width: 12px; height: 12px; color: white; opacity: 0; transform: scale(0.8); transition: opacity 180ms, transform 180ms; }
-.scan-checkbox.is-checked .scan-checkbox-box { border-color: #2C5BFF; background: #2C5BFF; }
+.scan-checkbox.is-checked .scan-checkbox-box { border-color: #9B8573; background: #9B8573; }
 .scan-checkbox.is-checked .scan-checkbox-box svg { opacity: 1; transform: scale(1); }
 
 /* Chip pill */
 .scan-chip {
   position: relative; display: inline-flex; align-items: center; gap: 8px;
   padding: 8px 14px 8px 12px;
-  background: white; border: 1.5px solid rgba(11,27,51,0.10);
+  background: white; border: 1.5px solid rgba(47, 47, 43, 0.10);
   border-radius: 999px;
-  font-family: var(--font-dm-sans), system-ui, sans-serif; font-size: 13px; font-weight: 500;
-  color: #0B1B33; cursor: pointer; transition: border-color 180ms, background 180ms;
+  font-family: var(--font-dm-sans), "Montserrat", system-ui, sans-serif; font-size: 13px; font-weight: 500;
+  color: #2F2F2B; cursor: pointer; transition: border-color 180ms, background 180ms;
   user-select: none;
 }
-.scan-chip:hover { border-color: rgba(11,27,51,0.16); }
-.scan-chip.is-checked { border-color: #2C5BFF; background: #E6ECFF; color: #2C5BFF; }
+.scan-chip:hover { border-color: rgba(47, 47, 43, 0.16); }
+.scan-chip.is-checked { border-color: #9B8573; background: #EFE7DC; color: #6B5B4B; }
 .scan-chip-tick {
   width: 16px; height: 16px; border-radius: 50%;
-  border: 1.5px solid rgba(11,27,51,0.16);
+  border: 1.5px solid rgba(47, 47, 43, 0.16);
   display: inline-flex; align-items: center; justify-content: center;
   flex-shrink: 0; transition: border-color 180ms, background 180ms;
 }
 .scan-chip-tick svg { width: 10px; height: 10px; color: white; opacity: 0; transition: opacity 180ms; }
-.scan-chip.is-checked .scan-chip-tick { border-color: #2C5BFF; background: #2C5BFF; }
+.scan-chip.is-checked .scan-chip-tick { border-color: #9B8573; background: #9B8573; }
 .scan-chip.is-checked .scan-chip-tick svg { opacity: 1; }
 
 /* Dotted background drift animation */
@@ -280,8 +281,8 @@
   50% { transform: translateY(6px); }
 }
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(44,91,255,0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(44,91,255,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(155, 133, 115, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(155, 133, 115, 0); }
 }
 @keyframes marqueeSlide {
   to { transform: translateX(-50%); }
