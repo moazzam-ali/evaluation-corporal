@@ -68,7 +68,7 @@ export default function Step4CurrentRoutine({ form, t }) {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label className="scan-label">{t("scan.step4.supplements_label", "Do you take any supplements for your skin?")} <span className="text-[10px] tracking-wider uppercase text-[#5A6B85] border border-[rgba(11,27,51,0.10)] px-1.5 py-px rounded-full">{t("common.optional", "Optional")}</span></label>
+        <label className="scan-label">{t("scan.step4.supplements_label", "Do you take any supplements for your skin?")} <span className="text-[10px] tracking-wider uppercase text-[#6B5B4B] border border-[rgba(47,47,43,0.10)] px-1.5 py-px rounded-full">{t("common.optional", "Optional")}</span></label>
         <input className="scan-input" {...register("supplements")} placeholder={t("scan.step4.supplements_placeholder", "e.g., Collagen, Vitamin C")} />
       </div>
     </div>

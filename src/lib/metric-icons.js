@@ -34,22 +34,22 @@ export const METRIC_ICONS = {
 export const INSIGHT_CATEGORIES = {
   strengths: {
     icon: CheckCircle,
-    color: "#2E8B6B",
-    borderClass: "border-l-[#2E8B6B]",
+    color: "#8D9A84",
+    borderClass: "border-l-[#8D9A84]",
   },
   concerns: {
     icon: AlertTriangle,
-    color: "#2C5BFF",
-    borderClass: "border-l-[#2C5BFF]",
+    color: "#9B8573",
+    borderClass: "border-l-[#9B8573]",
   },
   lifestyle: {
     icon: Leaf,
-    color: "#C68A2E",
-    borderClass: "border-l-[#C68A2E]",
+    color: "#C7A977",
+    borderClass: "border-l-[#C7A977]",
   },
   goals: {
     icon: Target,
-    color: "hsl(240, 27%, 14%)",
+    color: "#2F2F2B",
     borderClass: "border-l-primary",
   },
 };

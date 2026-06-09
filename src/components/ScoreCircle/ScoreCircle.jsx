@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 const STATUS_STROKES = {
-  good: "#2E8B6B",
-  normal: "#C68A2E",
-  needs_attention: "#2C5BFF",
+  good: "#8D9A84",
+  normal: "#C7A977",
+  needs_attention: "#9B8573",
 };
 
 export default function ScoreCircle({ metricId, score, status, label, insight, description, delay = 0 }) {
@@ -28,17 +28,17 @@ export default function ScoreCircle({ metricId, score, status, label, insight, d
       onClick={() => setExpanded(!expanded)}
       style={{
         background: "white",
-        border: expanded ? `1.5px solid ${stroke}` : "1px solid rgba(11,27,51,0.10)",
+        border: expanded ? `1.5px solid ${stroke}` : "1px solid rgba(47,47,43,0.10)",
         borderRadius: "16px",
         padding: "22px 18px 20px",
         transition: "transform 220ms cubic-bezier(0.22,1,0.36,1), box-shadow 220ms, border-color 220ms",
       }}
-      whileHover={{ y: -2, boxShadow: "0 12px 28px rgba(11,27,51,0.08)" }}
+      whileHover={{ y: -2, boxShadow: "0 12px 28px rgba(47,47,43,0.08)" }}
     >
       {/* Ring — ring-only variant (no icon) */}
       <div className="relative mb-3" style={{ width: "80px", height: "80px" }}>
         <svg width="80" height="80" viewBox="0 0 80 80" style={{ transform: "rotate(-90deg)" }}>
-          <circle cx="40" cy="40" r={radius} fill="none" stroke="#EDE3DA" strokeWidth="6" />
+          <circle cx="40" cy="40" r={radius} fill="none" stroke="#E4D9C6" strokeWidth="6" />
           <motion.circle
             cx="40" cy="40" r={radius}
             fill="none" stroke={stroke} strokeWidth="6" strokeLinecap="round"
@@ -61,13 +61,13 @@ export default function ScoreCircle({ metricId, score, status, label, insight, d
       </div>
 
       {/* Label */}
-      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500, color: "#0B1B33", marginBottom: "4px", lineHeight: 1.3 }}>
+      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500, color: "#2F2F2B", marginBottom: "4px", lineHeight: 1.3 }}>
         {label}
       </div>
 
       {/* Insight */}
       {insight && (
-        <div style={{ fontFamily: "var(--font-inter)", fontSize: "11.5px", color: "#5A6B85", lineHeight: 1.45 }}>
+        <div style={{ fontFamily: "var(--font-inter)", fontSize: "11.5px", color: "#6B5B4B", lineHeight: 1.45 }}>
           {insight}
         </div>
       )}
@@ -75,7 +75,7 @@ export default function ScoreCircle({ metricId, score, status, label, insight, d
       {/* Status dot */}
       <div
         className="inline-flex items-center gap-1.5 mt-2.5"
-        style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#5A6B85" }}
+        style={{ fontFamily: "var(--font-dm-sans)", fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6B5B4B" }}
       >
         <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: stroke }} />
         {statusLabel}
@@ -87,7 +87,7 @@ export default function ScoreCircle({ metricId, score, status, label, insight, d
           className="inline-flex items-center gap-1 mt-2"
           style={{
             fontFamily: "var(--font-dm-sans)", fontSize: "10px", fontWeight: 500,
-            color: expanded ? stroke : "rgba(11,27,51,0.30)",
+            color: expanded ? stroke : "rgba(47,47,43,0.30)",
             transition: "color 180ms",
           }}
         >
@@ -117,8 +117,8 @@ export default function ScoreCircle({ metricId, score, status, label, insight, d
           >
             <p style={{
               marginTop: "12px", paddingTop: "12px",
-              borderTop: "1px solid rgba(11,27,51,0.10)",
-              fontFamily: "var(--font-inter)", fontSize: "12px", color: "#5A6B85",
+              borderTop: "1px solid rgba(47,47,43,0.10)",
+              fontFamily: "var(--font-inter)", fontSize: "12px", color: "#6B5B4B",
               lineHeight: 1.55, textAlign: "center",
             }}>
               {description}
