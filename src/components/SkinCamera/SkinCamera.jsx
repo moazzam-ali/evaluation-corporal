@@ -55,8 +55,8 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
       <div
         className="inline-flex self-start"
         style={{
-          background: "#E3E8F0", padding: "4px", borderRadius: "14px",
-          border: "1px solid rgba(11,27,51,0.10)",
+          background: "#E4D9C6", padding: "4px", borderRadius: "14px",
+          border: "1px solid rgba(47,47,43,0.10)",
         }}
       >
         <button
@@ -67,8 +67,8 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
             padding: "10px 18px", borderRadius: "10px", border: 0, cursor: "pointer",
             fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
             background: activeTab === "camera" ? "white" : "transparent",
-            color: activeTab === "camera" ? "#0B1B33" : "#5A6B85",
-            boxShadow: activeTab === "camera" ? "0 2px 6px rgba(11,27,51,0.08)" : "none",
+            color: activeTab === "camera" ? "#2F2F2B" : "#6B5B4B",
+            boxShadow: activeTab === "camera" ? "0 2px 6px rgba(47,47,43,0.08)" : "none",
             transition: "background 220ms, color 220ms, box-shadow 220ms",
           }}
         >
@@ -83,8 +83,8 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
             padding: "10px 18px", borderRadius: "10px", border: 0, cursor: "pointer",
             fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
             background: activeTab === "upload" ? "white" : "transparent",
-            color: activeTab === "upload" ? "#0B1B33" : "#5A6B85",
-            boxShadow: activeTab === "upload" ? "0 2px 6px rgba(11,27,51,0.08)" : "none",
+            color: activeTab === "upload" ? "#2F2F2B" : "#6B5B4B",
+            boxShadow: activeTab === "upload" ? "0 2px 6px rgba(47,47,43,0.08)" : "none",
             transition: "background 220ms, color 220ms, box-shadow 220ms",
           }}
         >
@@ -100,8 +100,8 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
             className="relative overflow-hidden"
             style={{
               aspectRatio: "4 / 3", borderRadius: "18px",
-              background: "linear-gradient(160deg, #1B2A47 0%, #0B1B33 100%)",
-              border: "1.5px solid rgba(11,27,51,0.16)",
+              background: "linear-gradient(160deg, #4A4A42 0%, #2F2F2B 100%)",
+              border: "1.5px solid rgba(47,47,43,0.16)",
             }}
           >
             {capturedImage ? (
@@ -114,7 +114,7 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
                     style={{
                       fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
                       padding: "10px 20px", borderRadius: "999px",
-                      background: "rgba(255,255,255,0.94)", color: "#0B1B33",
+                      background: "rgba(255,255,255,0.94)", color: "#2F2F2B",
                       border: 0, cursor: "pointer", backdropFilter: "blur(6px)",
                     }}
                   >
@@ -140,12 +140,12 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
                 <span
                   className="absolute top-3.5 left-3.5 inline-flex items-center gap-2"
                   style={{
-                    background: "rgba(11,27,51,0.65)", backdropFilter: "blur(8px)",
+                    background: "rgba(47,47,43,0.65)", backdropFilter: "blur(8px)",
                     color: "white", padding: "6px 12px", borderRadius: "999px",
                     fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.08em", textTransform: "uppercase",
                   }}
                 >
-                  <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#FF5C7A", boxShadow: "0 0 0 3px rgba(255,92,122,0.30)" }} />
+                  <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#9C5A4A", boxShadow: "0 0 0 3px rgba(156,90,74,0.30)" }} />
                   {t("scan.camera_live", "Live")}
                 </span>
                 {/* Shutter button */}
@@ -160,7 +160,7 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
                       display: "inline-flex", alignItems: "center", justifyContent: "center",
                     }}
                   >
-                    <span style={{ width: "50px", height: "50px", borderRadius: "50%", background: "white", boxShadow: "inset 0 0 0 2px #2C5BFF", display: "block" }} />
+                    <span style={{ width: "50px", height: "50px", borderRadius: "50%", background: "white", boxShadow: "inset 0 0 0 2px #9B8573", display: "block" }} />
                   </button>
                 </div>
               </>
@@ -170,16 +170,16 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
           {/* Help banner */}
           <div
             className="flex gap-3 items-start"
-            style={{ background: "#E6ECFF", border: "1px solid rgba(44,91,255,0.20)", borderRadius: "14px", padding: "14px 16px" }}
+            style={{ background: "#EFE7DC", border: "1px solid rgba(155,133,115,0.20)", borderRadius: "14px", padding: "14px 16px" }}
           >
             <span
               className="inline-flex items-center justify-center shrink-0"
-              style={{ width: "28px", height: "28px", borderRadius: "8px", background: "white", color: "#2C5BFF" }}
+              style={{ width: "28px", height: "28px", borderRadius: "8px", background: "white", color: "#9B8573" }}
             >
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </span>
-            <p style={{ margin: 0, fontSize: "13px", color: "#2D2D40", lineHeight: 1.55 }}>
-              <strong style={{ color: "#0B1B33", fontWeight: 600 }}>{t("scan.camera_help_title", "Hold steady — we auto-capture the sharpest frame.")}</strong>{" "}
+            <p style={{ margin: 0, fontSize: "13px", color: "#4A4A42", lineHeight: 1.55 }}>
+              <strong style={{ color: "#2F2F2B", fontWeight: 600 }}>{t("scan.camera_help_title", "Hold steady — we auto-capture the sharpest frame.")}</strong>{" "}
               {t("scan.camera_help_body", "Make sure your full face is visible inside the dashed oval, with even lighting on both sides.")}
             </p>
           </div>
@@ -199,7 +199,7 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
                   style={{
                     fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
                     padding: "10px 20px", borderRadius: "999px",
-                    background: "rgba(255,255,255,0.94)", color: "#0B1B33",
+                    background: "rgba(255,255,255,0.94)", color: "#2F2F2B",
                     border: 0, cursor: "pointer", backdropFilter: "blur(6px)",
                   }}
                 >
@@ -212,9 +212,9 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
               {...getRootProps()}
               className="flex flex-col items-center justify-center text-center cursor-pointer"
               style={{
-                border: isDragActive ? "2px solid #2C5BFF" : "2px dashed rgba(11,27,51,0.16)",
+                border: isDragActive ? "2px solid #9B8573" : "2px dashed rgba(47,47,43,0.16)",
                 borderRadius: "18px", padding: "56px 24px",
-                background: isDragActive ? "#E6ECFF" : "#F8FAFE",
+                background: isDragActive ? "#EFE7DC" : "#F8F6F2",
                 minHeight: "320px",
                 transition: "border-color 220ms, background 220ms",
               }}
@@ -222,20 +222,20 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
               <input {...getInputProps()} />
               <span
                 className="inline-flex items-center justify-center"
-                style={{ width: "64px", height: "64px", borderRadius: "18px", background: "white", border: "1px solid rgba(11,27,51,0.10)", color: "#2C5BFF", marginBottom: "16px" }}
+                style={{ width: "64px", height: "64px", borderRadius: "18px", background: "white", border: "1px solid rgba(47,47,43,0.10)", color: "#9B8573", marginBottom: "16px" }}
               >
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               </span>
-              <span style={{ fontFamily: "var(--font-fraunces)", fontSize: "22px", fontWeight: 400, color: "#0B1B33", lineHeight: 1.25 }}>
-                {t("scan.upload_title_1", "Drag & drop your photo here,")} <em style={{ fontStyle: "italic", color: "#2C5BFF" }}>{t("scan.upload_title_2", "or click to browse.")}</em>
+              <span style={{ fontFamily: "var(--font-fraunces)", fontSize: "22px", fontWeight: 400, color: "#2F2F2B", lineHeight: 1.25 }}>
+                {t("scan.upload_title_1", "Drag & drop your photo here,")} <em style={{ fontStyle: "italic", color: "#9B8573" }}>{t("scan.upload_title_2", "or click to browse.")}</em>
               </span>
-              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#5A6B85", marginTop: "8px" }}>
+              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#6B5B4B", marginTop: "8px" }}>
                 {t("scan.upload_formats", "JPG, PNG · up to 10 MB")}
               </span>
               <span
                 style={{
                   fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
-                  color: "white", background: "#2C5BFF", padding: "9px 18px",
+                  color: "white", background: "#9B8573", padding: "9px 18px",
                   borderRadius: "999px", marginTop: "16px",
                 }}
               >
@@ -247,16 +247,16 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
           {/* Help banner */}
           <div
             className="flex gap-3 items-start"
-            style={{ background: "#E6ECFF", border: "1px solid rgba(44,91,255,0.20)", borderRadius: "14px", padding: "14px 16px" }}
+            style={{ background: "#EFE7DC", border: "1px solid rgba(155,133,115,0.20)", borderRadius: "14px", padding: "14px 16px" }}
           >
             <span
               className="inline-flex items-center justify-center shrink-0"
-              style={{ width: "28px", height: "28px", borderRadius: "8px", background: "white", color: "#2C5BFF" }}
+              style={{ width: "28px", height: "28px", borderRadius: "8px", background: "white", color: "#9B8573" }}
             >
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
             </span>
-            <p style={{ margin: 0, fontSize: "13px", color: "#2D2D40", lineHeight: 1.55 }}>
-              <strong style={{ color: "#0B1B33", fontWeight: 600 }}>{t("scan.upload_help_title", "Photos are processed, never permanently stored.")}</strong>{" "}
+            <p style={{ margin: 0, fontSize: "13px", color: "#4A4A42", lineHeight: 1.55 }}>
+              <strong style={{ color: "#2F2F2B", fontWeight: 600 }}>{t("scan.upload_help_title", "Photos are processed, never permanently stored.")}</strong>{" "}
               {t("scan.upload_help_body", "Only the JSON analysis and your email are kept. Images are auto-deleted within 24 hours.")}
             </p>
           </div>
@@ -274,15 +274,15 @@ export default function SkinCamera({ onImageCapture, activeTab, setActiveTab }) 
           <div
             key={i}
             className="flex flex-col gap-2"
-            style={{ background: "#F8FAFE", border: "1px solid rgba(11,27,51,0.10)", borderRadius: "12px", padding: "14px" }}
+            style={{ background: "#F8F6F2", border: "1px solid rgba(47,47,43,0.10)", borderRadius: "12px", padding: "14px" }}
           >
             <span
               className="inline-flex items-center justify-center"
-              style={{ width: "28px", height: "28px", borderRadius: "8px", background: "#E6ECFF", color: "#2C5BFF" }}
+              style={{ width: "28px", height: "28px", borderRadius: "8px", background: "#EFE7DC", color: "#9B8573" }}
             >
               {tip.icon}
             </span>
-            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12.5px", fontWeight: 500, color: "#0B1B33", lineHeight: 1.35 }}>
+            <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: "12.5px", fontWeight: 500, color: "#2F2F2B", lineHeight: 1.35 }}>
               {tip.text}
             </span>
           </div>
