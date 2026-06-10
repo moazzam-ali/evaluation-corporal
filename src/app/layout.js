@@ -1,21 +1,26 @@
-import { Inter, Fraunces, DM_Sans } from "next/font/google";
+import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
 
-const inter = Inter({
+// Body / UI typeface — Montserrat covers what Inter and DM Sans used to do.
+const montserrat = Montserrat({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-inter",
 });
 
-const fraunces = Fraunces({
+// Display / titles — Cormorant Garamond replaces Fraunces.
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
   variable: "--font-fraunces",
 });
 
-const dmSans = DM_Sans({
+// Reuse Montserrat for label/eyebrow variable previously bound to DM Sans.
+const montserratLabel = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-dm-sans",
 });
 
@@ -36,7 +41,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${fraunces.variable} ${dmSans.variable} antialiased`}>
+      <body className={`${montserrat.variable} ${cormorant.variable} ${montserratLabel.variable} antialiased`}>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

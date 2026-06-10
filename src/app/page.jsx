@@ -67,8 +67,8 @@ function ScoreRing({ value = 76, size = 120, stroke = 10, color = "var(--primary
 
 /* ── Body Silhouette ───────────────────────────────────────────── */
 function BodySilhouette({ view = "front", width = 200, height = 380, fillColor, strokeColor, hotspots = [] }) {
-  const fill = fillColor || "rgba(44, 91, 255, 0.10)";
-  const stroke = strokeColor || "rgba(44, 91, 255, 0.45)";
+  const fill = fillColor || "rgba(155, 133, 115, 0.10)";
+  const stroke = strokeColor || "rgba(155, 133, 115, 0.45)";
   const frontPath = "M100 20 C 88 20 80 30 80 44 C 80 56 86 64 92 68 L 88 76 C 70 80 56 90 54 110 L 50 150 C 48 162 50 174 56 184 L 60 200 L 56 240 C 56 250 60 258 64 264 L 60 320 C 60 332 64 344 70 354 L 76 366 L 90 366 L 92 354 L 90 320 L 92 270 L 100 270 L 108 270 L 110 320 L 108 354 L 110 366 L 124 366 L 130 354 C 136 344 140 332 140 320 L 136 264 C 140 258 144 250 144 240 L 140 200 L 144 184 C 150 174 152 162 150 150 L 146 110 C 144 90 130 80 112 76 L 108 68 C 114 64 120 56 120 44 C 120 30 112 20 100 20 Z";
   return (
     <div style={{ position: "relative", width, height }}>
@@ -76,15 +76,15 @@ function BodySilhouette({ view = "front", width = 200, height = 380, fillColor, 
         <defs>
           <linearGradient id={`bodyG-${view}`} x1="0" x2="0" y1="0" y2="1">
             <stop offset="0" stopColor={fill} />
-            <stop offset="1" stopColor="rgba(44, 91, 255, 0.04)" />
+            <stop offset="1" stopColor="rgba(155, 133, 115, 0.04)" />
           </linearGradient>
         </defs>
         <path d={frontPath} fill={`url(#bodyG-${view})`} stroke={stroke} strokeWidth="1" />
         {hotspots.map((h, i) => (
           <g key={i}>
-            <circle cx={h.x} cy={h.y} r="6" fill="white" stroke={h.color || "#2C5BFF"} strokeWidth="2" />
-            <circle cx={h.x} cy={h.y} r="3" fill={h.color || "#2C5BFF"} />
-            <circle cx={h.x} cy={h.y} r="10" fill={h.color || "#2C5BFF"} opacity="0.2">
+            <circle cx={h.x} cy={h.y} r="6" fill="white" stroke={h.color || "#9B8573"} strokeWidth="2" />
+            <circle cx={h.x} cy={h.y} r="3" fill={h.color || "#9B8573"} />
+            <circle cx={h.x} cy={h.y} r="10" fill={h.color || "#9B8573"} opacity="0.2">
               <animate attributeName="r" values="6;14;6" dur="2s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite" />
             </circle>
@@ -117,19 +117,19 @@ function RadarChart({ t }) {
   return (
     <svg width="360" height="360" viewBox="0 0 360 360">
       {[0.25, 0.5, 0.75, 1].map(s => (
-        <polygon key={s} points={Array.from({ length: 6 }, (_, k) => pt(s, k).join(",")).join(" ")} fill="none" stroke="var(--border-hex, #E3E8F0)" strokeWidth="1" />
+        <polygon key={s} points={Array.from({ length: 6 }, (_, k) => pt(s, k).join(",")).join(" ")} fill="none" stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />
       ))}
       {Array.from({ length: 6 }, (_, k) => {
         const [x, y] = pt(1, k);
-        return <line key={k} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--border-hex, #E3E8F0)" strokeWidth="1" />;
+        return <line key={k} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />;
       })}
-      <polygon points={polyA} fill="rgba(11,27,51,0.04)" stroke="rgba(11,27,51,0.4)" strokeWidth="1" strokeDasharray="3 4" />
-      <polygon points={polyB} fill="rgba(44,91,255,0.10)" stroke="var(--primary-hex, #2C5BFF)" strokeWidth="1.5" />
+      <polygon points={polyA} fill="rgba(47,47,43,0.04)" stroke="rgba(47,47,43,0.4)" strokeWidth="1" strokeDasharray="3 4" />
+      <polygon points={polyB} fill="rgba(155,133,115,0.10)" stroke="var(--primary-hex, #9B8573)" strokeWidth="1.5" />
       {labels.map((l, i) => {
         const [x, y] = pt(1.18, i);
-        return <text key={l} x={x} y={y} fontSize="11" fill="var(--muted-fg, #5A6B85)" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-inter)" fontWeight="500">{l}</text>;
+        return <text key={l} x={x} y={y} fontSize="11" fill="var(--muted-fg, #6B5B4B)" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-inter)" fontWeight="500">{l}</text>;
       })}
-      {valsB.map((v, i) => { const [x2, y2] = pt(v, i); return <circle key={i} cx={x2} cy={y2} r="3" fill="white" stroke="var(--primary-hex, #2C5BFF)" strokeWidth="2" />; })}
+      {valsB.map((v, i) => { const [x2, y2] = pt(v, i); return <circle key={i} cx={x2} cy={y2} r="3" fill="white" stroke="var(--primary-hex, #9B8573)" strokeWidth="2" />; })}
     </svg>
   );
 }
@@ -137,11 +137,11 @@ function RadarChart({ t }) {
 /* ── Avatar ─────────────────────────────────────────────────────── */
 function Avatar({ initials, size = 44 }) {
   const palettes = [
-    "linear-gradient(135deg, #0B1B33, #2C5BFF)",
-    "linear-gradient(135deg, #2E8B6B, #6FA0FF)",
-    "linear-gradient(135deg, #C68A2E, #D8455B)",
-    "linear-gradient(135deg, #1F44CC, #6FA0FF)",
-    "linear-gradient(135deg, #1B2A47, #2E8B6B)",
+    "linear-gradient(135deg, #2F2F2B, #9B8573)",
+    "linear-gradient(135deg, #8D9A84, #C7A977)",
+    "linear-gradient(135deg, #C7A977, #9C5A4A)",
+    "linear-gradient(135deg, #6B5B4B, #C7A977)",
+    "linear-gradient(135deg, #1B2A47, #8D9A84)",
   ];
   const idx = (initials.charCodeAt(0) + (initials.charCodeAt(1) || 0)) % palettes.length;
   return (
@@ -179,11 +179,11 @@ function LandingPageInner() {
   const METRIC_ICONS = ["chart", "user", "posture", "plan", "sparkle", "dumbbell", "droplet", "flame"];
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden" style={{ background: "#FAFBFD" }}>
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden" style={{ background: "#F4EFE7" }}>
 
       {/* ───────────── HERO ───────────── */}
-      <section className="relative overflow-hidden pb-0 pt-16 sm:pt-20" id="hero" style={{ background: "#FAFBFD" }}>
-        <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(44,91,255,0.06) 0%, rgba(44,91,255,0) 55%)" }} />
+      <section className="relative overflow-hidden pb-0 pt-16 sm:pt-20" id="hero" style={{ background: "#F4EFE7" }}>
+        <div className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(155,133,115,0.06) 0%, rgba(155,133,115,0) 55%)" }} />
 
         <div className="mx-auto max-w-[920px] px-5 sm:px-8 relative text-center" style={{ paddingTop: 64 }}>
           {/* Eyebrow pill */}
@@ -238,14 +238,14 @@ function LandingPageInner() {
         <Reveal delay={0.32}>
           <div className="relative mx-auto mt-16 hidden md:block" style={{ maxWidth: 1100, height: 540, marginBottom: 0 }}>
             {/* Soft floor shadow */}
-            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 rounded-[50%]" style={{ width: 820, height: 520, background: "radial-gradient(ellipse at center, rgba(11,27,51,0.05), rgba(11,27,51,0))", filter: "blur(2px)" }} />
+            <div className="absolute left-1/2 bottom-0 -translate-x-1/2 rounded-[50%]" style={{ width: 820, height: 520, background: "radial-gradient(ellipse at center, rgba(47,47,43,0.05), rgba(47,47,43,0))", filter: "blur(2px)" }} />
 
             {/* Center card with body silhouette */}
             <div className="absolute left-1/2 -translate-x-1/2" style={{
               top: 30, width: 360, height: 480,
-              background: "linear-gradient(180deg, #FFFFFF 0%, #F4F6FB 100%)",
+              background: "linear-gradient(180deg, #FFFFFF 0%, #F4EFE7 100%)",
               border: "1px solid var(--border-hex)", borderRadius: 28, padding: 24,
-              boxShadow: "0 30px 80px rgba(11,27,51,0.10), 0 4px 12px rgba(11,27,51,0.04)",
+              boxShadow: "0 30px 80px rgba(47,47,43,0.10), 0 4px 12px rgba(47,47,43,0.04)",
             }}>
               <div className="flex justify-between items-center">
                 <span className="text-[10px] font-medium tracking-[0.14em] uppercase" style={{ color: "var(--primary-hex)", fontFamily: "var(--font-inter)" }}>ASSESSMENT</span>
@@ -257,17 +257,17 @@ function LandingPageInner() {
 
               <div className="relative mt-2 flex justify-center items-center" style={{ height: 380 }}>
                 <svg className="absolute inset-0 m-auto" width="300" height="380" viewBox="0 0 300 380">
-                  <circle cx="150" cy="190" r="120" fill="none" stroke="rgba(44,91,255,0.10)" strokeWidth="1" />
-                  <circle cx="150" cy="190" r="80" fill="none" stroke="rgba(44,91,255,0.12)" strokeWidth="1" strokeDasharray="2 6" />
+                  <circle cx="150" cy="190" r="120" fill="none" stroke="rgba(155,133,115,0.10)" strokeWidth="1" />
+                  <circle cx="150" cy="190" r="80" fill="none" stroke="rgba(155,133,115,0.12)" strokeWidth="1" strokeDasharray="2 6" />
                 </svg>
-                <BodySilhouette view="front" width={180} height={340} fillColor="rgba(44,91,255,0.10)" strokeColor="rgba(44,91,255,0.55)" hotspots={[
-                  { x: 100, y: 120, color: "#2C5BFF" },
-                  { x: 144, y: 200, color: "#D8455B" },
-                  { x: 60, y: 200, color: "#2E8B6B" },
+                <BodySilhouette view="front" width={180} height={340} fillColor="rgba(155,133,115,0.10)" strokeColor="rgba(155,133,115,0.55)" hotspots={[
+                  { x: 100, y: 120, color: "#9B8573" },
+                  { x: 144, y: 200, color: "#9C5A4A" },
+                  { x: 60, y: 200, color: "#8D9A84" },
                 ]} />
                 {/* Scan line */}
                 <div className="absolute inset-x-[30px] inset-y-[30px] overflow-hidden rounded-2xl pointer-events-none">
-                  <div className="absolute inset-x-0 h-[2px] animate-[scanSweep_3.6s_ease-in-out_infinite]" style={{ background: "linear-gradient(90deg, rgba(44,91,255,0), rgba(44,91,255,0.6), rgba(44,91,255,0))", boxShadow: "0 0 18px rgba(44,91,255,0.5)" }} />
+                  <div className="absolute inset-x-0 h-[2px] animate-[scanSweep_3.6s_ease-in-out_infinite]" style={{ background: "linear-gradient(90deg, rgba(155,133,115,0), rgba(155,133,115,0.6), rgba(155,133,115,0))", boxShadow: "0 0 18px rgba(155,133,115,0.5)" }} />
                 </div>
               </div>
 
@@ -275,7 +275,7 @@ function LandingPageInner() {
                 {["FRONT", "SIDE", "BACK"].map((label, i) => (
                   <div key={label} className="text-center text-[10px] font-semibold tracking-[0.14em] py-2 rounded-lg" style={{
                     background: i === 0 ? "var(--primary-soft)" : "var(--muted)",
-                    border: i === 0 ? "1px solid rgba(44,91,255,0.25)" : "1px solid var(--border-hex)",
+                    border: i === 0 ? "1px solid rgba(155,133,115,0.25)" : "1px solid var(--border-hex)",
                     color: i === 0 ? "var(--primary-deep)" : "var(--muted-fg)",
                   }}>{label}</div>
                 ))}
@@ -286,7 +286,7 @@ function LandingPageInner() {
             <div className="absolute" style={{ left: 100, top: 90, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", animation: "floatA 6s ease-in-out infinite" }}>
               <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>BMI</div>
               <div className="flex items-center gap-3.5 mt-2">
-                <ScoreRing value={76} size={72} stroke={6} color="#2E8B6B" track="rgba(11,27,51,0.06)" />
+                <ScoreRing value={76} size={72} stroke={6} color="#8D9A84" track="rgba(47,47,43,0.06)" />
                 <div>
                   <div className="text-[22px] font-medium" style={{ fontFamily: "var(--font-fraunces)", color: "var(--ink)" }}>23.4</div>
                   <div className="text-[11px] mt-0.5 inline-flex items-center gap-1 rounded-full px-2 py-0.5" style={{ background: "var(--status-good-bg)", color: "var(--status-good-hex)" }}>
@@ -303,13 +303,13 @@ function LandingPageInner() {
                 <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>18.2</span>
                 <span className="text-[13px]" style={{ color: "var(--muted-fg)" }}>%</span>
               </div>
-              <div className="h-1 rounded-full mt-2 overflow-hidden" style={{ background: "rgba(11,27,51,0.06)" }}>
+              <div className="h-1 rounded-full mt-2 overflow-hidden" style={{ background: "rgba(47,47,43,0.06)" }}>
                 <div className="h-full rounded-full" style={{ width: "45%", background: "var(--status-good-hex)" }} />
               </div>
             </div>
 
             {/* Bottom-right dark card — calories */}
-            <div className="absolute" style={{ right: 140, bottom: 40, width: 200, background: "var(--ink)", color: "white", borderRadius: 16, padding: 16, boxShadow: "0 18px 40px rgba(11,27,51,0.18)", animation: "floatA 8s ease-in-out -4s infinite" }}>
+            <div className="absolute" style={{ right: 140, bottom: 40, width: 200, background: "var(--ink)", color: "white", borderRadius: 16, padding: 16, boxShadow: "0 18px 40px rgba(47,47,43,0.18)", animation: "floatA 8s ease-in-out -4s infinite" }}>
               <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>DAILY CALORIES</div>
               <div className="flex items-baseline gap-1.5 mt-1.5">
                 <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>2,148</span>
@@ -333,7 +333,7 @@ function LandingPageInner() {
       </section>
 
       {/* ───────────── TRUST STRIP ───────────── */}
-      <div className="border-y bg-white py-8" style={{ borderColor: "rgba(11,27,51,0.06)" }}>
+      <div className="border-y bg-white py-8" style={{ borderColor: "rgba(47,47,43,0.06)" }}>
         <div className="text-center text-[11px] font-medium uppercase tracking-[0.18em] mb-5" style={{ color: "var(--muted-fg)" }}>
           {t("landing.trust_strip", "As featured by · partnered with")}
         </div>
@@ -345,7 +345,7 @@ function LandingPageInner() {
       </div>
 
       {/* ───────────── STATS ───────────── */}
-      <section className="py-[72px]" style={{ background: "#FAFBFD" }}>
+      <section className="py-[72px]" style={{ background: "#F4EFE7" }}>
         <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[1, 2, 3, 4].map((i, idx) => (
@@ -430,7 +430,7 @@ function LandingPageInner() {
             {[1, 2, 3, 4, 5, 6].map((i, idx) => (
               <Reveal key={i} delay={idx * 0.06}>
                 <div className="flex flex-col h-full rounded-[20px] border bg-white p-7 shadow-[var(--shadow-xs)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]" style={{ borderColor: "var(--border-hex)" }}>
-                  <div className="w-12 h-12 rounded-[14px] flex items-center justify-center shrink-0 mb-4" style={{ background: "var(--primary-soft)", border: "1px solid rgba(44,91,255,0.12)" }}>
+                  <div className="w-12 h-12 rounded-[14px] flex items-center justify-center shrink-0 mb-4" style={{ background: "var(--primary-soft)", border: "1px solid rgba(155,133,115,0.12)" }}>
                     <Icon name={SERVICE_ICONS[idx]} size={20} color="var(--primary-hex)" />
                   </div>
                   <h3 className="text-[22px] tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
@@ -446,7 +446,7 @@ function LandingPageInner() {
 
           {/* Plan engine callout */}
           <Reveal delay={0.2}>
-            <div className="mt-16 rounded-3xl border p-12 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center" style={{ background: "#FAFBFD", borderColor: "var(--border-hex)" }}>
+            <div className="mt-16 rounded-3xl border p-12 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center" style={{ background: "#F4EFE7", borderColor: "var(--border-hex)" }}>
               <div>
                 <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
                   {t("landing.service_plan_label")}
@@ -475,7 +475,7 @@ function LandingPageInner() {
       </section>
 
       {/* ───────────── HOW IT WORKS ───────────── */}
-      <section className="py-24 lg:py-32" style={{ background: "#FAFBFD", borderTop: "1px solid var(--border-hex)" }} id="how">
+      <section className="py-24 lg:py-32" style={{ background: "#F4EFE7", borderTop: "1px solid var(--border-hex)" }} id="how">
         <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
           <div className="text-center mb-16">
             <Reveal>
@@ -541,7 +541,7 @@ function LandingPageInner() {
           <div className="grid lg:grid-cols-3 gap-5" style={{ alignItems: "stretch" }}>
             {[1, 2, 3].map((i, idx) => (
               <Reveal key={i} delay={idx * 0.08}>
-                <div className="flex flex-col h-full rounded-3xl border p-7 sm:p-8 transition-all hover:-translate-y-1 hover:border-[rgba(111,160,255,0.4)]" style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}>
+                <div className="flex flex-col h-full rounded-3xl border p-7 sm:p-8 transition-all hover:-translate-y-1 hover:border-[rgba(199,169,119,0.4)]" style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}>
                   <div className="mb-6 text-[11px] tracking-[0.2em]" style={{ color: "var(--sky)" }}>
                     {t(`landing.formula_${i}_eq`)}
                   </div>
@@ -603,7 +603,7 @@ function LandingPageInner() {
 
           {/* Featured quote */}
           <Reveal>
-            <div className="rounded-3xl border p-12 mb-4 relative" style={{ background: "#FAFBFD", borderColor: "var(--border-hex)" }}>
+            <div className="rounded-3xl border p-12 mb-4 relative" style={{ background: "#F4EFE7", borderColor: "var(--border-hex)" }}>
               <div className="absolute top-6 right-8 select-none" style={{ fontFamily: "var(--font-fraunces)", fontSize: 140, lineHeight: 1, color: "var(--primary-soft)" }}>&ldquo;</div>
               <div className="flex gap-1 mb-5">
                 {Array.from({ length: 5 }, (_, i) => <Icon key={i} name="star" size={16} color="var(--status-normal-hex)" />)}
@@ -651,15 +651,15 @@ function LandingPageInner() {
       </section>
 
       {/* ───────────── BIG CTA ───────────── */}
-      <section className="py-24" style={{ background: "#FAFBFD" }}>
+      <section className="py-24" style={{ background: "#F4EFE7" }}>
         <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
           <Reveal>
             <div className="relative overflow-hidden rounded-[32px] text-center text-white" style={{ background: "var(--ink)", padding: "72px 56px" }}>
               {/* Decorative circles */}
               <svg className="absolute inset-0 opacity-[0.18]" width="100%" height="100%" viewBox="0 0 1000 400" preserveAspectRatio="none">
-                <circle cx="500" cy="200" r="120" fill="none" stroke="#6FA0FF" strokeWidth="1" />
-                <circle cx="500" cy="200" r="200" fill="none" stroke="#6FA0FF" strokeWidth="1" strokeDasharray="3 6" />
-                <circle cx="500" cy="200" r="280" fill="none" stroke="#6FA0FF" strokeWidth="1" />
+                <circle cx="500" cy="200" r="120" fill="none" stroke="#C7A977" strokeWidth="1" />
+                <circle cx="500" cy="200" r="200" fill="none" stroke="#C7A977" strokeWidth="1" strokeDasharray="3 6" />
+                <circle cx="500" cy="200" r="280" fill="none" stroke="#C7A977" strokeWidth="1" />
               </svg>
 
               <div className="relative">

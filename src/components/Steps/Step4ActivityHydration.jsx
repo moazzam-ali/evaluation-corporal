@@ -26,7 +26,7 @@ export default function Step4ActivityHydration({ form, t }) {
 
   const renderSelect = (name, label, options) => (
     <div className="flex flex-col gap-1.5">
-      <label className="scan-label">{label} <span className="text-[#2C5BFF] text-sm">*</span></label>
+      <label className="scan-label">{label} <span className="text-[#9B8573] text-sm">*</span></label>
       <select className="scan-select" {...register(name)}>
         <option value="">{t("scan.step4.select", "Select...")}</option>
         {options.map((opt) => (

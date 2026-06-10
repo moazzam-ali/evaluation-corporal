@@ -42,8 +42,8 @@ export default function Step5HealthConditions({ form, t }) {
       </div>
 
       {health_conditions.length > 0 && (
-        <div className="rounded-xl border border-[rgba(44,91,255,0.2)] bg-[#E6ECFF] px-4 py-3">
-          <p className="text-[12.5px] leading-relaxed text-[#1F44CC]" style={{ fontFamily: "var(--font-inter)" }}>
+        <div className="rounded-xl border border-[rgba(155,133,115,0.2)] bg-[#EFE7DC] px-4 py-3">
+          <p className="text-[12.5px] leading-relaxed text-[#6B5B4B]" style={{ fontFamily: "var(--font-inter)" }}>
             {t("scan.step5.selected_count", "{{count}} condition(s) selected", { count: health_conditions.length })}
           </p>
         </div>
