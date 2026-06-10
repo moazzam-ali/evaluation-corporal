@@ -27,9 +27,9 @@ const DEMO = {
     fats: { g: 75, pct: 32 },
   },
   products: [
-    { name: "Rebuild Strength", condition: "Athlete recovery", icon: "dumbbell", why: "Post-workout recovery formula with BCAAs. Matched to your exercise frequency of 4–5 days/week.", dose: "1 scoop", timing: "Post workout", grad: "#0B1B33, #2C5BFF" },
-    { name: "Phyto Complete", condition: "Belly fat", icon: "leaf", why: "Plant-based meal replacement designed to support weight management and reduce abdominal fat.", dose: "1 serving", timing: "Lunch swap", grad: "#2E8B6B, #0B1B33" },
-    { name: "HerbalifeLine Max", condition: "Cholesterol", icon: "droplet", why: "Omega-3 EPA+DHA supplement supporting cardiovascular health and healthy cholesterol levels.", dose: "1 softgel", timing: "With breakfast", grad: "#1F44CC, #6FA0FF" },
+    { name: "Rebuild Strength", condition: "Athlete recovery", icon: "dumbbell", why: "Post-workout recovery formula with BCAAs. Matched to your exercise frequency of 4–5 days/week.", dose: "1 scoop", timing: "Post workout", grad: "#2F2F2B, #9B8573" },
+    { name: "Phyto Complete", condition: "Belly fat", icon: "leaf", why: "Plant-based meal replacement designed to support weight management and reduce abdominal fat.", dose: "1 serving", timing: "Lunch swap", grad: "#8D9A84, #2F2F2B" },
+    { name: "HerbalifeLine Max", condition: "Cholesterol", icon: "droplet", why: "Omega-3 EPA+DHA supplement supporting cardiovascular health and healthy cholesterol levels.", dose: "1 softgel", timing: "With breakfast", grad: "#6B5B4B, #C7A977" },
   ],
   radarData: [
     { label: "Compos.", now: 0.78, prev: 0.72 },
@@ -48,9 +48,9 @@ const DEMO = {
 
 /* ── Tone colors ───────────────────────────────────────────────── */
 const TONES = {
-  good:   { fill: "#2E8B6B", soft: "rgba(46,139,107,0.12)",  chip: "#E1F2EA", text: "#1F6B50" },
-  normal: { fill: "#C68A2E", soft: "rgba(198,138,46,0.10)",  chip: "#FBF1DD", text: "#8E6418" },
-  alert:  { fill: "#D8455B", soft: "rgba(216,69,91,0.10)",   chip: "#FBE2E5", text: "#A22A3D" },
+  good:   { fill: "#8D9A84", soft: "rgba(46,139,107,0.12)",  chip: "#EAEFE6", text: "#1F6B50" },
+  normal: { fill: "#C7A977", soft: "rgba(198,138,46,0.10)",  chip: "#F5EBD5", text: "#8E6418" },
+  alert:  { fill: "#9C5A4A", soft: "rgba(216,69,91,0.10)",   chip: "#EFDDD5", text: "#A22A3D" },
 };
 
 /* ── Icon ──────────────────────────────────────────────────────── */
@@ -89,7 +89,7 @@ function LinearRange({ value, min, max, segments, unit, caption, decimals = 1 })
         </span>
       </div>
       <div className="relative pb-8">
-        <div className="relative h-2.5 rounded-full overflow-hidden" style={{ background: "rgba(11,27,51,0.04)" }}>
+        <div className="relative h-2.5 rounded-full overflow-hidden" style={{ background: "rgba(47,47,43,0.04)" }}>
           {segs.map((s, i) => (
             <div key={i} className="absolute top-0 bottom-0" style={{ left: `${s.a}%`, width: `${s.b - s.a}%`, background: (TONES[s.tone] || TONES.normal).soft, borderRight: i < segs.length - 1 ? "1px solid rgba(255,255,255,0.85)" : "none" }} />
           ))}
@@ -112,7 +112,7 @@ function Card({ children, dark, className = "" }) {
     <div className={`rounded-[20px] ${className}`} style={{
       background: dark ? "var(--ink)" : "white",
       color: dark ? "white" : "var(--ink)",
-      border: dark ? "none" : "1px solid var(--border-hex, #E3E8F0)",
+      border: dark ? "none" : "1px solid var(--border-hex, #E4D9C6)",
       padding: "26px 30px 28px",
       boxShadow: dark ? "var(--shadow-md)" : "var(--shadow-xs)",
     }}>{children}</div>
@@ -131,10 +131,10 @@ function CardHeader({ title, action }) {
 /* ── Chapter Band ──────────────────────────────────────────────── */
 function ChapterBand({ eyebrow, title }) {
   return (
-    <div className="relative overflow-hidden py-24 sm:py-28" style={{ background: "linear-gradient(180deg, #FAFBFD 0%, #FFFFFF 100%)", borderTop: "1px solid var(--border-hex)", borderBottom: "1px solid var(--border-hex)" }}>
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(44,91,255,0.04) 0%, rgba(44,91,255,0) 60%)" }} />
+    <div className="relative overflow-hidden py-24 sm:py-28" style={{ background: "linear-gradient(180deg, #F4EFE7 0%, #FFFFFF 100%)", borderTop: "1px solid var(--border-hex)", borderBottom: "1px solid var(--border-hex)" }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(155,133,115,0.04) 0%, rgba(155,133,115,0) 60%)" }} />
       <div className="relative text-center max-w-[800px] mx-auto px-5">
-        <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--primary-hex, #2C5BFF)" }}>{eyebrow}</div>
+        <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--primary-hex, #9B8573)" }}>{eyebrow}</div>
         <h2 className="mt-4 text-[clamp(36px,5vw,56px)] leading-[1.05] tracking-[-0.03em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>{title}</h2>
       </div>
     </div>
@@ -149,12 +149,12 @@ function Radar({ data }) {
   const polyPrev = data.map((d, i) => pt(d.prev, i).join(",")).join(" ");
   return (
     <svg width="360" height="360" viewBox="0 0 360 360">
-      {[0.25, 0.5, 0.75, 1].map(s => <polygon key={s} points={Array.from({ length: n }, (_, k) => pt(s, k).join(",")).join(" ")} fill="none" stroke="var(--border-hex, #E3E8F0)" strokeWidth="1" />)}
-      {Array.from({ length: n }, (_, k) => { const [x, y] = pt(1, k); return <line key={k} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--border-hex, #E3E8F0)" strokeWidth="1" />; })}
-      <polygon points={polyPrev} fill="rgba(11,27,51,0.04)" stroke="rgba(11,27,51,0.35)" strokeWidth="1" strokeDasharray="3 4" />
-      <polygon points={polyNow} fill="rgba(44,91,255,0.10)" stroke="var(--primary-hex, #2C5BFF)" strokeWidth="2" />
-      {data.map((d, i) => { const [x, y] = pt(d.now, i); return <circle key={i} cx={x} cy={y} r="4" fill="white" stroke="var(--primary-hex, #2C5BFF)" strokeWidth="2" />; })}
-      {data.map((d, i) => { const [x, y] = pt(1.2, i); return <text key={d.label} x={x} y={y} fontSize="11" fontFamily="var(--font-inter)" fontWeight="600" fill="var(--ink, #0B1B33)" textAnchor="middle" dominantBaseline="middle">{d.label}</text>; })}
+      {[0.25, 0.5, 0.75, 1].map(s => <polygon key={s} points={Array.from({ length: n }, (_, k) => pt(s, k).join(",")).join(" ")} fill="none" stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />)}
+      {Array.from({ length: n }, (_, k) => { const [x, y] = pt(1, k); return <line key={k} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />; })}
+      <polygon points={polyPrev} fill="rgba(47,47,43,0.04)" stroke="rgba(47,47,43,0.35)" strokeWidth="1" strokeDasharray="3 4" />
+      <polygon points={polyNow} fill="rgba(155,133,115,0.10)" stroke="var(--primary-hex, #9B8573)" strokeWidth="2" />
+      {data.map((d, i) => { const [x, y] = pt(d.now, i); return <circle key={i} cx={x} cy={y} r="4" fill="white" stroke="var(--primary-hex, #9B8573)" strokeWidth="2" />; })}
+      {data.map((d, i) => { const [x, y] = pt(1.2, i); return <text key={d.label} x={x} y={y} fontSize="11" fontFamily="var(--font-inter)" fontWeight="600" fill="var(--ink, #2F2F2B)" textAnchor="middle" dominantBaseline="middle">{d.label}</text>; })}
     </svg>
   );
 }
@@ -166,10 +166,10 @@ export default function DemoResultsPage() {
   const d = DEMO;
   return (
     <Suspense fallback={null}>
-      <div className="min-h-screen" style={{ background: "#FAFBFD", fontFamily: "var(--font-inter)" }}>
+      <div className="min-h-screen" style={{ background: "#F4EFE7", fontFamily: "var(--font-inter)" }}>
 
         {/* ── HERO ── */}
-        <section className="relative overflow-hidden text-center" style={{ padding: "120px 56px 80px", background: "radial-gradient(ellipse at 50% -10%, rgba(44,91,255,0.06), transparent 50%), #FAFBFD" }}>
+        <section className="relative overflow-hidden text-center" style={{ padding: "120px 56px 80px", background: "radial-gradient(ellipse at 50% -10%, rgba(155,133,115,0.06), transparent 50%), #F4EFE7" }}>
           <div className="absolute left-1/2 top-16 -translate-x-1/2 w-20 h-px" style={{ background: "var(--ink)", opacity: 0.4 }} />
           <div className="relative max-w-[920px] mx-auto">
             <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
@@ -203,7 +203,7 @@ export default function DemoResultsPage() {
         {/* ── CHAPTER: WHERE YOU SIT TODAY ── */}
         <ChapterBand eyebrow="BODY METRICS" title="Where your body sits today." />
 
-        <section className="py-20 sm:py-24" style={{ background: "#FAFBFD" }}>
+        <section className="py-20 sm:py-24" style={{ background: "#F4EFE7" }}>
           <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
             {/* Row 1: BMI + Body Fat */}
             <div className="grid md:grid-cols-2 gap-4 mb-4">
@@ -244,14 +244,14 @@ export default function DemoResultsPage() {
                   <div>
                     <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>DELTA TO GOAL</div>
                     <div className="flex items-baseline gap-2 mt-1">
-                      <span className="text-[72px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #2C5BFF)" }}>−{d.weightDelta}</span>
+                      <span className="text-[72px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #9B8573)" }}>−{d.weightDelta}</span>
                       <span className="text-lg" style={{ color: "var(--muted-fg)" }}>kg</span>
                     </div>
                     <div className="text-[11px] mt-2" style={{ color: "var(--muted-fg)" }}>~12 weeks at the current rate</div>
                   </div>
                   {/* Weight scale bar */}
                   <div>
-                    <div className="relative h-1.5 rounded-full" style={{ background: "rgba(11,27,51,0.04)" }}>
+                    <div className="relative h-1.5 rounded-full" style={{ background: "rgba(47,47,43,0.04)" }}>
                       <div className="absolute top-0 h-full rounded-full" style={{ left: `${((d.healthyRange[0] - 60) / 30) * 100}%`, width: `${((d.healthyRange[1] - d.healthyRange[0]) / 30) * 100}%`, background: "rgba(46,139,107,0.18)" }} />
                       <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2" style={{ left: `${((d.weight - 60) / 30) * 100}%`, transform: "translate(-50%, -50%)", borderColor: "var(--primary-hex)" }} />
                     </div>
@@ -281,13 +281,13 @@ export default function DemoResultsPage() {
                     <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>ABSOLUTE</div>
                     <div className="flex items-baseline gap-2 mt-1">
                       <span className="text-[24px] font-semibold" style={{ fontFamily: "var(--font-inter)" }}>{d.lbmKg}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>kg</span></span>
-                      <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "var(--status-good-bg, #E1F2EA)", color: "#1F6B50" }}>+0.8 kg</span>
+                      <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "var(--status-good-bg, #EAEFE6)", color: "#1F6B50" }}>+0.8 kg</span>
                     </div>
                   </div>
                 </div>
-                <div className="relative h-2 rounded-full overflow-hidden mb-6" style={{ background: "rgba(11,27,51,0.04)" }}>
+                <div className="relative h-2 rounded-full overflow-hidden mb-6" style={{ background: "rgba(47,47,43,0.04)" }}>
                   <div className="absolute top-0 bottom-0 left-0" style={{ width: `${((d.lbmPct - 50) / 45) * 100}%`, background: "rgba(46,139,107,0.12)" }} />
-                  <div className="absolute top-0 bottom-0" style={{ left: `${((d.lbmPct - 50) / 45) * 100}%`, width: 2, background: "#2E8B6B", borderRadius: 1 }} />
+                  <div className="absolute top-0 bottom-0" style={{ left: `${((d.lbmPct - 50) / 45) * 100}%`, width: 2, background: "#8D9A84", borderRadius: 1 }} />
                 </div>
                 <p className="text-[13px] leading-relaxed" style={{ color: "var(--muted-fg)" }}>Up 0.8 kg since last assessment. The deficit is sparing muscle.</p>
               </Card>
@@ -302,13 +302,13 @@ export default function DemoResultsPage() {
                     <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>ABSOLUTE</div>
                     <div className="flex items-baseline gap-2 mt-1">
                       <span className="text-[24px] font-semibold" style={{ fontFamily: "var(--font-inter)" }}>{d.tbwL}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>L</span></span>
-                      <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "var(--status-alert-bg, #FBE2E5)", color: "#A22A3D" }}>−1.2 L</span>
+                      <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "var(--status-alert-bg, #EFDDD5)", color: "#A22A3D" }}>−1.2 L</span>
                     </div>
                   </div>
                 </div>
-                <div className="relative h-2 rounded-full overflow-hidden mb-6" style={{ background: "rgba(11,27,51,0.04)" }}>
+                <div className="relative h-2 rounded-full overflow-hidden mb-6" style={{ background: "rgba(47,47,43,0.04)" }}>
                   <div className="absolute top-0 bottom-0" style={{ left: `${((50 - 40) / 35) * 100}%`, width: `${((65 - 50) / 35) * 100}%`, background: "rgba(46,139,107,0.12)" }} />
-                  <div className="absolute top-0 bottom-0" style={{ left: `${((d.tbwPct - 40) / 35) * 100}%`, width: 2, background: "#D8455B", borderRadius: 1 }} />
+                  <div className="absolute top-0 bottom-0" style={{ left: `${((d.tbwPct - 40) / 35) * 100}%`, width: 2, background: "#9C5A4A", borderRadius: 1 }} />
                 </div>
                 <p className="text-[13px] leading-relaxed" style={{ color: "var(--muted-fg)" }}>Below the 60% reference. Daily intake target raised to 2.5 L.</p>
               </Card>
@@ -326,13 +326,13 @@ export default function DemoResultsPage() {
               {/* Caloric needs — dark card */}
               <Card dark className="relative overflow-hidden flex flex-col justify-between min-h-[420px]">
                 <svg className="absolute -right-20 -top-24 opacity-15" width="440" height="440" viewBox="0 0 440 440">
-                  <circle cx="220" cy="220" r="120" fill="none" stroke="#6FA0FF" strokeWidth="1" />
-                  <circle cx="220" cy="220" r="190" fill="none" stroke="#6FA0FF" strokeWidth="1" strokeDasharray="2 6" />
+                  <circle cx="220" cy="220" r="120" fill="none" stroke="#C7A977" strokeWidth="1" />
+                  <circle cx="220" cy="220" r="190" fill="none" stroke="#C7A977" strokeWidth="1" strokeDasharray="2 6" />
                 </svg>
                 <div className="relative">
                   <div className="flex items-baseline justify-between">
                     <span className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.7)" }}>Daily energy</span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: "rgba(111,160,255,0.16)", color: "#6FA0FF" }}>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: "rgba(199,169,119,0.16)", color: "#C7A977" }}>
                       Goal · Weight control
                     </span>
                   </div>
@@ -344,13 +344,13 @@ export default function DemoResultsPage() {
                 <div className="relative mt-8 pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.12)" }}>
                   <div className="flex h-1.5 rounded-full overflow-hidden mb-5 gap-0.5">
                     <div style={{ flex: d.bmr, background: "rgba(255,255,255,0.55)" }} />
-                    <div style={{ flex: d.activity, background: "#6FA0FF" }} />
+                    <div style={{ flex: d.activity, background: "#C7A977" }} />
                     <div style={{ flex: d.deficit, background: "rgba(216,69,91,0.7)" }} />
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     {[
                       { dot: "rgba(255,255,255,0.55)", label: "BMR · at rest", value: d.bmr.toLocaleString(), unit: "kcal" },
-                      { dot: "#6FA0FF", label: "Activity", value: `+${d.activity}`, unit: "kcal" },
+                      { dot: "#C7A977", label: "Activity", value: `+${d.activity}`, unit: "kcal" },
                       { dot: "rgba(216,69,91,0.7)", label: "Deficit", value: `−${d.deficit}`, unit: "kcal" },
                     ].map(s => (
                       <div key={s.label}>
@@ -368,12 +368,12 @@ export default function DemoResultsPage() {
               </Card>
 
               {/* Macros */}
-              <Card className="flex flex-col justify-between min-h-[420px]" style={{ background: "#FAFBFD" }}>
+              <Card className="flex flex-col justify-between min-h-[420px]" style={{ background: "#F4EFE7" }}>
                 <div>
                   <CardHeader title="Macro Split" action="Per day" />
                   <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>FEATURED · DAILY PROTEIN</div>
                   <div className="flex items-baseline gap-1 mt-2">
-                    <span className="text-[72px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #2C5BFF)" }}>{d.macros.protein.g}</span>
+                    <span className="text-[72px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #9B8573)" }}>{d.macros.protein.g}</span>
                     <span className="text-xl" style={{ color: "var(--muted-fg)" }}>g</span>
                   </div>
                   <p className="text-[13px] leading-relaxed mt-3 max-w-[34ch]" style={{ color: "var(--muted-fg)" }}>
@@ -384,9 +384,9 @@ export default function DemoResultsPage() {
                 <div className="mt-6">
                   <div className="flex h-14 rounded-[10px] overflow-hidden gap-0.5" style={{ background: "var(--muted)" }}>
                     {[
-                      { pct: d.macros.protein.pct, color: "var(--primary-hex, #2C5BFF)" },
-                      { pct: d.macros.carbs.pct, color: "var(--status-normal-hex, #C68A2E)" },
-                      { pct: d.macros.fats.pct, color: "var(--sky, #6FA0FF)" },
+                      { pct: d.macros.protein.pct, color: "var(--primary-hex, #9B8573)" },
+                      { pct: d.macros.carbs.pct, color: "var(--status-normal-hex, #C7A977)" },
+                      { pct: d.macros.fats.pct, color: "var(--sky, #C7A977)" },
                     ].map((m, i) => (
                       <div key={i} className="relative flex items-end p-2" style={{ flex: m.pct, background: m.color }}>
                         <span className="text-[11px] font-bold text-white tracking-[0.08em]">{m.pct}%</span>
@@ -395,9 +395,9 @@ export default function DemoResultsPage() {
                   </div>
                   <div className="grid grid-cols-3 gap-3 mt-4">
                     {[
-                      { key: "Protein", g: d.macros.protein.g, color: "var(--primary-hex, #2C5BFF)" },
-                      { key: "Carbs", g: d.macros.carbs.g, color: "var(--status-normal-hex, #C68A2E)" },
-                      { key: "Fats", g: d.macros.fats.g, color: "var(--sky, #6FA0FF)" },
+                      { key: "Protein", g: d.macros.protein.g, color: "var(--primary-hex, #9B8573)" },
+                      { key: "Carbs", g: d.macros.carbs.g, color: "var(--status-normal-hex, #C7A977)" },
+                      { key: "Fats", g: d.macros.fats.g, color: "var(--sky, #C7A977)" },
                     ].map(m => (
                       <div key={m.key} className="pt-2.5" style={{ borderTop: `2px solid ${m.color}` }}>
                         <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{m.key}</div>
@@ -418,7 +418,7 @@ export default function DemoResultsPage() {
                   <CardHeader title="Recommended" action="3 picks · tied to signals" />
                   <h3 className="text-[clamp(32px,4vw,48px)] leading-[1.05] tracking-[-0.028em] mt-2" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
                     Three items.<br />
-                    <span style={{ fontStyle: "italic", color: "var(--primary-hex, #2C5BFF)" }}>One reason each.</span>
+                    <span style={{ fontStyle: "italic", color: "var(--primary-hex, #9B8573)" }}>One reason each.</span>
                   </h3>
                 </div>
                 <p className="text-[14.5px] leading-relaxed pb-1.5" style={{ color: "var(--muted-fg)", maxWidth: "44ch" }}>
@@ -433,7 +433,7 @@ export default function DemoResultsPage() {
                       <div className="w-11 h-11 rounded-[11px] flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${p.grad})` }}>
                         <Icon name={p.icon} size={18} color="white" />
                       </div>
-                      <span className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--primary-hex, #2C5BFF)" }}>
+                      <span className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--primary-hex, #9B8573)" }}>
                         FOR · {p.condition.toUpperCase()}
                       </span>
                     </div>
@@ -459,7 +459,7 @@ export default function DemoResultsPage() {
         {/* ── CHAPTER: HEALTH OVERVIEW ── */}
         <ChapterBand eyebrow="HEALTH OVERVIEW" title="The full picture, at a glance." />
 
-        <section className="py-20 sm:py-24" style={{ background: "#FAFBFD" }}>
+        <section className="py-20 sm:py-24" style={{ background: "#F4EFE7" }}>
           <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
             {/* Risk callouts */}
             <div className="grid sm:grid-cols-3 gap-3 mb-12">
@@ -476,12 +476,12 @@ export default function DemoResultsPage() {
 
             {/* Radar + Summary */}
             <div className="grid lg:grid-cols-[1fr_1.1fr] gap-4">
-              <Card className="flex flex-col" style={{ background: "#FAFBFD" }}>
+              <Card className="flex flex-col" style={{ background: "#F4EFE7" }}>
                 <div className="flex justify-between items-baseline mb-5">
                   <span className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink)" }}>Profile</span>
                   <div className="flex gap-4 text-[11px]" style={{ color: "var(--muted-fg)" }}>
                     <span className="inline-flex items-center gap-1.5"><span className="w-3 h-0.5" style={{ background: "var(--primary-hex)" }} />Current</span>
-                    <span className="inline-flex items-center gap-1.5"><span className="w-3 h-0.5 border-t border-dashed" style={{ borderColor: "rgba(11,27,51,0.35)" }} />Previous</span>
+                    <span className="inline-flex items-center gap-1.5"><span className="w-3 h-0.5 border-t border-dashed" style={{ borderColor: "rgba(47,47,43,0.35)" }} />Previous</span>
                   </div>
                 </div>
                 <div className="flex-1 flex justify-center items-center">
@@ -493,7 +493,7 @@ export default function DemoResultsPage() {
                     return (
                       <div key={r.label}>
                         <div className="text-[9px] font-semibold uppercase tracking-[0.1em]" style={{ color: "var(--muted-fg)" }}>{r.label}</div>
-                        <div className="text-[20px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: delta >= 0 ? "var(--primary-hex, #2C5BFF)" : "#D8455B" }}>
+                        <div className="text-[20px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: delta >= 0 ? "var(--primary-hex, #9B8573)" : "#9C5A4A" }}>
                           {delta > 0 ? "+" : ""}{delta}
                         </div>
                       </div>
@@ -528,17 +528,17 @@ export default function DemoResultsPage() {
         </section>
 
         {/* ── FINAL CTA ── */}
-        <section className="px-5 sm:px-8 pb-24" style={{ background: "#FAFBFD" }}>
+        <section className="px-5 sm:px-8 pb-24" style={{ background: "#F4EFE7" }}>
           <div className="max-w-[1180px] mx-auto rounded-[28px] relative overflow-hidden" style={{ background: "var(--ink)", color: "white", padding: "56px 64px" }}>
             <svg className="absolute -right-28 -top-28 opacity-[0.18]" width="540" height="540" viewBox="0 0 540 540">
-              <circle cx="270" cy="270" r="150" fill="none" stroke="#6FA0FF" strokeWidth="1" />
-              <circle cx="270" cy="270" r="220" fill="none" stroke="#6FA0FF" strokeWidth="1" strokeDasharray="3 6" />
+              <circle cx="270" cy="270" r="150" fill="none" stroke="#C7A977" strokeWidth="1" />
+              <circle cx="270" cy="270" r="220" fill="none" stroke="#C7A977" strokeWidth="1" strokeDasharray="3 6" />
             </svg>
             <div className="relative grid lg:grid-cols-[1.4fr_auto] gap-12 items-center">
               <div>
-                <div className="text-[11px] font-medium uppercase tracking-[0.18em]" style={{ color: "#6FA0FF" }}>NEXT ASSESSMENT</div>
+                <div className="text-[11px] font-medium uppercase tracking-[0.18em]" style={{ color: "#C7A977" }}>NEXT ASSESSMENT</div>
                 <h3 className="mt-4 text-[clamp(32px,4vw,48px)] leading-[1.05] tracking-[-0.028em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
-                  Book your follow-up for <span style={{ fontStyle: "italic", color: "#6FA0FF" }}>11 June</span>.
+                  Book your follow-up for <span style={{ fontStyle: "italic", color: "#C7A977" }}>11 June</span>.
                 </h3>
                 <p className="mt-4 text-[15px] leading-relaxed max-w-[52ch]" style={{ color: "rgba(255,255,255,0.65)" }}>
                   Four weeks gives the plan time to bend the trend lines. We'll compare side-by-side and rebuild the next phase from actual results.
@@ -557,7 +557,7 @@ export default function DemoResultsPage() {
         </section>
 
         {/* Disclaimer */}
-        <div className="px-5 sm:px-8 pb-12" style={{ background: "#FAFBFD" }}>
+        <div className="px-5 sm:px-8 pb-12" style={{ background: "#F4EFE7" }}>
           <div className="max-w-[1180px] mx-auto rounded-[14px] border p-4 flex items-start gap-3 text-xs leading-relaxed" style={{ borderColor: "var(--border-hex)", background: "white", color: "var(--muted-fg)" }}>
             <span className="shrink-0 mt-0.5">⚕</span>
             <span><strong style={{ color: "var(--ink)" }}>Health assessment · not medical advice.</strong> Body composition and metrics are estimates based on published formulas. Consult a healthcare professional for diagnosis.</span>

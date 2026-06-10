@@ -25,7 +25,7 @@ export default function Step3DietNutrition({ form, t }) {
     <div className="flex flex-col gap-[22px]">
       {/* Diet type */}
       <div className="flex flex-col gap-1.5">
-        <label className="scan-label">{t("scan.step3.diet_type", "What kind of diet do you follow?")} <span className="text-[#2C5BFF] text-sm">*</span></label>
+        <label className="scan-label">{t("scan.step3.diet_type", "What kind of diet do you follow?")} <span className="text-[#9B8573] text-sm">*</span></label>
         <select className="scan-select" {...register("diet_type")}>
           <option value="">{t("scan.step3.select", "Select...")}</option>
           {DIET_OPTIONS.map((opt) => (
@@ -37,7 +37,7 @@ export default function Step3DietNutrition({ form, t }) {
 
       {/* Meals per day */}
       <div className="flex flex-col gap-1.5">
-        <label className="scan-label">{t("scan.step3.meals_per_day", "How many meals a day do you eat?")} <span className="text-[#2C5BFF] text-sm">*</span></label>
+        <label className="scan-label">{t("scan.step3.meals_per_day", "How many meals a day do you eat?")} <span className="text-[#9B8573] text-sm">*</span></label>
         <select className="scan-select" {...register("meals_per_day")}>
           <option value="">{t("scan.step3.select", "Select...")}</option>
           {MEALS_OPTIONS.map((opt) => (
@@ -49,7 +49,7 @@ export default function Step3DietNutrition({ form, t }) {
 
       {/* Breakfast */}
       <div className="flex flex-col gap-2">
-        <label className="scan-label">{t("scan.step3.has_breakfast", "Do you usually have breakfast?")} <span className="text-[#2C5BFF] text-sm">*</span></label>
+        <label className="scan-label">{t("scan.step3.has_breakfast", "Do you usually have breakfast?")} <span className="text-[#9B8573] text-sm">*</span></label>
         <div className="flex flex-wrap gap-2">
           {YES_NO.map((opt) => (
             <label
