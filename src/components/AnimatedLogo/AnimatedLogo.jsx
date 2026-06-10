@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 
-const NAVY_ARC = "#0B1B33";
-const BLUSH_FACE = "#6FA0FF";
-const ROSE_DOT = "#2C5BFF";
+const NAVY_ARC = "#2F2F2B";   // charcoal arc
+const BLUSH_FACE = "#C7A977"; // warm gold face
+const ROSE_DOT = "#9B8573";   // taupe dot
 
 export default function AnimatedLogo({ size = 120, showText = false, text = "" }) {
   const s = size;
