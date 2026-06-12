@@ -731,7 +731,7 @@ function LandingPageInner() {
             {/* Brand */}
             <div>
               <Link href="/" className="inline-flex items-center gap-2.5">
-                <Image src="/logo.png" alt="Evaluación Corporal" width={28} height={28} className="w-7 h-7 shrink-0 object-contain" />
+                <Image src="/logo.svg" alt="Evaluación Corporal" width={28} height={28} className="w-7 h-7 shrink-0 object-contain" unoptimized />
                 <span className="text-xl tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
                   {t("nav.brand")}
                 </span>
