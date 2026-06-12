@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { Check } from "lucide-react";
 
 import AnimatedLogo from "@/components/AnimatedLogo/AnimatedLogo";
+import BodyCamera from "@/components/BodyCamera/BodyCamera";
 import { fullScanSchema, STEP_FIELD_NAMES, DEFAULT_VALUES } from "@/lib/schemas/scan-schemas";
 
 import Step1PersonalInfo from "@/components/Steps/Step1PersonalInfo";
@@ -63,6 +64,13 @@ function ScanPageInner() {
   const [analysisProgress, setAnalysisProgress] = useState(0);
   const [activeAnalysisStep, setActiveAnalysisStep] = useState(0);
   const progressRef = useRef(null);
+
+  // Body photo capture flow (post-form).
+  const [photoPhase, setPhotoPhase] = useState(false);     // true once form is saved, before photo decision
+  const [photoTab, setPhotoTab] = useState("camera");
+  const [bodyImage, setBodyImage] = useState(null);
+  const [savedFormId, setSavedFormId] = useState(null);
+  const [savedFormData, setSavedFormData] = useState(null);
 
   const cleanID = (s) => { const n = Number(s); return s && !isNaN(n) ? String(Math.trunc(n)) : s; };
   const chatIDs = searchParams.get("n")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
@@ -140,21 +148,10 @@ function ScanPageInner() {
     }
   };
 
-  const onSubmit = async (formData) => {
-    setIsSubmitting(true);
-    setCustomerName(formData.name);
+  const runAnalyzingAnimation = (durations = [400, 2000, 4000, 6000, 8000]) => {
     setAnalysisProgress(0);
     setActiveAnalysisStep(0);
-
-    // Animate progress steps
-    const stepTimings = [
-      { step: 0, progress: 12, delay: 400 },
-      { step: 1, progress: 35, delay: 2000 },
-      { step: 2, progress: 58, delay: 4000 },
-      { step: 3, progress: 78, delay: 6000 },
-      { step: 4, progress: 92, delay: 8000 },
-    ];
-
+    const stepTimings = [12, 35, 58, 78, 92].map((progress, step) => ({ step, progress, delay: durations[step] }));
     const timers = stepTimings.map(({ step, progress, delay }) =>
       setTimeout(() => {
         setActiveAnalysisStep(step);
@@ -162,6 +159,14 @@ function ScanPageInner() {
       }, delay)
     );
     progressRef.current = timers;
+    return () => timers.forEach(clearTimeout);
+  };
+
+  const onSubmit = async (formData) => {
+    setIsSubmitting(true);
+    setCustomerName(formData.name);
+    setSavedFormData(formData);
+    const cancel = runAnalyzingAnimation();
 
     try {
       const res = await fetch("/api/forms", {
@@ -180,18 +185,60 @@ function ScanPageInner() {
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || "Submission failed");
 
+      setSavedFormId(result.id);
       setAnalysisProgress(100);
       setActiveAnalysisStep(5);
       await new Promise((r) => setTimeout(r, 600));
 
-      toast.success(t("scan.complete_toast", "Submission complete!"));
-      setSubmitComplete(true);
-    } catch (error) {
-      toast.error(error.message || t("common.error"));
-    } finally {
-      timers.forEach(clearTimeout);
+      // Move to the body-photo capture screen. User can upload, or skip.
+      cancel();
       setIsSubmitting(false);
+      setPhotoPhase(true);
+    } catch (error) {
+      cancel();
+      setIsSubmitting(false);
+      toast.error(error.message || t("common.error"));
     }
+  };
+
+  // Body-photo analysis path. Returns a results id and routes to /results/{id}.
+  const onAnalyzeBody = async () => {
+    if (!savedFormData) return;
+    setIsSubmitting(true);
+    const cancel = runAnalyzingAnimation([400, 1600, 3200, 5000, 7000]);
+    try {
+      const res = await fetch("/api/analyze-body", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formData: savedFormData,
+          image: bodyImage,
+          language: lang,
+          formId: savedFormId,
+        }),
+      });
+      const result = await res.json();
+      if (!res.ok || !result.id) throw new Error(result.error || "Analysis failed");
+
+      setAnalysisProgress(100);
+      setActiveAnalysisStep(5);
+      await new Promise((r) => setTimeout(r, 700));
+      cancel();
+      router.push(`/results/${result.id}?lang=${lang}`);
+    } catch (error) {
+      cancel();
+      setIsSubmitting(false);
+      toast.error(error.message || t("scan.analyze_error", "Could not analyze your photo. We saved your form — your coach will follow up."));
+      // Fall through to the existing "we'll contact you" screen so the
+      // submission is not lost.
+      setPhotoPhase(false);
+      setSubmitComplete(true);
+    }
+  };
+
+  const onSkipPhoto = () => {
+    setPhotoPhase(false);
+    setSubmitComplete(true);
   };
 
   const StepComponent = STEP_COMPONENTS[currentStep];
@@ -313,6 +360,80 @@ function ScanPageInner() {
         </motion.div>
 
         <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+      </div>
+    );
+  }
+
+  // Post-form body photo screen
+  if (photoPhase) {
+    return (
+      <div className="mx-auto" style={{ maxWidth: 920, padding: "48px 24px 96px" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div
+            className="inline-flex items-center gap-2.5 mb-3"
+            style={{ fontFamily: "var(--font-inter)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#6B5B4B" }}
+          >
+            <span style={{ width: "24px", height: "1px", background: "#9B8573" }} />
+            {t("scan.photo_eyebrow", "Final step · optional")}
+          </div>
+          <h1 style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "clamp(32px,4vw,46px)", color: "#2F2F2B", margin: 0, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+            {t("scan.photo_title_1", "Add a body photo for")}{" "}
+            <em style={{ fontStyle: "italic", color: "#9B8573", fontWeight: 400 }}>
+              {t("scan.photo_title_2", "AI-powered insights.")}
+            </em>
+          </h1>
+          <p style={{ marginTop: 12, fontSize: 14.5, color: "#6B5B4B", lineHeight: 1.6, maxWidth: 60 + "ch" }}>
+            {t(
+              "scan.photo_subtitle",
+              "Your form is saved. Add a full-body photo and we'll combine it with your numbers for a deeper read on posture, composition, and where to focus. Skip if you'd rather wait for your coach."
+            )}
+          </p>
+
+          <div className="mt-10 rounded-3xl border bg-white p-6 sm:p-8" style={{ borderColor: "rgba(47,47,43,0.10)" }}>
+            <BodyCamera
+              onImageCapture={setBodyImage}
+              activeTab={photoTab}
+              setActiveTab={setPhotoTab}
+            />
+          </div>
+
+          <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
+            <button
+              type="button"
+              onClick={onSkipPhoto}
+              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] px-5 py-3 text-sm font-medium transition-colors"
+              style={{
+                borderColor: "rgba(47,47,43,0.16)",
+                background: "transparent",
+                color: "#2F2F2B",
+                fontFamily: "var(--font-inter)",
+              }}
+            >
+              {t("scan.photo_skip", "Skip — wait for my coach")}
+            </button>
+            <button
+              type="button"
+              onClick={onAnalyzeBody}
+              disabled={!bodyImage}
+              className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all disabled:cursor-not-allowed"
+              style={{
+                background: bodyImage ? "#9B8573" : "#CDBFAE",
+                color: "white",
+                opacity: bodyImage ? 1 : 0.65,
+                fontFamily: "var(--font-inter)",
+              }}
+            >
+              {t("scan.photo_analyze", "Analyze my photo")}
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </motion.div>
       </div>
     );
   }

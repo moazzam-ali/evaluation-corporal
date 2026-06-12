@@ -106,7 +106,7 @@ export default function ResultsPage() {
           fontSize: "clamp(40px, 5.5vw, 60px)", color: "#2F2F2B",
           margin: 0, lineHeight: 1.05, letterSpacing: "-0.01em",
         }}>
-          {t("results.clinical_title", "Skin assessment")}{" "}
+          {t("results.clinical_title", "Body assessment")}{" "}
           {userName && <em style={{ fontStyle: "italic", color: "#9B8573", fontWeight: 400 }}>{t("results.clinical_for", "for")} {userName}.</em>}
         </h1>
         <div
@@ -129,8 +129,8 @@ export default function ResultsPage() {
         <SectionHead
           eyebrow={t("results.metrics_eyebrow", "Detailed metrics")}
           title={t("results.metrics_title_1", "Twelve readings,")}
-          titleEm={t("results.metrics_title_2", "one face.")}
-          lede={t("results.metrics_lede", "Each metric is scored 0–100 against your demographic cohort. Tap a card for the full description.")}
+          titleEm={t("results.metrics_title_2", "one body.")}
+          lede={t("results.metrics_lede", "Each metric is scored 0–100 against healthy bands for your age and sex. Tap a card for the full description.")}
         />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "14px" }}>
           {metrics.map((metric, i) => (
@@ -291,7 +291,7 @@ export default function ResultsPage() {
             eyebrow={t("results.products_eyebrow", "Recommended products")}
             title={t("results.products_title_1", "Curated for")}
             titleEm={t("results.products_title_2", "your readings.")}
-            lede={t("results.products_lede", "Personalised for your skin analysis — picks ranked by how directly they target your lowest-scoring metrics.")}
+            lede={t("results.products_lede", "Personalised for your body assessment — picks ranked by how directly they support your lowest-scoring metrics and goal.")}
           />
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "18px" }}>
             {products.map((product, i) => (
