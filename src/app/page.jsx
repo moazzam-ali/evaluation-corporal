@@ -65,11 +65,14 @@ function ScoreRing({ value = 76, size = 120, stroke = 10, color = "var(--primary
   );
 }
 
-/* ── Body Silhouette ───────────────────────────────────────────── */
-function BodySilhouette({ view = "front", width = 200, height = 380, fillColor, strokeColor, hotspots = [] }) {
+/* ── Body Silhouette — clinical, with calliper ticks ──────────── */
+function BodySilhouette({ view = "front", width = 200, height = 380, fillColor, strokeColor, hotspots = [], showGuides = true }) {
   const fill = fillColor || "rgba(155, 133, 115, 0.10)";
   const stroke = strokeColor || "rgba(155, 133, 115, 0.45)";
+  const guide = "rgba(155, 133, 115, 0.30)";
   const frontPath = "M100 20 C 88 20 80 30 80 44 C 80 56 86 64 92 68 L 88 76 C 70 80 56 90 54 110 L 50 150 C 48 162 50 174 56 184 L 60 200 L 56 240 C 56 250 60 258 64 264 L 60 320 C 60 332 64 344 70 354 L 76 366 L 90 366 L 92 354 L 90 320 L 92 270 L 100 270 L 108 270 L 110 320 L 108 354 L 110 366 L 124 366 L 130 354 C 136 344 140 332 140 320 L 136 264 C 140 258 144 250 144 240 L 140 200 L 144 184 C 150 174 152 162 150 150 L 146 110 C 144 90 130 80 112 76 L 108 68 C 114 64 120 56 120 44 C 120 30 112 20 100 20 Z";
+  // Anchors used for measurement guides
+  const NECK_Y = 76, CHEST_Y = 110, WAIST_Y = 190, HIP_Y = 240, KNEE_Y = 312;
   return (
     <div style={{ position: "relative", width, height }}>
       <svg viewBox="0 0 200 380" width={width} height={height}>
@@ -79,14 +82,37 @@ function BodySilhouette({ view = "front", width = 200, height = 380, fillColor, 
             <stop offset="1" stopColor="rgba(155, 133, 115, 0.04)" />
           </linearGradient>
         </defs>
-        <path d={frontPath} fill={`url(#bodyG-${view})`} stroke={stroke} strokeWidth="1" />
+
+        {showGuides && (
+          <g>
+            {/* Vertical centerline */}
+            <line x1="100" y1="14" x2="100" y2="372" stroke={guide} strokeWidth="0.6" strokeDasharray="2 4" />
+            {/* Horizontal anchors at neck / chest / waist / hip / knee */}
+            {[NECK_Y, CHEST_Y, WAIST_Y, HIP_Y, KNEE_Y].map((y, i) => (
+              <g key={i}>
+                <line x1="22" y1={y} x2="178" y2={y} stroke={guide} strokeWidth="0.5" strokeDasharray="1 3" />
+                {/* tick marks on left ruler */}
+                <line x1="18" y1={y} x2="26" y2={y} stroke={guide} strokeWidth="1" />
+              </g>
+            ))}
+            {/* Left ruler edge */}
+            <line x1="22" y1="14" x2="22" y2="372" stroke={guide} strokeWidth="0.6" />
+            {/* Minor ruler ticks */}
+            {Array.from({ length: 36 }, (_, i) => 24 + i * 10).map((y) => (
+              <line key={y} x1="20" y1={y} x2="24" y2={y} stroke={guide} strokeWidth="0.4" />
+            ))}
+          </g>
+        )}
+
+        <path d={frontPath} fill={`url(#bodyG-${view})`} stroke={stroke} strokeWidth="1.1" />
+
         {hotspots.map((h, i) => (
           <g key={i}>
             <circle cx={h.x} cy={h.y} r="6" fill="white" stroke={h.color || "#9B8573"} strokeWidth="2" />
             <circle cx={h.x} cy={h.y} r="3" fill={h.color || "#9B8573"} />
             <circle cx={h.x} cy={h.y} r="10" fill={h.color || "#9B8573"} opacity="0.2">
-              <animate attributeName="r" values="6;14;6" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="r" values="6;14;6" dur="2.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+              <animate attributeName="opacity" values="0.45;0;0.45" dur="2.4s" repeatCount="indefinite" />
             </circle>
           </g>
         ))}
@@ -174,7 +200,16 @@ function LandingPageInner() {
   const SERVICE_ICONS = ["chart", "user", "posture", "plan", "droplet", "leaf"];
   const STEP_ICONS = ["user", "dumbbell", "leaf", "chart"];
 
-  const TRUST_BRANDS = ["HERBALIFE", "WHOOP", "MYPROTEIN", "ATHLETIC GREENS", "OURA", "NOOM"];
+  // Real scientific methods this app implements. Replaces a previously fabricated
+  // brand-partnership strip — we list peer-reviewed equations we actually use.
+  const SCIENCE_BADGES = [
+    { key: "mifflin_st_jeor", label: "MIFFLIN-ST JEOR", sub: t("landing.science_badge_bmr", "BMR") },
+    { key: "deurenberg",      label: "DEURENBERG",      sub: t("landing.science_badge_bodyfat", "Body fat %") },
+    { key: "watson",          label: "WATSON",          sub: t("landing.science_badge_water", "Total body water") },
+    { key: "lorentz",         label: "LORENTZ",         sub: t("landing.science_badge_weight", "Healthy weight") },
+    { key: "who",             label: "WHO BANDS",       sub: t("landing.science_badge_bmi", "BMI classification") },
+    { key: "gdpr",            label: "GDPR",            sub: t("landing.science_badge_privacy", "Data privacy") },
+  ];
 
   const METRIC_ICONS = ["chart", "user", "posture", "plan", "sparkle", "dumbbell", "droplet", "flame"];
 
@@ -332,14 +367,17 @@ function LandingPageInner() {
         </Reveal>
       </section>
 
-      {/* ───────────── TRUST STRIP ───────────── */}
-      <div className="border-y bg-white py-8" style={{ borderColor: "rgba(47,47,43,0.06)" }}>
-        <div className="text-center text-[11px] font-medium uppercase tracking-[0.18em] mb-5" style={{ color: "var(--muted-fg)" }}>
-          {t("landing.trust_strip", "As featured by · partnered with")}
+      {/* ───────────── SCIENCE STRIP ───────────── */}
+      <div className="border-y bg-white py-9" style={{ borderColor: "rgba(47,47,43,0.06)" }}>
+        <div className="text-center text-[11px] font-medium uppercase tracking-[0.18em] mb-6" style={{ color: "var(--muted-fg)" }}>
+          {t("landing.science_strip", "Methods we use · peer-reviewed")}
         </div>
-        <div className="flex gap-16 items-center justify-center flex-wrap opacity-55">
-          {TRUST_BRANDS.map(n => (
-            <span key={n} className="text-[13px] font-bold tracking-[0.16em]" style={{ color: "var(--ink)" }}>{n}</span>
+        <div className="mx-auto max-w-[1100px] grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-6 gap-x-4 px-4">
+          {SCIENCE_BADGES.map(b => (
+            <div key={b.key} className="flex flex-col items-center text-center">
+              <span className="text-[12px] font-bold tracking-[0.14em]" style={{ color: "var(--ink)", fontFamily: "var(--font-dm-sans)" }}>{b.label}</span>
+              <span className="mt-1 text-[10.5px]" style={{ color: "var(--muted-fg)", letterSpacing: "0.04em" }}>{b.sub}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -594,7 +632,7 @@ function LandingPageInner() {
                     {Array.from({ length: 5 }, (_, i) => <Icon key={i} name="star" size={16} color="var(--status-normal-hex)" />)}
                   </div>
                   <span className="text-[13px]" style={{ color: "var(--muted-fg)" }}>
-                    <strong style={{ color: "var(--ink)" }}>{t("landing.testimonials_rating")}</strong> {t("landing.testimonials_review_count")}
+                    {t("landing.testimonials_beta", "Feedback from our early beta coaches and users.")}
                   </span>
                 </div>
               </div>
