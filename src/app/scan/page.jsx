@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState, useRef } from "react";
+import { Suspense, useState, useRef, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
@@ -250,128 +250,10 @@ function ScanPageInner() {
     exit: (d) => ({ x: d > 0 ? -200 : 200, opacity: 0 }),
   };
 
-  // Analyzing overlay — premium dark screen
+  // Analyzing overlay — minimal, focused on the animated brand mark.
+  // Component lives at the bottom of this file.
   if (isSubmitting) {
-    const ANALYSIS_STEPS = [
-      { key: "analyzing_step_1", fallback: "Calculating BMI & body composition" },
-      { key: "analyzing_step_2", fallback: "Estimating body fat percentage" },
-      { key: "analyzing_step_3", fallback: "Mapping waist-to-hip ratio" },
-      { key: "analyzing_step_4", fallback: "Computing caloric & macro targets" },
-      { key: "analyzing_step_5", fallback: "Composing your health plan" },
-    ];
-
-    return (
-      <div
-        className="flex flex-col items-center justify-center relative overflow-hidden"
-        style={{
-          minHeight: "100vh",
-          // Warm-neutrals premium gradient: deep mocha → charcoal → soft taupe
-          background: "linear-gradient(160deg, #1A1A18 0%, #2F2F2B 55%, #4A3F36 100%)",
-          color: "white",
-          margin: "-1px -9999px", padding: "0 9999px",
-        }}
-      >
-        {/* Decorative concentric rings — warm gold, low-opacity */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1280 800" preserveAspectRatio="none" style={{ opacity: 0.14 }}>
-          <circle cx="640" cy="400" r="200" fill="none" stroke="#C7A977" strokeWidth="1" />
-          <circle cx="640" cy="400" r="320" fill="none" stroke="#C7A977" strokeWidth="1" strokeDasharray="4 8" />
-          <circle cx="640" cy="400" r="440" fill="none" stroke="#C7A977" strokeWidth="1" />
-        </svg>
-
-        {/* Soft radial wash from the center */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse at 50% 45%, rgba(199,169,119,0.10) 0%, rgba(199,169,119,0) 55%)",
-          }}
-        />
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative z-10 flex flex-col items-center text-center px-6"
-        >
-          {/* Eyebrow */}
-          <div className="text-[11px] font-medium uppercase tracking-[0.18em]" style={{ color: "#C7A977" }}>
-            {t("scan.analyzing_label", "ASSESSMENT · ANALYZING")}
-          </div>
-
-          {/* Title */}
-          <h1 className="mt-3 text-[clamp(36px,6vw,56px)] leading-[1.05]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
-            {t("scan.analyzing_title", "Reading your body…")}
-          </h1>
-
-          {/* Subtitle */}
-          <p className="mt-3.5 max-w-[480px] text-[15px] leading-relaxed" style={{ color: "rgba(239,231,220,0.62)" }}>
-            {t("scan.analyzing_subtitle", "Calculating composition, estimating body fat, cross-checking your nutrition snapshot. Roughly 30 seconds.")}
-          </p>
-
-          {/* Animated logo centerpiece — continuous-line body silhouette
-              drawing itself in a soft, non-linear loop. */}
-          <div className="mt-10 relative" style={{ width: 280, height: 320 }}>
-            <AnimatedLogo size={280} color="#C7A977" haloColor="#9B8573" duration={5.4} />
-          </div>
-
-          {/* Step + progress readout below the figure */}
-          <div className="mt-2 flex flex-col items-center gap-1.5">
-            <div className="text-[11px] uppercase tracking-[0.18em]" style={{ color: "#C7A977" }}>
-              {activeAnalysisStep < ANALYSIS_STEPS.length
-                ? t(`scan.${ANALYSIS_STEPS[activeAnalysisStep].key}`, ANALYSIS_STEPS[activeAnalysisStep].fallback).toUpperCase()
-                : t("scan.analyzing_complete_label", "COMPLETE").toUpperCase()
-              }
-            </div>
-            <div style={{ fontFamily: "var(--font-fraunces)", fontSize: 28, fontWeight: 400, lineHeight: 1, color: "rgba(239,231,220,0.85)" }}>
-              {Math.round(analysisProgress)}<span className="text-[14px]" style={{ color: "rgba(239,231,220,0.4)" }}>%</span>
-            </div>
-            {/* Thin progress bar */}
-            <div className="mt-2 w-[220px] h-[2px] rounded-full overflow-hidden" style={{ background: "rgba(239,231,220,0.10)" }}>
-              <div
-                className="h-full rounded-full"
-                style={{
-                  width: `${analysisProgress}%`,
-                  background: "linear-gradient(90deg, #9B8573 0%, #C7A977 100%)",
-                  transition: "width 1.2s cubic-bezier(0.22,1,0.36,1)",
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Status feed */}
-          <div className="mt-12 flex flex-col gap-2 items-center">
-            {ANALYSIS_STEPS.map((step, i) => {
-              const isDone = i < activeAnalysisStep;
-              const isActive = i === activeAnalysisStep;
-              return (
-                <div key={i} className="flex items-center gap-2.5 text-[13px]" style={{
-                  color: isDone ? "rgba(239,231,220,0.45)" : isActive ? "rgba(239,231,220,0.95)" : "rgba(239,231,220,0.28)",
-                }}>
-                  {isDone ? (
-                    <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#C7A977" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg>
-                  ) : isActive ? (
-                    <span className="w-[14px] h-[14px] rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: "#C7A977", borderTopColor: "transparent" }} />
-                  ) : (
-                    <span className="w-[14px] h-[14px] rounded-full" style={{ border: "1px solid rgba(239,231,220,0.18)" }} />
-                  )}
-                  <span>{t(`scan.${step.key}`, step.fallback)}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Cancel */}
-          <button
-            onClick={() => { progressRef.current?.forEach(clearTimeout); setIsSubmitting(false); }}
-            className="mt-10 text-[13px] font-medium px-5 py-2.5 rounded-full transition-colors"
-            style={{ color: "rgba(239,231,220,0.85)", border: "1px solid rgba(239,231,220,0.22)", background: "transparent" }}
-          >
-            {t("scan.analyzing_cancel", "Cancel")}
-          </button>
-        </motion.div>
-
-        <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
-      </div>
-    );
+    return <AnalyzingOverlay t={t} onCancel={() => { progressRef.current?.forEach(clearTimeout); setIsSubmitting(false); }} />;
   }
 
   // Post-form body photo screen
@@ -738,6 +620,67 @@ function ScanPageInner() {
           }
         }
       `}</style>
+    </div>
+  );
+}
+
+/**
+ * AnalyzingOverlay — minimal full-screen analyzing state shown while the
+ * body-photo analysis API runs. Renders as a fixed overlay so it sits on top
+ * of the form regardless of scroll, locks body scroll, and resets the window
+ * scroll to top so the previous form-screen scroll position doesn't bleed
+ * through.
+ */
+function AnalyzingOverlay({ t, onCancel }) {
+  useEffect(() => {
+    // Reset scroll position and lock the body while the overlay is up.
+    const prevOverflow = document.body.style.overflow;
+    const prevScroll = window.scrollY;
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      // Restore the user's previous scroll position only if they're not
+      // navigating away; harmless either way.
+      window.scrollTo({ top: prevScroll, left: 0, behavior: "auto" });
+    };
+  }, []);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center text-center px-6"
+      style={{
+        background: "linear-gradient(160deg, #1A1A18 0%, #2F2F2B 55%, #4A3F36 100%)",
+        color: "white",
+      }}
+    >
+      <AnimatedLogo size={260} duration={5.2} />
+
+      <h1
+        className="mt-6 text-[clamp(28px,5vw,42px)] leading-[1.1]"
+        style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}
+      >
+        {t("scan.analyzing_title", "Analyzing…")}
+      </h1>
+
+      <p
+        className="mt-2 max-w-[340px] text-[14px] leading-relaxed"
+        style={{ color: "rgba(239,231,220,0.6)" }}
+      >
+        {t("scan.analyzing_subtitle_simple", "Hang tight — this takes about 30 seconds.")}
+      </p>
+
+      <button
+        onClick={onCancel}
+        className="mt-10 text-[13px] font-medium px-5 py-2.5 rounded-full transition-colors"
+        style={{
+          color: "rgba(239,231,220,0.85)",
+          border: "1px solid rgba(239,231,220,0.22)",
+          background: "transparent",
+        }}
+      >
+        {t("scan.analyzing_cancel", "Cancel")}
+      </button>
     </div>
   );
 }
