@@ -125,7 +125,7 @@ function BodySilhouette({ view = "front", width = 200, height = 380, fillColor, 
 function HeroScanVisual({ height = 380 }) {
   const [imgFailed, setImgFailed] = useState(false);
 
-  // Until /hero-body.png is added to public/, fall back to the silhouette.
+  // If /hero-body.webp fails to load, fall back to the silhouette.
   if (imgFailed) {
     return (
       <div className="relative mt-2 flex justify-center items-center" style={{ height }}>
@@ -149,7 +149,7 @@ function HeroScanVisual({ height = 380 }) {
     <div className="relative mt-2 overflow-hidden rounded-2xl" style={{ height }}>
       {/* Photo */}
       <Image
-        src="/hero-body.png"
+        src="/hero-body.webp"
         alt=""
         fill
         priority
@@ -164,37 +164,29 @@ function HeroScanVisual({ height = 380 }) {
         background: "linear-gradient(180deg, rgba(244,239,231,0.06) 0%, rgba(244,239,231,0) 18%, rgba(244,239,231,0) 78%, rgba(244,239,231,0.30) 100%)",
       }} />
 
-      {/* Measurement grid — breathes in and out */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none animate-[gridPulse_5s_ease-in-out_infinite]" viewBox="0 0 312 380" preserveAspectRatio="none">
-        {Array.from({ length: 7 }, (_, i) => 39 + i * 39).map((x) => (
-          <line key={`v${x}`} x1={x} y1="0" x2={x} y2="380" stroke="#9B8573" strokeWidth="0.6" />
-        ))}
-        {Array.from({ length: 8 }, (_, i) => 42 + i * 42).map((y) => (
-          <line key={`h${y}`} x1="0" y1={y} x2="312" y2={y} stroke="#9B8573" strokeWidth="0.6" />
-        ))}
-      </svg>
-
-      {/* Landmark markers — shoulder / waist / thigh */}
+      {/* Landmark markers — fade in once the opening scan pass completes,
+          then pulse continuously */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 312 380" preserveAspectRatio="none">
         {[
           { x: 118, y: 104, color: "#9B8573" },
           { x: 196, y: 186, color: "#9C5A4A" },
           { x: 140, y: 268, color: "#8D9A84" },
         ].map((h, i) => (
-          <g key={i}>
+          <g key={i} opacity="0">
+            <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin={`${2.8 + i * 0.2}s`} fill="freeze" />
             <circle cx={h.x} cy={h.y} r="6" fill="white" stroke={h.color} strokeWidth="2" />
             <circle cx={h.x} cy={h.y} r="3" fill={h.color} />
             <circle cx={h.x} cy={h.y} r="10" fill={h.color} opacity="0.2">
-              <animate attributeName="r" values="6;16;6" dur="2.6s" begin={`${i * 0.5}s`} repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
-              <animate attributeName="opacity" values="0.45;0;0.45" dur="2.6s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
+              <animate attributeName="r" values="6;16;6" dur="2.6s" begin={`${3 + i * 0.5}s`} repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+              <animate attributeName="opacity" values="0.45;0;0.45" dur="2.6s" begin={`${3 + i * 0.5}s`} repeatCount="indefinite" />
             </circle>
           </g>
         ))}
       </svg>
 
-      {/* Scan veil + leading line sweeping down the photo */}
+      {/* Continuous analysis sweep — first pass doubles as the opening scan */}
       <div
-        className="absolute inset-x-0 pointer-events-none animate-[scanY_4.2s_cubic-bezier(0.45,0,0.55,1)_infinite]"
+        className="absolute inset-x-0 pointer-events-none animate-[scanY_3.4s_cubic-bezier(0.45,0,0.55,1)_infinite]"
         style={{ height: 72, top: "-18%" }}
       >
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(199,169,119,0) 0%, rgba(199,169,119,0.10) 55%, rgba(199,169,119,0.28) 100%)" }} />
@@ -405,8 +397,8 @@ function LandingPageInner() {
               </div>
             </div>
 
-            {/* Left floating card — BMI */}
-            <div className="absolute" style={{ left: 100, top: 90, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", animation: "floatA 6s ease-in-out infinite" }}>
+            {/* Left floating card — BMI (reveals after opening scan) */}
+            <div className="absolute" style={{ left: 100, top: 90, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", opacity: 0, animation: "chipIn 0.6s var(--ease-out) 2.6s forwards, floatA 6s ease-in-out 3.2s infinite" }}>
               <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>BMI</div>
               <div className="flex items-center gap-3.5 mt-2">
                 <ScoreRing value={76} size={72} stroke={6} color="#8D9A84" track="rgba(47,47,43,0.06)" />
@@ -419,8 +411,8 @@ function LandingPageInner() {
               </div>
             </div>
 
-            {/* Right floating card — Body Fat */}
-            <div className="absolute" style={{ right: 100, top: 180, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", animation: "floatB 7s ease-in-out -2s infinite" }}>
+            {/* Right floating card — Body Fat (reveals after opening scan) */}
+            <div className="absolute" style={{ right: 100, top: 180, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", opacity: 0, animation: "chipIn 0.6s var(--ease-out) 2.78s forwards, floatB 7s ease-in-out 3.4s infinite" }}>
               <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>BODY FAT</div>
               <div className="flex items-baseline gap-2 mt-2">
                 <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>18.2</span>
@@ -431,8 +423,8 @@ function LandingPageInner() {
               </div>
             </div>
 
-            {/* Bottom-right dark card — calories */}
-            <div className="absolute" style={{ right: 140, bottom: 40, width: 200, background: "var(--ink)", color: "white", borderRadius: 16, padding: 16, boxShadow: "0 18px 40px rgba(47,47,43,0.18)", animation: "floatA 8s ease-in-out -4s infinite" }}>
+            {/* Bottom-right dark card — calories (reveals after opening scan) */}
+            <div className="absolute" style={{ right: 140, bottom: 40, width: 200, background: "var(--ink)", color: "white", borderRadius: 16, padding: 16, boxShadow: "0 18px 40px rgba(47,47,43,0.18)", opacity: 0, animation: "chipIn 0.6s var(--ease-out) 2.96s forwards, floatA 8s ease-in-out 3.6s infinite" }}>
               <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>DAILY CALORIES</div>
               <div className="flex items-baseline gap-1.5 mt-1.5">
                 <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>2,148</span>
@@ -443,8 +435,8 @@ function LandingPageInner() {
               </div>
             </div>
 
-            {/* Bottom-left — WHR */}
-            <div className="absolute" style={{ left: 150, bottom: 60, width: 180, background: "white", border: "1px solid var(--border-hex)", borderRadius: 16, padding: 14, boxShadow: "var(--shadow-lg)", animation: "floatB 7.5s ease-in-out -3s infinite" }}>
+            {/* Bottom-left — WHR (reveals after opening scan) */}
+            <div className="absolute" style={{ left: 150, bottom: 60, width: 180, background: "white", border: "1px solid var(--border-hex)", borderRadius: 16, padding: 14, boxShadow: "var(--shadow-lg)", opacity: 0, animation: "chipIn 0.6s var(--ease-out) 3.14s forwards, floatB 7.5s ease-in-out 3.8s infinite" }}>
               <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>WAIST-TO-HIP</div>
               <div className="flex items-baseline gap-2 mt-1">
                 <span className="text-[22px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>0.82</span>
