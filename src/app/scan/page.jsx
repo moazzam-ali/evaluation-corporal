@@ -502,7 +502,20 @@ function ScanPageInner() {
 
         {/* Stage body */}
         <div className="flex-1" style={{ padding: "32px 40px" }}>
-          <form onSubmit={handleSubmit(onSubmit)} id="scan-form">
+          {/* The form is wired only as a container for react-hook-form's
+              registration and validation. We never want native submit to
+              fire on its own — Enter inside any input would otherwise post
+              the form and skip past the review step. Submission is driven
+              exclusively by the Send button's onClick. */}
+          <form
+            id="scan-form"
+            onSubmit={(e) => e.preventDefault()}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && e.target?.tagName !== "TEXTAREA") {
+                e.preventDefault();
+              }
+            }}
+          >
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={currentStep}
@@ -555,10 +568,15 @@ function ScanPageInner() {
           </span>
 
           {isLastStep ? (
+            // Explicit type="button" + onClick → never relies on native form
+            // submit. Prevents the review step from being skipped by an
+            // accidental Enter keypress or by click-event bleed-through when
+            // the button swaps from "Next" to "Send".
             <button
-              type="submit"
-              form="scan-form"
+              key="submit-btn"
+              type="button"
               disabled={isSavingForm}
+              onClick={handleSubmit(onSubmit)}
               className="inline-flex items-center justify-center gap-2"
               style={{
                 fontFamily: "var(--font-inter)", fontSize: "13px", fontWeight: 500,
@@ -583,6 +601,7 @@ function ScanPageInner() {
             </button>
           ) : (
             <button
+              key="next-btn"
               type="button"
               onClick={handleNext}
               className="inline-flex items-center justify-center gap-2"
