@@ -68,11 +68,12 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
         {/* Brand lockup */}
-        <Link href="/" className="inline-flex items-center gap-2.5 shrink-0">
-          <Image src="/logo.svg" alt="Evaluación Corporal" width={32} height={32} className="w-8 h-8 shrink-0 object-contain" priority unoptimized />
+        <Link href="/" className="inline-flex items-center gap-1.5 shrink-0">
+          {/* Tight-cropped silhouette SVG — no surrounding void space */}
+          <Image src="/logo-mark.svg" alt="Evaluación Corporal" width={18} height={48} className="h-12 w-auto shrink-0" priority unoptimized />
           <span
             className="whitespace-nowrap"
-            style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "20px", color: "var(--ink, #2F2F2B)", letterSpacing: "-0.01em", lineHeight: 1 }}
+            style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "22px", color: "var(--ink, #2F2F2B)", letterSpacing: "-0.01em", lineHeight: 1 }}
           >
             {t("nav.brand", "Evaluación Corporal")}
           </span>

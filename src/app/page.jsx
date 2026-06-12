@@ -306,14 +306,16 @@ function LandingPageInner() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-2">
-                {["FRONT", "SIDE", "BACK"].map((label, i) => (
-                  <div key={label} className="text-center text-[10px] font-semibold tracking-[0.14em] py-2 rounded-lg" style={{
-                    background: i === 0 ? "var(--primary-soft)" : "var(--muted)",
-                    border: i === 0 ? "1px solid rgba(155,133,115,0.25)" : "1px solid var(--border-hex)",
-                    color: i === 0 ? "var(--primary-deep)" : "var(--muted-fg)",
-                  }}>{label}</div>
-                ))}
+              {/* Single front-view confirmation strip */}
+              <div
+                className="text-center text-[10px] font-semibold tracking-[0.14em] py-2 rounded-lg"
+                style={{
+                  background: "var(--primary-soft)",
+                  border: "1px solid rgba(155,133,115,0.25)",
+                  color: "var(--primary-deep)",
+                }}
+              >
+                {t("landing.scan_card_view", "FRONT VIEW · CAPTURING")}
               </div>
             </div>
 
@@ -730,8 +732,8 @@ function LandingPageInner() {
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] mb-12">
             {/* Brand */}
             <div>
-              <Link href="/" className="inline-flex items-center gap-2.5">
-                <Image src="/logo.svg" alt="Evaluación Corporal" width={28} height={28} className="w-7 h-7 shrink-0 object-contain" unoptimized />
+              <Link href="/" className="inline-flex items-center gap-1.5">
+                <Image src="/logo-mark.svg" alt="Evaluación Corporal" width={16} height={44} className="h-11 w-auto shrink-0" unoptimized />
                 <span className="text-xl tracking-[-0.01em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
                   {t("nav.brand")}
                 </span>
