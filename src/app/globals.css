@@ -282,6 +282,18 @@
   80%  { opacity: 1; }
   100% { background-position: 0 130%; opacity: 0; }
 }
+/* Vertical scan veil sweep over the hero photo */
+@keyframes scanY {
+  0%   { top: -18%; opacity: 0; }
+  10%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: 104%; opacity: 0; }
+}
+/* Measurement grid breathing over the hero photo */
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.05; }
+  50%      { opacity: 0.18; }
+}
 @keyframes floatA {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
