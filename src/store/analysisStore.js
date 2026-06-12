@@ -33,7 +33,7 @@ const useAnalysisStore = create((set, get) => ({
       set({
         analysisData: data.data,
         overallScore: results.overall_score || 0,
-        skinType: results.skin_type || "unknown",
+        skinType: results.body_type || results.skin_type || "balanced",
         metrics: results.metrics || [],
         recommendations: results.recommendations || [],
         enrichedProducts: results.enriched_products || [],
@@ -66,7 +66,7 @@ const useAnalysisStore = create((set, get) => ({
     set({
       analysisData: data,
       overallScore: results.overall_score || 0,
-      skinType: results.skin_type || "unknown",
+      skinType: results.body_type || results.skin_type || "balanced",
       metrics: results.metrics || [],
       recommendations: results.recommendations || [],
       enrichedProducts: results.enriched_products || [],

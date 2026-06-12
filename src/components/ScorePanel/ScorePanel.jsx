@@ -12,7 +12,7 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
   const offset = circumference - (overallScore / 100) * circumference;
   const color = overallScore >= 80 ? "#8D9A84" : overallScore >= 40 ? "#C7A977" : "#9B8573";
   const statusText = overallScore >= 80
-    ? t("results.score_good", "Skin in good balance overall")
+    ? t("results.score_good", "Wellness on track")
     : overallScore >= 40
       ? t("results.score_normal", "Some areas need attention")
       : t("results.score_alert", "Several areas need care");
@@ -108,7 +108,7 @@ export default function ScorePanel({ overallScore, skinType, summary, imageUrl }
             </span>
 
             <div style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "28px", color: "#2F2F2B", lineHeight: 1.15 }}>
-              {t("results.skin_type", "Skin type")} — <em style={{ fontStyle: "italic", color: "#9B8573" }}>{t(`scan.skin_types.${skinType}`, skinType)}</em>
+              {t("results.body_type_label", "Body type")} — <em style={{ fontStyle: "italic", color: "#9B8573" }}>{t(`results.body_types.${skinType}`, skinType)}</em>
             </div>
 
             <div className="flex gap-4 flex-wrap">

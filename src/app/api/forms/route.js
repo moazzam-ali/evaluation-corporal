@@ -23,9 +23,17 @@ export async function POST(request) {
     const id = nanoid(22);
     const language = lng || "en";
 
-    // 1. Store in PostgreSQL
+    // 1. Store in PostgreSQL. Tolerate a missing `forms` table — the analysis
+    // is what really matters and gets persisted later under `analyses`.
     steps.database = { status: "pending" };
     try {
+      await query(
+        `CREATE TABLE IF NOT EXISTS forms (
+           id VARCHAR(32) PRIMARY KEY,
+           data JSONB NOT NULL,
+           created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+         )`
+      );
       await query(
         "INSERT INTO forms (id, data) VALUES ($1, $2)",
         [id, JSON.stringify(formData)]
@@ -34,7 +42,8 @@ export async function POST(request) {
     } catch (dbError) {
       console.error("[forms] DB insert failed:", dbError.message);
       steps.database = { status: "failed", error: dbError.message };
-      return NextResponse.json({ error: "Database error", details: dbError.message }, { status: 500 });
+      // Continue — Telegram + Elastic notifications still go out, and the
+      // body-analysis endpoint will persist into the canonical `analyses` table.
     }
 
     // 2. Resolve bot

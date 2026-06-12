@@ -95,6 +95,14 @@ CREATE TABLE IF NOT EXISTS metric_product_map (
 );
 CREATE INDEX IF NOT EXISTS idx_metric_map_metric ON metric_product_map(metric_id);
 
+-- FORMS (intake submissions captured before optional body-photo analysis)
+CREATE TABLE IF NOT EXISTS forms (
+  id           VARCHAR(32) PRIMARY KEY,
+  data         JSONB NOT NULL,
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_forms_created_at ON forms(created_at DESC);
+
 -- ADMINS
 CREATE TABLE IF NOT EXISTS admins (
   id            SERIAL PRIMARY KEY,
