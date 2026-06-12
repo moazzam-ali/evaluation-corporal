@@ -174,7 +174,16 @@ function LandingPageInner() {
   const SERVICE_ICONS = ["chart", "user", "posture", "plan", "droplet", "leaf"];
   const STEP_ICONS = ["user", "dumbbell", "leaf", "chart"];
 
-  const TRUST_BRANDS = ["HERBALIFE", "WHOOP", "MYPROTEIN", "ATHLETIC GREENS", "OURA", "NOOM"];
+  // Real scientific methods this app implements. Replaces a previously fabricated
+  // brand-partnership strip — we list peer-reviewed equations we actually use.
+  const SCIENCE_BADGES = [
+    { key: "mifflin_st_jeor", label: "MIFFLIN-ST JEOR", sub: t("landing.science_badge_bmr", "BMR") },
+    { key: "deurenberg",      label: "DEURENBERG",      sub: t("landing.science_badge_bodyfat", "Body fat %") },
+    { key: "watson",          label: "WATSON",          sub: t("landing.science_badge_water", "Total body water") },
+    { key: "lorentz",         label: "LORENTZ",         sub: t("landing.science_badge_weight", "Healthy weight") },
+    { key: "who",             label: "WHO BANDS",       sub: t("landing.science_badge_bmi", "BMI classification") },
+    { key: "gdpr",            label: "GDPR",            sub: t("landing.science_badge_privacy", "Data privacy") },
+  ];
 
   const METRIC_ICONS = ["chart", "user", "posture", "plan", "sparkle", "dumbbell", "droplet", "flame"];
 
@@ -332,14 +341,17 @@ function LandingPageInner() {
         </Reveal>
       </section>
 
-      {/* ───────────── TRUST STRIP ───────────── */}
-      <div className="border-y bg-white py-8" style={{ borderColor: "rgba(47,47,43,0.06)" }}>
-        <div className="text-center text-[11px] font-medium uppercase tracking-[0.18em] mb-5" style={{ color: "var(--muted-fg)" }}>
-          {t("landing.trust_strip", "As featured by · partnered with")}
+      {/* ───────────── SCIENCE STRIP ───────────── */}
+      <div className="border-y bg-white py-9" style={{ borderColor: "rgba(47,47,43,0.06)" }}>
+        <div className="text-center text-[11px] font-medium uppercase tracking-[0.18em] mb-6" style={{ color: "var(--muted-fg)" }}>
+          {t("landing.science_strip", "Methods we use · peer-reviewed")}
         </div>
-        <div className="flex gap-16 items-center justify-center flex-wrap opacity-55">
-          {TRUST_BRANDS.map(n => (
-            <span key={n} className="text-[13px] font-bold tracking-[0.16em]" style={{ color: "var(--ink)" }}>{n}</span>
+        <div className="mx-auto max-w-[1100px] grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-6 gap-x-4 px-4">
+          {SCIENCE_BADGES.map(b => (
+            <div key={b.key} className="flex flex-col items-center text-center">
+              <span className="text-[12px] font-bold tracking-[0.14em]" style={{ color: "var(--ink)", fontFamily: "var(--font-dm-sans)" }}>{b.label}</span>
+              <span className="mt-1 text-[10.5px]" style={{ color: "var(--muted-fg)", letterSpacing: "0.04em" }}>{b.sub}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -594,7 +606,7 @@ function LandingPageInner() {
                     {Array.from({ length: 5 }, (_, i) => <Icon key={i} name="star" size={16} color="var(--status-normal-hex)" />)}
                   </div>
                   <span className="text-[13px]" style={{ color: "var(--muted-fg)" }}>
-                    <strong style={{ color: "var(--ink)" }}>{t("landing.testimonials_rating")}</strong> {t("landing.testimonials_review_count")}
+                    {t("landing.testimonials_beta", "Feedback from our early beta coaches and users.")}
                   </span>
                 </div>
               </div>
