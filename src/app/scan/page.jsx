@@ -58,7 +58,8 @@ function ScanPageInner() {
 
   const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);    // premium analyzing overlay — body photo analysis only
+  const [isSavingForm, setIsSavingForm] = useState(false);    // lightweight pending state for the form-submit POST
   const [submitComplete, setSubmitComplete] = useState(false);
   const [customerName, setCustomerName] = useState("");
   const [analysisProgress, setAnalysisProgress] = useState(0);
@@ -163,10 +164,13 @@ function ScanPageInner() {
   };
 
   const onSubmit = async (formData) => {
-    setIsSubmitting(true);
+    // Form-save POST: no premium analyzing overlay here — that's reserved
+    // for the body-photo analysis call after the upload module. Just disable
+    // the button with a lightweight pending state and transition straight to
+    // the photo phase on success.
+    setIsSavingForm(true);
     setCustomerName(formData.name);
     setSavedFormData(formData);
-    const cancel = runAnalyzingAnimation();
 
     try {
       const res = await fetch("/api/forms", {
@@ -186,17 +190,10 @@ function ScanPageInner() {
       if (!res.ok) throw new Error(result.error || "Submission failed");
 
       setSavedFormId(result.id);
-      setAnalysisProgress(100);
-      setActiveAnalysisStep(5);
-      await new Promise((r) => setTimeout(r, 600));
-
-      // Move to the body-photo capture screen. User can upload, or skip.
-      cancel();
-      setIsSubmitting(false);
+      setIsSavingForm(false);
       setPhotoPhase(true);
     } catch (error) {
-      cancel();
-      setIsSubmitting(false);
+      setIsSavingForm(false);
       toast.error(error.message || t("common.error"));
     }
   };
@@ -268,17 +265,26 @@ function ScanPageInner() {
         className="flex flex-col items-center justify-center relative overflow-hidden"
         style={{
           minHeight: "100vh",
-          background: "linear-gradient(160deg, #060F1F 0%, #2F2F2B 60%, #6B5B4B 100%)",
+          // Warm-neutrals premium gradient: deep mocha → charcoal → soft taupe
+          background: "linear-gradient(160deg, #1A1A18 0%, #2F2F2B 55%, #4A3F36 100%)",
           color: "white",
           margin: "-1px -9999px", padding: "0 9999px",
         }}
       >
-        {/* Decorative arcs */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1280 800" preserveAspectRatio="none" style={{ opacity: 0.15 }}>
+        {/* Decorative concentric rings — warm gold, low-opacity */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1280 800" preserveAspectRatio="none" style={{ opacity: 0.14 }}>
           <circle cx="640" cy="400" r="200" fill="none" stroke="#C7A977" strokeWidth="1" />
           <circle cx="640" cy="400" r="320" fill="none" stroke="#C7A977" strokeWidth="1" strokeDasharray="4 8" />
           <circle cx="640" cy="400" r="440" fill="none" stroke="#C7A977" strokeWidth="1" />
         </svg>
+
+        {/* Soft radial wash from the center */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at 50% 45%, rgba(199,169,119,0.10) 0%, rgba(199,169,119,0) 55%)",
+          }}
+        />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -297,51 +303,55 @@ function ScanPageInner() {
           </h1>
 
           {/* Subtitle */}
-          <p className="mt-3.5 max-w-[480px] text-[15px] leading-relaxed" style={{ color: "rgba(255,255,255,0.65)" }}>
+          <p className="mt-3.5 max-w-[480px] text-[15px] leading-relaxed" style={{ color: "rgba(239,231,220,0.62)" }}>
             {t("scan.analyzing_subtitle", "Calculating composition, estimating body fat, cross-checking your nutrition snapshot. Roughly 30 seconds.")}
           </p>
 
-          {/* Score Ring */}
-          <div className="mt-12 relative">
-            <svg width={260} height={260}>
-              <circle cx={130} cy={130} r={120} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth={6} />
-              <circle
-                cx={130} cy={130} r={120} fill="none" stroke="#C7A977" strokeWidth={6}
-                strokeDasharray={2 * Math.PI * 120}
-                strokeDashoffset={2 * Math.PI * 120 - (analysisProgress / 100) * 2 * Math.PI * 120}
-                strokeLinecap="round"
-                transform="rotate(-90 130 130)"
-                style={{ transition: "stroke-dashoffset 1.2s cubic-bezier(0.22,1,0.36,1)" }}
+          {/* Animated logo centerpiece — continuous-line body silhouette
+              drawing itself in a soft, non-linear loop. */}
+          <div className="mt-10 relative" style={{ width: 280, height: 320 }}>
+            <AnimatedLogo size={280} color="#C7A977" haloColor="#9B8573" duration={5.4} />
+          </div>
+
+          {/* Step + progress readout below the figure */}
+          <div className="mt-2 flex flex-col items-center gap-1.5">
+            <div className="text-[11px] uppercase tracking-[0.18em]" style={{ color: "#C7A977" }}>
+              {activeAnalysisStep < ANALYSIS_STEPS.length
+                ? t(`scan.${ANALYSIS_STEPS[activeAnalysisStep].key}`, ANALYSIS_STEPS[activeAnalysisStep].fallback).toUpperCase()
+                : t("scan.analyzing_complete_label", "COMPLETE").toUpperCase()
+              }
+            </div>
+            <div style={{ fontFamily: "var(--font-fraunces)", fontSize: 28, fontWeight: 400, lineHeight: 1, color: "rgba(239,231,220,0.85)" }}>
+              {Math.round(analysisProgress)}<span className="text-[14px]" style={{ color: "rgba(239,231,220,0.4)" }}>%</span>
+            </div>
+            {/* Thin progress bar */}
+            <div className="mt-2 w-[220px] h-[2px] rounded-full overflow-hidden" style={{ background: "rgba(239,231,220,0.10)" }}>
+              <div
+                className="h-full rounded-full"
+                style={{
+                  width: `${analysisProgress}%`,
+                  background: "linear-gradient(90deg, #9B8573 0%, #C7A977 100%)",
+                  transition: "width 1.2s cubic-bezier(0.22,1,0.36,1)",
+                }}
               />
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div style={{ fontFamily: "var(--font-fraunces)", fontSize: 64, fontWeight: 400, lineHeight: 1 }}>
-                {Math.round(analysisProgress)}<span className="text-[24px]" style={{ color: "rgba(255,255,255,0.5)" }}>%</span>
-              </div>
-              <div className="mt-2 text-[11px] uppercase tracking-[0.18em]" style={{ color: "#C7A977" }}>
-                {activeAnalysisStep < ANALYSIS_STEPS.length
-                  ? t(`scan.${ANALYSIS_STEPS[activeAnalysisStep].key}`, ANALYSIS_STEPS[activeAnalysisStep].fallback).toUpperCase()
-                  : t("scan.analyzing_complete_label", "COMPLETE").toUpperCase()
-                }
-              </div>
             </div>
           </div>
 
           {/* Status feed */}
-          <div className="mt-14 flex flex-col gap-2 items-center">
+          <div className="mt-12 flex flex-col gap-2 items-center">
             {ANALYSIS_STEPS.map((step, i) => {
               const isDone = i < activeAnalysisStep;
               const isActive = i === activeAnalysisStep;
               return (
                 <div key={i} className="flex items-center gap-2.5 text-[13px]" style={{
-                  color: isDone ? "rgba(255,255,255,0.5)" : isActive ? "white" : "rgba(255,255,255,0.3)",
+                  color: isDone ? "rgba(239,231,220,0.45)" : isActive ? "rgba(239,231,220,0.95)" : "rgba(239,231,220,0.28)",
                 }}>
                   {isDone ? (
                     <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="#C7A977" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 13l4 4L19 7" /></svg>
                   ) : isActive ? (
                     <span className="w-[14px] h-[14px] rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: "#C7A977", borderTopColor: "transparent" }} />
                   ) : (
-                    <span className="w-[14px] h-[14px] rounded-full" style={{ border: "1px solid rgba(255,255,255,0.2)" }} />
+                    <span className="w-[14px] h-[14px] rounded-full" style={{ border: "1px solid rgba(239,231,220,0.18)" }} />
                   )}
                   <span>{t(`scan.${step.key}`, step.fallback)}</span>
                 </div>
@@ -352,8 +362,8 @@ function ScanPageInner() {
           {/* Cancel */}
           <button
             onClick={() => { progressRef.current?.forEach(clearTimeout); setIsSubmitting(false); }}
-            className="mt-12 text-[13px] font-medium px-5 py-2.5 rounded-full transition-colors"
-            style={{ color: "white", border: "1px solid rgba(255,255,255,0.25)", background: "transparent" }}
+            className="mt-10 text-[13px] font-medium px-5 py-2.5 rounded-full transition-colors"
+            style={{ color: "rgba(239,231,220,0.85)", border: "1px solid rgba(239,231,220,0.22)", background: "transparent" }}
           >
             {t("scan.analyzing_cancel", "Cancel")}
           </button>
@@ -666,16 +676,28 @@ function ScanPageInner() {
             <button
               type="submit"
               form="scan-form"
+              disabled={isSavingForm}
               className="inline-flex items-center justify-center gap-2"
               style={{
                 fontFamily: "var(--font-inter)", fontSize: "13px", fontWeight: 500,
                 padding: "11px 20px", borderRadius: "999px", whiteSpace: "nowrap",
-                border: 0, background: "#9B8573", color: "white", cursor: "pointer",
-                transition: "transform 180ms, box-shadow 320ms, background 180ms",
+                border: 0, background: "#9B8573", color: "white",
+                cursor: isSavingForm ? "not-allowed" : "pointer",
+                opacity: isSavingForm ? 0.7 : 1,
+                transition: "transform 180ms, box-shadow 320ms, background 180ms, opacity 180ms",
               }}
             >
-              {t("navigation.submit", "Send")}
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+              {isSavingForm ? (
+                <>
+                  <span className="inline-block w-[14px] h-[14px] rounded-full border-2 border-white border-t-transparent animate-spin" />
+                  {t("navigation.sending", "Sending…")}
+                </>
+              ) : (
+                <>
+                  {t("navigation.submit", "Send")}
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </>
+              )}
             </button>
           ) : (
             <button
