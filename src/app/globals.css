@@ -299,28 +299,7 @@
   from { opacity: 0; transform: translateY(14px) scale(0.96); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
-/* Brand logo continuous draw → hold → erase loop */
-@keyframes logoMask {
-  0%   { clip-path: inset(0 0 100% 0); }
-  45%  { clip-path: inset(0 0 0% 0); }
-  60%  { clip-path: inset(0 0 0% 0); }
-  100% { clip-path: inset(100% 0 0% 0); }
-}
-/* Scan line that travels with the draw/erase passes */
-@keyframes logoScan {
-  0%   { transform: translateY(-12%); opacity: 0; }
-  8%   { opacity: 1; }
-  45%  { transform: translateY(100%); opacity: 1; }
-  46%  { opacity: 0; }
-  58%  { transform: translateY(-12%); opacity: 0; }
-  62%  { opacity: 1; }
-  100% { transform: translateY(100%); opacity: 0; }
-}
-/* Soft halo glow pulse behind the figure */
-@keyframes logoHalo {
-  0%, 100% { opacity: 0.10; transform: scale(0.96); }
-  50%      { opacity: 0.22; transform: scale(1.04); }
-}
+/* (Brand logo animation is driven by framer-motion stroke-dash, no CSS keyframes needed) */
 @keyframes floatA {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
