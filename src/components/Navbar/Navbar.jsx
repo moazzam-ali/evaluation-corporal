@@ -69,7 +69,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
         {/* Brand lockup */}
         <Link href="/" className="inline-flex items-center gap-2.5 shrink-0">
-          <Image src="/logo.svg" alt="" width={32} height={32} className="w-8 h-8 shrink-0" />
+          <Image src="/logo.png" alt="Evaluación Corporal" width={32} height={32} className="w-8 h-8 shrink-0 object-contain" priority />
           <span
             className="whitespace-nowrap"
             style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "20px", color: "var(--ink, #2F2F2B)", letterSpacing: "-0.01em", lineHeight: 1 }}
