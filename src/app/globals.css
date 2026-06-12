@@ -256,6 +256,16 @@
 .scan-chip.is-checked .scan-chip-tick { border-color: #9B8573; background: #9B8573; }
 .scan-chip.is-checked .scan-chip-tick svg { opacity: 1; }
 
+/* Honor user motion preferences across the app */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Dotted background drift animation */
 @keyframes dotDrift {
   from { background-position: 0 0; }
