@@ -499,7 +499,15 @@
       "normal": "Moderato",
       "good": "Buono"
     },
-    "body_type_label": "Body type"
+    "body_type_label": "Body type",
+    "body_types": {
+      "athletic": "Athletic",
+      "balanced": "Balanced",
+      "endomorph": "Endomorph",
+      "ectomorph": "Ectomorph",
+      "mesomorph": "Mesomorph",
+      "mixed": "Mixed"
+    }
   },
   "metrics": {
     "oily_skin": "Pelle Grassa",
@@ -513,7 +521,19 @@
     "smoothness": "Levigatezza",
     "fine_lines_wrinkles": "Linee Sottili e Rughe",
     "texture": "Texture",
-    "dark_circles": "Occhiaie"
+    "dark_circles": "Occhiaie",
+    "bmi": "BMI",
+    "body_fat": "Body fat %",
+    "lean_mass": "Lean body mass",
+    "waist_hip_ratio": "Waist-to-hip ratio",
+    "healthy_weight": "Healthy weight",
+    "total_body_water": "Total body water",
+    "bmr": "Basal metabolic rate",
+    "calorie_target": "Daily calories",
+    "protein_target": "Protein target",
+    "carbs_target": "Carbs target",
+    "fat_target": "Fat target",
+    "hydration_target": "Hydration target"
   },
   "metrics_desc": {
     "oily_skin": "Misura la quantità di sebo in eccesso sulla pelle. Un punteggio equilibrato indica che la pelle produce sebo a un livello normale senza essere eccessivamente grassa.",
@@ -527,7 +547,19 @@
     "smoothness": "Misura quanto la superficie della pelle appare e si sente liscia e uniforme. Un punteggio alto indica una pelle più levigata e raffinata.",
     "fine_lines_wrinkles": "Valuta l'aspetto generale delle linee di espressione e delle rughe sul viso. Un punteggio migliore significa che sono meno visibili.",
     "texture": "Si riferisce alla condizione generale e all'uniformità della superficie della pelle. Un punteggio molto alto suggerisce che la pelle appare raffinata, uniforme e ben equilibrata.",
-    "dark_circles": "Misura l'aspetto delle occhiaie sotto gli occhi. Un punteggio alto significa che la zona sotto gli occhi appare più luminosa e meno stanca."
+    "dark_circles": "Misura l'aspetto delle occhiaie sotto gli occhi. Un punteggio alto significa che la zona sotto gli occhi appare più luminosa e meno stanca.",
+    "bmi": "Weight relative to height squared. Classified using WHO bands from underweight through obesity III.",
+    "body_fat": "Estimated using the Deurenberg formula, adjusted for your age and sex.",
+    "lean_mass": "The non-fat share of your body — bones, organs, muscle, water. Higher lean mass means faster metabolism.",
+    "waist_hip_ratio": "Cardiometabolic risk proxy with gender-specific bands for low / moderate / high.",
+    "healthy_weight": "Lorentz-formula healthy target adjusted for height and sex.",
+    "total_body_water": "Watson equation estimate of total body water in liters.",
+    "bmr": "Mifflin-St Jeor BMR — kilocalories you burn at rest each day.",
+    "calorie_target": "BMR scaled by your activity level and your weight goal.",
+    "protein_target": "Protein grams per day calibrated to support your goal.",
+    "carbs_target": "Carbohydrate grams per day from the goal-specific macro split.",
+    "fat_target": "Fat grams per day from the goal-specific macro split.",
+    "hydration_target": "Liters per day based on body weight (0.033 L per kg)."
   },
   "products": {
     "view": "Vedi Prodotto",

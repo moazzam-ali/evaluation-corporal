@@ -522,7 +522,15 @@
       "normal": "Moderado",
       "good": "Bom"
     },
-    "body_type_label": "Body type"
+    "body_type_label": "Body type",
+    "body_types": {
+      "athletic": "Athletic",
+      "balanced": "Balanced",
+      "endomorph": "Endomorph",
+      "ectomorph": "Ectomorph",
+      "mesomorph": "Mesomorph",
+      "mixed": "Mixed"
+    }
   },
   "metrics": {
     "oily_skin": "Pele Oleosa",
@@ -536,7 +544,19 @@
     "smoothness": "Suavidade",
     "fine_lines_wrinkles": "Linhas Finas e Rugas",
     "texture": "Textura",
-    "dark_circles": "Olheiras"
+    "dark_circles": "Olheiras",
+    "bmi": "BMI",
+    "body_fat": "Body fat %",
+    "lean_mass": "Lean body mass",
+    "waist_hip_ratio": "Waist-to-hip ratio",
+    "healthy_weight": "Healthy weight",
+    "total_body_water": "Total body water",
+    "bmr": "Basal metabolic rate",
+    "calorie_target": "Daily calories",
+    "protein_target": "Protein target",
+    "carbs_target": "Carbs target",
+    "fat_target": "Fat target",
+    "hydration_target": "Hydration target"
   },
   "metrics_desc": {
     "oily_skin": "Mede a quantidade de excesso de oleosidade ou sebo na pele. Uma pontuação equilibrada indica que a pele produz oleosidade em nível normal sem ser excessivamente oleosa.",
@@ -550,7 +570,19 @@
     "smoothness": "Mede o quão macia e uniforme a superfície da pele parece e se sente. Uma pontuação alta indica uma pele mais refinada e polida.",
     "fine_lines_wrinkles": "Avalia a aparência geral das linhas de expressão e rugas no rosto. Uma pontuação melhor significa que são menos visíveis.",
     "texture": "Refere-se à condição geral e à uniformidade da superfície da pele. Uma pontuação muito alta sugere que a pele parece refinada, uniforme e bem equilibrada.",
-    "dark_circles": "Mede a aparência de escuridão sob os olhos. Uma pontuação alta significa que a área sob os olhos parece mais clara e menos cansada."
+    "dark_circles": "Mede a aparência de escuridão sob os olhos. Uma pontuação alta significa que a área sob os olhos parece mais clara e menos cansada.",
+    "bmi": "Weight relative to height squared. Classified using WHO bands from underweight through obesity III.",
+    "body_fat": "Estimated using the Deurenberg formula, adjusted for your age and sex.",
+    "lean_mass": "The non-fat share of your body — bones, organs, muscle, water. Higher lean mass means faster metabolism.",
+    "waist_hip_ratio": "Cardiometabolic risk proxy with gender-specific bands for low / moderate / high.",
+    "healthy_weight": "Lorentz-formula healthy target adjusted for height and sex.",
+    "total_body_water": "Watson equation estimate of total body water in liters.",
+    "bmr": "Mifflin-St Jeor BMR — kilocalories you burn at rest each day.",
+    "calorie_target": "BMR scaled by your activity level and your weight goal.",
+    "protein_target": "Protein grams per day calibrated to support your goal.",
+    "carbs_target": "Carbohydrate grams per day from the goal-specific macro split.",
+    "fat_target": "Fat grams per day from the goal-specific macro split.",
+    "hydration_target": "Liters per day based on body weight (0.033 L per kg)."
   },
   "products": {
     "view": "Ver Produto",
