@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef, Suspense } from "react";
+import { useRef, useState, Suspense } from "react";
 
 /* ── tiny helpers ──────────────────────────────────────────────── */
 function Reveal({ children, className = "", delay = 0 }) {
@@ -117,6 +117,106 @@ function BodySilhouette({ view = "front", width = 200, height = 380, fillColor, 
           </g>
         ))}
       </svg>
+    </div>
+  );
+}
+
+/* ── Hero Scan Visual — editorial photo + layered scanning fx ──── */
+function HeroScanVisual({ height = 380 }) {
+  const [imgFailed, setImgFailed] = useState(false);
+
+  // Until /hero-body.png is added to public/, fall back to the silhouette.
+  if (imgFailed) {
+    return (
+      <div className="relative mt-2 flex justify-center items-center" style={{ height }}>
+        <svg className="absolute inset-0 m-auto" width="300" height={height} viewBox="0 0 300 380">
+          <circle cx="150" cy="190" r="120" fill="none" stroke="rgba(155,133,115,0.10)" strokeWidth="1" />
+          <circle cx="150" cy="190" r="80" fill="none" stroke="rgba(155,133,115,0.12)" strokeWidth="1" strokeDasharray="2 6" />
+        </svg>
+        <BodySilhouette view="front" width={180} height={340} fillColor="rgba(155,133,115,0.10)" strokeColor="rgba(155,133,115,0.55)" hotspots={[
+          { x: 100, y: 120, color: "#9B8573" },
+          { x: 144, y: 200, color: "#9C5A4A" },
+          { x: 60, y: 200, color: "#8D9A84" },
+        ]} />
+        <div className="absolute inset-x-[30px] inset-y-[30px] overflow-hidden rounded-2xl pointer-events-none">
+          <div className="absolute inset-x-0 h-[2px] animate-[scanSweep_3.6s_ease-in-out_infinite]" style={{ background: "linear-gradient(90deg, rgba(155,133,115,0), rgba(155,133,115,0.6), rgba(155,133,115,0))", boxShadow: "0 0 18px rgba(155,133,115,0.5)" }} />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative mt-2 overflow-hidden rounded-2xl" style={{ height }}>
+      {/* Photo */}
+      <Image
+        src="/hero-body.png"
+        alt=""
+        fill
+        priority
+        sizes="312px"
+        className="object-cover"
+        style={{ objectPosition: "center top" }}
+        onError={() => setImgFailed(true)}
+      />
+
+      {/* Warm blend so the photo sits into the card */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "linear-gradient(180deg, rgba(244,239,231,0.06) 0%, rgba(244,239,231,0) 18%, rgba(244,239,231,0) 78%, rgba(244,239,231,0.30) 100%)",
+      }} />
+
+      {/* Measurement grid — breathes in and out */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none animate-[gridPulse_5s_ease-in-out_infinite]" viewBox="0 0 312 380" preserveAspectRatio="none">
+        {Array.from({ length: 7 }, (_, i) => 39 + i * 39).map((x) => (
+          <line key={`v${x}`} x1={x} y1="0" x2={x} y2="380" stroke="#9B8573" strokeWidth="0.6" />
+        ))}
+        {Array.from({ length: 8 }, (_, i) => 42 + i * 42).map((y) => (
+          <line key={`h${y}`} x1="0" y1={y} x2="312" y2={y} stroke="#9B8573" strokeWidth="0.6" />
+        ))}
+      </svg>
+
+      {/* Landmark markers — shoulder / waist / thigh */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 312 380" preserveAspectRatio="none">
+        {[
+          { x: 118, y: 104, color: "#9B8573" },
+          { x: 196, y: 186, color: "#9C5A4A" },
+          { x: 140, y: 268, color: "#8D9A84" },
+        ].map((h, i) => (
+          <g key={i}>
+            <circle cx={h.x} cy={h.y} r="6" fill="white" stroke={h.color} strokeWidth="2" />
+            <circle cx={h.x} cy={h.y} r="3" fill={h.color} />
+            <circle cx={h.x} cy={h.y} r="10" fill={h.color} opacity="0.2">
+              <animate attributeName="r" values="6;16;6" dur="2.6s" begin={`${i * 0.5}s`} repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1; 0.4 0 0.2 1" />
+              <animate attributeName="opacity" values="0.45;0;0.45" dur="2.6s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
+            </circle>
+          </g>
+        ))}
+      </svg>
+
+      {/* Scan veil + leading line sweeping down the photo */}
+      <div
+        className="absolute inset-x-0 pointer-events-none animate-[scanY_4.2s_cubic-bezier(0.45,0,0.55,1)_infinite]"
+        style={{ height: 72, top: "-18%" }}
+      >
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(199,169,119,0) 0%, rgba(199,169,119,0.10) 55%, rgba(199,169,119,0.28) 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0 h-[2px]" style={{ background: "linear-gradient(90deg, rgba(199,169,119,0), rgba(199,169,119,0.85), rgba(199,169,119,0))", boxShadow: "0 0 22px rgba(199,169,119,0.65)" }} />
+      </div>
+
+      {/* Viewfinder corner brackets */}
+      {[
+        { top: 10, left: 10, bt: true, bl: true },
+        { top: 10, right: 10, bt: true, br: true },
+        { bottom: 10, left: 10, bb: true, bl: true },
+        { bottom: 10, right: 10, bb: true, br: true },
+      ].map((c, i) => (
+        <span key={i} className="absolute w-5 h-5 pointer-events-none" style={{
+          top: c.top, left: c.left, right: c.right, bottom: c.bottom,
+          borderTop: c.bt ? "2px solid rgba(199,169,119,0.85)" : "none",
+          borderBottom: c.bb ? "2px solid rgba(199,169,119,0.85)" : "none",
+          borderLeft: c.bl ? "2px solid rgba(199,169,119,0.85)" : "none",
+          borderRight: c.br ? "2px solid rgba(199,169,119,0.85)" : "none",
+          borderRadius: 3,
+        }} />
+      ))}
     </div>
   );
 }
@@ -290,21 +390,7 @@ function LandingPageInner() {
                 </span>
               </div>
 
-              <div className="relative mt-2 flex justify-center items-center" style={{ height: 380 }}>
-                <svg className="absolute inset-0 m-auto" width="300" height="380" viewBox="0 0 300 380">
-                  <circle cx="150" cy="190" r="120" fill="none" stroke="rgba(155,133,115,0.10)" strokeWidth="1" />
-                  <circle cx="150" cy="190" r="80" fill="none" stroke="rgba(155,133,115,0.12)" strokeWidth="1" strokeDasharray="2 6" />
-                </svg>
-                <BodySilhouette view="front" width={180} height={340} fillColor="rgba(155,133,115,0.10)" strokeColor="rgba(155,133,115,0.55)" hotspots={[
-                  { x: 100, y: 120, color: "#9B8573" },
-                  { x: 144, y: 200, color: "#9C5A4A" },
-                  { x: 60, y: 200, color: "#8D9A84" },
-                ]} />
-                {/* Scan line */}
-                <div className="absolute inset-x-[30px] inset-y-[30px] overflow-hidden rounded-2xl pointer-events-none">
-                  <div className="absolute inset-x-0 h-[2px] animate-[scanSweep_3.6s_ease-in-out_infinite]" style={{ background: "linear-gradient(90deg, rgba(155,133,115,0), rgba(155,133,115,0.6), rgba(155,133,115,0))", boxShadow: "0 0 18px rgba(155,133,115,0.5)" }} />
-                </div>
-              </div>
+              <HeroScanVisual height={380} />
 
               {/* Single front-view confirmation strip */}
               <div
