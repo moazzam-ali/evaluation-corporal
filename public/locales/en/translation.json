@@ -513,6 +513,19 @@
       "good": "Good",
       "normal": "Normal",
       "needs_attention": "Needs attention"
+    },
+    "body_types": {
+      "athletic": "Athletic",
+      "balanced": "Balanced",
+      "endomorph": "Endomorph",
+      "ectomorph": "Ectomorph",
+      "mesomorph": "Mesomorph",
+      "mixed": "Mixed"
+    },
+    "status": {
+      "good": "Good",
+      "normal": "Normal",
+      "needs_attention": "Needs attention"
     }
   },
   "body_camera": {
@@ -538,5 +551,33 @@
   "products": {
     "pick": "pick",
     "supplement": "Supplement"
+  },
+  "metrics": {
+    "bmi": "BMI",
+    "body_fat": "Body fat %",
+    "lean_mass": "Lean body mass",
+    "waist_hip_ratio": "Waist-to-hip ratio",
+    "healthy_weight": "Healthy weight",
+    "total_body_water": "Total body water",
+    "bmr": "Basal metabolic rate",
+    "calorie_target": "Daily calories",
+    "protein_target": "Protein target",
+    "carbs_target": "Carbs target",
+    "fat_target": "Fat target",
+    "hydration_target": "Hydration target"
+  },
+  "metrics_desc": {
+    "bmi": "Weight relative to height squared. Classified using WHO bands from underweight through obesity III.",
+    "body_fat": "Estimated using the Deurenberg formula, adjusted for your age and sex.",
+    "lean_mass": "The non-fat share of your body — bones, organs, muscle, water. Higher lean mass means faster metabolism.",
+    "waist_hip_ratio": "Cardiometabolic risk proxy with gender-specific bands for low / moderate / high.",
+    "healthy_weight": "Lorentz-formula healthy target adjusted for height and sex.",
+    "total_body_water": "Watson equation estimate of total body water in liters.",
+    "bmr": "Mifflin-St Jeor BMR — kilocalories you burn at rest each day.",
+    "calorie_target": "BMR scaled by your activity level and your weight goal.",
+    "protein_target": "Protein grams per day calibrated to support your goal.",
+    "carbs_target": "Carbohydrate grams per day from the goal-specific macro split.",
+    "fat_target": "Fat grams per day from the goal-specific macro split.",
+    "hydration_target": "Liters per day based on body weight (0.033 L per kg)."
   }
 }
