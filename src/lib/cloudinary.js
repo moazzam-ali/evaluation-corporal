@@ -1,8 +1,21 @@
+export function isCloudinaryConfigured() {
+  return Boolean(
+    process.env.CLOUDINARY_CLOUD_NAME &&
+    process.env.CLOUDINARY_UPLOAD_PRESET &&
+    process.env.CLOUDINARY_API_KEY &&
+    process.env.CLOUDINARY_API_SECRET
+  );
+}
+
 export async function uploadToCloudinary(imageBuffer, filename, { folder = "skin-analysis" } = {}) {
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
   const apiKey = process.env.CLOUDINARY_API_KEY;
   const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+  if (!isCloudinaryConfigured()) {
+    throw new Error("Cloudinary not configured (missing CLOUDINARY_* env vars).");
+  }
 
   const timestamp = Math.round(new Date().getTime() / 1000);
 
