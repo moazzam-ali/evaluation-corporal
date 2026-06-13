@@ -2,6 +2,48 @@
 
 import { Suspense } from "react";
 import Link from "next/link";
+import StageStrip from "@/components/StageStrip/StageStrip";
+
+/* ── Stage spectrum definitions ────────────────────────────────────
+   Each metric's visual stages, lean → heavy. `scaleX` drives the
+   fallback silhouette width; `img` points at an optional real photo
+   under /public/stages (auto-used when present, silhouette otherwise).
+   `pick` returns the active stage key for a measured value.            */
+const STAGES = {
+  bodyFat: {
+    caption:
+      "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range.",
+    pick: (v) => (v <= 8 ? "essential" : v <= 14 ? "athletic" : v <= 18 ? "fitness" : v <= 25 ? "average" : "high"),
+    stages: [
+      { key: "essential", label: "Essential", sub: "2–8%", scaleX: 0.80, img: "/stages/bodyfat-essential.webp" },
+      { key: "athletic", label: "Athletic", sub: "8–14%", scaleX: 0.90, img: "/stages/bodyfat-athletic.webp" },
+      { key: "fitness", label: "Fitness", sub: "14–18%", scaleX: 1.00, img: "/stages/bodyfat-fitness.webp" },
+      { key: "average", label: "Average", sub: "18–25%", scaleX: 1.12, img: "/stages/bodyfat-average.webp" },
+      { key: "high", label: "High", sub: "25%+", scaleX: 1.26, img: "/stages/bodyfat-high.webp" },
+    ],
+  },
+  bmi: {
+    caption:
+      "BMI maps weight to height only — it can't see muscle. The silhouettes show the broad external shape each band tends to produce.",
+    pick: (v) => (v < 18.5 ? "under" : v < 25 ? "healthy" : v < 30 ? "over" : "obese"),
+    stages: [
+      { key: "under", label: "Underweight", sub: "<18.5", scaleX: 0.82, img: "/stages/bmi-under.webp" },
+      { key: "healthy", label: "Healthy", sub: "18.5–25", scaleX: 0.98, img: "/stages/bmi-healthy.webp" },
+      { key: "over", label: "Overweight", sub: "25–30", scaleX: 1.14, img: "/stages/bmi-over.webp" },
+      { key: "obese", label: "Obese", sub: "30+", scaleX: 1.30, img: "/stages/bmi-obese.webp" },
+    ],
+  },
+  whr: {
+    caption:
+      "Waist-to-hip ratio reflects where fat sits. Lower ratios carry less cardiometabolic risk; the shapes show low, moderate and high distribution.",
+    pick: (v) => (v <= 0.9 ? "low" : v <= 0.95 ? "moderate" : "high"),
+    stages: [
+      { key: "low", label: "Low risk", sub: "<0.90", scaleX: 0.92, img: "/stages/whr-low.webp" },
+      { key: "moderate", label: "Moderate", sub: "0.90–0.95", scaleX: 1.08, img: "/stages/whr-moderate.webp" },
+      { key: "high", label: "High risk", sub: "0.95+", scaleX: 1.24, img: "/stages/whr-high.webp" },
+    ],
+  },
+};
 
 /* ── Demo data ─────────────────────────────────────────────────── */
 const DEMO = {
@@ -215,6 +257,7 @@ export default function DemoResultsPage() {
                   { to: 30, label: "Over", tone: "normal" },
                   { to: 40, label: "Obese", tone: "alert" },
                 ]} unit="kg / m²" caption="Sits 0.9 above the healthy ceiling. Lean mass explains most of that — composition reads cleaner than BMI alone." />
+                <StageStrip stages={STAGES.bmi.stages} activeKey={STAGES.bmi.pick(d.bmi)} caption={STAGES.bmi.caption} />
               </Card>
               <Card>
                 <CardHeader title="Body Fat" action={`Male · ${d.user.age} years`} />
@@ -225,6 +268,7 @@ export default function DemoResultsPage() {
                   { to: 25, label: "Average", tone: "normal" },
                   { to: 32, label: "High", tone: "alert" },
                 ]} unit="percent" caption="Comfortable inside the fitness band. Trending down from last assessment." />
+                <StageStrip stages={STAGES.bodyFat.stages} activeKey={STAGES.bodyFat.pick(d.bodyFat)} caption={STAGES.bodyFat.caption} />
               </Card>
             </div>
 
@@ -237,6 +281,7 @@ export default function DemoResultsPage() {
                   { to: 0.95, label: "Moderate", tone: "normal" },
                   { to: 1.05, label: "High", tone: "alert" },
                 ]} unit="ratio" decimals={2} caption="Low risk range. Anterior fat pattern accounts for the position; mobility work helps." />
+                <StageStrip stages={STAGES.whr.stages} activeKey={STAGES.whr.pick(d.whr)} caption={STAGES.whr.caption} />
               </Card>
               <Card>
                 <CardHeader title="Weight Analysis" action="Lorentz healthy band" />
