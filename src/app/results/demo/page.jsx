@@ -237,11 +237,50 @@ function HydrationColumn({ pct, ideal = 60, min = 40, max = 70 }) {
   );
 }
 
+/* ── Weight trajectory — projected descent from now to goal ──────
+   Turns the static "−4 kg" into a path over time, with the healthy zone
+   (≤ ceiling) shaded so the descent visibly heads deeper into range.   */
+function WeightTrajectory({ start, goal, weeks = 12, healthyCeil }) {
+  const xL = 30, xR = 330, yT = 16, yB = 104;
+  const wTop = Math.max(start, healthyCeil) + 1;
+  const wBot = goal - 1;
+  const X = (wk) => xL + (wk / weeks) * (xR - xL);
+  const Y = (w) => yT + ((wTop - w) / (wTop - wBot)) * (yB - yT);
+  const ss = (t) => t * t * (3 - 2 * t);                       // smoothstep ease
+  const pts = Array.from({ length: weeks + 1 }, (_, k) => [X(k), Y(start - (start - goal) * ss(k / weeks))]);
+  const line = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ");
+  const area = `${line} L ${X(weeks).toFixed(1)} ${yB} L ${X(0).toFixed(1)} ${yB} Z`;
+  const yCeil = Y(healthyCeil);
+  return (
+    <svg viewBox="0 0 360 130" className="w-full" style={{ height: "auto" }} aria-hidden>
+      <defs>
+        <linearGradient id="wtArea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#9B8573" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="#9B8573" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <rect x={xL} y={yCeil} width={xR - xL} height={yB - yCeil} fill="#8D9A84" opacity="0.10" />
+      <line x1={xL} x2={xR} y1={yCeil} y2={yCeil} stroke="#8D9A84" strokeWidth="1" strokeDasharray="3 4" />
+      <text x={xR} y={yCeil - 5} fontSize="9" fill="#6B5B4B" textAnchor="end" fontFamily="var(--font-inter)">Healthy ≤ {healthyCeil} kg</text>
+      <path d={area} fill="url(#wtArea)" />
+      <path d={line} fill="none" stroke="#9B8573" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx={X(0)} cy={Y(start)} r="4.5" fill="white" stroke="#9B8573" strokeWidth="2.5" />
+      <circle cx={X(weeks)} cy={Y(goal)} r="4.5" fill="white" stroke="#8D9A84" strokeWidth="2.5" />
+      <text x={X(0) + 8} y={Y(start) - 8} fontSize="10" fontWeight="600" fill="#2F2F2B" textAnchor="start" fontFamily="var(--font-inter)">Now {start}</text>
+      <text x={X(weeks) - 8} y={Y(goal) + 16} fontSize="10" fontWeight="600" fill="#2F2F2B" textAnchor="end" fontFamily="var(--font-inter)">Goal {goal}</text>
+      {[0, weeks / 2, weeks].map((wk, i) => (
+        <text key={i} x={X(wk)} y={124} fontSize="9" fill="#6B5B4B" textAnchor={i === 0 ? "start" : i === 2 ? "end" : "middle"} fontFamily="var(--font-inter)">{wk === 0 ? "Now" : `${wk} wk`}</text>
+      ))}
+    </svg>
+  );
+}
+
 /* ══════════════════════════════════════════════════════════════════
    DEMO RESULTS PAGE
    ══════════════════════════════════════════════════════════════════ */
 export default function DemoResultsPage() {
   const d = DEMO;
+  const bmiGoal = (d.weightGoal / (d.user.height / 100) ** 2).toFixed(1);
   return (
     <Suspense fallback={null}>
       <div className="min-h-screen" style={{ background: "#F4EFE7", fontFamily: "var(--font-inter)" }}>
@@ -348,6 +387,29 @@ export default function DemoResultsPage() {
                         <span className="w-3 h-1 rounded-sm" style={{ background: "rgba(46,139,107,0.18)" }} />
                         Healthy {d.healthyRange[0]}–{d.healthyRange[1]} kg
                       </span>
+                    </div>
+                  </div>
+                  {/* Projected path over time */}
+                  <div className="pt-6" style={{ borderTop: "1px dashed var(--border-hex)" }}>
+                    <div className="text-[10px] font-medium uppercase tracking-[0.14em] mb-2" style={{ color: "var(--muted-fg)" }}>PROJECTED PATH</div>
+                    <WeightTrajectory start={d.weight} goal={d.weightGoal} weeks={12} healthyCeil={d.healthyRange[1]} />
+                  </div>
+                  {/* Supporting figures */}
+                  <div className="grid grid-cols-3 gap-3 pt-5" style={{ borderTop: "1px dashed var(--border-hex)" }}>
+                    <div>
+                      <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>To lose</div>
+                      <div className="text-[22px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{d.weightDelta}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>kg</span></div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>Weekly rate</div>
+                      <div className="text-[22px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>~{(d.weightDelta / 12).toFixed(1)}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>kg/wk</span></div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>BMI at goal</div>
+                      <div className="flex items-baseline gap-1.5 mt-1">
+                        <span className="text-[22px] font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{bmiGoal}</span>
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: "#EAEFE6", color: "#1F6B50" }}>Healthy</span>
+                      </div>
                     </div>
                   </div>
                 </div>
