@@ -5,6 +5,12 @@ These images power the "spectrum" filmstrips on the results page
 each banded metric. Until a file is present, the strip renders a width-scaled
 brand silhouette as a graceful fallback, so the page always looks intentional.
 
+> **Status:** all 12 stage photos are present. They were generated with
+> Higgsfield (Nano Banana) from a single base figure reused as a reference, so
+> it's the same male subject with identical framing, pose, lighting and warm
+> cream background across the whole set — only the body composition changes
+> per stage. 3:4 portrait WebP, ~1493×2000.
+
 ## Expected files (drop them here)
 
 Body fat (male reference, lean → heavy):
