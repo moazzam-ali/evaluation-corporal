@@ -229,7 +229,7 @@ function HydrationColumn({ pct, ideal = 60, min = 40, max = 70 }) {
   const fill = ((pct - min) / (max - min)) * 100;
   const ref = ((ideal - min) / (max - min)) * 100;
   return (
-    <div className="relative shrink-0 overflow-hidden" style={{ width: 46, height: 168, borderRadius: 24, background: "rgba(47,47,43,0.04)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
+    <div className="relative shrink-0 overflow-hidden" style={{ width: 44, height: 150, borderRadius: 22, background: "rgba(47,47,43,0.04)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
       <div className="absolute left-0 right-0 bottom-0" style={{ height: `${fill}%`, background: "linear-gradient(180deg, #D8C39A, #C7A977)" }} />
       <div className="absolute left-0 right-0" style={{ bottom: `${ref}%`, borderTop: "1.5px dashed rgba(47,47,43,0.45)" }} />
     </div>
@@ -418,67 +418,60 @@ export default function DemoResultsPage() {
 
             {/* Row 3: LBM + TBW */}
             <div className="grid md:grid-cols-2 gap-4">
-              <Card>
+              <Card className="flex flex-col">
                 <CardHeader title="Body Composition" action="Lean vs fat" />
-                <div className="flex items-center gap-6">
-                  <div className="shrink-0" style={{ width: 136, height: 136 }}>
+                <div className="flex-1 flex items-center gap-7 py-1">
+                  <div className="shrink-0" style={{ width: 132, height: 132 }}>
                     <CompositionRing leanPct={d.lbmPct} />
                   </div>
-                  <div className="flex-1 min-w-0 flex flex-col gap-3.5">
-                    {[
-                      { c: "#8D9A84", k: "Lean", pct: d.lbmPct, kg: d.lbmKg, chip: "+0.8 kg" },
-                      { c: "#9B8573", k: "Fat", pct: d.bodyFat, kg: fatKg },
-                    ].map(r => (
-                      <div key={r.k} className="flex items-center gap-2.5">
-                        <span className="w-2.5 h-2.5 rounded-sm" style={{ background: r.c }} />
-                        <span className="text-[13px] font-medium" style={{ color: "var(--ink)" }}>{r.k}</span>
-                        <span className="ml-auto text-[16px] font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{r.pct}%</span>
-                        <span className="text-[12px] w-[52px] text-right" style={{ color: "var(--muted-fg)" }}>{r.kg} kg</span>
-                        {r.chip
-                          ? <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#EAEFE6", color: "#1F6B50" }}>{r.chip}</span>
-                          : <span className="w-[46px]" aria-hidden />}
-                      </div>
-                    ))}
-                    <div className="text-[11px] mt-1 pt-3" style={{ color: "var(--muted-fg)", borderTop: "1px dashed var(--border-hex)" }}>
-                      of which body water {d.tbwPct}% · part of lean mass
+                  <div className="flex-1 min-w-0">
+                    <div className="grid items-center gap-x-3 gap-y-3.5" style={{ gridTemplateColumns: "1fr auto 56px 58px" }}>
+                      {[
+                        { c: "#8D9A84", k: "Lean", pct: d.lbmPct, kg: d.lbmKg, chip: "+0.8 kg" },
+                        { c: "#9B8573", k: "Fat", pct: d.bodyFat, kg: fatKg, chip: null },
+                      ].flatMap(r => [
+                        <div key={r.k + "-l"} className="flex items-center gap-2.5 text-[13px] font-medium" style={{ color: "var(--ink)" }}>
+                          <span className="w-2.5 h-2.5 rounded-sm" style={{ background: r.c }} />{r.k}
+                        </div>,
+                        <div key={r.k + "-p"} className="text-[17px] font-semibold text-right" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{r.pct}%</div>,
+                        <div key={r.k + "-k"} className="text-[12px] text-right" style={{ color: "var(--muted-fg)" }}>{r.kg} kg</div>,
+                        <div key={r.k + "-c"} className="text-right">
+                          {r.chip && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#EAEFE6", color: "#1F6B50" }}>{r.chip}</span>}
+                        </div>,
+                      ])}
                     </div>
+                    <p className="text-[11px] mt-4 pt-3" style={{ color: "var(--muted-fg)", borderTop: "1px dashed var(--border-hex)" }}>
+                      of which body water {d.tbwPct}% · part of lean mass
+                    </p>
                   </div>
                 </div>
-                <p className="text-[13px] leading-relaxed mt-5" style={{ color: "var(--muted-fg)" }}>Lean mass up 0.8 kg since last assessment — the deficit is sparing muscle.</p>
+                <p className="text-[13px] leading-relaxed mt-6" style={{ color: "var(--muted-fg)" }}>Lean mass up 0.8 kg since last assessment — the deficit is sparing muscle.</p>
               </Card>
-              <Card>
+              <Card className="flex flex-col">
                 <CardHeader title="Total Body Water" action="Hydration share" />
-                <div className="flex items-center gap-5">
+                <div className="flex-1 flex items-center gap-7 py-1">
                   <HydrationColumn pct={d.tbwPct} ideal={60} />
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-end gap-4">
-                      <div>
-                        <span className="text-[48px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{d.tbwPct}</span>
-                        <span className="text-base ml-1" style={{ color: "var(--muted-fg)" }}>%</span>
-                        <div className="text-[10px] font-medium uppercase tracking-[0.14em] mt-1" style={{ color: "var(--muted-fg)" }}>BODY WATER</div>
-                      </div>
-                      <div className="pb-1">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-[20px] font-semibold" style={{ fontFamily: "var(--font-inter)" }}>{d.tbwL}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>L</span></span>
-                          <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full" style={{ background: "#EFDDD5", color: "#A22A3D" }}>−1.2 L</span>
-                        </div>
-                      </div>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-[48px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{d.tbwPct}</span>
+                      <span className="text-base" style={{ color: "var(--muted-fg)" }}>%</span>
                     </div>
-                    <div className="mt-4 flex flex-col gap-1.5 text-[12px]">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-sm" style={{ background: "#C7A977" }} />
-                        <span style={{ color: "var(--ink)" }}>Now</span>
-                        <span className="ml-auto font-semibold" style={{ color: "var(--ink)" }}>{d.tbwPct}%</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="inline-block w-3 border-t border-dashed" style={{ borderColor: "rgba(47,47,43,0.45)" }} />
-                        <span style={{ color: "var(--ink)" }}>Ideal</span>
-                        <span className="ml-auto font-semibold" style={{ color: "var(--ink)" }}>60%</span>
-                      </div>
+                    <div className="text-[10px] font-medium uppercase tracking-[0.14em] mt-1.5" style={{ color: "var(--muted-fg)" }}>BODY WATER</div>
+                    <div className="flex items-baseline gap-2 mt-3">
+                      <span className="text-[18px] font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{d.tbwL}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>L</span></span>
+                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full" style={{ background: "#EFDDD5", color: "#A22A3D" }}>−1.2 L</span>
+                    </div>
+                    <div className="grid items-center gap-x-3 gap-y-2 mt-5 pt-3 text-[12px]" style={{ gridTemplateColumns: "auto 1fr auto", borderTop: "1px dashed var(--border-hex)" }}>
+                      <span className="w-2.5 h-2.5 rounded-sm" style={{ background: "#C7A977" }} />
+                      <span style={{ color: "var(--ink)" }}>Now</span>
+                      <span className="font-semibold text-right" style={{ color: "var(--ink)" }}>{d.tbwPct}%</span>
+                      <span className="inline-block w-2.5 border-t border-dashed" style={{ borderColor: "rgba(47,47,43,0.45)" }} />
+                      <span style={{ color: "var(--ink)" }}>Ideal</span>
+                      <span className="font-semibold text-right" style={{ color: "var(--ink)" }}>60%</span>
                     </div>
                   </div>
                 </div>
-                <p className="text-[13px] leading-relaxed mt-5" style={{ color: "var(--muted-fg)" }}>Below the 60% reference. Daily intake target raised to 2.5 L.</p>
+                <p className="text-[13px] leading-relaxed mt-6" style={{ color: "var(--muted-fg)" }}>Below the 60% reference. Daily intake target raised to 2.5 L.</p>
               </Card>
             </div>
           </div>
