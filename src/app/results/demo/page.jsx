@@ -138,9 +138,15 @@ function LinearRange({ value, min, max, segments, unit, caption, decimals = 1 })
         </div>
         <div className="absolute" style={{ left: `${pct(value)}%`, top: -1, transform: "translateX(-50%)", width: 2, height: 18, background: tone.fill, borderRadius: 1 }} />
         <div className="absolute left-0 right-0 top-6 flex justify-between pointer-events-none">
-          {segs.map((s, i) => (
-            <span key={i} className="text-[10px] font-medium" style={{ color: s === active ? tone.text : "var(--muted-fg)", letterSpacing: "0.04em" }}>{s.label}</span>
-          ))}
+          {segs.map((s, i) => {
+            const st = TONES[s.tone] || TONES.normal;
+            return (
+              <span key={i} className="inline-flex items-center gap-1 text-[10px] font-medium" style={{ color: s === active ? tone.text : "var(--muted-fg)", letterSpacing: "0.04em" }}>
+                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: st.fill }} />
+                {s.label}
+              </span>
+            );
+          })}
         </div>
       </div>
       {caption && <p className="text-[13px] leading-relaxed" style={{ color: "var(--muted-fg)" }}>{caption}</p>}
