@@ -20,6 +20,9 @@ export default function Navbar() {
   const searchParams = useSearchParams();
   const isScanPage = pathname === "/scan";
   const isLanding = pathname === "/";
+  const isResults = pathname.startsWith("/results");
+  // The form (scan) and results pages drop the section nav links entirely.
+  const hideNavLinks = isScanPage || isResults;
 
   const paramString = searchParams.toString();
   const scanHref = paramString ? `/scan?${paramString}` : "/scan";
@@ -47,6 +50,8 @@ export default function Navbar() {
         { label: t("landing.nav_how", "How it works"), href: "#how" },
         { label: t("landing.nav_science", "Science"), href: "#science" },
       ]
+    : hideNavLinks
+    ? []
     : [
         { label: t("nav.home", "Home"), href: "/" },
         { label: t("nav.scan", "Start Scan"), href: scanHref },
