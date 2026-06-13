@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 /**
  * StageStrip — an integrated "spectrum" filmstrip that shows how a body
@@ -37,6 +38,7 @@ function Silhouette({ scaleX = 1, color }) {
 }
 
 function StageFigure({ stage, active }) {
+  const { t } = useTranslation();
   const [imgFailed, setImgFailed] = useState(false);
   const showImg = stage.img && !imgFailed;
 
@@ -86,7 +88,7 @@ function StageFigure({ stage, active }) {
             className="inline-flex items-center gap-1 text-[8px] font-bold tracking-[0.16em] px-2 py-[3px] rounded-full leading-none"
             style={{ background: "#9B8573", color: "white" }}
           >
-            YOU
+            {t("rd.you", "YOU")}
           </span>
         )}
       </div>
@@ -105,16 +107,17 @@ function StageFigure({ stage, active }) {
   );
 }
 
-export default function StageStrip({ label = "The spectrum", stages, activeKey, caption }) {
+export default function StageStrip({ label, stages, activeKey, caption }) {
+  const { t } = useTranslation();
   return (
     <div className="mt-7 pt-6" style={{ borderTop: "1px dashed var(--border-hex, #E4D9C6)" }}>
       <div className="flex items-center justify-between mb-4">
         <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--muted-fg, #6B5B4B)" }}>
-          {label}
+          {label ?? t("rd.spectrum", "The spectrum")}
         </span>
         <span className="inline-flex items-center gap-1.5 text-[10px]" style={{ color: "var(--muted-fg, #6B5B4B)" }}>
           <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#9B8573" }} />
-          Your stage
+          {t("rd.your_stage", "Your stage")}
         </span>
       </div>
 
