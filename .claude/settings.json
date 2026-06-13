@@ -1,0 +1,12 @@
+{
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "fnf-device-auth.higgsfield.ai",
+        "higgsfield.ai",
+        "*.higgsfield.ai",
+        "*.cloudfront.net"
+      ]
+    }
+  }
+}
