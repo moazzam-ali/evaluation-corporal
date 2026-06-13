@@ -201,26 +201,25 @@ function Radar({ data }) {
   );
 }
 
-/* ── Brand body path (shared with StageStrip silhouette) ───────── */
-const BODY_PATH =
-  "M100 20 C 88 20 80 30 80 44 C 80 56 86 64 92 68 L 88 76 C 70 80 56 90 54 110 L 50 150 C 48 162 50 174 56 184 L 60 200 L 56 240 C 56 250 60 258 64 264 L 60 320 C 60 332 64 344 70 354 L 76 366 L 90 366 L 92 354 L 90 320 L 92 270 L 100 270 L 108 270 L 110 320 L 108 354 L 110 366 L 124 366 L 130 354 C 136 344 140 332 140 320 L 136 264 C 140 258 144 250 144 240 L 140 200 L 144 184 C 150 174 152 162 150 150 L 146 110 C 144 90 130 80 112 76 L 108 68 C 114 64 120 56 120 44 C 120 30 112 20 100 20 Z";
-
-/* ── Composition figure — body filled by lean vs fat share ───────
-   The body reads as a "fill gauge": lean fills the figure, fat is the
-   top slice. Labels carry the meaning, so it's a proportion cue, not an
-   anatomical map. Makes an abstract percentage instantly imaginable.   */
-function CompositionFigure({ fatPct }) {
-  const top = 20, bottom = 366;                         // body path vertical bounds
-  const divY = top + (bottom - top) * (fatPct / 100);  // fat occupies the top slice
+/* ── Composition ring — lean vs fat as an elegant donut ─────────
+   A precise vector donut reads cleaner than a filled silhouette and
+   carries the headline number in its centre. Sage = lean, taupe = fat. */
+function CompositionRing({ leanPct }) {
+  const cx = 80, cy = 80, r = 58, sw = 18;
+  const C = 2 * Math.PI * r;
+  const lean = (leanPct / 100) * C;
+  const fat = C - lean;
   return (
-    <svg viewBox="0 0 200 386" className="w-full h-full" preserveAspectRatio="xMidYMid meet" aria-hidden>
-      <defs><clipPath id="compClip"><path d={BODY_PATH} /></clipPath></defs>
-      <g clipPath="url(#compClip)">
-        <rect x="0" y="0" width="200" height="386" fill="#8D9A84" />{/* lean */}
-        <rect x="0" y="0" width="200" height={divY} fill="#9B8573" />{/* fat */}
-        <line x1="0" x2="200" y1={divY} y2={divY} stroke="#F4EFE7" strokeWidth="2.5" strokeDasharray="3 4" />
+    <svg viewBox="0 0 160 160" className="w-full h-full" aria-hidden>
+      <g transform="rotate(-90 80 80)">
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(47,47,43,0.05)" strokeWidth={sw} />
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="#8D9A84" strokeWidth={sw} strokeDasharray={`${lean} ${C - lean}`} />
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="#9B8573" strokeWidth={sw} strokeDasharray={`${fat} ${C - fat}`} strokeDashoffset={-lean} />
       </g>
-      <path d={BODY_PATH} fill="none" stroke="rgba(47,47,43,0.16)" strokeWidth="1.5" />
+      <text x="80" y="78" textAnchor="middle" fontSize="30" fontWeight="600" fill="#2F2F2B" fontFamily="var(--font-inter)">
+        {leanPct}<tspan fontSize="14">%</tspan>
+      </text>
+      <text x="80" y="97" textAnchor="middle" fontSize="9" letterSpacing="2" fontWeight="600" fill="#6B5B4B" fontFamily="var(--font-inter)">LEAN</text>
     </svg>
   );
 }
@@ -281,6 +280,7 @@ function WeightTrajectory({ start, goal, weeks = 12, healthyCeil }) {
 export default function DemoResultsPage() {
   const d = DEMO;
   const bmiGoal = (d.weightGoal / (d.user.height / 100) ** 2).toFixed(1);
+  const fatKg = (d.weight * d.bodyFat / 100).toFixed(1);
   return (
     <Suspense fallback={null}>
       <div className="min-h-screen" style={{ background: "#F4EFE7", fontFamily: "var(--font-inter)" }}>
@@ -420,36 +420,27 @@ export default function DemoResultsPage() {
             <div className="grid md:grid-cols-2 gap-4">
               <Card>
                 <CardHeader title="Body Composition" action="Lean vs fat" />
-                <div className="flex items-center gap-5">
-                  <div className="shrink-0" style={{ width: 104, height: 168 }}>
-                    <CompositionFigure fatPct={d.bodyFat} />
+                <div className="flex items-center gap-6">
+                  <div className="shrink-0" style={{ width: 136, height: 136 }}>
+                    <CompositionRing leanPct={d.lbmPct} />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-end gap-4">
-                      <div>
-                        <span className="text-[48px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{d.lbmPct}</span>
-                        <span className="text-base ml-1" style={{ color: "var(--muted-fg)" }}>%</span>
-                        <div className="text-[10px] font-medium uppercase tracking-[0.14em] mt-1" style={{ color: "var(--muted-fg)" }}>LEAN MASS</div>
+                  <div className="flex-1 min-w-0 flex flex-col gap-3.5">
+                    {[
+                      { c: "#8D9A84", k: "Lean", pct: d.lbmPct, kg: d.lbmKg, chip: "+0.8 kg" },
+                      { c: "#9B8573", k: "Fat", pct: d.bodyFat, kg: fatKg },
+                    ].map(r => (
+                      <div key={r.k} className="flex items-center gap-2.5">
+                        <span className="w-2.5 h-2.5 rounded-sm" style={{ background: r.c }} />
+                        <span className="text-[13px] font-medium" style={{ color: "var(--ink)" }}>{r.k}</span>
+                        <span className="ml-auto text-[16px] font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{r.pct}%</span>
+                        <span className="text-[12px] w-[52px] text-right" style={{ color: "var(--muted-fg)" }}>{r.kg} kg</span>
+                        {r.chip
+                          ? <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#EAEFE6", color: "#1F6B50" }}>{r.chip}</span>
+                          : <span className="w-[46px]" aria-hidden />}
                       </div>
-                      <div className="pb-1">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-[20px] font-semibold" style={{ fontFamily: "var(--font-inter)" }}>{d.lbmKg}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>kg</span></span>
-                          <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full" style={{ background: "#EAEFE6", color: "#1F6B50" }}>+0.8 kg</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-4 flex flex-col gap-1.5">
-                      {[
-                        { c: "#8D9A84", k: "Lean", v: `${d.lbmPct}%` },
-                        { c: "#9B8573", k: "Fat", v: `${d.bodyFat}%` },
-                      ].map(r => (
-                        <div key={r.k} className="flex items-center gap-2 text-[12px]">
-                          <span className="w-2.5 h-2.5 rounded-sm" style={{ background: r.c }} />
-                          <span style={{ color: "var(--ink)" }}>{r.k}</span>
-                          <span className="ml-auto font-semibold" style={{ color: "var(--ink)" }}>{r.v}</span>
-                        </div>
-                      ))}
-                      <div className="text-[11px] mt-0.5" style={{ color: "var(--muted-fg)" }}>of which body water {d.tbwPct}% · part of lean</div>
+                    ))}
+                    <div className="text-[11px] mt-1 pt-3" style={{ color: "var(--muted-fg)", borderTop: "1px dashed var(--border-hex)" }}>
+                      of which body water {d.tbwPct}% · part of lean mass
                     </div>
                   </div>
                 </div>
