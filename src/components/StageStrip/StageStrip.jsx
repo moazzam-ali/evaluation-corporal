@@ -76,10 +76,14 @@ function StageFigure({ stage, active }) {
             </div>
           </div>
         )}
+      </div>
 
+      {/* Active marker sits below the figure (never over the face). The fixed
+          height reserves space on every card so the labels stay aligned. */}
+      <div className="flex items-center justify-center" style={{ height: 16, marginTop: 8 }}>
         {active && (
           <span
-            className="absolute top-2 left-1/2 -translate-x-1/2 text-[8px] font-bold tracking-[0.16em] px-2 py-[3px] rounded-full"
+            className="inline-flex items-center gap-1 text-[8px] font-bold tracking-[0.16em] px-2 py-[3px] rounded-full leading-none"
             style={{ background: "#9B8573", color: "white" }}
           >
             YOU
@@ -87,7 +91,7 @@ function StageFigure({ stage, active }) {
         )}
       </div>
 
-      <div className="mt-2.5 text-center px-0.5">
+      <div className="mt-1.5 text-center px-0.5">
         <div className="text-[10.5px] font-semibold leading-tight" style={{ color: active ? "var(--ink, #2F2F2B)" : "var(--muted-fg, #6B5B4B)" }}>
           {stage.label}
         </div>
