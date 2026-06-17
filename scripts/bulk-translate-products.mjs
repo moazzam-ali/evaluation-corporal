@@ -10,13 +10,19 @@
  * Requires: DATABASE_URL and OPENAI_API_KEY in .env.local
  */
 
-import "dotenv/config";
+import { config } from "dotenv";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import pg from "pg";
 import OpenAI from "openai";
 
-const LANGUAGES = ["es", "fr", "de", "it", "tr", "in", "pt"];
+const __dirname = dirname(fileURLToPath(import.meta.url));
+config({ path: join(__dirname, "..", ".env.local") });
+
+// Base product content is Spanish. Translate into all other supported languages.
+const LANGUAGES = ["en", "fr", "de", "it", "tr", "in", "pt"];
 const LANGUAGE_NAMES = {
-  es: "Spanish", fr: "French", de: "German",
+  en: "English", fr: "French", de: "German",
   it: "Italian", tr: "Turkish", in: "Hindi", pt: "Portuguese",
 };
 
@@ -38,17 +44,17 @@ async function translateProduct(englishContent, targetLanguage) {
     messages: [
       {
         role: "system",
-        content: `You are a professional translator specializing in skincare and beauty products. Translate the following product content from English to ${langName}.
+        content: `You are a professional translator specializing in nutrition and wellness products (Herbalife product line). Translate the following product content from Spanish to ${langName}.
 
 Rules:
-- Preserve scientific/chemical ingredient names that are universally recognized (e.g., "Niacinamide", "Hyaluronic Acid", "Retinol", "CoQ10")
+- Preserve scientific/chemical ingredient names that are universally recognized (e.g., "CoQ10", "Omega-3", "EPA", "DHA")
 - Translate the "role" descriptions of ingredients naturally
 - Keep the exact same JSON structure as the input
 - "benefits" is an array of strings — translate each string
 - "key_ingredients" is an array of objects with "name" and "role" — translate both fields (but keep universal scientific names)
 - "how_to_use" is a single string — translate it
 - "cautions" is an array of strings — translate each string
-- "name" is the product display name — translate it naturally
+- "name" is the product display name — translate it naturally for the target market
 - Output valid JSON only, no markdown`,
       },
       { role: "user", content: JSON.stringify(englishContent) },
@@ -95,11 +101,7 @@ async function main() {
       cautions: product.cautions || [],
     };
 
-    // Determine which languages this product needs
-    const productLangs = product.languages || ["en"];
-    const targetLangs = LANGUAGES.filter((lang) => productLangs.includes(lang));
-
-    for (const lang of targetLangs) {
+    for (const lang of LANGUAGES) {
       const key = `${product.id}:${lang}`;
       if (!force && existing.has(key)) {
         skipped++;
