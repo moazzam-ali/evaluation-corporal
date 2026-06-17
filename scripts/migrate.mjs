@@ -2,7 +2,6 @@
 // Creates all DB tables and seeds bots + admin password.
 
 import { Pool } from "pg";
-import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import bcrypt from "bcryptjs";
@@ -133,10 +132,6 @@ const BOTS = [
   [20, 'es', 'coach_hatipikal_bot',    '6630724535:AAE98vXCdDYhD8noyqCkYWfeMFFEJaPjhSk'],
 ];
 
-const METRIC_PRODUCT_MAP = JSON.parse(
-  readFileSync(join(__dirname, "..", "src", "data", "metric-product-map.json"), "utf-8")
-);
-
 async function main() {
   const client = await pool.connect();
   try {
@@ -159,20 +154,8 @@ async function main() {
     }
     console.log(`✅ Seeded ${BOTS.length} bots\n`);
 
-    console.log("🔗 Seeding metric-product map...");
-    let mapCount = 0;
-    for (const [metricId, productIds] of Object.entries(METRIC_PRODUCT_MAP)) {
-      for (let i = 0; i < productIds.length; i++) {
-        await client.query(
-          `INSERT INTO metric_product_map (metric_id, product_id, priority, language)
-           VALUES ($1, $2, $3, '_all_')
-           ON CONFLICT DO NOTHING`,
-          [metricId, productIds[i], i + 1]
-        );
-        mapCount++;
-      }
-    }
-    console.log(`✅ Seeded ${mapCount} metric-product associations\n`);
+    // NOTE: the metric → product map is seeded by scripts/seed-products.mjs,
+    // after products exist, so its foreign key to products is satisfied.
 
     console.log("🔐 Setting up default admin (admin@beautyandglow.ai / changeme123)...");
     const passwordHash = await bcrypt.hash("changeme123", 10);
@@ -187,11 +170,10 @@ async function main() {
     console.log("🎉 Migration complete!");
     console.log("\n📋 Summary:");
     const r1 = await client.query("SELECT COUNT(*) FROM bots");
-    const r2 = await client.query("SELECT COUNT(*) FROM metric_product_map");
     const r3 = await client.query("SELECT COUNT(*) FROM admins");
     console.log(`   Bots: ${r1.rows[0].count}`);
-    console.log(`   Metric-product mappings: ${r2.rows[0].count}`);
     console.log(`   Admins: ${r3.rows[0].count}`);
+    console.log(`   (Products + metric map are seeded by: npm run db:seed)`);
     console.log(`\n   Default admin login:`);
     console.log(`     Email: admin@beautyandglow.ai`);
     console.log(`     Password: changeme123`);
