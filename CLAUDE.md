@@ -34,9 +34,8 @@ Individual steps: `npm run db:migrate`, `npm run db:seed`.
   `bots` + default `admin`. `seed-products.mjs` seeds `products` from
   `src/data/products.json` and then the `metric_product_map` from
   `src/data/metric-product-map.json` (kept after products so the FK holds).
-- **Default admin:** `admin@beautyandglow.ai` / `changeme123` — change it from
-  the admin panel after first login. (Email is a leftover default; fine to
-  change.)
+- **Default admin:** `admin@evaluation-corporal.ai` / `admin1234` — change it
+  from the admin panel after first login.
 
 ## Tables (all created by migrate.mjs)
 `analyses`, `forms`, `products`, `product_translations`, `metric_product_map`,
