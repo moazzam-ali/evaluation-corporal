@@ -57,10 +57,11 @@ Individual steps: `npm run db:migrate`, `npm run db:seed`.
 hydration_target, bmr, calorie_target, protein_target, carbs_target, fat_target`.
 
 ## Notes / TODO
-- **Seed catalog is starter data.** `src/data/products.json` is a generic,
-  brand-neutral nutrition catalog (type `ingestible`) adapted for body
-  composition; replace with the real catalog (edit the JSON or use the admin
-  panel) before launch.
+- **Product catalog** = real Herbalife line (13 SKUs) in `src/data/products.json`,
+  built from the official ES product labels; pack-shot images in
+  `public/images/products/`. Base content is **Spanish**; per-language
+  translations can be generated later (admin bulk-translate or
+  `product_translations`).
 - **Telegram tokens are still hardcoded** in `scripts/migrate.mjs` and committed
   to git — rotate them and move to a secret store when convenient.
 - i18n: after adding any `t("key", "default")`, run `node scripts/sync-en-locale.mjs`,
