@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "member_details": "*Beauty & Glow AI — Neuer Scan*\n━━━━━━━━━━━━━━━━━━━━\n\n*Kundenprofil*\n\nName: {name} {surname}\nE-Mail: {email}\nTelefon: {phone}\nGeburtsdatum: {birthDate}\nStandort: {city}, {country}",
+    "member_details": "*Evaluación Corporal — Neuer Scan*\n━━━━━━━━━━━━━━━━━━━━\n\n*Kundenprofil*\n\nName: {name} {surname}\nE-Mail: {email}\nTelefon: {phone}\nGeburtsdatum: {birthDate}\nStandort: {city}, {country}",
     "questionnaire_details": "*Hautfragebogen*\n━━━━━━━━━━━━━━━━━━━━\n\n*Ziele und Anliegen*\nAnliegen: {skinConcerns}\nPriorität: {priorityConcern}\nZonen: {improvementZones}\n\n*Hautprofil*\nTyp: {skinType}\nGefühl: {skinFeelGeneral}\nTagesende: {skinFeelEndOfDay}\n\n*Aktuelle Routine*\nHäufigkeit: {routineFrequency}\nProdukte: {productsUsed}\nUnverzichtbar: {essentialProduct}\nFehlt: {missingProduct}\nNahrungsergänzung: {supplements}\n\n*Empfindlichkeit*\nReaktionen: {reactionLevel}\nAnzeichen: {recentSigns}\n\n*Lebensstil*\nSonnenschutz: {sunscreenUse}\nMake-up: {makeupFrequency}\nSchlaf: {sleepHours}\nStress: {stressImpact}\nWasser: {waterIntake}\n\n*Erfahrung und Ziele*\nHistorie: {treatmentHistory}\nFrustrationen: {frustrations}\nSucht nach: {lookingFor}\nMöchte Empfehlung: {wantRoutineRecommendation}\nBudget: {budgetLevel}",
     "analysis_results": "*Analyseergebnisse*\n━━━━━━━━━━━━━━━━━━━━\n\nGesamtbewertung: *{overall_score}%*\nHauttyp: *{skin_type_result}*\n\n*Metrik-Übersicht:*\n{metrics}\n\n*Zusammenfassung:*\n{summary}",
-    "analysis_link": "*Vollständigen Bericht Anzeigen*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
+    "analysis_link": "*Vollständigen Bericht Anzeigen*\n━━━━━━━━━━━━━━━━━━━━\nhttps://evaluacion-corporal.vercel.app/results/{id}?l={lng}",
     "buttons": {
       "view_report": "📋 Bericht ansehen",
       "sms": "✉️ SMS senden",

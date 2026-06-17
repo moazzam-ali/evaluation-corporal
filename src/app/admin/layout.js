@@ -20,7 +20,7 @@ export default async function AdminLayout({ children }) {
         <nav className="border-b bg-background">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
             <Link href="/admin/products" className="text-sm font-bold">
-              Beauty &amp; Glow Admin
+              Evaluación Corporal Admin
             </Link>
             <div className="flex items-center gap-4 text-sm">
               <Link

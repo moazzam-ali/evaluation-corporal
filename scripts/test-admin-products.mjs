@@ -22,13 +22,13 @@
  *
  * Optional env vars:
  *   BASE_URL     — default http://localhost:3000
- *   ADMIN_EMAIL  — default admin@beautyandglow.ai
- *   ADMIN_PASS   — default changeme123
+ *   ADMIN_EMAIL  — default admin@evaluation-corporal.ai
+ *   ADMIN_PASS   — default admin1234
  */
 
 const BASE = process.env.BASE_URL || "http://localhost:3000";
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@beautyandglow.ai";
-const ADMIN_PASS = process.env.ADMIN_PASS || "changeme123";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@evaluation-corporal.ai";
+const ADMIN_PASS = process.env.ADMIN_PASS || "admin1234";
 
 const TEST_PRODUCT_ID = `__test_product_${Date.now()}`;
 
