@@ -157,13 +157,13 @@ async function main() {
     // NOTE: the metric → product map is seeded by scripts/seed-products.mjs,
     // after products exist, so its foreign key to products is satisfied.
 
-    console.log("🔐 Setting up default admin (admin@beautyandglow.ai / changeme123)...");
-    const passwordHash = await bcrypt.hash("changeme123", 10);
+    console.log("🔐 Setting up default admin (admin@evaluation-corporal.ai / admin1234)...");
+    const passwordHash = await bcrypt.hash("admin1234", 10);
     await client.query(
       `INSERT INTO admins (email, password_hash, name, role)
        VALUES ($1, $2, $3, 'admin')
        ON CONFLICT (email) DO NOTHING`,
-      ["admin@beautyandglow.ai", passwordHash, "Admin"]
+      ["admin@evaluation-corporal.ai", passwordHash, "Admin"]
     );
     console.log("✅ Default admin ready\n");
 
@@ -175,8 +175,8 @@ async function main() {
     console.log(`   Admins: ${r3.rows[0].count}`);
     console.log(`   (Products + metric map are seeded by: npm run db:seed)`);
     console.log(`\n   Default admin login:`);
-    console.log(`     Email: admin@beautyandglow.ai`);
-    console.log(`     Password: changeme123`);
+    console.log(`     Email: admin@evaluation-corporal.ai`);
+    console.log(`     Password: admin1234`);
     console.log(`   ⚠️  Change this password from the admin panel after first login.`);
   } finally {
     client.release();

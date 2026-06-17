@@ -80,6 +80,9 @@ function ScanPageInner() {
   const contactIDs = searchParams.get("c")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
   const lang = searchParams.get("l") || i18n.language || "en";
 
+  // ?sr=1 → "show results" testing toggle: skip photo, auto-analyze, redirect to results page.
+  const showResults = searchParams.get("sr") === "1";
+
   const hasRequiredParams = chatIDs.length > 0 && accountIDs.length > 0 && contactIDs.length > 0;
 
   if (!hasRequiredParams) {
@@ -228,12 +231,58 @@ function ScanPageInner() {
       toast.error(error.message || t("scan.analyze_error", "Could not analyze your photo. We saved your form — your coach will follow up."));
       // Fall through to the existing "we'll contact you" screen so the
       // submission is not lost.
+      if (showResults) {
+        // Still try to show results without vision — run analysis without image.
+        try {
+          const fallbackRes = await fetch("/api/analyze-body", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ formData: savedFormData, image: null, language: lang, formId: savedFormId }),
+          });
+          const fallbackResult = await fallbackRes.json();
+          if (fallbackRes.ok && fallbackResult.id) {
+            router.push(`/results/${fallbackResult.id}?lang=${lang}`);
+            return;
+          }
+        } catch (_) { /* fall through to completion screen */ }
+      }
       setPhotoPhase(false);
       setSubmitComplete(true);
     }
   };
 
-  const onSkipPhoto = () => {
+  const onSkipPhoto = async () => {
+    // When showResults is on, still run analysis (without photo) and redirect.
+    if (showResults && savedFormData) {
+      setPhotoPhase(false);
+      setIsSubmitting(true);
+      const cancel = runAnalyzingAnimation([400, 1600, 3200, 5000, 7000]);
+      try {
+        const res = await fetch("/api/analyze-body", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            formData: savedFormData,
+            image: null,
+            language: lang,
+            formId: savedFormId,
+          }),
+        });
+        const result = await res.json();
+        if (!res.ok || !result.id) throw new Error(result.error || "Analysis failed");
+        setAnalysisProgress(100);
+        setActiveAnalysisStep(5);
+        await new Promise((r) => setTimeout(r, 700));
+        cancel();
+        router.push(`/results/${result.id}?lang=${lang}`);
+      } catch (err) {
+        cancel();
+        setIsSubmitting(false);
+        setSubmitComplete(true);
+        toast.error(err.message || t("common.error"));
+      }
+      return;
+    }
     setPhotoPhase(false);
     setSubmitComplete(true);
   };
