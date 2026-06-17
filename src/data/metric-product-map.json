@@ -1,14 +1,14 @@
 {
-  "bmi": ["plant_meal_m02", "fiber_f06", "protein_blend_p01"],
-  "body_fat": ["plant_meal_m02", "protein_blend_p01", "fiber_f06"],
-  "lean_mass": ["protein_blend_p01", "recovery_r08", "multivit_v04"],
-  "waist_hip_ratio": ["omega3_o03", "fiber_f06", "plant_meal_m02"],
-  "healthy_weight": ["plant_meal_m02", "fiber_f06"],
-  "total_body_water": ["hydrate_h05"],
-  "hydration_target": ["hydrate_h05"],
-  "bmr": ["multivit_v04", "preworkout_pw07"],
-  "calorie_target": ["plant_meal_m02", "preworkout_pw07"],
-  "protein_target": ["protein_blend_p01", "recovery_r08"],
-  "carbs_target": ["preworkout_pw07", "plant_meal_m02"],
-  "fat_target": ["omega3_o03"]
+  "bmi": ["formula1_4466", "oat_apple_fiber_2554", "phyto_complete_567k", "fiber_concentrate_201k"],
+  "body_fat": ["formula1_4466", "phyto_complete_567k", "protein_drink_2600", "oat_apple_fiber_2554"],
+  "lean_mass": ["protein_drink_2600", "formula1_4466", "restore_1424"],
+  "waist_hip_ratio": ["betaheart_0267", "omega3_0043", "niteworks_3150"],
+  "healthy_weight": ["formula1_4466", "oat_apple_fiber_2554", "fiber_concentrate_201k"],
+  "total_body_water": ["aloe_1065", "fiber_concentrate_201k"],
+  "hydration_target": ["aloe_1065", "fiber_concentrate_201k"],
+  "bmr": ["phyto_complete_567k", "herbal_tea_167k"],
+  "calorie_target": ["formula1_4466", "protein_drink_2600"],
+  "protein_target": ["protein_drink_2600", "formula1_4466", "restore_1424"],
+  "carbs_target": ["oat_apple_fiber_2554", "fiber_concentrate_201k"],
+  "fat_target": ["omega3_0043", "betaheart_0267"]
 }
