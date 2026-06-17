@@ -1,191 +1,367 @@
 [
   {
-    "id": "protein_blend_p01",
-    "sku": "P01",
-    "name": "Whey Protein Blend",
-    "category": "Protein",
+    "id": "formula1_4466",
+    "sku": "4466",
+    "name": "Fórmula 1",
+    "category": "Sustitutivo de comida",
     "type": "ingestible",
-    "concernCategory": "Lean mass & recovery",
-    "size": "500 g / 17.6 oz",
-    "image": "/images/products/whey-protein-blend.png",
-    "concerns": ["protein_intake", "lean_mass", "muscle_recovery", "body_fat"],
+    "concernCategory": "Control de peso",
+    "size": "550 g (21 raciones)",
+    "image": "/images/products/formula1.jpg",
+    "concerns": ["control_de_peso", "proteinas", "comida_equilibrada", "bmi", "body_fat"],
     "benefits": [
-      "High-quality protein to support lean muscle maintenance during a deficit",
-      "Supports post-exercise recovery",
-      "Helps you reach a higher daily protein target",
-      "Low in sugar"
+      "Sustitutivo de comida para el control de peso, elaborado con proteína de soja de alta calidad",
+      "Aporta 25 vitaminas y minerales y alto contenido en proteínas",
+      "Contiene vitamina D, que contribuye al funcionamiento normal del sistema inmunitario",
+      "Con vitamina C, que ayuda a disminuir el cansancio y la fatiga",
+      "Apto para veganos, sin gluten, sin colorantes ni aromas artificiales"
     ],
     "keyIngredients": [
-      { "name": "Whey Protein Isolate", "role": "Complete protein for muscle support and satiety" },
-      { "name": "BCAAs (Leucine, Isoleucine, Valine)", "role": "Supports muscle recovery" },
-      { "name": "Digestive Enzymes", "role": "Aids protein digestion" }
+      { "name": "Proteína aislada de soja", "role": "Proteína de alta calidad que contribuye al mantenimiento de la masa muscular" },
+      { "name": "Fibra de avena e inulina", "role": "Aportan fibra a la dieta diaria" },
+      { "name": "Mezcla de 25 vitaminas y minerales", "role": "Apoyo nutricional completo" }
     ],
-    "howToUse": "Mix 1 scoop with 250 ml of water or milk. Take within 30 minutes after training or as a protein top-up.",
-    "cautions": ["Not a substitute for a varied diet", "Consult a professional if pregnant or on medication"],
+    "howToUse": "Mezclar 2 cucharadas (26 g) con 250 ml de leche semidesnatada fría o bebida de soja enriquecida. Para control de peso, sustituir dos comidas al día; para mantenimiento, sustituir una comida al día.",
+    "cautions": [
+      "Usar en el marco de una dieta hipocalórica variada y equilibrada con actividad física regular",
+      "Ingerir una cantidad adecuada de líquidos a lo largo del día",
+      "Consultar al médico antes de iniciar un programa de control de peso"
+    ],
+    "routineStep": { "time": "morning", "order": 1 }
+  },
+  {
+    "id": "protein_drink_2600",
+    "sku": "2600",
+    "name": "Bebida con Proteínas en Polvo",
+    "category": "Proteína",
+    "type": "ingestible",
+    "concernCategory": "Proteínas y masa muscular",
+    "size": "588 g (21 raciones)",
+    "image": "/images/products/protein-drink-mix.jpg",
+    "concerns": ["proteinas", "lean_mass", "body_fat", "saciedad"],
+    "benefits": [
+      "Bebida con alto contenido en proteínas para un impulso rápido a lo largo del día",
+      "Aporta 15 g de proteína de alta calidad y 108 kcal por ración",
+      "Las proteínas contribuyen a que aumente la masa muscular",
+      "Cada ración aporta 22 vitaminas y minerales (vitaminas B y cobre para el metabolismo energético; zinc y manganeso frente al daño oxidativo)",
+      "Apto para vegetarianos, sin azúcar añadido"
+    ],
+    "keyIngredients": [
+      { "name": "Proteína aislada de soja (47%)", "role": "Proteína de alta calidad para la masa muscular" },
+      { "name": "Caseinato de calcio (leche)", "role": "Fuente de proteína de digestión lenta" },
+      { "name": "22 vitaminas y minerales", "role": "Apoyo al metabolismo energético y antioxidante" }
+    ],
+    "howToUse": "Mezclar 2 cucharadas (28 g) con 250 ml de agua fría. Tomar a media mañana o a media tarde para cubrir las necesidades diarias de proteínas.",
+    "cautions": [
+      "Este producto no es adecuado como sustitutivo de una comida",
+      "No superar la dosis diaria recomendada",
+      "Contiene soja y leche"
+    ],
     "routineStep": { "time": "morning", "order": 2 }
   },
   {
-    "id": "plant_meal_m02",
-    "sku": "M02",
-    "name": "Plant-Based Meal Shake",
-    "category": "Meal Replacement",
+    "id": "herbal_tea_167k",
+    "sku": "167K",
+    "name": "Bebida Instantánea de Extracto de Té",
+    "category": "Bebida de té",
     "type": "ingestible",
-    "concernCategory": "Weight management",
-    "size": "750 g / 26.4 oz",
-    "image": "/images/products/plant-meal-shake.png",
-    "concerns": ["weight_management", "body_fat", "calorie_control", "bmi"],
+    "concernCategory": "Energía y metabolismo",
+    "size": "51 g (30 raciones)",
+    "image": "/images/products/herbal-tea.jpg",
+    "concerns": ["energia", "metabolismo", "bmr", "hidratacion"],
     "benefits": [
-      "Balanced meal replacement to support a calorie deficit",
-      "Plant protein plus fibre to help you feel full",
-      "Supports gradual, sustainable weight management",
-      "Includes added vitamins and minerals"
+      "Bebida deliciosa con cafeína e ingredientes botánicos para impulsar tu día",
+      "50 mg de cafeína por ración para ayudar a la sensación de energía",
+      "Elaborada con extractos de té verde y té negro orange pekoe",
+      "Solo 6 kcal por ración; se puede disfrutar caliente o fría"
     ],
     "keyIngredients": [
-      { "name": "Pea & Rice Protein", "role": "Plant protein for satiety and lean mass" },
-      { "name": "Inulin Fibre", "role": "Promotes fullness and digestive health" },
-      { "name": "Vitamin & Mineral Blend", "role": "Rounds out the meal nutritionally" }
+      { "name": "Extracto de hoja de té verde (17,7%)", "role": "Aporta antioxidantes y cafeína natural" },
+      { "name": "Extracto de té orange pekoe (4,7%)", "role": "Sabor y cafeína" },
+      { "name": "Cafeína, hibisco y cardamomo", "role": "Impulso de energía y aroma" }
     ],
-    "howToUse": "Blend 2 scoops with 300 ml of water or plant milk to replace one meal per day.",
-    "cautions": ["Use as part of a calorie-controlled diet", "Not intended as the sole source of nutrition"],
-    "routineStep": { "time": "morning", "order": 1 }
-  },
-  {
-    "id": "omega3_o03",
-    "sku": "O03",
-    "name": "Omega-3 Complex",
-    "category": "Essential Fatty Acids",
-    "type": "ingestible",
-    "concernCategory": "Cardiometabolic health",
-    "size": "60 softgels",
-    "image": "/images/products/omega-3-complex.png",
-    "concerns": ["cardiovascular", "cholesterol", "waist_hip_ratio", "fat_quality"],
-    "benefits": [
-      "EPA and DHA to support cardiovascular health",
-      "Supports healthy cholesterol levels already within the normal range",
-      "Contributes to normal heart function"
+    "howToUse": "Disolver 1/2 cucharadita (1,7 g) en 200-240 ml de agua caliente o fría. Tomar uno o dos vasos al día.",
+    "cautions": [
+      "Cada ración contiene 50 mg de cafeína",
+      "No superar la dosis diaria recomendada"
     ],
-    "keyIngredients": [
-      { "name": "Fish Oil (EPA + DHA)", "role": "Omega-3 fatty acids for heart health" },
-      { "name": "Vitamin E", "role": "Antioxidant that protects the oil" }
-    ],
-    "howToUse": "Take 1 softgel daily with breakfast.",
-    "cautions": ["Consult a professional if on blood-thinning medication", "Contains fish"],
     "routineStep": { "time": "morning", "order": 3 }
   },
   {
-    "id": "multivit_v04",
-    "sku": "V04",
-    "name": "Daily Multivitamin",
-    "category": "Multivitamin",
+    "id": "aloe_1065",
+    "sku": "1065",
+    "name": "Concentrado Herbal Aloe",
+    "category": "Aloe",
     "type": "ingestible",
-    "concernCategory": "Foundational nutrition",
-    "size": "90 tablets",
-    "image": "/images/products/daily-multivitamin.png",
-    "concerns": ["micronutrient_support", "energy_metabolism", "bmr"],
+    "concernCategory": "Hidratación y digestión",
+    "size": "473 ml (31 raciones)",
+    "image": "/images/products/aloe-concentrate.png",
+    "concerns": ["hydration_target", "total_body_water", "digestion"],
     "benefits": [
-      "Daily micronutrient base to fill common dietary gaps",
-      "B-vitamins contribute to normal energy-yielding metabolism",
-      "Supports overall wellbeing"
+      "Bebida refrescante para diluir, baja en calorías y sin azúcar",
+      "Elaborada con jugo de aloe vera (hoja entera) y extracto de manzanilla",
+      "Una forma agradable de aumentar la ingesta de líquidos a lo largo del día",
+      "Solo 2 kcal por ración (15 ml)"
     ],
     "keyIngredients": [
-      { "name": "B-Vitamin Complex", "role": "Supports energy metabolism" },
-      { "name": "Vitamin D3", "role": "Supports bone and immune health" },
-      { "name": "Zinc & Magnesium", "role": "Support normal metabolic function" }
+      { "name": "Jugo de aloe vera purificado - hoja entera (40%)", "role": "Ingrediente principal de la bebida" },
+      { "name": "Extracto de manzanilla (0,03%)", "role": "Toque botánico suave" }
     ],
-    "howToUse": "Take 1 tablet daily with a meal.",
-    "cautions": ["Do not exceed the recommended dose", "Keep out of reach of children"],
+    "howToUse": "Agitar bien antes de usar. Mezclar 3 tapones (15 ml) con 120 ml de agua, o preparar 1 litro con 8 cucharadas (120 ml) de concentrado. Guardar en el frigorífico una vez abierto.",
+    "cautions": [
+      "Una vez abierto, conservar en el frigorífico y consumir antes de 30 días"
+    ],
     "routineStep": { "time": "morning", "order": 4 }
   },
   {
-    "id": "hydrate_h05",
-    "sku": "H05",
-    "name": "Hydration Electrolytes",
-    "category": "Hydration",
+    "id": "oat_apple_fiber_2554",
+    "sku": "2554",
+    "name": "Avena, Manzana y Fibra",
+    "category": "Fibra",
     "type": "ingestible",
-    "concernCategory": "Hydration",
-    "size": "30 sachets",
-    "image": "/images/products/hydration-electrolytes.png",
-    "concerns": ["hydration_target", "total_body_water", "electrolyte_balance"],
+    "concernCategory": "Fibra y saciedad",
+    "size": "204 g (30 raciones)",
+    "image": "/images/products/oat-apple-fiber.png",
+    "concerns": ["fibra", "weight_management", "body_fat", "bmi", "digestion"],
     "benefits": [
-      "Electrolytes to support daily hydration",
-      "Helps replace fluids lost through activity and sweat",
-      "Light flavour to make hitting your water target easier"
+      "Forma fácil y deliciosa de aumentar la ingesta diaria de fibra",
+      "5 g de fibra y solo 18 calorías por ración",
+      "Mezcla de fibras solubles e insolubles de 6 fuentes naturales (manzana, avena, maíz, cítricos, achicoria y soja)",
+      "Sin edulcorantes artificiales, sin azúcar"
     ],
     "keyIngredients": [
-      { "name": "Sodium & Potassium", "role": "Key electrolytes for fluid balance" },
-      { "name": "Magnesium", "role": "Supports normal muscle function" }
+      { "name": "Fibra de avena (28%) y fibra de manzana (24%)", "role": "Fuentes principales de fibra soluble e insoluble" },
+      { "name": "Dextrina de maíz, fibra de soja y de cítricos", "role": "Fibras complementarias" },
+      { "name": "Inulina (de achicoria)", "role": "Fibra prebiótica" }
     ],
-    "howToUse": "Dissolve 1 sachet in 500 ml of water. Drink 1–2 servings across the day toward your hydration target.",
-    "cautions": ["Part of a daily fluid plan, not a replacement for water"],
-    "routineStep": { "time": "morning", "order": 5 }
+    "howToUse": "Mezclar 1 cucharada (6,8 g) con 150 ml de agua o añadir a tu batido favorito.",
+    "cautions": [
+      "Contiene cereales con gluten y soja",
+      "Aumentar la ingesta de fibra de forma gradual"
+    ],
+    "routineStep": { "time": "evening", "order": 5 }
   },
   {
-    "id": "fiber_f06",
-    "sku": "F06",
-    "name": "Fiber Complex",
-    "category": "Fiber",
+    "id": "fiber_concentrate_201k",
+    "sku": "201K",
+    "name": "Concentrado de Fibra",
+    "category": "Fibra",
     "type": "ingestible",
-    "concernCategory": "Weight management",
-    "size": "200 g / 7 oz",
-    "image": "/images/products/fiber-complex.png",
-    "concerns": ["weight_management", "body_fat", "digestive_health", "bmi"],
+    "concernCategory": "Fibra y digestión",
+    "size": "500 ml (33 raciones)",
+    "image": "/images/products/fiber-concentrate.jpg",
+    "concerns": ["fibra", "digestion", "hidratacion", "weight_management"],
     "benefits": [
-      "Soluble fibre to support fullness between meals",
-      "Supports digestive regularity",
-      "Helps moderate appetite within a calorie-controlled plan"
+      "Bebida concentrada de fibra con calcio y vitamina C, sabor naranja y bayas de goji",
+      "3 g de fibra por ración (15 ml)",
+      "El calcio contribuye al funcionamiento normal de las enzimas digestivas",
+      "La vitamina C contribuye al funcionamiento normal del sistema inmunitario",
+      "Vegano, sin gluten, sin azúcar, con edulcorante de origen natural"
     ],
     "keyIngredients": [
-      { "name": "Oat Beta-Glucan", "role": "Soluble fibre for satiety" },
-      { "name": "Psyllium Husk", "role": "Supports digestive regularity" }
+      { "name": "Dextrina de trigo sin gluten", "role": "Fuente de fibra soluble" },
+      { "name": "Lactato y gluconato de calcio", "role": "Calcio para las enzimas digestivas" },
+      { "name": "Vitamina C, concentrado de naranja y goji", "role": "Apoyo inmunitario y sabor" }
     ],
-    "howToUse": "Mix 1 scoop with water before your two largest meals.",
-    "cautions": ["Take with plenty of water", "Introduce gradually to allow tolerance"],
-    "routineStep": { "time": "evening", "order": 2 }
+    "howToUse": "Agitar bien antes de usar. Añadir 1,5 tapones o 1 cucharada (15 ml) a agua. No mezclar con líquidos a más de 25 ºC.",
+    "cautions": [
+      "Una vez abierto, conservar en el frigorífico y consumir antes de 30 días"
+    ],
+    "routineStep": { "time": "morning", "order": 6 }
   },
   {
-    "id": "preworkout_pw07",
-    "sku": "PW07",
-    "name": "Pre-Workout Energy",
-    "category": "Performance",
+    "id": "collagen_076k",
+    "sku": "076K",
+    "name": "Collagen Skin Booster",
+    "category": "Colágeno",
     "type": "ingestible",
-    "concernCategory": "Activity & energy",
-    "size": "300 g / 10.6 oz",
-    "image": "/images/products/pre-workout-energy.png",
-    "concerns": ["activity", "energy", "calorie_target", "bmr"],
+    "concernCategory": "Belleza desde el interior",
+    "size": "171 g (30 raciones)",
+    "image": "/images/products/collagen.png",
+    "concerns": ["piel", "colageno", "antioxidante"],
     "benefits": [
-      "Supports energy and focus before training",
-      "Helps you train harder to widen your daily energy expenditure",
-      "Light caffeine plus electrolytes"
+      "Péptidos bioactivos de colágeno (VERISOL®) con vitaminas y minerales",
+      "Vitamina C que contribuye a la formación normal de colágeno para la piel",
+      "Aporta el 50% de la IR de vitaminas A, C, E, niacina y biotina",
+      "Con zinc, cobre, selenio y yodo; sabor fresa y limón"
     ],
     "keyIngredients": [
-      { "name": "Caffeine (natural)", "role": "Supports alertness and performance" },
-      { "name": "Citrulline", "role": "Supports blood flow during exercise" }
+      { "name": "Hidrolizado de colágeno (VERISOL®)", "role": "Péptidos bioactivos de colágeno" },
+      { "name": "Vitaminas A, C, E, niacina y biotina", "role": "Contribuyen a la piel normal" },
+      { "name": "Zinc, cobre, selenio y yodo", "role": "Minerales de apoyo" }
     ],
-    "howToUse": "Mix 1 scoop with 300 ml of water 20–30 minutes before exercise.",
-    "cautions": ["Contains caffeine — avoid late in the day", "Not recommended for those sensitive to stimulants"],
-    "routineStep": { "time": "morning", "order": 1 }
+    "howToUse": "Mezclar 1 cucharada (5,7 g) con 250 ml de agua una vez al día, con la comida.",
+    "cautions": [
+      "No superar la dosis diaria recomendada",
+      "Complemento alimenticio; no sustituye una dieta equilibrada"
+    ],
+    "routineStep": { "time": "morning", "order": 7 }
   },
   {
-    "id": "recovery_r08",
-    "sku": "R08",
-    "name": "Night Recovery Formula",
-    "category": "Recovery",
+    "id": "phyto_complete_567k",
+    "sku": "567K",
+    "name": "Phyto Complete",
+    "category": "Fitonutrientes",
     "type": "ingestible",
-    "concernCategory": "Lean mass & recovery",
-    "size": "30 servings",
-    "image": "/images/products/night-recovery-formula.png",
-    "concerns": ["muscle_recovery", "lean_mass", "sleep_quality", "protein_intake"],
+    "concernCategory": "Metabolismo y peso",
+    "size": "60 cápsulas (42,8 g)",
+    "image": "/images/products/phyto-complete.jpg",
+    "concerns": ["body_fat", "weight_management", "bmi", "waist_hip_ratio", "metabolismo"],
     "benefits": [
-      "Slow-release protein to support overnight muscle recovery",
-      "Supports lean mass retention during a deficit",
-      "Includes magnesium to support restful sleep"
+      "Formulado con Fiit-NS™, vitamina C y cromo",
+      "La niacina y la vitamina C contribuyen al metabolismo energético normal y ayudan a disminuir el cansancio y la fatiga",
+      "El cromo contribuye a mantener niveles normales de glucosa en sangre",
+      "Contiene fitonutrientes (228 mg de polifenoles por ración)"
     ],
     "keyIngredients": [
-      { "name": "Micellar Casein", "role": "Slow-digesting protein for overnight support" },
-      { "name": "Magnesium", "role": "Supports muscle function and sleep quality" }
+      { "name": "Fiit-NS™ (63%)", "role": "Mezcla de niacina y extractos botánicos (té verde, guaraná, uva, pomelo, zanahoria negra)" },
+      { "name": "Vitamina C", "role": "Metabolismo energético y reducción de la fatiga" },
+      { "name": "Cromo", "role": "Mantenimiento de niveles normales de glucosa en sangre" }
     ],
-    "howToUse": "Mix 1 scoop with 250 ml of water or milk about 30 minutes before bed.",
-    "cautions": ["Not a substitute for a varied diet", "Contains milk"],
-    "routineStep": { "time": "evening", "order": 3 }
+    "howToUse": "Tomar 2 cápsulas al día con las comidas.",
+    "cautions": [
+      "No tomar con el estómago vacío",
+      "No apto para embarazadas, en lactancia ni menores de 18 años",
+      "No consumir junto con otros productos que contengan té verde"
+    ],
+    "routineStep": { "time": "morning", "order": 8 }
+  },
+  {
+    "id": "restore_1424",
+    "sku": "1424",
+    "name": "Restore (Herbalife24)",
+    "category": "Recuperación",
+    "type": "ingestible",
+    "concernCategory": "Recuperación y descanso",
+    "size": "30 cápsulas (21,4 g)",
+    "image": "/images/products/restore.jpg",
+    "concerns": ["recuperacion", "lean_mass", "inmunidad", "antioxidante"],
+    "benefits": [
+      "Apoyo nutricional nocturno, formulado para las necesidades de los atletas",
+      "200 mg de vitamina C, que contribuye al sistema inmunitario durante y después del ejercicio intenso",
+      "Vitamina E (100% IR) que protege las células frente al daño oxidativo",
+      "Con 150 mg de Lactium®, un péptido bioactivo de la caseína"
+    ],
+    "keyIngredients": [
+      { "name": "Lactium® (proteína de leche hidrolizada)", "role": "Péptido bioactivo derivado de la caseína" },
+      { "name": "Vitamina C (200 mg)", "role": "Apoyo al sistema inmunitario durante el ejercicio" },
+      { "name": "Vitaminas E y A", "role": "Protección celular antioxidante" }
+    ],
+    "howToUse": "Tomar una cápsula por la noche antes de irse a dormir.",
+    "cautions": [
+      "Testado para sustancias prohibidas (Informed Sport)",
+      "No superar la dosis diaria recomendada",
+      "Contiene leche"
+    ],
+    "routineStep": { "time": "evening", "order": 9 }
+  },
+  {
+    "id": "niteworks_3150",
+    "sku": "3150",
+    "name": "Niteworks",
+    "category": "Óxido nítrico",
+    "type": "ingestible",
+    "concernCategory": "Salud cardiovascular",
+    "size": "150 g (15 raciones)",
+    "image": "/images/products/niteworks.png",
+    "concerns": ["cardiovascular", "waist_hip_ratio", "antioxidante", "circulacion"],
+    "benefits": [
+      "Complemento con L-arginina, L-taurina y L-citrulina, precursores del óxido nítrico",
+      "Alto contenido de vitamina C y vitamina E, que protegen las células frente al daño oxidativo",
+      "Alto contenido de ácido fólico",
+      "Con bálsamo de limón (Melissa officinalis); sabor limón"
+    ],
+    "keyIngredients": [
+      { "name": "L-arginina (5,16 g)", "role": "Aminoácido precursor del óxido nítrico" },
+      { "name": "L-taurina y L-citrulina", "role": "Aminoácidos de apoyo" },
+      { "name": "Vitaminas C y E + ácido fólico", "role": "Protección antioxidante" }
+    ],
+    "howToUse": "Añadir 2 cucharadas medidoras (10 g) en 250 ml de agua fría. Tomar por la noche antes de acostarse.",
+    "cautions": [
+      "No apto para niños, embarazadas o en periodo de lactancia",
+      "No superar la dosis diaria recomendada"
+    ],
+    "routineStep": { "time": "evening", "order": 10 }
+  },
+  {
+    "id": "betaheart_0267",
+    "sku": "0267",
+    "name": "Beta heart",
+    "category": "Salud cardiovascular",
+    "type": "ingestible",
+    "concernCategory": "Colesterol",
+    "size": "229 g (30 raciones)",
+    "image": "/images/products/betaheart.png",
+    "concerns": ["colesterol", "cardiovascular", "fibra", "fat_target", "waist_hip_ratio"],
+    "benefits": [
+      "Polvo nutritivo con OatWell®, betaglucano de avena",
+      "Se ha demostrado que el betaglucano de avena disminuye el colesterol sanguíneo",
+      "1,5 g de betaglucanos y 3 g de fibra por cucharada; fuente de proteínas",
+      "25 kcal por cucharada, sin edulcorantes artificiales; sabor vainilla"
+    ],
+    "keyIngredients": [
+      { "name": "Salvado de avena en polvo (OatWell®, 89%)", "role": "Aporta betaglucano de avena" },
+      { "name": "Caseinato de sodio (leche)", "role": "Fuente de proteína" }
+    ],
+    "howToUse": "Agitar el bote antes de usar. Mezclar 1 o 2 cucharadas con agua, zumo o tu batido Fórmula 1 una vez al día. El efecto beneficioso se obtiene con 3 g de betaglucano de avena al día.",
+    "cautions": [
+      "La enfermedad coronaria tiene múltiples factores de riesgo",
+      "Contiene leche y cereales con gluten"
+    ],
+    "routineStep": { "time": "morning", "order": 11 }
+  },
+  {
+    "id": "omega3_0043",
+    "sku": "0043",
+    "name": "Herbalifeline Max",
+    "category": "Omega 3",
+    "type": "ingestible",
+    "concernCategory": "Salud cardiovascular",
+    "size": "30 cápsulas (42 g)",
+    "image": "/images/products/herbalifeline-omega3.png",
+    "concerns": ["cardiovascular", "fat_target", "omega3", "cerebro_vision"],
+    "benefits": [
+      "Suplemento con ácidos grasos omega-3 EPA + DHA de aceite de pescado",
+      "El EPA y el DHA contribuyen a una función cardíaca normal",
+      "El DHA contribuye a mantener el funcionamiento normal del cerebro y de la visión",
+      "Concentrado en ácidos grasos omega-3"
+    ],
+    "keyIngredients": [
+      { "name": "Aceite de pescado (EPA + DHA)", "role": "Ácidos grasos omega-3" },
+      { "name": "Vitamina E", "role": "Antioxidante que protege el aceite" }
+    ],
+    "howToUse": "Tomar una, cuatro o cinco cápsulas al día según el efecto beneficioso deseado, con un poco de agua.",
+    "cautions": [
+      "No superar la dosis diaria recomendada",
+      "Contiene pescado"
+    ],
+    "routineStep": { "time": "morning", "order": 12 }
+  },
+  {
+    "id": "microbiotic_max_173k",
+    "sku": "173K",
+    "name": "Microbiotic Max",
+    "category": "Probiótico",
+    "type": "ingestible",
+    "concernCategory": "Salud digestiva",
+    "size": "20 sobres (40 g)",
+    "image": "/images/products/microbiotic-max.png",
+    "concerns": ["digestion", "fibra", "microbiota"],
+    "benefits": [
+      "Combinación de bacterias vivas y fibra que trabajan en armonía",
+      "2 mil millones de bacterias vivas (UFC) por ración (Bifidobacterium lactis y Lactobacillus helveticus)",
+      "Alto contenido de fibra; práctico en sobres para llevar",
+      "Sin gluten; suave sabor a vainilla"
+    ],
+    "keyIngredients": [
+      { "name": "Lactobacillus helveticus R52 y Bifidobacterium lactis HN019", "role": "Cepas de bacterias vivas (2.000 millones UFC/ración)" },
+      { "name": "Galacto-oligosacáridos (leche)", "role": "Fibra prebiótica" }
+    ],
+    "howToUse": "Añadir 1 sobre a medio vaso de agua (unos 100 ml) o a tu batido Fórmula 1. Usar líquidos a menos de 25 ºC. Tomar una vez al día.",
+    "cautions": [
+      "Usar líquidos por debajo de 25 ºC para no afectar la eficacia",
+      "Puede contener soja; contiene leche"
+    ],
+    "routineStep": { "time": "morning", "order": 13 }
   }
 ]
