@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "validate-locales": "node scripts/validate-locales.mjs"
+    "validate-locales": "node scripts/validate-locales.mjs",
+    "db:migrate": "node scripts/migrate.mjs",
+    "db:seed": "node scripts/seed-products.mjs",
+    "db:setup": "node scripts/migrate.mjs && node scripts/seed-products.mjs"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^9.3.4",
