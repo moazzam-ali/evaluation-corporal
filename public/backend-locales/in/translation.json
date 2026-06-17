@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "member_details": "*Beauty & Glow AI — नया स्कैन*\n━━━━━━━━━━━━━━━━━━━━\n\n*ग्राहक प्रोफ़ाइल*\n\nनाम: {name} {surname}\nईमेल: {email}\nफ़ोन: {phone}\nजन्म तिथि: {birthDate}\nस्थान: {city}, {country}",
+    "member_details": "*Evaluación Corporal — नया स्कैन*\n━━━━━━━━━━━━━━━━━━━━\n\n*ग्राहक प्रोफ़ाइल*\n\nनाम: {name} {surname}\nईमेल: {email}\nफ़ोन: {phone}\nजन्म तिथि: {birthDate}\nस्थान: {city}, {country}",
     "questionnaire_details": "*त्वचा प्रश्नावली*\n━━━━━━━━━━━━━━━━━━━━\n\n*लक्ष्य और समस्याएँ*\nसमस्याएँ: {skinConcerns}\nप्राथमिकता: {priorityConcern}\nक्षेत्र: {improvementZones}\n\n*त्वचा प्रोफ़ाइल*\nप्रकार: {skinType}\nअनुभव: {skinFeelGeneral}\nदिन के अंत में: {skinFeelEndOfDay}\n\n*वर्तमान दिनचर्या*\nआवृत्ति: {routineFrequency}\nउत्पाद: {productsUsed}\nज़रूरी: {essentialProduct}\nकमी: {missingProduct}\nसप्लीमेंट: {supplements}\n\n*संवेदनशीलता*\nप्रतिक्रिया: {reactionLevel}\nलक्षण: {recentSigns}\n\n*जीवनशैली*\nसनस्क्रीन: {sunscreenUse}\nमेकअप: {makeupFrequency}\nनींद: {sleepHours}\nतनाव: {stressImpact}\nपानी: {waterIntake}\n\n*अनुभव और लक्ष्य*\nइतिहास: {treatmentHistory}\nनिराशा: {frustrations}\nतलाश: {lookingFor}\nसिफ़ारिश चाहिए: {wantRoutineRecommendation}\nबजट: {budgetLevel}",
     "analysis_results": "*विश्लेषण परिणाम*\n━━━━━━━━━━━━━━━━━━━━\n\nकुल स्कोर: *{overall_score}%*\nत्वचा का प्रकार: *{skin_type_result}*\n\n*मेट्रिक विवरण:*\n{metrics}\n\n*सारांश:*\n{summary}",
-    "analysis_link": "*पूरी रिपोर्ट देखें*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
+    "analysis_link": "*पूरी रिपोर्ट देखें*\n━━━━━━━━━━━━━━━━━━━━\nhttps://evaluacion-corporal.vercel.app/results/{id}?l={lng}",
     "buttons": {
       "view_report": "📋 रिपोर्ट देखें",
       "sms": "✉️ SMS भेजें",

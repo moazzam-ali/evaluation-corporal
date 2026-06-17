@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm rounded-2xl border bg-card p-8 shadow-sm">
         <div className="mb-6 text-center">
           <h1 className="text-2xl font-bold">Admin Login</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Beauty &amp; Glow AI</p>
+          <p className="mt-1 text-sm text-muted-foreground">Evaluación Corporal</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -51,7 +51,7 @@ export default function AdminLoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="w-full rounded-md border bg-background py-2 pl-9 pr-3 text-sm outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                placeholder="admin@beautyandglow.ai"
+                placeholder="admin@evaluation-corporal.ai"
               />
             </div>
           </div>

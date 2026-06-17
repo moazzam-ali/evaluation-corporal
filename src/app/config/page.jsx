@@ -55,7 +55,7 @@ export default function HomePage() {
       >
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5">
           <Sparkles className="h-4 w-4 text-secondary" />
-          <span className="text-sm font-medium text-primary">Beauty &amp; Glow AI</span>
+          <span className="text-sm font-medium text-primary">Evaluación Corporal</span>
         </div>
         <h1 className="text-3xl font-bold tracking-tight">{t("home.title", "Configuration")}</h1>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

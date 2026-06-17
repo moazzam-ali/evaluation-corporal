@@ -1,9 +1,9 @@
 {
   "telegram": {
-    "member_details": "*Beauty & Glow AI — Yeni Tarama*\n━━━━━━━━━━━━━━━━━━━━\n\n*Müşteri Profili*\n\nAd: {name} {surname}\nE-posta: {email}\nTelefon: {phone}\nDoğum Tarihi: {birthDate}\nKonum: {city}, {country}",
+    "member_details": "*Evaluación Corporal — Yeni Tarama*\n━━━━━━━━━━━━━━━━━━━━\n\n*Müşteri Profili*\n\nAd: {name} {surname}\nE-posta: {email}\nTelefon: {phone}\nDoğum Tarihi: {birthDate}\nKonum: {city}, {country}",
     "questionnaire_details": "*Cilt Anketi*\n━━━━━━━━━━━━━━━━━━━━\n\n*Hedefler ve Endişeler*\nEndişeler: {skinConcerns}\nÖncelik: {priorityConcern}\nBölgeler: {improvementZones}\n\n*Cilt Profili*\nTip: {skinType}\nHis: {skinFeelGeneral}\nGün Sonu: {skinFeelEndOfDay}\n\n*Mevcut Rutin*\nSıklık: {routineFrequency}\nÜrünler: {productsUsed}\nVazgeçilmez: {essentialProduct}\nEksik: {missingProduct}\nTakviyeler: {supplements}\n\n*Hassasiyet*\nReaksiyonlar: {reactionLevel}\nBelirtiler: {recentSigns}\n\n*Yaşam Tarzı*\nGüneş Kremi: {sunscreenUse}\nMakyaj: {makeupFrequency}\nUyku: {sleepHours}\nStres: {stressImpact}\nSu: {waterIntake}\n\n*Deneyim ve Hedefler*\nGeçmiş: {treatmentHistory}\nHayal Kırıklıkları: {frustrations}\nAranan: {lookingFor}\nTavsiye İstiyor: {wantRoutineRecommendation}\nBütçe: {budgetLevel}",
     "analysis_results": "*Analiz Sonuçları*\n━━━━━━━━━━━━━━━━━━━━\n\nGenel Puan: *{overall_score}%*\nCilt Tipi: *{skin_type_result}*\n\n*Metrik Dökümü:*\n{metrics}\n\n*Özet:*\n{summary}",
-    "analysis_link": "*Tam Raporu Görüntüle*\n━━━━━━━━━━━━━━━━━━━━\nhttps://beauty-glow-ai.vercel.app/results/{id}?l={lng}",
+    "analysis_link": "*Tam Raporu Görüntüle*\n━━━━━━━━━━━━━━━━━━━━\nhttps://evaluacion-corporal.vercel.app/results/{id}?l={lng}",
     "buttons": {
       "view_report": "📋 Raporu Gör",
       "sms": "✉️ SMS Gönder",
