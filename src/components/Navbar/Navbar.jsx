@@ -111,14 +111,16 @@ export default function Navbar() {
             </span>
           )}
 
-          <Link
-            href={scanHref}
-            className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] text-white transition-all hover:-translate-y-px hover:shadow-[var(--shadow-blue)]"
-            style={{ background: "var(--ink, #2F2F2B)", fontFamily: "var(--font-inter)", fontWeight: 500 }}
-          >
-            {t("landing.cta", "Start Free Scan")}
-            <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-          </Link>
+          {!isResults && (
+            <Link
+              href={scanHref}
+              className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[13px] text-white transition-all hover:-translate-y-px hover:shadow-[var(--shadow-blue)]"
+              style={{ background: "var(--ink, #2F2F2B)", fontFamily: "var(--font-inter)", fontWeight: 500 }}
+            >
+              {t("landing.cta", "Start Free Scan")}
+              <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+            </Link>
+          )}
 
           {/* Language selector */}
           <div className="relative">
@@ -232,17 +234,19 @@ export default function Navbar() {
             </div>
 
             {/* Mobile CTA */}
-            <div className="mt-3 border-t pt-4 px-4" style={{ borderColor: "rgba(47,47,43,0.06)" }}>
-              <Link
-                href={scanHref}
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-white transition-all hover:shadow-[var(--shadow-blue)]"
-                style={{ background: "var(--ink)", fontFamily: "var(--font-inter)" }}
-              >
-                {t("landing.cta", "Start Free Scan")}
-                <ChevronRight className="h-4 w-4" />
-              </Link>
-            </div>
+            {!isResults && (
+              <div className="mt-3 border-t pt-4 px-4" style={{ borderColor: "rgba(47,47,43,0.06)" }}>
+                <Link
+                  href={scanHref}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-white transition-all hover:shadow-[var(--shadow-blue)]"
+                  style={{ background: "var(--ink)", fontFamily: "var(--font-inter)" }}
+                >
+                  {t("landing.cta", "Start Free Scan")}
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       )}
