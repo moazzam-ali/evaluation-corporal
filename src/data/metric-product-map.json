@@ -1,14 +1,14 @@
 {
-  "hydration": ["night_cream_539k", "tension_cream_513k", "eye_cream_515k", "body_lotion_514k"],
-  "fine_lines_wrinkles": ["tension_cream_513k", "night_cream_539k", "eye_cream_515k", "collagen_booster_076k"],
-  "firmness": ["tension_cream_513k", "collagen_booster_076k", "night_cream_539k"],
-  "uneven_skin_tone": ["niacinamide_serum_508k", "tension_cream_513k"],
-  "oily_skin": ["gelo_cleanser_511k", "niacinamide_serum_508k"],
-  "dark_spots": ["niacinamide_serum_508k", "tension_cream_513k"],
-  "eye_wrinkles": ["eye_cream_515k", "collagen_booster_076k"],
-  "crows_feet": ["eye_cream_515k", "collagen_booster_076k"],
-  "dark_circles": ["eye_cream_515k", "collagen_booster_076k"],
-  "radiance": ["niacinamide_serum_508k", "tension_cream_513k"],
-  "texture": ["niacinamide_serum_508k", "gelo_cleanser_511k", "night_cream_539k"],
-  "smoothness": ["night_cream_539k", "niacinamide_serum_508k"]
+  "bmi": ["plant_meal_m02", "fiber_f06", "protein_blend_p01"],
+  "body_fat": ["plant_meal_m02", "protein_blend_p01", "fiber_f06"],
+  "lean_mass": ["protein_blend_p01", "recovery_r08", "multivit_v04"],
+  "waist_hip_ratio": ["omega3_o03", "fiber_f06", "plant_meal_m02"],
+  "healthy_weight": ["plant_meal_m02", "fiber_f06"],
+  "total_body_water": ["hydrate_h05"],
+  "hydration_target": ["hydrate_h05"],
+  "bmr": ["multivit_v04", "preworkout_pw07"],
+  "calorie_target": ["plant_meal_m02", "preworkout_pw07"],
+  "protein_target": ["protein_blend_p01", "recovery_r08"],
+  "carbs_target": ["preworkout_pw07", "plant_meal_m02"],
+  "fat_target": ["omega3_o03"]
 }
