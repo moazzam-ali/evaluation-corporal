@@ -73,6 +73,26 @@ async function main() {
       console.log(`  ✅ ${p.id} (${p.sku})`);
     }
     console.log(`\n🎉 Seeded ${products.length} products`);
+
+    // Seed the metric → product map here (after products exist) so the
+    // metric_product_map.product_id foreign key is always satisfied.
+    console.log("\n🔗 Seeding metric-product map...");
+    const MAP = JSON.parse(
+      readFileSync(join(__dirname, "..", "src", "data", "metric-product-map.json"), "utf-8")
+    );
+    let mapCount = 0;
+    for (const [metricId, productIds] of Object.entries(MAP)) {
+      for (let i = 0; i < productIds.length; i++) {
+        await client.query(
+          `INSERT INTO metric_product_map (metric_id, product_id, priority, language)
+           VALUES ($1, $2, $3, '_all_')
+           ON CONFLICT DO NOTHING`,
+          [metricId, productIds[i], i + 1]
+        );
+        mapCount++;
+      }
+    }
+    console.log(`✅ Seeded ${mapCount} metric-product associations`);
   } finally {
     client.release();
     await pool.end();

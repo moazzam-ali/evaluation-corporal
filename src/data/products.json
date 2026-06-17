@@ -1,249 +1,191 @@
 [
   {
-    "id": "night_cream_539k",
-    "sku": "539K",
-    "name": "HL/Skin Revitalising Night Cream",
-    "category": "Night Cream",
-    "type": "topical",
-    "concernCategory": "Healthy-Ageing",
-    "size": "50 ml / 1.7 fl oz",
-    "image": "/images/products/night-cream-539k.png",
-    "concerns": ["dryness", "elasticity", "ageing", "texture", "overnight_recovery"],
+    "id": "protein_blend_p01",
+    "sku": "P01",
+    "name": "Whey Protein Blend",
+    "category": "Protein",
+    "type": "ingestible",
+    "concernCategory": "Lean mass & recovery",
+    "size": "500 g / 17.6 oz",
+    "image": "/images/products/whey-protein-blend.png",
+    "concerns": ["protein_intake", "lean_mass", "muscle_recovery", "body_fat"],
     "benefits": [
-      "Delivers long-lasting hydration to improve dryness",
-      "Helps reduce visible signs of ageing and improves skin texture",
-      "Improves elasticity and enhances appearance of skin softness",
-      "Leaves skin feeling smooth, soft, plumped, and supple by morning",
-      "Supports skin moisturisation for comforted, replenished skin",
-      "Suitable for diverse skin types",
-      "No added parabens"
+      "High-quality protein to support lean muscle maintenance during a deficit",
+      "Supports post-exercise recovery",
+      "Helps you reach a higher daily protein target",
+      "Low in sugar"
     ],
     "keyIngredients": [
-      { "name": "Glycerin", "role": "Attracts and retains moisture; improves hydration; softens skin" },
-      { "name": "Squalane", "role": "Supports long-lasting hydration; improves dryness and elasticity" },
-      { "name": "Sodium Hyaluronate", "role": "Deep hydration" },
-      { "name": "Centella Asiatica Extract", "role": "Soothing and skin-repairing" },
-      { "name": "Retinyl Palmitate (Vitamin A)", "role": "Anti-ageing" },
-      { "name": "Tocopherol (Vitamin E)", "role": "Antioxidant protection" },
-      { "name": "Chamomile, Licorice Root, Rosemary Leaf Extracts", "role": "Soothing and antioxidant botanicals" }
+      { "name": "Whey Protein Isolate", "role": "Complete protein for muscle support and satiety" },
+      { "name": "BCAAs (Leucine, Isoleucine, Valine)", "role": "Supports muscle recovery" },
+      { "name": "Digestive Enzymes", "role": "Aids protein digestion" }
     ],
-    "howToUse": "Apply to clean, dry skin every evening. Gently massage into face and neck in upward motions until absorbed.",
-    "cautions": ["Contains Vitamin A — consider daily intake before use", "Avoid contact with eyes", "External use only"],
-    "routineStep": { "time": "evening", "order": 3 }
+    "howToUse": "Mix 1 scoop with 250 ml of water or milk. Take within 30 minutes after training or as a protein top-up.",
+    "cautions": ["Not a substitute for a varied diet", "Consult a professional if pregnant or on medication"],
+    "routineStep": { "time": "morning", "order": 2 }
   },
   {
-    "id": "tension_cream_513k",
-    "sku": "513K",
-    "name": "HL/Skin Ultimate Tension Cream",
-    "category": "Day Cream",
-    "type": "topical",
-    "concernCategory": "Healthy-Ageing",
-    "size": "50 ml / 1.7 fl oz",
-    "image": "/images/products/tension-cream-513k.png",
-    "concerns": ["wrinkles", "fine_lines", "firmness", "elasticity", "radiance", "dehydration"],
+    "id": "plant_meal_m02",
+    "sku": "M02",
+    "name": "Plant-Based Meal Shake",
+    "category": "Meal Replacement",
+    "type": "ingestible",
+    "concernCategory": "Weight management",
+    "size": "750 g / 26.4 oz",
+    "image": "/images/products/plant-meal-shake.png",
+    "concerns": ["weight_management", "body_fat", "calorie_control", "bmi"],
     "benefits": [
-      "Reduces the appearance of wrinkles while enhancing skin elasticity",
-      "Leaves skin feeling smooth and soft",
-      "Provides effective moisturisation and improves skin hydration",
-      "Boosts skin radiance; restores a healthy, natural glow",
-      "Rich and velvety texture",
-      "Suitable for use under makeup",
-      "Suitable for diverse skin types",
-      "No added parabens or sulphates"
+      "Balanced meal replacement to support a calorie deficit",
+      "Plant protein plus fibre to help you feel full",
+      "Supports gradual, sustainable weight management",
+      "Includes added vitamins and minerals"
     ],
     "keyIngredients": [
-      { "name": "Adenosine", "role": "Targets early signs of ageing; reduces fine lines and wrinkles" },
-      { "name": "Niacinamide", "role": "Supports skin hydration; targets early signs of ageing" },
-      { "name": "Vitamin B5 (Panthenol)", "role": "Hydration; retains moisture; strengthens skin barrier" },
-      { "name": "Sodium Hyaluronate", "role": "Deep hydration" },
-      { "name": "Multiple Peptides", "role": "Anti-ageing, firming" },
-      { "name": "Tocopherol (Vitamin E)", "role": "Antioxidant" }
+      { "name": "Pea & Rice Protein", "role": "Plant protein for satiety and lean mass" },
+      { "name": "Inulin Fibre", "role": "Promotes fullness and digestive health" },
+      { "name": "Vitamin & Mineral Blend", "role": "Rounds out the meal nutritionally" }
     ],
-    "howToUse": "Apply to clean, dry skin each morning. Gently massage onto face and neck in upward motions. Follow with SPF during the day. Suitable under makeup.",
-    "cautions": ["Avoid contact with eyes", "External use only", "Use SPF protection during the day"],
+    "howToUse": "Blend 2 scoops with 300 ml of water or plant milk to replace one meal per day.",
+    "cautions": ["Use as part of a calorie-controlled diet", "Not intended as the sole source of nutrition"],
+    "routineStep": { "time": "morning", "order": 1 }
+  },
+  {
+    "id": "omega3_o03",
+    "sku": "O03",
+    "name": "Omega-3 Complex",
+    "category": "Essential Fatty Acids",
+    "type": "ingestible",
+    "concernCategory": "Cardiometabolic health",
+    "size": "60 softgels",
+    "image": "/images/products/omega-3-complex.png",
+    "concerns": ["cardiovascular", "cholesterol", "waist_hip_ratio", "fat_quality"],
+    "benefits": [
+      "EPA and DHA to support cardiovascular health",
+      "Supports healthy cholesterol levels already within the normal range",
+      "Contributes to normal heart function"
+    ],
+    "keyIngredients": [
+      { "name": "Fish Oil (EPA + DHA)", "role": "Omega-3 fatty acids for heart health" },
+      { "name": "Vitamin E", "role": "Antioxidant that protects the oil" }
+    ],
+    "howToUse": "Take 1 softgel daily with breakfast.",
+    "cautions": ["Consult a professional if on blood-thinning medication", "Contains fish"],
     "routineStep": { "time": "morning", "order": 3 }
   },
   {
-    "id": "niacinamide_serum_508k",
-    "sku": "508K",
-    "name": "HL/Skin 10% Niacinamide Serum",
-    "category": "Serum",
-    "type": "topical",
-    "concernCategory": "Brightness & Illumination",
-    "size": "30 ml / 1.0 fl oz",
-    "image": "/images/products/niacinamide-serum-508k.png",
-    "concerns": ["uneven_tone", "dullness", "pores", "barrier", "ageing", "oiliness"],
-    "benefits": [
-      "Contains 10% niacinamide (high-concentration formula)",
-      "Visibly brightens and evens skin tone",
-      "Supports skin's natural moisture balance",
-      "Minimises the look of imperfections",
-      "Helps fight signs of ageing and reduce wrinkles",
-      "Supports and strengthens the skin barrier",
-      "Boosts radiance for a healthy, luminous look",
-      "Lightweight, fast-absorbing texture",
-      "Suitable for diverse skin types",
-      "No added parabens or sulphates"
-    ],
-    "keyIngredients": [
-      { "name": "Niacinamide (10%)", "role": "Evens skin tone; supports barrier; provides hydration; reduces wrinkles" },
-      { "name": "Vitamin B5 (Panthenol)", "role": "Delivers hydration; helps retain moisture" },
-      { "name": "Glycerin", "role": "Attracts and locks in moisture; supports barrier function" },
-      { "name": "Beta-Glucan", "role": "Soothing; hydration" },
-      { "name": "Hydrolyzed Hyaluronic Acid", "role": "Penetrates deeper for intensive hydration" },
-      { "name": "Fructooligosaccharides", "role": "Prebiotic; supports skin microbiome" }
-    ],
-    "howToUse": "Apply a few drops to clean, dry skin on face and neck. Gently press into skin until absorbed. Use once daily. Follow with SPF during the day.",
-    "cautions": ["May cause irritation on initial use", "Avoid contact with eyes", "External use only", "Use SPF during the day"],
-    "routineStep": { "time": "both", "order": 2 }
-  },
-  {
-    "id": "eye_cream_515k",
-    "sku": "515K",
-    "name": "HL/Skin Nourishing Eye Cream",
-    "category": "Eye Cream",
-    "type": "topical",
-    "concernCategory": "Healthy-Ageing",
-    "size": "15 ml / 0.5 fl oz",
-    "image": "/images/products/eye-cream-515k.png",
-    "concerns": ["eye_wrinkles", "eye_dryness", "puffiness", "dark_circles", "eye_radiance"],
-    "benefits": [
-      "Targets wrinkles and fine lines around the eye area",
-      "Provides refreshing hydration",
-      "Locks in moisture to combat dryness",
-      "Improves smoothness and radiance around the eyes",
-      "Lightweight, non-greasy, and fast-absorbing",
-      "Suitable for use under makeup",
-      "Suitable for diverse skin types",
-      "No added parabens or sulphates"
-    ],
-    "keyIngredients": [
-      { "name": "Squalane", "role": "Provides hydration; maintains skin moisture" },
-      { "name": "Macadamia Seed Oil", "role": "Alleviates dryness; supports lasting hydration" },
-      { "name": "Shea Butter", "role": "Alleviates dryness; supports lasting hydration" },
-      { "name": "Adenosine & Niacinamide", "role": "Hydrate skin; reduce wrinkles; target early signs of ageing" },
-      { "name": "Vitamin B5 (Panthenol)", "role": "Supports moisture retention; strengthens skin barrier" },
-      { "name": "Ceramide NP", "role": "Supports and restores the skin barrier" }
-    ],
-    "howToUse": "Apply morning and evening to a cleansed face. Gently press and massage a small amount around the eye contour area.",
-    "cautions": ["Avoid contact with eyes", "External use only"],
-    "routineStep": { "time": "both", "order": 4 }
-  },
-  {
-    "id": "body_lotion_514k",
-    "sku": "514K",
-    "name": "HL/Skin Nourishing Hand & Body Lotion",
-    "category": "Body & Hand Lotion",
-    "type": "topical",
-    "concernCategory": "Moisture & Hydration",
-    "size": "147 ml / 5.0 fl oz",
-    "image": "/images/products/body-lotion-514k.png",
-    "concerns": ["body_dryness", "rough_skin", "suppleness", "daily_moisture"],
-    "benefits": [
-      "Formulated with 6% squalane for moisturising and skin-conditioning",
-      "Provides long-lasting moisture and hydration for hands and body",
-      "Helps improve dryness",
-      "Leaves skin feeling velvet-smooth, soft, and nourished",
-      "Lightweight, non-greasy texture absorbs quickly",
-      "Suitable for diverse skin types",
-      "No added parabens or sulphates"
-    ],
-    "keyIngredients": [
-      { "name": "Squalane (6%)", "role": "Long-lasting hydration throughout the day" },
-      { "name": "Glycerin", "role": "Attracts and retains moisture" },
-      { "name": "Niacinamide", "role": "Skin conditioning; barrier support" },
-      { "name": "Ceramide NP", "role": "Restores and supports skin barrier" },
-      { "name": "Shea Butter, Jojoba Butter, Cupuaçu Seed Butter", "role": "Rich emollients for deep nourishment" },
-      { "name": "Centella Asiatica Extract", "role": "Soothing and hydrating" }
-    ],
-    "howToUse": "Apply daily as needed onto clean, dry skin until absorbed. For hands and body.",
-    "cautions": ["Avoid contact with eyes", "External use only"],
-    "routineStep": { "time": "any", "order": 1 }
-  },
-  {
-    "id": "gelo_cleanser_511k",
-    "sku": "511K",
-    "name": "HL/Skin Resurfacing Gelo Cleanser",
-    "category": "Facial Cleanser",
-    "type": "topical",
-    "concernCategory": "Brightness & Illumination",
-    "size": "147 ml / 5.0 fl oz",
-    "image": "/images/products/gelo-cleanser-511k.png",
-    "concerns": ["makeup_removal", "excess_oil", "impurities", "congestion", "over_drying"],
-    "benefits": [
-      "Effectively removes makeup, impurities, and excess oil",
-      "Gently purifies skin without over-drying",
-      "Leaves skin feeling clean, balanced, and refreshed",
-      "Lightweight, foaming gel texture",
-      "Suitable for diverse skin types",
-      "No added parabens or sulphates"
-    ],
-    "keyIngredients": [
-      { "name": "Glycerin", "role": "Maintains moisture during cleansing; prevents dryness" },
-      { "name": "Coconut-derived Surfactants", "role": "Gentle cleansing" },
-      { "name": "Centella Asiatica Extract", "role": "Soothing" },
-      { "name": "Beta-Glucan & Ceramide NP", "role": "Hydrating and barrier-protective" },
-      { "name": "Hydrolyzed Hyaluronic Acid", "role": "Hydration during cleansing" },
-      { "name": "Fructooligosaccharides", "role": "Prebiotic support for skin microbiome" }
-    ],
-    "howToUse": "Apply to wet hands and work into a light foam. Gently massage in circular motions over face and neck. Rinse thoroughly with warm water and pat dry. Use morning and evening.",
-    "cautions": ["Avoid contact with eyes", "External use only"],
-    "routineStep": { "time": "both", "order": 1 }
-  },
-  {
-    "id": "coq10_gels_378k",
-    "sku": "378K",
-    "name": "Herbalife Gels CoQ10VITA",
-    "category": "Chewable Supplement",
+    "id": "multivit_v04",
+    "sku": "V04",
+    "name": "Daily Multivitamin",
+    "category": "Multivitamin",
     "type": "ingestible",
-    "concernCategory": "Antioxidant Protection",
-    "size": "30 chewable gels (1/day)",
-    "image": "/images/products/coq10-gels-378k.png",
-    "concerns": ["oxidative_stress", "cardiovascular_support", "cellular_energy", "antioxidant"],
+    "concernCategory": "Foundational nutrition",
+    "size": "90 tablets",
+    "image": "/images/products/daily-multivitamin.png",
+    "concerns": ["micronutrient_support", "energy_metabolism", "bmr"],
     "benefits": [
-      "Contains CoQ10 (100 mg per serving) for cellular energy production",
-      "High Vitamin E (12 mg, 100% RI) — protects cells from oxidative damage",
-      "High Vitamin K (75 µg, 100% RI) — supports blood clotting and bone maintenance",
-      "Delicious cherry flavour",
-      "Sugar-free and gluten-free"
+      "Daily micronutrient base to fill common dietary gaps",
+      "B-vitamins contribute to normal energy-yielding metabolism",
+      "Supports overall wellbeing"
     ],
     "keyIngredients": [
-      { "name": "Coenzyme Q10 (100 mg)", "role": "Antioxidant; energy production in cells and heart" },
-      { "name": "Vitamin E (12 mg)", "role": "Cell protection from oxidative stress" },
-      { "name": "Vitamin K2 (75 µg)", "role": "Blood coagulation; bone health" }
+      { "name": "B-Vitamin Complex", "role": "Supports energy metabolism" },
+      { "name": "Vitamin D3", "role": "Supports bone and immune health" },
+      { "name": "Zinc & Magnesium", "role": "Support normal metabolic function" }
     ],
-    "howToUse": "Take 1 chewable gel per day as part of a varied and balanced diet.",
-    "cautions": ["Do not exceed recommended daily dose", "Not a substitute for a balanced diet", "Keep out of reach of young children"],
-    "routineStep": { "time": "daily", "order": 1 }
+    "howToUse": "Take 1 tablet daily with a meal.",
+    "cautions": ["Do not exceed the recommended dose", "Keep out of reach of children"],
+    "routineStep": { "time": "morning", "order": 4 }
   },
   {
-    "id": "collagen_booster_076k",
-    "sku": "076K",
-    "name": "Herbalife Collagen Skin Booster",
-    "category": "Powder Supplement",
+    "id": "hydrate_h05",
+    "sku": "H05",
+    "name": "Hydration Electrolytes",
+    "category": "Hydration",
     "type": "ingestible",
-    "concernCategory": "Collagen Support",
-    "size": "30 servings (1 scoop/day)",
-    "image": "/images/products/collagen-booster-076k.png",
-    "concerns": ["wrinkles", "elasticity_loss", "ageing_skin", "hair_health", "nail_health", "collagen_support"],
+    "concernCategory": "Hydration",
+    "size": "30 sachets",
+    "image": "/images/products/hydration-electrolytes.png",
+    "concerns": ["hydration_target", "total_body_water", "electrolyte_balance"],
     "benefits": [
-      "Contains Verisol® P bioactive collagen peptides — clinically shown to reduce eye wrinkles and improve elasticity after 4 weeks",
-      "Vitamin C contributes to normal collagen formation for skin",
-      "Biotin, Niacin, Iodine, Vitamin A, Zinc contribute to normal skin maintenance",
-      "Selenium, Biotin, Zinc contribute to normal hair maintenance",
-      "Zinc, Selenium contribute to normal nail maintenance",
-      "Refreshing strawberry & lemon flavour",
-      "Gluten-free"
+      "Electrolytes to support daily hydration",
+      "Helps replace fluids lost through activity and sweat",
+      "Light flavour to make hitting your water target easier"
     ],
     "keyIngredients": [
-      { "name": "Verisol® P Collagen Hydrolysate (2.5 g)", "role": "Clinically studied; reduces eye wrinkles; improves elasticity" },
-      { "name": "Vitamin C (40 mg)", "role": "Collagen synthesis support" },
-      { "name": "Vitamin A (400 µg)", "role": "Skin maintenance" },
-      { "name": "Vitamin E (6 mg)", "role": "Antioxidant" },
-      { "name": "Zinc (5 mg), Biotin (25 µg), Selenium (28 µg)", "role": "Skin, hair, and nail support" }
+      { "name": "Sodium & Potassium", "role": "Key electrolytes for fluid balance" },
+      { "name": "Magnesium", "role": "Supports normal muscle function" }
     ],
-    "howToUse": "Mix 1 scoop (5.7 g) with 250 ml water. Enjoy once daily with a meal.",
-    "cautions": ["Food supplement — not a substitute for a balanced diet", "Keep out of reach of children"],
-    "routineStep": { "time": "daily", "order": 2 }
+    "howToUse": "Dissolve 1 sachet in 500 ml of water. Drink 1–2 servings across the day toward your hydration target.",
+    "cautions": ["Part of a daily fluid plan, not a replacement for water"],
+    "routineStep": { "time": "morning", "order": 5 }
+  },
+  {
+    "id": "fiber_f06",
+    "sku": "F06",
+    "name": "Fiber Complex",
+    "category": "Fiber",
+    "type": "ingestible",
+    "concernCategory": "Weight management",
+    "size": "200 g / 7 oz",
+    "image": "/images/products/fiber-complex.png",
+    "concerns": ["weight_management", "body_fat", "digestive_health", "bmi"],
+    "benefits": [
+      "Soluble fibre to support fullness between meals",
+      "Supports digestive regularity",
+      "Helps moderate appetite within a calorie-controlled plan"
+    ],
+    "keyIngredients": [
+      { "name": "Oat Beta-Glucan", "role": "Soluble fibre for satiety" },
+      { "name": "Psyllium Husk", "role": "Supports digestive regularity" }
+    ],
+    "howToUse": "Mix 1 scoop with water before your two largest meals.",
+    "cautions": ["Take with plenty of water", "Introduce gradually to allow tolerance"],
+    "routineStep": { "time": "evening", "order": 2 }
+  },
+  {
+    "id": "preworkout_pw07",
+    "sku": "PW07",
+    "name": "Pre-Workout Energy",
+    "category": "Performance",
+    "type": "ingestible",
+    "concernCategory": "Activity & energy",
+    "size": "300 g / 10.6 oz",
+    "image": "/images/products/pre-workout-energy.png",
+    "concerns": ["activity", "energy", "calorie_target", "bmr"],
+    "benefits": [
+      "Supports energy and focus before training",
+      "Helps you train harder to widen your daily energy expenditure",
+      "Light caffeine plus electrolytes"
+    ],
+    "keyIngredients": [
+      { "name": "Caffeine (natural)", "role": "Supports alertness and performance" },
+      { "name": "Citrulline", "role": "Supports blood flow during exercise" }
+    ],
+    "howToUse": "Mix 1 scoop with 300 ml of water 20–30 minutes before exercise.",
+    "cautions": ["Contains caffeine — avoid late in the day", "Not recommended for those sensitive to stimulants"],
+    "routineStep": { "time": "morning", "order": 1 }
+  },
+  {
+    "id": "recovery_r08",
+    "sku": "R08",
+    "name": "Night Recovery Formula",
+    "category": "Recovery",
+    "type": "ingestible",
+    "concernCategory": "Lean mass & recovery",
+    "size": "30 servings",
+    "image": "/images/products/night-recovery-formula.png",
+    "concerns": ["muscle_recovery", "lean_mass", "sleep_quality", "protein_intake"],
+    "benefits": [
+      "Slow-release protein to support overnight muscle recovery",
+      "Supports lean mass retention during a deficit",
+      "Includes magnesium to support restful sleep"
+    ],
+    "keyIngredients": [
+      { "name": "Micellar Casein", "role": "Slow-digesting protein for overnight support" },
+      { "name": "Magnesium", "role": "Supports muscle function and sleep quality" }
+    ],
+    "howToUse": "Mix 1 scoop with 250 ml of water or milk about 30 minutes before bed.",
+    "cautions": ["Not a substitute for a varied diet", "Contains milk"],
+    "routineStep": { "time": "evening", "order": 3 }
   }
 ]
