@@ -24,7 +24,8 @@
     "contact_ids": "İletişim ID'leri",
     "contact_ids_placeholder": "Virgülle ayrılmış CRM iletişim ID'leri",
     "language": "Dil",
-    "submit": "Vücut Değerlendirmesine Geç"
+    "submit": "Vücut Değerlendirmesine Geç",
+    "bot_index_placeholder": "1"
   },
   "footer": {
     "rights": "Tüm hakları saklıdır.",
@@ -202,7 +203,7 @@
     "science_badge_privacy": "Veri gizliliği",
     "science_strip": "Kullandığımız yöntemler · hakemli",
     "testimonials_beta": "Erken beta koçlarımız ve kullanıcılarımızdan geri bildirimler.",
-    "scan_card_view": "FRONT VIEW · CAPTURING"
+    "scan_card_view": "ÖNDEN GÖRÜNÜM · YAKALANIYOR"
   },
   "scan": {
     "rail_eyebrow": "Vücut değerlendirmesi",
@@ -244,7 +245,8 @@
       "country": "Ülke",
       "province": "İl/Eyalet",
       "city": "Şehir",
-      "disclaimer": "Raporunuzu doğrudan WhatsApp'ınıza göndereceğiz. Lütfen telefon numaranızın doğru olduğunu kontrol edin. Teşekkürler!"
+      "disclaimer": "Raporunuzu doğrudan WhatsApp'ınıza göndereceğiz. Lütfen telefon numaranızın doğru olduğunu kontrol edin. Teşekkürler!",
+      "email_placeholder": "sofia@example.com"
     },
     "step2": {
       "nav": "Fiziksel Bilgiler",
@@ -405,14 +407,14 @@
     "tip2": "Gözlük ve şapkayı çıkarın",
     "tip3": "Doğrudan kameraya bakın",
     "tip4": "Yüzünüzün tamamı görünmeli",
-    "analyzing_subtitle_simple": "Hang tight — this takes about 30 seconds."
+    "analyzing_subtitle_simple": "Bekleyin — bu yaklaşık 30 saniye sürer."
   },
   "navigation": {
     "next": "İleri",
     "previous": "Geri",
     "submit": "Gönder",
     "submitting": "Gönderiliyor...",
-    "sending": "Sending…"
+    "sending": "Gönderiliyor…"
   },
   "validation": {
     "personal": {
@@ -527,12 +529,12 @@
     },
     "body_type_label": "Vücut tipi",
     "body_types": {
-      "athletic": "Athletic",
-      "balanced": "Balanced",
-      "endomorph": "Endomorph",
-      "ectomorph": "Ectomorph",
-      "mesomorph": "Mesomorph",
-      "mixed": "Mixed"
+      "athletic": "Atletik",
+      "balanced": "Dengeli",
+      "endomorph": "Endomorf",
+      "ectomorph": "Ektomorf",
+      "mesomorph": "Mezomorf",
+      "mixed": "Karışık"
     }
   },
   "metrics": {
@@ -549,17 +551,17 @@
     "texture": "Doku",
     "dark_circles": "Göz Altı Halkaları",
     "bmi": "BMI",
-    "body_fat": "Body fat %",
-    "lean_mass": "Lean body mass",
-    "waist_hip_ratio": "Waist-to-hip ratio",
-    "healthy_weight": "Healthy weight",
-    "total_body_water": "Total body water",
-    "bmr": "Basal metabolic rate",
-    "calorie_target": "Daily calories",
-    "protein_target": "Protein target",
-    "carbs_target": "Carbs target",
-    "fat_target": "Fat target",
-    "hydration_target": "Hydration target"
+    "body_fat": "Vücut yağı %",
+    "lean_mass": "Yağsız kütle",
+    "waist_hip_ratio": "Bel-kalça oranı",
+    "healthy_weight": "Sağlıklı kilo",
+    "total_body_water": "Toplam vücut suyu",
+    "bmr": "Bazal metabolizma hızı",
+    "calorie_target": "Günlük kalori",
+    "protein_target": "Protein hedefi",
+    "carbs_target": "Karbonhidrat hedefi",
+    "fat_target": "Yağ hedefi",
+    "hydration_target": "Hidrasyon hedefi"
   },
   "metrics_desc": {
     "oily_skin": "Ciltteki aşırı yağ veya sebum miktarını ölçer. Dengeli bir puan, cildin aşırı yağlı olmadan normal düzeyde yağ ürettiğini gösterir.",
@@ -574,18 +576,18 @@
     "fine_lines_wrinkles": "Yüzdeki ifade çizgilerinin ve kırışıklıkların genel görünümünü değerlendirir. Daha iyi bir puan, bunların daha az görünür olduğu anlamına gelir.",
     "texture": "Cilt yüzeyinin genel durumunu ve tutarlılığını ifade eder. Çok yüksek bir puan, cildin rafine, düzgün ve dengeli göründüğünü gösterir.",
     "dark_circles": "Göz altındaki koyu halkaların görünümünü ölçer. Yüksek bir puan, göz altı bölgesinin daha aydınlık ve daha az yorgun göründüğü anlamına gelir.",
-    "bmi": "Weight relative to height squared. Classified using WHO bands from underweight through obesity III.",
-    "body_fat": "Estimated using the Deurenberg formula, adjusted for your age and sex.",
-    "lean_mass": "The non-fat share of your body — bones, organs, muscle, water. Higher lean mass means faster metabolism.",
-    "waist_hip_ratio": "Cardiometabolic risk proxy with gender-specific bands for low / moderate / high.",
-    "healthy_weight": "Lorentz-formula healthy target adjusted for height and sex.",
-    "total_body_water": "Watson equation estimate of total body water in liters.",
-    "bmr": "Mifflin-St Jeor BMR — kilocalories you burn at rest each day.",
-    "calorie_target": "BMR scaled by your activity level and your weight goal.",
-    "protein_target": "Protein grams per day calibrated to support your goal.",
-    "carbs_target": "Carbohydrate grams per day from the goal-specific macro split.",
-    "fat_target": "Fat grams per day from the goal-specific macro split.",
-    "hydration_target": "Liters per day based on body weight (0.033 L per kg)."
+    "bmi": "Boyun karesine oranla kilo. DSÖ bantlarıyla zayıflıktan obezite III'e kadar sınıflandırılır.",
+    "body_fat": "Deurenberg formülüyle, yaş ve cinsiyetine göre tahmin edilir.",
+    "lean_mass": "Vücudunun yağsız kısmı — kemikler, organlar, kas, su. Daha fazla yağsız kütle, daha hızlı metabolizma demektir.",
+    "waist_hip_ratio": "Cinsiyete özgü düşük / orta / yüksek bantlarıyla kardiyometabolik risk göstergesi.",
+    "healthy_weight": "Boy ve cinsiyete göre ayarlanan Lorentz formülü sağlıklı hedefi.",
+    "total_body_water": "Watson denklemiyle litre cinsinden toplam vücut suyu tahmini.",
+    "bmr": "Mifflin-St Jeor BMH — her gün dinlenirken yaktığın kilokalori.",
+    "calorie_target": "Aktivite düzeyine ve kilo hedefine göre ölçeklenen BMH.",
+    "protein_target": "Hedefini desteklemek için ayarlanmış günlük protein gramı.",
+    "carbs_target": "Hedefine özel makro dağılımından günlük karbonhidrat gramı.",
+    "fat_target": "Hedefine özel makro dağılımından günlük yağ gramı.",
+    "hydration_target": "Vücut ağırlığına göre günlük litre (kg başına 0,033 L)."
   },
   "products": {
     "view": "Ürünü Görüntüle",
@@ -821,6 +823,18 @@
     "unit_bmi": "kg / m²",
     "unit_kg_wk": "kg/wk",
     "unit_l": "L",
-    "unit_g": "g"
+    "unit_g": "g",
+    "risk_strength_fallback": "En güçlü metriğin iyi durumda.",
+    "risk_watch_fallback": "Bu alan biraz dikkat gerektirebilir.",
+    "risk_action_fallback": "Bu metrik odaklı bir iyileştirme gerektiriyor.",
+    "female": "Kadın",
+    "male": "Erkek",
+    "bf_action_dynamic": "{{sex}} · {{age}} yaş",
+    "rec_action_dynamic": "{{n}} seçim · sinyallerine bağlı",
+    "how_to_use": "KULLANIMI",
+    "cta_eyebrow": "SIRADAKİ",
+    "cta_heading": "Planı izle,",
+    "cta_heading_em": "4 hafta sonra değerlendir.",
+    "cta_body_v2": "Planın sayıları değiştirmesine zaman tanı. Bir sonraki değerlendirmenin zamanı geldiğinde koçun seninle iletişime geçecek — yan yana karşılaştırıp oradan ayarlayacağız."
   }
 }

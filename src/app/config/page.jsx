@@ -101,7 +101,7 @@ export default function HomePage() {
                   id="botIndex"
                   value={botIndex}
                   onChange={(e) => setBotIndex(e.target.value)}
-                  placeholder="1"
+                  placeholder={t("home.bot_index_placeholder", "1")}
                 />
                 <p className="text-xs text-muted-foreground">
                   {t("home.bot_index_help", "Which Telegram bot to use (from the bots table).")}

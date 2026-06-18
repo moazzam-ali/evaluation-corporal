@@ -24,7 +24,8 @@
     "contact_ids": "Contact IDs",
     "contact_ids_placeholder": "Comma-separated CRM contact IDs",
     "language": "Language",
-    "submit": "Proceed to Body Assessment"
+    "submit": "Proceed to Body Assessment",
+    "bot_index_placeholder": "1"
   },
   "footer": {
     "rights": "All rights reserved.",
@@ -240,7 +241,8 @@
       "country": "Country",
       "province": "State/Province",
       "city": "City",
-      "disclaimer": "We will send your report directly to your WhatsApp. Please verify that your phone number is correct. Thank you!"
+      "disclaimer": "We will send your report directly to your WhatsApp. Please verify that your phone number is correct. Thank you!",
+      "email_placeholder": "sofia@example.com"
     },
     "step2": {
       "nav": "Physical Info",
@@ -730,6 +732,18 @@
     "disclaimer_body": "Body composition and metrics are estimates based on published formulas. Consult a healthcare professional for diagnosis.",
     "you": "YOU",
     "spectrum": "The spectrum",
-    "your_stage": "Your stage"
+    "your_stage": "Your stage",
+    "risk_strength_fallback": "Your strongest metric is performing well.",
+    "risk_watch_fallback": "This area could use some attention.",
+    "risk_action_fallback": "This metric needs focused improvement.",
+    "female": "Female",
+    "male": "Male",
+    "bf_action_dynamic": "{{sex}} · {{age}} years",
+    "rec_action_dynamic": "{{n}} picks · tied to signals",
+    "how_to_use": "HOW TO USE",
+    "cta_eyebrow": "WHAT'S NEXT",
+    "cta_heading": "Follow the plan,",
+    "cta_heading_em": "reassess in 4 weeks.",
+    "cta_body_v2": "Give the plan time to move the numbers. Your coach will reach out when it's time for your next assessment — we'll compare side-by-side and adjust from there."
   }
 }

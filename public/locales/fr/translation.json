@@ -24,7 +24,8 @@
     "contact_ids": "IDs de Contact",
     "contact_ids_placeholder": "IDs de contact CRM séparés par des virgules",
     "language": "Langue",
-    "submit": "Passer à l'Évaluation Corporelle"
+    "submit": "Passer à l'Évaluation Corporelle",
+    "bot_index_placeholder": "1"
   },
   "footer": {
     "rights": "Tous droits réservés.",
@@ -202,7 +203,7 @@
     "science_badge_privacy": "Confidentialité des données",
     "science_strip": "Nos méthodes · revues par des pairs",
     "testimonials_beta": "Retours de nos premiers coachs et utilisateurs en bêta.",
-    "scan_card_view": "FRONT VIEW · CAPTURING"
+    "scan_card_view": "VUE DE FACE · CAPTURE"
   },
   "scan": {
     "rail_eyebrow": "Évaluation corporelle",
@@ -244,7 +245,8 @@
       "country": "Pays",
       "province": "Région/Province",
       "city": "Ville",
-      "disclaimer": "Nous enverrons votre rapport directement sur votre WhatsApp. Veuillez vérifier que votre numéro de téléphone est correct. Merci !"
+      "disclaimer": "Nous enverrons votre rapport directement sur votre WhatsApp. Veuillez vérifier que votre numéro de téléphone est correct. Merci !",
+      "email_placeholder": "sofia@example.com"
     },
     "step2": {
       "nav": "Informations Physiques",
@@ -405,14 +407,14 @@
     "tip2": "Retirez lunettes et chapeaux",
     "tip3": "Faites face à la caméra",
     "tip4": "Tout le visage doit être visible",
-    "analyzing_subtitle_simple": "Hang tight — this takes about 30 seconds."
+    "analyzing_subtitle_simple": "Patientez — cela prend environ 30 secondes."
   },
   "navigation": {
     "next": "Suivant",
     "previous": "Précédent",
     "submit": "Envoyer",
     "submitting": "Envoi en cours...",
-    "sending": "Sending…"
+    "sending": "Envoi…"
   },
   "validation": {
     "personal": {
@@ -504,12 +506,12 @@
     },
     "body_type_label": "Type de morphologie",
     "body_types": {
-      "athletic": "Athletic",
-      "balanced": "Balanced",
-      "endomorph": "Endomorph",
-      "ectomorph": "Ectomorph",
-      "mesomorph": "Mesomorph",
-      "mixed": "Mixed"
+      "athletic": "Athlétique",
+      "balanced": "Équilibré",
+      "endomorph": "Endomorphe",
+      "ectomorph": "Ectomorphe",
+      "mesomorph": "Mésomorphe",
+      "mixed": "Mixte"
     }
   },
   "metrics": {
@@ -526,17 +528,17 @@
     "texture": "Texture",
     "dark_circles": "Cernes",
     "bmi": "BMI",
-    "body_fat": "Body fat %",
-    "lean_mass": "Lean body mass",
-    "waist_hip_ratio": "Waist-to-hip ratio",
-    "healthy_weight": "Healthy weight",
-    "total_body_water": "Total body water",
-    "bmr": "Basal metabolic rate",
-    "calorie_target": "Daily calories",
-    "protein_target": "Protein target",
-    "carbs_target": "Carbs target",
-    "fat_target": "Fat target",
-    "hydration_target": "Hydration target"
+    "body_fat": "% de masse grasse",
+    "lean_mass": "Masse maigre",
+    "waist_hip_ratio": "Rapport taille-hanches",
+    "healthy_weight": "Poids santé",
+    "total_body_water": "Eau corporelle totale",
+    "bmr": "Métabolisme de base",
+    "calorie_target": "Calories quotidiennes",
+    "protein_target": "Objectif protéines",
+    "carbs_target": "Objectif glucides",
+    "fat_target": "Objectif lipides",
+    "hydration_target": "Objectif d'hydratation"
   },
   "metrics_desc": {
     "oily_skin": "Mesure la quantité d'excès de sébum sur la peau. Un score équilibré indique que la peau produit du sébum à un niveau normal sans être excessivement grasse.",
@@ -551,18 +553,18 @@
     "fine_lines_wrinkles": "Évalue l'apparence générale des ridules et des rides sur le visage. Un meilleur score signifie qu'elles sont moins visibles.",
     "texture": "Désigne l'état général et la régularité de la surface de la peau. Un score très élevé suggère que la peau est raffinée, uniforme et bien équilibrée.",
     "dark_circles": "Mesure l'apparence des cernes sous les yeux. Un score élevé signifie que le contour des yeux paraît plus lumineux et moins fatigué.",
-    "bmi": "Weight relative to height squared. Classified using WHO bands from underweight through obesity III.",
-    "body_fat": "Estimated using the Deurenberg formula, adjusted for your age and sex.",
-    "lean_mass": "The non-fat share of your body — bones, organs, muscle, water. Higher lean mass means faster metabolism.",
-    "waist_hip_ratio": "Cardiometabolic risk proxy with gender-specific bands for low / moderate / high.",
-    "healthy_weight": "Lorentz-formula healthy target adjusted for height and sex.",
-    "total_body_water": "Watson equation estimate of total body water in liters.",
-    "bmr": "Mifflin-St Jeor BMR — kilocalories you burn at rest each day.",
-    "calorie_target": "BMR scaled by your activity level and your weight goal.",
-    "protein_target": "Protein grams per day calibrated to support your goal.",
-    "carbs_target": "Carbohydrate grams per day from the goal-specific macro split.",
-    "fat_target": "Fat grams per day from the goal-specific macro split.",
-    "hydration_target": "Liters per day based on body weight (0.033 L per kg)."
+    "bmi": "Poids rapporté au carré de la taille. Classé selon les seuils de l'OMS, de l'insuffisance pondérale à l'obésité III.",
+    "body_fat": "Estimée avec la formule de Deurenberg, ajustée selon votre âge et votre sexe.",
+    "lean_mass": "La part non grasse de votre corps : os, organes, muscles, eau. Plus de masse maigre = métabolisme plus rapide.",
+    "waist_hip_ratio": "Indicateur de risque cardiométabolique avec des seuils par sexe : faible / modéré / élevé.",
+    "healthy_weight": "Objectif santé selon la formule de Lorentz, ajusté selon la taille et le sexe.",
+    "total_body_water": "Estimation de l'eau corporelle totale en litres via l'équation de Watson.",
+    "bmr": "MB selon Mifflin-St Jeor — les kilocalories brûlées au repos chaque jour.",
+    "calorie_target": "MB ajusté selon votre niveau d'activité et votre objectif de poids.",
+    "protein_target": "Grammes de protéines par jour calibrés pour soutenir votre objectif.",
+    "carbs_target": "Grammes de glucides par jour selon la répartition des macros pour votre objectif.",
+    "fat_target": "Grammes de lipides par jour selon la répartition des macros pour votre objectif.",
+    "hydration_target": "Litres par jour selon votre poids corporel (0,033 L par kg)."
   },
   "products": {
     "view": "Voir le Produit",
@@ -821,6 +823,18 @@
     "unit_bmi": "kg / m²",
     "unit_kg_wk": "kg/wk",
     "unit_l": "L",
-    "unit_g": "g"
+    "unit_g": "g",
+    "risk_strength_fallback": "Votre meilleure mesure se porte bien.",
+    "risk_watch_fallback": "Ce point pourrait demander un peu d'attention.",
+    "risk_action_fallback": "Cette mesure nécessite une amélioration ciblée.",
+    "female": "Femme",
+    "male": "Homme",
+    "bf_action_dynamic": "{{sex}} · {{age}} ans",
+    "rec_action_dynamic": "{{n}} sélections · liées à vos signaux",
+    "how_to_use": "MODE D'EMPLOI",
+    "cta_eyebrow": "LA SUITE",
+    "cta_heading": "Suivez le plan,",
+    "cta_heading_em": "réévaluez dans 4 semaines.",
+    "cta_body_v2": "Laissez le plan agir sur les chiffres. Votre coach vous contactera au moment de votre prochain bilan — nous comparerons côte à côte et ajusterons à partir de là."
   }
 }

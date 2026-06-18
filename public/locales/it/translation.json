@@ -24,7 +24,8 @@
     "contact_ids": "ID Contatto",
     "contact_ids_placeholder": "ID contatto CRM separati da virgole",
     "language": "Lingua",
-    "submit": "Procedi alla Valutazione Corporea"
+    "submit": "Procedi alla Valutazione Corporea",
+    "bot_index_placeholder": "1"
   },
   "footer": {
     "rights": "Tutti i diritti riservati.",
@@ -202,7 +203,7 @@
     "science_badge_privacy": "Privacy dei dati",
     "science_strip": "I nostri metodi · revisionati da esperti",
     "testimonials_beta": "Feedback dai nostri primi coach e utenti beta.",
-    "scan_card_view": "FRONT VIEW · CAPTURING"
+    "scan_card_view": "VISTA FRONTALE · ACQUISIZIONE"
   },
   "scan": {
     "rail_eyebrow": "Valutazione corporea",
@@ -244,7 +245,8 @@
       "country": "Paese",
       "province": "Regione/Provincia",
       "city": "Città",
-      "disclaimer": "Invieremo il tuo report direttamente al tuo WhatsApp. Per favore, verifica che il tuo numero di telefono sia corretto. Grazie!"
+      "disclaimer": "Invieremo il tuo report direttamente al tuo WhatsApp. Per favore, verifica che il tuo numero di telefono sia corretto. Grazie!",
+      "email_placeholder": "sofia@example.com"
     },
     "step2": {
       "nav": "Informazioni Fisiche",
@@ -391,7 +393,7 @@
     "upload_tab": "Carica foto",
     "photo_alt_captured": "Scattata",
     "retake": "Ripeti scatto",
-    "camera_live": "Live",
+    "camera_live": "In diretta",
     "camera_help_title": "Resta fermo: catturiamo automaticamente il fotogramma più nitido.",
     "camera_help_body": "Assicurati che tutto il viso sia visibile all'interno dell'ovale tratteggiato, con luce uniforme su entrambi i lati.",
     "photo_alt_uploaded": "Caricata",
@@ -405,14 +407,14 @@
     "tip2": "Togli occhiali e cappelli",
     "tip3": "Guarda dritto in camera",
     "tip4": "Il viso deve essere tutto visibile",
-    "analyzing_subtitle_simple": "Hang tight — this takes about 30 seconds."
+    "analyzing_subtitle_simple": "Un attimo — ci vogliono circa 30 secondi."
   },
   "navigation": {
     "next": "Avanti",
     "previous": "Indietro",
     "submit": "Invia",
     "submitting": "Invio in corso...",
-    "sending": "Sending…"
+    "sending": "Invio…"
   },
   "validation": {
     "personal": {
@@ -504,12 +506,12 @@
     },
     "body_type_label": "Tipo di corporatura",
     "body_types": {
-      "athletic": "Athletic",
-      "balanced": "Balanced",
-      "endomorph": "Endomorph",
-      "ectomorph": "Ectomorph",
-      "mesomorph": "Mesomorph",
-      "mixed": "Mixed"
+      "athletic": "Atletico",
+      "balanced": "Equilibrato",
+      "endomorph": "Endomorfo",
+      "ectomorph": "Ectomorfo",
+      "mesomorph": "Mesomorfo",
+      "mixed": "Misto"
     }
   },
   "metrics": {
@@ -526,17 +528,17 @@
     "texture": "Texture",
     "dark_circles": "Occhiaie",
     "bmi": "BMI",
-    "body_fat": "Body fat %",
-    "lean_mass": "Lean body mass",
-    "waist_hip_ratio": "Waist-to-hip ratio",
-    "healthy_weight": "Healthy weight",
-    "total_body_water": "Total body water",
-    "bmr": "Basal metabolic rate",
-    "calorie_target": "Daily calories",
-    "protein_target": "Protein target",
-    "carbs_target": "Carbs target",
-    "fat_target": "Fat target",
-    "hydration_target": "Hydration target"
+    "body_fat": "% di grasso corporeo",
+    "lean_mass": "Massa magra",
+    "waist_hip_ratio": "Rapporto vita-fianchi",
+    "healthy_weight": "Peso sano",
+    "total_body_water": "Acqua corporea totale",
+    "bmr": "Metabolismo basale",
+    "calorie_target": "Calorie giornaliere",
+    "protein_target": "Obiettivo di proteine",
+    "carbs_target": "Obiettivo di carboidrati",
+    "fat_target": "Obiettivo di grassi",
+    "hydration_target": "Obiettivo di idratazione"
   },
   "metrics_desc": {
     "oily_skin": "Misura la quantità di sebo in eccesso sulla pelle. Un punteggio equilibrato indica che la pelle produce sebo a un livello normale senza essere eccessivamente grassa.",
@@ -551,18 +553,18 @@
     "fine_lines_wrinkles": "Valuta l'aspetto generale delle linee di espressione e delle rughe sul viso. Un punteggio migliore significa che sono meno visibili.",
     "texture": "Si riferisce alla condizione generale e all'uniformità della superficie della pelle. Un punteggio molto alto suggerisce che la pelle appare raffinata, uniforme e ben equilibrata.",
     "dark_circles": "Misura l'aspetto delle occhiaie sotto gli occhi. Un punteggio alto significa che la zona sotto gli occhi appare più luminosa e meno stanca.",
-    "bmi": "Weight relative to height squared. Classified using WHO bands from underweight through obesity III.",
-    "body_fat": "Estimated using the Deurenberg formula, adjusted for your age and sex.",
-    "lean_mass": "The non-fat share of your body — bones, organs, muscle, water. Higher lean mass means faster metabolism.",
-    "waist_hip_ratio": "Cardiometabolic risk proxy with gender-specific bands for low / moderate / high.",
-    "healthy_weight": "Lorentz-formula healthy target adjusted for height and sex.",
-    "total_body_water": "Watson equation estimate of total body water in liters.",
-    "bmr": "Mifflin-St Jeor BMR — kilocalories you burn at rest each day.",
-    "calorie_target": "BMR scaled by your activity level and your weight goal.",
-    "protein_target": "Protein grams per day calibrated to support your goal.",
-    "carbs_target": "Carbohydrate grams per day from the goal-specific macro split.",
-    "fat_target": "Fat grams per day from the goal-specific macro split.",
-    "hydration_target": "Liters per day based on body weight (0.033 L per kg)."
+    "bmi": "Peso rispetto all'altezza al quadrato. Classificato con le fasce dell'OMS, dal sottopeso all'obesità III.",
+    "body_fat": "Stimato con la formula di Deurenberg, adattato a età e sesso.",
+    "lean_mass": "La parte non grassa del corpo: ossa, organi, muscoli, acqua. Più massa magra significa un metabolismo più veloce.",
+    "waist_hip_ratio": "Indicatore di rischio cardiometabolico con fasce per sesso: basso / moderato / alto.",
+    "healthy_weight": "Obiettivo sano della formula di Lorentz, adattato per altezza e sesso.",
+    "total_body_water": "Stima dell'acqua corporea totale in litri con l'equazione di Watson.",
+    "bmr": "MB di Mifflin-St Jeor — le chilocalorie che bruci a riposo ogni giorno.",
+    "calorie_target": "MB adattato al tuo livello di attività e al tuo obiettivo di peso.",
+    "protein_target": "Grammi di proteine al giorno calibrati per supportare il tuo obiettivo.",
+    "carbs_target": "Grammi di carboidrati al giorno dalla ripartizione dei macro per il tuo obiettivo.",
+    "fat_target": "Grammi di grassi al giorno dalla ripartizione dei macro per il tuo obiettivo.",
+    "hydration_target": "Litri al giorno in base al peso corporeo (0,033 L per kg)."
   },
   "products": {
     "view": "Vedi Prodotto",
@@ -662,7 +664,7 @@
     "tab_upload": "Carica foto",
     "photo_captured": "Scattata",
     "retake": "Ripeti scatto",
-    "live": "Live",
+    "live": "In diretta",
     "capture": "Scatta",
     "camera_tip_title": "Posizionati a 2 metri dalla fotocamera.",
     "camera_tip_body": "Indossa abiti aderenti, tieni le braccia leggermente staccate dal corpo e inquadrati dalla testa alle caviglie all'interno del contorno tratteggiato.",
@@ -821,6 +823,18 @@
     "unit_bmi": "kg / m²",
     "unit_kg_wk": "kg/wk",
     "unit_l": "L",
-    "unit_g": "g"
+    "unit_g": "g",
+    "risk_strength_fallback": "Il tuo parametro migliore sta andando bene.",
+    "risk_watch_fallback": "Quest'area potrebbe richiedere un po' di attenzione.",
+    "risk_action_fallback": "Questo parametro necessita di un miglioramento mirato.",
+    "female": "Donna",
+    "male": "Uomo",
+    "bf_action_dynamic": "{{sex}} · {{age}} anni",
+    "rec_action_dynamic": "{{n}} selezioni · legate ai tuoi segnali",
+    "how_to_use": "MODO D'USO",
+    "cta_eyebrow": "COSA VIENE DOPO",
+    "cta_heading": "Segui il piano,",
+    "cta_heading_em": "rivaluta tra 4 settimane.",
+    "cta_body_v2": "Dai al piano il tempo di muovere i numeri. Il tuo coach ti contatterà quando sarà il momento della prossima valutazione: confronteremo fianco a fianco e regoleremo da lì."
   }
 }
