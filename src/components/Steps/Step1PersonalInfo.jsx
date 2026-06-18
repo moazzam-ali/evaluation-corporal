@@ -28,7 +28,7 @@ export default function Step1PersonalInfo({ form, t }) {
 
       <div className="flex flex-col gap-1.5">
         <label className="scan-label">{t("scan.step1.email", "Email")} <span className="text-[#9B8573] text-sm">*</span></label>
-        <input className="scan-input" type="email" placeholder="sofia@example.com" {...register("email")} />
+        <input className="scan-input" type="email" placeholder={t("scan.step1.email_placeholder", "sofia@example.com")} {...register("email")} />
         <span className="scan-help">{t("scan.step1.disclaimer", "We will send your report directly to your WhatsApp. Please verify that your phone number is correct.")}</span>
         {errors.email && <p className="scan-error">{t("validation.personal.email_invalid", errors.email.message)}</p>}
       </div>

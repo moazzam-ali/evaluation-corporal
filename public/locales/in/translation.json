@@ -24,7 +24,8 @@
     "contact_ids": "कॉन्टैक्ट आईडी",
     "contact_ids_placeholder": "कॉमा से अलग CRM कॉन्टैक्ट आईडी",
     "language": "भाषा",
-    "submit": "शारीरिक मूल्यांकन पर जाएं"
+    "submit": "शारीरिक मूल्यांकन पर जाएं",
+    "bot_index_placeholder": "1"
   },
   "footer": {
     "rights": "सर्वाधिकार सुरक्षित।",
@@ -202,7 +203,7 @@
     "science_badge_privacy": "डेटा गोपनीयता",
     "science_strip": "हमारी विधियाँ · समीक्षित",
     "testimonials_beta": "हमारे शुरुआती बीटा कोचों और उपयोगकर्ताओं की प्रतिक्रिया।",
-    "scan_card_view": "FRONT VIEW · CAPTURING"
+    "scan_card_view": "सामने का दृश्य · कैप्चर हो रहा है"
   },
   "scan": {
     "rail_eyebrow": "शारीरिक मूल्यांकन",
@@ -244,7 +245,8 @@
       "country": "देश",
       "province": "राज्य/प्रांत",
       "city": "शहर",
-      "disclaimer": "हम आपकी रिपोर्ट सीधे आपके WhatsApp पर भेजेंगे। कृपया सुनिश्चित करें कि आपका फ़ोन नंबर सही है। धन्यवाद!"
+      "disclaimer": "हम आपकी रिपोर्ट सीधे आपके WhatsApp पर भेजेंगे। कृपया सुनिश्चित करें कि आपका फ़ोन नंबर सही है। धन्यवाद!",
+      "email_placeholder": "sofia@example.com"
     },
     "step2": {
       "nav": "शारीरिक जानकारी",
@@ -405,14 +407,14 @@
     "tip2": "चश्मा और टोपी हटाएँ",
     "tip3": "सीधे कैमरे की ओर देखें",
     "tip4": "पूरा चेहरा दिखाई देना चाहिए",
-    "analyzing_subtitle_simple": "Hang tight — this takes about 30 seconds."
+    "analyzing_subtitle_simple": "थोड़ा रुकें — इसमें लगभग 30 सेकंड लगते हैं।"
   },
   "navigation": {
     "next": "अगला",
     "previous": "पिछला",
     "submit": "भेजें",
     "submitting": "भेजा जा रहा है...",
-    "sending": "Sending…"
+    "sending": "भेजा जा रहा है…"
   },
   "validation": {
     "personal": {
@@ -527,12 +529,12 @@
     },
     "body_type_label": "शरीर का प्रकार",
     "body_types": {
-      "athletic": "Athletic",
-      "balanced": "Balanced",
-      "endomorph": "Endomorph",
-      "ectomorph": "Ectomorph",
-      "mesomorph": "Mesomorph",
-      "mixed": "Mixed"
+      "athletic": "एथलेटिक",
+      "balanced": "संतुलित",
+      "endomorph": "एंडोमॉर्फ",
+      "ectomorph": "एक्टोमॉर्फ",
+      "mesomorph": "मेसोमॉर्फ",
+      "mixed": "मिश्रित"
     }
   },
   "metrics": {
@@ -549,17 +551,17 @@
     "texture": "टेक्सचर",
     "dark_circles": "डार्क सर्कल्स",
     "bmi": "BMI",
-    "body_fat": "Body fat %",
-    "lean_mass": "Lean body mass",
-    "waist_hip_ratio": "Waist-to-hip ratio",
-    "healthy_weight": "Healthy weight",
-    "total_body_water": "Total body water",
-    "bmr": "Basal metabolic rate",
-    "calorie_target": "Daily calories",
-    "protein_target": "Protein target",
-    "carbs_target": "Carbs target",
-    "fat_target": "Fat target",
-    "hydration_target": "Hydration target"
+    "body_fat": "शरीर में वसा %",
+    "lean_mass": "लीन बॉडी मास",
+    "waist_hip_ratio": "कमर-कूल्हा अनुपात",
+    "healthy_weight": "स्वस्थ वज़न",
+    "total_body_water": "कुल शारीरिक जल",
+    "bmr": "बेसल चयापचय दर",
+    "calorie_target": "दैनिक कैलोरी",
+    "protein_target": "प्रोटीन लक्ष्य",
+    "carbs_target": "कार्ब्स लक्ष्य",
+    "fat_target": "वसा लक्ष्य",
+    "hydration_target": "हाइड्रेशन लक्ष्य"
   },
   "metrics_desc": {
     "oily_skin": "यह त्वचा पर अतिरिक्त तेल या सीबम की मात्रा मापता है। एक संतुलित स्कोर दर्शाता है कि त्वचा सामान्य स्तर पर तेल उत्पन्न कर रही है बिना अत्यधिक चिकनाई के।",
@@ -574,18 +576,18 @@
     "fine_lines_wrinkles": "यह चेहरे पर अभिव्यक्ति रेखाओं और झुर्रियों की समग्र उपस्थिति का आकलन करता है। बेहतर स्कोर का मतलब वे कम दिखती हैं।",
     "texture": "यह त्वचा की सतह की समग्र स्थिति और संगति को दर्शाता है। बहुत उच्च स्कोर दर्शाता है कि त्वचा परिष्कृत, समान और संतुलित दिखती है।",
     "dark_circles": "यह आंखों के नीचे के कालेपन की उपस्थिति मापता है। उच्च स्कोर का मतलब आंखों के नीचे का क्षेत्र अधिक उज्ज्वल और कम थका हुआ दिखता है।",
-    "bmi": "Weight relative to height squared. Classified using WHO bands from underweight through obesity III.",
-    "body_fat": "Estimated using the Deurenberg formula, adjusted for your age and sex.",
-    "lean_mass": "The non-fat share of your body — bones, organs, muscle, water. Higher lean mass means faster metabolism.",
-    "waist_hip_ratio": "Cardiometabolic risk proxy with gender-specific bands for low / moderate / high.",
-    "healthy_weight": "Lorentz-formula healthy target adjusted for height and sex.",
-    "total_body_water": "Watson equation estimate of total body water in liters.",
-    "bmr": "Mifflin-St Jeor BMR — kilocalories you burn at rest each day.",
-    "calorie_target": "BMR scaled by your activity level and your weight goal.",
-    "protein_target": "Protein grams per day calibrated to support your goal.",
-    "carbs_target": "Carbohydrate grams per day from the goal-specific macro split.",
-    "fat_target": "Fat grams per day from the goal-specific macro split.",
-    "hydration_target": "Liters per day based on body weight (0.033 L per kg)."
+    "bmi": "कद के वर्ग के सापेक्ष वज़न। WHO बैंड से कम वज़न से मोटापा III तक वर्गीकृत।",
+    "body_fat": "ड्यूरेनबर्ग सूत्र से अनुमानित, आपकी आयु और लिंग के अनुसार समायोजित।",
+    "lean_mass": "आपके शरीर का गैर-वसा हिस्सा — हड्डियाँ, अंग, मांसपेशी, जल। अधिक लीन मास का अर्थ तेज़ चयापचय।",
+    "waist_hip_ratio": "निम्न / मध्यम / उच्च के लिए लिंग-विशिष्ट बैंड के साथ कार्डियोमेटाबोलिक जोखिम सूचक।",
+    "healthy_weight": "लॉरेंज़ सूत्र का स्वस्थ लक्ष्य, कद और लिंग के अनुसार समायोजित।",
+    "total_body_water": "वॉटसन समीकरण से लीटर में कुल शारीरिक जल का अनुमान।",
+    "bmr": "मिफ्लिन-सेंट जोर BMR — हर दिन विश्राम में आप जितनी किलोकैलोरी जलाते हैं।",
+    "calorie_target": "आपके गतिविधि स्तर और वज़न लक्ष्य के अनुसार समायोजित BMR।",
+    "protein_target": "आपके लक्ष्य का समर्थन करने के लिए निर्धारित प्रतिदिन प्रोटीन ग्राम।",
+    "carbs_target": "आपके लक्ष्य के मैक्रो विभाजन से प्रतिदिन कार्बोहाइड्रेट ग्राम।",
+    "fat_target": "आपके लक्ष्य के मैक्रो विभाजन से प्रतिदिन वसा ग्राम।",
+    "hydration_target": "शरीर के वज़न के आधार पर प्रतिदिन लीटर (0.033 L प्रति kg)।"
   },
   "products": {
     "view": "उत्पाद देखें",
@@ -821,6 +823,18 @@
     "unit_bmi": "kg / m²",
     "unit_kg_wk": "kg/wk",
     "unit_l": "L",
-    "unit_g": "g"
+    "unit_g": "g",
+    "risk_strength_fallback": "आपका सबसे मज़बूत मीट्रिक अच्छा प्रदर्शन कर रहा है।",
+    "risk_watch_fallback": "इस क्षेत्र पर थोड़ा ध्यान देने की ज़रूरत हो सकती है।",
+    "risk_action_fallback": "इस मीट्रिक में केंद्रित सुधार की आवश्यकता है।",
+    "female": "महिला",
+    "male": "पुरुष",
+    "bf_action_dynamic": "{{sex}} · {{age}} वर्ष",
+    "rec_action_dynamic": "{{n}} सुझाव · आपके संकेतों से जुड़े",
+    "how_to_use": "उपयोग कैसे करें",
+    "cta_eyebrow": "आगे क्या",
+    "cta_heading": "योजना का पालन करें,",
+    "cta_heading_em": "4 सप्ताह में पुनर्मूल्यांकन करें।",
+    "cta_body_v2": "योजना को संख्याएँ बदलने का समय दें। आपकी अगली मूल्यांकन का समय आने पर आपका कोच संपर्क करेगा — हम साथ-साथ तुलना करेंगे और वहीं से समायोजित करेंगे।"
   }
 }
