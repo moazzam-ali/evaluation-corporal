@@ -24,7 +24,8 @@
     "contact_ids": "Kontakt-IDs",
     "contact_ids_placeholder": "Kommagetrennte CRM-Kontakt-IDs",
     "language": "Sprache",
-    "submit": "Weiter zur Körperbewertung"
+    "submit": "Weiter zur Körperbewertung",
+    "bot_index_placeholder": "1"
   },
   "footer": {
     "rights": "Alle Rechte vorbehalten.",
@@ -142,7 +143,7 @@
     "tier_focus": "Fokus",
     "radar_composition": "Komposition",
     "radar_posture": "Haltung",
-    "radar_hydration": "Hydration",
+    "radar_hydration": "Hydratation",
     "radar_recovery": "Erholung",
     "radar_nutrition": "Ernährung",
     "radar_muscle": "Muskel",
@@ -202,7 +203,7 @@
     "science_badge_privacy": "Datenschutz",
     "science_strip": "Unsere Methoden · peer-reviewt",
     "testimonials_beta": "Feedback unserer ersten Beta-Coaches und Nutzer.",
-    "scan_card_view": "FRONT VIEW · CAPTURING"
+    "scan_card_view": "VORDERANSICHT · ERFASSUNG"
   },
   "scan": {
     "rail_eyebrow": "Körperbewertung",
@@ -244,7 +245,8 @@
       "country": "Land",
       "province": "Bundesland/Kanton",
       "city": "Stadt",
-      "disclaimer": "Wir senden Ihren Bericht direkt an Ihr WhatsApp. Bitte überprüfen Sie, ob Ihre Telefonnummer korrekt ist. Vielen Dank!"
+      "disclaimer": "Wir senden Ihren Bericht direkt an Ihr WhatsApp. Bitte überprüfen Sie, ob Ihre Telefonnummer korrekt ist. Vielen Dank!",
+      "email_placeholder": "sofia@example.com"
     },
     "step2": {
       "nav": "Körperliche Daten",
@@ -405,14 +407,14 @@
     "tip2": "Brille und Hut absetzen",
     "tip3": "Direkt in die Kamera schauen",
     "tip4": "Das gesamte Gesicht muss sichtbar sein",
-    "analyzing_subtitle_simple": "Hang tight — this takes about 30 seconds."
+    "analyzing_subtitle_simple": "Einen Moment — das dauert etwa 30 Sekunden."
   },
   "navigation": {
     "next": "Weiter",
     "previous": "Zurück",
     "submit": "Senden",
     "submitting": "Wird gesendet...",
-    "sending": "Sending…"
+    "sending": "Senden…"
   },
   "validation": {
     "personal": {
@@ -504,12 +506,12 @@
     },
     "body_type_label": "Körpertyp",
     "body_types": {
-      "athletic": "Athletic",
-      "balanced": "Balanced",
+      "athletic": "Athletisch",
+      "balanced": "Ausgewogen",
       "endomorph": "Endomorph",
-      "ectomorph": "Ectomorph",
+      "ectomorph": "Ektomorph",
       "mesomorph": "Mesomorph",
-      "mixed": "Mixed"
+      "mixed": "Gemischt"
     }
   },
   "metrics": {
@@ -526,17 +528,17 @@
     "texture": "Textur",
     "dark_circles": "Augenringe",
     "bmi": "BMI",
-    "body_fat": "Body fat %",
-    "lean_mass": "Lean body mass",
-    "waist_hip_ratio": "Waist-to-hip ratio",
-    "healthy_weight": "Healthy weight",
-    "total_body_water": "Total body water",
-    "bmr": "Basal metabolic rate",
-    "calorie_target": "Daily calories",
-    "protein_target": "Protein target",
-    "carbs_target": "Carbs target",
-    "fat_target": "Fat target",
-    "hydration_target": "Hydration target"
+    "body_fat": "Körperfett %",
+    "lean_mass": "Magermasse",
+    "waist_hip_ratio": "Taille-Hüft-Verhältnis",
+    "healthy_weight": "Gesundes Gewicht",
+    "total_body_water": "Gesamtkörperwasser",
+    "bmr": "Grundumsatz",
+    "calorie_target": "Tägliche Kalorien",
+    "protein_target": "Protein-Ziel",
+    "carbs_target": "Kohlenhydrat-Ziel",
+    "fat_target": "Fett-Ziel",
+    "hydration_target": "Hydratationsziel"
   },
   "metrics_desc": {
     "oily_skin": "Misst die Menge an überschüssigem Öl oder Talg auf der Haut. Ein ausgewogener Wert deutet darauf hin, dass die Haut Talg in normalem Maße produziert, ohne übermäßig fettig zu sein.",
@@ -551,18 +553,18 @@
     "fine_lines_wrinkles": "Bewertet das Gesamterscheinungsbild von feinen Linien und Falten im Gesicht. Ein besserer Wert bedeutet, dass sie weniger sichtbar sind.",
     "texture": "Bezieht sich auf den Gesamtzustand und die Gleichmäßigkeit der Hautoberfläche. Ein sehr hoher Wert deutet darauf hin, dass die Haut verfeinert, ebenmäßig und ausgewogen aussieht.",
     "dark_circles": "Misst das Erscheinungsbild von Dunkelheit unter den Augen. Ein hoher Wert bedeutet, dass der Bereich unter den Augen heller und weniger müde aussieht.",
-    "bmi": "Weight relative to height squared. Classified using WHO bands from underweight through obesity III.",
-    "body_fat": "Estimated using the Deurenberg formula, adjusted for your age and sex.",
-    "lean_mass": "The non-fat share of your body — bones, organs, muscle, water. Higher lean mass means faster metabolism.",
-    "waist_hip_ratio": "Cardiometabolic risk proxy with gender-specific bands for low / moderate / high.",
-    "healthy_weight": "Lorentz-formula healthy target adjusted for height and sex.",
-    "total_body_water": "Watson equation estimate of total body water in liters.",
-    "bmr": "Mifflin-St Jeor BMR — kilocalories you burn at rest each day.",
-    "calorie_target": "BMR scaled by your activity level and your weight goal.",
-    "protein_target": "Protein grams per day calibrated to support your goal.",
-    "carbs_target": "Carbohydrate grams per day from the goal-specific macro split.",
-    "fat_target": "Fat grams per day from the goal-specific macro split.",
-    "hydration_target": "Liters per day based on body weight (0.033 L per kg)."
+    "bmi": "Gewicht im Verhältnis zur Körpergröße im Quadrat. Klassifiziert nach WHO-Bändern von Untergewicht bis Adipositas III.",
+    "body_fat": "Geschätzt mit der Deurenberg-Formel, angepasst an Alter und Geschlecht.",
+    "lean_mass": "Der fettfreie Anteil deines Körpers — Knochen, Organe, Muskeln, Wasser. Mehr Magermasse bedeutet einen schnelleren Stoffwechsel.",
+    "waist_hip_ratio": "Indikator für kardiometabolisches Risiko mit geschlechtsspezifischen Bändern für niedrig / mittel / hoch.",
+    "healthy_weight": "Gesundes Ziel nach der Lorentz-Formel, angepasst an Größe und Geschlecht.",
+    "total_body_water": "Schätzung des Gesamtkörperwassers in Litern mit der Watson-Gleichung.",
+    "bmr": "Grundumsatz nach Mifflin-St Jeor — Kilokalorien, die du täglich in Ruhe verbrennst.",
+    "calorie_target": "Grundumsatz skaliert nach Aktivitätsniveau und Gewichtsziel.",
+    "protein_target": "Protein in Gramm pro Tag, abgestimmt auf dein Ziel.",
+    "carbs_target": "Kohlenhydrate in Gramm pro Tag aus der zielspezifischen Makroverteilung.",
+    "fat_target": "Fett in Gramm pro Tag aus der zielspezifischen Makroverteilung.",
+    "hydration_target": "Liter pro Tag basierend auf dem Körpergewicht (0,033 L pro kg)."
   },
   "products": {
     "view": "Produkt Ansehen",
@@ -821,6 +823,18 @@
     "unit_bmi": "kg / m²",
     "unit_kg_wk": "kg/wk",
     "unit_l": "L",
-    "unit_g": "g"
+    "unit_g": "g",
+    "risk_strength_fallback": "Dein stärkster Wert schneidet gut ab.",
+    "risk_watch_fallback": "Dieser Bereich könnte etwas Aufmerksamkeit gebrauchen.",
+    "risk_action_fallback": "Dieser Wert braucht gezielte Verbesserung.",
+    "female": "Weiblich",
+    "male": "Männlich",
+    "bf_action_dynamic": "{{sex}} · {{age}} Jahre",
+    "rec_action_dynamic": "{{n}} Empfehlungen · an Signale gekoppelt",
+    "how_to_use": "ANWENDUNG",
+    "cta_eyebrow": "WAS ALS NÄCHSTES",
+    "cta_heading": "Folge dem Plan,",
+    "cta_heading_em": "überprüfe in 4 Wochen.",
+    "cta_body_v2": "Gib dem Plan Zeit, die Zahlen zu bewegen. Dein Coach meldet sich, wenn deine nächste Auswertung ansteht — wir vergleichen Seite an Seite und passen von dort an."
   }
 }
