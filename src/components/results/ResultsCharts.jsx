@@ -111,19 +111,17 @@ export function ChapterBand({ eyebrow, title }) {
   );
 }
 
-/* ── Radar Chart ───────────────────────────────────────────────── */
+/* ── Radar Chart — single real "current profile" series ────────── */
 export function Radar({ data }) {
   const cx = 180, cy = 180, R = 130, n = data.length;
   const pt = (v, i) => { const a = (Math.PI * 2 / n) * i - Math.PI / 2; return [cx + Math.cos(a) * R * v, cy + Math.sin(a) * R * v]; };
-  const polyNow = data.map((d, i) => pt(d.now, i).join(",")).join(" ");
-  const polyPrev = data.map((d, i) => pt(d.prev, i).join(",")).join(" ");
+  const poly = data.map((d, i) => pt(d.value, i).join(",")).join(" ");
   return (
     <svg width="360" height="360" viewBox="0 0 360 360">
       {[0.25, 0.5, 0.75, 1].map(s => <polygon key={s} points={Array.from({ length: n }, (_, k) => pt(s, k).join(",")).join(" ")} fill="none" stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />)}
       {Array.from({ length: n }, (_, k) => { const [x, y] = pt(1, k); return <line key={k} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />; })}
-      <polygon points={polyPrev} fill="rgba(47,47,43,0.04)" stroke="rgba(47,47,43,0.35)" strokeWidth="1" strokeDasharray="3 4" />
-      <polygon points={polyNow} fill="rgba(155,133,115,0.10)" stroke="var(--primary-hex, #9B8573)" strokeWidth="2" />
-      {data.map((d, i) => { const [x, y] = pt(d.now, i); return <circle key={i} cx={x} cy={y} r="4" fill="white" stroke="var(--primary-hex, #9B8573)" strokeWidth="2" />; })}
+      <polygon points={poly} fill="rgba(155,133,115,0.12)" stroke="var(--primary-hex, #9B8573)" strokeWidth="2" />
+      {data.map((d, i) => { const [x, y] = pt(d.value, i); return <circle key={i} cx={x} cy={y} r="4" fill="white" stroke="var(--primary-hex, #9B8573)" strokeWidth="2" />; })}
       {data.map((d, i) => { const [x, y] = pt(1.2, i); return <text key={d.label} x={x} y={y} fontSize="11" fontFamily="var(--font-inter)" fontWeight="600" fill="var(--ink, #2F2F2B)" textAnchor="middle" dominantBaseline="middle">{d.label}</text>; })}
     </svg>
   );

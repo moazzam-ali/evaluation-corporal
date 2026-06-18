@@ -744,6 +744,14 @@
     "cta_eyebrow": "LA SUITE",
     "cta_heading": "Suivez le plan,",
     "cta_heading_em": "réévaluez dans 4 semaines.",
-    "cta_body_v2": "Laissez le plan agir sur les chiffres. Votre coach vous contactera au moment de votre prochain bilan — nous comparerons côte à côte et ajusterons à partir de là."
+    "cta_body_v2": "Laissez le plan agir sur les chiffres. Votre coach vous contactera au moment de votre prochain bilan — nous comparerons côte à côte et ajusterons à partir de là.",
+    "scan_title": "Votre scan",
+    "scan_action": "Analyse photo par IA",
+    "scan_photo_alt": "Photo de votre scan corporel",
+    "body_type_label": "Type de corps",
+    "posture_label": "Posture",
+    "composition_label": "Répartition de la masse",
+    "photo_note_label": "Note sur la photo",
+    "your_profile": "Votre profil"
   }
 }
