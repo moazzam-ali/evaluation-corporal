@@ -68,6 +68,12 @@ export default function ResultsPage() {
       summary={summary}
       metrics={metrics}
       createdAt={analysisData?.createdAt}
+      imageUrl={analysisData?.imageUrl || null}
+      bodyType={results.body_type || null}
+      postureNote={results.posture_note || null}
+      compositionNote={results.composition_note || null}
+      photoQualityNote={results.photo_quality_note || null}
+      visionAvailable={!!results.vision_available}
     />
   );
 }

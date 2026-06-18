@@ -78,13 +78,9 @@ export function mapResultsToView({ formData, results }) {
     fats: { g: fatMetric.value || 0, pct: fatMetric.meta?.pct || 0 },
   };
 
-  // Radar data — 6 dimensions from metric scores (0-1 scale).
-  // "prev" is a placeholder until scan history exists.
+  // Radar data — 6 dimensions straight from each metric's real score (0-1 scale).
   const radarIds = ["body_fat", "healthy_weight", "hydration_target", "calorie_target", "lean_mass", "waist_hip_ratio"];
-  const radarData = radarIds.map((id) => {
-    const now = findMetric(metrics, id).score / 100;
-    return { now: round(now, 2), prev: round(now * 0.93, 2) };
-  });
+  const radarData = radarIds.map((id) => ({ now: round(findMetric(metrics, id).score / 100, 2) }));
 
   // Metabolic age — estimate from overall score. Null if age unknown.
   let metabolicAge = null;

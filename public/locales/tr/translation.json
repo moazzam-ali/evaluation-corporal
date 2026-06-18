@@ -744,6 +744,14 @@
     "cta_eyebrow": "SIRADAKİ",
     "cta_heading": "Planı izle,",
     "cta_heading_em": "4 hafta sonra değerlendir.",
-    "cta_body_v2": "Planın sayıları değiştirmesine zaman tanı. Bir sonraki değerlendirmenin zamanı geldiğinde koçun seninle iletişime geçecek — yan yana karşılaştırıp oradan ayarlayacağız."
+    "cta_body_v2": "Planın sayıları değiştirmesine zaman tanı. Bir sonraki değerlendirmenin zamanı geldiğinde koçun seninle iletişime geçecek — yan yana karşılaştırıp oradan ayarlayacağız.",
+    "scan_title": "Taramanız",
+    "scan_action": "Yapay zekâ foto analizi",
+    "scan_photo_alt": "Vücut tarama fotoğrafın",
+    "body_type_label": "Vücut tipi",
+    "posture_label": "Duruş",
+    "composition_label": "Kütle dağılımı",
+    "photo_note_label": "Fotoğraf notu",
+    "your_profile": "Profilin"
   }
 }
