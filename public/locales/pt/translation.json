@@ -744,6 +744,14 @@
     "cta_eyebrow": "O QUE SE SEGUE",
     "cta_heading": "Segue o plano,",
     "cta_heading_em": "reavalia em 4 semanas.",
-    "cta_body_v2": "Dá tempo ao plano para mover os números. O teu coach entrará em contacto quando for altura da próxima avaliação — vamos comparar lado a lado e ajustar a partir daí."
+    "cta_body_v2": "Dá tempo ao plano para mover os números. O teu coach entrará em contacto quando for altura da próxima avaliação — vamos comparar lado a lado e ajustar a partir daí.",
+    "scan_title": "A tua digitalização",
+    "scan_action": "Análise de foto por IA",
+    "scan_photo_alt": "Foto da tua digitalização corporal",
+    "body_type_label": "Tipo de corpo",
+    "posture_label": "Postura",
+    "composition_label": "Distribuição da massa",
+    "photo_note_label": "Nota da foto",
+    "your_profile": "O teu perfil"
   }
 }
