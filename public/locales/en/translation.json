@@ -744,6 +744,14 @@
     "cta_eyebrow": "WHAT'S NEXT",
     "cta_heading": "Follow the plan,",
     "cta_heading_em": "reassess in 4 weeks.",
-    "cta_body_v2": "Give the plan time to move the numbers. Your coach will reach out when it's time for your next assessment — we'll compare side-by-side and adjust from there."
+    "cta_body_v2": "Give the plan time to move the numbers. Your coach will reach out when it's time for your next assessment — we'll compare side-by-side and adjust from there.",
+    "scan_title": "Your scan",
+    "scan_action": "AI photo analysis",
+    "scan_photo_alt": "Your body scan photo",
+    "body_type_label": "Body type",
+    "posture_label": "Posture",
+    "composition_label": "Mass distribution",
+    "photo_note_label": "Photo note",
+    "your_profile": "Your profile"
   }
 }

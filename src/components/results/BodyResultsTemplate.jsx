@@ -60,7 +60,7 @@ function generateRisks(metrics, t) {
  *   metrics   — raw metrics array (for risk callout generation)
  *   createdAt — ISO date string for the hero
  */
-export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt }) {
+export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionAvailable = false }) {
   const { t, i18n } = useTranslation();
   const d = data;
 
@@ -123,14 +123,15 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
 
   const normalizedProducts = products.map(normalizeProduct);
 
-  const radarData = [
-    { label: t("rd.radar_compos", "Compos."), ...d.radarData[0] },
-    { label: t("rd.radar_weight", "Weight"), ...d.radarData[1] },
-    { label: t("rd.radar_hydra", "Hydra."), ...d.radarData[2] },
-    { label: t("rd.radar_caloric", "Caloric"), ...d.radarData[3] },
-    { label: t("rd.radar_muscle", "Muscle"), ...d.radarData[4] },
-    { label: t("rd.radar_cardio", "Cardio"), ...d.radarData[5] },
+  const RADAR_LABELS = [
+    t("rd.radar_compos", "Compos."), t("rd.radar_weight", "Weight"), t("rd.radar_hydra", "Hydra."),
+    t("rd.radar_caloric", "Caloric"), t("rd.radar_muscle", "Muscle"), t("rd.radar_cardio", "Cardio"),
   ];
+  // 100% real: value (0–1) and score (0–100) come straight from each metric's score.
+  const radarData = RADAR_LABELS.map((label, i) => {
+    const v = d.radarData[i]?.now ?? 0;
+    return { label, value: v, score: Math.round(v * 100) };
+  });
 
   const risks = metrics.length > 0 ? generateRisks(metrics, t) : (data._demoRisks || []);
 
@@ -202,6 +203,39 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
 
         <section className="py-20 sm:py-24" style={{ background: "#F4EFE7" }}>
           <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
+            {/* Your scan — uploaded photo + AI vision read (only when a real photo exists) */}
+            {imageUrl && (
+              <Card className="mb-4">
+                <CardHeader title={t("rd.scan_title", "Your scan")} action={t("rd.scan_action", "AI photo analysis")} />
+                <div className="flex flex-col sm:flex-row gap-6 items-start">
+                  <div className="shrink-0 relative overflow-hidden" style={{ width: 168, aspectRatio: "3 / 4", borderRadius: 14, border: "1.5px solid #C7A977" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={imageUrl} alt={t("rd.scan_photo_alt", "Your body scan photo")} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top", filter: "grayscale(0.12) contrast(1.02)" }} />
+                    <div className="absolute inset-0 pointer-events-none" style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: 0.12 }} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    {visionAvailable && bodyType && (
+                      <div className="mb-4">
+                        <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.body_type_label", "Body type")}</div>
+                        <span className="inline-block mt-1.5 text-[14px] font-semibold px-3 py-1 rounded-full" style={{ background: "#F5EBD5", color: "#8E6418" }}>{t(`results.body_types.${bodyType}`, bodyType)}</span>
+                      </div>
+                    )}
+                    <div className="flex flex-col gap-3">
+                      {[
+                        { label: t("rd.posture_label", "Posture"), text: postureNote },
+                        { label: t("rd.composition_label", "Mass distribution"), text: compositionNote },
+                        { label: t("rd.photo_note_label", "Photo note"), text: photoQualityNote },
+                      ].filter(n => n.text).map(n => (
+                        <div key={n.label}>
+                          <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{n.label}</div>
+                          <p className="text-[13.5px] leading-relaxed mt-1" style={{ color: "var(--ink)" }}>{n.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            )}
             {/* Row 1: BMI + Body Fat */}
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <Card>
@@ -509,26 +543,22 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               <Card className="flex flex-col" style={{ background: "#F4EFE7" }}>
                 <div className="flex justify-between items-baseline mb-5">
                   <span className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink)" }}>{t("rd.profile_title", "Profile")}</span>
-                  <div className="flex gap-4 text-[11px]" style={{ color: "var(--muted-fg)" }}>
-                    <span className="inline-flex items-center gap-1.5"><span className="w-3 h-0.5" style={{ background: "var(--primary-hex)" }} />{t("rd.current", "Current")}</span>
-                    <span className="inline-flex items-center gap-1.5"><span className="w-3 h-0.5 border-t border-dashed" style={{ borderColor: "rgba(47,47,43,0.35)" }} />{t("rd.previous", "Previous")}</span>
-                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-[11px]" style={{ color: "var(--muted-fg)" }}>
+                    <span className="w-3 h-0.5" style={{ background: "var(--primary-hex)" }} />{t("rd.your_profile", "Your profile")}
+                  </span>
                 </div>
                 <div className="flex-1 flex justify-center items-center">
                   <Radar data={radarData} />
                 </div>
                 <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mt-6 pt-5" style={{ borderTop: "1px dashed var(--border-hex)" }}>
-                  {radarData.map(r => {
-                    const delta = Math.round((r.now - r.prev) * 100);
-                    return (
-                      <div key={r.label}>
-                        <div className="text-[9px] font-semibold uppercase tracking-[0.1em]" style={{ color: "var(--muted-fg)" }}>{r.label}</div>
-                        <div className="text-[20px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: delta >= 0 ? "var(--primary-hex, #9B8573)" : "#9C5A4A" }}>
-                          {delta > 0 ? "+" : ""}{delta}
-                        </div>
+                  {radarData.map(r => (
+                    <div key={r.label}>
+                      <div className="text-[9px] font-semibold uppercase tracking-[0.1em]" style={{ color: "var(--muted-fg)" }}>{r.label}</div>
+                      <div className="text-[20px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #9B8573)" }}>
+                        {r.score}<span className="text-[11px] font-normal" style={{ color: "var(--muted-fg)" }}>/100</span>
                       </div>
-                    );
-                  })}
+                    </div>
+                  ))}
                 </div>
               </Card>
 

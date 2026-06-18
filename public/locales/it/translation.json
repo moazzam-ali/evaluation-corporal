@@ -744,6 +744,14 @@
     "cta_eyebrow": "COSA VIENE DOPO",
     "cta_heading": "Segui il piano,",
     "cta_heading_em": "rivaluta tra 4 settimane.",
-    "cta_body_v2": "Dai al piano il tempo di muovere i numeri. Il tuo coach ti contatterà quando sarà il momento della prossima valutazione: confronteremo fianco a fianco e regoleremo da lì."
+    "cta_body_v2": "Dai al piano il tempo di muovere i numeri. Il tuo coach ti contatterà quando sarà il momento della prossima valutazione: confronteremo fianco a fianco e regoleremo da lì.",
+    "scan_title": "La tua scansione",
+    "scan_action": "Analisi della foto con IA",
+    "scan_photo_alt": "Foto della tua scansione corporea",
+    "body_type_label": "Tipo di corpo",
+    "posture_label": "Postura",
+    "composition_label": "Distribuzione della massa",
+    "photo_note_label": "Nota sulla foto",
+    "your_profile": "Il tuo profilo"
   }
 }

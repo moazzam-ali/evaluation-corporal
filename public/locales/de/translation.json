@@ -744,6 +744,14 @@
     "cta_eyebrow": "WAS ALS NÄCHSTES",
     "cta_heading": "Folge dem Plan,",
     "cta_heading_em": "überprüfe in 4 Wochen.",
-    "cta_body_v2": "Gib dem Plan Zeit, die Zahlen zu bewegen. Dein Coach meldet sich, wenn deine nächste Auswertung ansteht — wir vergleichen Seite an Seite und passen von dort an."
+    "cta_body_v2": "Gib dem Plan Zeit, die Zahlen zu bewegen. Dein Coach meldet sich, wenn deine nächste Auswertung ansteht — wir vergleichen Seite an Seite und passen von dort an.",
+    "scan_title": "Dein Scan",
+    "scan_action": "KI-Fotoanalyse",
+    "scan_photo_alt": "Foto deines Körperscans",
+    "body_type_label": "Körpertyp",
+    "posture_label": "Haltung",
+    "composition_label": "Massenverteilung",
+    "photo_note_label": "Foto-Hinweis",
+    "your_profile": "Dein Profil"
   }
 }
