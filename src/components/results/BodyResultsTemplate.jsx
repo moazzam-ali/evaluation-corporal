@@ -473,17 +473,15 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {normalizedProducts.map((p, i) => (
                     <Card key={i} className="flex flex-col">
-                      <div className="flex items-center justify-between pb-4 mb-4" style={{ borderBottom: "1px dashed var(--border-hex)" }}>
+                      {/* Prominent product image panel (full-bleed to the card edges) */}
+                      <div className="relative -mx-[30px] -mt-[26px] mb-5 overflow-hidden flex items-center justify-center" style={{ height: 200, background: p.image ? "#F4EFE7" : `linear-gradient(135deg, ${p.grad})`, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                         {p.image ? (
-                          <div className="w-11 h-11 rounded-[11px] overflow-hidden flex items-center justify-center" style={{ background: "#F4EFE7" }}>
-                            <img src={p.image} alt="" className="w-full h-full object-contain" />
-                          </div>
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={p.image} alt={p.name} className="object-contain" style={{ maxHeight: 168, maxWidth: "78%" }} />
                         ) : (
-                          <div className="w-11 h-11 rounded-[11px] flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${p.grad})` }}>
-                            <Icon name={p.icon} size={18} color="white" />
-                          </div>
+                          <Icon name={p.icon} size={44} color="white" />
                         )}
-                        <span className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--primary-hex, #9B8573)" }}>
+                        <span className="absolute top-3 left-3 text-[10px] font-medium uppercase tracking-[0.14em] px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.88)", color: "var(--primary-hex, #9B8573)" }}>
                           {t("rd.for_prefix", "FOR")} · {(p.condition || "").toUpperCase()}
                         </span>
                       </div>
