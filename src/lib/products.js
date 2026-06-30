@@ -98,16 +98,30 @@ export async function getProductIdsForLanguage(language = "en") {
   return r.rows.map((row) => row.id);
 }
 
+// Products that are ALWAYS recommended — appended to every enriched set
+// regardless of the AI picks or the metric engine (e.g. the personalized
+// daily foundation). Each is shown even when the caller passes no
+// recommendations, so old scans surface it too on re-enrichment.
+const PINNED_PRODUCT_IDS = ["bioniq_go"];
+
 /**
  * Enrich AI-returned recommendations with full product data.
  * Filters out any product not available in the given language.
+ * Always includes the pinned products (PINNED_PRODUCT_IDS).
  */
 export async function enrichRecommendations(recommendations, language = "en") {
-  if (!recommendations || !Array.isArray(recommendations) || recommendations.length === 0) {
-    return [];
-  }
-  const ids = recommendations.map((r) => r.product_id);
   const lang = SUPPORTED_LANGS.includes(language) ? language : "en";
+  const recs = Array.isArray(recommendations) ? recommendations.filter(Boolean) : [];
+
+  // Append pinned products that the caller didn't already include.
+  const present = new Set(recs.map((r) => r.product_id));
+  const pinned = PINNED_PRODUCT_IDS
+    .filter((id) => !present.has(id))
+    .map((id) => ({ product_id: id, pinned: true }));
+  const allRecs = [...recs, ...pinned];
+  if (allRecs.length === 0) return [];
+
+  const ids = allRecs.map((r) => r.product_id);
 
   const r = await query(
     `SELECT p.*, t.name as t_name, t.benefits as t_benefits,
@@ -123,11 +137,14 @@ export async function enrichRecommendations(recommendations, language = "en") {
     r.rows.map((row) => [row.id, rowToProduct(row, extractTranslation(row))])
   );
 
-  return recommendations
-    .map((rec) => {
+  return allRecs
+    .map((rec, i) => {
       const product = productMap.get(rec.product_id);
       if (!product) return null;
-      return { ...product, priority: rec.priority, reason: rec.reason };
+      // Pinned items have no AI reason — fall back to the product's own lead benefit (localized).
+      const reason = rec.reason || (rec.pinned ? product.benefits?.[0] || "" : "");
+      const priority = rec.priority ?? (rec.pinned ? 99 : i + 1);
+      return { ...product, priority, reason };
     })
     .filter(Boolean);
 }

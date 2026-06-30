@@ -45,6 +45,7 @@ const IMAGES = [
   ["betaheart.png",            "https://d8j0ntlcm91z4.cloudfront.net/user_39MesriSRZdxNCuZhchnP0o93sz/hf_20260630_130113_1aa6cfe8-3ee2-497c-b9fe-824a2feb1b39.png"],
   ["herbalifeline-omega3.png", "https://d8j0ntlcm91z4.cloudfront.net/user_39MesriSRZdxNCuZhchnP0o93sz/hf_20260630_130117_87accf34-e229-4893-ac78-6c9b8b129625.png"],
   ["microbiotic-max.png",      "https://d8j0ntlcm91z4.cloudfront.net/user_39MesriSRZdxNCuZhchnP0o93sz/hf_20260630_130119_b6806f66-bc90-4b79-aa57-1acd42a85f2b.png"],
+  ["bioniq-go.png",            "https://d8j0ntlcm91z4.cloudfront.net/user_39MesriSRZdxNCuZhchnP0o93sz/hf_20260630_131554_9060a3d9-b711-441b-b26e-0d36c74ae03a.png"],
 ];
 
 async function loadSharp() {

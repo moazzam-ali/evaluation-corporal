@@ -363,5 +363,35 @@
       "Puede contener soja; contiene leche"
     ],
     "routineStep": { "time": "morning", "order": 13 }
+  },
+  {
+    "id": "bioniq_go",
+    "sku": "BIONIQ-GO",
+    "name": "Bioniq GO",
+    "category": "Suplemento personalizado",
+    "type": "ingestible",
+    "concernCategory": "Micronutrición personalizada",
+    "size": "140 g (suministro para 30 días · 2 cucharadas al día)",
+    "image": "/images/products/bioniq-go.png",
+    "concerns": ["energia", "metabolismo", "inmunidad", "piel", "cerebro_vision", "cardiovascular", "lean_mass"],
+    "benefits": [
+      "Complemento alimenticio diario adaptado a tus objetivos de bienestar a partir de una evaluación personalizada",
+      "Presentación innovadora en gránulos de origen suizo, diseñada para favorecer la absorción de los nutrientes",
+      "Fórmula seleccionada entre 40 opciones, con hasta 23 vitaminas y minerales según tu perfil",
+      "Apoya distintos objetivos: bienestar a largo plazo, belleza, deporte y rendimiento, y función cognitiva y psicológica",
+      "Calidad y seguridad suizas, con ingredientes respaldados por la ciencia"
+    ],
+    "keyIngredients": [
+      { "name": "Hasta 23 vitaminas y minerales", "role": "Combinación seleccionada entre 40 fórmulas según tu evaluación de bienestar" },
+      { "name": "Gránulos de tecnología suiza", "role": "Formato diseñado para optimizar la administración y la absorción de los nutrientes" },
+      { "name": "Ingredientes respaldados por la ciencia", "role": "Fabricados bajo estrictos controles de calidad y seguridad suizos" }
+    ],
+    "howToUse": "Tomar 2 cucharadas al día, juntas o repartidas en dos tomas de 1 cucharada. Tragar los gránulos con agua u otra bebida fría o a temperatura ambiente, con las comidas o después de ellas. No masticar, triturar ni mezclar con bebidas calientes ni en batidos.",
+    "cautions": [
+      "Los gránulos están diseñados para tragarse enteros: no los mastiques ni los tritures",
+      "No sustituye una alimentación equilibrada ni un estilo de vida saludable",
+      "Complementa, sin reemplazarlos, los productos esenciales de tu rutina"
+    ],
+    "routineStep": { "time": "morning", "order": 14 }
   }
 ]

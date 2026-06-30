@@ -93,6 +93,44 @@ async function main() {
       }
     }
     console.log(`✅ Seeded ${mapCount} metric-product associations`);
+
+    // Seed committed product translations (src/data/product-translations.json),
+    // keyed by product id → language → { name, benefits, key_ingredients,
+    // how_to_use, cautions }. Optional file — skipped cleanly if absent.
+    console.log("\n🌍 Seeding product translations...");
+    let trCount = 0;
+    try {
+      const TRANSLATIONS = JSON.parse(
+        readFileSync(join(__dirname, "..", "src", "data", "product-translations.json"), "utf-8")
+      );
+      for (const [productId, langs] of Object.entries(TRANSLATIONS)) {
+        for (const [language, c] of Object.entries(langs)) {
+          await client.query(
+            `INSERT INTO product_translations (product_id, language, name, benefits, key_ingredients, how_to_use, cautions)
+             VALUES ($1, $2, $3, $4::jsonb, $5::jsonb, $6, $7::jsonb)
+             ON CONFLICT (product_id, language) DO UPDATE SET
+               name = EXCLUDED.name,
+               benefits = EXCLUDED.benefits,
+               key_ingredients = EXCLUDED.key_ingredients,
+               how_to_use = EXCLUDED.how_to_use,
+               cautions = EXCLUDED.cautions`,
+            [
+              productId,
+              language,
+              c.name || null,
+              JSON.stringify(c.benefits || []),
+              JSON.stringify(c.key_ingredients || []),
+              c.how_to_use || null,
+              JSON.stringify(c.cautions || []),
+            ]
+          );
+          trCount++;
+        }
+      }
+      console.log(`✅ Seeded ${trCount} product translations`);
+    } catch (e) {
+      console.warn(`⚠ Skipped product translations: ${e.message}`);
+    }
   } finally {
     client.release();
     await pool.end();
