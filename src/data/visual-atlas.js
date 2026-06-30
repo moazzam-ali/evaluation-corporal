@@ -12,6 +12,7 @@ export const ATLAS_VIEWS = [
   { id: "internal", labelKey: "atlas.view_internal", labelEn: "Internals" },
   { id: "cross_section", labelKey: "atlas.view_cross", labelEn: "Cross-section" },
   { id: "facial", labelKey: "atlas.view_facial", labelEn: "Facial signs" },
+  { id: "facial_fat", labelKey: "atlas.view_facialfat", labelEn: "Facial fat" },
   { id: "posture", labelKey: "atlas.view_posture", labelEn: "Posture" },
 ];
 
@@ -58,6 +59,15 @@ const FACIAL = (sex) => [
   S("fatigued", "atlas.stage_face_fatigued", "Fatigued", null, `/atlas/facial-${sex}-fatigued.webp`, 1),
   S("depleted", "atlas.stage_face_depleted", "Depleted", null, `/atlas/facial-${sex}-depleted.webp`, 1),
 ];
+// Facial fat / leanness — how the face reshapes across the body-fat range.
+// Reuses the rd.bf_* band labels; images are head-and-shoulders portraits.
+const FACE_FAT = (sex) => [
+  S("essential", "rd.bf_essential", "Essential", "2–8%", `/atlas/facialfat-${sex}-essential.webp`, 1),
+  S("athletic", "rd.bf_athletic", "Athletic", "8–14%", `/atlas/facialfat-${sex}-athletic.webp`, 1),
+  S("fitness", "rd.bf_fitness", "Fitness", "14–18%", `/atlas/facialfat-${sex}-fitness.webp`, 1),
+  S("average", "rd.bf_average", "Average", "18–25%", `/atlas/facialfat-${sex}-average.webp`, 1),
+  S("high", "rd.bf_high", "High", "25%+", `/atlas/facialfat-${sex}-high.webp`, 1),
+];
 const POSTURE = (sex) => [
   S("aligned", "atlas.stage_pose_aligned", "Aligned", null, `/atlas/posture-${sex}-aligned.webp`, 1),
   S("rounded", "atlas.stage_pose_rounded", "Rounded", null, `/atlas/posture-${sex}-rounded.webp`, 1),
@@ -99,6 +109,12 @@ export const ATLAS_COLLECTIONS = [
     "Visible signs of wellness in the face — hydration, skin radiance, under-eye freshness — from vibrant to depleted.", FACIAL("male")),
   C("face-female", "facial", "female", "atlas.topic_facial", "Facial vitality", "atlas.cap_facial",
     "Visible signs of wellness in the face — hydration, skin radiance, under-eye freshness — from vibrant to depleted.", FACIAL("female")),
+
+  // ── Facial fat / leanness ──
+  C("facefat-male", "facial_fat", "male", "atlas.topic_facialfat", "Facial fat & leanness", "atlas.cap_facialfat",
+    "How the face reshapes across the body-fat range — fuller cheeks and a softer jaw at higher fat, sharper cheekbones and a defined jawline as it drops.", FACE_FAT("male")),
+  C("facefat-female", "facial_fat", "female", "atlas.topic_facialfat", "Facial fat & leanness", "atlas.cap_facialfat",
+    "How the face reshapes across the body-fat range — fuller cheeks and a softer jaw at higher fat, sharper cheekbones and a defined jawline as it drops.", FACE_FAT("female")),
 
   // ── Posture ──
   C("pose-male", "posture", "male", "atlas.topic_posture", "Posture", "atlas.cap_posture",

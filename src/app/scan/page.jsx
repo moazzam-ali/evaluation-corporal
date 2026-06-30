@@ -201,90 +201,86 @@ function ScanPageInner() {
     }
   };
 
-  // Body-photo analysis path. Returns a results id and routes to /results/{id}.
-  const onAnalyzeBody = async () => {
-    if (!savedFormData) return;
-    setIsSubmitting(true);
-    const cancel = runAnalyzingAnimation([400, 1600, 3200, 5000, 7000]);
-    try {
-      const res = await fetch("/api/analyze-body", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formData: savedFormData,
-          image: bodyImage,
-          language: lang,
-          formId: savedFormId,
-        }),
-      });
-      const result = await res.json();
-      if (!res.ok || !result.id) throw new Error(result.error || "Analysis failed");
+  // Run the body analysis. This is what notifies the coach (Telegram, with the
+  // results link) and indexes the lead (Elastic) — so it must run whether or not
+  // a photo is added. The CRM/chat params are forwarded so the coach is reached.
+  const runBodyAnalysis = async (image) => {
+    const res = await fetch("/api/analyze-body", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        formData: savedFormData,
+        image,
+        language: lang,
+        formId: savedFormId,
+        chatIDs,
+        botIndex,
+        accountIDs,
+        contactIDs,
+      }),
+    });
+    const result = await res.json();
+    if (!res.ok || !result.id) throw new Error(result.error || "Analysis failed");
+    return result;
+  };
 
-      setAnalysisProgress(100);
-      setActiveAnalysisStep(5);
-      await new Promise((r) => setTimeout(r, 700));
-      cancel();
+  // After analysis: the end user is NOT taken to the results page — they see the
+  // "your coach will reach out" screen. The results page only opens automatically
+  // when the ?sr=1 ("show results") URL flag is present (internal/testing use).
+  const finishAfterAnalysis = async (result) => {
+    setAnalysisProgress(100);
+    setActiveAnalysisStep(5);
+    await new Promise((r) => setTimeout(r, 700));
+    if (showResults) {
       router.push(`/results/${result.id}?lang=${lang}`);
-    } catch (error) {
-      cancel();
+    } else {
       setIsSubmitting(false);
-      toast.error(error.message || t("scan.analyze_error", "Could not analyze your photo. We saved your form — your coach will follow up."));
-      // Fall through to the existing "we'll contact you" screen so the
-      // submission is not lost.
-      if (showResults) {
-        // Still try to show results without vision — run analysis without image.
-        try {
-          const fallbackRes = await fetch("/api/analyze-body", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ formData: savedFormData, image: null, language: lang, formId: savedFormId }),
-          });
-          const fallbackResult = await fallbackRes.json();
-          if (fallbackRes.ok && fallbackResult.id) {
-            router.push(`/results/${fallbackResult.id}?lang=${lang}`);
-            return;
-          }
-        } catch (_) { /* fall through to completion screen */ }
-      }
       setPhotoPhase(false);
       setSubmitComplete(true);
     }
   };
 
-  const onSkipPhoto = async () => {
-    // When showResults is on, still run analysis (without photo) and redirect.
-    if (showResults && savedFormData) {
+  // "Analyze my photo" — runs analysis with the captured body photo.
+  const onAnalyzeBody = async () => {
+    if (!savedFormData) return;
+    setIsSubmitting(true);
+    const cancel = runAnalyzingAnimation([400, 1600, 3200, 5000, 7000]);
+    try {
+      const result = await runBodyAnalysis(bodyImage);
+      cancel();
+      await finishAfterAnalysis(result);
+    } catch (error) {
+      cancel();
+      setIsSubmitting(false);
+      toast.error(error.message || t("scan.analyze_error", "Could not analyze your photo. We saved your form — your coach will follow up."));
+      // Submission is not lost — the form is stored and the coach is still
+      // contacted by the server when reachable. Show the completion screen.
       setPhotoPhase(false);
-      setIsSubmitting(true);
-      const cancel = runAnalyzingAnimation([400, 1600, 3200, 5000, 7000]);
-      try {
-        const res = await fetch("/api/analyze-body", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            formData: savedFormData,
-            image: null,
-            language: lang,
-            formId: savedFormId,
-          }),
-        });
-        const result = await res.json();
-        if (!res.ok || !result.id) throw new Error(result.error || "Analysis failed");
-        setAnalysisProgress(100);
-        setActiveAnalysisStep(5);
-        await new Promise((r) => setTimeout(r, 700));
-        cancel();
-        router.push(`/results/${result.id}?lang=${lang}`);
-      } catch (err) {
-        cancel();
-        setIsSubmitting(false);
-        setSubmitComplete(true);
-        toast.error(err.message || t("common.error"));
-      }
+      setSubmitComplete(true);
+    }
+  };
+
+  // "Skip — wait for my coach" — still runs analysis (no photo) so the results
+  // exist and the coach is notified with a working report link.
+  const onSkipPhoto = async () => {
+    if (!savedFormData) {
+      setPhotoPhase(false);
+      setSubmitComplete(true);
       return;
     }
     setPhotoPhase(false);
-    setSubmitComplete(true);
+    setIsSubmitting(true);
+    const cancel = runAnalyzingAnimation([400, 1600, 3200, 5000, 7000]);
+    try {
+      const result = await runBodyAnalysis(null);
+      cancel();
+      await finishAfterAnalysis(result);
+    } catch (err) {
+      cancel();
+      setIsSubmitting(false);
+      setSubmitComplete(true);
+      toast.error(err.message || t("common.error"));
+    }
   };
 
   const StepComponent = STEP_COMPONENTS[currentStep];
