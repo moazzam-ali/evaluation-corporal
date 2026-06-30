@@ -85,6 +85,7 @@ export default function VisualAtlasPage() {
             collections.map((c) => (
               <Card key={c.id}>
                 <StageStrip
+                  trueColor
                   label={t(c.titleKey, c.titleEn)}
                   caption={t(c.captionKey, c.captionEn)}
                   stages={c.stages.map((s) => ({
