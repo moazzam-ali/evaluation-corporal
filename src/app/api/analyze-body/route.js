@@ -10,6 +10,11 @@ import {
   enrichRecommendations,
   getProductsForMetrics,
 } from "@/lib/products";
+import { resolveBot } from "@/lib/bots";
+import { sendAnalysisToTelegram } from "@/lib/telegram";
+import { indexDocumentsInAppSearch, buildElasticDocuments } from "@/lib/elastic";
+import { readFile } from "fs/promises";
+import { join } from "path";
 
 export const maxDuration = 60;
 
@@ -37,7 +42,16 @@ export async function POST(request) {
 
   try {
     const body = await request.json();
-    const { formData, image, language = "en", formId } = body;
+    const {
+      formData,
+      image,
+      language = "en",
+      formId,
+      chatIDs,
+      botIndex,
+      accountIDs,
+      contactIDs,
+    } = body;
 
     if (!formData) {
       return NextResponse.json({ error: "Missing formData" }, { status: 400 });
@@ -179,6 +193,71 @@ export async function POST(request) {
       );
       return analysisId;
     }, "database", steps);
+
+    // 9. Coach notification + CRM indexing — mirrors the original skin flow so
+    //    the coach receives a Telegram message (with the results link) and the
+    //    lead is indexed in App Search. The end user is NOT shown the results
+    //    page; the coach reaches out using the link in this message.
+    const chatList = Array.isArray(chatIDs) ? chatIDs.filter(Boolean) : [];
+    const accountList = Array.isArray(accountIDs) ? accountIDs.filter(Boolean) : [];
+    const contactList = Array.isArray(contactIDs) ? contactIDs.filter(Boolean) : [];
+
+    // Load backend translations for the Telegram message templates (en fallback).
+    let translations = {};
+    const tr = await safe(async () => {
+      const p = join(process.cwd(), "public", "backend-locales", language, "translation.json");
+      return JSON.parse(await readFile(p, "utf-8"));
+    }, "translations", steps);
+    if (tr.ok) {
+      translations = tr.result;
+    } else {
+      try {
+        const p = join(process.cwd(), "public", "backend-locales", "en", "translation.json");
+        translations = JSON.parse(await readFile(p, "utf-8"));
+      } catch {}
+    }
+
+    // Telegram → coach, with the report link pointing at this analysis id.
+    let telegramResult = { answersText: "" };
+    if (chatList.length) {
+      const tg = await safe(async () => {
+        const bot = await resolveBot(botIndex, language);
+        if (!bot) throw new Error("No bot configured for this botIndex/language");
+        return sendAnalysisToTelegram({
+          chatIDs: chatList,
+          bot,
+          analysisData: { formData, results },
+          translations,
+          analysisId,
+          language,
+        });
+      }, "telegram", steps);
+      if (tg.ok) telegramResult = tg.result;
+    } else {
+      steps.telegram = { status: "skipped", reason: "No chat IDs provided" };
+    }
+
+    // Elastic / App Search indexing (CRM record per account/contact pair).
+    if (accountList.length || contactList.length) {
+      await safe(
+        () =>
+          indexDocumentsInAppSearch(
+            buildElasticDocuments({
+              formData,
+              results,
+              accountIDs: accountList,
+              contactIDs: contactList,
+              language,
+              analysisId,
+              answersText: telegramResult.answersText || "",
+            })
+          ),
+        "elastic",
+        steps
+      );
+    } else {
+      steps.elastic = { status: "skipped", reason: "No account/contact IDs provided" };
+    }
 
     return NextResponse.json({
       id: analysisId,
