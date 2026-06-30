@@ -752,6 +752,9 @@
     "posture_label": "Posture",
     "composition_label": "Répartition de la masse",
     "photo_note_label": "Note sur la photo",
-    "your_profile": "Votre profil"
+    "your_profile": "Votre profil",
+    "viewer_close": "Fermer",
+    "enlarge_hint": "Agrandir",
+    "scan_caption": "Votre photo, utilisée pour l'analyse de composition corporelle par IA."
   }
 }

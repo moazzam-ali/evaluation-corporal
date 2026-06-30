@@ -752,6 +752,9 @@
     "posture_label": "आसन",
     "composition_label": "द्रव्यमान वितरण",
     "photo_note_label": "फ़ोटो टिप्पणी",
-    "your_profile": "आपकी प्रोफ़ाइल"
+    "your_profile": "आपकी प्रोफ़ाइल",
+    "viewer_close": "बंद करें",
+    "enlarge_hint": "बड़ा करें",
+    "scan_caption": "AI शरीर-संरचना विश्लेषण के लिए उपयोग की गई आपकी अपलोड की गई फ़ोटो।"
   }
 }
