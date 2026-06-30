@@ -29,7 +29,7 @@ export async function translateProductContent(englishContent, targetLanguage) {
     messages: [
       {
         role: "system",
-        content: `You are a professional translator specializing in skincare and beauty products. Translate the following product content from English to ${langName}.
+        content: `You are a professional translator specializing in health, nutrition and wellness products. Translate the following product content from English to ${langName}.
 
 Rules:
 - Preserve scientific/chemical ingredient names that are universally recognized (e.g., "Niacinamide", "Hyaluronic Acid", "Retinol", "CoQ10")

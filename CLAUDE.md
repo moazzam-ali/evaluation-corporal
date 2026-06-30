@@ -42,14 +42,18 @@ Individual steps: `npm run db:migrate`, `npm run db:seed`.
 `bots`, `admins`. Schema is the source of truth inside `scripts/migrate.mjs`.
 
 ## Key flows / routes
-- `POST /api/forms` — store intake questionnaire (`forms`).
-- `POST /api/analyze` and `/api/analyze-body` — run OpenAI analysis, persist to
-  `analyses`, optional Cloudinary upload + Elastic indexing.
+- `POST /api/forms` — store intake questionnaire early (`forms`), returns the id
+  the analysis is persisted under.
+- `POST /api/analyze-body` — the all-in-one step: deterministic body formulas +
+  optional Cloudinary photo upload + optional OpenAI vision, persist to
+  `analyses`, then notify the coach (Telegram, with the results link) and index
+  the lead (Elastic/App Search). The end user is NOT shown the results page —
+  the coach reaches out with the link; the results page only opens automatically
+  when the `?sr=1` flag is in the scan URL.
 - `GET /api/results` (+ `/api/results/products`) — read an analysis by id.
 - `/api/admin/*` — bcrypt login (`admins`) + product/translation CRUD.
-- Canonical results UI: `src/app/results/demo/page.jsx` (chaptered dashboard).
-  The dynamic `src/app/results/[id]/page.jsx` is the older skin-based skin and
-  is being superseded.
+- Canonical results UI: `src/components/results/BodyResultsTemplate.jsx`, rendered
+  by both `src/app/results/demo/page.jsx` and `src/app/results/[id]/page.jsx`.
 
 ## Body metrics (ids used across analysis, dictionaries, and the metric map)
 `bmi, body_fat, lean_mass, waist_hip_ratio, healthy_weight, total_body_water,
