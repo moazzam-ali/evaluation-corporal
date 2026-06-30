@@ -57,7 +57,7 @@ export default function Step6GoalsCare({ form, t }) {
       </div>
 
       {/* Skincare routine */}
-      {renderRadioGroup("has_skincare_routine", t("scan.step6.has_skincare_routine", "Do you have a daily skincare, body, or hair care routine?"), YES_NO)}
+      {renderRadioGroup("has_skincare_routine", t("scan.step6.has_skincare_routine", "Do you follow a daily wellness or self-care routine?"), YES_NO)}
 
       {has_skincare_routine === "yes" && (
         <div className="flex flex-col gap-1.5">
@@ -67,7 +67,7 @@ export default function Step6GoalsCare({ form, t }) {
       )}
 
       {/* Facial evaluation */}
-      {renderRadioGroup("want_facial_evaluation", t("scan.step6.want_facial_evaluation", "Would you like a free facial assessment?"), YES_NO)}
+      {renderRadioGroup("want_facial_evaluation", t("scan.step6.want_facial_evaluation", "Would you like a free wellness consultation?"), YES_NO)}
 
       {/* Privacy policy */}
       <div className="flex items-start gap-3 rounded-xl border border-[rgba(47,47,43,0.10)] bg-[#F8F6F2] p-4">

@@ -88,9 +88,9 @@ async function sendTelegramMessage(botApiKey, chatID, message, { inlineKeyboards
 }
 
 /**
- * Build and send Telegram messages for a skin analysis.
- *   Message 1: Member details + Questionnaire summary
- *   Message 2: Analysis results + Report link with inline keyboard (reply to Message 1)
+ * Build and send Telegram messages for a body assessment.
+ *   Message 1: Member details + body questionnaire summary
+ *   Message 2: Assessment results + report link with inline keyboard (reply to Message 1)
  */
 export async function sendAnalysisToTelegram({
   chatIDs,
@@ -123,6 +123,8 @@ export async function sendAnalysisToTelegram({
   const translateField = (value, prefix) =>
     s(t(`${prefix}.${value}`) || value || "—");
 
+  const num = (v) => (v === 0 || v ? s(String(v)) : "—");
+
   // ── Message 1: Member details ──
   let memberDetailsMessage = t("telegram.member_details") || "";
   memberDetailsMessage = memberDetailsMessage
@@ -131,35 +133,31 @@ export async function sendAnalysisToTelegram({
     .replace("{email}", s(formData.email) || "Unknown")
     .replace("{phone}", s(formData.phone) || "Unknown")
     .replace("{birthDate}", s(formData.birthDate) || "Unknown")
+    .replace("{sex}", translateField(formData.sex, "telegram.form_fields.sex"))
     .replace("{country}", s(formData.country) || "Unknown")
+    .replace("{province}", s(formData.province) || "—")
     .replace("{city}", s(formData.city) || "Unknown");
 
-  // ── Message 2: Questionnaire summary ──
+  // ── Message 2: Body questionnaire summary ──
   let questionnaireMessage = t("telegram.questionnaire_details") || "";
   questionnaireMessage = questionnaireMessage
-    .replace("{skinConcerns}", translateArray(formData.skinConcerns, "telegram.form_fields.concerns"))
-    .replace("{priorityConcern}", s(formData.priorityConcern) || "—")
-    .replace("{improvementZones}", translateArray(formData.improvementZones, "telegram.form_fields.zones"))
-    .replace("{skinType}", translateField(formData.skinType, "telegram.form_fields.skin_types"))
-    .replace("{skinFeelGeneral}", translateField(formData.skinFeelGeneral, "telegram.form_fields.feel_general"))
-    .replace("{skinFeelEndOfDay}", translateField(formData.skinFeelEndOfDay, "telegram.form_fields.feel_end_day"))
-    .replace("{routineFrequency}", translateField(formData.routineFrequency, "telegram.form_fields.routine_frequency"))
-    .replace("{productsUsed}", translateArray(formData.productsUsed, "telegram.form_fields.products"))
-    .replace("{essentialProduct}", s(formData.essentialProduct) || "—")
-    .replace("{missingProduct}", s(formData.missingProduct) || "—")
-    .replace("{supplements}", s(formData.supplements) || "—")
-    .replace("{reactionLevel}", translateField(formData.reactionLevel, "telegram.form_fields.reaction"))
-    .replace("{recentSigns}", translateArray(formData.recentSigns, "telegram.form_fields.signs"))
-    .replace("{sunscreenUse}", translateField(formData.sunscreenUse, "telegram.form_fields.sunscreen"))
-    .replace("{makeupFrequency}", translateField(formData.makeupFrequency, "telegram.form_fields.makeup"))
-    .replace("{sleepHours}", translateField(formData.sleepHours, "telegram.form_fields.sleep"))
-    .replace("{stressImpact}", translateField(formData.stressImpact, "telegram.form_fields.stress"))
-    .replace("{waterIntake}", translateField(formData.waterIntake, "telegram.form_fields.water"))
-    .replace("{treatmentHistory}", translateField(formData.treatmentHistory, "telegram.form_fields.history"))
-    .replace("{frustrations}", translateArray(formData.frustrations, "telegram.form_fields.frustrations"))
-    .replace("{lookingFor}", translateField(formData.lookingFor, "telegram.form_fields.looking_for"))
-    .replace("{wantRoutineRecommendation}", translateField(formData.wantRoutineRecommendation, "telegram.form_fields.recommendation"))
-    .replace("{budgetLevel}", translateField(formData.budgetLevel, "telegram.form_fields.budget"));
+    .replace("{weight}", num(formData.weight))
+    .replace("{height}", num(formData.height))
+    .replace("{waist}", num(formData.waist))
+    .replace("{hip}", num(formData.hip))
+    .replace("{diet_type}", translateField(formData.diet_type, "telegram.form_fields.diet_type"))
+    .replace("{meals_per_day}", translateField(formData.meals_per_day, "telegram.form_fields.meals_per_day"))
+    .replace("{has_breakfast}", translateField(formData.has_breakfast, "telegram.form_fields.yes_no"))
+    .replace("{breakfast_description}", s(formData.breakfast_description) || "—")
+    .replace("{exercise_level}", translateField(formData.exercise_level, "telegram.form_fields.exercise_level"))
+    .replace("{exercise_duration}", translateField(formData.exercise_duration, "telegram.form_fields.exercise_duration"))
+    .replace("{water_intake}", translateField(formData.water_intake, "telegram.form_fields.water_intake"))
+    .replace("{health_conditions}", translateArray(formData.health_conditions, "telegram.form_fields.health_conditions"))
+    .replace("{goal}", translateField(formData.goal, "telegram.form_fields.goal"))
+    .replace("{weight_at_ideal_age}", num(formData.weight_at_ideal_age))
+    .replace("{has_skincare_routine}", translateField(formData.has_skincare_routine, "telegram.form_fields.yes_no"))
+    .replace("{skincare_products}", s(formData.skincare_products) || "—")
+    .replace("{want_facial_evaluation}", translateField(formData.want_facial_evaluation, "telegram.form_fields.yes_no"));
 
   // ── Message 3: Analysis results with all metrics ──
   let analysisResultsMessage = t("telegram.analysis_results") || "";
@@ -176,12 +174,11 @@ export async function sendAnalysisToTelegram({
     })
     .join("\n");
 
-  // Body flow has no skin_type — fall back to body_type so the line still reads.
-  const typeResult = results.skin_type || results.body_type;
+  const typeResult = results.body_type || results.skin_type;
   analysisResultsMessage = analysisResultsMessage
     .replace("{overall_score}", results.overall_score || "N/A")
-    .replace("{skin_type_result}", s(t(`telegram.form_fields.skin_types.${typeResult}`) || typeResult || "Unknown"))
-    .replace("{metrics}", metricsLines || "  No metrics available")
+    .replace("{body_type_result}", s(t(`telegram.form_fields.body_types.${typeResult}`) || typeResult || "—"))
+    .replace("{metrics}", metricsLines || "  —")
     .replace("{summary}", s(results.summary) || "");
 
   // Build the report URL — used by both the inline button and the Markdown link in the body.

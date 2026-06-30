@@ -7,7 +7,7 @@ export function isCloudinaryConfigured() {
   );
 }
 
-export async function uploadToCloudinary(imageBuffer, filename, { folder = "skin-analysis" } = {}) {
+export async function uploadToCloudinary(imageBuffer, filename, { folder = "body-analysis" } = {}) {
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
   const apiKey = process.env.CLOUDINARY_API_KEY;
@@ -26,7 +26,7 @@ export async function uploadToCloudinary(imageBuffer, filename, { folder = "skin
 
   const formData = new FormData();
   const blob = new Blob([imageBuffer], { type: "image/jpeg" });
-  formData.append("file", blob, filename || "skin-photo.jpg");
+  formData.append("file", blob, filename || "body-photo.jpg");
   formData.append("upload_preset", uploadPreset);
   formData.append("folder", folder);
   formData.append("invalidate", "true");

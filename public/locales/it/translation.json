@@ -11,7 +11,7 @@
   },
   "home": {
     "title": "Configurazione",
-    "subtitle": "Configura i parametri di notifica Telegram e CRM, poi procedi al modulo di analisi della pelle.",
+    "subtitle": "Configura la notifica Telegram e i parametri CRM, poi prosegui al modulo di valutazione corporea.",
     "form_title": "Parametri",
     "form_desc": "Configura i bot Telegram, gli ID CRM e la lingua prima di iniziare.",
     "chat_ids": "ID Chat",
@@ -24,7 +24,7 @@
     "contact_ids": "ID Contatto",
     "contact_ids_placeholder": "ID contatto CRM separati da virgole",
     "language": "Lingua",
-    "submit": "Procedi alla Valutazione Corporea",
+    "submit": "Procedi alla valutazione corporea",
     "bot_index_placeholder": "1"
   },
   "footer": {
@@ -359,10 +359,10 @@
       },
       "weight_at_ideal_age": "Realisticamente, a quale peso ti sentiresti bene?",
       "weight_at_ideal_age_placeholder": "Inserisci il peso (kg)",
-      "has_skincare_routine": "Hai attualmente una routine quotidiana di cura della pelle, del corpo o dei capelli?",
+      "has_skincare_routine": "Segui una routine quotidiana di benessere o cura di te?",
       "skincare_products": "Che tipo di prodotti usi?",
       "skincare_products_placeholder": "Descrivi brevemente i tuoi prodotti.",
-      "want_facial_evaluation": "Vorresti una valutazione facciale gratuita?",
+      "want_facial_evaluation": "Vuoi una consulenza benessere gratuita?",
       "privacy_policy": "Accetto l'Informativa sulla Privacy",
       "privacy_policy_link": "Leggi la nostra Informativa sulla Privacy",
       "disclaimer": "Questa autovalutazione non ha scopi diagnostici né terapeutici. È solo informativa e non sostituisce in alcun caso la valutazione di un professionista sanitario."
@@ -442,7 +442,7 @@
       "goal_required": "Seleziona il tuo obiettivo.",
       "weight_at_ideal_age_required": "Inserisci il tuo peso ideale.",
       "has_skincare_routine_required": "Indica se hai una routine di cura.",
-      "want_facial_evaluation_required": "Indica se desideri una valutazione facciale.",
+      "want_facial_evaluation_required": "Indica se desideri una consulenza benessere.",
       "privacy_policy_required": "Devi accettare l'informativa sulla privacy per continuare."
     }
   },
@@ -451,7 +451,7 @@
     "new_scan": "Avvia una nuova analisi",
     "view_responses": "Vedi le Mie Risposte",
     "form_data_title": "Le Tue Risposte alla Scansione",
-    "form_data_desc": "Tutte le informazioni che hai fornito durante la scansione della pelle.",
+    "form_data_desc": "Tutte le informazioni fornite durante la tua valutazione corporea.",
     "tips_title": "Consigli personalizzati",
     "routine_title": "La tua routine",
     "clinical_eyebrow": "Report clinico",
@@ -477,7 +477,7 @@
     "score_good": "Pelle in buon equilibrio generale",
     "score_normal": "Alcune aree necessitano attenzione",
     "score_alert": "Diverse aree necessitano di cura",
-    "photo_alt": "Scansione della pelle",
+    "photo_alt": "Scansione corporea",
     "metric_details": "Dettagli",
     "metric_less": "Meno",
     "status": {

@@ -12,8 +12,7 @@ const videoConstraints = {
 };
 
 /**
- * Full-body camera + file-upload composite.
- * Mirrors the SkinCamera API surface so the scan flow can drop it in.
+ * Full-body camera + file-upload composite for the scan flow's photo step.
  *
  * Props:
  *  - onImageCapture(dataUrl | null)
