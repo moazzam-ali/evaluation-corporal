@@ -796,6 +796,8 @@
     "stage_face_depleted": "Bitkin",
     "stage_pose_aligned": "Hizalı",
     "stage_pose_rounded": "Yuvarlak",
-    "stage_pose_tilted": "Eğik"
+    "stage_pose_tilted": "Eğik",
+    "view_label": "Görünüm",
+    "body_label": "Vücut"
   }
 }

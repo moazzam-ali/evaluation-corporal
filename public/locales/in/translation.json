@@ -796,6 +796,8 @@
     "stage_face_depleted": "क्षीण",
     "stage_pose_aligned": "संरेखित",
     "stage_pose_rounded": "गोल",
-    "stage_pose_tilted": "झुका हुआ"
+    "stage_pose_tilted": "झुका हुआ",
+    "view_label": "दृश्य",
+    "body_label": "शरीर"
   }
 }

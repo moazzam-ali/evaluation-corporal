@@ -796,6 +796,8 @@
     "stage_face_depleted": "Agotado",
     "stage_pose_aligned": "Alineada",
     "stage_pose_rounded": "Redondeada",
-    "stage_pose_tilted": "Inclinada"
+    "stage_pose_tilted": "Inclinada",
+    "view_label": "Vista",
+    "body_label": "Cuerpo"
   }
 }
