@@ -58,17 +58,38 @@ export default function VisualAtlasPage() {
             </p>
           </div>
 
-          {/* Selectors */}
-          <div className="flex flex-col items-center gap-3 mt-9">
-            <div className="flex flex-wrap justify-center gap-2">
+          {/* Selectors — two visually distinct controls: a lens/view picker (pills)
+              and a body toggle (segmented), so they aren't mistaken for one row. */}
+          <div className="flex flex-col items-center gap-4 mt-9">
+            {/* View picker — individual pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <span className="mr-1 text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--muted-fg)" }}>
+                {t("atlas.view_label", "View")}
+              </span>
               {ATLAS_VIEWS.map((v) => (
                 <Chip key={v.id} active={view === v.id} onClick={() => setView(v.id)}>{t(v.labelKey, v.labelEn)}</Chip>
               ))}
             </div>
-            <div className="flex flex-wrap justify-center gap-2">
-              {ATLAS_SEXES.map((s) => (
-                <Chip key={s.id} active={sex === s.id} onClick={() => setSex(s.id)}>{t(s.labelKey, s.labelEn)}</Chip>
-              ))}
+            {/* Body toggle — segmented control in a track, distinct shape + accent colour */}
+            <div className="flex items-center gap-2.5">
+              <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--muted-fg)" }}>
+                {t("atlas.body_label", "Body")}
+              </span>
+              <div className="inline-flex rounded-full p-1" style={{ background: "rgba(47,47,43,0.05)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
+                {ATLAS_SEXES.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setSex(s.id)}
+                    className="rounded-full px-5 py-1.5 text-[13px] font-medium transition-all"
+                    style={{
+                      background: sex === s.id ? "var(--primary-hex, #9B8573)" : "transparent",
+                      color: sex === s.id ? "white" : "var(--muted-fg)",
+                    }}
+                  >
+                    {t(s.labelKey, s.labelEn)}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>

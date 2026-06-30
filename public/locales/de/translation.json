@@ -796,6 +796,8 @@
     "stage_face_depleted": "Erschöpft",
     "stage_pose_aligned": "Ausgerichtet",
     "stage_pose_rounded": "Rund",
-    "stage_pose_tilted": "Gekippt"
+    "stage_pose_tilted": "Gekippt",
+    "view_label": "Ansicht",
+    "body_label": "Körper"
   }
 }
