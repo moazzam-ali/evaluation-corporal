@@ -752,6 +752,9 @@
     "posture_label": "Duruş",
     "composition_label": "Kütle dağılımı",
     "photo_note_label": "Fotoğraf notu",
-    "your_profile": "Profilin"
+    "your_profile": "Profilin",
+    "viewer_close": "Kapat",
+    "enlarge_hint": "Büyüt",
+    "scan_caption": "Yapay zekâ vücut kompozisyonu analizi için kullanılan yüklediğin fotoğraf."
   }
 }

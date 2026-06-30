@@ -752,6 +752,9 @@
     "posture_label": "Haltung",
     "composition_label": "Massenverteilung",
     "photo_note_label": "Foto-Hinweis",
-    "your_profile": "Dein Profil"
+    "your_profile": "Dein Profil",
+    "viewer_close": "Schließen",
+    "enlarge_hint": "Vergrößern",
+    "scan_caption": "Dein hochgeladenes Foto, genutzt für die KI-Körperzusammensetzungsanalyse."
   }
 }
