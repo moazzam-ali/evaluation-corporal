@@ -108,7 +108,9 @@ export async function sendAnalysisToTelegram({
   const defaultLanguage = bot.language;
   const t = (path) => getTranslation(translations, path);
 
-  const { formData, results } = analysisData;
+  const { formData, results: rawResults } = analysisData;
+  // Null-safe: the results section may be empty (e.g. a notify-only call).
+  const results = rawResults || {};
 
   // Sanitize a single user value
   const s = (val) => sanitizeValue(val);
@@ -174,9 +176,11 @@ export async function sendAnalysisToTelegram({
     })
     .join("\n");
 
+  // Body flow has no skin_type — fall back to body_type so the line still reads.
+  const typeResult = results.skin_type || results.body_type;
   analysisResultsMessage = analysisResultsMessage
     .replace("{overall_score}", results.overall_score || "N/A")
-    .replace("{skin_type_result}", s(t(`telegram.form_fields.skin_types.${results.skin_type}`) || results.skin_type || "Unknown"))
+    .replace("{skin_type_result}", s(t(`telegram.form_fields.skin_types.${typeResult}`) || typeResult || "Unknown"))
     .replace("{metrics}", metricsLines || "  No metrics available")
     .replace("{summary}", s(results.summary) || "");
 
