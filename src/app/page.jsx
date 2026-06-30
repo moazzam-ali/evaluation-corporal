@@ -807,7 +807,7 @@ function LandingPageInner() {
       {/* ───────────── FOOTER ───────────── */}
       <footer className="bg-white pt-16 pb-8" style={{ borderTop: "1px solid var(--border-hex)" }}>
         <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] mb-12">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.8fr_1fr_1fr] mb-12">
             {/* Brand */}
             <div>
               <Link href="/" className="inline-flex items-center gap-1.5">
@@ -821,15 +821,18 @@ function LandingPageInner() {
               </p>
             </div>
 
-            {/* Footer columns */}
-            {["product", "company", "resources", "contact"].map((col) => (
+            {/* Footer columns — only real, working destinations */}
+            {[
+              { col: "product", hrefs: [scanHref, "#metrics", "#science"] },
+              { col: "company", hrefs: ["/privacy"] },
+            ].map(({ col, hrefs }) => (
               <div key={col}>
                 <div className="text-[11px] font-medium uppercase tracking-[0.14em] mb-3.5" style={{ color: "var(--muted-fg)" }}>
                   {t(`landing.footer_col_${col}`)}
                 </div>
                 <div className="flex flex-col gap-2.5 text-[13px]" style={{ color: "var(--muted-fg)" }}>
-                  {t(`landing.footer_${col}_items`, "").split(",").map(item => (
-                    <a key={item} className="hover:text-[var(--ink)] transition-colors cursor-pointer">{item.trim()}</a>
+                  {t(`landing.footer_${col}_items`, "").split(",").filter(Boolean).map((item, i) => (
+                    <a key={item} href={hrefs[i] || "#"} className="hover:text-[var(--ink)] transition-colors">{item.trim()}</a>
                   ))}
                 </div>
               </div>
