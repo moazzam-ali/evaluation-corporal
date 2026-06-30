@@ -371,7 +371,7 @@
     "category": "Suplemento personalizado",
     "type": "ingestible",
     "concernCategory": "Micronutrición personalizada",
-    "size": "140 g (suministro para 30 días · 2 cucharadas al día)",
+    "size": "140 g · 30 días · 2 cucharadas/día",
     "image": "/images/products/bioniq-go.png",
     "concerns": ["energia", "metabolismo", "inmunidad", "piel", "cerebro_vision", "cardiovascular", "lean_mass"],
     "benefits": [
