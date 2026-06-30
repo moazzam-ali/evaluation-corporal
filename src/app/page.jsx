@@ -344,10 +344,10 @@ function LandingPageInner() {
               {t("landing.hero_cta", "Start your free scan")}
               <Icon name="arrow" size={14} color="white" />
             </Link>
-            <button className="inline-flex items-center gap-2.5 rounded-full border px-5 py-3.5 text-sm font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)", borderColor: "var(--border-strong)", fontFamily: "var(--font-inter)" }}>
+            <Link href="/results/demo" className="inline-flex items-center gap-2.5 rounded-full border px-5 py-3.5 text-sm font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)", borderColor: "var(--border-strong)", fontFamily: "var(--font-inter)" }}>
               <Icon name="play" size={12} color="var(--ink)" />
-              {t("landing.hero_demo_cta", "Watch a 60-sec demo")}
-            </button>
+              {t("landing.hero_demo_cta", "See a sample report")}
+            </Link>
           </Reveal>
 
           {/* Trust points */}
