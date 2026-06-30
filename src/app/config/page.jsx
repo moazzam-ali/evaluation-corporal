@@ -59,7 +59,7 @@ export default function HomePage() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight">{t("home.title", "Configuration")}</h1>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {t("home.subtitle", "Set up the Telegram notification and CRM parameters, then proceed to the skin analysis form.")}
+          {t("home.subtitle", "Set up the Telegram notification and CRM parameters, then proceed to the body assessment form.")}
         </p>
       </motion.div>
 
@@ -148,7 +148,7 @@ export default function HomePage() {
               </div>
 
               <Button type="submit" size="lg" className="w-full gap-2">
-                {t("home.submit", "Proceed to Skin Analysis")}
+                {t("home.submit", "Proceed to Body Assessment")}
                 <ArrowRight className="h-5 w-5" />
               </Button>
             </form>

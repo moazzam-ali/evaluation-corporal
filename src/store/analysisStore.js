@@ -8,7 +8,7 @@ const useAnalysisStore = create((set, get) => ({
 
   // Parsed results
   overallScore: 0,
-  skinType: "",
+  bodyType: "",
   metrics: [],
   recommendations: [],
   enrichedProducts: [],
@@ -33,7 +33,7 @@ const useAnalysisStore = create((set, get) => ({
       set({
         analysisData: data.data,
         overallScore: results.overall_score || 0,
-        skinType: results.body_type || results.skin_type || "balanced",
+        bodyType: results.body_type || "balanced",
         metrics: results.metrics || [],
         recommendations: results.recommendations || [],
         enrichedProducts: results.enriched_products || [],
@@ -85,7 +85,7 @@ const useAnalysisStore = create((set, get) => ({
       isLoading: false,
       error: null,
       overallScore: 0,
-      skinType: "",
+      bodyType: "",
       metrics: [],
       recommendations: [],
       enrichedProducts: [],

@@ -1,9 +1,8 @@
 {
   "telegram": {
-    "member_details": "*Evaluación Corporal — Yeni Tarama*\n━━━━━━━━━━━━━━━━━━━━\n\n*Müşteri Profili*\n\nAd: {name} {surname}\nE-posta: {email}\nTelefon: {phone}\nDoğum Tarihi: {birthDate}\nKonum: {city}, {country}",
-    "questionnaire_details": "*Cilt Anketi*\n━━━━━━━━━━━━━━━━━━━━\n\n*Hedefler ve Endişeler*\nEndişeler: {skinConcerns}\nÖncelik: {priorityConcern}\nBölgeler: {improvementZones}\n\n*Cilt Profili*\nTip: {skinType}\nHis: {skinFeelGeneral}\nGün Sonu: {skinFeelEndOfDay}\n\n*Mevcut Rutin*\nSıklık: {routineFrequency}\nÜrünler: {productsUsed}\nVazgeçilmez: {essentialProduct}\nEksik: {missingProduct}\nTakviyeler: {supplements}\n\n*Hassasiyet*\nReaksiyonlar: {reactionLevel}\nBelirtiler: {recentSigns}\n\n*Yaşam Tarzı*\nGüneş Kremi: {sunscreenUse}\nMakyaj: {makeupFrequency}\nUyku: {sleepHours}\nStres: {stressImpact}\nSu: {waterIntake}\n\n*Deneyim ve Hedefler*\nGeçmiş: {treatmentHistory}\nHayal Kırıklıkları: {frustrations}\nAranan: {lookingFor}\nTavsiye İstiyor: {wantRoutineRecommendation}\nBütçe: {budgetLevel}",
-    "analysis_results": "*Analiz Sonuçları*\n━━━━━━━━━━━━━━━━━━━━\n\nGenel Puan: *{overall_score}%*\nCilt Tipi: *{skin_type_result}*\n\n*Metrik Dökümü:*\n{metrics}\n\n*Özet:*\n{summary}",
-    "analysis_link": "*Tam Raporu Görüntüle*\n━━━━━━━━━━━━━━━━━━━━\nhttps://evaluacion-corporal.vercel.app/results/{id}?l={lng}",
+    "member_details": "*Evaluación Corporal — Yeni değerlendirme*\n━━━━━━━━━━━━━━━━━━━━\n\n*Müşteri profili*\n\nAd: {name} {surname}\nE-posta: {email}\nTelefon: {phone}\nDoğum tarihi: {birthDate}\nCinsiyet: {sex}\nKonum: {city}, {province}, {country}",
+    "questionnaire_details": "*Vücut anketi*\n━━━━━━━━━━━━━━━━━━━━\n\n*Ölçüler*\nKilo: {weight} kg\nBoy: {height} cm\nBel: {waist} cm\nKalça: {hip} cm\n\n*Beslenme*\nDiyet: {diet_type}\nGünlük öğün: {meals_per_day}\nKahvaltı yapıyor: {has_breakfast}\nKahvaltı: {breakfast_description}\n\n*Aktivite ve su*\nAktivite düzeyi: {exercise_level}\nSpor süresi: {exercise_duration}\nSu tüketimi: {water_intake}\n\n*Sağlık durumları*\n{health_conditions}\n\n*Hedefler*\nHedef: {goal}\nHedef kilo: {weight_at_ideal_age} kg\nÖz bakım rutini: {has_skincare_routine}\nÜrünler / takviyeler: {skincare_products}\nÜcretsiz danışmanlık istiyor: {want_facial_evaluation}",
+    "analysis_results": "*Değerlendirme sonuçları*\n━━━━━━━━━━━━━━━━━━━━\n\nGenel puan: *{overall_score}%*\nVücut tipi: *{body_type_result}*\n\n*Metrik dökümü:*\n{metrics}\n\n*Özet:*\n{summary}",
     "buttons": {
       "view_report": "📋 Raporu Gör",
       "sms": "✉️ SMS Gönder",
@@ -12,159 +11,89 @@
       "telegram": "✈️ Telegram"
     },
     "form_fields": {
-      "skin_types": {
-        "oily": "Yağlı",
-        "dry": "Kuru",
-        "combination": "Karma",
-        "normal": "Normal",
-        "sensitive": "Hassas",
-        "dehydrated": "Susuz",
-        "dont_know": "Bilinmiyor"
+      "sex": {
+        "male": "Erkek",
+        "female": "Kadın"
+      },
+      "diet_type": {
+        "omnivore": "Omnivor (her şey yer)",
+        "vegetarian": "Vejetaryen (bitkisel, yumurta, süt ürünleri)",
+        "vegan": "Vegan (yalnızca bitkisel gıdalar)"
+      },
+      "meals_per_day": {
+        "less_than_3": "3'ten az",
+        "between_3_and_5": "3 ile 5 arası",
+        "more_than_5": "5'ten fazla"
+      },
+      "yes_no": {
+        "yes": "Evet",
+        "no": "Hayır"
+      },
+      "exercise_level": {
+        "little": "Az veya hiç egzersiz / Ofis işi",
+        "light": "Haftada 1-3 gün fiziksel egzersiz",
+        "moderate": "Haftada 3-5 gün fiziksel egzersiz",
+        "active": "Haftada 6-7 gün fiziksel egzersiz",
+        "very_active": "Günde iki kez egzersiz"
+      },
+      "exercise_duration": {
+        "never": "Hiç egzersiz yapmadım",
+        "less_than_6": "6 aydan az",
+        "6_to_12": "6 ile 12 ay arası",
+        "more_than_12": "12 aydan fazla"
+      },
+      "water_intake": {
+        "less_than_2": "Günde 2 litreden az",
+        "about_2": "Günde yaklaşık 2 litre",
+        "more_than_2": "Günde 2 litreden fazla"
+      },
+      "health_conditions": {
+        "low_bone_density": "Düşük kemik yoğunluğu",
+        "constipation": "Kabızlık",
+        "athlete_supplements": "Spor takviyesi alan sporcu",
+        "high_cholesterol": "Yüksek kolesterol",
+        "few_vegetables": "Çok az sebze yiyor",
+        "low_energy": "Gün boyunca enerji düşüklüğü hissediyor",
+        "trouble_sleeping": "Uyku problemi yaşıyor",
+        "poor_mental_agility": "Zihinsel çevikliği az",
+        "inflammation": "Sık sık iltihap sorunları yaşıyor",
+        "skin_cellulite": "Cilt ve/veya selülit görünümünü iyileştirmek istiyor",
+        "little_water": "Az su içiyor",
+        "demanding_job": "Fiziksel olarak çok yorucu bir işi var",
+        "belly_fat": "Karın yağını azaltmak istiyor",
+        "circulation_problems": "Dolaşım sorunları var"
+      },
+      "goal": {
+        "weight_control": "Kilomi kontrol etmek ve vücut yağ oranını azaltmak",
+        "maintain_care": "Kilomi korumak ama kendime daha iyi bakmaya başlamak",
+        "gain_weight": "Kilo ve/veya kas kütlesini artırmak"
+      },
+      "body_types": {
+        "balanced": "Dengeli",
+        "lean": "İnce",
+        "athletic": "Atletik",
+        "average": "Ortalama",
+        "muscular": "Kaslı",
+        "soft": "Yumuşak"
       },
       "status": {
         "good": "İyi",
         "normal": "Normal",
-        "needs_attention": "İlgiye İhtiyacı Var"
-      },
-      "concerns": {
-        "dryness": "Kuruluk",
-        "wrinkles": "Kırışıklıklar",
-        "sagging": "Sarkma",
-        "dark_spots": "Lekeler",
-        "dullness": "Donukluk",
-        "blemishes": "Kusurlar",
-        "pores": "Gözenekler",
-        "eye_area": "Göz Çevresi",
-        "sensitivity": "Hassasiyet",
-        "other": "Diğer"
-      },
-      "zones": {
-        "full_face": "Tüm Yüz",
-        "eye_contour": "Göz Çevresi",
-        "neck": "Boyun",
-        "hands": "Eller",
-        "body": "Vücut"
-      },
-      "feel_general": {
-        "tight": "Gergin",
-        "shiny": "Parlak",
-        "comfortable": "Rahat",
-        "sensitive_reactive": "Hassas",
-        "dull": "Donuk",
-        "dont_know": "Bilinmiyor"
-      },
-      "feel_end_day": {
-        "tight": "Gergin",
-        "shiny": "Parlak",
-        "comfortable": "Rahat",
-        "irritated": "Tahriş olmuş",
-        "dull": "Donuk"
-      },
-      "routine_frequency": {
-        "morning_only": "Sadece sabah",
-        "night_only": "Sadece gece",
-        "morning_and_night": "Sabah ve gece",
-        "no_routine": "Rutin yok"
-      },
-      "products": {
-        "cleanser": "Temizleyici",
-        "toner": "Tonik",
-        "serum": "Serum",
-        "day_cream": "Gündüz Kremi",
-        "sunscreen": "Güneş Kremi",
-        "eye_contour": "Göz Çevresi",
-        "night_cream": "Gece Kremi",
-        "mask": "Maske",
-        "exfoliant": "Peeling",
-        "other": "Diğer"
-      },
-      "reaction": {
-        "yes_a_lot": "Evet, çok",
-        "sometimes": "Bazen",
-        "no": "Hayır",
-        "dont_know": "Bilinmiyor"
-      },
-      "signs": {
-        "redness": "Kızarıklık",
-        "itching": "Kaşıntı",
-        "flaking": "Pullanma",
-        "excess_shine": "Aşırı Parlaklık",
-        "blemishes": "Kusurlar",
-        "dark_spots": "Lekeler",
-        "tightness": "Gerginlik",
-        "none": "Yok"
-      },
-      "sunscreen": {
-        "daily": "Her gün",
-        "sometimes": "Bazen",
-        "summer_only": "Sadece yaz",
-        "no": "Hayır"
-      },
-      "makeup": {
-        "daily": "Her gün",
-        "several_times_week": "Haftada birkaç kez",
-        "occasionally": "Ara sıra",
-        "never": "Hiç"
-      },
-      "sleep": {
-        "less_than_5": "<5s",
-        "5_6": "5-6s",
-        "7_8": "7-8s",
-        "more_than_8": ">8s"
-      },
-      "stress": {
-        "yes": "Evet",
-        "a_little": "Biraz",
-        "no": "Hayır"
-      },
-      "water": {
-        "yes": "Evet",
-        "sometimes": "Bazen",
-        "no": "Hayır"
-      },
-      "history": {
-        "yes_worked": "Evet, işe yaradı",
-        "yes_no_results": "Evet, sonuçsuz",
-        "tried_many_nothing_works": "Çok denedim, hiçbiri işe yaramadı",
-        "barely_tried": "Neredeyse hiç denemedim"
-      },
-      "frustrations": {
-        "no_results": "Sonuç yok",
-        "irritation": "Tahriş",
-        "dont_know_how_to_combine": "Nasıl kombine edeceğimi bilmiyorum",
-        "too_expensive": "Çok pahalı",
-        "not_consistent": "Tutarlı değilim",
-        "other": "Diğer"
-      },
-      "looking_for": {
-        "basic_routine": "Temel rutin",
-        "complete_routine": "Komple rutin",
-        "specific_problem": "Spesifik sorun",
-        "prevention": "Önleme",
-        "personalized_advice": "Kişisel danışmanlık"
-      },
-      "recommendation": {
-        "yes": "Evet",
-        "no": "Hayır"
-      },
-      "budget": {
-        "basic": "Temel",
-        "medium": "Orta",
-        "premium": "Premium"
+        "needs_attention": "Dikkat gerekli"
       },
       "metrics": {
-        "oily_skin": "Yağlı Cilt",
-        "uneven_skin_tone": "Dengesiz Cilt Tonu",
-        "eye_wrinkles": "Göz Kırışıklıkları",
-        "crows_feet": "Kaz Ayakları",
-        "radiance": "Parlaklık",
-        "firmness": "Sıkılık",
-        "hydration": "Nem",
-        "dark_spots": "Koyu Lekeler",
-        "smoothness": "Pürüzsüzlük",
-        "fine_lines_wrinkles": "İnce Çizgiler ve Kırışıklıklar",
-        "texture": "Doku",
-        "dark_circles": "Göz Altı Halkaları"
+        "bmi": "BMI",
+        "body_fat": "Vücut yağı %",
+        "lean_mass": "Yağsız kütle",
+        "waist_hip_ratio": "Bel-kalça oranı",
+        "healthy_weight": "Sağlıklı kilo",
+        "total_body_water": "Toplam vücut suyu",
+        "bmr": "Bazal metabolizma hızı",
+        "calorie_target": "Günlük kalori",
+        "protein_target": "Protein hedefi",
+        "carbs_target": "Karbonhidrat hedefi",
+        "fat_target": "Yağ hedefi",
+        "hydration_target": "Hidrasyon hedefi"
       }
     }
   }

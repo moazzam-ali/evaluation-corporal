@@ -1,9 +1,8 @@
 {
   "telegram": {
-    "member_details": "*Evaluación Corporal — Nova Análise*\n━━━━━━━━━━━━━━━━━━━━\n\n*Perfil do Cliente*\n\nNome: {name} {surname}\nEmail: {email}\nTelefone: {phone}\nData de Nascimento: {birthDate}\nLocalização: {city}, {country}",
-    "questionnaire_details": "*Questionário de Pele*\n━━━━━━━━━━━━━━━━━━━━\n\n*Objetivos e Preocupações*\nPreocupações: {skinConcerns}\nPrioridade: {priorityConcern}\nZonas: {improvementZones}\n\n*Perfil de Pele*\nTipo: {skinType}\nSensação: {skinFeelGeneral}\nFim do Dia: {skinFeelEndOfDay}\n\n*Rotina Atual*\nFrequência: {routineFrequency}\nProdutos: {productsUsed}\nEssencial: {essentialProduct}\nFalta: {missingProduct}\nSuplementos: {supplements}\n\n*Sensibilidade*\nReações: {reactionLevel}\nSinais: {recentSigns}\n\n*Estilo de Vida*\nProtetor Solar: {sunscreenUse}\nMaquiagem: {makeupFrequency}\nSono: {sleepHours}\nEstresse: {stressImpact}\nÁgua: {waterIntake}\n\n*Experiência e Objetivos*\nHistórico: {treatmentHistory}\nFrustrações: {frustrations}\nProcura: {lookingFor}\nQuer Recomendação: {wantRoutineRecommendation}\nOrçamento: {budgetLevel}",
-    "analysis_results": "*Resultados da Análise*\n━━━━━━━━━━━━━━━━━━━━\n\nPontuação Geral: *{overall_score}%*\nTipo de Pele: *{skin_type_result}*\n\n*Detalhamento das Métricas:*\n{metrics}\n\n*Resumo:*\n{summary}",
-    "analysis_link": "*Ver Relatório Completo*\n━━━━━━━━━━━━━━━━━━━━\nhttps://evaluacion-corporal.vercel.app/results/{id}?l={lng}",
+    "member_details": "*Evaluación Corporal — Nova avaliação*\n━━━━━━━━━━━━━━━━━━━━\n\n*Perfil do cliente*\n\nNome: {name} {surname}\nE-mail: {email}\nTelefone: {phone}\nData de nascimento: {birthDate}\nSexo: {sex}\nLocalização: {city}, {province}, {country}",
+    "questionnaire_details": "*Questionário corporal*\n━━━━━━━━━━━━━━━━━━━━\n\n*Medidas*\nPeso: {weight} kg\nAltura: {height} cm\nCintura: {waist} cm\nQuadril: {hip} cm\n\n*Dieta e nutrição*\nDieta: {diet_type}\nRefeições por dia: {meals_per_day}\nToma café da manhã: {has_breakfast}\nCafé da manhã: {breakfast_description}\n\n*Atividade e hidratação*\nNível de atividade: {exercise_level}\nTreina há: {exercise_duration}\nConsumo de água: {water_intake}\n\n*Condições de saúde*\n{health_conditions}\n\n*Objetivos*\nObjetivo: {goal}\nPeso ideal: {weight_at_ideal_age} kg\nRotina de autocuidado: {has_skincare_routine}\nProdutos / suplementos: {skincare_products}\nDeseja uma consulta gratuita: {want_facial_evaluation}",
+    "analysis_results": "*Resultados da avaliação*\n━━━━━━━━━━━━━━━━━━━━\n\nPontuação geral: *{overall_score}%*\nTipo de corpo: *{body_type_result}*\n\n*Detalhamento das métricas:*\n{metrics}\n\n*Resumo:*\n{summary}",
     "buttons": {
       "view_report": "📋 Ver Relatório",
       "sms": "✉️ Enviar SMS",
@@ -12,159 +11,89 @@
       "telegram": "✈️ Telegram"
     },
     "form_fields": {
-      "skin_types": {
-        "oily": "Oleosa",
-        "dry": "Seca",
-        "combination": "Mista",
-        "normal": "Normal",
-        "sensitive": "Sensível",
-        "dehydrated": "Desidratada",
-        "dont_know": "Desconhecido"
+      "sex": {
+        "male": "Masculino",
+        "female": "Feminino"
+      },
+      "diet_type": {
+        "omnivore": "Onívoro (come de tudo)",
+        "vegetarian": "Vegetariano (vegetais, ovos, laticínios)",
+        "vegan": "Vegano (apenas alimentos vegetais)"
+      },
+      "meals_per_day": {
+        "less_than_3": "Menos de 3",
+        "between_3_and_5": "Entre 3 e 5",
+        "more_than_5": "Mais de 5"
+      },
+      "yes_no": {
+        "yes": "Sim",
+        "no": "Não"
+      },
+      "exercise_level": {
+        "little": "Pouco ou nenhum exercício / Trabalho de escritório",
+        "light": "Exercício físico 1-3 dias/semana",
+        "moderate": "Exercício físico 3-5 dias/semana",
+        "active": "Exercício físico 6-7 dias/semana",
+        "very_active": "Exercício duas vezes por dia"
+      },
+      "exercise_duration": {
+        "never": "Nunca se exercitou",
+        "less_than_6": "Menos de 6 meses",
+        "6_to_12": "Entre 6 e 12 meses",
+        "more_than_12": "Mais de 12 meses"
+      },
+      "water_intake": {
+        "less_than_2": "Menos de 2 litros por dia",
+        "about_2": "Cerca de 2 litros por dia",
+        "more_than_2": "Mais de 2 litros por dia"
+      },
+      "health_conditions": {
+        "low_bone_density": "Baixa densidade óssea",
+        "constipation": "Constipação",
+        "athlete_supplements": "Atleta que toma suplementos esportivos",
+        "high_cholesterol": "Colesterol alto",
+        "few_vegetables": "Come muito poucos vegetais",
+        "low_energy": "Sente baixa energia durante o dia",
+        "trouble_sleeping": "Tem dificuldade para dormir",
+        "poor_mental_agility": "Tem pouca agilidade mental",
+        "inflammation": "Sofre frequentemente de inflamação",
+        "skin_cellulite": "Quer melhorar a aparência da pele e/ou celulite",
+        "little_water": "Bebe pouca água",
+        "demanding_job": "Tem um trabalho muito exigente e fisicamente desgastante",
+        "belly_fat": "Quer reduzir a gordura abdominal",
+        "circulation_problems": "Tem problemas de circulação"
+      },
+      "goal": {
+        "weight_control": "Controlar meu peso e reduzir o percentual de gordura corporal",
+        "maintain_care": "Manter meu peso, mas começar a me cuidar melhor",
+        "gain_weight": "Aumentar peso e/ou massa muscular"
+      },
+      "body_types": {
+        "balanced": "Equilibrado",
+        "lean": "Magro",
+        "athletic": "Atlético",
+        "average": "Médio",
+        "muscular": "Musculoso",
+        "soft": "Mole"
       },
       "status": {
         "good": "Bom",
         "normal": "Normal",
-        "needs_attention": "Precisa de Atenção"
-      },
-      "concerns": {
-        "dryness": "Ressecamento",
-        "wrinkles": "Rugas",
-        "sagging": "Flacidez",
-        "dark_spots": "Manchas escuras",
-        "dullness": "Opacidade",
-        "blemishes": "Imperfeições",
-        "pores": "Poros",
-        "eye_area": "Área dos olhos",
-        "sensitivity": "Sensibilidade",
-        "other": "Outro"
-      },
-      "zones": {
-        "full_face": "Rosto inteiro",
-        "eye_contour": "Contorno dos olhos",
-        "neck": "Pescoço",
-        "hands": "Mãos",
-        "body": "Corpo"
-      },
-      "feel_general": {
-        "tight": "Repuxada",
-        "shiny": "Brilhante",
-        "comfortable": "Confortável",
-        "sensitive_reactive": "Sensível",
-        "dull": "Opaca",
-        "dont_know": "Desconhecido"
-      },
-      "feel_end_day": {
-        "tight": "Repuxada",
-        "shiny": "Brilhante",
-        "comfortable": "Confortável",
-        "irritated": "Irritada",
-        "dull": "Opaca"
-      },
-      "routine_frequency": {
-        "morning_only": "Só manhã",
-        "night_only": "Só noite",
-        "morning_and_night": "Manhã e noite",
-        "no_routine": "Sem rotina"
-      },
-      "products": {
-        "cleanser": "Limpador",
-        "toner": "Tônico",
-        "serum": "Sérum",
-        "day_cream": "Creme diurno",
-        "sunscreen": "Protetor solar",
-        "eye_contour": "Contorno dos olhos",
-        "night_cream": "Creme noturno",
-        "mask": "Máscara",
-        "exfoliant": "Esfoliante",
-        "other": "Outro"
-      },
-      "reaction": {
-        "yes_a_lot": "Sim, muito",
-        "sometimes": "Às vezes",
-        "no": "Não",
-        "dont_know": "Desconhecido"
-      },
-      "signs": {
-        "redness": "Vermelhidão",
-        "itching": "Coceira",
-        "flaking": "Descamação",
-        "excess_shine": "Brilho excessivo",
-        "blemishes": "Imperfeições",
-        "dark_spots": "Manchas escuras",
-        "tightness": "Repuxamento",
-        "none": "Nenhum"
-      },
-      "sunscreen": {
-        "daily": "Diário",
-        "sometimes": "Às vezes",
-        "summer_only": "Só no verão",
-        "no": "Não"
-      },
-      "makeup": {
-        "daily": "Diário",
-        "several_times_week": "Várias vezes/semana",
-        "occasionally": "Ocasionalmente",
-        "never": "Nunca"
-      },
-      "sleep": {
-        "less_than_5": "<5h",
-        "5_6": "5-6h",
-        "7_8": "7-8h",
-        "more_than_8": ">8h"
-      },
-      "stress": {
-        "yes": "Sim",
-        "a_little": "Um pouco",
-        "no": "Não"
-      },
-      "water": {
-        "yes": "Sim",
-        "sometimes": "Às vezes",
-        "no": "Não"
-      },
-      "history": {
-        "yes_worked": "Sim, funcionou",
-        "yes_no_results": "Sim, sem resultados",
-        "tried_many_nothing_works": "Tentei muito, nada funciona",
-        "barely_tried": "Quase não tentei"
-      },
-      "frustrations": {
-        "no_results": "Sem resultados",
-        "irritation": "Irritação",
-        "dont_know_how_to_combine": "Não sei combinar",
-        "too_expensive": "Muito caro",
-        "not_consistent": "Não sou consistente",
-        "other": "Outro"
-      },
-      "looking_for": {
-        "basic_routine": "Rotina básica",
-        "complete_routine": "Rotina completa",
-        "specific_problem": "Problema específico",
-        "prevention": "Prevenção",
-        "personalized_advice": "Conselho personalizado"
-      },
-      "recommendation": {
-        "yes": "Sim",
-        "no": "Não"
-      },
-      "budget": {
-        "basic": "Básico",
-        "medium": "Médio",
-        "premium": "Premium"
+        "needs_attention": "Requer atenção"
       },
       "metrics": {
-        "oily_skin": "Pele Oleosa",
-        "uneven_skin_tone": "Tom de Pele Irregular",
-        "eye_wrinkles": "Rugas dos Olhos",
-        "crows_feet": "Pés de Galinha",
-        "radiance": "Luminosidade",
-        "firmness": "Firmeza",
-        "hydration": "Hidratação",
-        "dark_spots": "Manchas Escuras",
-        "smoothness": "Suavidade",
-        "fine_lines_wrinkles": "Linhas Finas e Rugas",
-        "texture": "Textura",
-        "dark_circles": "Olheiras"
+        "bmi": "BMI",
+        "body_fat": "% de gordura corporal",
+        "lean_mass": "Massa magra",
+        "waist_hip_ratio": "Relação cintura-anca",
+        "healthy_weight": "Peso saudável",
+        "total_body_water": "Água corporal total",
+        "bmr": "Taxa metabólica basal",
+        "calorie_target": "Calorias diárias",
+        "protein_target": "Objetivo de proteína",
+        "carbs_target": "Objetivo de hidratos",
+        "fat_target": "Objetivo de gorduras",
+        "hydration_target": "Objetivo de hidratação"
       }
     }
   }

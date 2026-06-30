@@ -359,10 +359,10 @@
       },
       "weight_at_ideal_age": "Realistically, at what weight would you feel good?",
       "weight_at_ideal_age_placeholder": "Enter the weight (kg)",
-      "has_skincare_routine": "Do you currently have a daily skincare, body, or hair care routine?",
+      "has_skincare_routine": "Do you follow a daily wellness or self-care routine?",
       "skincare_products": "What kind of products do you use?",
       "skincare_products_placeholder": "Briefly describe your products.",
-      "want_facial_evaluation": "Would you like a free facial assessment?",
+      "want_facial_evaluation": "Would you like a free wellness consultation?",
       "privacy_policy": "I accept the Privacy Policy",
       "privacy_policy_link": "Read our Privacy Policy",
       "disclaimer": "This self-assessment is not intended for diagnostic or therapeutic purposes. It is for informational purposes only and does not replace in any case the evaluation of a healthcare professional."
@@ -442,7 +442,7 @@
       "goal_required": "Please select your goal.",
       "weight_at_ideal_age_required": "Please enter your ideal weight.",
       "has_skincare_routine_required": "Please indicate if you have a care routine.",
-      "want_facial_evaluation_required": "Please indicate if you would like a facial assessment.",
+      "want_facial_evaluation_required": "Please indicate if you would like a wellness consultation.",
       "privacy_policy_required": "You must accept the privacy policy to continue."
     }
   },
@@ -505,13 +505,13 @@
     "view_responses": "View My Responses",
     "new_scan": "Run a new scan",
     "form_data_title": "Your Scan Responses",
-    "form_data_desc": "All the information you provided during your skin scan.",
+    "form_data_desc": "All the information you provided during your body assessment.",
     "metric_less": "Less",
     "metric_details": "Details",
     "score_good": "Wellness on track",
     "score_normal": "Some areas need attention",
     "score_alert": "Several areas need care",
-    "photo_alt": "Skin scan",
+    "photo_alt": "Body scan",
     "overall_score": "Overall Score",
     "body_type_label": "Body type",
     "score_guide": {
