@@ -28,7 +28,7 @@ function Silhouette({ scaleX = 1, color }) {
   );
 }
 
-function StageFigure({ stage, active, onOpen }) {
+function StageFigure({ stage, active, onOpen, trueColor }) {
   const { t } = useTranslation();
   const [imgFailed, setImgFailed] = useState(false);
   const showImg = stage.img && !imgFailed;
@@ -60,11 +60,11 @@ function StageFigure({ stage, active, onOpen }) {
               alt={stage.label}
               className="absolute inset-0 w-full h-full object-cover"
               onError={() => setImgFailed(true)}
-              style={{ filter: active ? "grayscale(0.15) contrast(1.02)" : "grayscale(0.7) contrast(0.98) brightness(1.02)" }}
+              style={{ filter: trueColor ? "none" : active ? "grayscale(0.15) contrast(1.02)" : "grayscale(0.7) contrast(0.98) brightness(1.02)" }}
             />
             <div
               className="absolute inset-0 pointer-events-none"
-              style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: active ? 0.14 : 0.22 }}
+              style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: trueColor ? 0 : active ? 0.14 : 0.22 }}
             />
             {clickable && (
               <span className="absolute top-1.5 right-1.5 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: 22, height: 22, background: "rgba(47,47,43,0.55)" }}>
@@ -106,7 +106,7 @@ function StageFigure({ stage, active, onOpen }) {
   );
 }
 
-export default function StageStrip({ label, stages, activeKey, caption }) {
+export default function StageStrip({ label, stages, activeKey, caption, trueColor = false }) {
   const { t } = useTranslation();
   const { open } = useLightbox();
 
@@ -157,7 +157,7 @@ export default function StageStrip({ label, stages, activeKey, caption }) {
         style={{ gridTemplateColumns: `repeat(${stages.length}, minmax(0, 1fr))` }}
       >
         {stages.map((s) => (
-          <StageFigure key={s.key} stage={s} active={s.key === activeKey} onOpen={s.img ? () => openAt(s) : undefined} />
+          <StageFigure key={s.key} stage={s} active={s.key === activeKey} trueColor={trueColor} onOpen={s.img ? () => openAt(s) : undefined} />
         ))}
       </div>
 
