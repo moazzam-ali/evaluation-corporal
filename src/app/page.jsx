@@ -233,7 +233,7 @@ function RadarChart({ t }) {
   const polyA = valsA.map((v, i) => pt(v, i).join(",")).join(" ");
   const polyB = valsB.map((v, i) => pt(v, i).join(",")).join(" ");
   return (
-    <svg width="360" height="360" viewBox="0 0 360 360">
+    <svg viewBox="0 0 360 360" className="w-full h-auto" style={{ maxWidth: 360 }}>
       {[0.25, 0.5, 0.75, 1].map(s => (
         <polygon key={s} points={Array.from({ length: 6 }, (_, k) => pt(s, k).join(",")).join(" ")} fill="none" stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />
       ))}
@@ -564,7 +564,7 @@ function LandingPageInner() {
 
           {/* Plan engine callout */}
           <Reveal delay={0.2}>
-            <div className="mt-16 rounded-3xl border p-12 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center" style={{ background: "#F4EFE7", borderColor: "var(--border-hex)" }}>
+            <div className="mt-16 rounded-3xl border p-6 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-center" style={{ background: "#F4EFE7", borderColor: "var(--border-hex)" }}>
               <div>
                 <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
                   {t("landing.service_plan_label")}
@@ -575,7 +575,7 @@ function LandingPageInner() {
                 <p className="mt-4 text-[14.5px] leading-relaxed max-w-[44ch]" style={{ color: "var(--muted-fg)" }}>
                   {t("landing.service_plan_body")}
                 </p>
-                <div className="flex gap-2.5 mt-6">
+                <div className="flex flex-wrap gap-2.5 mt-6">
                   <button className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-[13px] font-medium text-white" style={{ background: "var(--ink)" }}>
                     {t("landing.service_plan_cta_1")}
                   </button>
@@ -584,7 +584,7 @@ function LandingPageInner() {
                   </button>
                 </div>
               </div>
-              <div className="rounded-[18px] border bg-white p-7 flex justify-center" style={{ borderColor: "var(--border-hex)" }}>
+              <div className="rounded-[18px] border bg-white p-5 sm:p-7 flex justify-center" style={{ borderColor: "var(--border-hex)" }}>
                 <RadarChart t={t} />
               </div>
             </div>
@@ -721,7 +721,7 @@ function LandingPageInner() {
 
           {/* Featured quote */}
           <Reveal>
-            <div className="rounded-3xl border p-12 mb-4 relative" style={{ background: "#F4EFE7", borderColor: "var(--border-hex)" }}>
+            <div className="rounded-3xl border p-7 sm:p-12 mb-4 relative" style={{ background: "#F4EFE7", borderColor: "var(--border-hex)" }}>
               <div className="absolute top-6 right-8 select-none" style={{ fontFamily: "var(--font-fraunces)", fontSize: 140, lineHeight: 1, color: "var(--primary-soft)" }}>&ldquo;</div>
               <div className="flex gap-1 mb-5">
                 {Array.from({ length: 5 }, (_, i) => <Icon key={i} name="star" size={16} color="var(--status-normal-hex)" />)}
@@ -772,7 +772,7 @@ function LandingPageInner() {
       <section className="py-24" style={{ background: "#F4EFE7" }}>
         <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
           <Reveal>
-            <div className="relative overflow-hidden rounded-[32px] text-center text-white" style={{ background: "var(--ink)", padding: "72px 56px" }}>
+            <div className="relative overflow-hidden rounded-[32px] text-center text-white px-6 py-16 sm:px-10 sm:py-[72px]" style={{ background: "var(--ink)" }}>
               {/* Decorative circles */}
               <svg className="absolute inset-0 opacity-[0.18]" width="100%" height="100%" viewBox="0 0 1000 400" preserveAspectRatio="none">
                 <circle cx="500" cy="200" r="120" fill="none" stroke="#C7A977" strokeWidth="1" />
