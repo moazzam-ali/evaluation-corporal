@@ -752,6 +752,9 @@
     "posture_label": "Posture",
     "composition_label": "Mass distribution",
     "photo_note_label": "Photo note",
-    "your_profile": "Your profile"
+    "your_profile": "Your profile",
+    "viewer_close": "Close",
+    "enlarge_hint": "Enlarge",
+    "scan_caption": "Your uploaded photo, used for the AI body-composition read."
   }
 }

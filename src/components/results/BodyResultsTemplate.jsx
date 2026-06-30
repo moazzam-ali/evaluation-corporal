@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import StageStrip from "@/components/StageStrip/StageStrip";
+import { useLightbox, ExpandIcon } from "@/components/Lightbox/Lightbox";
 import {
   PICK, TONES, Icon,
   LinearRange, Card, CardHeader, ChapterBand,
@@ -62,7 +63,31 @@ function generateRisks(metrics, t) {
  */
 export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionAvailable = false }) {
   const { t, i18n } = useTranslation();
+  const { open: openLightbox } = useLightbox();
   const d = data;
+
+  const openScan = () => openLightbox({
+    title: t("rd.scan_title", "Your scan"),
+    caption: t("rd.scan_caption", "Your uploaded photo, used for the AI body-composition read."),
+    indicators: [
+      visionAvailable && bodyType ? { label: t("rd.body_type_label", "Body type"), value: t(`results.body_types.${bodyType}`, bodyType) } : null,
+      postureNote ? { label: t("rd.posture_label", "Posture"), value: postureNote } : null,
+      compositionNote ? { label: t("rd.composition_label", "Mass distribution"), value: compositionNote } : null,
+      photoQualityNote ? { label: t("rd.photo_note_label", "Photo note"), value: photoQualityNote } : null,
+    ].filter(Boolean),
+    items: [{ src: imageUrl }],
+  });
+
+  const openProduct = (p) => openLightbox({
+    title: p.condition ? `${t("rd.for_prefix", "FOR")} · ${p.condition}` : "",
+    caption: p.why,
+    indicators: [
+      p.dose ? { label: t("rd.dose", "DOSE"), value: p.dose } : null,
+      p.timing ? { label: t("rd.timing", "TIMING"), value: p.timing } : null,
+      p.howToUse && !(p.dose && p.timing) ? { label: t("rd.how_to_use", "HOW TO USE"), value: p.howToUse } : null,
+    ].filter(Boolean),
+    items: [{ src: p.image, label: p.name }],
+  });
 
   const bmiGoal = d.user.height > 0 ? (d.weightGoal / (d.user.height / 100) ** 2).toFixed(1) : "—";
   const fatKg = (d.weight * d.bodyFat / 100).toFixed(1);
@@ -208,10 +233,21 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               <Card className="mb-4">
                 <CardHeader title={t("rd.scan_title", "Your scan")} action={t("rd.scan_action", "AI photo analysis")} />
                 <div className="flex flex-col sm:flex-row gap-6 items-start">
-                  <div className="shrink-0 relative overflow-hidden" style={{ width: 168, aspectRatio: "3 / 4", borderRadius: 14, border: "1.5px solid #C7A977" }}>
+                  <div
+                    className="group shrink-0 relative overflow-hidden cursor-zoom-in"
+                    style={{ width: 168, aspectRatio: "3 / 4", borderRadius: 14, border: "1.5px solid #C7A977" }}
+                    onClick={openScan}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={t("rd.enlarge_hint", "Enlarge")}
+                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openScan(); } }}
+                  >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={imageUrl} alt={t("rd.scan_photo_alt", "Your body scan photo")} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top", filter: "grayscale(0.12) contrast(1.02)" }} />
                     <div className="absolute inset-0 pointer-events-none" style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: 0.12 }} />
+                    <span className="absolute top-2 right-2 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: 24, height: 24, background: "rgba(47,47,43,0.55)" }}>
+                      <ExpandIcon size={13} color="white" />
+                    </span>
                   </div>
                   <div className="flex-1 min-w-0">
                     {visionAvailable && bodyType && (
@@ -474,7 +510,15 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                   {normalizedProducts.map((p, i) => (
                     <Card key={i} className="flex flex-col">
                       {/* Prominent product image panel (full-bleed to the card edges) */}
-                      <div className="relative -mx-[30px] -mt-[26px] mb-5 overflow-hidden flex items-center justify-center" style={{ height: 200, background: p.image ? "#F4EFE7" : `linear-gradient(135deg, ${p.grad})`, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                      <div
+                        className={`group relative -mx-[30px] -mt-[26px] mb-5 overflow-hidden flex items-center justify-center ${p.image ? "cursor-zoom-in" : ""}`}
+                        style={{ height: 200, background: p.image ? "#F4EFE7" : `linear-gradient(135deg, ${p.grad})`, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+                        onClick={p.image ? () => openProduct(p) : undefined}
+                        role={p.image ? "button" : undefined}
+                        tabIndex={p.image ? 0 : undefined}
+                        aria-label={p.image ? `${p.name} — ${t("rd.enlarge_hint", "Enlarge")}` : undefined}
+                        onKeyDown={p.image ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProduct(p); } } : undefined}
+                      >
                         {p.image ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img src={p.image} alt={p.name} className="object-contain" style={{ maxHeight: 168, maxWidth: "78%" }} />
@@ -484,6 +528,11 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                         <span className="absolute top-3 left-3 text-[10px] font-medium uppercase tracking-[0.14em] px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.88)", color: "var(--primary-hex, #9B8573)" }}>
                           {t("rd.for_prefix", "FOR")} · {(p.condition || "").toUpperCase()}
                         </span>
+                        {p.image && (
+                          <span className="absolute top-3 right-3 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: 24, height: 24, background: "rgba(47,47,43,0.5)" }}>
+                            <ExpandIcon size={13} color="white" />
+                          </span>
+                        )}
                       </div>
                       <h4 className="text-[26px] tracking-[-0.02em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>{p.name}</h4>
                       <p className="text-[13.5px] leading-relaxed mt-3 flex-1" style={{ color: "var(--muted-fg)" }}>{p.why}</p>

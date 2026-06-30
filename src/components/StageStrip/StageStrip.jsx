@@ -2,24 +2,16 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLightbox, ExpandIcon } from "@/components/Lightbox/Lightbox";
 
 /**
  * StageStrip — an integrated "spectrum" filmstrip that shows how a body
  * looks across the stages of a banded metric (body fat, BMI, WHR …) and
  * highlights the stage the user currently sits in.
  *
- * Designed to sit *inside* an existing metric card, beneath the numeric
- * gauge, so it deepens the explanation without breaking the minimal,
- * editorial feel of the results page.
- *
- * Imagery strategy:
- *  - If a real photo exists at `stage.img`, it's shown with a warm duotone
- *    treatment so every photo unifies with the theme regardless of source.
- *  - If the photo is missing or fails to load, we fall back to the brand
- *    body silhouette, horizontally scaled per stage (`stage.scaleX`) so a
- *    leaner stage reads narrower and a heavier stage reads broader. This
- *    keeps the strip expressive and on-brand before any photos are added,
- *    and it upgrades seamlessly once photos are dropped into /public.
+ * Each figure is clickable: it opens a near-fullscreen gallery (the whole
+ * spectrum enlarged, current stage flagged) so a coach can walk a client
+ * through the visuals in detail.
  */
 
 // Brand front-view silhouette (shared with the landing hero visual).
@@ -29,7 +21,6 @@ const FRONT_PATH =
 function Silhouette({ scaleX = 1, color }) {
   return (
     <svg viewBox="0 0 200 380" className="w-full h-full" preserveAspectRatio="xMidYMax meet" aria-hidden>
-      {/* scale horizontally about the centre line (x = 100) to imply mass */}
       <g transform={`translate(100 0) scale(${scaleX} 1) translate(-100 0)`}>
         <path d={FRONT_PATH} fill={color} />
       </g>
@@ -37,15 +28,16 @@ function Silhouette({ scaleX = 1, color }) {
   );
 }
 
-function StageFigure({ stage, active }) {
+function StageFigure({ stage, active, onOpen }) {
   const { t } = useTranslation();
   const [imgFailed, setImgFailed] = useState(false);
   const showImg = stage.img && !imgFailed;
+  const clickable = !!onOpen && showImg;
 
   return (
     <div className="flex flex-col items-center">
       <div
-        className="relative w-full overflow-hidden"
+        className={`group relative w-full overflow-hidden ${clickable ? "cursor-zoom-in" : ""}`}
         style={{
           aspectRatio: "3 / 4",
           borderRadius: 12,
@@ -55,6 +47,11 @@ function StageFigure({ stage, active }) {
           border: active ? "1.5px solid #C7A977" : "1px solid var(--border-hex, #E4D9C6)",
           transition: "border-color 200ms, background 200ms",
         }}
+        onClick={clickable ? onOpen : undefined}
+        role={clickable ? "button" : undefined}
+        tabIndex={clickable ? 0 : undefined}
+        aria-label={clickable ? `${stage.label} — ${t("rd.enlarge_hint", "Enlarge")}` : undefined}
+        onKeyDown={clickable ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onOpen(); } } : undefined}
       >
         {showImg ? (
           <>
@@ -65,11 +62,15 @@ function StageFigure({ stage, active }) {
               onError={() => setImgFailed(true)}
               style={{ filter: active ? "grayscale(0.15) contrast(1.02)" : "grayscale(0.7) contrast(0.98) brightness(1.02)" }}
             />
-            {/* Warm duotone wash so any photo source matches the palette */}
             <div
               className="absolute inset-0 pointer-events-none"
               style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: active ? 0.14 : 0.22 }}
             />
+            {clickable && (
+              <span className="absolute top-1.5 right-1.5 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: 22, height: 22, background: "rgba(47,47,43,0.55)" }}>
+                <ExpandIcon size={12} color="white" />
+              </span>
+            )}
           </>
         ) : (
           <div className="absolute inset-0 flex items-end justify-center px-2 pb-1.5">
@@ -80,8 +81,6 @@ function StageFigure({ stage, active }) {
         )}
       </div>
 
-      {/* Active marker sits below the figure (never over the face). The fixed
-          height reserves space on every card so the labels stay aligned. */}
       <div className="flex items-center justify-center" style={{ height: 16, marginTop: 8 }}>
         {active && (
           <span
@@ -109,16 +108,48 @@ function StageFigure({ stage, active }) {
 
 export default function StageStrip({ label, stages, activeKey, caption }) {
   const { t } = useTranslation();
+  const { open } = useLightbox();
+
+  const galleryItems = stages.filter((s) => s.img).map((s) => ({
+    src: s.img, label: s.label, sub: s.sub, active: s.key === activeKey,
+  }));
+  const activeStage = stages.find((s) => s.key === activeKey);
+  const hasGallery = galleryItems.length > 0;
+
+  const openAt = (stage) => {
+    const idx = galleryItems.findIndex((it) => it.src === stage.img);
+    open({
+      title: label ?? t("rd.spectrum", "The spectrum"),
+      caption,
+      indicators: activeStage
+        ? [{ label: t("rd.your_stage", "Your stage"), value: activeStage.sub ? `${activeStage.label} · ${activeStage.sub}` : activeStage.label }]
+        : [],
+      items: galleryItems,
+      index: Math.max(0, idx),
+    });
+  };
+
   return (
     <div className="mt-7 pt-6" style={{ borderTop: "1px dashed var(--border-hex, #E4D9C6)" }}>
       <div className="flex items-center justify-between mb-4">
         <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--muted-fg, #6B5B4B)" }}>
           {label ?? t("rd.spectrum", "The spectrum")}
         </span>
-        <span className="inline-flex items-center gap-1.5 text-[10px]" style={{ color: "var(--muted-fg, #6B5B4B)" }}>
-          <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#9B8573" }} />
-          {t("rd.your_stage", "Your stage")}
-        </span>
+        {hasGallery ? (
+          <button
+            onClick={() => openAt(activeStage || stages.find((s) => s.img))}
+            className="inline-flex items-center gap-1.5 text-[10px] transition-colors hover:text-[var(--ink)]"
+            style={{ color: "var(--muted-fg, #6B5B4B)" }}
+          >
+            <ExpandIcon size={12} color="currentColor" />
+            {t("rd.enlarge_hint", "Enlarge")}
+          </button>
+        ) : (
+          <span className="inline-flex items-center gap-1.5 text-[10px]" style={{ color: "var(--muted-fg, #6B5B4B)" }}>
+            <span className="w-1.5 h-1.5 rounded-full" style={{ background: "#9B8573" }} />
+            {t("rd.your_stage", "Your stage")}
+          </span>
+        )}
       </div>
 
       <div
@@ -126,7 +157,7 @@ export default function StageStrip({ label, stages, activeKey, caption }) {
         style={{ gridTemplateColumns: `repeat(${stages.length}, minmax(0, 1fr))` }}
       >
         {stages.map((s) => (
-          <StageFigure key={s.key} stage={s} active={s.key === activeKey} />
+          <StageFigure key={s.key} stage={s} active={s.key === activeKey} onOpen={s.img ? () => openAt(s) : undefined} />
         ))}
       </div>
 
