@@ -183,7 +183,8 @@ export async function sendAnalysisToTelegram({
 
   // Build the report URL — used by both the inline button and the Markdown link in the body.
   // Markdown link form `[text](url)` keeps underscores in the nanoid from being parsed as italic.
-  const reportUrl = `https://evaluacion-corporal.vercel.app/results/${analysisId}?l=${language || defaultLanguage || "en"}`;
+  const baseUrl = (process.env.SITE_URL || "https://evaluation-corporal.vercel.app").replace(/\/+$/, "");
+  const reportUrl = `${baseUrl}/results/${analysisId}?l=${language || defaultLanguage || "en"}`;
 
   // Inline keyboard buttons — View Report first so it's the most prominent action.
   const inlineKeyboards = [
