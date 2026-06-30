@@ -528,7 +528,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                       >
                         {p.image ? (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={p.image} alt={p.name} className="object-contain" style={{ maxHeight: 168, maxWidth: "78%" }} />
+                          <img src={p.image} alt={p.name} className="absolute inset-0 h-full w-full object-contain" />
                         ) : (
                           <Icon name={p.icon} size={44} color="white" />
                         )}
