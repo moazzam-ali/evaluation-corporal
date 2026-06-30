@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 /**
@@ -62,6 +62,18 @@ export function LightboxProvider({ children }) {
   const cur = state?.items?.[state.index];
   const multi = (state?.items?.length || 0) > 1;
 
+  // Swipe left/right to navigate on touch devices.
+  const touchStart = useRef(null);
+  const onTouchStart = (e) => { const p = e.changedTouches[0]; touchStart.current = { x: p.clientX, y: p.clientY }; };
+  const onTouchEnd = (e) => {
+    if (!multi || !touchStart.current) return;
+    const p = e.changedTouches[0];
+    const dx = p.clientX - touchStart.current.x;
+    const dy = p.clientY - touchStart.current.y;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) go(dx < 0 ? 1 : -1);
+    touchStart.current = null;
+  };
+
   return (
     <LightboxCtx.Provider value={{ open, close }}>
       {children}
@@ -102,9 +114,9 @@ export function LightboxProvider({ children }) {
 
           {/* Main: image + side panel */}
           <div className="flex-1 min-h-0 flex flex-col lg:flex-row items-center justify-center gap-6 px-4 sm:px-10 pb-2 overflow-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="relative flex items-center justify-center" style={{ flex: "1 1 auto", maxWidth: "min(92vw, 720px)" }}>
+            <div className="relative flex items-center justify-center" style={{ flex: "1 1 auto", maxWidth: "min(92vw, 720px)" }} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
               {multi && (
-                <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-1 sm:-left-4 z-10 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: "rgba(255,255,255,0.12)", color: "white" }}>
+                <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-1 sm:-left-4 z-10 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: "rgba(20,18,16,0.55)", border: "1px solid rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)", color: "white" }}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
                 </button>
               )}
@@ -121,7 +133,7 @@ export function LightboxProvider({ children }) {
                 )}
               </div>
               {multi && (
-                <button onClick={() => go(1)} aria-label="Next" className="absolute right-1 sm:-right-4 z-10 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: "rgba(255,255,255,0.12)", color: "white" }}>
+                <button onClick={() => go(1)} aria-label="Next" className="absolute right-1 sm:-right-4 z-10 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: "rgba(20,18,16,0.55)", border: "1px solid rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)", color: "white" }}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
                 </button>
               )}
