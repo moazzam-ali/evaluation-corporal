@@ -7,23 +7,6 @@ import StageStrip from "@/components/StageStrip/StageStrip";
 import { Card } from "@/components/results/ResultsCharts";
 import { ATLAS_VIEWS, ATLAS_SEXES, ATLAS_COLLECTIONS } from "@/data/visual-atlas";
 
-function Chip({ active, onClick, children }) {
-  return (
-    <button
-      onClick={onClick}
-      className="rounded-full px-4 py-2 text-[13px] font-medium transition-all"
-      style={{
-        fontFamily: "var(--font-inter)",
-        background: active ? "var(--ink)" : "white",
-        color: active ? "white" : "var(--muted-fg)",
-        border: active ? "1px solid var(--ink)" : "1px solid var(--border-hex, #E4D9C6)",
-      }}
-    >
-      {children}
-    </button>
-  );
-}
-
 export default function VisualAtlasPage() {
   const { t } = useTranslation();
   const router = useRouter();
@@ -58,37 +41,58 @@ export default function VisualAtlasPage() {
             </p>
           </div>
 
-          {/* Selectors — two visually distinct controls: a lens/view picker (pills)
-              and a body toggle (segmented), so they aren't mistaken for one row. */}
-          <div className="flex flex-col items-center gap-4 mt-9">
-            {/* View picker — individual pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <span className="mr-1 text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--muted-fg)" }}>
+          {/* Selectors — a contained, labelled group: an even view grid and a
+              full-width body toggle. Stays organised on mobile (no ragged wrap). */}
+          <div className="mt-9 mx-auto w-full max-w-[440px] flex flex-col gap-5">
+            {/* View — even grid of options */}
+            <div>
+              <div className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--muted-fg)" }}>
                 {t("atlas.view_label", "View")}
-              </span>
-              {ATLAS_VIEWS.map((v) => (
-                <Chip key={v.id} active={view === v.id} onClick={() => setView(v.id)}>{t(v.labelKey, v.labelEn)}</Chip>
-              ))}
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                {ATLAS_VIEWS.map((v) => {
+                  const active = view === v.id;
+                  return (
+                    <button
+                      key={v.id}
+                      onClick={() => setView(v.id)}
+                      className="w-full rounded-full px-3 py-2.5 text-[13px] font-medium transition-all"
+                      style={{
+                        fontFamily: "var(--font-inter)",
+                        background: active ? "var(--ink)" : "white",
+                        color: active ? "white" : "var(--muted-fg)",
+                        border: active ? "1px solid var(--ink)" : "1px solid var(--border-hex, #E4D9C6)",
+                      }}
+                    >
+                      {t(v.labelKey, v.labelEn)}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-            {/* Body toggle — segmented control in a track, distinct shape + accent colour */}
-            <div className="flex items-center gap-2.5">
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--muted-fg)" }}>
+            {/* Body — full-width segmented toggle in a track */}
+            <div>
+              <div className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: "var(--muted-fg)" }}>
                 {t("atlas.body_label", "Body")}
-              </span>
-              <div className="inline-flex rounded-full p-1" style={{ background: "rgba(47,47,43,0.05)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
-                {ATLAS_SEXES.map((s) => (
-                  <button
-                    key={s.id}
-                    onClick={() => setSex(s.id)}
-                    className="rounded-full px-5 py-1.5 text-[13px] font-medium transition-all"
-                    style={{
-                      background: sex === s.id ? "var(--primary-hex, #9B8573)" : "transparent",
-                      color: sex === s.id ? "white" : "var(--muted-fg)",
-                    }}
-                  >
-                    {t(s.labelKey, s.labelEn)}
-                  </button>
-                ))}
+              </div>
+              <div className="grid grid-cols-2 gap-1 rounded-full p-1" style={{ background: "rgba(47,47,43,0.05)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
+                {ATLAS_SEXES.map((s) => {
+                  const active = sex === s.id;
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => setSex(s.id)}
+                      className="w-full rounded-full px-5 py-2 text-[13px] font-medium transition-all"
+                      style={{
+                        fontFamily: "var(--font-inter)",
+                        background: active ? "var(--primary-hex, #9B8573)" : "transparent",
+                        color: active ? "white" : "var(--muted-fg)",
+                      }}
+                    >
+                      {t(s.labelKey, s.labelEn)}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
