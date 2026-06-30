@@ -205,6 +205,13 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               {t("rd.hero_subtitle", "Your body assessment — a snapshot of where you stand today. Read it once, then let the plan do the work.")}
             </p>
 
+            <div className="mt-7 flex justify-center">
+              <Link href="/results/visuals" className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+                {t("atlas.open", "Open visual guide")}
+              </Link>
+            </div>
+
             {/* Meta strip */}
             <div className={`grid ${meta.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"} mt-16 py-7`} style={{ borderTop: "1px solid var(--border-hex)", borderBottom: "1px solid var(--border-hex)" }}>
               {meta.map((m, i, arr) => (
