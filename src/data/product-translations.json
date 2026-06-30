@@ -1,0 +1,151 @@
+{
+  "bioniq_go": {
+    "en": {
+      "name": "Bioniq GO",
+      "benefits": [
+        "A daily food supplement matched to your wellness goals based on a personalized assessment",
+        "Innovative Swiss-origin granule format, designed to support nutrient absorption",
+        "A formula selected from 40 options, with up to 23 vitamins and minerals based on your profile",
+        "Supports a range of goals: long-term wellness, beauty, sport and performance, and cognitive and psychological function",
+        "Swiss quality and safety, with science-backed ingredients"
+      ],
+      "key_ingredients": [
+        { "name": "Up to 23 vitamins and minerals", "role": "A combination selected from 40 formulas based on your wellness assessment" },
+        { "name": "Swiss granule technology", "role": "A format designed to optimize nutrient delivery and absorption" },
+        { "name": "Science-backed ingredients", "role": "Made under strict Swiss quality and safety controls" }
+      ],
+      "how_to_use": "Take 2 scoops a day, together or split into two servings of 1 scoop. Swallow the granules with water or another cold or room-temperature drink, with or after meals. Do not chew, crush, or mix them with hot drinks or into shakes.",
+      "cautions": [
+        "The granules are designed to be swallowed whole — do not chew or crush them",
+        "Not a substitute for a balanced diet or a healthy lifestyle",
+        "Complements, rather than replaces, the essential products in your routine"
+      ]
+    },
+    "fr": {
+      "name": "Bioniq GO",
+      "benefits": [
+        "Un complément alimentaire quotidien adapté à vos objectifs de bien-être à partir d’une évaluation personnalisée",
+        "Présentation innovante en granulés d’origine suisse, conçue pour favoriser l’absorption des nutriments",
+        "Une formule sélectionnée parmi 40 options, avec jusqu’à 23 vitamines et minéraux selon votre profil",
+        "Soutient différents objectifs : bien-être à long terme, beauté, sport et performance, et fonction cognitive et psychologique",
+        "Qualité et sécurité suisses, avec des ingrédients soutenus par la science"
+      ],
+      "key_ingredients": [
+        { "name": "Jusqu’à 23 vitamines et minéraux", "role": "Une combinaison sélectionnée parmi 40 formules selon votre évaluation de bien-être" },
+        { "name": "Granulés de technologie suisse", "role": "Un format conçu pour optimiser l’apport et l’absorption des nutriments" },
+        { "name": "Ingrédients soutenus par la science", "role": "Fabriqués sous des contrôles stricts de qualité et de sécurité suisses" }
+      ],
+      "how_to_use": "Prendre 2 mesures par jour, ensemble ou réparties en deux prises d’une mesure. Avaler les granulés avec de l’eau ou une autre boisson froide ou à température ambiante, pendant ou après les repas. Ne pas mâcher, écraser ni mélanger à des boissons chaudes ou dans des shakes.",
+      "cautions": [
+        "Les granulés sont conçus pour être avalés entiers : ne les mâchez pas et ne les écrasez pas",
+        "Ne remplace pas une alimentation équilibrée ni un mode de vie sain",
+        "Complète, sans les remplacer, les produits essentiels de votre routine"
+      ]
+    },
+    "de": {
+      "name": "Bioniq GO",
+      "benefits": [
+        "Ein tägliches Nahrungsergänzungsmittel, das auf Basis einer personalisierten Auswertung auf deine Wellness-Ziele abgestimmt ist",
+        "Innovative Darreichung als Granulat Schweizer Herkunft, entwickelt zur Unterstützung der Nährstoffaufnahme",
+        "Eine aus 40 Optionen ausgewählte Formel mit bis zu 23 Vitaminen und Mineralstoffen je nach deinem Profil",
+        "Unterstützt verschiedene Ziele: langfristiges Wohlbefinden, Schönheit, Sport und Leistung sowie kognitive und psychische Funktion",
+        "Schweizer Qualität und Sicherheit, mit wissenschaftlich fundierten Inhaltsstoffen"
+      ],
+      "key_ingredients": [
+        { "name": "Bis zu 23 Vitamine und Mineralstoffe", "role": "Eine aus 40 Formeln ausgewählte Kombination nach deiner Wellness-Auswertung" },
+        { "name": "Granulat in Schweizer Technologie", "role": "Ein Format, das die Zufuhr und Aufnahme von Nährstoffen optimieren soll" },
+        { "name": "Wissenschaftlich fundierte Inhaltsstoffe", "role": "Hergestellt unter strengen Schweizer Qualitäts- und Sicherheitskontrollen" }
+      ],
+      "how_to_use": "Nimm 2 Messlöffel pro Tag, zusammen oder aufgeteilt auf zwei Portionen von je 1 Messlöffel. Schlucke das Granulat mit Wasser oder einem anderen kalten oder zimmerwarmen Getränk, zu oder nach den Mahlzeiten. Nicht kauen, zerkleinern oder in heiße Getränke oder Shakes mischen.",
+      "cautions": [
+        "Das Granulat ist zum Ganzschlucken bestimmt – nicht kauen oder zerkleinern",
+        "Kein Ersatz für eine ausgewogene Ernährung oder einen gesunden Lebensstil",
+        "Ergänzt die wesentlichen Produkte deiner Routine, ersetzt sie aber nicht"
+      ]
+    },
+    "it": {
+      "name": "Bioniq GO",
+      "benefits": [
+        "Un integratore alimentare quotidiano adattato ai tuoi obiettivi di benessere a partire da una valutazione personalizzata",
+        "Presentazione innovativa in granuli di origine svizzera, progettata per favorire l’assorbimento dei nutrienti",
+        "Una formula selezionata tra 40 opzioni, con fino a 23 vitamine e minerali in base al tuo profilo",
+        "Sostiene diversi obiettivi: benessere a lungo termine, bellezza, sport e prestazione e funzione cognitiva e psicologica",
+        "Qualità e sicurezza svizzere, con ingredienti supportati dalla scienza"
+      ],
+      "key_ingredients": [
+        { "name": "Fino a 23 vitamine e minerali", "role": "Una combinazione selezionata tra 40 formule in base alla tua valutazione del benessere" },
+        { "name": "Granuli con tecnologia svizzera", "role": "Un formato progettato per ottimizzare l’apporto e l’assorbimento dei nutrienti" },
+        { "name": "Ingredienti supportati dalla scienza", "role": "Prodotti secondo rigorosi controlli svizzeri di qualità e sicurezza" }
+      ],
+      "how_to_use": "Assumere 2 misurini al giorno, insieme o suddivisi in due assunzioni da 1 misurino. Deglutire i granuli con acqua o un’altra bevanda fredda o a temperatura ambiente, durante o dopo i pasti. Non masticare, frantumare né mescolare con bevande calde o nei frullati.",
+      "cautions": [
+        "I granuli sono pensati per essere deglutiti interi: non masticarli né frantumarli",
+        "Non sostituisce un’alimentazione equilibrata né uno stile di vita sano",
+        "Integra, senza sostituirli, i prodotti essenziali della tua routine"
+      ]
+    },
+    "tr": {
+      "name": "Bioniq GO",
+      "benefits": [
+        "Kişiselleştirilmiş bir değerlendirmeye dayanarak sağlık hedeflerinize göre uyarlanan günlük bir gıda takviyesi",
+        "Besin emilimini desteklemek için tasarlanmış, İsviçre menşeli yenilikçi granül sunum",
+        "Profilinize göre 40 seçenek arasından seçilen, en fazla 23 vitamin ve mineral içeren bir formül",
+        "Farklı hedefleri destekler: uzun vadeli sağlık, güzellik, spor ve performans ile bilişsel ve psikolojik işlev",
+        "Bilimsel olarak desteklenen içeriklerle İsviçre kalitesi ve güvenliği"
+      ],
+      "key_ingredients": [
+        { "name": "En fazla 23 vitamin ve mineral", "role": "Sağlık değerlendirmenize göre 40 formül arasından seçilen bir kombinasyon" },
+        { "name": "İsviçre teknolojili granüller", "role": "Besinlerin alımını ve emilimini optimize etmek için tasarlanmış bir format" },
+        { "name": "Bilimsel olarak desteklenen içerikler", "role": "Sıkı İsviçre kalite ve güvenlik kontrolleri altında üretilir" }
+      ],
+      "how_to_use": "Günde 2 ölçek alın; birlikte ya da 1’er ölçeklik iki porsiyona bölerek. Granülleri su veya soğuk ya da oda sıcaklığındaki başka bir içecekle, yemeklerle birlikte veya sonrasında yutun. Çiğnemeyin, ezmeyin; sıcak içeceklerle veya shake’lerin içinde karıştırmayın.",
+      "cautions": [
+        "Granüller bütün olarak yutulmak üzere tasarlanmıştır: çiğnemeyin veya ezmeyin",
+        "Dengeli bir beslenmenin veya sağlıklı bir yaşam tarzının yerini tutmaz",
+        "Rutininizdeki temel ürünlerin yerine geçmez, onları tamamlar"
+      ]
+    },
+    "pt": {
+      "name": "Bioniq GO",
+      "benefits": [
+        "Um suplemento alimentar diário adaptado aos seus objetivos de bem-estar a partir de uma avaliação personalizada",
+        "Apresentação inovadora em grânulos de origem suíça, concebida para favorecer a absorção dos nutrientes",
+        "Uma fórmula selecionada entre 40 opções, com até 23 vitaminas e minerais de acordo com o seu perfil",
+        "Apoia diferentes objetivos: bem-estar a longo prazo, beleza, desporto e desempenho, e função cognitiva e psicológica",
+        "Qualidade e segurança suíças, com ingredientes sustentados pela ciência"
+      ],
+      "key_ingredients": [
+        { "name": "Até 23 vitaminas e minerais", "role": "Uma combinação selecionada entre 40 fórmulas de acordo com a sua avaliação de bem-estar" },
+        { "name": "Grânulos de tecnologia suíça", "role": "Um formato concebido para otimizar o fornecimento e a absorção dos nutrientes" },
+        { "name": "Ingredientes sustentados pela ciência", "role": "Fabricados sob rigorosos controlos suíços de qualidade e segurança" }
+      ],
+      "how_to_use": "Tomar 2 colheres medidoras por dia, juntas ou divididas em duas tomas de 1 colher. Engolir os grânulos com água ou outra bebida fria ou à temperatura ambiente, às refeições ou após elas. Não mastigar, triturar nem misturar com bebidas quentes ou em batidos.",
+      "cautions": [
+        "Os grânulos foram concebidos para serem engolidos inteiros: não os mastigue nem os triture",
+        "Não substitui uma alimentação equilibrada nem um estilo de vida saudável",
+        "Complementa, sem os substituir, os produtos essenciais da sua rotina"
+      ]
+    },
+    "in": {
+      "name": "Bioniq GO",
+      "benefits": [
+        "एक दैनिक आहार अनुपूरक, जो व्यक्तिगत मूल्यांकन के आधार पर आपके स्वास्थ्य लक्ष्यों के अनुरूप होता है",
+        "स्विस मूल के दानों (ग्रैन्यूल) में नवीन प्रस्तुति, जो पोषक तत्वों के अवशोषण में सहायता के लिए बनाई गई है",
+        "आपकी प्रोफ़ाइल के अनुसार 40 विकल्पों में से चुना गया फ़ॉर्मूला, जिसमें 23 तक विटामिन और खनिज होते हैं",
+        "विभिन्न लक्ष्यों में सहायक: दीर्घकालिक स्वास्थ्य, सौंदर्य, खेल और प्रदर्शन, तथा संज्ञानात्मक एवं मानसिक कार्य",
+        "विज्ञान-समर्थित अवयवों के साथ स्विस गुणवत्ता और सुरक्षा"
+      ],
+      "key_ingredients": [
+        { "name": "23 तक विटामिन और खनिज", "role": "आपके स्वास्थ्य मूल्यांकन के अनुसार 40 फ़ॉर्मूलों में से चुना गया संयोजन" },
+        { "name": "स्विस तकनीक वाले दाने", "role": "पोषक तत्वों की आपूर्ति और अवशोषण को बेहतर बनाने के लिए डिज़ाइन किया गया स्वरूप" },
+        { "name": "विज्ञान-समर्थित अवयव", "role": "सख़्त स्विस गुणवत्ता और सुरक्षा नियंत्रण के तहत निर्मित" }
+      ],
+      "how_to_use": "प्रतिदिन 2 स्कूप लें — एक साथ या 1-1 स्कूप की दो खुराकों में बाँटकर। दानों को पानी या किसी अन्य ठंडे या कमरे के तापमान वाले पेय के साथ, भोजन के साथ या बाद में निगलें। इन्हें चबाएँ नहीं, पीसें नहीं, और न ही गर्म पेय या शेक में मिलाएँ।",
+      "cautions": [
+        "दाने साबुत निगलने के लिए बनाए गए हैं: इन्हें चबाएँ या पीसें नहीं",
+        "यह संतुलित आहार या स्वस्थ जीवनशैली का विकल्प नहीं है",
+        "यह आपकी दिनचर्या के आवश्यक उत्पादों का स्थान नहीं लेता, बल्कि उन्हें पूरक बनाता है"
+      ]
+    }
+  }
+}
