@@ -11,7 +11,7 @@
   },
   "home": {
     "title": "Yapılandırma",
-    "subtitle": "Telegram bildirim ve CRM parametrelerini ayarlayın, ardından cilt analizi formuna geçin.",
+    "subtitle": "Telegram bildirimini ve CRM parametrelerini ayarlayın, ardından vücut değerlendirme formuna geçin.",
     "form_title": "Parametreler",
     "form_desc": "Başlamadan önce Telegram botlarını, CRM ID'lerini ve dili yapılandırın.",
     "chat_ids": "Sohbet ID'leri",
@@ -24,7 +24,7 @@
     "contact_ids": "İletişim ID'leri",
     "contact_ids_placeholder": "Virgülle ayrılmış CRM iletişim ID'leri",
     "language": "Dil",
-    "submit": "Vücut Değerlendirmesine Geç",
+    "submit": "Vücut değerlendirmesine geç",
     "bot_index_placeholder": "1"
   },
   "footer": {
@@ -359,10 +359,10 @@
       },
       "weight_at_ideal_age": "Gerçekçi olarak kaç kiloda kendinizi iyi hissedersiniz?",
       "weight_at_ideal_age_placeholder": "Kiloyu girin (kg)",
-      "has_skincare_routine": "Şu anda günlük bir cilt, vücut veya saç bakım rutininiz var mı?",
+      "has_skincare_routine": "Günlük bir sağlık veya öz bakım rutininiz var mı?",
       "skincare_products": "Ne tür ürünler kullanıyorsunuz?",
       "skincare_products_placeholder": "Ürünlerinizi kısaca açıklayın.",
-      "want_facial_evaluation": "Ücretsiz bir yüz değerlendirmesi ister misiniz?",
+      "want_facial_evaluation": "Ücretsiz bir sağlık danışmanlığı ister misiniz?",
       "privacy_policy": "Gizlilik Politikasını kabul ediyorum",
       "privacy_policy_link": "Gizlilik Politikamızı okuyun",
       "disclaimer": "Bu öz değerlendirme tanı veya tedavi amaçlı değildir. Yalnızca bilgilendirme amaçlıdır ve hiçbir durumda bir sağlık uzmanının değerlendirmesinin yerini tutmaz."
@@ -442,7 +442,7 @@
       "goal_required": "Lütfen hedefinizi seçin.",
       "weight_at_ideal_age_required": "Lütfen ideal kilonuzu girin.",
       "has_skincare_routine_required": "Lütfen bir bakım rutininiz olup olmadığını belirtin.",
-      "want_facial_evaluation_required": "Lütfen yüz değerlendirmesi isteyip istemediğinizi belirtin.",
+      "want_facial_evaluation_required": "Lütfen bir sağlık danışmanlığı isteyip istemediğinizi belirtin.",
       "privacy_policy_required": "Devam etmek için gizlilik politikasını kabul etmelisiniz."
     }
   },
@@ -474,7 +474,7 @@
     "new_scan": "Yeni bir analiz başlat",
     "view_responses": "Yanıtlarımı Görüntüle",
     "form_data_title": "Tarama Yanıtlarınız",
-    "form_data_desc": "Cilt taramanız sırasında verdiğiniz tüm bilgiler.",
+    "form_data_desc": "Vücut değerlendirmeniz sırasında verdiğiniz tüm bilgiler.",
     "tips_title": "Kişiselleştirilmiş ipuçları",
     "routine_title": "Rutininiz",
     "clinical_eyebrow": "Klinik rapor",
@@ -500,7 +500,7 @@
     "score_good": "Cilt genel olarak iyi dengede",
     "score_normal": "Bazı alanlar dikkat gerektiriyor",
     "score_alert": "Birkaç alan bakım gerektiriyor",
-    "photo_alt": "Cilt taraması",
+    "photo_alt": "Vücut taraması",
     "metric_details": "Ayrıntılar",
     "metric_less": "Daha az",
     "status": {
