@@ -799,5 +799,13 @@
     "stage_pose_tilted": "Inclinata",
     "view_label": "Vista",
     "body_label": "Corpo"
+  },
+  "measure": {
+    "title": "Come prendere le misure",
+    "waist_label": "Vita",
+    "waist_desc": "Misura intorno alla parte più stretta dell'addome, senza stringere il metro.",
+    "hip_label": "Fianchi",
+    "hip_desc": "Misura intorno alla parte più larga di fianchi e glutei.",
+    "tip": "Tieni il metro dritto e parallelo al pavimento."
   }
 }

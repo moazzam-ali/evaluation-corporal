@@ -799,5 +799,13 @@
     "stage_pose_tilted": "Inclinada",
     "view_label": "Vista",
     "body_label": "Cuerpo"
+  },
+  "measure": {
+    "title": "Cómo tomarte las medidas",
+    "waist_label": "Cintura",
+    "waist_desc": "Mide alrededor de la parte más estrecha del abdomen, sin apretar la cinta.",
+    "hip_label": "Cadera",
+    "hip_desc": "Mide alrededor de la parte más ancha de la cadera y los glúteos.",
+    "tip": "Mantén la cinta recta y paralela al suelo."
   }
 }
