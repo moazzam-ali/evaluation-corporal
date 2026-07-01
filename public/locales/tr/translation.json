@@ -799,5 +799,13 @@
     "stage_pose_tilted": "Eğik",
     "view_label": "Görünüm",
     "body_label": "Vücut"
+  },
+  "measure": {
+    "title": "Ölçülerinizi nasıl alırsınız",
+    "waist_label": "Bel",
+    "waist_desc": "Karnınızın en dar bölgesinin çevresini, mezurayı sıkmadan ölçün.",
+    "hip_label": "Kalça",
+    "hip_desc": "Kalça ve basenin en geniş bölgesinin çevresini ölçün.",
+    "tip": "Mezurayı düz ve yere paralel tutun."
   }
 }

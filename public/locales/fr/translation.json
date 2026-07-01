@@ -799,5 +799,13 @@
     "stage_pose_tilted": "Basculée",
     "view_label": "Vue",
     "body_label": "Corps"
+  },
+  "measure": {
+    "title": "Comment prendre vos mesures",
+    "waist_label": "Taille",
+    "waist_desc": "Mesurez autour de la partie la plus étroite de l'abdomen, sans serrer le mètre ruban.",
+    "hip_label": "Hanches",
+    "hip_desc": "Mesurez autour de la partie la plus large des hanches et des fessiers.",
+    "tip": "Gardez le mètre ruban droit et parallèle au sol."
   }
 }

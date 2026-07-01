@@ -799,5 +799,13 @@
     "stage_pose_tilted": "Inclinada",
     "view_label": "Vista",
     "body_label": "Corpo"
+  },
+  "measure": {
+    "title": "Como tirar as suas medidas",
+    "waist_label": "Cintura",
+    "waist_desc": "Meça à volta da parte mais estreita do abdómen, sem apertar a fita.",
+    "hip_label": "Anca",
+    "hip_desc": "Meça à volta da parte mais larga das ancas e dos glúteos.",
+    "tip": "Mantenha a fita direita e paralela ao chão."
   }
 }

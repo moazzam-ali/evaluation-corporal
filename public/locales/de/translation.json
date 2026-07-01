@@ -799,5 +799,13 @@
     "stage_pose_tilted": "Gekippt",
     "view_label": "Ansicht",
     "body_label": "Körper"
+  },
+  "measure": {
+    "title": "So nimmst du deine Maße",
+    "waist_label": "Taille",
+    "waist_desc": "Miss um die schmalste Stelle deines Bauches, ohne das Maßband festzuziehen.",
+    "hip_label": "Hüfte",
+    "hip_desc": "Miss um die breiteste Stelle von Hüfte und Gesäß.",
+    "tip": "Halte das Maßband gerade und parallel zum Boden."
   }
 }

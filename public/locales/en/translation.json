@@ -799,5 +799,13 @@
     "stage_pose_tilted": "Tilted",
     "view_label": "View",
     "body_label": "Body"
+  },
+  "measure": {
+    "title": "How to take your measurements",
+    "waist_label": "Waist",
+    "waist_desc": "Measure around the narrowest part of your abdomen, without pulling the tape tight.",
+    "hip_label": "Hip",
+    "hip_desc": "Measure around the widest part of your hips and glutes.",
+    "tip": "Keep the tape level and parallel to the floor."
   }
 }

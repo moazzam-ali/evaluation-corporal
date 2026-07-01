@@ -1,5 +1,7 @@
 "use client";
 
+import MeasurementGuide from "@/components/MeasurementGuide/MeasurementGuide";
+
 export default function Step2PhysicalInfo({ form, t }) {
   const { register, formState: { errors }, watch, setValue } = form;
   const sex = watch("sex");
@@ -50,6 +52,9 @@ export default function Step2PhysicalInfo({ form, t }) {
           {t("scan.step2.measurement_intro", "Do you know your waist and hip measurements? Would you like me to measure them for you? It will only take a moment. (A measuring tape is recommended.)")}
         </p>
       </div>
+
+      {/* Visual guide: how to take the waist & hip measurements */}
+      <MeasurementGuide t={t} />
 
       {/* Waist & Hip */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
