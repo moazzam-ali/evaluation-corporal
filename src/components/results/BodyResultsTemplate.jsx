@@ -467,7 +467,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                     <span className="text-xl" style={{ color: "var(--muted-fg)" }}>{t("rd.unit_g", "g")}</span>
                   </div>
                   <p className="text-[13px] leading-relaxed mt-3 max-w-[34ch]" style={{ color: "var(--muted-fg)" }}>
-                    {t("rd.macro_desc", "Calibrated to your lean mass. Holds muscle through the deficit; carbs and fats fill the remainder.")}
+                    {t("rd.macro_desc", "Set by your goal — protein, carbs and fat as a share of your daily calories.")}
                   </p>
                 </div>
                 {/* Macro bar */}
