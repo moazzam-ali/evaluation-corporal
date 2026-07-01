@@ -18,10 +18,12 @@ const GOAL_MULTIPLIERS = {
   gain_weight: 1.2,
 };
 
+// Goal-based macro split as a share of daily calories (matches the reference
+// sheet: Weight control 30/40/30, Maintenance 25/45/30, Muscle gain 20/55/25).
 const MACRO_SPLITS = {
-  weight_control: { protein: 0.30, carbs: 0.30, fat: 0.40 },
-  maintain_care: { protein: 0.225, carbs: 0.40, fat: 0.375 },
-  gain_weight: { protein: 0.20, carbs: 0.50, fat: 0.30 },
+  weight_control: { protein: 0.30, carbs: 0.40, fat: 0.30 },
+  maintain_care: { protein: 0.25, carbs: 0.45, fat: 0.30 },
+  gain_weight: { protein: 0.20, carbs: 0.55, fat: 0.25 },
 };
 
 function clamp(n, min, max) {
@@ -137,25 +139,18 @@ export function calculateCalories({ bmr, activityLevel, goal }) {
   return Math.round(bmr * am * gm);
 }
 
-export function calculateMacros({ calories, goal, weightKg }) {
+export function calculateMacros({ calories, goal }) {
   if (!calories) return null;
   const split = MACRO_SPLITS[goal] || MACRO_SPLITS.maintain_care;
-  // Protein anchored to bodyweight per the brief.
-  const proteinG = weightKg ? Math.round((goal === "gain_weight" ? 2.0 : 1.5) * weightKg) : null;
-  // Carbs and fat from calorie split, subtract protein kcals so totals balance.
-  const proteinKcal = proteinG ? proteinG * 4 : calories * split.protein;
-  const remaining = Math.max(0, calories - proteinKcal);
-  // Distribute remaining between carbs and fat in their ratio.
-  const cfTotal = split.carbs + split.fat;
-  const carbsKcal = remaining * (split.carbs / cfTotal);
-  const fatKcal = remaining * (split.fat / cfTotal);
+  // Grams and percentages read directly from the goal's split (share of calories):
+  // protein/carbs at 4 kcal/g, fat at 9 kcal/g. Percentages mirror the sheet exactly.
   return {
-    proteinG: proteinG || Math.round((calories * split.protein) / 4),
-    carbsG: Math.round(carbsKcal / 4),
-    fatG: Math.round(fatKcal / 9),
-    proteinPct: Math.round((proteinKcal / calories) * 100),
-    carbsPct: Math.round((carbsKcal / calories) * 100),
-    fatPct: Math.round((fatKcal / calories) * 100),
+    proteinG: Math.round((calories * split.protein) / 4),
+    carbsG: Math.round((calories * split.carbs) / 4),
+    fatG: Math.round((calories * split.fat) / 9),
+    proteinPct: Math.round(split.protein * 100),
+    carbsPct: Math.round(split.carbs * 100),
+    fatPct: Math.round(split.fat * 100),
   };
 }
 
@@ -216,7 +211,7 @@ export function computeBodyMetrics(formData = {}) {
   const tbw = calculateTBW({ age, heightCm, weightKg, sex });
   const bmr = calculateBMR({ weightKg, heightCm, age, sex });
   const calories = calculateCalories({ bmr, activityLevel: formData.exercise_level, goal: formData.goal });
-  const macros = calculateMacros({ calories, goal: formData.goal, weightKg });
+  const macros = calculateMacros({ calories, goal: formData.goal });
   const hydrationTarget = calculateHydrationTarget(weightKg);
   const currentIntake = parseWaterIntake(formData.water_intake);
 

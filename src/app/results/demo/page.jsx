@@ -23,9 +23,9 @@ const DEMO = {
   deficit: 300,
   sex: "male",
   macros: {
-    protein: { g: 148, pct: 28 },
+    protein: { g: 161, pct: 30 },
     carbs: { g: 215, pct: 40 },
-    fats: { g: 75, pct: 32 },
+    fats: { g: 72, pct: 30 },
   },
   radarData: [
     { now: 0.78, prev: 0.72 },
