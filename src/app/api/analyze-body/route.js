@@ -4,7 +4,7 @@ import { query } from "@/lib/db";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import getOpenAI from "@/lib/openai";
 import { computeBodyMetrics, deriveInsights } from "@/lib/body-analysis";
-import { getBodyVisionPrompt } from "@/lib/body-prompts";
+import { getBodyVisionPrompt, VISION_ENUMS } from "@/lib/body-prompts";
 import {
   getProductIdsForLanguage,
   enrichRecommendations,
@@ -27,6 +27,34 @@ function dataUrlToBuffer(dataUrl) {
   const m = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
   if (!m) return null;
   return { mimeType: m[1], buffer: Buffer.from(m[2], "base64") };
+}
+
+// Structured photo read, validated against the fixed vocabularies so a
+// creative model answer can never leak an untranslatable value into the UI.
+function sanitizeVisionDetails(vision) {
+  if (!vision) return null;
+  const oneOf = (value, allowed) => (allowed.includes(value) ? value : null);
+  const manyOf = (values, allowed, max) =>
+    (Array.isArray(values) ? values.filter((v) => allowed.includes(v)) : []).slice(0, max);
+
+  let visualBodyFat = null;
+  const low = Number(vision.visual_body_fat?.low);
+  const high = Number(vision.visual_body_fat?.high);
+  if (Number.isFinite(low) && Number.isFinite(high) && low > 0 && high >= low && high < 70) {
+    visualBodyFat = { low: Math.round(low), high: Math.round(high) };
+  }
+
+  const confidence = Number(vision.read_confidence);
+
+  return {
+    visual_body_fat: visualBodyFat,
+    fat_distribution: oneOf(vision.fat_distribution, VISION_ENUMS.fat_distribution),
+    muscle_tone: oneOf(vision.muscle_tone, VISION_ENUMS.muscle_tone),
+    symmetry: oneOf(vision.symmetry, VISION_ENUMS.symmetry),
+    posture_flags: manyOf(vision.posture_flags, VISION_ENUMS.posture_flags, 4),
+    focus_areas: manyOf(vision.focus_areas, VISION_ENUMS.focus_areas, 3),
+    read_confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(100, Math.round(confidence))) : null,
+  };
 }
 
 async function safe(fn, label, steps) {
@@ -112,7 +140,7 @@ export async function POST(request) {
           ],
           response_format: { type: "json_object" },
           temperature: 0.4,
-          max_tokens: 1200,
+          max_tokens: 1600,
         });
         const raw = completion.choices?.[0]?.message?.content;
         if (!raw) throw new Error("Empty OpenAI response");
@@ -191,8 +219,10 @@ export async function POST(request) {
       insights,
       tips,
       routine_note: vision?.composition_note || null,
+      composition_note: vision?.composition_note || null,
       posture_note: vision?.posture_note || null,
       photo_quality_note: vision?.photo_quality_note || null,
+      vision_details: sanitizeVisionDetails(vision),
       recommendations,
       enriched_products: enrichedProducts,
       vision_available: !!vision,
