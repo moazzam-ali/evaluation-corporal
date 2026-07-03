@@ -405,9 +405,9 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                     </div>
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.bmi_at_goal", "BMI at goal")}</div>
-                      <div className="flex items-baseline gap-1.5 mt-1">
+                      <div className="flex flex-wrap items-baseline gap-1.5 mt-1">
                         <span className="text-[22px] font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{bmiGoal}</span>
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{ background: "#EAEFE6", color: "#1F6B50" }}>{t("rd.healthy_tag", "Healthy")}</span>
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#EAEFE6", color: "#1F6B50" }}>{t("rd.healthy_tag", "Healthy")}</span>
                       </div>
                     </div>
                   </div>
@@ -419,12 +419,12 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="flex flex-col">
                 <CardHeader title={t("rd.comp_title", "Body Composition")} action={t("rd.comp_action", "Lean vs fat")} />
-                <div className="flex-1 flex items-center gap-7 py-1">
+                <div className="flex-1 flex flex-col sm:flex-row items-center gap-6 sm:gap-7 py-1">
                   <div className="shrink-0" style={{ width: 132, height: 132 }}>
                     <CompositionRing leanPct={d.lbmPct} />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="grid items-center gap-x-3 gap-y-3.5" style={{ gridTemplateColumns: "1fr auto 56px 58px" }}>
+                  <div className="flex-1 min-w-0 w-full">
+                    <div className="grid items-center gap-x-3 gap-y-3.5" style={{ gridTemplateColumns: "1fr auto auto auto" }}>
                       {compRows.flatMap(r => [
                         <div key={r.k + "-l"} className="flex items-center gap-2.5 text-[13px] font-medium" style={{ color: "var(--ink)" }}>
                           <span className="w-2.5 h-2.5 rounded-sm" style={{ background: r.c }} />{r.k}
@@ -445,9 +445,9 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               </Card>
               <Card className="flex flex-col">
                 <CardHeader title={t("rd.tbw_title", "Total Body Water")} action={t("rd.tbw_action", "Hydration share")} />
-                <div className="flex-1 flex items-center gap-7 py-1">
+                <div className="flex-1 flex flex-col sm:flex-row items-center gap-6 sm:gap-7 py-1">
                   <HydrationColumn pct={d.tbwPct} ideal={60} />
-                  <div className="flex-1 min-w-0">
+                  <div className="flex-1 min-w-0 w-full">
                     <div className="flex items-baseline gap-1">
                       <span className="text-[48px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{d.tbwPct}</span>
                       <span className="text-base" style={{ color: "var(--muted-fg)" }}>%</span>
