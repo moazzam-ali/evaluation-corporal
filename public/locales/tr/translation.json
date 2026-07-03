@@ -605,7 +605,7 @@
     "bmiseg_under": "Düşük",
     "bmiseg_healthy": "Sağlıklı",
     "bmiseg_over": "Fazla",
-    "bmiseg_obese": "Obez",
+    "bmiseg_obese": "Obezite I",
     "bf_essential": "Temel",
     "bf_athletic": "Atletik",
     "bf_fitness": "Fit",
@@ -617,7 +617,7 @@
     "bmi_under": "Zayıf",
     "bmi_healthy": "Sağlıklı",
     "bmi_over": "Fazla kilolu",
-    "bmi_obese": "Obez",
+    "bmi_obese": "Obezite I",
     "whr_low": "Düşük risk",
     "whr_moderate": "Orta",
     "whr_high": "Yüksek risk",
@@ -802,7 +802,9 @@
     "whr_cap_high": "Yüksek risk bandı — merkezi yağ kardiyometabolik risk taşır; plan buna öncelik verir.",
     "tbw_cap_ok": "%{{pct}} vücut suyu — sağlıklı referans aralığında.",
     "tbw_cap_below": "%{{pct}} vücut suyu — %60 referansın altında; günlük hidrasyon hedefin bu farkı kapatır.",
-    "scan_no_read": "Yapay zekâ bu fotoğraftan ayrıntılı not çıkaramadı. Aşağıdaki metrikler ölçülerinden hesaplanır ve etkilenmez."
+    "scan_no_read": "Yapay zekâ bu fotoğraftan ayrıntılı not çıkaramadı. Aşağıdaki metrikler ölçülerinden hesaplanır ve etkilenmez.",
+    "bmi_obese2": "Obezite II+",
+    "bmiseg_obese2": "Obezite II+"
   },
   "atlas": {
     "view_external": "Dış",

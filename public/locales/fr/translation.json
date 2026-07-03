@@ -605,7 +605,7 @@
     "bmiseg_under": "Insuf.",
     "bmiseg_healthy": "Sain",
     "bmiseg_over": "Surpoids",
-    "bmiseg_obese": "Obésité",
+    "bmiseg_obese": "Obésité I",
     "bf_essential": "Essentiel",
     "bf_athletic": "Athlétique",
     "bf_fitness": "En forme",
@@ -617,7 +617,7 @@
     "bmi_under": "Insuffisance pondérale",
     "bmi_healthy": "Sain",
     "bmi_over": "Surpoids",
-    "bmi_obese": "Obésité",
+    "bmi_obese": "Obésité I",
     "whr_low": "Risque faible",
     "whr_moderate": "Modéré",
     "whr_high": "Risque élevé",
@@ -802,7 +802,9 @@
     "whr_cap_high": "Zone de risque élevé — la graisse centrale porte un risque cardiométabolique ; le plan la priorise.",
     "tbw_cap_ok": "{{pct}} % d'eau corporelle — dans la plage de référence saine.",
     "tbw_cap_below": "{{pct}} % d'eau corporelle — sous la référence de 60 % ; votre objectif d'hydratation quotidien comble l'écart.",
-    "scan_no_read": "L'IA n'a pas pu extraire de notes détaillées de cette photo. Vos indicateurs ci-dessous sont calculés à partir de vos mesures et ne sont pas affectés."
+    "scan_no_read": "L'IA n'a pas pu extraire de notes détaillées de cette photo. Vos indicateurs ci-dessous sont calculés à partir de vos mesures et ne sont pas affectés.",
+    "bmi_obese2": "Obésité II+",
+    "bmiseg_obese2": "Obésité II+"
   },
   "atlas": {
     "view_external": "Externe",

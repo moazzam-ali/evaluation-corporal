@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 
 /* ── Active-stage pickers (numeric only; labels live in the component) ── */
 export const PICK = {
-  bmi: (v) => (v < 18.5 ? "under" : v < 25 ? "healthy" : v < 30 ? "over" : "obese"),
+  bmi: (v) => (v < 18.5 ? "under" : v < 25 ? "healthy" : v < 30 ? "over" : v < 35 ? "obese" : "obese2"),
   bodyFat: (v) => (v <= 8 ? "essential" : v <= 14 ? "athletic" : v <= 18 ? "fitness" : v <= 25 ? "average" : "high"),
   whr: (v) => (v <= 0.9 ? "low" : v <= 0.95 ? "moderate" : "high"),
 };

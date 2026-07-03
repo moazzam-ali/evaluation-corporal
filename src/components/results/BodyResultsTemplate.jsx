@@ -164,7 +164,8 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
     { to: 18.5, label: t("rd.bmiseg_under", "Under"), tone: "normal" },
     { to: 25, label: t("rd.bmiseg_healthy", "Healthy"), tone: "good" },
     { to: 30, label: t("rd.bmiseg_over", "Over"), tone: "normal" },
-    { to: 40, label: t("rd.bmiseg_obese", "Obese"), tone: "alert" },
+    { to: 35, label: t("rd.bmiseg_obese", "Obese I"), tone: "alert" },
+    { to: 40, label: t("rd.bmiseg_obese2", "Obese II+"), tone: "alert" },
   ];
   const bfSegments = [
     { to: 8, label: t("rd.bf_essential", "Essential"), tone: "alert" },
@@ -183,7 +184,8 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
     { key: "under", label: t("rd.bmi_under", "Underweight"), sub: "<18.5", scaleX: 0.82, img: "/stages/bmi-under.webp" },
     { key: "healthy", label: t("rd.bmi_healthy", "Healthy"), sub: "18.5–25", scaleX: 0.98, img: "/stages/bmi-healthy.webp" },
     { key: "over", label: t("rd.bmi_over", "Overweight"), sub: "25–30", scaleX: 1.14, img: "/stages/bmi-over.webp" },
-    { key: "obese", label: t("rd.bmi_obese", "Obese"), sub: "30+", scaleX: 1.30, img: "/stages/bmi-obese.webp" },
+    { key: "obese", label: t("rd.bmi_obese", "Obese I"), sub: "30–35", scaleX: 1.30, img: "/stages/bmi-obese.webp" },
+    { key: "obese2", label: t("rd.bmi_obese2", "Obese II+"), sub: "35+", scaleX: 1.44, img: "/stages/bmi-obese2.webp" },
   ];
   const bfStages = [
     { key: "essential", label: t("rd.bf_essential", "Essential"), sub: "2–8%", scaleX: 0.80, img: "/stages/bodyfat-essential.webp" },

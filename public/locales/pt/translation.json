@@ -605,7 +605,7 @@
     "bmiseg_under": "Abaixo",
     "bmiseg_healthy": "Saudável",
     "bmiseg_over": "Sobrepeso",
-    "bmiseg_obese": "Obesidade",
+    "bmiseg_obese": "Obesidade I",
     "bf_essential": "Essencial",
     "bf_athletic": "Atlético",
     "bf_fitness": "Em forma",
@@ -617,7 +617,7 @@
     "bmi_under": "Abaixo do peso",
     "bmi_healthy": "Saudável",
     "bmi_over": "Sobrepeso",
-    "bmi_obese": "Obesidade",
+    "bmi_obese": "Obesidade I",
     "whr_low": "Risco baixo",
     "whr_moderate": "Moderado",
     "whr_high": "Risco alto",
@@ -802,7 +802,9 @@
     "whr_cap_high": "Faixa de risco alto — a gordura central acarreta risco cardiometabólico; o plano dá prioridade a isso.",
     "tbw_cap_ok": "{{pct}}% de água corporal — dentro do intervalo de referência saudável.",
     "tbw_cap_below": "{{pct}}% de água corporal — abaixo da referência de 60%; a sua meta diária de hidratação fecha a diferença.",
-    "scan_no_read": "A IA não conseguiu extrair notas detalhadas desta foto. As métricas abaixo são calculadas a partir das suas medidas e não são afetadas."
+    "scan_no_read": "A IA não conseguiu extrair notas detalhadas desta foto. As métricas abaixo são calculadas a partir das suas medidas e não são afetadas.",
+    "bmi_obese2": "Obesidade II+",
+    "bmiseg_obese2": "Obesidade II+"
   },
   "atlas": {
     "view_external": "Externo",

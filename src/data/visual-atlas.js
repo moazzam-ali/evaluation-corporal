@@ -33,7 +33,8 @@ const BMI = (base) => [
   S("under", "rd.bmi_under", "Underweight", "<18.5", `${base}-under.webp`, 0.82),
   S("healthy", "rd.bmi_healthy", "Healthy", "18.5–25", `${base}-healthy.webp`, 0.98),
   S("over", "rd.bmi_over", "Overweight", "25–30", `${base}-over.webp`, 1.14),
-  S("obese", "rd.bmi_obese", "Obese", "30+", `${base}-obese.webp`, 1.30),
+  S("obese", "rd.bmi_obese", "Obese I", "30–35", `${base}-obese.webp`, 1.30),
+  S("obese2", "rd.bmi_obese2", "Obese II+", "35+", `${base}-obese2.webp`, 1.44),
 ];
 const WHR = (base) => [
   S("low", "rd.whr_low", "Low risk", "<0.90", `${base}-low.webp`, 0.92),

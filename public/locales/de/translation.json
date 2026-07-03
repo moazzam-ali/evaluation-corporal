@@ -605,7 +605,7 @@
     "bmiseg_under": "Unter",
     "bmiseg_healthy": "Gesund",
     "bmiseg_over": "Übergew.",
-    "bmiseg_obese": "Adipös",
+    "bmiseg_obese": "Adipositas I",
     "bf_essential": "Essenziell",
     "bf_athletic": "Athletisch",
     "bf_fitness": "Fit",
@@ -617,7 +617,7 @@
     "bmi_under": "Untergewicht",
     "bmi_healthy": "Gesund",
     "bmi_over": "Übergewicht",
-    "bmi_obese": "Adipositas",
+    "bmi_obese": "Adipositas I",
     "whr_low": "Geringes Risiko",
     "whr_moderate": "Mittel",
     "whr_high": "Hohes Risiko",
@@ -802,7 +802,9 @@
     "whr_cap_high": "Hohes Risiko — zentrales Fett birgt kardiometabolisches Risiko; der Plan priorisiert es.",
     "tbw_cap_ok": "{{pct}} % Körperwasser — im gesunden Referenzbereich.",
     "tbw_cap_below": "{{pct}} % Körperwasser — unter der 60-%-Referenz; dein tägliches Hydrationsziel schließt die Lücke.",
-    "scan_no_read": "Die KI konnte aus diesem Foto keine detaillierten Notizen gewinnen. Deine Werte unten werden aus deinen Maßen berechnet und sind nicht betroffen."
+    "scan_no_read": "Die KI konnte aus diesem Foto keine detaillierten Notizen gewinnen. Deine Werte unten werden aus deinen Maßen berechnet und sind nicht betroffen.",
+    "bmi_obese2": "Adipositas II+",
+    "bmiseg_obese2": "Adipositas II+"
   },
   "atlas": {
     "view_external": "Extern",
