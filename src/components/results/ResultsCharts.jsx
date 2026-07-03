@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 /* ── Active-stage pickers (numeric only; labels live in the component) ── */
@@ -75,6 +76,82 @@ export function LinearRange({ value, min, max, segments, unit, caption, decimals
   );
 }
 
+/* ── InfoHint — a quiet "i" that explains how a value is computed ──
+   Click/tap toggles a floating explainer; closes on outside click or
+   Escape. The panel clamps itself to the viewport so it never causes
+   horizontal scroll, and stays light-on-white even inside dark cards. */
+export function InfoHint({ text, dark = false }) {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+  const [panel, setPanel] = useState({ shift: 0, width: 300 });
+  const rootRef = useRef(null);
+  const btnRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e) => { if (rootRef.current && !rootRef.current.contains(e.target)) setOpen(false); };
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const toggle = () => {
+    if (!open && btnRef.current) {
+      const r = btnRef.current.getBoundingClientRect();
+      const width = Math.min(300, window.innerWidth - 32);
+      let left = r.left - 8;
+      if (left + width > window.innerWidth - 16) left = window.innerWidth - 16 - width;
+      if (left < 16) left = 16;
+      setPanel({ shift: left - r.left, width });
+    }
+    setOpen((o) => !o);
+  };
+
+  if (!text) return null;
+  return (
+    <span ref={rootRef} className="relative inline-flex shrink-0" style={{ verticalAlign: "middle" }}>
+      <button
+        ref={btnRef}
+        type="button"
+        onClick={toggle}
+        aria-expanded={open}
+        aria-label={t("rd.info_aria", "What does this mean?")}
+        className="flex items-center justify-center rounded-full transition-colors cursor-pointer"
+        style={{
+          width: 16, height: 16,
+          border: `1px solid ${dark ? "rgba(255,255,255,0.32)" : "var(--border-hex, #E4D9C6)"}`,
+          color: open
+            ? (dark ? "white" : "var(--ink)")
+            : (dark ? "rgba(255,255,255,0.55)" : "var(--muted-fg)"),
+          background: open ? (dark ? "rgba(255,255,255,0.12)" : "rgba(47,47,43,0.04)") : "transparent",
+        }}
+      >
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round">
+          <path d="M12 11v6" /><circle cx="12" cy="6.5" r="0.5" fill="currentColor" />
+        </svg>
+      </button>
+      {open && (
+        <div
+          role="note"
+          className="absolute z-50 rounded-[12px] p-4 text-left normal-case"
+          style={{
+            top: "calc(100% + 10px)", left: panel.shift, width: panel.width,
+            background: "white", border: "1px solid var(--border-hex, #E4D9C6)",
+            boxShadow: "0 12px 32px rgba(47,47,43,0.14)",
+            fontFamily: "var(--font-inter)",
+          }}
+        >
+          <p className="text-[12.5px] leading-relaxed m-0" style={{ color: "var(--ink)", fontWeight: 400, letterSpacing: 0, textTransform: "none" }}>{text}</p>
+        </div>
+      )}
+    </span>
+  );
+}
+
 /* ── Card ──────────────────────────────────────────────────────── */
 export function Card({ children, dark, className = "", style: extraStyle }) {
   return (
@@ -89,10 +166,13 @@ export function Card({ children, dark, className = "", style: extraStyle }) {
   );
 }
 
-export function CardHeader({ title, action }) {
+export function CardHeader({ title, action, info }) {
   return (
     <div className="flex items-baseline justify-between gap-3 mb-5">
-      <span className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink)" }}>{title}</span>
+      <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink)" }}>
+        {title}
+        {info && <InfoHint text={info} />}
+      </span>
       {action && <span className="text-[11px]" style={{ color: "var(--muted-fg)", letterSpacing: "0.04em" }}>{action}</span>}
     </div>
   );
@@ -165,15 +245,20 @@ export function HydrationColumn({ pct, ideal = 60, min = 40, max = 70 }) {
 export function WeightTrajectory({ start, goal, weeks = 12, healthyCeil }) {
   const { t } = useTranslation();
   const xL = 30, xR = 330, yT = 16, yB = 104;
-  const wTop = Math.max(start, healthyCeil) + 1;
-  const wBot = goal - 1;
+  // Scale spans everything drawn — start, goal AND the healthy ceiling — so
+  // the curve stays on-canvas whether the goal is below the current weight
+  // (loss) or above it (gain).
+  const wTop = Math.max(start, goal, healthyCeil) + 1;
+  const wBot = Math.min(start, goal) - 1;
   const X = (wk) => xL + (wk / weeks) * (xR - xL);
   const Y = (w) => yT + ((wTop - w) / (wTop - wBot)) * (yB - yT);
   const ss = (tt) => tt * tt * (3 - 2 * tt);
   const pts = Array.from({ length: weeks + 1 }, (_, k) => [X(k), Y(start - (start - goal) * ss(k / weeks))]);
   const line = pts.map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ");
   const area = `${line} L ${X(weeks).toFixed(1)} ${yB} L ${X(0).toFixed(1)} ${yB} Z`;
-  const yCeil = Y(healthyCeil);
+  // Clamp so a ceiling outside the plotted range never yields a negative-
+  // height rect (invalid SVG) or a line off the canvas.
+  const yCeil = Math.min(yB, Math.max(yT, Y(healthyCeil)));
   const nowLabel = t("rd.now", "Now");
   return (
     <svg viewBox="0 0 360 130" className="w-full" style={{ height: "auto" }} aria-hidden>
