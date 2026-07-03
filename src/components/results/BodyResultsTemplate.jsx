@@ -251,7 +251,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               {t("rd.hero_brand", "EVALUACIÓN CORPORAL")} · {heroDate}
             </div>
             <h1 className="mt-10 text-[clamp(64px,10vw,120px)] leading-[0.95] tracking-[-0.045em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 300, color: "var(--ink)" }}>
-              {d.user.firstName} <span style={{ fontStyle: "italic", fontWeight: 400 }}>{d.user.lastName}.</span>
+              {d.user.firstName} <span style={{ fontStyle: "italic", fontWeight: 400 }}>{d.user.lastName}</span>
             </h1>
             <p className="mx-auto mt-8 max-w-[44ch] text-lg leading-relaxed" style={{ color: "var(--muted-fg)" }}>
               {t("rd.hero_subtitle", "Your body assessment — a snapshot of where you stand today. Read it once, then let the plan do the work.")}
