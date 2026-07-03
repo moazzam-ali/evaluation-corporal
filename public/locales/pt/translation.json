@@ -30,7 +30,7 @@
   "footer": {
     "rights": "Todos os direitos reservados.",
     "privacy": "Política de Privacidade",
-    "disclaimer": "Estimativa de IA — não constitui aconselhamento médico. A composição corporal é apresentada como um intervalo com grau de confiança. Consulte um profissional de saúde para diagnóstico."
+    "disclaimer": "Avaliação de saúde baseada em fórmulas — não é aconselhamento médico. Consulte um profissional de saúde para diagnóstico."
   },
   "landing": {
     "cta": "Comece a Avaliação Gratuita",
@@ -193,7 +193,18 @@
     "science_badge_privacy": "Privacidade dos dados",
     "science_strip": "Nossos métodos · revisados por pares",
     "testimonials_beta": "Feedback dos nossos primeiros coaches e usuários beta.",
-    "scan_card_view": "VISTA FRONTAL · A CAPTURAR"
+    "scan_card_view": "VISTA FRONTAL · A CAPTURAR",
+    "card_assessment": "AVALIAÇÃO",
+    "card_calculating": "A calcular",
+    "card_bmi": "IMC",
+    "card_healthy": "Saudável",
+    "card_bodyfat": "GORDURA CORPORAL",
+    "card_calories": "CALORIAS DIÁRIAS",
+    "card_kcal": "kcal",
+    "card_whr": "CINTURA-QUADRIL",
+    "card_lowrisk": "Risco baixo",
+    "how_step_label": "PASSO",
+    "formula_evidence_label": "Evidência"
   },
   "scan": {
     "rail_eyebrow": "Avaliação corporal",
@@ -484,7 +495,7 @@
     "insights_title_2": "significam para você.",
     "insights_lede": "Quatro perspectivas sobre os mesmos dados — o que está funcionando, o que está comprometido, o que seus hábitos estão causando e para onde mirar.",
     "tips_eyebrow": "Para você · Este mês",
-    "tips_title_1": "Cinco dicas,",
+    "tips_title_1": "Dicas práticas,",
     "tips_title_2": "uma rotina.",
     "tips_lede": "Pequenos ajustes, sequenciados. A rotina é construída em torno das suas preocupações — ordem, frequência e horário incluídos.",
     "products_eyebrow": "Produtos recomendados",

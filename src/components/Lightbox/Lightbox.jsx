@@ -116,7 +116,7 @@ export function LightboxProvider({ children }) {
           <div className="flex-1 min-h-0 flex flex-col lg:flex-row items-center justify-center gap-6 px-4 sm:px-10 pb-2 overflow-auto" onClick={(e) => e.stopPropagation()}>
             <div className="relative flex items-center justify-center" style={{ flex: "1 1 auto", maxWidth: "min(92vw, 720px)" }} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
               {multi && (
-                <button onClick={() => go(-1)} aria-label="Previous" className="absolute left-1 sm:-left-4 z-10 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: "rgba(20,18,16,0.55)", border: "1px solid rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)", color: "white" }}>
+                <button onClick={() => go(-1)} aria-label={t("navigation.previous", "Previous")} className="absolute left-1 sm:-left-4 z-10 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: "rgba(20,18,16,0.55)", border: "1px solid rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)", color: "white" }}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
                 </button>
               )}
@@ -133,7 +133,7 @@ export function LightboxProvider({ children }) {
                 )}
               </div>
               {multi && (
-                <button onClick={() => go(1)} aria-label="Next" className="absolute right-1 sm:-right-4 z-10 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: "rgba(20,18,16,0.55)", border: "1px solid rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)", color: "white" }}>
+                <button onClick={() => go(1)} aria-label={t("navigation.next", "Next")} className="absolute right-1 sm:-right-4 z-10 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: "rgba(20,18,16,0.55)", border: "1px solid rgba(255,255,255,0.18)", backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)", color: "white" }}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
                 </button>
               )}

@@ -30,7 +30,7 @@
   "footer": {
     "rights": "Tutti i diritti riservati.",
     "privacy": "Informativa sulla Privacy",
-    "disclaimer": "Stima basata su IA — non costituisce parere medico. La composizione corporea viene mostrata come intervallo con livello di confidenza. Consulta un medico per una diagnosi."
+    "disclaimer": "Valutazione della salute basata su formule — non è un consiglio medico. Consulta un professionista sanitario per una diagnosi."
   },
   "landing": {
     "cta": "Inizia la valutazione gratuita",
@@ -193,7 +193,18 @@
     "science_badge_privacy": "Privacy dei dati",
     "science_strip": "I nostri metodi · revisionati da esperti",
     "testimonials_beta": "Feedback dai nostri primi coach e utenti beta.",
-    "scan_card_view": "VISTA FRONTALE · ACQUISIZIONE"
+    "scan_card_view": "VISTA FRONTALE · ACQUISIZIONE",
+    "card_assessment": "VALUTAZIONE",
+    "card_calculating": "Calcolo in corso",
+    "card_bmi": "IMC",
+    "card_healthy": "Sano",
+    "card_bodyfat": "GRASSO CORPOREO",
+    "card_calories": "CALORIE GIORNALIERE",
+    "card_kcal": "kcal",
+    "card_whr": "VITA-FIANCHI",
+    "card_lowrisk": "Rischio basso",
+    "how_step_label": "PASSO",
+    "formula_evidence_label": "Evidenze"
   },
   "scan": {
     "rail_eyebrow": "Valutazione corporea",
@@ -461,7 +472,7 @@
     "insights_title_2": "per te.",
     "insights_lede": "Quattro prospettive sugli stessi dati — cosa funziona, cosa è sotto stress, l'effetto delle tue abitudini e dove puntare.",
     "tips_eyebrow": "Per te · Questo mese",
-    "tips_title_1": "Cinque consigli,",
+    "tips_title_1": "Consigli pratici,",
     "tips_title_2": "una routine.",
     "tips_lede": "Piccoli aggiustamenti, in sequenza. La routine è costruita intorno alle tue preoccupazioni — ordine, frequenza e tempistica inclusi.",
     "products_eyebrow": "Prodotti consigliati",

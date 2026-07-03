@@ -30,7 +30,7 @@
   "footer": {
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
-    "disclaimer": "AI estimate — not medical advice. Body composition is shown as a range with confidence. Consult a clinician for diagnosis."
+    "disclaimer": "Formula-based health assessment — not medical advice. Consult a healthcare professional for diagnosis."
   },
   "landing": {
     "cta": "Start Free Assessment",
@@ -193,7 +193,18 @@
     "science_badge_privacy": "Data privacy",
     "science_strip": "Methods we use · peer-reviewed",
     "testimonials_beta": "Feedback from our early beta coaches and users.",
-    "scan_card_view": "FRONT VIEW · CAPTURING"
+    "scan_card_view": "FRONT VIEW · CAPTURING",
+    "card_assessment": "ASSESSMENT",
+    "card_calculating": "Calculating",
+    "card_bmi": "BMI",
+    "card_healthy": "Healthy",
+    "card_bodyfat": "BODY FAT",
+    "card_calories": "DAILY CALORIES",
+    "card_kcal": "kcal",
+    "card_whr": "WAIST-TO-HIP",
+    "card_lowrisk": "Low risk",
+    "how_step_label": "STEP",
+    "formula_evidence_label": "Evidence"
   },
   "scan": {
     "rail_eyebrow": "Body assessment",
@@ -487,7 +498,7 @@
     "insights_title_2": "mean for you.",
     "insights_lede": "Four lenses on the same data — what's working, what's stressed, what your habits are doing to it, and where to aim next.",
     "tips_eyebrow": "For you · This month",
-    "tips_title_1": "Five tips,",
+    "tips_title_1": "Practical tips,",
     "tips_title_2": "one routine.",
     "tips_lede": "Small adjustments, sequenced. The routine is built around your concerns — order, frequency, and timing all included.",
     "tips_title": "Personalised tips",

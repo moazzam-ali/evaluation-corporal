@@ -30,7 +30,7 @@
   "footer": {
     "rights": "Alle Rechte vorbehalten.",
     "privacy": "Datenschutzrichtlinie",
-    "disclaimer": "KI-Schätzung — kein medizinischer Rat. Die Körperzusammensetzung wird als Bereich mit Konfidenzintervall angezeigt. Wenden Sie sich für eine Diagnose an einen Arzt."
+    "disclaimer": "Formelbasierte Gesundheitsauswertung — keine medizinische Beratung. Für eine Diagnose wende dich an medizinisches Fachpersonal."
   },
   "landing": {
     "cta": "Kostenlose Auswertung starten",
@@ -193,7 +193,18 @@
     "science_badge_privacy": "Datenschutz",
     "science_strip": "Unsere Methoden · peer-reviewt",
     "testimonials_beta": "Feedback unserer ersten Beta-Coaches und Nutzer.",
-    "scan_card_view": "VORDERANSICHT · ERFASSUNG"
+    "scan_card_view": "VORDERANSICHT · ERFASSUNG",
+    "card_assessment": "AUSWERTUNG",
+    "card_calculating": "Wird berechnet",
+    "card_bmi": "BMI",
+    "card_healthy": "Gesund",
+    "card_bodyfat": "KÖRPERFETT",
+    "card_calories": "TAGESKALORIEN",
+    "card_kcal": "kcal",
+    "card_whr": "TAILLE-HÜFTE",
+    "card_lowrisk": "Geringes Risiko",
+    "how_step_label": "SCHRITT",
+    "formula_evidence_label": "Evidenz"
   },
   "scan": {
     "rail_eyebrow": "Körperbewertung",
@@ -461,7 +472,7 @@
     "insights_title_2": "für Sie bedeuten.",
     "insights_lede": "Vier Perspektiven auf dieselben Daten — was funktioniert, was belastet ist, was Ihre Gewohnheiten bewirken und worauf Sie als Nächstes abzielen sollten.",
     "tips_eyebrow": "Für Sie · Diesen Monat",
-    "tips_title_1": "Fünf Tipps,",
+    "tips_title_1": "Praktische Tipps,",
     "tips_title_2": "eine Routine.",
     "tips_lede": "Kleine Anpassungen, in der richtigen Reihenfolge. Die Routine orientiert sich an Ihren Anliegen — Reihenfolge, Häufigkeit und Zeitpunkt inklusive.",
     "products_eyebrow": "Empfohlene Produkte",

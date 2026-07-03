@@ -3,6 +3,14 @@
 AI body & nutrition assessment (Next.js 16, App Router). Warm-neutral
 editorial design system. Multi-language (en, es, fr, de, it, tr, pt, in).
 
+## Attribution policy (MANDATORY — every session, every change)
+- NEVER add AI co-author trailers ("Co-Authored-By: …"), session links, or any
+  AI/assistant/tool references to commit messages, PR titles/bodies, code,
+  comments, branch names, or documentation.
+- Use neutral branch names (feature/…, fix/…) — never AI-tool-prefixed names.
+- All work must read as authored by the repository owner. Do not mention who
+  or what wrote the code anywhere in the repository or its history.
+
 ## Stack
 - **Next.js 16** (App Router) + React 19.
 - **Postgres** via `pg` (raw SQL) — see `src/lib/db.js`. We use **Neon**.

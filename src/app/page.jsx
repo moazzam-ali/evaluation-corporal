@@ -375,10 +375,10 @@ function LandingPageInner() {
               boxShadow: "0 30px 80px rgba(47,47,43,0.10), 0 4px 12px rgba(47,47,43,0.04)",
             }}>
               <div className="flex justify-between items-center">
-                <span className="text-[10px] font-medium tracking-[0.14em] uppercase" style={{ color: "var(--primary-hex)", fontFamily: "var(--font-inter)" }}>ASSESSMENT</span>
+                <span className="text-[10px] font-medium tracking-[0.14em] uppercase" style={{ color: "var(--primary-hex)", fontFamily: "var(--font-inter)" }}>{t("landing.card_assessment", "ASSESSMENT")}</span>
                 <span className="inline-flex items-center gap-1.5 text-[10px]" style={{ color: "var(--muted-fg)" }}>
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--status-good-hex)" }} />
-                  Calculating
+                  {t("landing.card_calculating", "Calculating")}
                 </span>
               </div>
 
@@ -399,13 +399,13 @@ function LandingPageInner() {
 
             {/* Left floating card — BMI (reveals after opening scan) */}
             <div className="absolute" style={{ left: 100, top: 90, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", opacity: 0, animation: "chipIn 0.6s var(--ease-out) 2.6s forwards, floatA 6s ease-in-out 3.2s infinite" }}>
-              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>BMI</div>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("landing.card_bmi", "BMI")}</div>
               <div className="flex items-center gap-3.5 mt-2">
                 <ScoreRing value={76} size={72} stroke={6} color="#8D9A84" track="rgba(47,47,43,0.06)" />
                 <div>
                   <div className="text-[22px] font-medium" style={{ fontFamily: "var(--font-fraunces)", color: "var(--ink)" }}>23.4</div>
                   <div className="text-[11px] mt-0.5 inline-flex items-center gap-1 rounded-full px-2 py-0.5" style={{ background: "var(--status-good-bg)", color: "var(--status-good-hex)" }}>
-                    Healthy
+                    {t("landing.card_healthy", "Healthy")}
                   </div>
                 </div>
               </div>
@@ -413,7 +413,7 @@ function LandingPageInner() {
 
             {/* Right floating card — Body Fat (reveals after opening scan) */}
             <div className="absolute" style={{ right: 100, top: 180, width: 220, background: "white", border: "1px solid var(--border-hex)", borderRadius: 18, padding: 18, boxShadow: "var(--shadow-lg)", opacity: 0, animation: "chipIn 0.6s var(--ease-out) 2.78s forwards, floatB 7s ease-in-out 3.4s infinite" }}>
-              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>BODY FAT</div>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("landing.card_bodyfat", "BODY FAT")}</div>
               <div className="flex items-baseline gap-2 mt-2">
                 <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>18.2</span>
                 <span className="text-[13px]" style={{ color: "var(--muted-fg)" }}>%</span>
@@ -425,10 +425,10 @@ function LandingPageInner() {
 
             {/* Bottom-right dark card — calories (reveals after opening scan) */}
             <div className="absolute" style={{ right: 140, bottom: 40, width: 200, background: "var(--ink)", color: "white", borderRadius: 16, padding: 16, boxShadow: "0 18px 40px rgba(47,47,43,0.18)", opacity: 0, animation: "chipIn 0.6s var(--ease-out) 2.96s forwards, floatA 8s ease-in-out 3.6s infinite" }}>
-              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>DAILY CALORIES</div>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--sky)" }}>{t("landing.card_calories", "DAILY CALORIES")}</div>
               <div className="flex items-baseline gap-1.5 mt-1.5">
                 <span className="text-[30px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>2,148</span>
-                <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.5)" }}>kcal</span>
+                <span className="text-[11px]" style={{ color: "rgba(255,255,255,0.5)" }}>{t("landing.card_kcal", "kcal")}</span>
               </div>
               <div className="h-1 rounded-full mt-2.5 overflow-hidden" style={{ background: "rgba(255,255,255,0.12)" }}>
                 <div className="h-full rounded-full" style={{ width: "62%", background: "var(--sky)" }} />
@@ -437,10 +437,10 @@ function LandingPageInner() {
 
             {/* Bottom-left — WHR (reveals after opening scan) */}
             <div className="absolute" style={{ left: 150, bottom: 60, width: 180, background: "white", border: "1px solid var(--border-hex)", borderRadius: 16, padding: 14, boxShadow: "var(--shadow-lg)", opacity: 0, animation: "chipIn 0.6s var(--ease-out) 3.14s forwards, floatB 7.5s ease-in-out 3.8s infinite" }}>
-              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>WAIST-TO-HIP</div>
+              <div className="text-[11px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("landing.card_whr", "WAIST-TO-HIP")}</div>
               <div className="flex items-baseline gap-2 mt-1">
                 <span className="text-[22px]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>0.82</span>
-                <span className="text-[11px] rounded-full px-2 py-0.5" style={{ background: "var(--status-good-bg)", color: "var(--status-good-hex)" }}>Low risk</span>
+                <span className="text-[11px] rounded-full px-2 py-0.5" style={{ background: "var(--status-good-bg)", color: "var(--status-good-hex)" }}>{t("landing.card_lowrisk", "Low risk")}</span>
               </div>
             </div>
           </div>
@@ -620,7 +620,7 @@ function LandingPageInner() {
                     <Icon name={STEP_ICONS[idx]} size={20} color="var(--primary-hex)" />
                   </div>
                   <div className="text-[11px] font-medium uppercase tracking-[0.14em] mt-5" style={{ color: "var(--muted-fg)" }}>
-                    STEP {t(`landing.how_step${i}_num`, `0${i}`)}
+                    {t("landing.how_step_label", "STEP")} {t(`landing.how_step${i}_num`, `0${i}`)}
                   </div>
                   <h3 className="text-[26px] tracking-[-0.01em] mt-2 mb-2.5" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink)" }}>
                     {t(`landing.how_step${i}_title`)}
@@ -673,7 +673,7 @@ function LandingPageInner() {
                     {t(`landing.formula_${i}_desc`)}
                   </p>
                   <div className="pt-5 border-t mt-auto" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-                    <div className="text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.55)" }}>Evidence</div>
+                    <div className="text-[10px] uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.55)" }}>{t("landing.formula_evidence_label", "Evidence")}</div>
                     <div className="mt-1 text-lg" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
                       <span style={{ color: "var(--sky)" }}>{t(`landing.formula_${i}_evidence`)}</span>
                     </div>

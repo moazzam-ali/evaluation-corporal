@@ -30,7 +30,7 @@
   "footer": {
     "rights": "Tüm hakları saklıdır.",
     "privacy": "Gizlilik Politikası",
-    "disclaimer": "Yapay zeka tahminidir — tıbbi tavsiye değildir. Vücut kompozisyonu bir güven aralığı ile gösterilir. Teşhis için bir klinisyene danışın."
+    "disclaimer": "Formül temelli sağlık değerlendirmesi — tıbbi tavsiye değildir. Tanı için bir sağlık uzmanına danışın."
   },
   "landing": {
     "cta": "Ücretsiz Değerlendirmeyi Başlat",
@@ -193,7 +193,18 @@
     "science_badge_privacy": "Veri gizliliği",
     "science_strip": "Kullandığımız yöntemler · hakemli",
     "testimonials_beta": "Erken beta koçlarımız ve kullanıcılarımızdan geri bildirimler.",
-    "scan_card_view": "ÖNDEN GÖRÜNÜM · YAKALANIYOR"
+    "scan_card_view": "ÖNDEN GÖRÜNÜM · YAKALANIYOR",
+    "card_assessment": "DEĞERLENDİRME",
+    "card_calculating": "Hesaplanıyor",
+    "card_bmi": "BKİ",
+    "card_healthy": "Sağlıklı",
+    "card_bodyfat": "VÜCUT YAĞI",
+    "card_calories": "GÜNLÜK KALORİ",
+    "card_kcal": "kcal",
+    "card_whr": "BEL-KALÇA",
+    "card_lowrisk": "Düşük risk",
+    "how_step_label": "ADIM",
+    "formula_evidence_label": "Kanıt"
   },
   "scan": {
     "rail_eyebrow": "Vücut değerlendirmesi",
@@ -484,7 +495,7 @@
     "insights_title_2": "ne anlama geldiği.",
     "insights_lede": "Aynı veriye dört farklı bakış — neyin işe yaradığı, neyin zorlandığı, alışkanlıklarınızın etkisi ve sonraki hedef.",
     "tips_eyebrow": "Sizin için · Bu ay",
-    "tips_title_1": "Beş ipucu,",
+    "tips_title_1": "Pratik ipuçları,",
     "tips_title_2": "bir rutin.",
     "tips_lede": "Küçük ayarlamalar, sıralı. Rutin endişeleriniz etrafında oluşturulur — sıra, sıklık ve zamanlama dahil.",
     "products_eyebrow": "Önerilen ürünler",

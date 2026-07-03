@@ -30,7 +30,7 @@
   "footer": {
     "rights": "Tous droits réservés.",
     "privacy": "Politique de Confidentialité",
-    "disclaimer": "Estimation par IA — ne constitue pas un avis médical. La composition corporelle est affichée sous forme de fourchette avec un niveau de confiance. Consultez un professionnel de santé pour un diagnostic."
+    "disclaimer": "Bilan de santé basé sur des formules — pas un avis médical. Consultez un professionnel de santé pour un diagnostic."
   },
   "landing": {
     "cta": "Lancer le bilan gratuit",
@@ -193,7 +193,18 @@
     "science_badge_privacy": "Confidentialité des données",
     "science_strip": "Nos méthodes · revues par des pairs",
     "testimonials_beta": "Retours de nos premiers coachs et utilisateurs en bêta.",
-    "scan_card_view": "VUE DE FACE · CAPTURE"
+    "scan_card_view": "VUE DE FACE · CAPTURE",
+    "card_assessment": "BILAN",
+    "card_calculating": "Calcul en cours",
+    "card_bmi": "IMC",
+    "card_healthy": "Sain",
+    "card_bodyfat": "MASSE GRASSE",
+    "card_calories": "CALORIES QUOTIDIENNES",
+    "card_kcal": "kcal",
+    "card_whr": "TAILLE-HANCHES",
+    "card_lowrisk": "Risque faible",
+    "how_step_label": "ÉTAPE",
+    "formula_evidence_label": "Preuves"
   },
   "scan": {
     "rail_eyebrow": "Évaluation corporelle",
@@ -461,7 +472,7 @@
     "insights_title_2": "signifient pour vous.",
     "insights_lede": "Quatre angles sur les mêmes données — ce qui fonctionne, ce qui est fragilisé, l'impact de vos habitudes, et les pistes d'amélioration.",
     "tips_eyebrow": "Pour vous · Ce mois-ci",
-    "tips_title_1": "Cinq conseils,",
+    "tips_title_1": "Des conseils pratiques,",
     "tips_title_2": "une routine.",
     "tips_lede": "De petits ajustements, séquencés. La routine est construite autour de vos préoccupations — ordre, fréquence et horaire inclus.",
     "products_eyebrow": "Produits recommandés",
