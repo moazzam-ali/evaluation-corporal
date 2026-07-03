@@ -7,9 +7,21 @@ editorial design system. Multi-language (en, es, fr, de, it, tr, pt, in).
 - NEVER add AI co-author trailers ("Co-Authored-By: …"), session links, or any
   AI/assistant/tool references to commit messages, PR titles/bodies, code,
   comments, branch names, or documentation.
-- Use neutral branch names (feature/…, fix/…) — never AI-tool-prefixed names.
+- **Git identity — verify BEFORE the first commit of every session.** Cloud
+  sessions default to `Claude <noreply@anthropic.com>`; commits must be
+  authored as `Moazzam Ali <moazzam435j@gmail.com>` (enforced via env in
+  `.claude/settings.json`, but confirm with `git log -1 --format='%an %ae'`
+  after committing — if wrong, rewrite before pushing).
+- **Branches — never push an AI-prefixed ref.** If the platform assigns a
+  `claude/…` working branch, do the work locally but PUBLISH to a neutral
+  `feature/…` or `fix/…` branch, and delete any `claude/*` ref that exists on
+  origin before ending the session. PR titles must be written manually as a
+  neutral description — never left as the auto-generated branch-name title.
 - All work must read as authored by the repository owner. Do not mention who
   or what wrote the code anywhere in the repository or its history.
+- Before ending any session that pushed: audit with
+  `git log --all --format='%an %ae %B' | grep -ci "claude\|anthropic"` — the
+  count must be 0 on every pushed ref.
 
 ## Stack
 - **Next.js 16** (App Router) + React 19.

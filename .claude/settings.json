@@ -1,4 +1,11 @@
 {
+  "includeCoAuthoredBy": false,
+  "env": {
+    "GIT_AUTHOR_NAME": "Moazzam Ali",
+    "GIT_AUTHOR_EMAIL": "moazzam435j@gmail.com",
+    "GIT_COMMITTER_NAME": "Moazzam Ali",
+    "GIT_COMMITTER_EMAIL": "moazzam435j@gmail.com"
+  },
   "sandbox": {
     "network": {
       "allowedDomains": [
