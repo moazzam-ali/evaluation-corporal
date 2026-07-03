@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import StageStrip from "@/components/StageStrip/StageStrip";
 import { useLightbox, ExpandIcon } from "@/components/Lightbox/Lightbox";
 import {
-  PICK, TONES, Icon,
+  PICK, TONES, Icon, InfoHint,
   LinearRange, Card, CardHeader, ChapterBand,
   Radar, CompositionRing, HydrationColumn, WeightTrajectory,
 } from "@/components/results/ResultsCharts";
@@ -58,6 +58,49 @@ function metricNote(m, t) {
   }
 }
 
+/* ── Scan-card enum labels ─────────────────────────────────────────
+   The vision read stores machine ids (English enums); these maps resolve
+   them in the CURRENT UI language. Literal t() calls so the locale sync
+   script picks every key up. */
+function scanLabels(t) {
+  return {
+    fatDistribution: {
+      android: t("rd.fatdist_android", "Abdomen-first (android)"),
+      gynoid: t("rd.fatdist_gynoid", "Hips & thighs (gynoid)"),
+      mixed: t("rd.fatdist_mixed", "Mixed pattern"),
+      even: t("rd.fatdist_even", "Evenly distributed"),
+    },
+    muscleTone: {
+      low: t("rd.tone_low", "Soft — low definition"),
+      moderate: t("rd.tone_moderate", "Moderate definition"),
+      defined: t("rd.tone_defined", "Defined"),
+      athletic: t("rd.tone_athletic", "Athletic"),
+    },
+    symmetry: {
+      balanced: t("rd.sym_balanced", "Balanced left–right"),
+      slight_asymmetry: t("rd.sym_slight_asymmetry", "Slight asymmetry"),
+      notable_asymmetry: t("rd.sym_notable_asymmetry", "Notable asymmetry"),
+    },
+    postureFlags: {
+      neutral: t("rd.pf_neutral", "Neutral stance"),
+      forward_head: t("rd.pf_forward_head", "Forward head"),
+      rounded_shoulders: t("rd.pf_rounded_shoulders", "Rounded shoulders"),
+      uneven_shoulders: t("rd.pf_uneven_shoulders", "Uneven shoulders"),
+      anterior_pelvic_tilt: t("rd.pf_anterior_pelvic_tilt", "Anterior pelvic tilt"),
+      posterior_pelvic_tilt: t("rd.pf_posterior_pelvic_tilt", "Posterior pelvic tilt"),
+      lateral_lean: t("rd.pf_lateral_lean", "Lateral lean"),
+    },
+    focusAreas: {
+      core: t("rd.focus_core", "Core & midsection"),
+      upper_body: t("rd.focus_upper_body", "Upper body"),
+      lower_body: t("rd.focus_lower_body", "Lower body"),
+      posture: t("rd.focus_posture", "Posture"),
+      symmetry: t("rd.focus_symmetry", "Left–right balance"),
+      overall_conditioning: t("rd.focus_overall", "Overall conditioning"),
+    },
+  };
+}
+
 /* ── Risk callouts: generated from metric scores ── */
 function generateRisks(metrics, t) {
   if (!metrics?.length) return [];
@@ -91,7 +134,7 @@ function generateRisks(metrics, t) {
  *   metrics   — raw metrics array (for risk callout generation)
  *   createdAt — ISO date string for the hero
  */
-export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionAvailable = false }) {
+export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionDetails = null, visionAvailable = false }) {
   const { t, i18n } = useTranslation();
   const { open: openLightbox } = useLightbox();
   const d = data;
@@ -118,13 +161,42 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   // Goal delta sign follows the user's own goal (gain goals show +).
   const goalSign = d.weightGoal > d.weight ? "+" : "−";
 
+  // ── Structured photo read (vision_details) — enum ids resolved to the
+  //    current UI language via scanLabels; old rows without it just render
+  //    the classic three-note card. ──
+  const SCAN = scanLabels(t);
+  const vd = visionDetails || {};
+  const scanTraits = [
+    visionAvailable && bodyType ? { label: t("rd.body_type_label", "Body type"), value: t(`results.body_types.${bodyType}`, bodyType) } : null,
+    vd.fat_distribution ? { label: t("rd.fat_dist_label", "Fat distribution"), value: SCAN.fatDistribution[vd.fat_distribution] } : null,
+    vd.muscle_tone ? { label: t("rd.muscle_tone_label", "Muscle tone"), value: SCAN.muscleTone[vd.muscle_tone] } : null,
+    vd.symmetry ? { label: t("rd.symmetry_label", "Symmetry"), value: SCAN.symmetry[vd.symmetry] } : null,
+  ].filter((x) => x && x.value);
+  const postureFlags = (vd.posture_flags || []).map((f) => ({ id: f, label: SCAN.postureFlags[f] })).filter((f) => f.label);
+  const focusAreas = (vd.focus_areas || []).map((f) => SCAN.focusAreas[f]).filter(Boolean);
+
+  // Visual body-fat cross-check: the AI's from-photo range vs the Deurenberg
+  // formula estimate. ±2 pts of slack before we call a disagreement.
+  const vbf = vd.visual_body_fat || null;
+  const vbfVerdict = vbf && d.bodyFat > 0
+    ? (d.bodyFat >= vbf.low - 2 && d.bodyFat <= vbf.high + 2 ? "match" : d.bodyFat > vbf.high ? "leaner" : "fuller")
+    : null;
+  const vbfVerdictText =
+    vbfVerdict === "match" ? t("rd.vbf_match", "In line with your formula estimate of {{value}}%", { value: d.bodyFat })
+    : vbfVerdict === "leaner" ? t("rd.vbf_leaner", "The photo reads leaner than your formula estimate of {{value}}%", { value: d.bodyFat })
+    : vbfVerdict === "fuller" ? t("rd.vbf_fuller", "The photo reads fuller than your formula estimate of {{value}}%", { value: d.bodyFat })
+    : null;
+
   const openScan = () => openLightbox({
     title: t("rd.scan_title", "Your scan"),
     caption: t("rd.scan_caption", "Your uploaded photo, used for the AI body-composition read."),
     indicators: [
-      visionAvailable && bodyType ? { label: t("rd.body_type_label", "Body type"), value: t(`results.body_types.${bodyType}`, bodyType) } : null,
-      postureNote ? { label: t("rd.posture_label", "Posture"), value: postureNote } : null,
+      ...scanTraits,
+      vbf ? { label: t("rd.vbf_label", "Visual body-fat read"), value: `${vbf.low}–${vbf.high}%` } : null,
+      postureFlags.length ? { label: t("rd.posture_label", "Posture"), value: postureFlags.map((f) => f.label).join(" · ") } : null,
+      postureNote ? { label: t("rd.posture_note_label", "Posture note"), value: postureNote } : null,
       compositionNote ? { label: t("rd.composition_label", "Mass distribution"), value: compositionNote } : null,
+      focusAreas.length ? { label: t("rd.focus_label", "Where to focus first"), value: focusAreas.join(" · ") } : null,
       photoQualityNote ? { label: t("rd.photo_note_label", "Photo note"), value: photoQualityNote } : null,
     ].filter(Boolean),
     items: [{ src: imageUrl }],
@@ -141,7 +213,15 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
     items: [{ src: p.image, label: p.name }],
   });
 
-  const bmiGoal = d.user.height > 0 ? (d.weightGoal / (d.user.height / 100) ** 2).toFixed(1) : "—";
+  const bmiGoalNum = d.user.height > 0 ? d.weightGoal / (d.user.height / 100) ** 2 : null;
+  const bmiGoal = bmiGoalNum != null ? bmiGoalNum.toFixed(1) : "—";
+  // BMI-at-goal chip reflects the band the goal actually lands in (the old
+  // chip said "Healthy" no matter the number).
+  const bmiGoalTag = bmiGoalNum == null ? null
+    : bmiGoalNum < 18.5 ? { label: t("rd.bmiseg_under", "Under"), bg: "#F5EBD5", color: "#8E6418" }
+    : bmiGoalNum < 25 ? { label: t("rd.healthy_tag", "Healthy"), bg: "#EAEFE6", color: "#1F6B50" }
+    : bmiGoalNum < 30 ? { label: t("rd.bmiseg_over", "Over"), bg: "#F5EBD5", color: "#8E6418" }
+    : { label: t("rd.bmiseg_obese", "Obese I"), bg: "#EFDDD5", color: "#A22A3D" };
   const fatKg = (d.weight * d.bodyFat / 100).toFixed(1);
 
   const heroDate = createdAt
@@ -153,7 +233,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
     { l: t("rd.meta_height", "Height"), v: d.user.height, u: t("rd.unit_cm", "cm") },
     { l: t("rd.meta_weight", "Weight"), v: d.user.weight, u: t("rd.unit_kg", "kg") },
     ...(d.user.metabolicAge != null ? [{
-      l: t("rd.meta_metabolic", "Metabolic age"), v: d.user.metabolicAge, u: t("rd.unit_years", "years"),
+      l: t("rd.meta_metabolic", "Metabolic age"), v: d.user.metabolicAge, u: t("rd.unit_years", "years"), infoKey: "metabolic",
       note: d.user.age != null && d.user.metabolicAge < d.user.age
         ? t("rd.metabolic_note", "{{n}} yrs younger", { n: d.user.age - d.user.metabolicAge })
         : null,
@@ -241,6 +321,25 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
 
   const sexLabel = d.sex === "female" ? t("rd.female", "Female") : t("rd.male", "Male");
 
+  // ── Per-card explainers (the quiet "i" next to each title) — how the
+  //    value is computed, what it represents, why it matters. ──
+  const INFO = {
+    scan: t("rd.info_scan", "The AI describes what is visible in your photo — posture, where mass sits, muscle tone. It complements the numbers below, which are calculated from your measurements, not from the image. Read confidence reflects how well the photo (framing, light, clothing) supports the read."),
+    bmi: t("rd.info_bmi", "BMI is your weight in kilograms divided by your height in meters squared, read against the WHO reference bands. It's a quick screening number — it can't tell muscle from fat, which is why we read it alongside body fat and waist-to-hip ratio."),
+    bf: t("rd.info_bf", "Estimated with the Deurenberg formula from your BMI, age and sex — an estimate, not a direct measurement. Healthy bands shift with age and differ between men and women. The trend across assessments matters more than any single reading."),
+    whr: t("rd.info_whr", "Your waist circumference divided by your hip circumference, from the measurements you entered. It shows where fat sits: fat stored around the waist carries more cardiometabolic risk than fat on the hips, and thresholds differ by sex."),
+    weight: t("rd.info_weight", "Your goal is the weight you told us you felt best at (or a formula estimate if you didn't). The green band is the Lorentz healthy range for your height and sex, and the projection assumes a steady, sustainable pace over about 12 weeks."),
+    comp: t("rd.info_comp", "Lean mass is everything that isn't fat — muscle, bone, organs and water — calculated as 100% minus your estimated body fat, then applied to your current weight for the kilogram figures. Keeping lean mass while losing fat is what the protein target protects."),
+    tbw: t("rd.info_tbw", "Total body water is estimated with the Watson formula from your age, height, weight and sex. Water lives almost entirely in lean tissue, so this share falls as body fat rises. Staying near the ideal supports energy, digestion and recovery."),
+    energy: t("rd.info_energy", "Your resting burn (BMR) comes from the Mifflin-St Jeor equation using weight, height, age and sex. We multiply it by your activity level, then adjust for your goal — a controlled deficit for weight loss, a surplus for gain. Your macros are built from this target."),
+    macros: t("rd.info_macros", "Your daily calorie target split by goal: protein and carbs carry 4 kcal per gram, fat 9. Weight control favors more protein, maintenance and muscle gain favor more carbs. Protein is featured because it protects muscle while your weight changes."),
+    rec: t("rd.info_rec", "Picks come from three sources: the AI photo analysis, the health concerns you selected on the form, and the metrics scoring lowest in this report — merged without duplicates. Every card states the specific signal it responds to."),
+    risks: t("rd.info_risks", "Each key metric gets a 0–100 score based on how far it sits from its healthy band. Your best-scoring metric shows as a strength, a mid-range one as watch, and the lowest as action — the area where focused effort pays off most."),
+    radar: t("rd.info_radar", "Each axis is one of your metric scores on a 0–100 scale — composition, weight, hydration, calories, muscle and cardio. The closer the shape reaches the outer edge, the closer that area sits to its healthy band; a balanced shape beats a spiky one."),
+    summary: t("rd.info_summary", "Composed from your report: what's working is your strongest signal, what's drifting is your weakest, and this week is the first step from your plan. When AI photo analysis ran, its observations feed in here too."),
+    metabolic: t("rd.info_metabolic", "An estimate of the age your overall wellness score corresponds to — scoring above the midpoint reads younger than your calendar age, below reads older. Treat it as a motivational compass, not a clinical measurement."),
+  };
+
   return (
     <Suspense fallback={null}>
       <div className="min-h-screen" style={{ background: "#F4EFE7", fontFamily: "var(--font-inter)" }}>
@@ -270,7 +369,10 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             <div className={`grid ${meta.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"} mt-16 py-7`} style={{ borderTop: "1px solid var(--border-hex)", borderBottom: "1px solid var(--border-hex)" }}>
               {meta.map((m, i, arr) => (
                 <div key={m.l} className="flex flex-col items-center py-2" style={{ borderRight: i < arr.length - 1 ? "1px solid var(--border-hex)" : "none" }}>
-                  <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{m.l}</div>
+                  <div className="inline-flex items-center gap-1.5 text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>
+                    {m.l}
+                    {m.infoKey && <InfoHint text={INFO[m.infoKey]} />}
+                  </div>
                   <div className="text-[40px] leading-none font-semibold mt-3" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{m.v}</div>
                   <div className="text-[11px] mt-1.5" style={{ color: "var(--muted-fg)", letterSpacing: "0.06em" }}>{m.u}</div>
                   {m.note && (
@@ -292,34 +394,83 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             {/* Your scan — uploaded photo + AI vision read (only when a real photo exists) */}
             {imageUrl && (
               <Card className="mb-4">
-                <CardHeader title={t("rd.scan_title", "Your scan")} action={t("rd.scan_action", "AI photo analysis")} />
+                <CardHeader title={t("rd.scan_title", "Your scan")} action={t("rd.scan_action", "AI photo analysis")} info={INFO.scan} />
                 <div className="flex flex-col sm:flex-row gap-6 items-start">
-                  <div
-                    className="group shrink-0 relative overflow-hidden cursor-zoom-in"
-                    style={{ width: 168, aspectRatio: "3 / 4", borderRadius: 14, border: "1.5px solid #C7A977" }}
-                    onClick={openScan}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={t("rd.enlarge_hint", "Enlarge")}
-                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openScan(); } }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imageUrl} alt={t("rd.scan_photo_alt", "Your body scan photo")} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top", filter: "grayscale(0.12) contrast(1.02)" }} />
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: 0.12 }} />
-                    <span className="absolute top-2 right-2 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: 24, height: 24, background: "rgba(47,47,43,0.55)" }}>
-                      <ExpandIcon size={13} color="white" />
-                    </span>
+                  <div className="shrink-0" style={{ width: 168 }}>
+                    <div
+                      className="group relative overflow-hidden cursor-zoom-in"
+                      style={{ aspectRatio: "3 / 4", borderRadius: 14, border: "1.5px solid #C7A977" }}
+                      onClick={openScan}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={t("rd.enlarge_hint", "Enlarge")}
+                      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openScan(); } }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={imageUrl} alt={t("rd.scan_photo_alt", "Your body scan photo")} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top", filter: "grayscale(0.12) contrast(1.02)" }} />
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: 0.12 }} />
+                      <span className="absolute top-2 right-2 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: 24, height: 24, background: "rgba(47,47,43,0.55)" }}>
+                        <ExpandIcon size={13} color="white" />
+                      </span>
+                    </div>
+                    {/* How much the photo supports the read (angle, light, framing) */}
+                    {vd.read_confidence != null && (
+                      <div className="mt-3">
+                        <div className="flex items-baseline justify-between">
+                          <span className="text-[9px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.confidence_label", "Read confidence")}</span>
+                          <span className="text-[11px] font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{vd.read_confidence}%</span>
+                        </div>
+                        <div className="mt-1.5 h-1 rounded-full" style={{ background: "rgba(47,47,43,0.08)" }}>
+                          <div className="h-full rounded-full" style={{ width: `${vd.read_confidence}%`, background: "#C7A977" }} />
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    {visionAvailable && bodyType && (
-                      <div className="mb-4">
-                        <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.body_type_label", "Body type")}</div>
-                        <span className="inline-block mt-1.5 text-[14px] font-semibold px-3 py-1 rounded-full" style={{ background: "#F5EBD5", color: "#8E6418" }}>{t(`results.body_types.${bodyType}`, bodyType)}</span>
+                    {/* Trait chips — enum ids resolved in the current UI language */}
+                    {scanTraits.length > 0 && (
+                      <div className="flex flex-wrap gap-x-7 gap-y-4 mb-5">
+                        {scanTraits.map((tr, i) => (
+                          <div key={tr.label}>
+                            <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{tr.label}</div>
+                            <span className="inline-block mt-1.5 text-[13px] font-semibold px-3 py-1 rounded-full" style={i === 0 ? { background: "#F5EBD5", color: "#8E6418" } : { background: "rgba(47,47,43,0.05)", color: "var(--ink)" }}>{tr.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {/* Visual body-fat read vs the formula estimate */}
+                    {vbf && (
+                      <div className="mb-5 rounded-[12px] px-4 py-3.5" style={{ background: "#FAF6EE", border: "1px dashed var(--border-hex)" }}>
+                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                          <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.vbf_label", "Visual body-fat read")}</span>
+                          <span className="text-[20px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{vbf.low}–{vbf.high}<span className="text-[12px] font-normal" style={{ color: "var(--muted-fg)" }}>%</span></span>
+                          {vbfVerdictText && (
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={vbfVerdict === "match" ? { background: "#EAEFE6", color: "#1F6B50" } : { background: "#F5EBD5", color: "#8E6418" }}>
+                              {vbfVerdictText}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[11.5px] leading-relaxed mt-2" style={{ color: "var(--muted-fg)" }}>
+                          {t("rd.vbf_caption", "Estimated from visible definition in the photo. The formula estimate below remains the reference number.")}
+                        </p>
                       </div>
                     )}
                     <div className="flex flex-col gap-3">
+                      {/* Posture — structured flags first, then the free-text note */}
+                      {(postureFlags.length > 0 || postureNote) && (
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.posture_label", "Posture")}</div>
+                          {postureFlags.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mt-1.5">
+                              {postureFlags.map((f) => (
+                                <span key={f.id} className="text-[11px] font-medium px-2.5 py-0.5 rounded-full" style={f.id === "neutral" ? { background: "#EAEFE6", color: "#1F6B50" } : { background: "rgba(47,47,43,0.05)", color: "var(--ink)" }}>{f.label}</span>
+                              ))}
+                            </div>
+                          )}
+                          {postureNote && <p className="text-[13.5px] leading-relaxed mt-1.5" style={{ color: "var(--ink)" }}>{postureNote}</p>}
+                        </div>
+                      )}
                       {[
-                        { label: t("rd.posture_label", "Posture"), text: postureNote },
                         { label: t("rd.composition_label", "Mass distribution"), text: compositionNote },
                         { label: t("rd.photo_note_label", "Photo note"), text: photoQualityNote },
                       ].filter(n => n.text).map(n => (
@@ -330,7 +481,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                       ))}
                       {/* Never leave the panel empty: when the AI read returned no notes,
                           show the summary or a localized explanation instead. */}
-                      {!postureNote && !compositionNote && !photoQualityNote && (
+                      {!postureNote && !compositionNote && !photoQualityNote && scanTraits.length === 0 && !vbf && (
                         <div>
                           <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.scan_title", "Your scan")}</div>
                           <p className="text-[13.5px] leading-relaxed mt-1" style={{ color: "var(--ink)" }}>
@@ -339,6 +490,17 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                         </div>
                       )}
                     </div>
+                    {/* Where the photo says to focus first */}
+                    {focusAreas.length > 0 && (
+                      <div className="mt-5 pt-4" style={{ borderTop: "1px dashed var(--border-hex)" }}>
+                        <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.focus_label", "Where to focus first")}</div>
+                        <div className="flex flex-wrap gap-1.5 mt-1.5">
+                          {focusAreas.map((f) => (
+                            <span key={f} className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "#F5EBD5", color: "#8E6418" }}>{f}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </Card>
@@ -346,12 +508,12 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             {/* Row 1: BMI + Body Fat */}
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <Card>
-                <CardHeader title={t("rd.bmi_title", "Body Mass Index")} action={t("rd.bmi_action", "WHO reference")} />
+                <CardHeader title={t("rd.bmi_title", "Body Mass Index")} action={t("rd.bmi_action", "WHO reference")} info={INFO.bmi} />
                 <LinearRange value={d.bmi} min={15} max={40} segments={bmiSegments} unit={t("rd.unit_bmi", "kg / m²")} caption={bmiCaption} />
                 <StageStrip stages={bmiStages} activeKey={PICK.bmi(d.bmi)} caption={t("rd.bmi_spectrum_caption", "BMI maps weight to height only — it can't see muscle. The silhouettes show the broad external shape each band tends to produce.")} />
               </Card>
               <Card>
-                <CardHeader title={t("rd.bf_title", "Body Fat")} action={t("rd.bf_action_dynamic", "{{sex}} · {{age}} years", { sex: sexLabel, age: d.user.age })} />
+                <CardHeader title={t("rd.bf_title", "Body Fat")} action={t("rd.bf_action_dynamic", "{{sex}} · {{age}} years", { sex: sexLabel, age: d.user.age })} info={INFO.bf} />
                 <LinearRange value={d.bodyFat} min={5} max={32} segments={bfSegments} unit={t("rd.unit_percent", "percent")} caption={bfCaption} />
                 <StageStrip stages={bfStages} activeKey={PICK.bodyFat(d.bodyFat)} caption={t("rd.bf_spectrum_caption", "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range.")} />
               </Card>
@@ -360,12 +522,12 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             {/* Row 2: WHR + Weight */}
             <div className="grid md:grid-cols-[1fr_1.4fr] gap-4 mb-4">
               <Card>
-                <CardHeader title={t("rd.whr_title", "Waist-to-Hip Ratio")} action={t("rd.whr_action", "Cardiometabolic risk")} />
+                <CardHeader title={t("rd.whr_title", "Waist-to-Hip Ratio")} action={t("rd.whr_action", "Cardiometabolic risk")} info={INFO.whr} />
                 <LinearRange value={d.whr} min={0.75} max={1.05} segments={whrSegments} unit={t("rd.unit_ratio", "ratio")} decimals={2} caption={whrCaption} />
                 <StageStrip stages={whrStages} activeKey={PICK.whr(d.whr)} caption={t("rd.whr_spectrum_caption", "Waist-to-hip ratio reflects where fat sits. Lower ratios carry less cardiometabolic risk; the shapes show low, moderate and high distribution.")} />
               </Card>
               <Card>
-                <CardHeader title={t("rd.weight_title", "Weight Analysis")} action={t("rd.weight_action", "Lorentz healthy band")} />
+                <CardHeader title={t("rd.weight_title", "Weight Analysis")} action={t("rd.weight_action", "Lorentz healthy band")} info={INFO.weight} />
                 <div className="flex flex-col gap-6">
                   <div>
                     <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.delta_to_goal", "DELTA TO GOAL")}</div>
@@ -398,7 +560,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                   {/* Supporting figures */}
                   <div className="grid grid-cols-3 gap-3 pt-5" style={{ borderTop: "1px dashed var(--border-hex)" }}>
                     <div>
-                      <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.to_lose", "To lose")}</div>
+                      <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{d.weightGoal > d.weight ? t("rd.to_gain", "To gain") : t("rd.to_lose", "To lose")}</div>
                       <div className="text-[22px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{d.weightDelta}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>{t("rd.unit_kg", "kg")}</span></div>
                     </div>
                     <div>
@@ -409,7 +571,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                       <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.bmi_at_goal", "BMI at goal")}</div>
                       <div className="flex flex-wrap items-baseline gap-1.5 mt-1">
                         <span className="text-[22px] font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{bmiGoal}</span>
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: "#EAEFE6", color: "#1F6B50" }}>{t("rd.healthy_tag", "Healthy")}</span>
+                        {bmiGoalTag && <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full whitespace-nowrap" style={{ background: bmiGoalTag.bg, color: bmiGoalTag.color }}>{bmiGoalTag.label}</span>}
                       </div>
                     </div>
                   </div>
@@ -420,7 +582,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             {/* Row 3: Composition + TBW */}
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="flex flex-col">
-                <CardHeader title={t("rd.comp_title", "Body Composition")} action={t("rd.comp_action", "Lean vs fat")} />
+                <CardHeader title={t("rd.comp_title", "Body Composition")} action={t("rd.comp_action", "Lean vs fat")} info={INFO.comp} />
                 <div className="flex-1 flex flex-col sm:flex-row items-center gap-6 sm:gap-7 py-1">
                   <div className="shrink-0" style={{ width: 132, height: 132 }}>
                     <CompositionRing leanPct={d.lbmPct} />
@@ -446,7 +608,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                 <p className="text-[13px] leading-relaxed mt-6" style={{ color: "var(--muted-fg)" }}>{t("rd.comp_caption", "Lean mass up 0.8 kg since last assessment — the deficit is sparing muscle.")}</p>
               </Card>
               <Card className="flex flex-col">
-                <CardHeader title={t("rd.tbw_title", "Total Body Water")} action={t("rd.tbw_action", "Hydration share")} />
+                <CardHeader title={t("rd.tbw_title", "Total Body Water")} action={t("rd.tbw_action", "Hydration share")} info={INFO.tbw} />
                 <div className="flex-1 flex flex-col sm:flex-row items-center gap-6 sm:gap-7 py-1">
                   <HydrationColumn pct={d.tbwPct} ideal={60} />
                   <div className="flex-1 min-w-0 w-full">
@@ -489,7 +651,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                 </svg>
                 <div className="relative">
                   <div className="flex items-baseline justify-between">
-                    <span className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.7)" }}>{t("rd.daily_energy", "Daily energy")}</span>
+                    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.7)" }}>{t("rd.daily_energy", "Daily energy")}<InfoHint text={INFO.energy} dark /></span>
                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: "rgba(199,169,119,0.16)", color: "#C7A977" }}>
                       {t("rd.cal_goal", "Goal · Weight control")}
                     </span>
@@ -524,7 +686,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               {/* Macros */}
               <Card className="flex flex-col justify-between min-h-[420px]" style={{ background: "#F4EFE7" }}>
                 <div>
-                  <CardHeader title={t("rd.macro_title", "Macro Split")} action={t("rd.macro_action", "Per day")} />
+                  <CardHeader title={t("rd.macro_title", "Macro Split")} action={t("rd.macro_action", "Per day")} info={INFO.macros} />
                   <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.featured_protein", "FEATURED · DAILY PROTEIN")}</div>
                   <div className="flex items-baseline gap-1 mt-2">
                     <span className="text-[72px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #9B8573)" }}>{d.macros.protein.g}</span>
@@ -566,7 +728,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               <div className="mt-12">
                 <div className="grid md:grid-cols-2 gap-12 items-end mb-9">
                   <div>
-                    <CardHeader title={t("rd.rec_title", "Recommended")} action={t("rd.rec_action_dynamic", "{{n}} picks · tied to signals", { n: normalizedProducts.length })} />
+                    <CardHeader title={t("rd.rec_title", "Recommended")} action={t("rd.rec_action_dynamic", "{{n}} picks · tied to signals", { n: normalizedProducts.length })} info={INFO.rec} />
                     <h3 className="text-[clamp(32px,4vw,48px)] leading-[1.05] tracking-[-0.028em] mt-2" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
                       {t("rd.rec_headline_1", "Chosen for you.")}<br />
                       <span style={{ fontStyle: "italic", color: "var(--primary-hex, #9B8573)" }}>{t("rd.rec_headline_2", "One reason each.")}</span>
@@ -643,6 +805,12 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
           <div className="max-w-[1180px] mx-auto px-5 sm:px-8">
             {/* Risk callouts */}
             {risks.length > 0 && (
+              <div className="flex items-center gap-2 mb-4 text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink)" }}>
+                {t("rd.risks_title", "Signals")}
+                <InfoHint text={INFO.risks} />
+              </div>
+            )}
+            {risks.length > 0 && (
               <div className="grid sm:grid-cols-3 gap-3 mb-12">
                 {risks.map((r, i) => (
                   <div key={i} className="relative rounded-[14px] border bg-white p-5" style={{ borderColor: "var(--border-hex)" }}>
@@ -660,7 +828,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             <div className="grid lg:grid-cols-[1fr_1.1fr] gap-4">
               <Card className="flex flex-col" style={{ background: "#F4EFE7" }}>
                 <div className="flex justify-between items-baseline mb-5">
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink)" }}>{t("rd.profile_title", "Profile")}</span>
+                  <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--ink)" }}>{t("rd.profile_title", "Profile")}<InfoHint text={INFO.radar} /></span>
                   <span className="inline-flex items-center gap-1.5 text-[11px]" style={{ color: "var(--muted-fg)" }}>
                     <span className="w-3 h-0.5" style={{ background: "var(--primary-hex)" }} />{t("rd.your_profile", "Your profile")}
                   </span>
@@ -682,7 +850,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
 
               {/* Coach note */}
               <Card>
-                <CardHeader title={t("rd.summary_title", "Summary")} />
+                <CardHeader title={t("rd.summary_title", "Summary")} info={INFO.summary} />
                 <h3 className="text-[clamp(28px,3vw,36px)] leading-[1.1] tracking-[-0.02em]" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
                   <span style={{ fontStyle: "italic" }}>{d.user.firstName}</span> —
                 </h3>
