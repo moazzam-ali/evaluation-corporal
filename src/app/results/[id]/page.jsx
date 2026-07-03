@@ -71,8 +71,9 @@ export default function ResultsPage() {
       imageUrl={analysisData?.imageUrl || null}
       bodyType={results.body_type || null}
       postureNote={results.posture_note || null}
-      compositionNote={results.composition_note || null}
+      compositionNote={results.composition_note || results.routine_note || null}
       photoQualityNote={results.photo_quality_note || null}
+      visionDetails={results.vision_details || null}
       visionAvailable={!!results.vision_available}
     />
   );

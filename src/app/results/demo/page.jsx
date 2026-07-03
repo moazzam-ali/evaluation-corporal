@@ -39,6 +39,18 @@ const DEMO = {
   _demoRisks: [],
 };
 
+/* Structured photo read shown on the demo scan card — machine ids only;
+   the template resolves them in the current UI language. */
+const DEMO_VISION_DETAILS = {
+  visual_body_fat: { low: 16, high: 20 },
+  fat_distribution: "android",
+  muscle_tone: "moderate",
+  symmetry: "balanced",
+  posture_flags: ["rounded_shoulders", "forward_head"],
+  focus_areas: ["core", "posture"],
+  read_confidence: 84,
+};
+
 export default function DemoResultsPage() {
   const { t } = useTranslation();
 
@@ -62,6 +74,13 @@ export default function DemoResultsPage() {
       tips={[]}
       summary=""
       metrics={[]}
+      imageUrl="/hero-body.webp"
+      bodyType="mesomorph"
+      postureNote={t("rd.demo_posture_note", "Shoulders roll slightly forward of the hip line; the spine stacks well otherwise.")}
+      compositionNote={t("rd.demo_composition_note", "Mass is carried mainly around the midsection, with proportionate limbs.")}
+      photoQualityNote={t("rd.demo_photo_note", "Good lighting and framing — full body visible, clothing slightly loose around the waist.")}
+      visionDetails={DEMO_VISION_DETAILS}
+      visionAvailable
     />
   );
 }

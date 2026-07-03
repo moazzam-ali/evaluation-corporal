@@ -58,6 +58,49 @@ function metricNote(m, t) {
   }
 }
 
+/* ── Scan-card enum labels ─────────────────────────────────────────
+   The vision read stores machine ids (English enums); these maps resolve
+   them in the CURRENT UI language. Literal t() calls so the locale sync
+   script picks every key up. */
+function scanLabels(t) {
+  return {
+    fatDistribution: {
+      android: t("rd.fatdist_android", "Abdomen-first (android)"),
+      gynoid: t("rd.fatdist_gynoid", "Hips & thighs (gynoid)"),
+      mixed: t("rd.fatdist_mixed", "Mixed pattern"),
+      even: t("rd.fatdist_even", "Evenly distributed"),
+    },
+    muscleTone: {
+      low: t("rd.tone_low", "Soft — low definition"),
+      moderate: t("rd.tone_moderate", "Moderate definition"),
+      defined: t("rd.tone_defined", "Defined"),
+      athletic: t("rd.tone_athletic", "Athletic"),
+    },
+    symmetry: {
+      balanced: t("rd.sym_balanced", "Balanced left–right"),
+      slight_asymmetry: t("rd.sym_slight_asymmetry", "Slight asymmetry"),
+      notable_asymmetry: t("rd.sym_notable_asymmetry", "Notable asymmetry"),
+    },
+    postureFlags: {
+      neutral: t("rd.pf_neutral", "Neutral stance"),
+      forward_head: t("rd.pf_forward_head", "Forward head"),
+      rounded_shoulders: t("rd.pf_rounded_shoulders", "Rounded shoulders"),
+      uneven_shoulders: t("rd.pf_uneven_shoulders", "Uneven shoulders"),
+      anterior_pelvic_tilt: t("rd.pf_anterior_pelvic_tilt", "Anterior pelvic tilt"),
+      posterior_pelvic_tilt: t("rd.pf_posterior_pelvic_tilt", "Posterior pelvic tilt"),
+      lateral_lean: t("rd.pf_lateral_lean", "Lateral lean"),
+    },
+    focusAreas: {
+      core: t("rd.focus_core", "Core & midsection"),
+      upper_body: t("rd.focus_upper_body", "Upper body"),
+      lower_body: t("rd.focus_lower_body", "Lower body"),
+      posture: t("rd.focus_posture", "Posture"),
+      symmetry: t("rd.focus_symmetry", "Left–right balance"),
+      overall_conditioning: t("rd.focus_overall", "Overall conditioning"),
+    },
+  };
+}
+
 /* ── Risk callouts: generated from metric scores ── */
 function generateRisks(metrics, t) {
   if (!metrics?.length) return [];
@@ -91,7 +134,7 @@ function generateRisks(metrics, t) {
  *   metrics   — raw metrics array (for risk callout generation)
  *   createdAt — ISO date string for the hero
  */
-export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionAvailable = false }) {
+export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionDetails = null, visionAvailable = false }) {
   const { t, i18n } = useTranslation();
   const { open: openLightbox } = useLightbox();
   const d = data;
@@ -118,13 +161,42 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   // Goal delta sign follows the user's own goal (gain goals show +).
   const goalSign = d.weightGoal > d.weight ? "+" : "−";
 
+  // ── Structured photo read (vision_details) — enum ids resolved to the
+  //    current UI language via scanLabels; old rows without it just render
+  //    the classic three-note card. ──
+  const SCAN = scanLabels(t);
+  const vd = visionDetails || {};
+  const scanTraits = [
+    visionAvailable && bodyType ? { label: t("rd.body_type_label", "Body type"), value: t(`results.body_types.${bodyType}`, bodyType) } : null,
+    vd.fat_distribution ? { label: t("rd.fat_dist_label", "Fat distribution"), value: SCAN.fatDistribution[vd.fat_distribution] } : null,
+    vd.muscle_tone ? { label: t("rd.muscle_tone_label", "Muscle tone"), value: SCAN.muscleTone[vd.muscle_tone] } : null,
+    vd.symmetry ? { label: t("rd.symmetry_label", "Symmetry"), value: SCAN.symmetry[vd.symmetry] } : null,
+  ].filter((x) => x && x.value);
+  const postureFlags = (vd.posture_flags || []).map((f) => ({ id: f, label: SCAN.postureFlags[f] })).filter((f) => f.label);
+  const focusAreas = (vd.focus_areas || []).map((f) => SCAN.focusAreas[f]).filter(Boolean);
+
+  // Visual body-fat cross-check: the AI's from-photo range vs the Deurenberg
+  // formula estimate. ±2 pts of slack before we call a disagreement.
+  const vbf = vd.visual_body_fat || null;
+  const vbfVerdict = vbf && d.bodyFat > 0
+    ? (d.bodyFat >= vbf.low - 2 && d.bodyFat <= vbf.high + 2 ? "match" : d.bodyFat > vbf.high ? "leaner" : "fuller")
+    : null;
+  const vbfVerdictText =
+    vbfVerdict === "match" ? t("rd.vbf_match", "In line with your formula estimate of {{value}}%", { value: d.bodyFat })
+    : vbfVerdict === "leaner" ? t("rd.vbf_leaner", "The photo reads leaner than your formula estimate of {{value}}%", { value: d.bodyFat })
+    : vbfVerdict === "fuller" ? t("rd.vbf_fuller", "The photo reads fuller than your formula estimate of {{value}}%", { value: d.bodyFat })
+    : null;
+
   const openScan = () => openLightbox({
     title: t("rd.scan_title", "Your scan"),
     caption: t("rd.scan_caption", "Your uploaded photo, used for the AI body-composition read."),
     indicators: [
-      visionAvailable && bodyType ? { label: t("rd.body_type_label", "Body type"), value: t(`results.body_types.${bodyType}`, bodyType) } : null,
-      postureNote ? { label: t("rd.posture_label", "Posture"), value: postureNote } : null,
+      ...scanTraits,
+      vbf ? { label: t("rd.vbf_label", "Visual body-fat read"), value: `${vbf.low}–${vbf.high}%` } : null,
+      postureFlags.length ? { label: t("rd.posture_label", "Posture"), value: postureFlags.map((f) => f.label).join(" · ") } : null,
+      postureNote ? { label: t("rd.posture_note_label", "Posture note"), value: postureNote } : null,
       compositionNote ? { label: t("rd.composition_label", "Mass distribution"), value: compositionNote } : null,
+      focusAreas.length ? { label: t("rd.focus_label", "Where to focus first"), value: focusAreas.join(" · ") } : null,
       photoQualityNote ? { label: t("rd.photo_note_label", "Photo note"), value: photoQualityNote } : null,
     ].filter(Boolean),
     items: [{ src: imageUrl }],
@@ -294,32 +366,81 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               <Card className="mb-4">
                 <CardHeader title={t("rd.scan_title", "Your scan")} action={t("rd.scan_action", "AI photo analysis")} />
                 <div className="flex flex-col sm:flex-row gap-6 items-start">
-                  <div
-                    className="group shrink-0 relative overflow-hidden cursor-zoom-in"
-                    style={{ width: 168, aspectRatio: "3 / 4", borderRadius: 14, border: "1.5px solid #C7A977" }}
-                    onClick={openScan}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={t("rd.enlarge_hint", "Enlarge")}
-                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openScan(); } }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imageUrl} alt={t("rd.scan_photo_alt", "Your body scan photo")} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top", filter: "grayscale(0.12) contrast(1.02)" }} />
-                    <div className="absolute inset-0 pointer-events-none" style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: 0.12 }} />
-                    <span className="absolute top-2 right-2 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: 24, height: 24, background: "rgba(47,47,43,0.55)" }}>
-                      <ExpandIcon size={13} color="white" />
-                    </span>
+                  <div className="shrink-0" style={{ width: 168 }}>
+                    <div
+                      className="group relative overflow-hidden cursor-zoom-in"
+                      style={{ aspectRatio: "3 / 4", borderRadius: 14, border: "1.5px solid #C7A977" }}
+                      onClick={openScan}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={t("rd.enlarge_hint", "Enlarge")}
+                      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openScan(); } }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={imageUrl} alt={t("rd.scan_photo_alt", "Your body scan photo")} className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center top", filter: "grayscale(0.12) contrast(1.02)" }} />
+                      <div className="absolute inset-0 pointer-events-none" style={{ background: "#9B8573", mixBlendMode: "multiply", opacity: 0.12 }} />
+                      <span className="absolute top-2 right-2 flex items-center justify-center rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style={{ width: 24, height: 24, background: "rgba(47,47,43,0.55)" }}>
+                        <ExpandIcon size={13} color="white" />
+                      </span>
+                    </div>
+                    {/* How much the photo supports the read (angle, light, framing) */}
+                    {vd.read_confidence != null && (
+                      <div className="mt-3">
+                        <div className="flex items-baseline justify-between">
+                          <span className="text-[9px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.confidence_label", "Read confidence")}</span>
+                          <span className="text-[11px] font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{vd.read_confidence}%</span>
+                        </div>
+                        <div className="mt-1.5 h-1 rounded-full" style={{ background: "rgba(47,47,43,0.08)" }}>
+                          <div className="h-full rounded-full" style={{ width: `${vd.read_confidence}%`, background: "#C7A977" }} />
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="flex-1 min-w-0">
-                    {visionAvailable && bodyType && (
-                      <div className="mb-4">
-                        <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.body_type_label", "Body type")}</div>
-                        <span className="inline-block mt-1.5 text-[14px] font-semibold px-3 py-1 rounded-full" style={{ background: "#F5EBD5", color: "#8E6418" }}>{t(`results.body_types.${bodyType}`, bodyType)}</span>
+                    {/* Trait chips — enum ids resolved in the current UI language */}
+                    {scanTraits.length > 0 && (
+                      <div className="flex flex-wrap gap-x-7 gap-y-4 mb-5">
+                        {scanTraits.map((tr, i) => (
+                          <div key={tr.label}>
+                            <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{tr.label}</div>
+                            <span className="inline-block mt-1.5 text-[13px] font-semibold px-3 py-1 rounded-full" style={i === 0 ? { background: "#F5EBD5", color: "#8E6418" } : { background: "rgba(47,47,43,0.05)", color: "var(--ink)" }}>{tr.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {/* Visual body-fat read vs the formula estimate */}
+                    {vbf && (
+                      <div className="mb-5 rounded-[12px] px-4 py-3.5" style={{ background: "#FAF6EE", border: "1px dashed var(--border-hex)" }}>
+                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                          <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.vbf_label", "Visual body-fat read")}</span>
+                          <span className="text-[20px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{vbf.low}–{vbf.high}<span className="text-[12px] font-normal" style={{ color: "var(--muted-fg)" }}>%</span></span>
+                          {vbfVerdictText && (
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={vbfVerdict === "match" ? { background: "#EAEFE6", color: "#1F6B50" } : { background: "#F5EBD5", color: "#8E6418" }}>
+                              {vbfVerdictText}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-[11.5px] leading-relaxed mt-2" style={{ color: "var(--muted-fg)" }}>
+                          {t("rd.vbf_caption", "Estimated from visible definition in the photo. The formula estimate below remains the reference number.")}
+                        </p>
                       </div>
                     )}
                     <div className="flex flex-col gap-3">
+                      {/* Posture — structured flags first, then the free-text note */}
+                      {(postureFlags.length > 0 || postureNote) && (
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.posture_label", "Posture")}</div>
+                          {postureFlags.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mt-1.5">
+                              {postureFlags.map((f) => (
+                                <span key={f.id} className="text-[11px] font-medium px-2.5 py-0.5 rounded-full" style={f.id === "neutral" ? { background: "#EAEFE6", color: "#1F6B50" } : { background: "rgba(47,47,43,0.05)", color: "var(--ink)" }}>{f.label}</span>
+                              ))}
+                            </div>
+                          )}
+                          {postureNote && <p className="text-[13.5px] leading-relaxed mt-1.5" style={{ color: "var(--ink)" }}>{postureNote}</p>}
+                        </div>
+                      )}
                       {[
-                        { label: t("rd.posture_label", "Posture"), text: postureNote },
                         { label: t("rd.composition_label", "Mass distribution"), text: compositionNote },
                         { label: t("rd.photo_note_label", "Photo note"), text: photoQualityNote },
                       ].filter(n => n.text).map(n => (
@@ -330,7 +451,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                       ))}
                       {/* Never leave the panel empty: when the AI read returned no notes,
                           show the summary or a localized explanation instead. */}
-                      {!postureNote && !compositionNote && !photoQualityNote && (
+                      {!postureNote && !compositionNote && !photoQualityNote && scanTraits.length === 0 && !vbf && (
                         <div>
                           <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.scan_title", "Your scan")}</div>
                           <p className="text-[13.5px] leading-relaxed mt-1" style={{ color: "var(--ink)" }}>
@@ -339,6 +460,17 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                         </div>
                       )}
                     </div>
+                    {/* Where the photo says to focus first */}
+                    {focusAreas.length > 0 && (
+                      <div className="mt-5 pt-4" style={{ borderTop: "1px dashed var(--border-hex)" }}>
+                        <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.focus_label", "Where to focus first")}</div>
+                        <div className="flex flex-wrap gap-1.5 mt-1.5">
+                          {focusAreas.map((f) => (
+                            <span key={f} className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "#F5EBD5", color: "#8E6418" }}>{f}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </Card>
