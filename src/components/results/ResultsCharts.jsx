@@ -117,7 +117,7 @@ export function Radar({ data }) {
   const pt = (v, i) => { const a = (Math.PI * 2 / n) * i - Math.PI / 2; return [cx + Math.cos(a) * R * v, cy + Math.sin(a) * R * v]; };
   const poly = data.map((d, i) => pt(d.value, i).join(",")).join(" ");
   return (
-    <svg width="360" height="360" viewBox="0 0 360 360">
+    <svg viewBox="0 0 360 360" className="w-full h-auto" style={{ maxWidth: 360 }}>
       {[0.25, 0.5, 0.75, 1].map(s => <polygon key={s} points={Array.from({ length: n }, (_, k) => pt(s, k).join(",")).join(" ")} fill="none" stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />)}
       {Array.from({ length: n }, (_, k) => { const [x, y] = pt(1, k); return <line key={k} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--border-hex, #E4D9C6)" strokeWidth="1" />; })}
       <polygon points={poly} fill="rgba(155,133,115,0.12)" stroke="var(--primary-hex, #9B8573)" strokeWidth="2" />
