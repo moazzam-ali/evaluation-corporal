@@ -28,6 +28,36 @@ function normalizeProduct(p) {
   };
 }
 
+/* ── Localized text for computed content ─────────────────────────
+   Server-computed insights/tips are stored as { key, params, text } so the
+   client renders them in the CURRENT UI language (old rows stored plain
+   English strings — those pass through unchanged). Category enums resolve
+   through rd.cat_<id>. */
+function useLocText(t) {
+  return (p) => {
+    if (p == null) return "";
+    if (typeof p === "string") return p;
+    const params = { ...(p.params || {}) };
+    if (params.cat) params.category = t(`rd.cat_${params.cat}`, String(params.cat).replace(/_/g, " "));
+    return p.key ? t(`rd.${p.key}`, { ...params, defaultValue: p.text || "" }) : (p.text || "");
+  };
+}
+
+/* Localized one-liner for a metric — used by the risk callouts instead of the
+   stored (English) insight string. */
+function metricNote(m, t) {
+  const cat = m.category ? t(`rd.cat_${m.category}`, String(m.category).replace(/_/g, " ")) : "";
+  switch (m.id) {
+    case "bmi": return t("rd.ins_bmi", { value: m.value, category: cat, defaultValue: `BMI of ${m.value} — ${cat} range.` });
+    case "body_fat": return t("rd.ins_bf", { value: m.value, category: cat, defaultValue: `Estimated body fat ${m.value}% — ${cat} for your age band.` });
+    case "waist_hip_ratio": return t("rd.ins_whr", { value: m.value, category: cat, defaultValue: `Waist-to-hip ratio ${m.value} — ${cat} cardiometabolic risk band.` });
+    case "hydration_target": return t("rd.ins_hydration", { value: m.value, defaultValue: `Daily hydration target ${m.value} L.` });
+    case "lean_mass": return t("rd.ins_lean", { value: m.value, defaultValue: `Lean mass at ${m.value}% of body weight.` });
+    case "total_body_water": return t("rd.ins_tbw", { value: m.value, defaultValue: `Total body water ${m.value} L.` });
+    default: return null;
+  }
+}
+
 /* ── Risk callouts: generated from metric scores ── */
 function generateRisks(metrics, t) {
   if (!metrics?.length) return [];
@@ -38,15 +68,15 @@ function generateRisks(metrics, t) {
   const risks = [];
   const best = sorted[sorted.length - 1];
   if (best?.score >= 60) {
-    risks.push({ tone: "good", label: t("rd.risk_strength", "STRENGTH"), note: best.insight || t("rd.risk_strength_fallback", "Your strongest metric is performing well.") });
+    risks.push({ tone: "good", label: t("rd.risk_strength", "STRENGTH"), note: metricNote(best, t) || t("rd.risk_strength_fallback", "Your strongest metric is performing well.") });
   }
   const mid = sorted.find((m) => m.score >= 40 && m.score < 70);
   if (mid) {
-    risks.push({ tone: "normal", label: t("rd.risk_watch", "WATCH"), note: mid.insight || t("rd.risk_watch_fallback", "This area could use some attention.") });
+    risks.push({ tone: "normal", label: t("rd.risk_watch", "WATCH"), note: metricNote(mid, t) || t("rd.risk_watch_fallback", "This area could use some attention.") });
   }
   const worst = sorted[0];
   if (worst?.score < 70) {
-    risks.push({ tone: "alert", label: t("rd.risk_action", "ACTION"), note: worst.insight || t("rd.risk_action_fallback", "This metric needs focused improvement.") });
+    risks.push({ tone: "alert", label: t("rd.risk_action", "ACTION"), note: metricNote(worst, t) || t("rd.risk_action_fallback", "This metric needs focused improvement.") });
   }
   return risks;
 }
@@ -65,6 +95,28 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   const { t, i18n } = useTranslation();
   const { open: openLightbox } = useLightbox();
   const d = data;
+  const locText = useLocText(t);
+
+  // Dynamic, localized band captions computed from the user's real values —
+  // replaces the old static copy that claimed "0.9 above the ceiling" for everyone.
+  const bmiCaption = d.bmi <= 0 ? "" :
+    d.bmi < 18.5 ? t("rd.bmi_cap_under", { delta: (18.5 - d.bmi).toFixed(1) })
+    : d.bmi < 25 ? t("rd.bmi_cap_in")
+    : t("rd.bmi_cap_over", { delta: (d.bmi - 25).toFixed(1) });
+  const bfCat = metrics.find((m) => m.id === "body_fat")?.category;
+  const bfCaption = bfCat
+    ? t(`rd.bf_cap_${bfCat}`, t("rd.bf_range_caption", "Estimated from BMI, age and sex (Deurenberg)."))
+    : t("rd.bf_range_caption", "Estimated from BMI, age and sex (Deurenberg).");
+  const whrCat = metrics.find((m) => m.id === "waist_hip_ratio")?.category;
+  const whrCaption = whrCat
+    ? t(`rd.whr_cap_${whrCat}`, t("rd.whr_range_caption", "Waist relative to hip — a proxy for where fat sits."))
+    : t("rd.whr_range_caption", "Waist relative to hip — a proxy for where fat sits.");
+  const tbwCaption = d.tbwPct >= 60
+    ? t("rd.tbw_cap_ok", { pct: d.tbwPct })
+    : t("rd.tbw_cap_below", { pct: d.tbwPct });
+
+  // Goal delta sign follows the user's own goal (gain goals show +).
+  const goalSign = d.weightGoal > d.weight ? "+" : "−";
 
   const openScan = () => openLightbox({
     title: t("rd.scan_title", "Your scan"),
@@ -181,9 +233,9 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   const strengthsInsight = insights.find((i) => i.category === "strengths");
   const concernsInsight = insights.find((i) => i.category === "concerns");
   const goalsInsight = insights.find((i) => i.category === "goals");
-  const coachWorking = strengthsInsight?.points?.[0] || summary || t("rd.summary_working", "Body fat is in the fitness band and lean mass added 0.8 kg. The deficit isn't eating your muscle.");
-  const coachDrifting = concernsInsight?.points?.[0] || t("rd.summary_drifting", "Hydration sits at 1.2 L average against a 2.5 L target. Total body water reads 56% — below ideal.");
-  const coachWeek = tips?.[0] || goalsInsight?.points?.[0] || t("rd.summary_week", "One swap, one habit. Trade Tuesday's pasta for grilled fish and greens; add a 12:30 hydration reminder.");
+  const coachWorking = locText(strengthsInsight?.points?.[0]) || summary || t("rd.summary_working", "Your strongest metrics are holding inside their healthy bands.");
+  const coachDrifting = locText(concernsInsight?.points?.[0]) || t("rd.summary_drifting", "Keep an eye on the lowest-scoring metric in your report.");
+  const coachWeek = locText(tips?.[0]) || locText(goalsInsight?.points?.[0]) || t("rd.summary_week", "Pick one habit from your plan and hold it all week.");
 
   const sexLabel = d.sex === "female" ? t("rd.female", "Female") : t("rd.male", "Male");
 
@@ -274,6 +326,16 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                           <p className="text-[13.5px] leading-relaxed mt-1" style={{ color: "var(--ink)" }}>{n.text}</p>
                         </div>
                       ))}
+                      {/* Never leave the panel empty: when the AI read returned no notes,
+                          show the summary or a localized explanation instead. */}
+                      {!postureNote && !compositionNote && !photoQualityNote && (
+                        <div>
+                          <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.scan_title", "Your scan")}</div>
+                          <p className="text-[13.5px] leading-relaxed mt-1" style={{ color: "var(--ink)" }}>
+                            {(visionAvailable && summary) || t("rd.scan_no_read", "The AI couldn't extract detailed notes from this photo. Your metrics below are calculated from your measurements and are not affected.")}
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -283,12 +345,12 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <Card>
                 <CardHeader title={t("rd.bmi_title", "Body Mass Index")} action={t("rd.bmi_action", "WHO reference")} />
-                <LinearRange value={d.bmi} min={15} max={40} segments={bmiSegments} unit={t("rd.unit_bmi", "kg / m²")} caption={t("rd.bmi_range_caption", "Sits 0.9 above the healthy ceiling. Lean mass explains most of that — composition reads cleaner than BMI alone.")} />
+                <LinearRange value={d.bmi} min={15} max={40} segments={bmiSegments} unit={t("rd.unit_bmi", "kg / m²")} caption={bmiCaption} />
                 <StageStrip stages={bmiStages} activeKey={PICK.bmi(d.bmi)} caption={t("rd.bmi_spectrum_caption", "BMI maps weight to height only — it can't see muscle. The silhouettes show the broad external shape each band tends to produce.")} />
               </Card>
               <Card>
                 <CardHeader title={t("rd.bf_title", "Body Fat")} action={t("rd.bf_action_dynamic", "{{sex}} · {{age}} years", { sex: sexLabel, age: d.user.age })} />
-                <LinearRange value={d.bodyFat} min={5} max={32} segments={bfSegments} unit={t("rd.unit_percent", "percent")} caption={t("rd.bf_range_caption", "Comfortable inside the fitness band. Trending down from last assessment.")} />
+                <LinearRange value={d.bodyFat} min={5} max={32} segments={bfSegments} unit={t("rd.unit_percent", "percent")} caption={bfCaption} />
                 <StageStrip stages={bfStages} activeKey={PICK.bodyFat(d.bodyFat)} caption={t("rd.bf_spectrum_caption", "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range.")} />
               </Card>
             </div>
@@ -297,7 +359,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             <div className="grid md:grid-cols-[1fr_1.4fr] gap-4 mb-4">
               <Card>
                 <CardHeader title={t("rd.whr_title", "Waist-to-Hip Ratio")} action={t("rd.whr_action", "Cardiometabolic risk")} />
-                <LinearRange value={d.whr} min={0.75} max={1.05} segments={whrSegments} unit={t("rd.unit_ratio", "ratio")} decimals={2} caption={t("rd.whr_range_caption", "Low risk range. Anterior fat pattern accounts for the position; mobility work helps.")} />
+                <LinearRange value={d.whr} min={0.75} max={1.05} segments={whrSegments} unit={t("rd.unit_ratio", "ratio")} decimals={2} caption={whrCaption} />
                 <StageStrip stages={whrStages} activeKey={PICK.whr(d.whr)} caption={t("rd.whr_spectrum_caption", "Waist-to-hip ratio reflects where fat sits. Lower ratios carry less cardiometabolic risk; the shapes show low, moderate and high distribution.")} />
               </Card>
               <Card>
@@ -306,7 +368,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                   <div>
                     <div className="text-[10px] font-medium uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.delta_to_goal", "DELTA TO GOAL")}</div>
                     <div className="flex items-baseline gap-2 mt-1">
-                      <span className="text-[72px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #9B8573)" }}>−{d.weightDelta}</span>
+                      <span className="text-[72px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #9B8573)" }}>{goalSign}{d.weightDelta}</span>
                       <span className="text-lg" style={{ color: "var(--muted-fg)" }}>{t("rd.unit_kg", "kg")}</span>
                     </div>
                     <div className="text-[11px] mt-2" style={{ color: "var(--muted-fg)" }}>{t("rd.weeks_at_rate", "~12 weeks at the current rate")}</div>
@@ -404,7 +466,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                     </div>
                   </div>
                 </div>
-                <p className="text-[13px] leading-relaxed mt-6" style={{ color: "var(--muted-fg)" }}>{t("rd.tbw_caption", "Below the 60% reference. Daily intake target raised to 2.5 L.")}</p>
+                <p className="text-[13px] leading-relaxed mt-6" style={{ color: "var(--muted-fg)" }}>{tbwCaption}</p>
               </Card>
             </div>
           </div>
@@ -504,7 +566,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                   <div>
                     <CardHeader title={t("rd.rec_title", "Recommended")} action={t("rd.rec_action_dynamic", "{{n}} picks · tied to signals", { n: normalizedProducts.length })} />
                     <h3 className="text-[clamp(32px,4vw,48px)] leading-[1.05] tracking-[-0.028em] mt-2" style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>
-                      {t("rd.rec_headline_1", "Three items.")}<br />
+                      {t("rd.rec_headline_1", "Chosen for you.")}<br />
                       <span style={{ fontStyle: "italic", color: "var(--primary-hex, #9B8573)" }}>{t("rd.rec_headline_2", "One reason each.")}</span>
                     </h3>
                   </div>

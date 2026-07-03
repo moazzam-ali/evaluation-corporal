@@ -189,8 +189,10 @@ function ScanPageInner() {
         }),
       });
 
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.error || "Submission failed");
+      // Guard the parse: a timed-out/proxied response returns non-JSON (HTML),
+      // and an unguarded res.json() throw here is what "broke" submissions.
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(result.error || `Submission failed (${res.status})`);
 
       setSavedFormId(result.id);
       setIsSavingForm(false);
@@ -219,8 +221,8 @@ function ScanPageInner() {
         contactIDs,
       }),
     });
-    const result = await res.json();
-    if (!res.ok || !result.id) throw new Error(result.error || "Analysis failed");
+    const result = await res.json().catch(() => ({}));
+    if (!res.ok || !result.id) throw new Error(result.error || `Analysis failed (${res.status})`);
     return result;
   };
 

@@ -363,6 +363,25 @@ export function computeBodyMetrics(formData = {}) {
   };
 }
 
+// Insight point for a metric as a translatable { key, params, text } object.
+// `text` is the English fallback so legacy consumers (and old stored rows)
+// still render; the client resolves `rd.<key>` with params in the UI language.
+function metricInsightPoint(m) {
+  const cat = m.category || "unknown";
+  switch (m.id) {
+    case "bmi":
+      return { key: "ins_bmi", params: { value: m.value, cat }, text: `BMI of ${m.value} — ${cat.replace("_", " ")} range.` };
+    case "body_fat":
+      return { key: "ins_bf", params: { value: m.value, cat }, text: `Estimated body fat ${m.value}% — ${cat} for your age band.` };
+    case "waist_hip_ratio":
+      return { key: "ins_whr", params: { value: m.value, cat }, text: `Waist-to-hip ratio ${m.value} — ${cat} cardiometabolic risk band.` };
+    case "hydration_target":
+      return { key: "ins_hydration", params: { value: m.value }, text: `Daily hydration target ${m.value} L.` };
+    default:
+      return m.insight ? { key: null, params: {}, text: m.insight } : null;
+  }
+}
+
 export function deriveInsights(metrics, summary) {
   const strengths = [];
   const concerns = [];
@@ -371,29 +390,34 @@ export function deriveInsights(metrics, summary) {
 
   for (const m of metrics) {
     if (m.status === "good" && ["bmi", "body_fat", "waist_hip_ratio", "hydration_target"].includes(m.id)) {
-      if (m.insight) strengths.push(m.insight);
+      const p = metricInsightPoint(m);
+      if (p) strengths.push(p);
     }
-    if (m.status === "needs_attention" && m.insight) concerns.push(m.insight);
+    if (m.status === "needs_attention") {
+      const p = metricInsightPoint(m);
+      if (p) concerns.push(p);
+    }
   }
 
   if (summary.calories) {
-    lifestyle.push(`Daily calorie target ${summary.calories} kcal based on your activity and goal.`);
+    lifestyle.push({ key: "ins_cal", params: { kcal: summary.calories }, text: `Daily calorie target ${summary.calories} kcal based on your activity and goal.` });
   }
   if (summary.macros) {
-    lifestyle.push(`Macro split: ${summary.macros.proteinG}g protein · ${summary.macros.carbsG}g carbs · ${summary.macros.fatG}g fat.`);
+    const { proteinG: p, carbsG: c, fatG: f } = summary.macros;
+    lifestyle.push({ key: "ins_macros", params: { p, c, f }, text: `Macro split: ${p}g protein · ${c}g carbs · ${f}g fat.` });
   }
   if (summary.weightKg && summary.healthyWeight) {
     const delta = round(summary.weightKg - summary.healthyWeight, 1);
-    if (delta > 0) goals.push(`To reach your healthy weight band, you're ${delta} kg above the Lorentz target.`);
-    else if (delta < 0) goals.push(`You're ${Math.abs(delta)} kg below the Lorentz target — focus on lean mass.`);
-    else goals.push("You're already at your Lorentz target weight.");
+    if (delta > 0) goals.push({ key: "ins_goal_above", params: { delta }, text: `To reach your healthy weight band, you're ${delta} kg above the Lorentz target.` });
+    else if (delta < 0) goals.push({ key: "ins_goal_below", params: { delta: Math.abs(delta) }, text: `You're ${Math.abs(delta)} kg below the Lorentz target — focus on lean mass.` });
+    else goals.push({ key: "ins_goal_at", params: {}, text: "You're already at your Lorentz target weight." });
   }
 
   return [
-    { category: "strengths", title: "Your strengths", points: strengths.length ? strengths : ["Most metrics within healthy bands."] },
-    { category: "concerns", title: "Focus areas", points: concerns.length ? concerns : ["No critical concerns flagged by the formulas."] },
+    { category: "strengths", title: "Your strengths", points: strengths.length ? strengths : [{ key: "ins_strength_default", params: {}, text: "Most metrics within healthy bands." }] },
+    { category: "concerns", title: "Focus areas", points: concerns.length ? concerns : [{ key: "ins_concern_default", params: {}, text: "No critical concerns flagged by the formulas." }] },
     { category: "lifestyle", title: "Lifestyle plan", points: lifestyle },
-    { category: "goals", title: "Your goals", points: goals.length ? goals : ["Maintain current habits and re-scan in 4 weeks."] },
+    { category: "goals", title: "Your goals", points: goals.length ? goals : [{ key: "ins_goal_default", params: {}, text: "Maintain current habits and re-scan in 4 weeks." }] },
   ];
 }
 

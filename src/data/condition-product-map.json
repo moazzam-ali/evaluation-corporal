@@ -1,0 +1,16 @@
+{
+  "low_bone_density": ["formula1_4466", "collagen_076k"],
+  "constipation": ["oat_apple_fiber_2554", "fiber_concentrate_201k", "microbiotic_max_173k"],
+  "athlete_supplements": ["restore_1424", "protein_drink_2600", "bioniq_go"],
+  "high_cholesterol": ["betaheart_0267", "omega3_0043"],
+  "few_vegetables": ["phyto_complete_567k", "formula1_4466", "bioniq_go"],
+  "low_energy": ["herbal_tea_167k", "phyto_complete_567k", "bioniq_go"],
+  "trouble_sleeping": ["restore_1424", "niteworks_3150"],
+  "poor_mental_agility": ["omega3_0043", "bioniq_go"],
+  "inflammation": ["omega3_0043", "aloe_1065"],
+  "skin_cellulite": ["collagen_076k", "aloe_1065"],
+  "little_water": ["aloe_1065", "fiber_concentrate_201k"],
+  "demanding_job": ["restore_1424", "bioniq_go", "herbal_tea_167k"],
+  "belly_fat": ["phyto_complete_567k", "formula1_4466", "oat_apple_fiber_2554"],
+  "circulation_problems": ["niteworks_3150", "omega3_0043"]
+}

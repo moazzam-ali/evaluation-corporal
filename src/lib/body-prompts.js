@@ -29,9 +29,11 @@ CRITICAL RULES:
 3. Do not contradict the formula-computed metrics provided below; reference them.
 4. If the photo is unclear (cropped, blurry, dark, partial), still return all fields and note the photo limitation inside "photo_quality_note".
 5. Never assess medical conditions. Frame everything as wellness observation, not diagnosis.
-6. Recommend 2-4 products from the catalog (if provided) that best support the user's goal and lowest-scoring metrics.
+6. Recommend products from the catalog (if provided) that support the user's goal, their lowest-scoring metrics, AND every selected health concern listed below — as many products as their concerns require, not a fixed number.
+7. "posture_note", "composition_note" and "photo_quality_note" must NEVER be empty — if something can't be judged from the photo, say so in ${langName} in that field.
 
 INPUT — USER GOAL: ${formData.goal || "unspecified"}
+INPUT — SELECTED HEALTH CONCERNS: ${(formData.health_conditions || []).join(", ") || "none"}
 INPUT — SEX: ${formData.sex || "unspecified"} · AGE: ${computed.age ?? "unknown"}
 INPUT — COMPUTED METRICS:
 - BMI: ${summary.bmi ?? "n/a"} (${summary.bmiCategory ?? "n/a"})

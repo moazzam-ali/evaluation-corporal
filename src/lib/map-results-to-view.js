@@ -54,15 +54,24 @@ export function mapResultsToView({ formData, results }) {
   const goalKey = formData.goal || "maintain_care";
   const deficit = goalKey === "weight_control" ? Math.max(0, tdee - calories) : 0;
 
-  // Weight analysis
+  // Weight analysis — the goal is the weight the USER said they'd feel good at
+  // (form: weight_at_ideal_age). Only when they didn't provide one do we fall
+  // back to the Lorentz-derived estimate. Delta = current − goal.
   const healthyWeightMetric = findMetric(metrics, "healthy_weight");
   const healthyWeight = healthyWeightMetric.value || weight;
-  const weightDelta = healthyWeightMetric.meta?.delta != null
-    ? Math.abs(healthyWeightMetric.meta.delta)
-    : round(Math.abs(weight - healthyWeight), 1);
-  const weightGoal = goalKey === "gain_weight"
-    ? round(weight + weightDelta, 1)
-    : round(weight - weightDelta, 1);
+  const userGoalWeight = Number(formData.weight_at_ideal_age) || null;
+  let weightGoal;
+  if (userGoalWeight && userGoalWeight > 20 && userGoalWeight < 400) {
+    weightGoal = round(userGoalWeight, 1);
+  } else {
+    const lorentzDelta = healthyWeightMetric.meta?.delta != null
+      ? Math.abs(healthyWeightMetric.meta.delta)
+      : round(Math.abs(weight - healthyWeight), 1);
+    weightGoal = goalKey === "gain_weight"
+      ? round(weight + lorentzDelta, 1)
+      : round(weight - lorentzDelta, 1);
+  }
+  const weightDelta = round(Math.abs(weight - weightGoal), 1);
   const healthyRange = [
     round(Math.max(healthyWeight - 5, 40), 0),
     round(healthyWeight + 5, 0),

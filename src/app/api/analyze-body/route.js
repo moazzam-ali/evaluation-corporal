@@ -9,6 +9,7 @@ import {
   getProductIdsForLanguage,
   enrichRecommendations,
   getProductsForMetrics,
+  getConditionRecommendations,
 } from "@/lib/products";
 import { resolveBot } from "@/lib/bots";
 import { sendAnalysisToTelegram } from "@/lib/telegram";
@@ -16,7 +17,10 @@ import { indexDocumentsInAppSearch, buildElasticDocuments } from "@/lib/elastic"
 import { readFile } from "fs/promises";
 import { join } from "path";
 
-export const maxDuration = 60;
+// Vision + Cloudinary + DB + Telegram (with retries) + Elastic can exceed 60s;
+// a killed function mid-flight is how submissions "break" and Telegram messages
+// silently go missing. Give the function real headroom (clamped by plan).
+export const maxDuration = 300;
 
 function dataUrlToBuffer(dataUrl) {
   if (!dataUrl || typeof dataUrl !== "string") return null;
@@ -134,32 +138,48 @@ export async function POST(request) {
         })
       : formulaInsights;
 
+    // Tips as translatable { key, params, text } objects — the client renders
+    // them in the current UI language; vision tips come already localized.
     const tips = vision?.vision_tips?.length
       ? vision.vision_tips
       : [
-          "Match daily water intake to your hydration target.",
-          "Hit your protein target — split evenly across meals.",
-          "Aim for 7-9 hours of sleep — recovery shapes composition more than training volume.",
+          { key: "tip_water", params: {}, text: "Match daily water intake to your hydration target." },
+          { key: "tip_protein", params: {}, text: "Hit your protein target — split evenly across meals." },
+          { key: "tip_sleep", params: {}, text: "Aim for 7-9 hours of sleep — recovery shapes composition more than training volume." },
         ];
 
-    // 6. Enrich recommended products. AI picks first, fall back to metric-based engine.
+    // 6. Build recommendations from THREE sources, deduped in priority order:
+    //    (a) AI vision picks, (b) products mapped to EVERY selected health
+    //    condition, (c) the metric-based engine. No fixed cap — the list
+    //    scales with how many problems the user selected.
+    const mergedRecs = [];
+    const seenRecIds = new Set();
+    const pushRec = (rec) => {
+      if (!rec?.product_id || seenRecIds.has(rec.product_id)) return;
+      seenRecIds.add(rec.product_id);
+      mergedRecs.push(rec);
+    };
+    if (Array.isArray(vision?.recommendations)) {
+      for (const r of vision.recommendations) pushRec(r);
+    }
+    for (const r of getConditionRecommendations(formData.health_conditions)) pushRec(r);
+    const metricBased = await safe(
+      () => getProductsForMetrics(computed.metrics, language),
+      "products_metric_engine",
+      steps
+    );
+    if (metricBased.ok) {
+      for (const p of metricBased.result) pushRec({ product_id: p.id });
+    }
+    const recommendations = mergedRecs.map((r, i) => ({ ...r, priority: r.priority ?? i + 1 }));
+
     let enrichedProducts = [];
-    if (vision?.recommendations?.length) {
-      const enriched = await safe(
-        () => enrichRecommendations(vision.recommendations, language),
-        "products_enrich",
-        steps
-      );
-      if (enriched.ok) enrichedProducts = enriched.result;
-    }
-    if (enrichedProducts.length === 0) {
-      const fallback = await safe(
-        () => getProductsForMetrics(computed.metrics, language),
-        "products_fallback",
-        steps
-      );
-      if (fallback.ok) enrichedProducts = fallback.result.slice(0, 4);
-    }
+    const enriched = await safe(
+      () => enrichRecommendations(recommendations, language),
+      "products_enrich",
+      steps
+    );
+    if (enriched.ok) enrichedProducts = enriched.result;
 
     // 7. Build results object stored to DB.
     const results = {
@@ -173,7 +193,7 @@ export async function POST(request) {
       routine_note: vision?.composition_note || null,
       posture_note: vision?.posture_note || null,
       photo_quality_note: vision?.photo_quality_note || null,
-      recommendations: vision?.recommendations || enrichedProducts.map((p, i) => ({ product_id: p.id, priority: i + 1, reason: "Matches your lowest-scoring metrics." })),
+      recommendations,
       enriched_products: enrichedProducts,
       vision_available: !!vision,
     };
@@ -232,7 +252,14 @@ export async function POST(request) {
           language,
         });
       }, "telegram", steps);
-      if (tg.ok) telegramResult = tg.result;
+      if (tg.ok) {
+        telegramResult = tg.result;
+        // sendAnalysisToTelegram resolves even when every chat failed — surface
+        // the real delivery status instead of a blanket "success".
+        if (telegramResult.telegramStatus && telegramResult.telegramStatus !== "success") {
+          steps.telegram = { status: telegramResult.telegramStatus, failed: telegramResult.failedChats };
+        }
+      }
     } else {
       steps.telegram = { status: "skipped", reason: "No chat IDs provided" };
     }

@@ -40,6 +40,10 @@ function sanitizeMessage(message) {
  */
 async function sendTelegramMessage(botApiKey, chatID, message, { inlineKeyboards, replyToMessageId } = {}, maxRetries = 3) {
   const telegramApiUrl = `https://api.telegram.org/bot${botApiKey}/sendMessage`;
+  // A Markdown parse error (unbalanced entity from user-provided text) is
+  // deterministic — retrying identically would fail forever and the coach
+  // would never get the message. After one parse failure, resend as plain text.
+  let useMarkdown = true;
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -47,9 +51,9 @@ async function sendTelegramMessage(botApiKey, chatID, message, { inlineKeyboards
 
       const body = {
         chat_id: chatID,
-        text: message,
-        parse_mode: "Markdown",
+        text: useMarkdown ? message : sanitizeMessage(message),
       };
+      if (useMarkdown) body.parse_mode = "Markdown";
 
       if (replyToMessageId) {
         body.reply_to_message_id = replyToMessageId;
@@ -75,6 +79,11 @@ async function sendTelegramMessage(botApiKey, chatID, message, { inlineKeyboards
       return result;
     } catch (error) {
       console.error(`[telegram] Attempt ${attempt} failed:`, error.message);
+
+      // Entity/parse errors won't fix themselves — drop Markdown for the retry.
+      if (/parse entities|can't parse/i.test(error.message)) {
+        useMarkdown = false;
+      }
 
       if (attempt === maxRetries) {
         throw new Error(`Failed to send message after ${maxRetries} attempts: ${error.message}`);

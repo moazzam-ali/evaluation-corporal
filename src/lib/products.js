@@ -1,6 +1,7 @@
 // Server-side product service. All functions are async.
 // Used in API routes; results are enriched server-side and returned to the client.
 import { query } from "./db";
+import CONDITION_PRODUCT_MAP from "@/data/condition-product-map.json";
 
 const SUPPORTED_LANGS = ["en", "es", "fr", "de", "it", "tr", "in", "pt"];
 
@@ -141,12 +142,34 @@ export async function enrichRecommendations(recommendations, language = "en") {
     .map((rec, i) => {
       const product = productMap.get(rec.product_id);
       if (!product) return null;
-      // Pinned items have no AI reason — fall back to the product's own lead benefit (localized).
-      const reason = rec.reason || (rec.pinned ? product.benefits?.[0] || "" : "");
+      // Items without an AI reason (pinned / condition / metric picks) fall back
+      // to the product's own lead benefit — already localized via translations.
+      const reason = rec.reason || product.benefits?.[0] || "";
       const priority = rec.priority ?? (rec.pinned ? 99 : i + 1);
       return { ...product, priority, reason };
     })
     .filter(Boolean);
+}
+
+/**
+ * Products matched to the health conditions the user ticked on the form.
+ * Pure lookup (no DB) — returns [{ product_id, condition }] in form order,
+ * deduped, so EVERY selected condition contributes coverage. The count of
+ * recommendations naturally scales with the number of selected problems.
+ */
+export function getConditionRecommendations(healthConditions = []) {
+  if (!Array.isArray(healthConditions) || healthConditions.length === 0) return [];
+  const out = [];
+  const seen = new Set();
+  for (const cond of healthConditions) {
+    const ids = CONDITION_PRODUCT_MAP[cond] || [];
+    for (const id of ids.slice(0, 2)) {
+      if (seen.has(id)) continue;
+      seen.add(id);
+      out.push({ product_id: id, condition: cond });
+    }
+  }
+  return out;
 }
 
 /**
