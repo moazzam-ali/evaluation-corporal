@@ -134,7 +134,7 @@ function generateRisks(metrics, t) {
  *   metrics   — raw metrics array (for risk callout generation)
  *   createdAt — ISO date string for the hero
  */
-export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionDetails = null, visionAvailable = false }) {
+export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionDetails = null, visionAvailable = false, answersHref = null }) {
   const { t, i18n } = useTranslation();
   const { open: openLightbox } = useLightbox();
   const d = data;
@@ -358,11 +358,17 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               {t("rd.hero_subtitle", "Your body assessment — a snapshot of where you stand today. Read it once, then let the plan do the work.")}
             </p>
 
-            <div className="mt-7 flex justify-center">
+            <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Link href="/results/visuals" className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
                 {t("atlas.open", "Open visual guide")}
               </Link>
+              {answersHref && (
+                <Link href={answersHref} className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 4h6v3H9zM9 4H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2h-2M9 11h6M9 15h4" /></svg>
+                  {t("rd.view_answers", "See your answers")}
+                </Link>
+              )}
             </div>
 
             {/* Meta strip */}

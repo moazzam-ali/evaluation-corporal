@@ -859,7 +859,8 @@
     "info_radar": "Chaque axe est l'un de vos scores de 0 à 100 — composition, poids, hydratation, calories, muscle et cardio. Plus la forme approche du bord extérieur, plus ce domaine est proche de sa bande saine ; une forme équilibrée vaut mieux qu'une forme en pointes.",
     "info_summary": "Composé à partir de votre rapport : ce qui fonctionne est votre signal le plus fort, ce qui dérive le plus faible, et cette semaine la première étape de votre plan. Quand l'analyse photo par IA a été réalisée, ses observations alimentent aussi cette section.",
     "info_metabolic": "Une estimation de l'âge auquel correspond votre score global de bien-être — au-dessus du point médian, il se lit plus jeune que votre âge réel ; en dessous, plus âgé. Voyez-le comme une boussole de motivation, pas comme une mesure clinique.",
-    "to_gain": "À prendre"
+    "to_gain": "À prendre",
+    "view_answers": "Voir vos réponses"
   },
   "atlas": {
     "view_external": "Externe",
@@ -917,5 +918,14 @@
     "hip_label": "Hanches",
     "hip_desc": "Mesurez autour de la partie la plus large des hanches et des fessiers.",
     "tip": "Gardez le mètre ruban droit et parallèle au sol."
+  },
+  "answers": {
+    "back": "Retour aux résultats",
+    "eyebrow": "Votre envoi",
+    "title": "Tout ce que vous nous avez dit.",
+    "subtitle": "Les réponses du formulaire derrière cette évaluation, telles que vous les avez envoyées.",
+    "submitted": "Envoyé le {{date}}.",
+    "empty": "Aucune réponse de formulaire n'est enregistrée pour cette évaluation.",
+    "none_selected": "Aucune sélection."
   }
 }

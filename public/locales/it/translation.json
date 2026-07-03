@@ -859,7 +859,8 @@
     "info_radar": "Ogni asse è uno dei tuoi punteggi su scala 0–100 — composizione, peso, idratazione, calorie, muscolo e cardio. Più la forma raggiunge il bordo esterno, più quell'area è vicina alla sua fascia sana; una forma equilibrata batte una a punte.",
     "info_summary": "Composto dal tuo report: cosa funziona è il tuo segnale più forte, cosa scivola il più debole, e questa settimana il primo passo del tuo piano. Se l'analisi foto con IA è stata eseguita, anche le sue osservazioni confluiscono qui.",
     "info_metabolic": "Una stima dell'età a cui corrisponde il tuo punteggio complessivo di benessere — sopra il punto medio si legge più giovane della tua età anagrafica, sotto più vecchio. Prendila come bussola motivazionale, non come misurazione clinica.",
-    "to_gain": "Da guadagnare"
+    "to_gain": "Da guadagnare",
+    "view_answers": "Vedi le tue risposte"
   },
   "atlas": {
     "view_external": "Esterno",
@@ -917,5 +918,14 @@
     "hip_label": "Fianchi",
     "hip_desc": "Misura intorno alla parte più larga di fianchi e glutei.",
     "tip": "Tieni il metro dritto e parallelo al pavimento."
+  },
+  "answers": {
+    "back": "Torna ai risultati",
+    "eyebrow": "Il tuo invio",
+    "title": "Tutto quello che ci hai raccontato.",
+    "subtitle": "Le risposte del modulo dietro questa valutazione, esattamente come le hai inviate.",
+    "submitted": "Inviato il {{date}}.",
+    "empty": "Nessuna risposta del modulo salvata per questa valutazione.",
+    "none_selected": "Nessuna selezionata."
   }
 }

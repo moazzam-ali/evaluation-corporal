@@ -859,7 +859,8 @@
     "info_radar": "Cada eje es una de tus puntuaciones de 0 a 100 — composición, peso, hidratación, calorías, músculo y cardio. Cuanto más se acerca la forma al borde exterior, más cerca está esa área de su banda saludable; una forma equilibrada es mejor que una con picos.",
     "info_summary": "Compuesto a partir de tu informe: lo que funciona es tu señal más fuerte, lo que se desvía la más débil, y esta semana el primer paso de tu plan. Cuando se ejecutó el análisis de foto con IA, sus observaciones también alimentan esta sección.",
     "info_metabolic": "Una estimación de la edad a la que corresponde tu puntuación global de bienestar — puntuar por encima del punto medio se lee como más joven que tu edad real, por debajo como mayor. Tómalo como una brújula motivacional, no como una medición clínica.",
-    "to_gain": "Por ganar"
+    "to_gain": "Por ganar",
+    "view_answers": "Ver tus respuestas"
   },
   "atlas": {
     "view_external": "Externo",
@@ -917,5 +918,14 @@
     "hip_label": "Cadera",
     "hip_desc": "Mide alrededor de la parte más ancha de la cadera y los glúteos.",
     "tip": "Mantén la cinta recta y paralela al suelo."
+  },
+  "answers": {
+    "back": "Volver a los resultados",
+    "eyebrow": "Tu envío",
+    "title": "Todo lo que nos contaste.",
+    "subtitle": "Las respuestas del formulario detrás de esta evaluación, tal como las enviaste.",
+    "submitted": "Enviado el {{date}}.",
+    "empty": "No hay respuestas de formulario guardadas para esta evaluación.",
+    "none_selected": "Ninguna seleccionada."
   }
 }

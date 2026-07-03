@@ -859,7 +859,8 @@
     "info_radar": "Cada eixo é uma das tuas pontuações numa escala de 0–100 — composição, peso, hidratação, calorias, músculo e cardio. Quanto mais a forma se aproxima da borda exterior, mais perto essa área está da sua faixa saudável; uma forma equilibrada vale mais do que uma com picos.",
     "info_summary": "Composto a partir do teu relatório: o que está a funcionar é o teu sinal mais forte, o que está a derivar o mais fraco, e esta semana o primeiro passo do teu plano. Quando a análise de foto por IA correu, as suas observações também alimentam esta secção.",
     "info_metabolic": "Uma estimativa da idade a que corresponde a tua pontuação global de bem-estar — acima do ponto médio lê-se mais jovem do que a tua idade real, abaixo mais velho. Encara-a como uma bússola motivacional, não como uma medição clínica.",
-    "to_gain": "A ganhar"
+    "to_gain": "A ganhar",
+    "view_answers": "Ver as tuas respostas"
   },
   "atlas": {
     "view_external": "Externo",
@@ -917,5 +918,14 @@
     "hip_label": "Anca",
     "hip_desc": "Meça à volta da parte mais larga das ancas e dos glúteos.",
     "tip": "Mantenha a fita direita e paralela ao chão."
+  },
+  "answers": {
+    "back": "Voltar aos resultados",
+    "eyebrow": "O teu envio",
+    "title": "Tudo o que nos contaste.",
+    "subtitle": "As respostas do formulário por trás desta avaliação, exatamente como as enviaste.",
+    "submitted": "Enviado a {{date}}.",
+    "empty": "Não há respostas de formulário guardadas para esta avaliação.",
+    "none_selected": "Nenhuma selecionada."
   }
 }

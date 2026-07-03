@@ -75,6 +75,7 @@ export default function ResultsPage() {
       photoQualityNote={results.photo_quality_note || null}
       visionDetails={results.vision_details || null}
       visionAvailable={!!results.vision_available}
+      answersHref={`/results/${id}/answers`}
     />
   );
 }

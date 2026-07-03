@@ -859,7 +859,8 @@
     "info_radar": "Her eksen 0–100 ölçeğindeki puanlarından biridir — kompozisyon, kilo, hidrasyon, kalori, kas ve kardiyo. Şekil dış kenara ne kadar yaklaşırsa o alan sağlıklı bandına o kadar yakındır; dengeli bir şekil sivri olandan iyidir.",
     "info_summary": "Raporundan derlenir: işleyen en güçlü sinyalin, kayan en zayıfın, bu hafta ise planındaki ilk adımdır. Yapay zekâ fotoğraf analizi çalıştıysa gözlemleri de buraya katılır.",
     "info_metabolic": "Genel sağlıklı yaşam puanının karşılık geldiği yaşın bir tahmini — orta noktanın üzerinde puan takvim yaşından genç, altında yaşlı okunur. Bunu klinik bir ölçüm değil, motivasyon pusulası olarak gör.",
-    "to_gain": "Alınacak"
+    "to_gain": "Alınacak",
+    "view_answers": "Yanıtlarını gör"
   },
   "atlas": {
     "view_external": "Dış",
@@ -917,5 +918,14 @@
     "hip_label": "Kalça",
     "hip_desc": "Kalça ve basenin en geniş bölgesinin çevresini ölçün.",
     "tip": "Mezurayı düz ve yere paralel tutun."
+  },
+  "answers": {
+    "back": "Sonuçlara dön",
+    "eyebrow": "Gönderimin",
+    "title": "Bize anlattığın her şey.",
+    "subtitle": "Bu değerlendirmenin arkasındaki form yanıtları — tam gönderdiğin haliyle.",
+    "submitted": "{{date}} tarihinde gönderildi.",
+    "empty": "Bu değerlendirme için kayıtlı form yanıtı yok.",
+    "none_selected": "Hiçbiri seçilmedi."
   }
 }

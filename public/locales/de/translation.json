@@ -859,7 +859,8 @@
     "info_radar": "Jede Achse ist einer deiner Scores auf einer Skala von 0–100 — Komposition, Gewicht, Hydration, Kalorien, Muskeln und Kardio. Je näher die Form an den äußeren Rand reicht, desto näher liegt der Bereich an seinem gesunden Band; eine ausgewogene Form schlägt eine spitze.",
     "info_summary": "Zusammengestellt aus deinem Bericht: Was funktioniert ist dein stärkstes Signal, was abdriftet dein schwächstes, und diese Woche der erste Schritt aus deinem Plan. Lief die KI-Fotoanalyse, fließen auch ihre Beobachtungen hier ein.",
     "info_metabolic": "Eine Schätzung, welchem Alter dein Gesamt-Wellness-Score entspricht — über dem Mittelwert liest er sich jünger als dein Kalenderalter, darunter älter. Versteh ihn als Motivationskompass, nicht als klinische Messung.",
-    "to_gain": "Zuzunehmen"
+    "to_gain": "Zuzunehmen",
+    "view_answers": "Deine Antworten ansehen"
   },
   "atlas": {
     "view_external": "Extern",
@@ -917,5 +918,14 @@
     "hip_label": "Hüfte",
     "hip_desc": "Miss um die breiteste Stelle von Hüfte und Gesäß.",
     "tip": "Halte das Maßband gerade und parallel zum Boden."
+  },
+  "answers": {
+    "back": "Zurück zu den Ergebnissen",
+    "eyebrow": "Deine Angaben",
+    "title": "Alles, was du uns gesagt hast.",
+    "subtitle": "Die Formularantworten hinter dieser Auswertung — genau so, wie du sie abgeschickt hast.",
+    "submitted": "Abgeschickt am {{date}}.",
+    "empty": "Für diese Auswertung sind keine Formularantworten gespeichert.",
+    "none_selected": "Keine ausgewählt."
   }
 }

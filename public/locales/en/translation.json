@@ -859,7 +859,8 @@
     "info_metabolic": "An estimate of the age your overall wellness score corresponds to — scoring above the midpoint reads younger than your calendar age, below reads older. Treat it as a motivational compass, not a clinical measurement.",
     "risks_title": "Signals",
     "info_aria": "What does this mean?",
-    "to_gain": "To gain"
+    "to_gain": "To gain",
+    "view_answers": "See your answers"
   },
   "atlas": {
     "view_external": "External",
@@ -917,5 +918,14 @@
     "hip_label": "Hip",
     "hip_desc": "Measure around the widest part of your hips and glutes.",
     "tip": "Keep the tape level and parallel to the floor."
+  },
+  "answers": {
+    "back": "Back to results",
+    "eyebrow": "Your submission",
+    "title": "Everything you told us.",
+    "subtitle": "The intake answers behind this assessment, exactly as you submitted them.",
+    "submitted": "Submitted {{date}}.",
+    "empty": "No form answers are stored for this assessment.",
+    "none_selected": "None selected."
   }
 }
