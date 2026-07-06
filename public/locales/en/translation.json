@@ -567,7 +567,9 @@
     "upload_title_2": "or click to browse.",
     "upload_subtitle": "JPEG · PNG · WEBP · 12 MB max",
     "upload_tip_title": "Photos are processed in private.",
-    "upload_tip_body": "We never store the raw image after analysis — only the secure URL of an anonymized copy you can delete any time."
+    "upload_tip_body": "We never store the raw image after analysis — only the secure URL of an anonymized copy you can delete any time.",
+    "camera_error": "The camera isn't available in this browser. Upload a photo from your gallery instead.",
+    "camera_error_cta": "Upload a photo"
   },
   "products": {
     "pick": "pick",

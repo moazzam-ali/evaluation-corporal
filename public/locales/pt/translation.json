@@ -599,7 +599,9 @@
     "upload_title_2": "ou clique para procurar.",
     "upload_subtitle": "JPEG · PNG · WEBP · 12 MB máx.",
     "upload_tip_title": "As fotos são processadas em privado.",
-    "upload_tip_body": "Nunca armazenamos a imagem original após a análise – apenas a URL segura de uma cópia anonimizada que você pode excluir a qualquer momento."
+    "upload_tip_body": "Nunca armazenamos a imagem original após a análise – apenas a URL segura de uma cópia anonimizada que você pode excluir a qualquer momento.",
+    "camera_error": "A câmara não está disponível neste navegador. Carregue uma foto da sua galeria.",
+    "camera_error_cta": "Carregar uma foto"
   },
   "rd": {
     "lean_short": "MAGRA",

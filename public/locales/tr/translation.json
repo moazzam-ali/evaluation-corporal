@@ -599,7 +599,9 @@
     "upload_title_2": "veya göz atmak için tıklayın.",
     "upload_subtitle": "JPEG · PNG · WEBP · en fazla 12 MB",
     "upload_tip_title": "Fotoğraflar gizli olarak işlenir.",
-    "upload_tip_body": "Analizden sonra ham görüntüyü asla saklamayız – yalnızca istediğiniz zaman silebileceğiniz, anonimleştirilmiş bir kopyanın güvenli URL'si."
+    "upload_tip_body": "Analizden sonra ham görüntüyü asla saklamayız – yalnızca istediğiniz zaman silebileceğiniz, anonimleştirilmiş bir kopyanın güvenli URL'si.",
+    "camera_error": "Kamera bu tarayıcıda kullanılamıyor. Bunun yerine galerinden bir fotoğraf yükle.",
+    "camera_error_cta": "Fotoğraf yükle"
   },
   "rd": {
     "lean_short": "YAĞSIZ",

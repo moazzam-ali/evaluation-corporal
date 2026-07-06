@@ -67,15 +67,45 @@ function ScanPageInner() {
   const progressRef = useRef(null);
 
   // Body photo — captured on the photo step (before review), kept locally in
-  // state until the review step sends everything in one go.
-  const [photoTab, setPhotoTab] = useState("camera");
+  // state until the review step sends everything in one go. The upload tab is
+  // the default: auto-starting the camera on step entry crashes some in-app
+  // browsers (Telegram/Instagram WebViews) and prompts for permission before
+  // the user asked for it.
+  const [photoTab, setPhotoTab] = useState("upload");
   const [bodyImage, setBodyImage] = useState(null);
 
   const cleanID = (s) => { const n = Number(s); return s && !isNaN(n) ? String(Math.trunc(n)) : s; };
-  const chatIDs = searchParams.get("n")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
-  const botIndex = cleanID(searchParams.get("b") || "1");
-  const accountIDs = searchParams.get("a")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
-  const contactIDs = searchParams.get("c")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
+  const urlChatIDs = searchParams.get("n")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
+  const urlBotIndex = cleanID(searchParams.get("b") || "1");
+  const urlAccountIDs = searchParams.get("a")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
+  const urlContactIDs = searchParams.get("c")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
+  const urlHasParams = urlChatIDs.length > 0 && urlAccountIDs.length > 0 && urlContactIDs.length > 0;
+
+  // The coach's access params survive a reload: in-app browsers sometimes
+  // recover from a crash or "reload" onto the URL without the query string,
+  // which used to strand people on the "Access required" screen mid-attempt.
+  const ACCESS_KEY = "scan-access-params";
+  const [storedAccess] = useState(() => {
+    if (typeof window === "undefined") return null;
+    try { return JSON.parse(window.sessionStorage.getItem(ACCESS_KEY) || "null"); } catch { return null; }
+  });
+  useEffect(() => {
+    if (!urlHasParams) return;
+    try {
+      window.sessionStorage.setItem(ACCESS_KEY, JSON.stringify({
+        chatIDs: urlChatIDs, botIndex: urlBotIndex, accountIDs: urlAccountIDs, contactIDs: urlContactIDs,
+      }));
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlHasParams, searchParams]);
+
+  const access = urlHasParams
+    ? { chatIDs: urlChatIDs, botIndex: urlBotIndex, accountIDs: urlAccountIDs, contactIDs: urlContactIDs }
+    : storedAccess;
+  const chatIDs = access?.chatIDs || [];
+  const botIndex = access?.botIndex || "1";
+  const accountIDs = access?.accountIDs || [];
+  const contactIDs = access?.contactIDs || [];
   const lang = searchParams.get("l") || i18n.language || "en";
 
   // ?sr=1 → "show results" testing toggle: skip photo, auto-analyze, redirect to results page.

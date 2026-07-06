@@ -599,7 +599,9 @@
     "upload_title_2": "ou cliquez pour parcourir.",
     "upload_subtitle": "JPEG · PNG · WEBP · 12 Mo max",
     "upload_tip_title": "Les photos sont traitées en privé.",
-    "upload_tip_body": "Nous ne conservons jamais l'image brute après analyse – seulement l'URL sécurisée d'une copie anonymisée que vous pouvez supprimer à tout moment."
+    "upload_tip_body": "Nous ne conservons jamais l'image brute après analyse – seulement l'URL sécurisée d'une copie anonymisée que vous pouvez supprimer à tout moment.",
+    "camera_error": "La caméra n'est pas disponible dans ce navigateur. Téléchargez une photo depuis votre galerie.",
+    "camera_error_cta": "Télécharger une photo"
   },
   "rd": {
     "lean_short": "MAIGRE",

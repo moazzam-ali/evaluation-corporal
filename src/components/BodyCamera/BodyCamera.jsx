@@ -4,6 +4,7 @@ import { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
+import { compressImage } from "@/lib/image-utils";
 
 const videoConstraints = {
   width: 720,
@@ -25,6 +26,9 @@ export default function BodyCamera({ onImageCapture, activeTab, setActiveTab }) 
   const [capturedImage, setCapturedImage] = useState(null);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [error, setError] = useState(null);
+  // getUserMedia is unreliable inside in-app browsers (Telegram, Instagram…):
+  // when it fails we show a friendly fallback instead of a dead camera pane.
+  const [cameraError, setCameraError] = useState(false);
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current?.getScreenshot();
@@ -52,10 +56,20 @@ export default function BodyCamera({ onImageCapture, activeTab, setActiveTab }) 
       const file = acceptedFiles[0];
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = () => {
-        setUploadedImage(reader.result);
+      reader.onload = async () => {
+        // Downscale before keeping it: phone photos can be 40+ megapixels,
+        // which crashes low-memory in-app browsers when decoded/posted, and
+        // the API rejects oversized request bodies anyway. ~1440px is more
+        // than the analysis needs.
+        let image = reader.result;
+        try {
+          image = await compressImage(reader.result, { maxWidth: 1440, maxHeight: 1440, quality: 0.85 });
+        } catch {
+          // keep the original if compression fails — better than losing the photo
+        }
+        setUploadedImage(image);
         setError(null);
-        onImageCapture(reader.result);
+        onImageCapture(image);
       };
       reader.onerror = () =>
         setError(t("body_camera.error_read", "Could not read the file. Try another."));
@@ -180,6 +194,30 @@ export default function BodyCamera({ onImageCapture, activeTab, setActiveTab }) 
                   </button>
                 </div>
               </>
+            ) : cameraError ? (
+              /* Camera unavailable (common inside Telegram/Instagram in-app
+                 browsers) — friendly fallback pointing at the upload tab. */
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-8 text-center">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="rgba(255,255,255,0.75)" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                  <line x1="2" y1="2" x2="22" y2="22" />
+                </svg>
+                <p style={{ margin: 0, fontFamily: "var(--font-inter)", fontSize: "13.5px", lineHeight: 1.55, color: "rgba(255,255,255,0.85)" }}>
+                  {t("body_camera.camera_error", "The camera isn't available in this browser. Upload a photo from your gallery instead.")}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("upload")}
+                  style={{
+                    fontFamily: "var(--font-dm-sans)", fontSize: "13px", fontWeight: 500,
+                    padding: "10px 20px", borderRadius: "999px",
+                    background: "rgba(255,255,255,0.94)", color: "#2F2F2B",
+                    border: 0, cursor: "pointer",
+                  }}
+                >
+                  {t("body_camera.camera_error_cta", "Upload a photo")}
+                </button>
+              </div>
             ) : (
               <>
                 <Webcam
@@ -188,6 +226,7 @@ export default function BodyCamera({ onImageCapture, activeTab, setActiveTab }) 
                   screenshotFormat="image/jpeg"
                   screenshotQuality={0.88}
                   videoConstraints={videoConstraints}
+                  onUserMediaError={() => setCameraError(true)}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
                 {/* Full-body silhouette guide */}

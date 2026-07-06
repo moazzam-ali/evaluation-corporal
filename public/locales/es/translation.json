@@ -599,7 +599,9 @@
     "upload_title_2": "o haz clic para buscar.",
     "upload_subtitle": "JPEG · PNG · WEBP · 12 MB máx.",
     "upload_tip_title": "Las fotos se procesan en privado.",
-    "upload_tip_body": "Nunca guardamos la imagen original después del análisis — solo la URL segura de una copia anonimizada que puedes eliminar cuando quieras."
+    "upload_tip_body": "Nunca guardamos la imagen original después del análisis — solo la URL segura de una copia anonimizada que puedes eliminar cuando quieras.",
+    "camera_error": "La cámara no está disponible en este navegador. Sube una foto desde tu galería.",
+    "camera_error_cta": "Subir una foto"
   },
   "rd": {
     "lean_short": "MAGRO",

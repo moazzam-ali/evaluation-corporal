@@ -599,7 +599,9 @@
     "upload_title_2": "oder klicken zum Durchsuchen.",
     "upload_subtitle": "JPEG · PNG · WEBP · max. 12 MB",
     "upload_tip_title": "Fotos werden vertraulich verarbeitet.",
-    "upload_tip_body": "Wir speichern das Originalbild nach der Analyse nie — nur die sichere URL einer anonymisierten Kopie, die du jederzeit löschen kannst."
+    "upload_tip_body": "Wir speichern das Originalbild nach der Analyse nie — nur die sichere URL einer anonymisierten Kopie, die du jederzeit löschen kannst.",
+    "camera_error": "Die Kamera ist in diesem Browser nicht verfügbar. Lade stattdessen ein Foto aus deiner Galerie hoch.",
+    "camera_error_cta": "Foto hochladen"
   },
   "rd": {
     "lean_short": "MAGER",

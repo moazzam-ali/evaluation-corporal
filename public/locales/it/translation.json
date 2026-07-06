@@ -599,7 +599,9 @@
     "upload_title_2": "oppure clicca per sfogliare.",
     "upload_subtitle": "JPEG · PNG · WEBP · max 12 MB",
     "upload_tip_title": "Le foto vengono elaborate in privato.",
-    "upload_tip_body": "Dopo l'analisi non conserviamo mai l'immagine originale: solo l'URL sicuro di una copia anonimizzata che puoi eliminare quando vuoi."
+    "upload_tip_body": "Dopo l'analisi non conserviamo mai l'immagine originale: solo l'URL sicuro di una copia anonimizzata che puoi eliminare quando vuoi.",
+    "camera_error": "La fotocamera non è disponibile in questo browser. Carica una foto dalla tua galleria.",
+    "camera_error_cta": "Carica una foto"
   },
   "rd": {
     "lean_short": "MAGRA",
