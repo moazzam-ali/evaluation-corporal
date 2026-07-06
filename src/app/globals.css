@@ -199,6 +199,7 @@
   font-family: var(--font-inter), "Montserrat", system-ui, sans-serif; font-size: 14px; color: #2F2F2B;
   cursor: pointer; transition: border-color 180ms, background 180ms;
   user-select: none;
+  text-align: left; /* buttons center by default — keep wrapped labels left-aligned */
 }
 .scan-radio:hover { border-color: rgba(47, 47, 43, 0.16); }
 .scan-radio.is-checked { border-color: #9B8573; background: #EFE7DC; }
@@ -226,6 +227,7 @@
   font-family: var(--font-inter), "Montserrat", system-ui, sans-serif; font-size: 14px; color: #2F2F2B;
   cursor: pointer; transition: border-color 180ms, background 180ms;
   user-select: none;
+  text-align: left; /* buttons center by default — keep wrapped labels left-aligned */
 }
 .scan-checkbox:hover { border-color: rgba(47, 47, 43, 0.16); }
 .scan-checkbox.is-checked { border-color: #9B8573; background: #EFE7DC; }

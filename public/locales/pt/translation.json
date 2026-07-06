@@ -815,7 +815,7 @@
     "whr_cap_high": "Faixa de risco alto — a gordura central acarreta risco cardiometabólico; o plano dá prioridade a isso.",
     "tbw_cap_ok": "{{pct}}% de água corporal — dentro do intervalo de referência saudável.",
     "tbw_cap_below": "{{pct}}% de água corporal — abaixo da referência de 60%; a sua meta diária de hidratação fecha a diferença.",
-    "scan_no_read": "A IA não conseguiu extrair notas detalhadas desta foto. As métricas abaixo são calculadas a partir das suas medidas e não são afetadas.",
+    "scan_no_read": "Não conseguimos obter uma leitura detalhada desta foto. Para o melhor resultado, use uma foto de corpo inteiro, bem iluminada e com roupa justa. As suas métricas abaixo são calculadas a partir das suas medidas e não são afetadas.",
     "bmi_obese2": "Obesidade II+",
     "bmiseg_obese2": "Obesidade II+",
     "fat_dist_label": "Distribuição de gordura",

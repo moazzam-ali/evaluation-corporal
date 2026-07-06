@@ -815,7 +815,7 @@
     "whr_cap_high": "High risk band — central fat carries cardiometabolic risk; the plan prioritises it.",
     "tbw_cap_ok": "{{pct}}% body water — within the healthy reference range.",
     "tbw_cap_below": "{{pct}}% body water — below the 60% reference; your daily hydration target closes the gap.",
-    "scan_no_read": "The AI couldn't extract detailed notes from this photo. Your metrics below are calculated from your measurements and are not affected.",
+    "scan_no_read": "We couldn't get a detailed read from this photo. For the best result, use a clear, well-lit, full-body photo in fitted clothing. Your metrics below are calculated from your measurements and are not affected.",
     "bmi_obese2": "Obese II+",
     "bmiseg_obese2": "Obese II+",
     "fatdist_android": "Abdomen-first (android)",

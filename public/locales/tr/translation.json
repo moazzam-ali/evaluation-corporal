@@ -815,7 +815,7 @@
     "whr_cap_high": "Yüksek risk bandı — merkezi yağ kardiyometabolik risk taşır; plan buna öncelik verir.",
     "tbw_cap_ok": "%{{pct}} vücut suyu — sağlıklı referans aralığında.",
     "tbw_cap_below": "%{{pct}} vücut suyu — %60 referansın altında; günlük hidrasyon hedefin bu farkı kapatır.",
-    "scan_no_read": "Yapay zekâ bu fotoğraftan ayrıntılı not çıkaramadı. Aşağıdaki metrikler ölçülerinden hesaplanır ve etkilenmez.",
+    "scan_no_read": "Bu fotoğraftan ayrıntılı bir okuma elde edemedik. En iyi sonuç için iyi aydınlatılmış, tüm vücudu gösteren ve dar giysili bir fotoğraf kullan. Aşağıdaki ölçümlerin ölçülerinden hesaplanır ve etkilenmez.",
     "bmi_obese2": "Obezite II+",
     "bmiseg_obese2": "Obezite II+",
     "fat_dist_label": "Yağ dağılımı",

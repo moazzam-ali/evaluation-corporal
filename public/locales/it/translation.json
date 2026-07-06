@@ -815,7 +815,7 @@
     "whr_cap_high": "Fascia di rischio alto: il grasso centrale comporta rischio cardiometabolico; il piano lo mette al primo posto.",
     "tbw_cap_ok": "{{pct}}% di acqua corporea: nell'intervallo di riferimento sano.",
     "tbw_cap_below": "{{pct}}% di acqua corporea: sotto il riferimento del 60%; il tuo obiettivo di idratazione colma il divario.",
-    "scan_no_read": "L'IA non ha potuto estrarre note dettagliate da questa foto. Le metriche qui sotto sono calcolate dalle tue misure e non ne risentono.",
+    "scan_no_read": "Non siamo riusciti a ottenere una lettura dettagliata da questa foto. Per il risultato migliore, usa una foto a figura intera, ben illuminata e con abbigliamento aderente. Le tue metriche qui sotto sono calcolate dalle tue misure e non sono influenzate.",
     "bmi_obese2": "Obesità II+",
     "bmiseg_obese2": "Obesità II+",
     "fat_dist_label": "Distribuzione del grasso",

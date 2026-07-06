@@ -815,7 +815,7 @@
     "whr_cap_high": "Hohes Risiko — zentrales Fett birgt kardiometabolisches Risiko; der Plan priorisiert es.",
     "tbw_cap_ok": "{{pct}} % Körperwasser — im gesunden Referenzbereich.",
     "tbw_cap_below": "{{pct}} % Körperwasser — unter der 60-%-Referenz; dein tägliches Hydrationsziel schließt die Lücke.",
-    "scan_no_read": "Die KI konnte aus diesem Foto keine detaillierten Notizen gewinnen. Deine Werte unten werden aus deinen Maßen berechnet und sind nicht betroffen.",
+    "scan_no_read": "Wir konnten aus diesem Foto keine detaillierte Einschätzung gewinnen. Für das beste Ergebnis verwende ein gut beleuchtetes Ganzkörperfoto in eng anliegender Kleidung. Deine Werte unten werden aus deinen Messwerten berechnet und sind nicht betroffen.",
     "bmi_obese2": "Adipositas II+",
     "bmiseg_obese2": "Adipositas II+",
     "fat_dist_label": "Fettverteilung",

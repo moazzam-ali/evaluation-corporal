@@ -143,17 +143,22 @@ export async function POST(request) {
     if (productList.ok) productIds = productList.result;
 
     // 4. Photo analysis (optional — formulas alone are enough).
-    //    Coach-voice prompt, gpt-4.1-mini, low-detail image, JSON mode.
-    //    One retry on failure/unparseable/empty analysis before giving up.
+    //    Coach-voice prompt, JSON mode. Tries a chain of models so a key that
+    //    lacks access to the preferred model degrades to a known-available one
+    //    instead of leaving every photo un-analyzed. `detail: "high"` and a
+    //    generous token budget avoid empty/truncated reads on a single photo.
+    //    BODY_ANALYSIS_MODEL (comma-separated) overrides the chain.
     let photoAnalysis = null;
+    const modelChain = (process.env.BODY_ANALYSIS_MODEL || "gpt-4.1-mini,gpt-4o,gpt-4o-mini")
+      .split(",").map((m) => m.trim()).filter(Boolean);
     if (process.env.OPENAI_API_KEY && (inlineImage || imageUrl)) {
-      const callPhotoAnalysis = async () => {
+      const callPhotoAnalysis = async (model) => {
         const openai = getOpenAI();
         const completion = await openai.chat.completions.create(
           {
-            model: "gpt-4.1-mini",
+            model,
             temperature: 0.5,
-            max_tokens: 600,
+            max_tokens: 900,
             response_format: { type: "json_object" },
             messages: [
               { role: "system", content: PHOTO_COACH_SYSTEM },
@@ -161,27 +166,41 @@ export async function POST(request) {
                 role: "user",
                 content: [
                   { type: "text", text: getPhotoAnalysisUserText({ language, formData, computed }) },
-                  // Base64 data-URI preferred; detail:"low" per spec (cost/speed).
-                  { type: "image_url", image_url: { url: inlineImage || imageUrl, detail: "low" } },
+                  { type: "image_url", image_url: { url: inlineImage || imageUrl, detail: "high" } },
                 ],
               },
             ],
           },
           { timeout: 60_000 }
         );
+        if (completion.choices?.[0]?.finish_reason === "length") {
+          throw new Error("Response truncated (finish_reason=length)");
+        }
         const raw = completion.choices?.[0]?.message?.content;
         if (!raw) throw new Error("Empty OpenAI response");
         const cleaned = sanitizePhotoAnalysis(JSON.parse(raw));
         if (!cleaned) throw new Error("Empty analysis in photo read");
         return cleaned;
       };
+      // Walk the model chain; within each model retry once. First success wins.
       const v = await safe(async () => {
-        try {
-          return await callPhotoAnalysis();
-        } catch (err) {
-          console.error("[analyze-body] photo analysis attempt 1 failed:", err.message);
-          return await callPhotoAnalysis();
+        let lastErr;
+        for (const model of modelChain) {
+          for (let attempt = 1; attempt <= 2; attempt++) {
+            try {
+              const result = await callPhotoAnalysis(model);
+              steps.vision_model = { status: "success", model };
+              return result;
+            } catch (err) {
+              lastErr = err;
+              console.error(`[analyze-body] photo analysis failed (model=${model}, attempt=${attempt}):`, err.message);
+              // A model-access/not-found error won't improve on retry — skip to
+              // the next model immediately instead of burning the second attempt.
+              if (/model|not found|does not exist|access|404/i.test(err.message)) break;
+            }
+          }
         }
+        throw lastErr || new Error("All photo-analysis models failed");
       }, "vision", steps);
       if (v.ok) photoAnalysis = v.result;
     } else if (!process.env.OPENAI_API_KEY) {
