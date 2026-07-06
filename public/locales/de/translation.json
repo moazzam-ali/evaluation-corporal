@@ -860,7 +860,8 @@
     "info_summary": "Zusammengestellt aus deinem Bericht: Was funktioniert ist dein stärkstes Signal, was abdriftet dein schwächstes, und diese Woche der erste Schritt aus deinem Plan. Lief die KI-Fotoanalyse, fließen auch ihre Beobachtungen hier ein.",
     "info_metabolic": "Eine Schätzung, welchem Alter dein Gesamt-Wellness-Score entspricht — über dem Mittelwert liest er sich jünger als dein Kalenderalter, darunter älter. Versteh ihn als Motivationskompass, nicht als klinische Messung.",
     "to_gain": "Zuzunehmen",
-    "view_answers": "Deine Antworten ansehen"
+    "view_answers": "Deine Antworten ansehen",
+    "bf_spectrum_caption_female": "Die Figuren zeigen das typische äußere Erscheinungsbild über den weiblichen Körperfettbereich — gleiche Größe und gleiches Gewicht, unterschiedliche Zusammensetzung."
   },
   "atlas": {
     "view_external": "Extern",
@@ -909,7 +910,14 @@
     "stage_pose_rounded": "Rund",
     "stage_pose_tilted": "Gekippt",
     "view_label": "Ansicht",
-    "body_label": "Körper"
+    "body_label": "Körper",
+    "view_measure": "Messen",
+    "topic_measure": "So nimmst du deine Maße",
+    "cap_measure": "Wo das Maßband sitzt: Brust, Taille (schmalste Stelle des Bauches) und Hüfte (breiteste Stelle des Gesäßes). Halte das Band gerade, eng anliegend und ohne die Haut einzudrücken.",
+    "stage_meas_tape": "Maßband-Positionen",
+    "stage_meas_front": "Vorne",
+    "stage_meas_side": "Seite",
+    "stage_meas_back": "Rücken"
   },
   "measure": {
     "title": "So nimmst du deine Maße",
@@ -917,7 +925,12 @@
     "waist_desc": "Miss um die schmalste Stelle deines Bauches, ohne das Maßband festzuziehen.",
     "hip_label": "Hüfte",
     "hip_desc": "Miss um die breiteste Stelle von Hüfte und Gesäß.",
-    "tip": "Halte das Maßband gerade und parallel zum Boden."
+    "tip": "Halte das Maßband gerade und parallel zum Boden.",
+    "tip_snug": "Das Maßband sollte eng an der Haut anliegen, ohne sie einzudrücken.",
+    "tip_exhale": "Miss am Ende einer normalen Ausatmung, entspannt stehend.",
+    "tip_skin": "Miss auf nackter Haut oder über dünner Kleidung für mehr Genauigkeit.",
+    "body_male": "Mann",
+    "body_female": "Frau"
   },
   "answers": {
     "back": "Zurück zu den Ergebnissen",

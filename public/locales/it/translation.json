@@ -860,7 +860,8 @@
     "info_summary": "Composto dal tuo report: cosa funziona è il tuo segnale più forte, cosa scivola il più debole, e questa settimana il primo passo del tuo piano. Se l'analisi foto con IA è stata eseguita, anche le sue osservazioni confluiscono qui.",
     "info_metabolic": "Una stima dell'età a cui corrisponde il tuo punteggio complessivo di benessere — sopra il punto medio si legge più giovane della tua età anagrafica, sotto più vecchio. Prendila come bussola motivazionale, non come misurazione clinica.",
     "to_gain": "Da guadagnare",
-    "view_answers": "Vedi le tue risposte"
+    "view_answers": "Vedi le tue risposte",
+    "bf_spectrum_caption_female": "Le figure mostrano l'aspetto esterno tipico lungo l'intervallo di grasso corporeo femminile — stessa altezza e stesso peso, composizione diversa."
   },
   "atlas": {
     "view_external": "Esterno",
@@ -909,7 +910,14 @@
     "stage_pose_rounded": "Arrotondata",
     "stage_pose_tilted": "Inclinata",
     "view_label": "Vista",
-    "body_label": "Corpo"
+    "body_label": "Corpo",
+    "view_measure": "Misurazione",
+    "topic_measure": "Come prendere le misure",
+    "cap_measure": "Dove va il metro: petto, vita (il punto più stretto dell'addome) e fianchi (il punto più largo dei glutei). Tieni il metro dritto, aderente e senza comprimere la pelle.",
+    "stage_meas_tape": "Posizioni del metro",
+    "stage_meas_front": "Fronte",
+    "stage_meas_side": "Profilo",
+    "stage_meas_back": "Schiena"
   },
   "measure": {
     "title": "Come prendere le misure",
@@ -917,7 +925,12 @@
     "waist_desc": "Misura intorno alla parte più stretta dell'addome, senza stringere il metro.",
     "hip_label": "Fianchi",
     "hip_desc": "Misura intorno alla parte più larga di fianchi e glutei.",
-    "tip": "Tieni il metro dritto e parallelo al pavimento."
+    "tip": "Tieni il metro dritto e parallelo al pavimento.",
+    "tip_snug": "Il metro deve aderire alla pelle senza comprimerla.",
+    "tip_exhale": "Misura alla fine di un'espirazione normale, in piedi e rilassato.",
+    "tip_skin": "Misura sulla pelle nuda o sopra un indumento sottile per maggiore precisione.",
+    "body_male": "Uomo",
+    "body_female": "Donna"
   },
   "answers": {
     "back": "Torna ai risultati",

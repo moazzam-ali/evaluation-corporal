@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import StageStrip from "@/components/StageStrip/StageStrip";
@@ -140,6 +140,15 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   const d = data;
   const locText = useLocText(t);
 
+  // Spectrum figures follow the sex selected on the form; a switcher on each
+  // strip lets the coach flip between the male and female image sets.
+  const [stageSex, setStageSex] = useState(d.sex === "female" ? "female" : "male");
+  const sexToggle = { value: stageSex, onChange: setStageSex };
+  // Male set predates the atlas and lives under /stages; the female set was
+  // added with the atlas under /atlas/external-female-*.
+  const stageImg = (metric, key) =>
+    stageSex === "female" ? `/atlas/external-female-${metric}-${key}.webp` : `/stages/${metric}-${key}.webp`;
+
   // Dynamic, localized band captions computed from the user's real values —
   // replaces the old static copy that claimed "0.9 above the ceiling" for everyone.
   const bmiCaption = d.bmi <= 0 ? "" :
@@ -261,23 +270,23 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   ];
 
   const bmiStages = [
-    { key: "under", label: t("rd.bmi_under", "Underweight"), sub: "<18.5", scaleX: 0.82, img: "/stages/bmi-under.webp" },
-    { key: "healthy", label: t("rd.bmi_healthy", "Healthy"), sub: "18.5–25", scaleX: 0.98, img: "/stages/bmi-healthy.webp" },
-    { key: "over", label: t("rd.bmi_over", "Overweight"), sub: "25–30", scaleX: 1.14, img: "/stages/bmi-over.webp" },
-    { key: "obese", label: t("rd.bmi_obese", "Obese I"), sub: "30–35", scaleX: 1.30, img: "/stages/bmi-obese.webp" },
-    { key: "obese2", label: t("rd.bmi_obese2", "Obese II+"), sub: "35+", scaleX: 1.44, img: "/stages/bmi-obese2.webp" },
+    { key: "under", label: t("rd.bmi_under", "Underweight"), sub: "<18.5", scaleX: 0.82, img: stageImg("bmi", "under") },
+    { key: "healthy", label: t("rd.bmi_healthy", "Healthy"), sub: "18.5–25", scaleX: 0.98, img: stageImg("bmi", "healthy") },
+    { key: "over", label: t("rd.bmi_over", "Overweight"), sub: "25–30", scaleX: 1.14, img: stageImg("bmi", "over") },
+    { key: "obese", label: t("rd.bmi_obese", "Obese I"), sub: "30–35", scaleX: 1.30, img: stageImg("bmi", "obese") },
+    { key: "obese2", label: t("rd.bmi_obese2", "Obese II+"), sub: "35+", scaleX: 1.44, img: stageImg("bmi", "obese2") },
   ];
   const bfStages = [
-    { key: "essential", label: t("rd.bf_essential", "Essential"), sub: "2–8%", scaleX: 0.80, img: "/stages/bodyfat-essential.webp" },
-    { key: "athletic", label: t("rd.bf_athletic", "Athletic"), sub: "8–14%", scaleX: 0.90, img: "/stages/bodyfat-athletic.webp" },
-    { key: "fitness", label: t("rd.bf_fitness", "Fitness"), sub: "14–18%", scaleX: 1.00, img: "/stages/bodyfat-fitness.webp" },
-    { key: "average", label: t("rd.bf_average", "Average"), sub: "18–25%", scaleX: 1.12, img: "/stages/bodyfat-average.webp" },
-    { key: "high", label: t("rd.bf_high", "High"), sub: "25%+", scaleX: 1.26, img: "/stages/bodyfat-high.webp" },
+    { key: "essential", label: t("rd.bf_essential", "Essential"), sub: "2–8%", scaleX: 0.80, img: stageImg("bodyfat", "essential") },
+    { key: "athletic", label: t("rd.bf_athletic", "Athletic"), sub: "8–14%", scaleX: 0.90, img: stageImg("bodyfat", "athletic") },
+    { key: "fitness", label: t("rd.bf_fitness", "Fitness"), sub: "14–18%", scaleX: 1.00, img: stageImg("bodyfat", "fitness") },
+    { key: "average", label: t("rd.bf_average", "Average"), sub: "18–25%", scaleX: 1.12, img: stageImg("bodyfat", "average") },
+    { key: "high", label: t("rd.bf_high", "High"), sub: "25%+", scaleX: 1.26, img: stageImg("bodyfat", "high") },
   ];
   const whrStages = [
-    { key: "low", label: t("rd.whr_low", "Low risk"), sub: "<0.90", scaleX: 0.92, img: "/stages/whr-low.webp" },
-    { key: "moderate", label: t("rd.whr_moderate", "Moderate"), sub: "0.90–0.95", scaleX: 1.08, img: "/stages/whr-moderate.webp" },
-    { key: "high", label: t("rd.whr_high", "High risk"), sub: "0.95+", scaleX: 1.24, img: "/stages/whr-high.webp" },
+    { key: "low", label: t("rd.whr_low", "Low risk"), sub: "<0.90", scaleX: 0.92, img: stageImg("whr", "low") },
+    { key: "moderate", label: t("rd.whr_moderate", "Moderate"), sub: "0.90–0.95", scaleX: 1.08, img: stageImg("whr", "moderate") },
+    { key: "high", label: t("rd.whr_high", "High risk"), sub: "0.95+", scaleX: 1.24, img: stageImg("whr", "high") },
   ];
 
   const normalizedProducts = products.map(normalizeProduct);
@@ -359,7 +368,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
             </p>
 
             <div className="mt-7 flex flex-wrap justify-center gap-3">
-              <Link href="/results/visuals" className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
+              <Link href={`/results/visuals?sex=${d.sex === "female" ? "female" : "male"}`} className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-medium transition-all hover:-translate-y-px" style={{ background: "white", color: "var(--ink)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
                 {t("atlas.open", "Open visual guide")}
               </Link>
@@ -516,12 +525,14 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               <Card>
                 <CardHeader title={t("rd.bmi_title", "Body Mass Index")} action={t("rd.bmi_action", "WHO reference")} info={INFO.bmi} />
                 <LinearRange value={d.bmi} min={15} max={40} segments={bmiSegments} unit={t("rd.unit_bmi", "kg / m²")} caption={bmiCaption} />
-                <StageStrip stages={bmiStages} activeKey={PICK.bmi(d.bmi)} caption={t("rd.bmi_spectrum_caption", "BMI maps weight to height only — it can't see muscle. The silhouettes show the broad external shape each band tends to produce.")} />
+                <StageStrip stages={bmiStages} activeKey={PICK.bmi(d.bmi)} sexToggle={sexToggle} caption={t("rd.bmi_spectrum_caption", "BMI maps weight to height only — it can't see muscle. The silhouettes show the broad external shape each band tends to produce.")} />
               </Card>
               <Card>
                 <CardHeader title={t("rd.bf_title", "Body Fat")} action={t("rd.bf_action_dynamic", "{{sex}} · {{age}} years", { sex: sexLabel, age: d.user.age })} info={INFO.bf} />
                 <LinearRange value={d.bodyFat} min={5} max={32} segments={bfSegments} unit={t("rd.unit_percent", "percent")} caption={bfCaption} />
-                <StageStrip stages={bfStages} activeKey={PICK.bodyFat(d.bodyFat)} caption={t("rd.bf_spectrum_caption", "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range.")} />
+                <StageStrip stages={bfStages} activeKey={PICK.bodyFat(d.bodyFat)} sexToggle={sexToggle} caption={stageSex === "female"
+                  ? t("rd.bf_spectrum_caption_female", "The figures show the typical external look across the female body-fat range — same height and weight, different composition.")
+                  : t("rd.bf_spectrum_caption", "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range.")} />
               </Card>
             </div>
 
@@ -530,7 +541,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               <Card>
                 <CardHeader title={t("rd.whr_title", "Waist-to-Hip Ratio")} action={t("rd.whr_action", "Cardiometabolic risk")} info={INFO.whr} />
                 <LinearRange value={d.whr} min={0.75} max={1.05} segments={whrSegments} unit={t("rd.unit_ratio", "ratio")} decimals={2} caption={whrCaption} />
-                <StageStrip stages={whrStages} activeKey={PICK.whr(d.whr)} caption={t("rd.whr_spectrum_caption", "Waist-to-hip ratio reflects where fat sits. Lower ratios carry less cardiometabolic risk; the shapes show low, moderate and high distribution.")} />
+                <StageStrip stages={whrStages} activeKey={PICK.whr(d.whr)} sexToggle={sexToggle} caption={t("rd.whr_spectrum_caption", "Waist-to-hip ratio reflects where fat sits. Lower ratios carry less cardiometabolic risk; the shapes show low, moderate and high distribution.")} />
               </Card>
               <Card>
                 <CardHeader title={t("rd.weight_title", "Weight Analysis")} action={t("rd.weight_action", "Lorentz healthy band")} info={INFO.weight} />

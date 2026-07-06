@@ -53,8 +53,9 @@ export default function Step2PhysicalInfo({ form, t }) {
         </p>
       </div>
 
-      {/* Visual guide: how to take the waist & hip measurements */}
-      <MeasurementGuide t={t} />
+      {/* Visual guide: how to take the waist & hip measurements —
+          keyed by sex so it follows the selection above */}
+      <MeasurementGuide key={sex || "male"} t={t} sex={sex} />
 
       {/* Waist & Hip */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

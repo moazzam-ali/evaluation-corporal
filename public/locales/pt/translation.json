@@ -860,7 +860,8 @@
     "info_summary": "Composto a partir do teu relatório: o que está a funcionar é o teu sinal mais forte, o que está a derivar o mais fraco, e esta semana o primeiro passo do teu plano. Quando a análise de foto por IA correu, as suas observações também alimentam esta secção.",
     "info_metabolic": "Uma estimativa da idade a que corresponde a tua pontuação global de bem-estar — acima do ponto médio lê-se mais jovem do que a tua idade real, abaixo mais velho. Encara-a como uma bússola motivacional, não como uma medição clínica.",
     "to_gain": "A ganhar",
-    "view_answers": "Ver as tuas respostas"
+    "view_answers": "Ver as tuas respostas",
+    "bf_spectrum_caption_female": "As figuras mostram o aspeto externo típico ao longo do intervalo de gordura corporal feminino — mesma altura e peso, composição diferente."
   },
   "atlas": {
     "view_external": "Externo",
@@ -909,7 +910,14 @@
     "stage_pose_rounded": "Arredondada",
     "stage_pose_tilted": "Inclinada",
     "view_label": "Vista",
-    "body_label": "Corpo"
+    "body_label": "Corpo",
+    "view_measure": "Medição",
+    "topic_measure": "Como tirar as suas medidas",
+    "cap_measure": "Onde vai a fita: peito, cintura (a parte mais estreita do abdómen) e anca (a parte mais larga dos glúteos). Mantenha a fita direita, ajustada e sem comprimir a pele.",
+    "stage_meas_tape": "Posições da fita",
+    "stage_meas_front": "Frente",
+    "stage_meas_side": "Perfil",
+    "stage_meas_back": "Costas"
   },
   "measure": {
     "title": "Como tirar as suas medidas",
@@ -917,7 +925,12 @@
     "waist_desc": "Meça à volta da parte mais estreita do abdómen, sem apertar a fita.",
     "hip_label": "Anca",
     "hip_desc": "Meça à volta da parte mais larga das ancas e dos glúteos.",
-    "tip": "Mantenha a fita direita e paralela ao chão."
+    "tip": "Mantenha a fita direita e paralela ao chão.",
+    "tip_snug": "A fita deve ficar ajustada à pele, sem comprimi-la.",
+    "tip_exhale": "Meça no final de uma expiração normal, em pé e relaxado.",
+    "tip_skin": "Meça sobre a pele nua ou com roupa fina para maior precisão.",
+    "body_male": "Homem",
+    "body_female": "Mulher"
   },
   "answers": {
     "back": "Voltar aos resultados",

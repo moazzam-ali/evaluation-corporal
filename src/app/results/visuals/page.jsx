@@ -1,17 +1,31 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import StageStrip from "@/components/StageStrip/StageStrip";
 import { Card } from "@/components/results/ResultsCharts";
 import { ATLAS_VIEWS, ATLAS_SEXES, ATLAS_COLLECTIONS } from "@/data/visual-atlas";
 
 export default function VisualAtlasPage() {
+  return (
+    <Suspense fallback={null}>
+      <VisualAtlasInner />
+    </Suspense>
+  );
+}
+
+function VisualAtlasInner() {
   const { t } = useTranslation();
   const router = useRouter();
-  const [view, setView] = useState("external");
-  const [sex, setSex] = useState("male");
+  const searchParams = useSearchParams();
+  // Preselect from the results page link: the person's sex (from the form)
+  // and, optionally, the view to open on.
+  const initialView = ATLAS_VIEWS.some((v) => v.id === searchParams.get("view"))
+    ? searchParams.get("view")
+    : "external";
+  const [view, setView] = useState(initialView);
+  const [sex, setSex] = useState(searchParams.get("sex") === "female" ? "female" : "male");
 
   const collections = ATLAS_COLLECTIONS.filter((c) => c.view === view && c.sex === sex);
 

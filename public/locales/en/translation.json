@@ -860,7 +860,8 @@
     "risks_title": "Signals",
     "info_aria": "What does this mean?",
     "to_gain": "To gain",
-    "view_answers": "See your answers"
+    "view_answers": "See your answers",
+    "bf_spectrum_caption_female": "The figures show the typical external look across the female body-fat range — same height and weight, different composition."
   },
   "atlas": {
     "view_external": "External",
@@ -909,7 +910,14 @@
     "stage_pose_rounded": "Rounded",
     "stage_pose_tilted": "Tilted",
     "view_label": "View",
-    "body_label": "Body"
+    "body_label": "Body",
+    "view_measure": "Measuring",
+    "topic_measure": "Taking your measurements",
+    "cap_measure": "Where the tape goes: chest, waist (narrowest point of the abdomen) and hip (widest point of the glutes). Keep the tape level, snug and never compressing the skin.",
+    "stage_meas_tape": "Tape positions",
+    "stage_meas_front": "Front",
+    "stage_meas_side": "Side",
+    "stage_meas_back": "Back"
   },
   "measure": {
     "title": "How to take your measurements",
@@ -917,7 +925,12 @@
     "waist_desc": "Measure around the narrowest part of your abdomen, without pulling the tape tight.",
     "hip_label": "Hip",
     "hip_desc": "Measure around the widest part of your hips and glutes.",
-    "tip": "Keep the tape level and parallel to the floor."
+    "tip": "Keep the tape level and parallel to the floor.",
+    "tip_snug": "The tape should sit snug against the skin — never compressing it.",
+    "tip_exhale": "Measure at the end of a normal exhale, standing relaxed.",
+    "tip_skin": "Measure on bare skin or over thin clothing for accuracy.",
+    "body_male": "Male",
+    "body_female": "Female"
   },
   "answers": {
     "back": "Back to results",

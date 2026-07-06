@@ -860,7 +860,8 @@
     "info_summary": "Raporundan derlenir: işleyen en güçlü sinyalin, kayan en zayıfın, bu hafta ise planındaki ilk adımdır. Yapay zekâ fotoğraf analizi çalıştıysa gözlemleri de buraya katılır.",
     "info_metabolic": "Genel sağlıklı yaşam puanının karşılık geldiği yaşın bir tahmini — orta noktanın üzerinde puan takvim yaşından genç, altında yaşlı okunur. Bunu klinik bir ölçüm değil, motivasyon pusulası olarak gör.",
     "to_gain": "Alınacak",
-    "view_answers": "Yanıtlarını gör"
+    "view_answers": "Yanıtlarını gör",
+    "bf_spectrum_caption_female": "Figürler, kadın vücut yağı aralığı boyunca tipik dış görünümü gösterir — aynı boy ve kilo, farklı kompozisyon."
   },
   "atlas": {
     "view_external": "Dış",
@@ -909,7 +910,14 @@
     "stage_pose_rounded": "Yuvarlak",
     "stage_pose_tilted": "Eğik",
     "view_label": "Görünüm",
-    "body_label": "Vücut"
+    "body_label": "Vücut",
+    "view_measure": "Ölçüm",
+    "topic_measure": "Ölçülerini nasıl alırsın",
+    "cap_measure": "Mezuranın yerleri: göğüs, bel (karnın en dar noktası) ve kalça (kalçanın en geniş noktası). Mezurayı düz, tene oturmuş ve cildi sıkıştırmadan tut.",
+    "stage_meas_tape": "Mezura konumları",
+    "stage_meas_front": "Ön",
+    "stage_meas_side": "Yan",
+    "stage_meas_back": "Arka"
   },
   "measure": {
     "title": "Ölçülerinizi nasıl alırsınız",
@@ -917,7 +925,12 @@
     "waist_desc": "Karnınızın en dar bölgesinin çevresini, mezurayı sıkmadan ölçün.",
     "hip_label": "Kalça",
     "hip_desc": "Kalça ve basenin en geniş bölgesinin çevresini ölçün.",
-    "tip": "Mezurayı düz ve yere paralel tutun."
+    "tip": "Mezurayı düz ve yere paralel tutun.",
+    "tip_snug": "Mezura cilde temas etmeli ama sıkıştırmamalı.",
+    "tip_exhale": "Normal bir nefes verişin sonunda, ayakta ve rahat dururken ölç.",
+    "tip_skin": "Doğruluk için çıplak tende veya ince bir giysi üzerinden ölç.",
+    "body_male": "Erkek",
+    "body_female": "Kadın"
   },
   "answers": {
     "back": "Sonuçlara dön",

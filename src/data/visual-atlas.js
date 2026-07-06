@@ -14,6 +14,7 @@ export const ATLAS_VIEWS = [
   { id: "facial", labelKey: "atlas.view_facial", labelEn: "Facial signs" },
   { id: "facial_fat", labelKey: "atlas.view_facialfat", labelEn: "Facial fat" },
   { id: "posture", labelKey: "atlas.view_posture", labelEn: "Posture" },
+  { id: "measure", labelKey: "atlas.view_measure", labelEn: "Measuring" },
 ];
 
 export const ATLAS_SEXES = [
@@ -74,6 +75,14 @@ const POSTURE = (sex) => [
   S("rounded", "atlas.stage_pose_rounded", "Rounded", null, `/atlas/posture-${sex}-rounded.webp`, 1),
   S("tilted", "atlas.stage_pose_tilted", "Tilted", null, `/atlas/posture-${sex}-tilted.webp`, 1),
 ];
+// Measurement guide — the same reference photos used by the form's
+// "how to take your measurements" helper, from every useful angle.
+const MEASURE = (sex) => [
+  S("tape", "atlas.stage_meas_tape", "Tape positions", null, `/measure/${sex}-tape.webp`, 1),
+  S("front", "atlas.stage_meas_front", "Front", null, `/measure/${sex}-front.webp`, 1),
+  S("side", "atlas.stage_meas_side", "Side", null, `/measure/${sex}-side.webp`, 1),
+  S("back", "atlas.stage_meas_back", "Back", null, `/measure/${sex}-back.webp`, 1),
+];
 
 const C = (id, view, sex, titleKey, titleEn, captionKey, captionEn, stages) =>
   ({ id, view, sex, titleKey, titleEn, captionKey, captionEn, stages });
@@ -122,4 +131,10 @@ export const ATLAS_COLLECTIONS = [
     "Alignment patterns from the side — neutral stack vs. rounded shoulders vs. anterior pelvic tilt.", POSTURE("male")),
   C("pose-female", "posture", "female", "atlas.topic_posture", "Posture", "atlas.cap_posture",
     "Alignment patterns from the side — neutral stack vs. rounded shoulders vs. anterior pelvic tilt.", POSTURE("female")),
+
+  // ── Taking measurements ──
+  C("meas-male", "measure", "male", "atlas.topic_measure", "Taking your measurements", "atlas.cap_measure",
+    "Where the tape goes: chest, waist (narrowest point of the abdomen) and hip (widest point of the glutes). Keep the tape level, snug and never compressing the skin.", MEASURE("male")),
+  C("meas-female", "measure", "female", "atlas.topic_measure", "Taking your measurements", "atlas.cap_measure",
+    "Where the tape goes: chest, waist (narrowest point of the abdomen) and hip (widest point of the glutes). Keep the tape level, snug and never compressing the skin.", MEASURE("female")),
 ];

@@ -860,7 +860,8 @@
     "info_summary": "Composé à partir de votre rapport : ce qui fonctionne est votre signal le plus fort, ce qui dérive le plus faible, et cette semaine la première étape de votre plan. Quand l'analyse photo par IA a été réalisée, ses observations alimentent aussi cette section.",
     "info_metabolic": "Une estimation de l'âge auquel correspond votre score global de bien-être — au-dessus du point médian, il se lit plus jeune que votre âge réel ; en dessous, plus âgé. Voyez-le comme une boussole de motivation, pas comme une mesure clinique.",
     "to_gain": "À prendre",
-    "view_answers": "Voir vos réponses"
+    "view_answers": "Voir vos réponses",
+    "bf_spectrum_caption_female": "Les silhouettes montrent l'apparence externe typique sur la plage de masse grasse féminine — même taille et même poids, composition différente."
   },
   "atlas": {
     "view_external": "Externe",
@@ -909,7 +910,14 @@
     "stage_pose_rounded": "Enroulée",
     "stage_pose_tilted": "Basculée",
     "view_label": "Vue",
-    "body_label": "Corps"
+    "body_label": "Corps",
+    "view_measure": "Mesures",
+    "topic_measure": "Prendre vos mesures",
+    "cap_measure": "Où placer le ruban : poitrine, taille (partie la plus étroite de l'abdomen) et hanches (partie la plus large des fessiers). Gardez le ruban droit, ajusté et sans comprimer la peau.",
+    "stage_meas_tape": "Position du ruban",
+    "stage_meas_front": "Face",
+    "stage_meas_side": "Profil",
+    "stage_meas_back": "Dos"
   },
   "measure": {
     "title": "Comment prendre vos mesures",
@@ -917,7 +925,12 @@
     "waist_desc": "Mesurez autour de la partie la plus étroite de l'abdomen, sans serrer le mètre ruban.",
     "hip_label": "Hanches",
     "hip_desc": "Mesurez autour de la partie la plus large des hanches et des fessiers.",
-    "tip": "Gardez le mètre ruban droit et parallèle au sol."
+    "tip": "Gardez le mètre ruban droit et parallèle au sol.",
+    "tip_snug": "Le ruban doit être ajusté contre la peau, sans la comprimer.",
+    "tip_exhale": "Mesurez à la fin d'une expiration normale, debout et détendu.",
+    "tip_skin": "Mesurez à même la peau ou sur un vêtement fin pour plus de précision.",
+    "body_male": "Homme",
+    "body_female": "Femme"
   },
   "answers": {
     "back": "Retour aux résultats",

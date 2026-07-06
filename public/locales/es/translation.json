@@ -860,7 +860,8 @@
     "info_summary": "Compuesto a partir de tu informe: lo que funciona es tu señal más fuerte, lo que se desvía la más débil, y esta semana el primer paso de tu plan. Cuando se ejecutó el análisis de foto con IA, sus observaciones también alimentan esta sección.",
     "info_metabolic": "Una estimación de la edad a la que corresponde tu puntuación global de bienestar — puntuar por encima del punto medio se lee como más joven que tu edad real, por debajo como mayor. Tómalo como una brújula motivacional, no como una medición clínica.",
     "to_gain": "Por ganar",
-    "view_answers": "Ver tus respuestas"
+    "view_answers": "Ver tus respuestas",
+    "bf_spectrum_caption_female": "Las figuras muestran el aspecto externo típico a lo largo del rango de grasa corporal femenino: misma altura y peso, distinta composición."
   },
   "atlas": {
     "view_external": "Externo",
@@ -909,7 +910,14 @@
     "stage_pose_rounded": "Redondeada",
     "stage_pose_tilted": "Inclinada",
     "view_label": "Vista",
-    "body_label": "Cuerpo"
+    "body_label": "Cuerpo",
+    "view_measure": "Medición",
+    "topic_measure": "Cómo tomarte las medidas",
+    "cap_measure": "Dónde va la cinta: pecho, cintura (la parte más estrecha del abdomen) y cadera (la parte más ancha de los glúteos). Mantén la cinta recta, ajustada y sin comprimir la piel.",
+    "stage_meas_tape": "Posición de la cinta",
+    "stage_meas_front": "Frente",
+    "stage_meas_side": "Perfil",
+    "stage_meas_back": "Espalda"
   },
   "measure": {
     "title": "Cómo tomarte las medidas",
@@ -917,7 +925,12 @@
     "waist_desc": "Mide alrededor de la parte más estrecha del abdomen, sin apretar la cinta.",
     "hip_label": "Cadera",
     "hip_desc": "Mide alrededor de la parte más ancha de la cadera y los glúteos.",
-    "tip": "Mantén la cinta recta y paralela al suelo."
+    "tip": "Mantén la cinta recta y paralela al suelo.",
+    "tip_snug": "La cinta debe quedar ajustada a la piel, sin comprimirla.",
+    "tip_exhale": "Mide al final de una exhalación normal, de pie y relajado.",
+    "tip_skin": "Mide sobre la piel desnuda o con ropa fina para mayor precisión.",
+    "body_male": "Hombre",
+    "body_female": "Mujer"
   },
   "answers": {
     "back": "Volver a los resultados",
