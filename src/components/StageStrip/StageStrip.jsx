@@ -107,14 +107,19 @@ function StageFigure({ stage, active, onOpen, trueColor }) {
 }
 
 /**
- * Optional sexToggle prop: { value: "male"|"female", onChange } — renders a
- * compact body switcher in the strip header so the spectrum images can be
- * flipped between the male and female sets (preselected from the form).
+ * Optional sexToggle prop: { value: "male"|"female", onChange, imgFor(sex, key),
+ * captionBySex? } — the strip preselects the set matching `value`, and the
+ * enlarged (lightbox) view gets a body switcher that flips the whole gallery
+ * between the male and female sets. The card itself stays uncluttered.
  */
 export default function StageStrip({ label, stages, activeKey, caption, trueColor = false, sexToggle = null }) {
   const { t } = useTranslation();
   const { open } = useLightbox();
 
+  const itemsFor = (sex) => stages.filter((s) => s.img).map((s) => ({
+    src: sexToggle?.imgFor ? sexToggle.imgFor(sex, s.key) : s.img,
+    label: s.label, sub: s.sub, active: s.key === activeKey,
+  }));
   const galleryItems = stages.filter((s) => s.img).map((s) => ({
     src: s.img, label: s.label, sub: s.sub, active: s.key === activeKey,
   }));
@@ -131,36 +136,23 @@ export default function StageStrip({ label, stages, activeKey, caption, trueColo
         : [],
       items: galleryItems,
       index: Math.max(0, idx),
+      sexToggle: sexToggle
+        ? {
+            value: sexToggle.value === "female" ? "female" : "male",
+            onChange: sexToggle.onChange,
+            itemsBySex: { male: itemsFor("male"), female: itemsFor("female") },
+            captionBySex: sexToggle.captionBySex || null,
+          }
+        : null,
     });
   };
 
   return (
     <div className="mt-7 pt-6" style={{ borderTop: "1px dashed var(--border-hex, #E4D9C6)" }}>
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+      <div className="flex items-center justify-between mb-4">
         <span className="text-[10px] font-bold uppercase tracking-[0.16em]" style={{ color: "var(--muted-fg, #6B5B4B)" }}>
           {label ?? t("rd.spectrum", "The spectrum")}
         </span>
-        {sexToggle && (
-          <span className="flex gap-0.5 rounded-full p-0.5" style={{ background: "rgba(47,47,43,0.05)", border: "1px solid var(--border-hex, #E4D9C6)" }}>
-            {[
-              { id: "male", label: t("rd.male", "Male") },
-              { id: "female", label: t("rd.female", "Female") },
-            ].map((opt) => (
-              <button
-                key={opt.id}
-                type="button"
-                onClick={() => sexToggle.onChange(opt.id)}
-                className="rounded-full px-2.5 py-[3px] text-[10px] font-semibold transition-all"
-                style={{
-                  background: sexToggle.value === opt.id ? "var(--primary-hex, #9B8573)" : "transparent",
-                  color: sexToggle.value === opt.id ? "white" : "var(--muted-fg, #6B5B4B)",
-                }}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </span>
-        )}
         {hasGallery ? (
           <button
             onClick={() => openAt(activeStage || stages.find((s) => s.img))}

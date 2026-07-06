@@ -14,6 +14,12 @@ import { useTranslation } from "react-i18next";
  *   indicators?: [{ label, value }],      // extra read-outs (side panel)
  *   items: [{ src, label?, sub?, active?, badge? }],
  *   index?: number,                       // starting item
+ *   sexToggle?: {                         // body switcher inside the viewer
+ *     value: "male" | "female",           //   preselected set
+ *     onChange?: (sex) => void,           //   keeps the page behind in sync
+ *     itemsBySex: { male: [...], female: [...] },
+ *     captionBySex?: { male, female },    //   optional caption swap
+ *   },
  * }
  */
 const LightboxCtx = createContext(null);
@@ -42,6 +48,21 @@ export function LightboxProvider({ children }) {
     setState((s) => (s ? { ...s, index: (s.index + delta + s.items.length) % s.items.length } : s));
   }, []);
   const goTo = useCallback((i) => setState((s) => (s ? { ...s, index: i } : s)), []);
+  // Swap the whole gallery to the other body's image set. The caller keeps
+  // the page behind in sync via sexToggle.onChange (fired from the button).
+  const setSex = useCallback((sex) => {
+    setState((s) => {
+      if (!s?.sexToggle?.itemsBySex?.[sex] || s.sexToggle.value === sex) return s;
+      const items = s.sexToggle.itemsBySex[sex];
+      return {
+        ...s,
+        items,
+        index: Math.min(s.index, items.length - 1),
+        caption: s.sexToggle.captionBySex?.[sex] ?? s.caption,
+        sexToggle: { ...s.sexToggle, value: sex },
+      };
+    });
+  }, []);
 
   useEffect(() => {
     if (!state) return;
@@ -157,6 +178,35 @@ export function LightboxProvider({ children }) {
               </div>
             )}
           </div>
+
+          {/* Body switcher — flips the whole gallery between the male and
+              female sets; the strips on the page behind follow along. */}
+          {state.sexToggle && (
+            <div className="flex justify-center px-5 pt-3" onClick={(e) => e.stopPropagation()}>
+              <div className="flex gap-1 rounded-full p-1" style={{ background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.14)" }}>
+                {[
+                  { id: "male", label: t("rd.male", "Male") },
+                  { id: "female", label: t("rd.female", "Female") },
+                ].map((opt) => {
+                  const active = state.sexToggle.value === opt.id;
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => { if (!active) { state.sexToggle.onChange?.(opt.id); setSex(opt.id); } }}
+                      className="rounded-full px-4 py-1.5 text-[12px] font-semibold transition-all"
+                      style={{
+                        background: active ? "#C7A977" : "transparent",
+                        color: active ? "#2F2F2B" : "rgba(255,255,255,0.75)",
+                      }}
+                    >
+                      {opt.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Thumbnail strip (gallery) */}
           {multi && (

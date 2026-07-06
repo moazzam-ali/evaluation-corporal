@@ -140,14 +140,20 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   const d = data;
   const locText = useLocText(t);
 
-  // Spectrum figures follow the sex selected on the form; a switcher on each
-  // strip lets the coach flip between the male and female image sets.
+  // Spectrum figures follow the sex selected on the form; the switcher lives
+  // in the enlarged (lightbox) view so the cards stay clean on mobile.
   const [stageSex, setStageSex] = useState(d.sex === "female" ? "female" : "male");
-  const sexToggle = { value: stageSex, onChange: setStageSex };
   // Male set predates the atlas and lives under /stages; the female set was
   // added with the atlas under /atlas/external-female-*.
-  const stageImg = (metric, key) =>
-    stageSex === "female" ? `/atlas/external-female-${metric}-${key}.webp` : `/stages/${metric}-${key}.webp`;
+  const stageImgFor = (sex, metric, key) =>
+    sex === "female" ? `/atlas/external-female-${metric}-${key}.webp` : `/stages/${metric}-${key}.webp`;
+  const stageImg = (metric, key) => stageImgFor(stageSex, metric, key);
+  const sexToggleFor = (metric, captionBySex = null) => ({
+    value: stageSex,
+    onChange: setStageSex,
+    imgFor: (sex, key) => stageImgFor(sex, metric, key),
+    captionBySex,
+  });
 
   // Dynamic, localized band captions computed from the user's real values —
   // replaces the old static copy that claimed "0.9 above the ceiling" for everyone.
@@ -525,12 +531,15 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               <Card>
                 <CardHeader title={t("rd.bmi_title", "Body Mass Index")} action={t("rd.bmi_action", "WHO reference")} info={INFO.bmi} />
                 <LinearRange value={d.bmi} min={15} max={40} segments={bmiSegments} unit={t("rd.unit_bmi", "kg / m²")} caption={bmiCaption} />
-                <StageStrip stages={bmiStages} activeKey={PICK.bmi(d.bmi)} sexToggle={sexToggle} caption={t("rd.bmi_spectrum_caption", "BMI maps weight to height only — it can't see muscle. The silhouettes show the broad external shape each band tends to produce.")} />
+                <StageStrip stages={bmiStages} activeKey={PICK.bmi(d.bmi)} sexToggle={sexToggleFor("bmi")} caption={t("rd.bmi_spectrum_caption", "BMI maps weight to height only — it can't see muscle. The silhouettes show the broad external shape each band tends to produce.")} />
               </Card>
               <Card>
                 <CardHeader title={t("rd.bf_title", "Body Fat")} action={t("rd.bf_action_dynamic", "{{sex}} · {{age}} years", { sex: sexLabel, age: d.user.age })} info={INFO.bf} />
                 <LinearRange value={d.bodyFat} min={5} max={32} segments={bfSegments} unit={t("rd.unit_percent", "percent")} caption={bfCaption} />
-                <StageStrip stages={bfStages} activeKey={PICK.bodyFat(d.bodyFat)} sexToggle={sexToggle} caption={stageSex === "female"
+                <StageStrip stages={bfStages} activeKey={PICK.bodyFat(d.bodyFat)} sexToggle={sexToggleFor("bodyfat", {
+                  male: t("rd.bf_spectrum_caption", "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range."),
+                  female: t("rd.bf_spectrum_caption_female", "The figures show the typical external look across the female body-fat range — same height and weight, different composition."),
+                })} caption={stageSex === "female"
                   ? t("rd.bf_spectrum_caption_female", "The figures show the typical external look across the female body-fat range — same height and weight, different composition.")
                   : t("rd.bf_spectrum_caption", "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range.")} />
               </Card>
@@ -541,7 +550,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
               <Card>
                 <CardHeader title={t("rd.whr_title", "Waist-to-Hip Ratio")} action={t("rd.whr_action", "Cardiometabolic risk")} info={INFO.whr} />
                 <LinearRange value={d.whr} min={0.75} max={1.05} segments={whrSegments} unit={t("rd.unit_ratio", "ratio")} decimals={2} caption={whrCaption} />
-                <StageStrip stages={whrStages} activeKey={PICK.whr(d.whr)} sexToggle={sexToggle} caption={t("rd.whr_spectrum_caption", "Waist-to-hip ratio reflects where fat sits. Lower ratios carry less cardiometabolic risk; the shapes show low, moderate and high distribution.")} />
+                <StageStrip stages={whrStages} activeKey={PICK.whr(d.whr)} sexToggle={sexToggleFor("whr")} caption={t("rd.whr_spectrum_caption", "Waist-to-hip ratio reflects where fat sits. Lower ratios carry less cardiometabolic risk; the shapes show low, moderate and high distribution.")} />
               </Card>
               <Card>
                 <CardHeader title={t("rd.weight_title", "Weight Analysis")} action={t("rd.weight_action", "Lorentz healthy band")} info={INFO.weight} />
