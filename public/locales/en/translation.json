@@ -381,7 +381,10 @@
       "description": "Review your information and make sure everything is correct.",
       "note": "Before submitting, ensure that all the data you have provided is accurate.",
       "tip": "Check your email ({{email}}) and phone number ({{phone}}) for possible errors.",
-      "open_results": "Hello {{customerName}},\n\nThank you for completing the questionnaire and trusting us with your body assessment!\n\nVery soon, the person who invited you to the study will contact you to share the report results.\n\nCompleting this information is the first step. We will be in touch with you soon!\n\nKind regards."
+      "open_results": "Hello {{customerName}},\n\nThank you for completing the questionnaire and trusting us with your body assessment!\n\nVery soon, the person who invited you to the study will contact you to share the report results.\n\nCompleting this information is the first step. We will be in touch with you soon!\n\nKind regards.",
+      "photo_alt": "Your body photo",
+      "photo_attached": "Body photo attached — it will be analyzed together with your answers.",
+      "photo_missing": "No body photo added. You can go back one step to add one, or send the form without it."
     },
     "analyze_error": "Could not analyze your photo. We saved your form — your coach will follow up.",
     "photo_eyebrow": "Final step · optional",
@@ -408,7 +411,15 @@
     "tip2": "Remove glasses and hats",
     "tip3": "Face the camera directly",
     "tip4": "Full face must be visible",
-    "analyzing_subtitle_simple": "Hang tight — this takes about 30 seconds."
+    "analyzing_subtitle_simple": "Hang tight — this takes about 30 seconds.",
+    "photo": {
+      "intro": "Optional — add one full-body photo and we'll combine it with your numbers for a deeper read on posture, composition and where to focus. No photo? Just continue to the next step.",
+      "attached": "Photo added — it will be analyzed when you send the form.",
+      "nav": "Body photo",
+      "display_title": "Add a",
+      "display_title_em": "body photo",
+      "display_sub": "Optional — one full-body photo gives the AI a deeper read on posture and composition."
+    }
   },
   "navigation": {
     "next": "Next",
@@ -843,7 +854,7 @@
     "demo_posture_note": "Shoulders roll slightly forward of the hip line; the spine stacks well otherwise.",
     "demo_composition_note": "Mass is carried mainly around the midsection, with proportionate limbs.",
     "demo_photo_note": "Good lighting and framing — full body visible, clothing slightly loose around the waist.",
-    "info_scan": "The AI describes what is visible in your photo — posture, where mass sits, muscle tone. It complements the numbers below, which are calculated from your measurements, not from the image. Read confidence reflects how well the photo (framing, light, clothing) supports the read.",
+    "info_scan": "The AI coach describes what is visible in your photo — posture, muscle tone, strong points and what to work on. It complements the numbers below, which are calculated from your measurements, not from the image. Estimates from a photo are orientative, never medical.",
     "info_bmi": "BMI is your weight in kilograms divided by your height in meters squared, read against the WHO reference bands. It's a quick screening number — it can't tell muscle from fat, which is why we read it alongside body fat and waist-to-hip ratio.",
     "info_bf": "Estimated with the Deurenberg formula from your BMI, age and sex — an estimate, not a direct measurement. Healthy bands shift with age and differ between men and women. The trend across assessments matters more than any single reading.",
     "info_whr": "Your waist circumference divided by your hip circumference, from the measurements you entered. It shows where fat sits: fat stored around the waist carries more cardiometabolic risk than fat on the hips, and thresholds differ by sex.",
@@ -861,7 +872,13 @@
     "info_aria": "What does this mean?",
     "to_gain": "To gain",
     "view_answers": "See your answers",
-    "bf_spectrum_caption_female": "The figures show the typical external look across the female body-fat range — same height and weight, different composition."
+    "bf_spectrum_caption_female": "The figures show the typical external look across the female body-fat range — same height and weight, different composition.",
+    "fitness_label": "Fitness level",
+    "visual_age_label": "Apparent age",
+    "analysis_label": "Coach's read",
+    "wellness_label": "Overall wellness",
+    "progress_label": "Progress",
+    "highlights_label": "What stands out"
   },
   "atlas": {
     "view_external": "External",

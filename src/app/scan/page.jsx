@@ -10,7 +10,6 @@ import toast from "react-hot-toast";
 import { Check } from "lucide-react";
 
 import AnimatedLogo from "@/components/AnimatedLogo/AnimatedLogo";
-import BodyCamera from "@/components/BodyCamera/BodyCamera";
 import { fullScanSchema, STEP_FIELD_NAMES, DEFAULT_VALUES } from "@/lib/schemas/scan-schemas";
 
 import Step1PersonalInfo from "@/components/Steps/Step1PersonalInfo";
@@ -19,12 +18,13 @@ import Step3DietNutrition from "@/components/Steps/Step3DietNutrition";
 import Step4ActivityHydration from "@/components/Steps/Step4ActivityHydration";
 import Step5HealthConditions from "@/components/Steps/Step5HealthConditions";
 import Step6GoalsCare from "@/components/Steps/Step6GoalsCare";
+import Step7BodyPhoto from "@/components/Steps/Step7BodyPhoto";
 import Step7FinalSubmission from "@/components/Steps/Step7FinalSubmission";
 
 const STEP_COMPONENTS = [
   Step1PersonalInfo, Step2PhysicalInfo, Step3DietNutrition,
   Step4ActivityHydration, Step5HealthConditions, Step6GoalsCare,
-  Step7FinalSubmission,
+  Step7BodyPhoto, Step7FinalSubmission,
 ];
 
 const TOTAL_STEPS = STEP_COMPONENTS.length;
@@ -36,6 +36,7 @@ const STEP_META = [
   { key: "step4", label: "Activity", title: "Activity &", titleEm: "hydration", sub: "How you move and how much you drink — two big levers." },
   { key: "step5", label: "Health", title: "Health", titleEm: "conditions", sub: "Select anything that applies — we use this to tailor product recommendations." },
   { key: "step6", label: "Goals", title: "Goals &", titleEm: "care", sub: "What you're aiming for, and what you're already doing." },
+  { key: "photo", label: "Body photo", title: "Add a", titleEm: "body photo", sub: "Optional — one full-body photo gives the AI a deeper read on posture and composition." },
   { key: "step7", label: "Review", title: "Ready to", titleEm: "send?", sub: "Review your information and make sure everything is correct." },
 ];
 
@@ -58,20 +59,17 @@ function ScanPageInner() {
 
   const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);    // premium analyzing overlay — body photo analysis only
-  const [isSavingForm, setIsSavingForm] = useState(false);    // lightweight pending state for the form-submit POST
+  const [isSubmitting, setIsSubmitting] = useState(false);    // analyzing overlay — covers form save + analysis
   const [submitComplete, setSubmitComplete] = useState(false);
   const [customerName, setCustomerName] = useState("");
   const [analysisProgress, setAnalysisProgress] = useState(0);
   const [activeAnalysisStep, setActiveAnalysisStep] = useState(0);
   const progressRef = useRef(null);
 
-  // Body photo capture flow (post-form).
-  const [photoPhase, setPhotoPhase] = useState(false);     // true once form is saved, before photo decision
+  // Body photo — captured on the photo step (before review), kept locally in
+  // state until the review step sends everything in one go.
   const [photoTab, setPhotoTab] = useState("camera");
   const [bodyImage, setBodyImage] = useState(null);
-  const [savedFormId, setSavedFormId] = useState(null);
-  const [savedFormData, setSavedFormData] = useState(null);
 
   const cleanID = (s) => { const n = Number(s); return s && !isNaN(n) ? String(Math.trunc(n)) : s; };
   const chatIDs = searchParams.get("n")?.split(",").map((s) => cleanID(s.trim())).filter(Boolean) || [];
@@ -166,55 +164,18 @@ function ScanPageInner() {
     return () => timers.forEach(clearTimeout);
   };
 
-  const onSubmit = async (formData) => {
-    // Form-save POST: no premium analyzing overlay here — that's reserved
-    // for the body-photo analysis call after the upload module. Just disable
-    // the button with a lightweight pending state and transition straight to
-    // the photo phase on success.
-    setIsSavingForm(true);
-    setCustomerName(formData.name);
-    setSavedFormData(formData);
-
-    try {
-      const res = await fetch("/api/forms", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          formData,
-          chatIDs,
-          botIndex,
-          accountIDs,
-          contactIDs,
-          lng: lang,
-        }),
-      });
-
-      // Guard the parse: a timed-out/proxied response returns non-JSON (HTML),
-      // and an unguarded res.json() throw here is what "broke" submissions.
-      const result = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(result.error || `Submission failed (${res.status})`);
-
-      setSavedFormId(result.id);
-      setIsSavingForm(false);
-      setPhotoPhase(true);
-    } catch (error) {
-      setIsSavingForm(false);
-      toast.error(error.message || t("common.error"));
-    }
-  };
-
   // Run the body analysis. This is what notifies the coach (Telegram, with the
   // results link) and indexes the lead (Elastic) — so it must run whether or not
   // a photo is added. The CRM/chat params are forwarded so the coach is reached.
-  const runBodyAnalysis = async (image) => {
+  const runBodyAnalysis = async ({ formData, image, formId }) => {
     const res = await fetch("/api/analyze-body", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        formData: savedFormData,
+        formData,
         image,
         language: lang,
-        formId: savedFormId,
+        formId,
         chatIDs,
         botIndex,
         accountIDs,
@@ -237,51 +198,57 @@ function ScanPageInner() {
       router.push(`/results/${result.id}?lang=${lang}`);
     } else {
       setIsSubmitting(false);
-      setPhotoPhase(false);
       setSubmitComplete(true);
     }
   };
 
-  // "Analyze my photo" — runs analysis with the captured body photo.
-  const onAnalyzeBody = async () => {
-    if (!savedFormData) return;
+  // Single submit from the review step: save the form, then run the analysis
+  // with the photo captured on the previous step (or without one). The
+  // analyzing overlay covers the whole backend flow.
+  const onSubmit = async (formData) => {
+    setCustomerName(formData.name);
     setIsSubmitting(true);
     const cancel = runAnalyzingAnimation([400, 1600, 3200, 5000, 7000]);
+
+    // 1. Store the intake form. If this fails the submission is NOT sent —
+    //    surface the error and stay on the review step so nothing is lost.
+    let formId = null;
     try {
-      const result = await runBodyAnalysis(bodyImage);
+      const res = await fetch("/api/forms", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formData,
+          chatIDs,
+          botIndex,
+          accountIDs,
+          contactIDs,
+          lng: lang,
+        }),
+      });
+      // Guard the parse: a timed-out/proxied response returns non-JSON (HTML),
+      // and an unguarded res.json() throw here is what "broke" submissions.
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(result.error || `Submission failed (${res.status})`);
+      formId = result.id;
+    } catch (error) {
+      cancel();
+      setIsSubmitting(false);
+      toast.error(error.message || t("common.error"));
+      return;
+    }
+
+    // 2. Analysis (photo optional). The form is already stored, so a failure
+    //    here still ends on the completion screen — the coach follows up.
+    try {
+      const result = await runBodyAnalysis({ formData, image: bodyImage, formId });
       cancel();
       await finishAfterAnalysis(result);
     } catch (error) {
       cancel();
       setIsSubmitting(false);
       toast.error(error.message || t("scan.analyze_error", "Could not analyze your photo. We saved your form — your coach will follow up."));
-      // Submission is not lost — the form is stored and the coach is still
-      // contacted by the server when reachable. Show the completion screen.
-      setPhotoPhase(false);
       setSubmitComplete(true);
-    }
-  };
-
-  // "Skip — wait for my coach" — still runs analysis (no photo) so the results
-  // exist and the coach is notified with a working report link.
-  const onSkipPhoto = async () => {
-    if (!savedFormData) {
-      setPhotoPhase(false);
-      setSubmitComplete(true);
-      return;
-    }
-    setPhotoPhase(false);
-    setIsSubmitting(true);
-    const cancel = runAnalyzingAnimation([400, 1600, 3200, 5000, 7000]);
-    try {
-      const result = await runBodyAnalysis(null);
-      cancel();
-      await finishAfterAnalysis(result);
-    } catch (err) {
-      cancel();
-      setIsSubmitting(false);
-      setSubmitComplete(true);
-      toast.error(err.message || t("common.error"));
     }
   };
 
@@ -301,80 +268,6 @@ function ScanPageInner() {
   // Component lives at the bottom of this file.
   if (isSubmitting) {
     return <AnalyzingOverlay t={t} onCancel={() => { progressRef.current?.forEach(clearTimeout); setIsSubmitting(false); }} />;
-  }
-
-  // Post-form body photo screen
-  if (photoPhase) {
-    return (
-      <div className="mx-auto" style={{ maxWidth: 920, padding: "48px 24px 96px" }}>
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div
-            className="inline-flex items-center gap-2.5 mb-3"
-            style={{ fontFamily: "var(--font-inter)", fontSize: "11px", letterSpacing: "0.16em", textTransform: "uppercase", color: "#6B5B4B" }}
-          >
-            <span style={{ width: "24px", height: "1px", background: "#9B8573" }} />
-            {t("scan.photo_eyebrow", "Final step · optional")}
-          </div>
-          <h1 style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "clamp(32px,4vw,46px)", color: "#2F2F2B", margin: 0, lineHeight: 1.1, letterSpacing: "-0.01em" }}>
-            {t("scan.photo_title_1", "Add a body photo for")}{" "}
-            <em style={{ fontStyle: "italic", color: "#9B8573", fontWeight: 400 }}>
-              {t("scan.photo_title_2", "AI-powered insights.")}
-            </em>
-          </h1>
-          <p style={{ marginTop: 12, fontSize: 14.5, color: "#6B5B4B", lineHeight: 1.6, maxWidth: 60 + "ch" }}>
-            {t(
-              "scan.photo_subtitle",
-              "Your form is saved. Add a full-body photo and we'll combine it with your numbers for a deeper read on posture, composition, and where to focus. Skip if you'd rather wait for your coach."
-            )}
-          </p>
-
-          <div className="mt-10 rounded-3xl border bg-white p-6 sm:p-8" style={{ borderColor: "rgba(47,47,43,0.10)" }}>
-            <BodyCamera
-              onImageCapture={setBodyImage}
-              activeTab={photoTab}
-              setActiveTab={setPhotoTab}
-            />
-          </div>
-
-          <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
-            <button
-              type="button"
-              onClick={onSkipPhoto}
-              className="inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] px-5 py-3 text-sm font-medium transition-colors"
-              style={{
-                borderColor: "rgba(47,47,43,0.16)",
-                background: "transparent",
-                color: "#2F2F2B",
-                fontFamily: "var(--font-inter)",
-              }}
-            >
-              {t("scan.photo_skip", "Skip — wait for my coach")}
-            </button>
-            <button
-              type="button"
-              onClick={onAnalyzeBody}
-              disabled={!bodyImage}
-              className="inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all disabled:cursor-not-allowed"
-              style={{
-                background: bodyImage ? "#9B8573" : "#CDBFAE",
-                color: "white",
-                opacity: bodyImage ? 1 : 0.65,
-                fontFamily: "var(--font-inter)",
-              }}
-            >
-              {t("scan.photo_analyze", "Analyze my photo")}
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M13 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </motion.div>
-      </div>
-    );
   }
 
   // Submission complete
@@ -572,7 +465,7 @@ function ScanPageInner() {
                 exit="exit"
                 transition={{ duration: 0.25, ease: "easeInOut" }}
               >
-                <StepComponent form={form} t={t} />
+                <StepComponent form={form} t={t} bodyImage={bodyImage} onImageCapture={setBodyImage} photoTab={photoTab} setPhotoTab={setPhotoTab} />
               </motion.div>
             </AnimatePresence>
           </form>
@@ -620,19 +513,19 @@ function ScanPageInner() {
             <button
               key="submit-btn"
               type="button"
-              disabled={isSavingForm}
+              disabled={isSubmitting}
               onClick={handleSubmit(onSubmit)}
               className="inline-flex items-center justify-center gap-2"
               style={{
                 fontFamily: "var(--font-inter)", fontSize: "13px", fontWeight: 500,
                 padding: "11px 20px", borderRadius: "999px", whiteSpace: "nowrap",
                 border: 0, background: "#9B8573", color: "white",
-                cursor: isSavingForm ? "not-allowed" : "pointer",
-                opacity: isSavingForm ? 0.7 : 1,
+                cursor: isSubmitting ? "not-allowed" : "pointer",
+                opacity: isSubmitting ? 0.7 : 1,
                 transition: "transform 180ms, box-shadow 320ms, background 180ms, opacity 180ms",
               }}
             >
-              {isSavingForm ? (
+              {isSubmitting ? (
                 <>
                   <span className="inline-block w-[14px] h-[14px] rounded-full border-2 border-white border-t-transparent animate-spin" />
                   {t("navigation.sending", "Sending…")}

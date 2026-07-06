@@ -381,7 +381,10 @@
       "description": "Vérifiez vos informations et assurez-vous que tout est correct.",
       "note": "Avant d'envoyer, assurez-vous que toutes les données fournies sont exactes.",
       "tip": "Vérifiez votre e-mail ({{email}}) et votre numéro de téléphone ({{phone}}) pour d'éventuelles erreurs.",
-      "open_results": "Bonjour {{customerName}},\n\nMerci d'avoir complété le questionnaire et de nous faire confiance pour votre évaluation corporelle !\n\nTrès bientôt, la personne qui vous a invité à l'étude vous contactera pour partager les résultats du rapport.\n\nRemplir ces informations est la première étape. Nous serons en contact avec vous bientôt !\n\nCordialement."
+      "open_results": "Bonjour {{customerName}},\n\nMerci d'avoir complété le questionnaire et de nous faire confiance pour votre évaluation corporelle !\n\nTrès bientôt, la personne qui vous a invité à l'étude vous contactera pour partager les résultats du rapport.\n\nRemplir ces informations est la première étape. Nous serons en contact avec vous bientôt !\n\nCordialement.",
+      "photo_alt": "Votre photo du corps",
+      "photo_attached": "Photo du corps jointe — elle sera analysée avec vos réponses.",
+      "photo_missing": "Aucune photo du corps ajoutée. Vous pouvez revenir en arrière pour en ajouter une, ou envoyer le formulaire sans."
     },
     "analyze_error": "Impossible d'analyser votre photo. Votre formulaire est enregistré – votre coach reviendra vers vous.",
     "photo_eyebrow": "Dernière étape · facultative",
@@ -408,7 +411,15 @@
     "tip2": "Retirez lunettes et chapeaux",
     "tip3": "Faites face à la caméra",
     "tip4": "Tout le visage doit être visible",
-    "analyzing_subtitle_simple": "Patientez — cela prend environ 30 secondes."
+    "analyzing_subtitle_simple": "Patientez — cela prend environ 30 secondes.",
+    "photo": {
+      "nav": "Photo du corps",
+      "display_title": "Ajoutez une",
+      "display_title_em": "photo du corps",
+      "display_sub": "Facultatif — une photo en pied donne à l'IA une lecture plus fine de votre posture et de votre composition.",
+      "intro": "Facultatif — ajoutez une photo en pied et nous la combinerons avec vos données pour une lecture plus fine de la posture, de la composition et des priorités. Pas de photo ? Passez à l'étape suivante.",
+      "attached": "Photo ajoutée — elle sera analysée à l'envoi du formulaire."
+    }
   },
   "navigation": {
     "next": "Suivant",
@@ -845,7 +856,7 @@
     "demo_photo_note": "Bon éclairage et bon cadrage — corps entier visible, vêtements un peu amples à la taille.",
     "info_aria": "Qu'est-ce que cela signifie ?",
     "risks_title": "Signaux",
-    "info_scan": "L'IA décrit ce qui est visible sur votre photo — posture, répartition de la masse, tonus musculaire. Elle complète les chiffres ci-dessous, calculés à partir de vos mesures et non de l'image. La fiabilité de la lecture reflète la qualité de la photo (cadrage, lumière, vêtements).",
+    "info_scan": "Le coach IA décrit ce qui est visible sur votre photo : posture, tonus musculaire, points forts et axes de travail. Il complète les chiffres ci-dessous, calculés à partir de vos mesures, pas de l'image. Les estimations issues d'une photo sont indicatives, jamais médicales.",
     "info_bmi": "L'IMC est votre poids en kilos divisé par votre taille en mètres au carré, lu sur les bandes de référence de l'OMS. C'est un chiffre de dépistage rapide — il ne distingue pas le muscle de la graisse, d'où sa lecture conjointe avec la masse grasse et le rapport taille-hanches.",
     "info_bf": "Estimée avec la formule de Deurenberg à partir de votre IMC, âge et sexe — une estimation, pas une mesure directe. Les bandes saines évoluent avec l'âge et diffèrent entre hommes et femmes. La tendance d'une évaluation à l'autre compte plus qu'une lecture isolée.",
     "info_whr": "Votre tour de taille divisé par votre tour de hanches, à partir des mesures saisies. Il montre où se loge la graisse : la graisse abdominale porte plus de risque cardiométabolique que celle des hanches, et les seuils diffèrent selon le sexe.",
@@ -861,7 +872,13 @@
     "info_metabolic": "Une estimation de l'âge auquel correspond votre score global de bien-être — au-dessus du point médian, il se lit plus jeune que votre âge réel ; en dessous, plus âgé. Voyez-le comme une boussole de motivation, pas comme une mesure clinique.",
     "to_gain": "À prendre",
     "view_answers": "Voir vos réponses",
-    "bf_spectrum_caption_female": "Les silhouettes montrent l'apparence externe typique sur la plage de masse grasse féminine — même taille et même poids, composition différente."
+    "bf_spectrum_caption_female": "Les silhouettes montrent l'apparence externe typique sur la plage de masse grasse féminine — même taille et même poids, composition différente.",
+    "fitness_label": "Niveau de forme",
+    "visual_age_label": "Âge apparent",
+    "analysis_label": "Lecture du coach",
+    "wellness_label": "Bien-être général",
+    "progress_label": "Progrès",
+    "highlights_label": "Ce qui ressort"
   },
   "atlas": {
     "view_external": "Externe",

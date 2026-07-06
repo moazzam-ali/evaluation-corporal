@@ -381,7 +381,10 @@
       "description": "Controlla le tue informazioni e assicurati che tutto sia corretto.",
       "note": "Prima di inviare, assicurati che tutti i dati forniti siano accurati.",
       "tip": "Verifica la tua e-mail ({{email}}) e il numero di telefono ({{phone}}) per possibili errori.",
-      "open_results": "Ciao {{customerName}},\n\nGrazie per aver completato il questionario e averci affidato la tua valutazione corporea!\n\nMolto presto, la persona che ti ha invitato allo studio ti contatterà per condividere i risultati del report.\n\nCompilare queste informazioni è il primo passo. Saremo in contatto con te presto!\n\nCordiali saluti."
+      "open_results": "Ciao {{customerName}},\n\nGrazie per aver completato il questionario e averci affidato la tua valutazione corporea!\n\nMolto presto, la persona che ti ha invitato allo studio ti contatterà per condividere i risultati del report.\n\nCompilare queste informazioni è il primo passo. Saremo in contatto con te presto!\n\nCordiali saluti.",
+      "photo_alt": "La tua foto del corpo",
+      "photo_attached": "Foto del corpo allegata — sarà analizzata insieme alle tue risposte.",
+      "photo_missing": "Nessuna foto del corpo aggiunta. Puoi tornare indietro di uno step per aggiungerla o inviare il modulo senza."
     },
     "analyze_error": "Non è stato possibile analizzare la tua foto. Abbiamo salvato il modulo: il tuo coach ti ricontatterà.",
     "photo_eyebrow": "Ultimo passaggio · facoltativo",
@@ -408,7 +411,15 @@
     "tip2": "Togli occhiali e cappelli",
     "tip3": "Guarda dritto in camera",
     "tip4": "Il viso deve essere tutto visibile",
-    "analyzing_subtitle_simple": "Un attimo — ci vogliono circa 30 secondi."
+    "analyzing_subtitle_simple": "Un attimo — ci vogliono circa 30 secondi.",
+    "photo": {
+      "nav": "Foto del corpo",
+      "display_title": "Aggiungi una",
+      "display_title_em": "foto del corpo",
+      "display_sub": "Facoltativo — una foto a figura intera dà all'IA una lettura più profonda di postura e composizione.",
+      "intro": "Facoltativo — aggiungi una foto a figura intera e la combineremo con i tuoi dati per una lettura più profonda di postura, composizione e priorità. Niente foto? Passa allo step successivo.",
+      "attached": "Foto aggiunta — sarà analizzata quando invii il modulo."
+    }
   },
   "navigation": {
     "next": "Avanti",
@@ -845,7 +856,7 @@
     "demo_photo_note": "Buona illuminazione e inquadratura — corpo intero visibile, abiti un po' larghi in vita.",
     "info_aria": "Cosa significa?",
     "risks_title": "Segnali",
-    "info_scan": "L'IA descrive ciò che è visibile nella tua foto — postura, dove si concentra la massa, tono muscolare. Completa i numeri qui sotto, calcolati dalle tue misure, non dall'immagine. L'affidabilità della lettura riflette quanto la foto (inquadratura, luce, abiti) la supporta.",
+    "info_scan": "Il coach IA descrive ciò che è visibile nella tua foto: postura, tono muscolare, punti di forza e cosa allenare. Integra i numeri qui sotto, calcolati dalle tue misure, non dall'immagine. Le stime da una foto sono orientative, mai mediche.",
     "info_bmi": "L'IMC è il tuo peso in chili diviso per l'altezza in metri al quadrato, letto sulle bande di riferimento dell'OMS. È un numero di screening rapido — non distingue il muscolo dal grasso, per questo lo leggiamo insieme al grasso corporeo e al rapporto vita-fianchi.",
     "info_bf": "Stimato con la formula di Deurenberg da IMC, età e sesso — una stima, non una misurazione diretta. Le fasce sane cambiano con l'età e differiscono tra uomini e donne. Il trend tra le valutazioni conta più di una singola lettura.",
     "info_whr": "La circonferenza vita divisa per quella dei fianchi, dalle misure che hai inserito. Mostra dove si deposita il grasso: quello addominale comporta più rischio cardiometabolico di quello sui fianchi, e le soglie differiscono per sesso.",
@@ -861,7 +872,13 @@
     "info_metabolic": "Una stima dell'età a cui corrisponde il tuo punteggio complessivo di benessere — sopra il punto medio si legge più giovane della tua età anagrafica, sotto più vecchio. Prendila come bussola motivazionale, non come misurazione clinica.",
     "to_gain": "Da guadagnare",
     "view_answers": "Vedi le tue risposte",
-    "bf_spectrum_caption_female": "Le figure mostrano l'aspetto esterno tipico lungo l'intervallo di grasso corporeo femminile — stessa altezza e stesso peso, composizione diversa."
+    "bf_spectrum_caption_female": "Le figure mostrano l'aspetto esterno tipico lungo l'intervallo di grasso corporeo femminile — stessa altezza e stesso peso, composizione diversa.",
+    "fitness_label": "Livello di forma",
+    "visual_age_label": "Età apparente",
+    "analysis_label": "Lettura del coach",
+    "wellness_label": "Benessere generale",
+    "progress_label": "Progressi",
+    "highlights_label": "Cosa spicca"
   },
   "atlas": {
     "view_external": "Esterno",

@@ -1,106 +1,83 @@
-// Body-composition vision prompt — receives a full-body photo and the
-// already-computed formula metrics, returns qualitative AI insights.
+// Body-photo analysis prompt (Hatipikal spec) — coach-voice, honest and
+// direct, single JSON response. The prompts are Spanish verbatim from the
+// spec; when the report language isn't Spanish, only the two output-language
+// mentions are swapped so the stored texts match the report language.
 
 const LANG_NAMES = {
   en: "English", es: "Spanish", fr: "French", de: "German",
   it: "Italian", tr: "Turkish", pt: "Portuguese", in: "Hindi",
 };
 
-// Fixed vocabularies for the structured photo read. These are machine ids —
-// they stay English in the stored analysis and are translated by the client
-// (rd.* keys), so the scan card follows the UI language like everything else.
-const VISION_ENUMS = {
-  body_type: ["athletic", "balanced", "endomorph", "ectomorph", "mesomorph", "mixed"],
-  fat_distribution: ["android", "gynoid", "mixed", "even"],
-  muscle_tone: ["low", "moderate", "defined", "athletic"],
-  symmetry: ["balanced", "slight_asymmetry", "notable_asymmetry"],
-  posture_flags: [
-    "neutral", "forward_head", "rounded_shoulders", "uneven_shoulders",
-    "anterior_pelvic_tilt", "posterior_pelvic_tilt", "lateral_lean",
-  ],
-  focus_areas: ["core", "upper_body", "lower_body", "posture", "symmetry", "overall_conditioning"],
+// Spanish names of the supported report languages, used inside the prompt.
+const LANG_NAMES_ES = {
+  en: "inglés", es: "español", fr: "francés", de: "alemán",
+  it: "italiano", tr: "turco", pt: "portugués", in: "hindi",
 };
 
+// Form goal ids → the wording the coach prompt expects.
+const GOAL_LABELS_ES = {
+  weight_control: "perder peso/grasa (control de peso)",
+  maintain_care: "mantenimiento y cuidado general",
+  gain_weight: "ganar peso/masa muscular",
+};
+
+/** `system` message — verbatim from the spec. */
+export const PHOTO_COACH_SYSTEM =
+  'Eres el COACH PERSONAL de esta persona: la acompañas a lo largo del tiempo, recuerdas cómo estaba antes y te diriges a ella en segunda persona (tú), de forma cercana, humana y cálida. Celebras de verdad sus logros (bajar de peso, mejorar postura o musculatura) y, cuando algo empeora o cuesta, la animas con cariño y confianza ("tú puedes", "vamos a por ello"), sin culpar. Al mismo tiempo eres HONESTO y DIRECTO: señalas con claridad y respeto lo que conviene corregir o reforzar, sin adular ni regalar el oído. No das diagnósticos médicos ni cifras clínicas, ni mencionas enfermedades. Respondes solo JSON válido.';
+
+/** INTRO — case C (single photo), verbatim. */
+const INTRO_SINGLE =
+  "Analiza esta foto de progreso físico de un cliente de fitness y describe lo que se observa.";
+
+/** Output RULES — verbatim; `{IDIOMA}` is replaced with the report language. */
+const RULES = `Devuelve SOLO un JSON (sin texto fuera del JSON) con estas claves exactas:
+- "analysis": texto en {IDIOMA} HONESTO y DIRECTO (3-5 frases), respetuoso y educado pero SIN adular ni regalar el oído, sobre la composición corporal visible (definición, volumen, postura, equilibrio muscular, zonas fuertes y zonas a trabajar). Reconoce lo que va bien, pero di con CLARIDAD lo que conviene corregir o mejorar. NO des cifras médicas ni porcentaje de grasa exacto (no son fiables en una foto). NO inventes datos. Si apenas hay cambio o hay retroceso, dilo con tacto pero sin ocultarlo.
+- "highlights": array de 2 a 4 cadenas MUY cortas (máx. 5 palabras) con PUNTOS FUERTES o cambios positivos observables, p. ej. "Más definición abdominal", "Postura más erguida". Vacío [] si no aplica.
+- "improve": array de 1 a 4 cadenas cortas, HONESTAS y CONCRETAS, con lo que la persona debería corregir o reforzar a partir de lo que se ve, p. ej. "Corrige hombros adelantados", "Refuerza el tren inferior", "Trabaja la espalda para equilibrar", "Reduce algo de grasa abdominal". Redacción respetuosa y educada pero DIRECTA y accionable, sin adular. NO inventes problemas: si de verdad no hay nada relevante que mejorar, devuelve []. NUNCA menciones enfermedades, dolencias ni nada médico o alarmante.
+- "progress": SOLO si en los Datos se aporta un "Estado anterior" (foto previa). Escribe 2-3 frases como su COACH PERSONAL, en segunda persona (tú), cercano y humano, comparando con ese estado anterior. Si el peso ha BAJADO o se aprecian mejoras (postura, musculatura, definición), FELICÍTALA de corazón y con concreción ("Has bajado X kg, se nota en..."). Si el peso ha SUBIDO o algo no ha mejorado, sé honesto pero ANÍMALA con cariño y confianza ("no pasa nada, vamos a por ello, tú puedes"), nunca culpabilices ni asustes. Suena a una persona que la acompaña, no a un informe. Si NO hay estado anterior, devuelve null y no inventes comparación.
+- "visual_age": edad aparente ESTIMADA como cadena breve (p. ej. "35-40 años") SOLO si en alguna foto se ve la cara con claridad suficiente para estimarla; si no se ve bien la cara, devuelve null.
+- "visual_age_note": frase corta recordando que es una estimación orientativa generada por IA, no la edad real. null si visual_age es null.
+- "wellness": 1-2 frases con una lectura GENERAL de bienestar visible (p. ej. aspecto saludable, vitalidad, postura, piel, signos de hábitos de cuidado). MUY IMPORTANTE: NUNCA diagnostiques, NUNCA menciones enfermedades, dolencias, riesgos ni nada alarmante o que pueda asustar; NO des consejos médicos. Es orientativo, no una valoración médica. null si no puedes decir nada con seguridad.
+- "muscle_tone": cadena MUY breve sobre el tono/definición muscular aparente (p. ej. "Tono medio, definición notable"). null si no se aprecia.
+- "posture": cadena MUY breve sobre la postura (hombros, espalda, alineación), p. ej. "Espalda recta, hombros alineados". null si no se aprecia.
+- "fitness_level": cadena MUY breve y CUALITATIVA del nivel de forma física aparente (p. ej. "Buena forma general"). null si no procede.
+- "body_fat": ESTIMACIÓN ORIENTATIVA y EN RANGO del % de grasa aparente (p. ej. "~18-22 % (orientativo)"). Incluye SIEMPRE que es orientativo y poco fiable por foto. null si no procede.
+- "is_progress_photo": true si son fotos corporales / de progreso físico; false si no lo son.
+Usa los Datos (altura, peso, medidas, IMC, sexo, edad, estado anterior) si se aportan para afinar las estimaciones y la comparación. Sé honesto y prudente; nada alarmante ni médico.
+Si se aporta el "Objetivo del cliente", ORIENTA el análisis y sobre todo "improve" a ese objetivo: si busca perder peso/grasa, prioriza las zonas de acumulación de grasa; si busca ganar músculo, prioriza los grupos musculares poco desarrollados; si busca tonificar/salud, equilibra ambos. NO cambies el tono ni hagas promesas ni menciones cifras médicas.
+Si las imágenes NO son fotos corporales de progreso, pon is_progress_photo=false, explica en "analysis" que no parecen fotos de progreso, deja highlights e improve vacíos y el resto null.
+Escribe TODOS los valores de texto del JSON en {IDIOMA}; las claves del JSON se mantienen en inglés tal cual.`;
+
 /**
- * Build the vision prompt for body assessment.
- * The model is given the photo *and* the computed metrics so its insights
- * can reference real numbers instead of inventing them.
+ * Context line: `Datos: …` — only the fields we actually have, in the exact
+ * field wording the spec uses. Our flow has no previous photo, so the
+ * "Estado anterior" block is never sent and `progress` comes back null.
  */
-export function getBodyVisionPrompt({ language = "en", formData = {}, computed = {}, productIds = [] } = {}) {
-  const langName = LANG_NAMES[language] || "English";
+function buildDatosLine({ formData = {}, computed = {} } = {}) {
+  const parts = [];
   const summary = computed.summary || {};
-
-  const productCatalog = productIds.length
-    ? `\nPRODUCT CATALOG (recommend by ID only, choose those that best match the user's needs):\n${productIds.map((id) => `- "${id}"`).join("\n")}\n`
-    : "";
-
-  return `You are a clinical-grade body composition assistant for a nutrition coaching app.
-A user has provided a full-body photograph along with biometric data and goals.
-Your job is to write qualitative insights that complement the deterministic numbers — never override them, never invent vitals, never make medical diagnoses.
-
-CRITICAL RULES:
-1. Return ONLY a valid JSON object. No text before or after.
-2. Write ALL human-readable strings in ${langName}. Metric IDs and product IDs stay in English.
-3. Do not contradict the formula-computed metrics provided below; reference them.
-4. If the photo is unclear (cropped, blurry, dark, partial), still return all fields and note the photo limitation inside "photo_quality_note".
-5. Never assess medical conditions. Frame everything as wellness observation, not diagnosis.
-6. Recommend products from the catalog (if provided) that support the user's goal, their lowest-scoring metrics, AND every selected health concern listed below — as many products as their concerns require, not a fixed number.
-7. "posture_note", "composition_note" and "photo_quality_note" must NEVER be empty — if something can't be judged from the photo, say so in ${langName} in that field.
-8. The structured fields ("fat_distribution", "muscle_tone", "symmetry", "posture_flags", "focus_areas", "visual_body_fat") must use ONLY the allowed English values listed in the shape below — they are machine ids, never translate them. If the photo genuinely does not let you judge a field, use null (or [] for arrays) instead of guessing.
-9. "visual_body_fat" is your own estimate of the body-fat percentage RANGE visible in the photo (e.g. 22–26). It may disagree with the formula estimate — that disagreement is useful signal; report what you see. Keep the range 4-6 points wide.
-10. "read_confidence" (0-100) reflects how much the photo supports your read: full-body, front-on, good light ≈ 80-95; cropped/blurry/clothed-baggy ≈ 30-60.
-
-INPUT — USER GOAL: ${formData.goal || "unspecified"}
-INPUT — SELECTED HEALTH CONCERNS: ${(formData.health_conditions || []).join(", ") || "none"}
-INPUT — SEX: ${formData.sex || "unspecified"} · AGE: ${computed.age ?? "unknown"}
-INPUT — COMPUTED METRICS:
-- BMI: ${summary.bmi ?? "n/a"} (${summary.bmiCategory ?? "n/a"})
-- Body fat est.: ${summary.bodyFat ?? "n/a"}% (${summary.bodyFatCategory ?? "n/a"})
-- Waist-to-hip: ${summary.whr ?? "n/a"} (${summary.whrCategory ?? "n/a"})
-- BMR: ${summary.bmr ?? "n/a"} kcal · Target: ${summary.calories ?? "n/a"} kcal
-- Hydration target: ${summary.hydrationTarget ?? "n/a"} L/day
-- Lorentz healthy weight: ${summary.healthyWeight ?? "n/a"} kg · Current: ${summary.weightKg ?? "n/a"} kg
-
-VISION TASK — describe what is visible in the photo:
-- General posture (shoulders, hip alignment, spinal stack) — both as free text AND as structured flags
-- Apparent body composition distribution (where mass is carried) — free text AND the fat_distribution id
-- Visible muscle tone / definition and left-right symmetry
-- Your own visual body-fat percentage range, independent of the formula estimate
-- Which 1-3 areas the photo suggests focusing on first
-- Photo quality, any limitations, and how confident the read is (read_confidence)
-
-${productCatalog}
-
-REQUIRED JSON SHAPE — follow EXACTLY:
-{
-  "summary": "<2-3 sentence overall body-composition summary in ${langName}>",
-  "body_type": "<one of: ${VISION_ENUMS.body_type.join(" | ")}>",
-  "posture_note": "<1 sentence on posture observed>",
-  "composition_note": "<1 sentence on mass distribution observed>",
-  "photo_quality_note": "<1 sentence on photo clarity / any limitation>",
-  "visual_body_fat": { "low": <number>, "high": <number> } | null,
-  "fat_distribution": "<one of: ${VISION_ENUMS.fat_distribution.join(" | ")}>" | null,
-  "muscle_tone": "<one of: ${VISION_ENUMS.muscle_tone.join(" | ")}>" | null,
-  "symmetry": "<one of: ${VISION_ENUMS.symmetry.join(" | ")}>" | null,
-  "posture_flags": ["<zero or more of: ${VISION_ENUMS.posture_flags.join(" | ")}>"],
-  "focus_areas": ["<1-3 of: ${VISION_ENUMS.focus_areas.join(" | ")}>"],
-  "read_confidence": <integer 0-100>,
-  "vision_insights": [
-    {
-      "category": "<strengths|concerns|lifestyle|goals>",
-      "title": "<short title in ${langName}>",
-      "points": ["<1 short observation>", "<another>", "<another>"]
-    }
-  ],
-  "vision_tips": ["<tip>", "<tip>", "<tip>"],
-  "recommendations": [
-    { "product_id": "<id-from-catalog>", "priority": 1, "reason": "<1 sentence why in ${langName}>" }
-  ]
+  if (summary.heightCm) parts.push(`Altura: ${summary.heightCm} cm`);
+  if (summary.weightKg) parts.push(`Peso: ${summary.weightKg} kg`);
+  if (Number(formData.waist)) parts.push(`Cintura: ${Number(formData.waist)} cm`);
+  if (Number(formData.hip)) parts.push(`Cadera: ${Number(formData.hip)} cm`);
+  if (summary.bmi != null) parts.push(`IMC: ${summary.bmi}`);
+  if (formData.sex) parts.push(`Sexo: ${formData.sex === "female" ? "mujer" : "hombre"}`);
+  if (computed.age != null) parts.push(`Edad: ${computed.age} años`);
+  if (formData.goal) parts.push(`Objetivo del cliente: ${GOAL_LABELS_ES[formData.goal] || formData.goal}`);
+  const targetWeight = Number(formData.weight_at_ideal_age);
+  if (targetWeight) parts.push(`Peso objetivo: ${targetWeight} kg`);
+  return parts.length ? `Datos: ${parts.join(". ")}.` : "";
 }
 
-The vision_insights array MUST contain EXACTLY 4 objects, one per category in order:
-strengths, concerns, lifestyle, goals.
-`;
+/**
+ * Full `user` text: INTRO + Datos + RULES, per the spec's concatenation.
+ * The photo itself is attached as a separate image_url entry (detail: "low").
+ */
+export function getPhotoAnalysisUserText({ language = "es", formData = {}, computed = {} } = {}) {
+  const idioma = LANG_NAMES_ES[language] || "español";
+  const datos = buildDatosLine({ formData, computed });
+  const rules = RULES.replaceAll("{IDIOMA}", idioma);
+  return [INTRO_SINGLE, datos, rules].filter(Boolean).join("\n");
 }
 
-export { LANG_NAMES, VISION_ENUMS };
+export { LANG_NAMES };

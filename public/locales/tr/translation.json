@@ -381,7 +381,10 @@
       "description": "Bilgilerinizi gözden geçirin ve her şeyin doğru olduğundan emin olun.",
       "note": "Göndermeden önce, verdiğiniz tüm bilgilerin doğru olduğundan emin olun.",
       "tip": "E-postanızı ({{email}}) ve telefon numaranızı ({{phone}}) olası hatalar için kontrol edin.",
-      "open_results": "Merhaba {{customerName}},\n\nAnketi tamamladığınız ve vücut değerlendirmenizi bize emanet ettiğiniz için teşekkür ederiz!\n\nÇok yakında, sizi çalışmaya davet eden kişi rapor sonuçlarını sizinle paylaşmak için iletişime geçecektir.\n\nBu bilgileri tamamlamak ilk adımdır. Yakında sizinle iletişime geçeceğiz!\n\nSaygılarımızla."
+      "open_results": "Merhaba {{customerName}},\n\nAnketi tamamladığınız ve vücut değerlendirmenizi bize emanet ettiğiniz için teşekkür ederiz!\n\nÇok yakında, sizi çalışmaya davet eden kişi rapor sonuçlarını sizinle paylaşmak için iletişime geçecektir.\n\nBu bilgileri tamamlamak ilk adımdır. Yakında sizinle iletişime geçeceğiz!\n\nSaygılarımızla.",
+      "photo_alt": "Vücut fotoğrafın",
+      "photo_attached": "Vücut fotoğrafı eklendi — cevaplarınla birlikte analiz edilecek.",
+      "photo_missing": "Vücut fotoğrafı eklenmedi. Eklemek için bir adım geri dönebilir veya formu fotoğrafsız gönderebilirsin."
     },
     "analyze_error": "Fotoğrafınız analiz edilemedi. Formunuzu kaydettik – koçunuz sizinle iletişime geçecek.",
     "photo_eyebrow": "Son adım · isteğe bağlı",
@@ -408,7 +411,15 @@
     "tip2": "Gözlük ve şapkayı çıkarın",
     "tip3": "Doğrudan kameraya bakın",
     "tip4": "Yüzünüzün tamamı görünmeli",
-    "analyzing_subtitle_simple": "Bekleyin — bu yaklaşık 30 saniye sürer."
+    "analyzing_subtitle_simple": "Bekleyin — bu yaklaşık 30 saniye sürer.",
+    "photo": {
+      "nav": "Vücut fotoğrafı",
+      "display_title": "Bir",
+      "display_title_em": "vücut fotoğrafı ekle",
+      "display_sub": "İsteğe bağlı — tüm vücut fotoğrafı, yapay zekâya duruş ve kompozisyon için daha derin bir okuma sağlar.",
+      "intro": "İsteğe bağlı — tüm vücut fotoğrafı ekle; duruş, kompozisyon ve nereye odaklanman gerektiği konusunda verilerinle birleştirelim. Fotoğraf yok mu? Bir sonraki adıma geç.",
+      "attached": "Fotoğraf eklendi — formu gönderdiğinde analiz edilecek."
+    }
   },
   "navigation": {
     "next": "İleri",
@@ -845,7 +856,7 @@
     "demo_photo_note": "İyi ışık ve kadraj — tüm vücut görünür, bel çevresinde kıyafet biraz bol.",
     "info_aria": "Bu ne anlama geliyor?",
     "risks_title": "Sinyaller",
-    "info_scan": "Yapay zekâ fotoğrafında görüneni tarif eder — duruş, kütlenin nerede taşındığı, kas tonusu. Aşağıdaki sayıları tamamlar; onlar görüntüden değil, ölçülerinden hesaplanır. Okuma güvenilirliği, fotoğrafın (kadraj, ışık, kıyafet) bu okumayı ne kadar desteklediğini gösterir.",
+    "info_scan": "Yapay zekâ koçu fotoğrafında görüneni anlatır: duruş, kas tonusu, güçlü yönler ve üzerinde çalışılacaklar. Aşağıdaki sayıları tamamlar; onlar görüntüden değil, ölçülerinden hesaplanır. Fotoğraftan yapılan tahminler yol göstericidir, asla tıbbi değildir.",
     "info_bmi": "BKİ, kilogram cinsinden ağırlığının metre cinsinden boyunun karesine bölümüdür ve DSÖ referans bantlarında okunur. Hızlı bir tarama sayısıdır — kası yağdan ayıramaz; bu yüzden vücut yağı ve bel-kalça oranıyla birlikte okuruz.",
     "info_bf": "BKİ, yaş ve cinsiyetinden Deurenberg formülüyle tahmin edilir — doğrudan bir ölçüm değil, bir tahmindir. Sağlıklı bantlar yaşla kayar ve kadın-erkek arasında farklıdır. Değerlendirmeler arasındaki eğilim, tek bir okumadan daha önemlidir.",
     "info_whr": "Girdiğin ölçülerle bel çevrenin kalça çevrene bölümü. Yağın nerede durduğunu gösterir: bel çevresindeki yağ, kalçadaki yağdan daha fazla kardiyometabolik risk taşır ve eşikler cinsiyete göre değişir.",
@@ -861,7 +872,13 @@
     "info_metabolic": "Genel sağlıklı yaşam puanının karşılık geldiği yaşın bir tahmini — orta noktanın üzerinde puan takvim yaşından genç, altında yaşlı okunur. Bunu klinik bir ölçüm değil, motivasyon pusulası olarak gör.",
     "to_gain": "Alınacak",
     "view_answers": "Yanıtlarını gör",
-    "bf_spectrum_caption_female": "Figürler, kadın vücut yağı aralığı boyunca tipik dış görünümü gösterir — aynı boy ve kilo, farklı kompozisyon."
+    "bf_spectrum_caption_female": "Figürler, kadın vücut yağı aralığı boyunca tipik dış görünümü gösterir — aynı boy ve kilo, farklı kompozisyon.",
+    "fitness_label": "Form seviyesi",
+    "visual_age_label": "Görünen yaş",
+    "analysis_label": "Koç okuması",
+    "wellness_label": "Genel sağlıklılık",
+    "progress_label": "İlerleme",
+    "highlights_label": "Öne çıkanlar"
   },
   "atlas": {
     "view_external": "Dış",

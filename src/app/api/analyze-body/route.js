@@ -4,7 +4,7 @@ import { query } from "@/lib/db";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import getOpenAI from "@/lib/openai";
 import { computeBodyMetrics, deriveInsights } from "@/lib/body-analysis";
-import { getBodyVisionPrompt, VISION_ENUMS } from "@/lib/body-prompts";
+import { PHOTO_COACH_SYSTEM, getPhotoAnalysisUserText } from "@/lib/body-prompts";
 import {
   getProductIdsForLanguage,
   enrichRecommendations,
@@ -29,31 +29,53 @@ function dataUrlToBuffer(dataUrl) {
   return { mimeType: m[1], buffer: Buffer.from(m[2], "base64") };
 }
 
-// Structured photo read, validated against the fixed vocabularies so a
-// creative model answer can never leak an untranslatable value into the UI.
-function sanitizeVisionDetails(vision) {
-  if (!vision) return null;
-  const oneOf = (value, allowed) => (allowed.includes(value) ? value : null);
-  const manyOf = (values, allowed, max) =>
-    (Array.isArray(values) ? values.filter((v) => allowed.includes(v)) : []).slice(0, max);
+// Tolerant cleanup of the coach-prompt JSON. Free-text fields are stored as
+// returned (already in the report language); the body-fat range string is
+// additionally parsed into numbers so the UI can compare it against the
+// formula estimate.
+function sanitizePhotoAnalysis(raw) {
+  if (!raw || typeof raw !== "object") return null;
+  const str = (v, max = 800) => (typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null);
+  const strArr = (v, max) =>
+    (Array.isArray(v) ? v : [])
+      .filter((x) => typeof x === "string" && x.trim())
+      .map((x) => x.trim().slice(0, 140))
+      .slice(0, max);
 
+  const analysis = str(raw.analysis);
+  if (!analysis) return null;
+
+  // "~18-22 % (orientativo)" → { low: 18, high: 22 }; single figures get ±2.
+  const bodyFatText = str(raw.body_fat, 80);
   let visualBodyFat = null;
-  const low = Number(vision.visual_body_fat?.low);
-  const high = Number(vision.visual_body_fat?.high);
-  if (Number.isFinite(low) && Number.isFinite(high) && low > 0 && high >= low && high < 70) {
-    visualBodyFat = { low: Math.round(low), high: Math.round(high) };
+  if (bodyFatText) {
+    const range = bodyFatText.match(/(\d+(?:[.,]\d+)?)\s*[-–a]\s*(\d+(?:[.,]\d+)?)/);
+    const single = bodyFatText.match(/(\d+(?:[.,]\d+)?)/);
+    const num = (s) => Number(String(s).replace(",", "."));
+    if (range) {
+      const low = num(range[1]);
+      const high = num(range[2]);
+      if (low > 0 && high >= low && high < 70) visualBodyFat = { low: Math.round(low), high: Math.round(high) };
+    } else if (single) {
+      const mid = num(single[1]);
+      if (mid > 2 && mid < 68) visualBodyFat = { low: Math.round(mid - 2), high: Math.round(mid + 2) };
+    }
   }
 
-  const confidence = Number(vision.read_confidence);
-
   return {
+    analysis,
+    highlights: strArr(raw.highlights, 4),
+    improve: strArr(raw.improve, 4),
+    progress: str(raw.progress),
+    visual_age: str(raw.visual_age, 40),
+    visual_age_note: str(raw.visual_age_note, 200),
+    wellness: str(raw.wellness, 400),
+    muscle_tone: str(raw.muscle_tone, 120),
+    posture: str(raw.posture, 120),
+    fitness_level: str(raw.fitness_level, 120),
+    body_fat: bodyFatText,
     visual_body_fat: visualBodyFat,
-    fat_distribution: oneOf(vision.fat_distribution, VISION_ENUMS.fat_distribution),
-    muscle_tone: oneOf(vision.muscle_tone, VISION_ENUMS.muscle_tone),
-    symmetry: oneOf(vision.symmetry, VISION_ENUMS.symmetry),
-    posture_flags: manyOf(vision.posture_flags, VISION_ENUMS.posture_flags, 4),
-    focus_areas: manyOf(vision.focus_areas, VISION_ENUMS.focus_areas, 3),
-    read_confidence: Number.isFinite(confidence) ? Math.max(0, Math.min(100, Math.round(confidence))) : null,
+    is_progress_photo: raw.is_progress_photo !== false,
   };
 }
 
@@ -120,66 +142,87 @@ export async function POST(request) {
     const productList = await safe(() => getProductIdsForLanguage(language), "products_list", steps);
     if (productList.ok) productIds = productList.result;
 
-    // 4. Vision call (optional — formulas alone are enough).
-    let vision = null;
-    if (process.env.OPENAI_API_KEY && (imageUrl || inlineImage)) {
-      const v = await safe(async () => {
+    // 4. Photo analysis (optional — formulas alone are enough).
+    //    Coach-voice prompt, gpt-4.1-mini, low-detail image, JSON mode.
+    //    One retry on failure/unparseable/empty analysis before giving up.
+    let photoAnalysis = null;
+    if (process.env.OPENAI_API_KEY && (inlineImage || imageUrl)) {
+      const callPhotoAnalysis = async () => {
         const openai = getOpenAI();
-        const prompt = getBodyVisionPrompt({ language, formData, computed, productIds });
-        const completion = await openai.chat.completions.create({
-          model: "gpt-4o",
-          messages: [
-            { role: "system", content: prompt },
-            {
-              role: "user",
-              content: [
-                { type: "text", text: "Analyze this body photograph against the brief above." },
-                { type: "image_url", image_url: { url: imageUrl || inlineImage } },
-              ],
-            },
-          ],
-          response_format: { type: "json_object" },
-          temperature: 0.4,
-          max_tokens: 1600,
-        });
+        const completion = await openai.chat.completions.create(
+          {
+            model: "gpt-4.1-mini",
+            temperature: 0.5,
+            max_tokens: 600,
+            response_format: { type: "json_object" },
+            messages: [
+              { role: "system", content: PHOTO_COACH_SYSTEM },
+              {
+                role: "user",
+                content: [
+                  { type: "text", text: getPhotoAnalysisUserText({ language, formData, computed }) },
+                  // Base64 data-URI preferred; detail:"low" per spec (cost/speed).
+                  { type: "image_url", image_url: { url: inlineImage || imageUrl, detail: "low" } },
+                ],
+              },
+            ],
+          },
+          { timeout: 60_000 }
+        );
         const raw = completion.choices?.[0]?.message?.content;
         if (!raw) throw new Error("Empty OpenAI response");
-        return JSON.parse(raw);
+        const cleaned = sanitizePhotoAnalysis(JSON.parse(raw));
+        if (!cleaned) throw new Error("Empty analysis in photo read");
+        return cleaned;
+      };
+      const v = await safe(async () => {
+        try {
+          return await callPhotoAnalysis();
+        } catch (err) {
+          console.error("[analyze-body] photo analysis attempt 1 failed:", err.message);
+          return await callPhotoAnalysis();
+        }
       }, "vision", steps);
-      if (v.ok) vision = v.result;
+      if (v.ok) photoAnalysis = v.result;
     } else if (!process.env.OPENAI_API_KEY) {
       steps.vision = { status: "skipped", reason: "OPENAI_API_KEY not configured" };
     } else {
       steps.vision = { status: "skipped", reason: "No image to analyze" };
     }
 
-    // 5. Build deterministic insights, merge with vision insights if present.
+    // 5. Build deterministic insights, fold the photo read in where it fits:
+    //    highlights → strengths, improve → concerns, wellness → lifestyle.
+    //    (Photo strings are already in the report language; the formula points
+    //    stay translatable {key,params,text} objects — the client renders both.)
     const formulaInsights = deriveInsights(computed.metrics, computed.summary);
-    const insights = vision?.vision_insights?.length
-      ? vision.vision_insights.map((vi) => {
-          const matching = formulaInsights.find((fi) => fi.category === vi.category);
-          return {
-            category: vi.category,
-            title: vi.title || matching?.title || vi.category,
-            points: [...(matching?.points || []), ...(vi.points || [])].slice(0, 5),
-          };
-        })
-      : formulaInsights;
+    const photoPointsByCategory = photoAnalysis
+      ? {
+          strengths: photoAnalysis.highlights,
+          concerns: photoAnalysis.improve,
+          lifestyle: photoAnalysis.wellness ? [photoAnalysis.wellness] : [],
+          goals: photoAnalysis.progress ? [photoAnalysis.progress] : [],
+        }
+      : {};
+    const insights = formulaInsights.map((fi) => ({
+      ...fi,
+      points: [...fi.points, ...(photoPointsByCategory[fi.category] || [])].slice(0, 5),
+    }));
 
     // Tips as translatable { key, params, text } objects — the client renders
-    // them in the current UI language; vision tips come already localized.
-    const tips = vision?.vision_tips?.length
-      ? vision.vision_tips
-      : [
-          { key: "tip_water", params: {}, text: "Match daily water intake to your hydration target." },
-          { key: "tip_protein", params: {}, text: "Hit your protein target — split evenly across meals." },
-          { key: "tip_sleep", params: {}, text: "Aim for 7-9 hours of sleep — recovery shapes composition more than training volume." },
-        ];
+    // them in the current UI language. The photo's "improve" items ride along
+    // first when available (already localized strings).
+    const tips = [
+      ...(photoAnalysis?.improve || []),
+      { key: "tip_water", params: {}, text: "Match daily water intake to your hydration target." },
+      { key: "tip_protein", params: {}, text: "Hit your protein target — split evenly across meals." },
+      { key: "tip_sleep", params: {}, text: "Aim for 7-9 hours of sleep — recovery shapes composition more than training volume." },
+    ].slice(0, 5);
 
-    // 6. Build recommendations from THREE sources, deduped in priority order:
-    //    (a) AI vision picks, (b) products mapped to EVERY selected health
-    //    condition, (c) the metric-based engine. No fixed cap — the list
-    //    scales with how many problems the user selected.
+    // 6. Build recommendations from TWO sources, deduped in priority order:
+    //    (a) products mapped to EVERY selected health condition, (b) the
+    //    metric-based engine. No fixed cap — the list scales with how many
+    //    problems the user selected. (The coach photo prompt doesn't pick
+    //    products; the deterministic engines cover it.)
     const mergedRecs = [];
     const seenRecIds = new Set();
     const pushRec = (rec) => {
@@ -187,9 +230,6 @@ export async function POST(request) {
       seenRecIds.add(rec.product_id);
       mergedRecs.push(rec);
     };
-    if (Array.isArray(vision?.recommendations)) {
-      for (const r of vision.recommendations) pushRec(r);
-    }
     for (const r of getConditionRecommendations(formData.health_conditions)) pushRec(r);
     const metricBased = await safe(
       () => getProductsForMetrics(computed.metrics, language),
@@ -209,23 +249,26 @@ export async function POST(request) {
     );
     if (enriched.ok) enrichedProducts = enriched.result;
 
-    // 7. Build results object stored to DB.
+    // 7. Build results object stored to DB. `photo_analysis` carries the new
+    //    coach photo read; the legacy note/enum fields stay null on new rows
+    //    (old stored rows keep rendering through their own fields).
     const results = {
       overall_score: computed.overallScore,
-      body_type: vision?.body_type || "balanced",
-      summary: vision?.summary || `Wellness score ${computed.overallScore}/100 based on your biometrics.`,
+      body_type: "balanced",
+      summary: photoAnalysis?.analysis || `Wellness score ${computed.overallScore}/100 based on your biometrics.`,
       metrics: computed.metrics,
       computed_summary: computed.summary,
       insights,
       tips,
-      routine_note: vision?.composition_note || null,
-      composition_note: vision?.composition_note || null,
-      posture_note: vision?.posture_note || null,
-      photo_quality_note: vision?.photo_quality_note || null,
-      vision_details: sanitizeVisionDetails(vision),
+      routine_note: null,
+      composition_note: null,
+      posture_note: photoAnalysis?.posture || null,
+      photo_quality_note: null,
+      vision_details: null,
+      photo_analysis: photoAnalysis,
       recommendations,
       enriched_products: enrichedProducts,
-      vision_available: !!vision,
+      vision_available: !!photoAnalysis,
     };
 
     // 8. Persist to analyses table. Gracefully tolerate DB failure.

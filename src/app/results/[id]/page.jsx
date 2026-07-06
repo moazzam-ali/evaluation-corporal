@@ -74,6 +74,7 @@ export default function ResultsPage() {
       compositionNote={results.composition_note || results.routine_note || null}
       photoQualityNote={results.photo_quality_note || null}
       visionDetails={results.vision_details || null}
+      photoAnalysis={results.photo_analysis || null}
       visionAvailable={!!results.vision_available}
       answersHref={`/results/${id}/answers`}
     />

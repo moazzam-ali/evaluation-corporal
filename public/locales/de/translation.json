@@ -381,7 +381,10 @@
       "description": "Überprüfen Sie Ihre Angaben und stellen Sie sicher, dass alles korrekt ist.",
       "note": "Stellen Sie vor dem Absenden sicher, dass alle von Ihnen angegebenen Daten korrekt sind.",
       "tip": "Überprüfen Sie Ihre E-Mail ({{email}}) und Telefonnummer ({{phone}}) auf mögliche Fehler.",
-      "open_results": "Hallo {{customerName}},\n\nvielen Dank, dass Sie den Fragebogen ausgefüllt und uns Ihre Körperbewertung anvertraut haben!\n\nSehr bald wird sich die Person, die Sie zur Studie eingeladen hat, mit Ihnen in Verbindung setzen, um die Ergebnisse des Berichts zu teilen.\n\nDas Ausfüllen dieser Informationen ist der erste Schritt. Wir werden uns bald bei Ihnen melden!\n\nMit freundlichen Grüßen."
+      "open_results": "Hallo {{customerName}},\n\nvielen Dank, dass Sie den Fragebogen ausgefüllt und uns Ihre Körperbewertung anvertraut haben!\n\nSehr bald wird sich die Person, die Sie zur Studie eingeladen hat, mit Ihnen in Verbindung setzen, um die Ergebnisse des Berichts zu teilen.\n\nDas Ausfüllen dieser Informationen ist der erste Schritt. Wir werden uns bald bei Ihnen melden!\n\nMit freundlichen Grüßen.",
+      "photo_alt": "Dein Körperfoto",
+      "photo_attached": "Körperfoto angehängt — es wird zusammen mit deinen Antworten analysiert.",
+      "photo_missing": "Kein Körperfoto hinzugefügt. Du kannst einen Schritt zurückgehen, um eines hinzuzufügen, oder das Formular ohne Foto absenden."
     },
     "analyze_error": "Dein Foto konnte nicht analysiert werden. Wir haben deine Eingaben gespeichert — dein Coach meldet sich.",
     "photo_eyebrow": "Letzter Schritt · optional",
@@ -408,7 +411,15 @@
     "tip2": "Brille und Hut absetzen",
     "tip3": "Direkt in die Kamera schauen",
     "tip4": "Das gesamte Gesicht muss sichtbar sein",
-    "analyzing_subtitle_simple": "Einen Moment — das dauert etwa 30 Sekunden."
+    "analyzing_subtitle_simple": "Einen Moment — das dauert etwa 30 Sekunden.",
+    "photo": {
+      "nav": "Körperfoto",
+      "display_title": "Füge ein",
+      "display_title_em": "Körperfoto hinzu",
+      "display_sub": "Optional — ein Ganzkörperfoto gibt der KI einen tieferen Blick auf Haltung und Körperzusammensetzung.",
+      "intro": "Optional — füge ein Ganzkörperfoto hinzu und wir kombinieren es mit deinen Daten für eine tiefere Einschätzung von Haltung, Zusammensetzung und Schwerpunkten. Kein Foto? Geh einfach weiter zum nächsten Schritt.",
+      "attached": "Foto hinzugefügt — es wird analysiert, sobald du das Formular absendest."
+    }
   },
   "navigation": {
     "next": "Weiter",
@@ -845,7 +856,7 @@
     "demo_photo_note": "Gutes Licht und guter Bildausschnitt — ganzer Körper sichtbar, Kleidung an der Taille etwas locker.",
     "info_aria": "Was bedeutet das?",
     "risks_title": "Signale",
-    "info_scan": "Die KI beschreibt, was auf deinem Foto sichtbar ist — Haltung, Masseverteilung, Muskeltonus. Sie ergänzt die Zahlen unten, die aus deinen Messwerten berechnet werden, nicht aus dem Bild. Die Verlässlichkeit zeigt, wie gut das Foto (Ausschnitt, Licht, Kleidung) die Auswertung stützt.",
+    "info_scan": "Der KI-Coach beschreibt, was auf deinem Foto sichtbar ist: Haltung, Muskeltonus, Stärken und woran du arbeiten solltest. Er ergänzt die Zahlen unten, die aus deinen Messwerten berechnet werden, nicht aus dem Bild. Schätzungen anhand eines Fotos sind orientierend, nie medizinisch.",
     "info_bmi": "Der BMI ist dein Gewicht in Kilogramm geteilt durch deine Größe in Metern zum Quadrat, gelesen auf den WHO-Referenzbändern. Er ist eine schnelle Screening-Zahl — Muskeln und Fett kann er nicht unterscheiden, deshalb lesen wir ihn zusammen mit Körperfett und Taille-Hüft-Verhältnis.",
     "info_bf": "Geschätzt mit der Deurenberg-Formel aus BMI, Alter und Geschlecht — eine Schätzung, keine direkte Messung. Gesunde Bereiche verschieben sich mit dem Alter und unterscheiden sich zwischen Männern und Frauen. Der Trend über mehrere Auswertungen zählt mehr als ein Einzelwert.",
     "info_whr": "Dein Taillenumfang geteilt durch den Hüftumfang, aus deinen eingegebenen Maßen. Es zeigt, wo Fett sitzt: Fett am Bauch trägt mehr kardiometabolisches Risiko als Fett an den Hüften, und die Schwellen unterscheiden sich je nach Geschlecht.",
@@ -861,7 +872,13 @@
     "info_metabolic": "Eine Schätzung, welchem Alter dein Gesamt-Wellness-Score entspricht — über dem Mittelwert liest er sich jünger als dein Kalenderalter, darunter älter. Versteh ihn als Motivationskompass, nicht als klinische Messung.",
     "to_gain": "Zuzunehmen",
     "view_answers": "Deine Antworten ansehen",
-    "bf_spectrum_caption_female": "Die Figuren zeigen das typische äußere Erscheinungsbild über den weiblichen Körperfettbereich — gleiche Größe und gleiches Gewicht, unterschiedliche Zusammensetzung."
+    "bf_spectrum_caption_female": "Die Figuren zeigen das typische äußere Erscheinungsbild über den weiblichen Körperfettbereich — gleiche Größe und gleiches Gewicht, unterschiedliche Zusammensetzung.",
+    "fitness_label": "Fitnesslevel",
+    "visual_age_label": "Geschätztes Alter",
+    "analysis_label": "Coach-Einschätzung",
+    "wellness_label": "Allgemeines Wohlbefinden",
+    "progress_label": "Fortschritt",
+    "highlights_label": "Was hervorsticht"
   },
   "atlas": {
     "view_external": "Extern",

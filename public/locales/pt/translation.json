@@ -381,7 +381,10 @@
       "description": "Revise suas informações e certifique-se de que tudo está correto.",
       "note": "Antes de enviar, certifique-se de que todos os dados fornecidos estão corretos.",
       "tip": "Verifique seu e-mail ({{email}}) e número de telefone ({{phone}}) para possíveis erros.",
-      "open_results": "Olá {{customerName}},\n\nObrigado por completar o questionário e confiar em nós para a sua avaliação corporal!\n\nEm breve, a pessoa que o convidou para o estudo entrará em contato para compartilhar os resultados do relatório.\n\nCompletar estas informações é o primeiro passo. Entraremos em contato em breve!\n\nCordialmente."
+      "open_results": "Olá {{customerName}},\n\nObrigado por completar o questionário e confiar em nós para a sua avaliação corporal!\n\nEm breve, a pessoa que o convidou para o estudo entrará em contato para compartilhar os resultados do relatório.\n\nCompletar estas informações é o primeiro passo. Entraremos em contato em breve!\n\nCordialmente.",
+      "photo_alt": "A sua foto do corpo",
+      "photo_attached": "Foto do corpo anexada — será analisada junto com as suas respostas.",
+      "photo_missing": "Nenhuma foto do corpo adicionada. Pode voltar um passo para adicionar uma, ou enviar o formulário sem ela."
     },
     "analyze_error": "Não foi possível analisar a sua foto. Salvamos o seu formulário – seu coach entrará em contato.",
     "photo_eyebrow": "Etapa final · opcional",
@@ -408,7 +411,15 @@
     "tip2": "Tire óculos e chapéus",
     "tip3": "Olhe direto para a câmera",
     "tip4": "Todo o rosto deve aparecer",
-    "analyzing_subtitle_simple": "Aguarde — isto demora cerca de 30 segundos."
+    "analyzing_subtitle_simple": "Aguarde — isto demora cerca de 30 segundos.",
+    "photo": {
+      "nav": "Foto do corpo",
+      "display_title": "Adicione uma",
+      "display_title_em": "foto do corpo",
+      "display_sub": "Opcional — uma foto de corpo inteiro dá à IA uma leitura mais profunda da postura e composição.",
+      "intro": "Opcional — adicione uma foto de corpo inteiro e vamos combiná-la com os seus dados para uma leitura mais profunda de postura, composição e onde focar. Sem foto? Continue para o próximo passo.",
+      "attached": "Foto adicionada — será analisada quando enviar o formulário."
+    }
   },
   "navigation": {
     "next": "Próximo",
@@ -845,7 +856,7 @@
     "demo_photo_note": "Boa iluminação e enquadramento — corpo inteiro visível, roupa um pouco larga na cintura.",
     "info_aria": "O que significa isto?",
     "risks_title": "Sinais",
-    "info_scan": "A IA descreve o que está visível na tua foto — postura, onde se concentra a massa, tónus muscular. Complementa os números abaixo, calculados a partir das tuas medidas, não da imagem. A fiabilidade da leitura reflete o quanto a foto (enquadramento, luz, roupa) a sustenta.",
+    "info_scan": "O coach de IA descreve o que é visível na sua foto: postura, tónus muscular, pontos fortes e o que trabalhar. Complementa os números abaixo, calculados a partir das suas medidas, não da imagem. As estimativas a partir de uma foto são orientativas, nunca médicas.",
     "info_bmi": "O IMC é o teu peso em quilos a dividir pela altura em metros ao quadrado, lido nas bandas de referência da OMS. É um número de triagem rápido — não distingue músculo de gordura, por isso o lemos junto com a gordura corporal e a relação cintura-anca.",
     "info_bf": "Estimada com a fórmula de Deurenberg a partir do IMC, idade e sexo — uma estimativa, não uma medição direta. As faixas saudáveis mudam com a idade e diferem entre homens e mulheres. A tendência entre avaliações importa mais do que uma leitura isolada.",
     "info_whr": "O perímetro da cintura a dividir pelo da anca, com as medidas que introduziste. Mostra onde a gordura se acumula: a gordura na cintura acarreta mais risco cardiometabólico do que a das ancas, e os limiares diferem por sexo.",
@@ -861,7 +872,13 @@
     "info_metabolic": "Uma estimativa da idade a que corresponde a tua pontuação global de bem-estar — acima do ponto médio lê-se mais jovem do que a tua idade real, abaixo mais velho. Encara-a como uma bússola motivacional, não como uma medição clínica.",
     "to_gain": "A ganhar",
     "view_answers": "Ver as tuas respostas",
-    "bf_spectrum_caption_female": "As figuras mostram o aspeto externo típico ao longo do intervalo de gordura corporal feminino — mesma altura e peso, composição diferente."
+    "bf_spectrum_caption_female": "As figuras mostram o aspeto externo típico ao longo do intervalo de gordura corporal feminino — mesma altura e peso, composição diferente.",
+    "fitness_label": "Nível de forma",
+    "visual_age_label": "Idade aparente",
+    "analysis_label": "Leitura do coach",
+    "wellness_label": "Bem-estar geral",
+    "progress_label": "Progresso",
+    "highlights_label": "O que se destaca"
   },
   "atlas": {
     "view_external": "Externo",

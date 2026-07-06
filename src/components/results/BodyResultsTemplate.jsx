@@ -134,7 +134,7 @@ function generateRisks(metrics, t) {
  *   metrics   — raw metrics array (for risk callout generation)
  *   createdAt — ISO date string for the hero
  */
-export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionDetails = null, visionAvailable = false, answersHref = null }) {
+export default function BodyResultsTemplate({ data, products = [], insights = [], tips = [], summary = "", metrics = [], createdAt, imageUrl = null, bodyType = null, postureNote = null, compositionNote = null, photoQualityNote = null, visionDetails = null, photoAnalysis = null, visionAvailable = false, answersHref = null }) {
   const { t, i18n } = useTranslation();
   const { open: openLightbox } = useLightbox();
   const d = data;
@@ -176,23 +176,45 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   // Goal delta sign follows the user's own goal (gain goals show +).
   const goalSign = d.weightGoal > d.weight ? "+" : "−";
 
-  // ── Structured photo read (vision_details) — enum ids resolved to the
-  //    current UI language via scanLabels; old rows without it just render
-  //    the classic three-note card. ──
+  // ── Photo read. New rows carry `photo_analysis` (coach-voice free text in
+  //    the report language); old rows carry `vision_details` enums resolved
+  //    via scanLabels. The card renders whichever the row has. ──
   const SCAN = scanLabels(t);
   const vd = visionDetails || {};
-  const scanTraits = [
-    visionAvailable && bodyType ? { label: t("rd.body_type_label", "Body type"), value: t(`results.body_types.${bodyType}`, bodyType) } : null,
-    vd.fat_distribution ? { label: t("rd.fat_dist_label", "Fat distribution"), value: SCAN.fatDistribution[vd.fat_distribution] } : null,
-    vd.muscle_tone ? { label: t("rd.muscle_tone_label", "Muscle tone"), value: SCAN.muscleTone[vd.muscle_tone] } : null,
-    vd.symmetry ? { label: t("rd.symmetry_label", "Symmetry"), value: SCAN.symmetry[vd.symmetry] } : null,
-  ].filter((x) => x && x.value);
-  const postureFlags = (vd.posture_flags || []).map((f) => ({ id: f, label: SCAN.postureFlags[f] })).filter((f) => f.label);
-  const focusAreas = (vd.focus_areas || []).map((f) => SCAN.focusAreas[f]).filter(Boolean);
+  const pa = photoAnalysis || null;
+  const scanTraits = pa
+    ? [
+        pa.muscle_tone ? { label: t("rd.muscle_tone_label", "Muscle tone"), value: pa.muscle_tone } : null,
+        pa.posture ? { label: t("rd.posture_label", "Posture"), value: pa.posture } : null,
+        pa.fitness_level ? { label: t("rd.fitness_label", "Fitness level"), value: pa.fitness_level } : null,
+        pa.visual_age ? { label: t("rd.visual_age_label", "Apparent age"), value: pa.visual_age } : null,
+        pa.body_fat && !pa.visual_body_fat ? { label: t("rd.vbf_label", "Visual body-fat read"), value: pa.body_fat } : null,
+      ].filter((x) => x && x.value)
+    : [
+        visionAvailable && bodyType ? { label: t("rd.body_type_label", "Body type"), value: t(`results.body_types.${bodyType}`, bodyType) } : null,
+        vd.fat_distribution ? { label: t("rd.fat_dist_label", "Fat distribution"), value: SCAN.fatDistribution[vd.fat_distribution] } : null,
+        vd.muscle_tone ? { label: t("rd.muscle_tone_label", "Muscle tone"), value: SCAN.muscleTone[vd.muscle_tone] } : null,
+        vd.symmetry ? { label: t("rd.symmetry_label", "Symmetry"), value: SCAN.symmetry[vd.symmetry] } : null,
+      ].filter((x) => x && x.value);
+  const postureFlags = pa ? [] : (vd.posture_flags || []).map((f) => ({ id: f, label: SCAN.postureFlags[f] })).filter((f) => f.label);
+  // "Where to focus first": the coach's improve list on new rows, enum ids on old ones.
+  const focusAreas = pa ? (pa.improve || []) : (vd.focus_areas || []).map((f) => SCAN.focusAreas[f]).filter(Boolean);
+  const highlights = pa?.highlights || [];
+  // Free-text notes under the chips — coach analysis first, then wellness/progress.
+  const scanNotes = pa
+    ? [
+        { label: t("rd.analysis_label", "Coach's read"), text: pa.analysis },
+        { label: t("rd.wellness_label", "Overall wellness"), text: pa.wellness },
+        { label: t("rd.progress_label", "Progress"), text: pa.progress },
+      ].filter((n) => n.text)
+    : [
+        { label: t("rd.composition_label", "Mass distribution"), text: compositionNote },
+        { label: t("rd.photo_note_label", "Photo note"), text: photoQualityNote },
+      ].filter((n) => n.text);
 
   // Visual body-fat cross-check: the AI's from-photo range vs the Deurenberg
   // formula estimate. ±2 pts of slack before we call a disagreement.
-  const vbf = vd.visual_body_fat || null;
+  const vbf = pa?.visual_body_fat || vd.visual_body_fat || null;
   const vbfVerdict = vbf && d.bodyFat > 0
     ? (d.bodyFat >= vbf.low - 2 && d.bodyFat <= vbf.high + 2 ? "match" : d.bodyFat > vbf.high ? "leaner" : "fuller")
     : null;
@@ -204,15 +226,17 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
 
   const openScan = () => openLightbox({
     title: t("rd.scan_title", "Your scan"),
-    caption: t("rd.scan_caption", "Your uploaded photo, used for the AI body-composition read."),
+    caption: pa?.analysis || t("rd.scan_caption", "Your uploaded photo, used for the AI body-composition read."),
     indicators: [
       ...scanTraits,
-      vbf ? { label: t("rd.vbf_label", "Visual body-fat read"), value: `${vbf.low}–${vbf.high}%` } : null,
+      vbf ? { label: t("rd.vbf_label", "Visual body-fat read"), value: pa?.body_fat || `${vbf.low}–${vbf.high}%` } : null,
+      highlights.length ? { label: t("rd.highlights_label", "What stands out"), value: highlights.join(" · ") } : null,
       postureFlags.length ? { label: t("rd.posture_label", "Posture"), value: postureFlags.map((f) => f.label).join(" · ") } : null,
-      postureNote ? { label: t("rd.posture_note_label", "Posture note"), value: postureNote } : null,
-      compositionNote ? { label: t("rd.composition_label", "Mass distribution"), value: compositionNote } : null,
+      !pa && postureNote ? { label: t("rd.posture_note_label", "Posture note"), value: postureNote } : null,
+      !pa && compositionNote ? { label: t("rd.composition_label", "Mass distribution"), value: compositionNote } : null,
       focusAreas.length ? { label: t("rd.focus_label", "Where to focus first"), value: focusAreas.join(" · ") } : null,
-      photoQualityNote ? { label: t("rd.photo_note_label", "Photo note"), value: photoQualityNote } : null,
+      pa?.wellness ? { label: t("rd.wellness_label", "Overall wellness"), value: pa.wellness } : null,
+      !pa && photoQualityNote ? { label: t("rd.photo_note_label", "Photo note"), value: photoQualityNote } : null,
     ].filter(Boolean),
     items: [{ src: imageUrl }],
   });
@@ -339,7 +363,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   // ── Per-card explainers (the quiet "i" next to each title) — how the
   //    value is computed, what it represents, why it matters. ──
   const INFO = {
-    scan: t("rd.info_scan", "The AI describes what is visible in your photo — posture, where mass sits, muscle tone. It complements the numbers below, which are calculated from your measurements, not from the image. Read confidence reflects how well the photo (framing, light, clothing) supports the read."),
+    scan: t("rd.info_scan", "The AI coach describes what is visible in your photo — posture, muscle tone, strong points and what to work on. It complements the numbers below, which are calculated from your measurements, not from the image. Estimates from a photo are orientative, never medical."),
     bmi: t("rd.info_bmi", "BMI is your weight in kilograms divided by your height in meters squared, read against the WHO reference bands. It's a quick screening number — it can't tell muscle from fat, which is why we read it alongside body fat and waist-to-hip ratio."),
     bf: t("rd.info_bf", "Estimated with the Deurenberg formula from your BMI, age and sex — an estimate, not a direct measurement. Healthy bands shift with age and differ between men and women. The trend across assessments matters more than any single reading."),
     whr: t("rd.info_whr", "Your waist circumference divided by your hip circumference, from the measurements you entered. It shows where fat sits: fat stored around the waist carries more cardiometabolic risk than fat on the hips, and thresholds differ by sex."),
@@ -477,8 +501,8 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                       </div>
                     )}
                     <div className="flex flex-col gap-3">
-                      {/* Posture — structured flags first, then the free-text note */}
-                      {(postureFlags.length > 0 || postureNote) && (
+                      {/* Posture — legacy rows only (new rows carry posture as a chip) */}
+                      {!pa && (postureFlags.length > 0 || postureNote) && (
                         <div>
                           <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.posture_label", "Posture")}</div>
                           {postureFlags.length > 0 && (
@@ -491,18 +515,21 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                           {postureNote && <p className="text-[13.5px] leading-relaxed mt-1.5" style={{ color: "var(--ink)" }}>{postureNote}</p>}
                         </div>
                       )}
-                      {[
-                        { label: t("rd.composition_label", "Mass distribution"), text: compositionNote },
-                        { label: t("rd.photo_note_label", "Photo note"), text: photoQualityNote },
-                      ].filter(n => n.text).map(n => (
+                      {/* Free-text notes — coach analysis/wellness/progress on new
+                          rows, composition/photo notes on legacy ones */}
+                      {scanNotes.map(n => (
                         <div key={n.label}>
                           <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{n.label}</div>
                           <p className="text-[13.5px] leading-relaxed mt-1" style={{ color: "var(--ink)" }}>{n.text}</p>
                         </div>
                       ))}
+                      {/* Apparent-age disclaimer — always shown next to the estimate */}
+                      {pa?.visual_age && pa?.visual_age_note && (
+                        <p className="text-[11px] leading-relaxed italic" style={{ color: "var(--muted-fg)" }}>{pa.visual_age_note}</p>
+                      )}
                       {/* Never leave the panel empty: when the AI read returned no notes,
                           show the summary or a localized explanation instead. */}
-                      {!postureNote && !compositionNote && !photoQualityNote && scanTraits.length === 0 && !vbf && (
+                      {scanNotes.length === 0 && !postureNote && scanTraits.length === 0 && !vbf && (
                         <div>
                           <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.scan_title", "Your scan")}</div>
                           <p className="text-[13.5px] leading-relaxed mt-1" style={{ color: "var(--ink)" }}>
@@ -511,6 +538,17 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                         </div>
                       )}
                     </div>
+                    {/* What the photo says is going well */}
+                    {highlights.length > 0 && (
+                      <div className="mt-5 pt-4" style={{ borderTop: "1px dashed var(--border-hex)" }}>
+                        <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.highlights_label", "What stands out")}</div>
+                        <div className="flex flex-wrap gap-1.5 mt-1.5">
+                          {highlights.map((h) => (
+                            <span key={h} className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full" style={{ background: "#EAEFE6", color: "#1F6B50" }}>{h}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                     {/* Where the photo says to focus first */}
                     {focusAreas.length > 0 && (
                       <div className="mt-5 pt-4" style={{ borderTop: "1px dashed var(--border-hex)" }}>

@@ -51,7 +51,10 @@ export const goalsCareSchema = z.object({
   privacy_policy: z.literal(true, { errorMap: () => ({ message: "You must accept the privacy policy" }) }),
 });
 
-// Step 7: Final Submission (review only)
+// Step 7: Body photo (optional — image lives in component state, not the form)
+export const bodyPhotoSchema = z.object({});
+
+// Step 8: Final Submission (review only)
 export const finalSubmissionSchema = z.object({});
 
 // Merged full schema
@@ -63,7 +66,7 @@ export const fullScanSchema = personalInfoSchema
   .merge(goalsCareSchema)
   .merge(finalSubmissionSchema);
 
-// Array of schemas indexed by step (0-6)
+// Array of schemas indexed by step (0-7)
 export const STEP_SCHEMAS = [
   personalInfoSchema,
   physicalInfoSchema,
@@ -71,6 +74,7 @@ export const STEP_SCHEMAS = [
   activityHydrationSchema,
   healthConditionsSchema,
   goalsCareSchema,
+  bodyPhotoSchema,
   finalSubmissionSchema,
 ];
 
@@ -82,6 +86,7 @@ export const STEP_FIELD_NAMES = [
   ["exercise_level", "exercise_duration", "water_intake"],
   ["health_conditions"],
   ["goal", "weight_at_ideal_age", "has_skincare_routine", "skincare_products", "want_facial_evaluation", "privacy_policy"],
+  [],
   [],
 ];
 

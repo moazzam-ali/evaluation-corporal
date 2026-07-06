@@ -1,6 +1,6 @@
 "use client";
 
-export default function Step7FinalSubmission({ form, t }) {
+export default function Step7FinalSubmission({ form, t, bodyImage = null }) {
   const { getValues } = form;
   const values = getValues();
 
@@ -13,6 +13,30 @@ export default function Step7FinalSubmission({ form, t }) {
         <p className="text-[13px] leading-relaxed" style={{ color: "var(--muted-fg)", fontFamily: "var(--font-inter)" }}>
           {t("scan.step7.description", "Review your information and make sure everything is correct.")}
         </p>
+      </div>
+
+      {/* Body photo status — captured on the previous step, sent with the form */}
+      <div className="rounded-xl border border-[rgba(47,47,43,0.10)] bg-white p-5">
+        <div className="flex items-center gap-3.5">
+          {bodyImage ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={bodyImage}
+                alt={t("scan.step7.photo_alt", "Your body photo")}
+                className="shrink-0 rounded-lg object-cover"
+                style={{ width: 44, height: 58, border: "1px solid rgba(47,47,43,0.10)" }}
+              />
+              <p className="text-[13px] leading-relaxed" style={{ color: "var(--muted-fg)", fontFamily: "var(--font-inter)" }}>
+                {t("scan.step7.photo_attached", "Body photo attached — it will be analyzed together with your answers.")}
+              </p>
+            </>
+          ) : (
+            <p className="text-[13px] leading-relaxed" style={{ color: "var(--muted-fg)", fontFamily: "var(--font-inter)" }}>
+              {t("scan.step7.photo_missing", "No body photo added. You can go back one step to add one, or send the form without it.")}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="rounded-xl border border-[rgba(47,47,43,0.10)] bg-white p-5">
