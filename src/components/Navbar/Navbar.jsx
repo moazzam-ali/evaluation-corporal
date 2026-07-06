@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { Menu, X, Globe, ChevronDown, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { LANGUAGES } from "@/lib/languages";
 
 const languages = LANGUAGES;
@@ -16,17 +16,23 @@ export default function Navbar() {
   const [langMenuOpen, setLangMenuOpen] = useState(false);
   const [mobileLangOpen, setMobileLangOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Query string is read client-side (not via useSearchParams) so the navbar
+  // never bails out of static prerendering — a bailout here removes the whole
+  // header (menu button included) from the served HTML until hydration.
+  const [paramString, setParamString] = useState("");
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const isScanPage = pathname === "/scan";
   const isLanding = pathname === "/";
   const isResults = pathname.startsWith("/results");
   // The form (scan) and results pages drop the section nav links entirely.
   const hideNavLinks = isScanPage || isResults;
 
-  const paramString = searchParams.toString();
   const scanHref = paramString ? `/scan?${paramString}` : "/scan";
   const configHref = paramString ? `/config?${paramString}` : "/config";
+
+  useEffect(() => {
+    setParamString(window.location.search.replace(/^\?/, ""));
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -71,14 +77,14 @@ export default function Navbar() {
         WebkitBackdropFilter: "saturate(180%) blur(18px)",
       }}
     >
-      <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
+      <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between gap-3 px-5 sm:px-8">
         {/* Brand lockup */}
-        <Link href="/" className="inline-flex items-center gap-1.5 shrink-0">
+        <Link href="/" className="inline-flex min-w-0 items-center gap-1.5">
           {/* Tight-cropped silhouette SVG — no surrounding void space */}
           <Image src="/logo-mark.svg" alt="Evaluación Corporal" width={18} height={48} className="h-12 w-auto shrink-0" priority unoptimized />
           <span
-            className="whitespace-nowrap"
-            style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, fontSize: "22px", color: "var(--ink, #2F2F2B)", letterSpacing: "-0.01em", lineHeight: 1 }}
+            className="truncate whitespace-nowrap text-[19px] sm:text-[22px]"
+            style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400, color: "var(--ink, #2F2F2B)", letterSpacing: "-0.01em", lineHeight: 1.15 }}
           >
             {t("nav.brand", "Evaluación Corporal")}
           </span>
@@ -155,11 +161,14 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu button — fixed tap target that can never be squeezed
+            out of the row, whatever the brand text or locale does. */}
         <button
-          className="lg:hidden"
+          type="button"
+          className="lg:hidden flex h-10 w-10 shrink-0 items-center justify-center rounded-full -mr-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={t("nav.aria_toggle_menu", "Toggle navigation menu")}
+          aria-expanded={mobileMenuOpen}
           style={{ color: "var(--ink)" }}
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

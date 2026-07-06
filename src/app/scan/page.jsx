@@ -416,7 +416,7 @@ function ScanPageInner() {
   }
 
   return (
-    <div className="mx-auto max-w-[1280px]" style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: "56px", padding: "48px 32px 80px" }}>
+    <div className="mx-auto max-w-[1280px] grid grid-cols-1 md:grid-cols-[300px_1fr] lg:grid-cols-[320px_1fr] gap-8 md:gap-10 lg:gap-14 px-5 pt-8 pb-16 sm:px-6 md:px-8 md:pt-12 md:pb-20">
       {/* ===== LEFT RAIL ===== */}
       <aside className="hidden md:block" style={{ position: "sticky", top: "96px", alignSelf: "start" }}>
         <div
@@ -516,9 +516,8 @@ function ScanPageInner() {
       >
         {/* Stage header */}
         <div
-          className="flex flex-wrap items-end justify-between gap-6"
+          className="flex flex-wrap items-end justify-between gap-6 px-5 pt-6 pb-5 sm:px-10 sm:pt-8 sm:pb-6"
           style={{
-            padding: "32px 40px 24px",
             borderBottom: "1px solid rgba(47,47,43,0.10)",
             background: "linear-gradient(180deg, #F8F6F2 0%, white 100%)",
           }}
@@ -548,7 +547,7 @@ function ScanPageInner() {
         </div>
 
         {/* Stage body */}
-        <div className="flex-1" style={{ padding: "32px 40px" }}>
+        <div className="flex-1 px-5 py-6 sm:px-10 sm:py-8">
           {/* The form is wired only as a container for react-hook-form's
               registration and validation. We never want native submit to
               fire on its own — Enter inside any input would otherwise post
@@ -581,9 +580,8 @@ function ScanPageInner() {
 
         {/* Stage footer */}
         <div
-          className="flex flex-wrap items-center justify-between gap-4"
+          className="flex flex-wrap items-center justify-between gap-4 px-5 pt-4 pb-5 sm:px-10 sm:pt-5 sm:pb-6"
           style={{
-            padding: "18px 40px 22px",
             borderTop: "1px solid rgba(47,47,43,0.10)",
             background: "#F8F6F2",
           }}
@@ -666,26 +664,6 @@ function ScanPageInner() {
         </div>
       </section>
 
-      <style jsx global>{`
-        @media (max-width: 980px) {
-          .mx-auto.max-w-\\[1280px\\] {
-            grid-template-columns: 1fr !important;
-            gap: 32px !important;
-            padding: 32px 20px 64px !important;
-          }
-        }
-        @media (max-width: 600px) {
-          .flex.flex-wrap.items-end.justify-between {
-            padding: 24px 22px 18px !important;
-          }
-          .flex-1[style*="padding: 32px 40px"] {
-            padding: 24px 22px !important;
-          }
-          .flex.flex-wrap.items-center.justify-between[style*="padding: 18px 40px"] {
-            padding: 16px 22px 18px !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

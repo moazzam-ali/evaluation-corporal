@@ -115,12 +115,18 @@
   * {
     @apply border-border;
   }
+  html {
+    /* Never allow sideways scroll from stray wide content on mobile.
+       `clip` (not `hidden`) keeps position: sticky working for the navbar. */
+    overflow-x: clip;
+  }
   body {
     @apply text-foreground;
     background: var(--canvas, #F4EFE7);
     font-family: var(--font-inter), "Montserrat", system-ui, sans-serif;
     color: var(--ink, #2F2F2B);
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
   }
 }
 
