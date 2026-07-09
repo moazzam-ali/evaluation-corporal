@@ -98,13 +98,15 @@ export function calculateWHR(waistCm, hipCm) {
 
 export function classifyWHR({ whr, sex }) {
   if (whr == null || !sex) return "unknown";
+  // High-risk cutoffs are inclusive: men ≥ 1.00 and women ≥ 0.85 are "high".
+  // Using `<` on the moderate boundary keeps those exact values out of moderate.
   if (sex === "male") {
     if (whr < 0.90) return "low";
-    if (whr <= 1.0) return "moderate";
+    if (whr < 1.0) return "moderate";
     return "high";
   }
   if (whr < 0.80) return "low";
-  if (whr <= 0.85) return "moderate";
+  if (whr < 0.85) return "moderate";
   return "high";
 }
 
