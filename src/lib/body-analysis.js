@@ -237,6 +237,10 @@ export function computeBodyMetrics(formData = {}) {
     scoreInBand((tbw / weightKg) * 100, sex === "male" ? 55 : 47, sex === "male" ? 65 : 57, 6);
   const calorieScore = calories == null || idealWeightKg == null || weightKg == null ? 70 :
     scoreInBand(weightKg, idealWeightKg - 3, idealWeightKg + 3, 8);
+  // Weight vs the Lorentz healthy band (±5 kg). Distance beyond the band
+  // drains the score over a 25 kg span — someone 25+ kg outside it reads 0.
+  const weightScore = healthyWeight == null || weightKg == null ? 50 :
+    scoreInBand(weightKg, healthyWeight - 5, healthyWeight + 5, 25);
 
   const metrics = [
     {
@@ -275,8 +279,8 @@ export function computeBodyMetrics(formData = {}) {
     },
     {
       id: "healthy_weight",
-      score: 100,
-      status: "good",
+      score: weightScore,
+      status: statusFromScore(weightScore),
       value: healthyWeight,
       unit: "kg",
       meta: { current: weightKg, delta: healthyWeight && weightKg ? round(weightKg - healthyWeight, 1) : null },
