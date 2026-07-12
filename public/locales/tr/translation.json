@@ -679,7 +679,7 @@
     "bf_action": "Erkek · {{age}} yaş",
     "unit_percent": "yüzde",
     "bf_range_caption": "BKİ, yaş ve cinsiyetten tahmin edilir (Deurenberg).",
-    "bf_spectrum_caption": "Fitness bandındasın — aşırıya kaçmadan görünür bir tonus. Figürler erkek vücut yağı aralığındaki tipik dış görünümü gösterir.",
+    "bf_spectrum_caption": "Figürler, erkek vücut yağı aralığı boyunca tipik dış görünümü gösterir — aynı boy ve kilo, farklı kompozisyon.",
     "whr_title": "Bel-kalça oranı",
     "whr_action": "Kardiyometabolik risk",
     "unit_ratio": "oran",
@@ -862,7 +862,7 @@
     "info_bmi": "BKİ, kilogram cinsinden ağırlığının metre cinsinden boyunun karesine bölümüdür ve DSÖ referans bantlarında okunur. Hızlı bir tarama sayısıdır — kası yağdan ayıramaz; bu yüzden vücut yağı ve bel-kalça oranıyla birlikte okuruz.",
     "info_bf": "BKİ, yaş ve cinsiyetinden Deurenberg formülüyle tahmin edilir — doğrudan bir ölçüm değil, bir tahmindir. Sağlıklı bantlar yaşla kayar ve kadın-erkek arasında farklıdır. Değerlendirmeler arasındaki eğilim, tek bir okumadan daha önemlidir.",
     "info_whr": "Girdiğin ölçülerle bel çevrenin kalça çevrene bölümü. Yağın nerede durduğunu gösterir: bel çevresindeki yağ, kalçadaki yağdan daha fazla kardiyometabolik risk taşır ve eşikler cinsiyete göre değişir.",
-    "info_weight": "Hedefin, kendini en iyi hissettiğini söylediğin kilodur (belirtmediysen formül tahmini). Yeşil bant, boyuna ve cinsiyetine göre Lorentz sağlıklı aralığıdır; projeksiyon yaklaşık 12 hafta boyunca istikrarlı, sürdürülebilir bir tempo varsayar.",
+    "info_weight": "Hedefin, kendini en iyi hissettiğini söylediğin kilodur (belirtmediysen formülle tahmin edilir). Yeşil bant, boyuna ve cinsiyetine göre Lorentz sağlıklı aralığıdır; projeksiyon istikrarlı, sürdürülebilir bir tempo varsayar.",
     "info_comp": "Yağsız kütle, yağ olmayan her şeydir — kas, kemik, organlar ve su — %100'den tahmini vücut yağın çıkarılarak hesaplanır ve kilogram değerleri için mevcut kilona uygulanır. Yağ kaybederken yağsız kütleyi korumak, protein hedefinin koruduğu şeydir.",
     "info_tbw": "Toplam vücut suyu; yaş, boy, kilo ve cinsiyetten Watson formülüyle tahmin edilir. Su neredeyse tamamen yağsız dokuda bulunur; bu pay, vücut yağı arttıkça düşer. İdeale yakın kalmak enerjiyi, sindirimi ve toparlanmayı destekler.",
     "info_energy": "Dinlenme harcaman (BMH) kilo, boy, yaş ve cinsiyetle Mifflin-St Jeor denkleminden gelir. Bunu aktivite seviyenle çarpar, sonra hedefine göre ayarlarız — kilo vermek için kontrollü açık, almak için fazlalık. Makroların bu hedef üzerine kurulur.",
@@ -880,7 +880,12 @@
     "analysis_label": "Koç okuması",
     "wellness_label": "Genel sağlıklılık",
     "progress_label": "İlerleme",
-    "highlights_label": "Öne çıkanlar"
+    "highlights_label": "Öne çıkanlar",
+    "weeks_at_pace": "Sürdürülebilir bir tempoda ~{{n}} hafta",
+    "cal_goal_weight_control": "Hedef · Kilo kontrolü",
+    "cal_goal_maintain_care": "Hedef · Koruma ve bakım",
+    "cal_goal_gain_weight": "Hedef · Kilo ve kas kazanımı",
+    "tbw_cap_below_ref": "%{{pct}} vücut suyu — %{{ideal}} referansının altında; günlük su hedefin bu farkı kapatır."
   },
   "atlas": {
     "view_external": "Dış",

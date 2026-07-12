@@ -679,7 +679,7 @@
     "bf_action": "Mann · {{age}} Jahre",
     "unit_percent": "Prozent",
     "bf_range_caption": "Geschätzt aus BMI, Alter und Geschlecht (Deurenberg).",
-    "bf_spectrum_caption": "Du liegst im Fitness-Bereich — sichtbare Definition ohne Extreme. Die Figuren zeigen das typische äußere Erscheinungsbild über den männlichen Körperfettbereich.",
+    "bf_spectrum_caption": "Die Figuren zeigen das typische äußere Erscheinungsbild über den männlichen Körperfettbereich — gleiche Größe und gleiches Gewicht, unterschiedliche Zusammensetzung.",
     "whr_title": "Taille-Hüft-Verhältnis",
     "whr_action": "Kardiometabolisches Risiko",
     "unit_ratio": "Verhältnis",
@@ -862,7 +862,7 @@
     "info_bmi": "Der BMI ist dein Gewicht in Kilogramm geteilt durch deine Größe in Metern zum Quadrat, gelesen auf den WHO-Referenzbändern. Er ist eine schnelle Screening-Zahl — Muskeln und Fett kann er nicht unterscheiden, deshalb lesen wir ihn zusammen mit Körperfett und Taille-Hüft-Verhältnis.",
     "info_bf": "Geschätzt mit der Deurenberg-Formel aus BMI, Alter und Geschlecht — eine Schätzung, keine direkte Messung. Gesunde Bereiche verschieben sich mit dem Alter und unterscheiden sich zwischen Männern und Frauen. Der Trend über mehrere Auswertungen zählt mehr als ein Einzelwert.",
     "info_whr": "Dein Taillenumfang geteilt durch den Hüftumfang, aus deinen eingegebenen Maßen. Es zeigt, wo Fett sitzt: Fett am Bauch trägt mehr kardiometabolisches Risiko als Fett an den Hüften, und die Schwellen unterscheiden sich je nach Geschlecht.",
-    "info_weight": "Dein Ziel ist das Gewicht, bei dem du dich nach eigener Angabe am wohlsten gefühlt hast (sonst eine Formel-Schätzung). Das grüne Band ist der gesunde Lorentz-Bereich für deine Größe und dein Geschlecht; die Projektion nimmt ein stetiges, nachhaltiges Tempo über etwa 12 Wochen an.",
+    "info_weight": "Dein Ziel ist das Gewicht, bei dem du dich nach eigener Angabe am wohlsten gefühlt hast (oder eine Formelschätzung, falls nicht angegeben). Das grüne Band ist der gesunde Lorentz-Bereich für deine Größe und dein Geschlecht, und die Projektion geht von einem gleichmäßigen, nachhaltigen Tempo aus.",
     "info_comp": "Magermasse ist alles, was kein Fett ist — Muskeln, Knochen, Organe und Wasser — berechnet als 100 % minus dein geschätztes Körperfett und auf dein aktuelles Gewicht umgelegt. Magermasse beim Fettabbau zu erhalten ist genau das, was das Proteinziel schützt.",
     "info_tbw": "Das Gesamtkörperwasser wird mit der Watson-Formel aus Alter, Größe, Gewicht und Geschlecht geschätzt. Wasser sitzt fast vollständig im mageren Gewebe, daher sinkt dieser Anteil, wenn das Körperfett steigt. Nah am Ideal zu bleiben unterstützt Energie, Verdauung und Regeneration.",
     "info_energy": "Dein Ruheumsatz (BMR) stammt aus der Mifflin-St-Jeor-Gleichung mit Gewicht, Größe, Alter und Geschlecht. Wir multiplizieren ihn mit deinem Aktivitätslevel und passen ihn an dein Ziel an — kontrolliertes Defizit beim Abnehmen, Überschuss beim Zunehmen. Deine Makros bauen auf diesem Ziel auf.",
@@ -880,7 +880,12 @@
     "analysis_label": "Coach-Einschätzung",
     "wellness_label": "Allgemeines Wohlbefinden",
     "progress_label": "Fortschritt",
-    "highlights_label": "Was hervorsticht"
+    "highlights_label": "Was hervorsticht",
+    "weeks_at_pace": "~{{n}} Wochen bei nachhaltigem Tempo",
+    "cal_goal_weight_control": "Ziel · Gewichtskontrolle",
+    "cal_goal_maintain_care": "Ziel · Erhalt und Pflege",
+    "cal_goal_gain_weight": "Ziel · Gewichts- und Muskelaufbau",
+    "tbw_cap_below_ref": "{{pct}} % Körperwasser — unter der {{ideal}}-%-Referenz; dein tägliches Hydrationsziel schließt die Lücke."
   },
   "atlas": {
     "view_external": "Extern",

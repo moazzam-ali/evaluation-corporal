@@ -679,7 +679,7 @@
     "bf_action": "Uomo · {{age}} anni",
     "unit_percent": "percento",
     "bf_range_caption": "Stimato da IMC, età e sesso (Deurenberg).",
-    "bf_spectrum_caption": "Ti collochi nella fascia In forma: tono visibile senza estremi. Le figure mostrano l'aspetto esterno tipico lungo l'intervallo di grasso corporeo maschile.",
+    "bf_spectrum_caption": "Le figure mostrano l'aspetto esterno tipico lungo l'intervallo di grasso corporeo maschile — stessa altezza e stesso peso, composizione diversa.",
     "whr_title": "Rapporto vita-fianchi",
     "whr_action": "Rischio cardiometabolico",
     "unit_ratio": "rapporto",
@@ -862,7 +862,7 @@
     "info_bmi": "L'IMC è il tuo peso in chili diviso per l'altezza in metri al quadrato, letto sulle bande di riferimento dell'OMS. È un numero di screening rapido — non distingue il muscolo dal grasso, per questo lo leggiamo insieme al grasso corporeo e al rapporto vita-fianchi.",
     "info_bf": "Stimato con la formula di Deurenberg da IMC, età e sesso — una stima, non una misurazione diretta. Le fasce sane cambiano con l'età e differiscono tra uomini e donne. Il trend tra le valutazioni conta più di una singola lettura.",
     "info_whr": "La circonferenza vita divisa per quella dei fianchi, dalle misure che hai inserito. Mostra dove si deposita il grasso: quello addominale comporta più rischio cardiometabolico di quello sui fianchi, e le soglie differiscono per sesso.",
-    "info_weight": "Il tuo obiettivo è il peso a cui hai detto di sentirti meglio (o una stima da formula in mancanza). La banda verde è l'intervallo sano di Lorentz per la tua altezza e sesso; la proiezione presume un ritmo costante e sostenibile per circa 12 settimane.",
+    "info_weight": "Il tuo obiettivo è il peso al quale ci hai detto di sentirti meglio (o una stima da formula se non l'hai indicato). La banda verde è l'intervallo sano di Lorentz per la tua altezza e il tuo sesso, e la proiezione presuppone un ritmo costante e sostenibile.",
     "info_comp": "La massa magra è tutto ciò che non è grasso — muscoli, ossa, organi e acqua — calcolata come 100% meno il grasso corporeo stimato, applicata al peso attuale per le cifre in chili. Conservare massa magra perdendo grasso è ciò che l'obiettivo proteico protegge.",
     "info_tbw": "L'acqua corporea totale è stimata con la formula di Watson da età, altezza, peso e sesso. L'acqua risiede quasi tutta nel tessuto magro, quindi questa quota scende quando il grasso sale. Restare vicino all'ideale sostiene energia, digestione e recupero.",
     "info_energy": "Il tuo consumo a riposo (MB) viene dall'equazione Mifflin-St Jeor con peso, altezza, età e sesso. Lo moltiplichiamo per il tuo livello di attività e lo adattiamo all'obiettivo — deficit controllato per dimagrire, surplus per aumentare. I tuoi macro si costruiscono su questo target.",
@@ -880,7 +880,12 @@
     "analysis_label": "Lettura del coach",
     "wellness_label": "Benessere generale",
     "progress_label": "Progressi",
-    "highlights_label": "Cosa spicca"
+    "highlights_label": "Cosa spicca",
+    "weeks_at_pace": "~{{n}} settimane a un ritmo sostenibile",
+    "cal_goal_weight_control": "Obiettivo · Controllo del peso",
+    "cal_goal_maintain_care": "Obiettivo · Mantenimento e cura",
+    "cal_goal_gain_weight": "Obiettivo · Aumento di peso e muscolo",
+    "tbw_cap_below_ref": "{{pct}} % di acqua corporea — sotto il riferimento del {{ideal}} %; il tuo obiettivo di idratazione quotidiano colma il divario."
   },
   "atlas": {
     "view_external": "Esterno",

@@ -679,7 +679,7 @@
     "bf_action": "Hombre · {{age}} años",
     "unit_percent": "por ciento",
     "bf_range_caption": "Estimado a partir del IMC, la edad y el sexo (Deurenberg).",
-    "bf_spectrum_caption": "Te sitúas en la banda En forma: tono visible sin extremos. Las figuras muestran el aspecto externo típico en el rango de grasa corporal masculina.",
+    "bf_spectrum_caption": "Las figuras muestran el aspecto externo típico a lo largo del rango de grasa corporal masculino: misma altura y peso, distinta composición.",
     "whr_title": "Índice cintura-cadera",
     "whr_action": "Riesgo cardiometabólico",
     "unit_ratio": "ratio",
@@ -862,7 +862,7 @@
     "info_bmi": "El IMC es tu peso en kilos dividido por tu altura en metros al cuadrado, leído sobre las bandas de referencia de la OMS. Es un número de cribado rápido — no distingue músculo de grasa, por eso lo leemos junto a la grasa corporal y el índice cintura-cadera.",
     "info_bf": "Estimada con la fórmula de Deurenberg a partir de tu IMC, edad y sexo — una estimación, no una medición directa. Las bandas saludables cambian con la edad y difieren entre hombres y mujeres. La tendencia entre evaluaciones importa más que una lectura aislada.",
     "info_whr": "Tu perímetro de cintura dividido por el de cadera, con las medidas que introdujiste. Muestra dónde se acumula la grasa: la grasa en la cintura conlleva más riesgo cardiometabólico que la de las caderas, y los umbrales difieren por sexo.",
-    "info_weight": "Tu objetivo es el peso en el que dijiste sentirte mejor (o una estimación por fórmula si no lo indicaste). La banda verde es el rango saludable de Lorentz para tu altura y sexo, y la proyección asume un ritmo constante y sostenible durante unas 12 semanas.",
+    "info_weight": "Tu meta es el peso en el que nos dijiste que te sentías mejor (o una estimación por fórmula si no lo indicaste). La banda verde es el rango saludable de Lorentz para tu altura y sexo, y la proyección asume un ritmo constante y sostenible.",
     "info_comp": "La masa magra es todo lo que no es grasa — músculo, hueso, órganos y agua — calculada como 100% menos tu grasa corporal estimada, aplicada a tu peso actual para las cifras en kilos. Conservar masa magra mientras pierdes grasa es lo que protege el objetivo de proteína.",
     "info_tbw": "El agua corporal total se estima con la fórmula de Watson a partir de tu edad, altura, peso y sexo. El agua vive casi por completo en el tejido magro, así que esta proporción baja cuando sube la grasa corporal. Mantenerse cerca del ideal favorece la energía, la digestión y la recuperación.",
     "info_energy": "Tu gasto en reposo (TMB) sale de la ecuación Mifflin-St Jeor con peso, altura, edad y sexo. Lo multiplicamos por tu nivel de actividad y lo ajustamos a tu objetivo — un déficit controlado para perder peso, un superávit para ganar. Tus macros se construyen sobre este objetivo.",
@@ -880,7 +880,12 @@
     "analysis_label": "Lectura del coach",
     "wellness_label": "Bienestar general",
     "progress_label": "Progreso",
-    "highlights_label": "Lo que destaca"
+    "highlights_label": "Lo que destaca",
+    "weeks_at_pace": "~{{n}} semanas a un ritmo sostenible",
+    "cal_goal_weight_control": "Meta · Control de peso",
+    "cal_goal_maintain_care": "Meta · Mantenimiento y cuidado",
+    "cal_goal_gain_weight": "Meta · Ganar peso y músculo",
+    "tbw_cap_below_ref": "{{pct}} % de agua corporal: por debajo de la referencia del {{ideal}} %; tu objetivo diario de hidratación cierra la brecha."
   },
   "atlas": {
     "view_external": "Externo",

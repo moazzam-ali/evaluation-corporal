@@ -169,12 +169,32 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
   const whrCaption = whrCat
     ? t(`rd.whr_cap_${whrCat}`, t("rd.whr_range_caption", "Waist relative to hip — a proxy for where fat sits."))
     : t("rd.whr_range_caption", "Waist relative to hip — a proxy for where fat sits.");
-  const tbwCaption = d.tbwPct >= 60
+  // Body-water reference is sex-specific (≈60% male midpoint, ≈52% female);
+  // older stored rows without tbwIdeal fall back by sex.
+  const tbwIdeal = d.tbwIdeal ?? (d.sex === "female" ? 52 : 60);
+  const tbwCaption = d.tbwPct >= tbwIdeal
     ? t("rd.tbw_cap_ok", { pct: d.tbwPct })
-    : t("rd.tbw_cap_below", { pct: d.tbwPct });
+    : t("rd.tbw_cap_below_ref", "{{pct}}% body water — below the {{ideal}}% reference; your daily hydration target closes the gap.", { pct: d.tbwPct, ideal: tbwIdeal });
 
   // Goal delta sign follows the user's own goal (gain goals show +).
   const goalSign = d.weightGoal > d.weight ? "+" : "−";
+
+  // Sustainable-pace timeline (older rows without it fall back to 12 weeks)
+  // and the calorie card's goal chip, which follows the user's actual goal.
+  const weeksToGoal = d.weeksToGoal || 12;
+  const GOAL_CHIP = {
+    weight_control: t("rd.cal_goal_weight_control", "Goal · Weight control"),
+    maintain_care: t("rd.cal_goal_maintain_care", "Goal · Maintenance & care"),
+    gain_weight: t("rd.cal_goal_gain_weight", "Goal · Gain weight & muscle"),
+  };
+  const goalChip = GOAL_CHIP[d.goal] || GOAL_CHIP.weight_control;
+
+  // Weight scale-bar axis spans this person's own numbers (+padding) so the
+  // marker and healthy band always sit on the track — the old axis was a
+  // hardcoded 60–90 kg window.
+  const axisMin = Math.min(d.healthyRange[0], d.weight, d.weightGoal) - 5;
+  const axisMax = Math.max(d.healthyRange[1], d.weight, d.weightGoal) + 5;
+  const axisPos = (v) => ((v - axisMin) / Math.max(1, axisMax - axisMin)) * 100;
 
   // ── Photo read. New rows carry `photo_analysis` (coach-voice free text in
   //    the report language); old rows carry `vision_details` enums resolved
@@ -575,11 +595,11 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                 <CardHeader title={t("rd.bf_title", "Body Fat")} action={t("rd.bf_action_dynamic", "{{sex}} · {{age}} years", { sex: sexLabel, age: d.user.age })} info={INFO.bf} />
                 <LinearRange value={d.bodyFat} min={5} max={32} segments={bfSegments} unit={t("rd.unit_percent", "percent")} caption={bfCaption} />
                 <StageStrip stages={bfStages} activeKey={PICK.bodyFat(d.bodyFat)} sexToggle={sexToggleFor("bodyfat", {
-                  male: t("rd.bf_spectrum_caption", "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range."),
+                  male: t("rd.bf_spectrum_caption", "The figures show the typical external look across the male body-fat range — same height and weight, different composition."),
                   female: t("rd.bf_spectrum_caption_female", "The figures show the typical external look across the female body-fat range — same height and weight, different composition."),
                 })} caption={stageSex === "female"
                   ? t("rd.bf_spectrum_caption_female", "The figures show the typical external look across the female body-fat range — same height and weight, different composition.")
-                  : t("rd.bf_spectrum_caption", "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range.")} />
+                  : t("rd.bf_spectrum_caption", "The figures show the typical external look across the male body-fat range — same height and weight, different composition.")} />
               </Card>
             </div>
 
@@ -599,13 +619,14 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                       <span className="text-[72px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--primary-hex, #9B8573)" }}>{goalSign}{d.weightDelta}</span>
                       <span className="text-lg" style={{ color: "var(--muted-fg)" }}>{t("rd.unit_kg", "kg")}</span>
                     </div>
-                    <div className="text-[11px] mt-2" style={{ color: "var(--muted-fg)" }}>{t("rd.weeks_at_rate", "~12 weeks at the current rate")}</div>
+                    <div className="text-[11px] mt-2" style={{ color: "var(--muted-fg)" }}>{t("rd.weeks_at_pace", "~{{n}} weeks at a sustainable pace", { n: weeksToGoal })}</div>
                   </div>
-                  {/* Weight scale bar */}
+                  {/* Weight scale bar — axis spans whatever this person's
+                      numbers are, so the marker can never render off-track */}
                   <div>
                     <div className="relative h-1.5 rounded-full" style={{ background: "rgba(47,47,43,0.04)" }}>
-                      <div className="absolute top-0 h-full rounded-full" style={{ left: `${((d.healthyRange[0] - 60) / 30) * 100}%`, width: `${((d.healthyRange[1] - d.healthyRange[0]) / 30) * 100}%`, background: "rgba(46,139,107,0.18)" }} />
-                      <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2" style={{ left: `${((d.weight - 60) / 30) * 100}%`, transform: "translate(-50%, -50%)", borderColor: "var(--primary-hex)" }} />
+                      <div className="absolute top-0 h-full rounded-full" style={{ left: `${axisPos(d.healthyRange[0])}%`, width: `${axisPos(d.healthyRange[1]) - axisPos(d.healthyRange[0])}%`, background: "rgba(46,139,107,0.18)" }} />
+                      <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2" style={{ left: `${axisPos(d.weight)}%`, transform: "translate(-50%, -50%)", borderColor: "var(--primary-hex)" }} />
                     </div>
                     <div className="flex justify-between mt-3 text-[11px]" style={{ color: "var(--muted-fg)" }}>
                       <span>{t("rd.current", "Current")}: <strong style={{ color: "var(--ink)" }}>{d.weight} {t("rd.unit_kg", "kg")}</strong></span>
@@ -619,7 +640,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                   {/* Projected path over time */}
                   <div className="pt-6" style={{ borderTop: "1px dashed var(--border-hex)" }}>
                     <div className="text-[10px] font-medium uppercase tracking-[0.14em] mb-2" style={{ color: "var(--muted-fg)" }}>{t("rd.projected_path", "PROJECTED PATH")}</div>
-                    <WeightTrajectory start={d.weight} goal={d.weightGoal} weeks={12} healthyCeil={d.healthyRange[1]} />
+                    <WeightTrajectory start={d.weight} goal={d.weightGoal} weeks={weeksToGoal} healthyCeil={d.healthyRange[1]} />
                   </div>
                   {/* Supporting figures */}
                   <div className="grid grid-cols-3 gap-3 pt-5" style={{ borderTop: "1px dashed var(--border-hex)" }}>
@@ -629,7 +650,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                     </div>
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.weekly_rate", "Weekly rate")}</div>
-                      <div className="text-[22px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>~{(d.weightDelta / 12).toFixed(1)}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>{t("rd.unit_kg_wk", "kg/wk")}</span></div>
+                      <div className="text-[22px] font-semibold mt-1" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>~{(d.weightDelta / weeksToGoal).toFixed(1)}<span className="text-xs ml-1 font-normal" style={{ color: "var(--muted-fg)" }}>{t("rd.unit_kg_wk", "kg/wk")}</span></div>
                     </div>
                     <div>
                       <div className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--muted-fg)" }}>{t("rd.bmi_at_goal", "BMI at goal")}</div>
@@ -669,12 +690,12 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                     </p>
                   </div>
                 </div>
-                <p className="text-[13px] leading-relaxed mt-6" style={{ color: "var(--muted-fg)" }}>{t("rd.comp_caption", "Lean mass up 0.8 kg since last assessment — the deficit is sparing muscle.")}</p>
+                <p className="text-[13px] leading-relaxed mt-6" style={{ color: "var(--muted-fg)" }}>{t("rd.comp_caption", "Lean mass is a key marker of metabolic health and helps protect muscle during a calorie deficit.")}</p>
               </Card>
               <Card className="flex flex-col">
                 <CardHeader title={t("rd.tbw_title", "Total Body Water")} action={t("rd.tbw_action", "Hydration share")} info={INFO.tbw} />
                 <div className="flex-1 flex flex-col sm:flex-row items-center gap-6 sm:gap-7 py-1">
-                  <HydrationColumn pct={d.tbwPct} ideal={60} />
+                  <HydrationColumn pct={d.tbwPct} ideal={tbwIdeal} />
                   <div className="flex-1 min-w-0 w-full">
                     <div className="flex items-baseline gap-1">
                       <span className="text-[48px] leading-none font-semibold" style={{ fontFamily: "var(--font-inter)", color: "var(--ink)" }}>{d.tbwPct}</span>
@@ -690,7 +711,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                       <span className="font-semibold text-right" style={{ color: "var(--ink)" }}>{d.tbwPct}%</span>
                       <span className="inline-block w-2.5 border-t border-dashed" style={{ borderColor: "rgba(47,47,43,0.45)" }} />
                       <span style={{ color: "var(--ink)" }}>{t("rd.ideal", "Ideal")}</span>
-                      <span className="font-semibold text-right" style={{ color: "var(--ink)" }}>60%</span>
+                      <span className="font-semibold text-right" style={{ color: "var(--ink)" }}>{tbwIdeal}%</span>
                     </div>
                   </div>
                 </div>
@@ -717,7 +738,7 @@ export default function BodyResultsTemplate({ data, products = [], insights = []
                   <div className="flex items-baseline justify-between">
                     <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]" style={{ color: "rgba(255,255,255,0.7)" }}>{t("rd.daily_energy", "Daily energy")}<InfoHint text={INFO.energy} dark /></span>
                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold" style={{ background: "rgba(199,169,119,0.16)", color: "#C7A977" }}>
-                      {t("rd.cal_goal", "Goal · Weight control")}
+                      {goalChip}
                     </span>
                   </div>
                   <div className="text-[clamp(80px,12vw,140px)] leading-none font-semibold mt-6" style={{ fontFamily: "var(--font-inter)" }}>

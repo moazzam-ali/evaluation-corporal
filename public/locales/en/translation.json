@@ -683,7 +683,7 @@
     "bf_action": "Male · {{age}} years",
     "unit_percent": "percent",
     "bf_range_caption": "Estimated from BMI, age and sex (Deurenberg).",
-    "bf_spectrum_caption": "You read in the Fitness band — visible tone without extremes. The figures show the typical external look across the male body-fat range.",
+    "bf_spectrum_caption": "The figures show the typical external look across the male body-fat range — same height and weight, different composition.",
     "whr_title": "Waist-to-Hip Ratio",
     "whr_action": "Cardiometabolic risk",
     "unit_ratio": "ratio",
@@ -860,7 +860,7 @@
     "info_bmi": "BMI is your weight in kilograms divided by your height in meters squared, read against the WHO reference bands. It's a quick screening number — it can't tell muscle from fat, which is why we read it alongside body fat and waist-to-hip ratio.",
     "info_bf": "Estimated with the Deurenberg formula from your BMI, age and sex — an estimate, not a direct measurement. Healthy bands shift with age and differ between men and women. The trend across assessments matters more than any single reading.",
     "info_whr": "Your waist circumference divided by your hip circumference, from the measurements you entered. It shows where fat sits: fat stored around the waist carries more cardiometabolic risk than fat on the hips, and thresholds differ by sex.",
-    "info_weight": "Your goal is the weight you told us you felt best at (or a formula estimate if you didn't). The green band is the Lorentz healthy range for your height and sex, and the projection assumes a steady, sustainable pace over about 12 weeks.",
+    "info_weight": "Your goal is the weight you told us you felt best at (or a formula estimate if you didn't). The green band is the Lorentz healthy range for your height and sex, and the projection assumes a steady, sustainable pace.",
     "info_comp": "Lean mass is everything that isn't fat — muscle, bone, organs and water — calculated as 100% minus your estimated body fat, then applied to your current weight for the kilogram figures. Keeping lean mass while losing fat is what the protein target protects.",
     "info_tbw": "Total body water is estimated with the Watson formula from your age, height, weight and sex. Water lives almost entirely in lean tissue, so this share falls as body fat rises. Staying near the ideal supports energy, digestion and recovery.",
     "info_energy": "Your resting burn (BMR) comes from the Mifflin-St Jeor equation using weight, height, age and sex. We multiply it by your activity level, then adjust for your goal — a controlled deficit for weight loss, a surplus for gain. Your macros are built from this target.",
@@ -880,7 +880,12 @@
     "analysis_label": "Coach's read",
     "wellness_label": "Overall wellness",
     "progress_label": "Progress",
-    "highlights_label": "What stands out"
+    "highlights_label": "What stands out",
+    "tbw_cap_below_ref": "{{pct}}% body water — below the {{ideal}}% reference; your daily hydration target closes the gap.",
+    "cal_goal_weight_control": "Goal · Weight control",
+    "cal_goal_maintain_care": "Goal · Maintenance & care",
+    "cal_goal_gain_weight": "Goal · Gain weight & muscle",
+    "weeks_at_pace": "~{{n}} weeks at a sustainable pace"
   },
   "atlas": {
     "view_external": "External",

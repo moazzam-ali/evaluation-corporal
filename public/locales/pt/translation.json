@@ -679,7 +679,7 @@
     "bf_action": "Homem · {{age}} anos",
     "unit_percent": "por cento",
     "bf_range_caption": "Estimado a partir do IMC, idade e sexo (Deurenberg).",
-    "bf_spectrum_caption": "Estás na faixa Em forma: tonificação visível sem extremos. As figuras mostram o aspeto externo típico ao longo do intervalo de gordura corporal masculina.",
+    "bf_spectrum_caption": "As figuras mostram o aspeto externo típico ao longo do intervalo de gordura corporal masculino — mesma altura e peso, composição diferente.",
     "whr_title": "Relação cintura-anca",
     "whr_action": "Risco cardiometabólico",
     "unit_ratio": "rácio",
@@ -862,7 +862,7 @@
     "info_bmi": "O IMC é o teu peso em quilos a dividir pela altura em metros ao quadrado, lido nas bandas de referência da OMS. É um número de triagem rápido — não distingue músculo de gordura, por isso o lemos junto com a gordura corporal e a relação cintura-anca.",
     "info_bf": "Estimada com a fórmula de Deurenberg a partir do IMC, idade e sexo — uma estimativa, não uma medição direta. As faixas saudáveis mudam com a idade e diferem entre homens e mulheres. A tendência entre avaliações importa mais do que uma leitura isolada.",
     "info_whr": "O perímetro da cintura a dividir pelo da anca, com as medidas que introduziste. Mostra onde a gordura se acumula: a gordura na cintura acarreta mais risco cardiometabólico do que a das ancas, e os limiares diferem por sexo.",
-    "info_weight": "O teu objetivo é o peso em que disseste sentir-te melhor (ou uma estimativa por fórmula, na falta dele). A banda verde é o intervalo saudável de Lorentz para a tua altura e sexo; a projeção assume um ritmo constante e sustentável ao longo de cerca de 12 semanas.",
+    "info_weight": "A sua meta é o peso em que nos disse sentir-se melhor (ou uma estimativa por fórmula, se não indicou). A banda verde é o intervalo saudável de Lorentz para a sua altura e sexo, e a projeção assume um ritmo constante e sustentável.",
     "info_comp": "A massa magra é tudo o que não é gordura — músculo, osso, órgãos e água — calculada como 100% menos a gordura corporal estimada, aplicada ao teu peso atual para os valores em quilos. Manter massa magra enquanto perdes gordura é o que o objetivo de proteína protege.",
     "info_tbw": "A água corporal total é estimada com a fórmula de Watson a partir da idade, altura, peso e sexo. A água vive quase toda no tecido magro, por isso esta fração desce quando a gordura sobe. Ficar perto do ideal apoia a energia, a digestão e a recuperação.",
     "info_energy": "O teu gasto em repouso (TMB) vem da equação Mifflin-St Jeor com peso, altura, idade e sexo. Multiplicamo-lo pelo teu nível de atividade e ajustamo-lo ao objetivo — défice controlado para perder peso, excedente para ganhar. Os teus macros constroem-se sobre esta meta.",
@@ -880,7 +880,12 @@
     "analysis_label": "Leitura do coach",
     "wellness_label": "Bem-estar geral",
     "progress_label": "Progresso",
-    "highlights_label": "O que se destaca"
+    "highlights_label": "O que se destaca",
+    "weeks_at_pace": "~{{n}} semanas a um ritmo sustentável",
+    "cal_goal_weight_control": "Meta · Controlo de peso",
+    "cal_goal_maintain_care": "Meta · Manutenção e cuidado",
+    "cal_goal_gain_weight": "Meta · Ganho de peso e músculo",
+    "tbw_cap_below_ref": "{{pct}} % de água corporal — abaixo da referência de {{ideal}} %; a sua meta diária de hidratação fecha a diferença."
   },
   "atlas": {
     "view_external": "Externo",

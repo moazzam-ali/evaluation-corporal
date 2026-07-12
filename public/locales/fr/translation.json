@@ -679,7 +679,7 @@
     "bf_action": "Homme · {{age}} ans",
     "unit_percent": "pour cent",
     "bf_range_caption": "Estimé à partir de l'IMC, de l'âge et du sexe (Deurenberg).",
-    "bf_spectrum_caption": "Vous êtes dans la tranche En forme : un tonus visible sans extrêmes. Les figures montrent l'aspect externe typique sur la plage de masse grasse masculine.",
+    "bf_spectrum_caption": "Les silhouettes montrent l'apparence externe typique sur la plage de masse grasse masculine — même taille et même poids, composition différente.",
     "whr_title": "Rapport taille-hanches",
     "whr_action": "Risque cardiométabolique",
     "unit_ratio": "ratio",
@@ -862,7 +862,7 @@
     "info_bmi": "L'IMC est votre poids en kilos divisé par votre taille en mètres au carré, lu sur les bandes de référence de l'OMS. C'est un chiffre de dépistage rapide — il ne distingue pas le muscle de la graisse, d'où sa lecture conjointe avec la masse grasse et le rapport taille-hanches.",
     "info_bf": "Estimée avec la formule de Deurenberg à partir de votre IMC, âge et sexe — une estimation, pas une mesure directe. Les bandes saines évoluent avec l'âge et diffèrent entre hommes et femmes. La tendance d'une évaluation à l'autre compte plus qu'une lecture isolée.",
     "info_whr": "Votre tour de taille divisé par votre tour de hanches, à partir des mesures saisies. Il montre où se loge la graisse : la graisse abdominale porte plus de risque cardiométabolique que celle des hanches, et les seuils diffèrent selon le sexe.",
-    "info_weight": "Votre objectif est le poids auquel vous avez dit vous sentir le mieux (ou une estimation par formule à défaut). La bande verte est la plage saine de Lorentz pour votre taille et votre sexe, et la projection suppose un rythme régulier et soutenable sur environ 12 semaines.",
+    "info_weight": "Votre objectif est le poids auquel vous nous avez dit vous sentir le mieux (ou une estimation par formule sinon). La bande verte est la plage saine de Lorentz pour votre taille et votre sexe, et la projection suppose un rythme régulier et durable.",
     "info_comp": "La masse maigre est tout ce qui n'est pas de la graisse — muscles, os, organes et eau — calculée comme 100 % moins votre masse grasse estimée, puis appliquée à votre poids actuel pour les chiffres en kilos. Préserver la masse maigre en perdant de la graisse, c'est ce que protège l'objectif de protéines.",
     "info_tbw": "L'eau corporelle totale est estimée avec la formule de Watson à partir de votre âge, taille, poids et sexe. L'eau loge presque entièrement dans les tissus maigres : cette part baisse quand la masse grasse augmente. Rester proche de l'idéal soutient l'énergie, la digestion et la récupération.",
     "info_energy": "Votre dépense au repos (MB) vient de l'équation Mifflin-St Jeor avec poids, taille, âge et sexe. Nous la multiplions par votre niveau d'activité, puis l'ajustons à votre objectif — déficit contrôlé pour perdre du poids, surplus pour en prendre. Vos macros sont bâties sur cette cible.",
@@ -880,7 +880,12 @@
     "analysis_label": "Lecture du coach",
     "wellness_label": "Bien-être général",
     "progress_label": "Progrès",
-    "highlights_label": "Ce qui ressort"
+    "highlights_label": "Ce qui ressort",
+    "weeks_at_pace": "~{{n}} semaines à un rythme durable",
+    "cal_goal_weight_control": "Objectif · Contrôle du poids",
+    "cal_goal_maintain_care": "Objectif · Maintien et soin",
+    "cal_goal_gain_weight": "Objectif · Prise de poids et de muscle",
+    "tbw_cap_below_ref": "{{pct}} % d'eau corporelle — sous la référence de {{ideal}} % ; votre objectif d'hydratation quotidien comble l'écart."
   },
   "atlas": {
     "view_external": "Externe",

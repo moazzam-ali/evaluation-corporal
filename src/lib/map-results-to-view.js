@@ -77,6 +77,13 @@ export function mapResultsToView({ formData, results }) {
     round(healthyWeight + 5, 0),
   ];
 
+  // Realistic timeline to the goal at a sustainable pace (~0.75 kg/week for
+  // loss, ~0.35 kg/week for gain), capped between 4 weeks and 2 years — the
+  // old fixed "12 weeks" implied absurd weekly rates for large deltas.
+  const losing = weightGoal <= weight;
+  const pace = losing ? 0.75 : 0.35;
+  const weeksToGoal = clamp(Math.round(weightDelta / pace) || 4, 4, 104);
+
   // Macros
   const proteinMetric = findMetric(metrics, "protein_target");
   const carbsMetric = findMetric(metrics, "carbs_target");
@@ -125,5 +132,10 @@ export function mapResultsToView({ formData, results }) {
     macros,
     radarData,
     sex: formData.sex || "male",
+    goal: goalKey,
+    weeksToGoal,
+    // Body-water reference differs by sex (Watson healthy bands ≈ 55–65%
+    // male, 47–57% female) — 60% is only the male midpoint.
+    tbwIdeal: (formData.sex || "male") === "female" ? 52 : 60,
   };
 }
